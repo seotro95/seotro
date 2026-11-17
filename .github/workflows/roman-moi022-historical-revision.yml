@@ -1,0 +1,36 @@
+name: Roman MOI022 historical visuals revision retain all sixteen voices
+on:
+  push:
+    branches: [codex/roman-moi022-production-20261117]
+    paths: [.github/workflows/roman-moi022-historical-revision.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  historical_documents:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: roman-concrete-moi022
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python roman-concrete-moi022/extract_content.py
+          python roman-concrete-moi022/extract_voice_inputs.py
+          python -u roman-concrete-moi022/publish_historical_revision.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roman-moi022-historical-visual-revision-reports
+          path: |
+            roman-concrete-moi022/documents/HISTORICAL_VISUAL_REVISION_QA.json
+            roman-concrete-moi022/documents/DOCUMENT_QA.json
+            roman-concrete-moi022/DOCUMENT_ASSET_MANIFEST.json
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true

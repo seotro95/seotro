@@ -33,20 +33,44 @@ backup=[
  ('Three separate physical fissure teaching models with differing gap widths and moisture conditions, all geometry fixed and no visible growth of deposits.','High oblique slider comparing the three distinct models.'),
  ('A clean glass collector beneath a fixed connected laboratory outlet, gentle reflections and no droplet falling during the shot; the cracked specimen remains in view.','Locked macro with a slow focus pull between collector rim and outlet.')]
 for visual,camera in backup:shots.append(dict(id=len(shots)+1,start=None,end=None,kind='backup_not_on_timeline',visual=visual,camera=camera,used=False))
+historical = (R/'HISTORICAL_CUE_VISUALS.tsv').read_text(encoding='utf-8').splitlines()
+historical = {int(x.split('\t')[0]):x.split('\t')[1:] for x in historical}
+assert set(historical)==set(range(4,130))
+opening_historical=[
+ ('An illustrative cured mortar fragment with a fixed fissure on rough dark stone, a small water drop at the lower edge, Roman masonry softly visible beyond.','Locked 100 mm macro, slow focus shift from drop to fissure.'),
+ ('A narrow water path within a fixed Roman-inspired mortar cutaway, no modern test equipment, no instant mineral growth.','Low side macro with a restrained lateral move.'),
+ ('Porous off-white mineral particle crossing a pre-existing fissure in an enlarged physical mortar model on a plain stone base.','Oblique macro push toward the fixed intersection.'),
+ ('Two separate Roman-inspired masonry cutaways, one visibly damp and one nearly dry, no measured-result claim or ancient experiment implied.','Symmetrical close view with a slow lateral slide.'),
+ ('Historical reconstruction of a Roman rubble-and-mortar wall in the central Italian countryside, rough aggregate visible.','Wide low tracking shot along the wall.'),
+ ('An adult Roman mason examines a cured replica mortar fragment on a simple wooden bench, earth-tone linen tunic, no modern gloves or tools.','Close side view of mature hands rotating the fragment.'),
+ ('A Roman lime-kiln reconstruction with limestone nearby and modest warm interior light, no lava or explosive reaction.','Wide oblique approach toward the kiln and stone stack.'),
+ ('A Roman construction courtyard with mortar trough, ceramic water jars, volcanic grains and unfinished wall, any workers clearly adult.','High oblique drift through the workyard.'),
+ ('Two separate fixed-state mortar teaching cutaways, open fissure and static local mineral filling, placed apart on a rough stone bench.','Slow lateral move emphasizing physical separation.'),
+ ('A historically inspired Pompeian construction courtyard with unfinished masonry and dry mineral heaps, simple period tools, no eruption or modern crew.','Slow wide push toward the unfinished wall.')]
+for shot,(visual,camera) in zip(shots[:10],opening_historical):shot.update(visual=visual,camera=camera)
+for shot,row in zip(shots[10:136],rows[3:]):shot.update(visual=historical[row['id']][0],camera=historical[row['id']][1])
+backup_historical=[
+ ('A Roman aqueduct reconstruction above a dry Mediterranean valley, natural light and period-plausible masonry, no people.','Wide elevated drift along the arches.'),
+ ('Adult Roman masons carry stone fragments in simple baskets toward a partly built wall, rough linen or wool work tunics and sandals, no modern equipment.','Medium lateral tracking shot at workyard height.'),
+ ('A fixed conceptual mortar section on dark stone with a pale inclusion, rough pore network and small water meniscus, no room, instruments or instant healing.','Slow oblique macro arc around the fixed cutaway.'),
+ ('A quiet Roman cistern-wall reconstruction with a narrow mortar fissure and a faint damp patch, no valves or tubes and no change in crack width.','Locked low close-up with soft natural reflections.')]
+for shot,(visual,camera) in zip(shots[136:],backup_historical):shot.update(visual=visual,camera=camera)
 silent='Video không có âm thanh, không có lời nói.'
 for shot in shots:
     shot.update(generation_seconds=10,use_seconds=shot['end']-shot['start'] if shot['used'] else 0,source_filename=f'ROMAN_{shot["id"]:03}.mp4')
     overlaps=[r for r in rows if shot['used'] and r['start']<shot['end'] and r['end']>shot['start']]
     shot.update(voice_cue_ids=[r['id'] for r in overlaps],voice=' '.join(r['voice'] for r in overlaps))
-    shot['prompt']=('One continuous 10-second shot, 16:9 landscape, cinematic science-documentary visual, realistic materials and restrained camera motion. '
-        +shot['visual']+' Camera: '+shot['camera']+' Maintain object identity, fixed crack geometry and natural water behavior; no closed valve pretending to show healing. '
-        +'Modern laboratory specimens and all archaeological reconstructions, pore networks, thermal colors, cross-sections and enlarged mineral models are illustrative teaching visuals, never authenticated ancient specimens, measured maps, microscope data or a claimed reproduction of a published experiment. '
+    shot['visual_revision']='historical-context-v2-no-scientists'
+    shot['prompt']=('One continuous 10-second shot, 16:9 landscape, cinematic historical documentary, realistic mineral textures and restrained camera motion. '
+        +shot['visual']+' Camera: '+shot['camera']+' Maintain object identity, fixed fissure geometry and natural water behavior. '
+        +'Historical scenes use ancient Roman Italian architecture, workyards, simple period materials and tools; any clothing is a plain earth-tone linen or wool working tunic with period-plausible sandals. Neutral material cutaways are explanatory illustrations, not an ancient laboratory or a claim that Romans performed modern tests. Any modern reinforcement cutaway is clearly a neutral explanatory model, never an ancient Roman reinforced-concrete claim. '
+        +'All reconstructions, material sections and enlarged mineral models are illustrative, never authenticated archaeological specimens, actual measured data or a claimed reproduction of a published experiment. '
         +'No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Any visible person or hand must be clearly adult age 35–65. '
-        +'No instant repair, crack faces moving together, self-rebuilding wall, magical glowing grains, fake graphs, fabricated numerical readouts, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. '+silent)
+        +'No scientists, researchers, technicians, modern laboratory interiors, microscopes, modern lab apparatus, electronic meters, monitors, white lab coats, modern gloves or modern protective clothing. No instant repair, crack faces moving together, self-rebuilding wall, glowing grains, fake graphs, numerical readouts, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. '+silent)
 assert len(shots)==140 and len({s['prompt'] for s in shots})==140
 for i in range(0,140,10):
     (P/f'PROMPT_{i//10+1:02}_{i+1:03}-{i+10:03}.txt').write_text('\n\n'.join(f"{s['id']:03}. {s['prompt']}" for s in shots[i:i+10])+'\n',encoding='utf-8')
-dump(S/'en-US.json',rows);dump(D/'ENGLISH_CUES_129.json',rows);dump(D/'ALL_PROMPTS.json',shots)
+dump(S/'en-US.json',rows);dump(D/'ENGLISH_CUES_129.json',[{k:r[k] for k in ['id','start','end','voice']} for r in rows]);dump(D/'ALL_PROMPTS.json',shots)
 dump(D/'OPENING_10_SHOTS_30s.json',shots[:10]);dump(D/'BACKUP_137_140.json',shots[136:])
 chapters=[]
 for i in range(0,129,10):
@@ -68,7 +92,8 @@ qa=dict(status='passed',topic_id='MOI-022',catalogue_id='new-100-topics-20261116
         timeline_shots=136,backup_prompt_ids=list(range(137,141)),timeline_total_seconds=TARGET,opening_shots=10,opening_seconds=30,
         all_prompts_silent_suffix=all(s['prompt'].endswith(silent) for s in shots),all_prompts_exclude_minors=True,
         translated_chapters=13,chapter_seconds=[100]*12+[82],expected_audio_frames_48000=FRAMES,requested_voice_count=16,
-        all_requested_voices_male=True,vietnamese_voice_id='vi-VN-NamMinhNeural',voices_generated=False,footage_generated=False,video_edited=False)
+        all_requested_voices_male=True,vietnamese_voice_id='vi-VN-NamMinhNeural',voices_generated=False,footage_generated=False,video_edited=False,
+        visual_revision='historical-context-v2-no-scientists',scientist_scenes=False,modern_laboratory_scenes=False)
 dump(D/'DOCUMENT_QA.json',qa)
 guide=f'''MỚI-022 — BÊ TÔNG LA MÃ — 21:22
 
@@ -78,7 +103,7 @@ Timeline dùng 136 cảnh: 001–010 lấy 3 giây/cảnh; 011–135 lấy 10 gi
 Mốc voice 10 giây có thể giao nhiều cảnh mở đầu 3 giây; CSV ghi đủ ID lời tương ứng, không mặc định một mốc bằng một cảnh ở đoạn mở.
 Mỗi prompt kết bằng “{silent}”. Không trẻ em, thiếu niên, hình trẻ trong nền/màn hình/phản chiếu. Người/tay nhìn thấy phải rõ trưởng thành 35–65 tuổi. Khi dựng vẫn xóa âm gốc nếu công cụ tạo clip tự sinh tiếng.
 Phim chính chỉ voice tiếng Anh, không nhạc/SFX. Nếu thiếu cảnh, thay bằng video chuyển động liên quan, không ảnh đứng có chữ.
-Hình là minh họa; mô hình, mặt cắt, màu nhiệt và phòng thí nghiệm tạo sinh không phải dữ liệu đo hay ảnh mẫu khảo cổ thật. Không để một cú máy làm khe lành ngay khi nước chạm. Hai trạng thái dùng hai mô hình tách biệt; thời gian thực do voice giải thích.
+Hình ưu tiên bối cảnh La Mã cổ đại: công trường, thợ xây trưởng thành, tường, lò vôi, bể chứa, cầu dẫn nước và bến cảng. Đã bỏ toàn bộ cảnh nhà khoa học, phòng thí nghiệm hiện đại và thiết bị đo hiện đại. Mặt cắt/khoáng chỉ minh họa, không phải dữ liệu đo, mẫu khảo cổ thật hoặc cảnh người La Mã làm thí nghiệm hiện đại. Lời vẫn giải thích nghiên cứu hiện đại; không được gán các phép thử ấy cho người cổ. Không để khe lành ngay khi nước chạm. Hai trạng thái dùng hai mô hình riêng; thời gian thực do voice giải thích.
 Thí nghiệm năm 2023 dùng mẫu hiện đại lấy cảm hứng từ vật liệu La Mã. Khe khoảng 0,5 mm; có tiền xử lý ướt/khô hai tháng trước pha dòng chảy tối đa 30 ngày. Giảm thấm không đồng nghĩa phục hồi hoàn toàn sức chịu lực. Không áp dụng cho mọi công trình/khe.
 16 giọng nam giữ nguyên ID tập Upano. Tiếng Anh Andrew, Việt Nam Nam Minh, Đức Christoph. Backend online của Melo-Viet-Studio 1.3.1 ở commit khóa trong MELO_SOURCE_LOCK.json; không tự nhận chạy UI Windows hoặc model Melo đa ngôn ngữ cục bộ.
 Từng MP3 phải giải mã đúng 61.536.000 mẫu mono 48 kHz = 21:22. Anh căn 129 mốc; bản dịch căn 13 chương chung: 12 × 100 giây + 82 giây. Cùng độ dài không có nghĩa từng từ trùng thời điểm. SRT dịch theo chương cần chia nhỏ trước khi hiển thị.
