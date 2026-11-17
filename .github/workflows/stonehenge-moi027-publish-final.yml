@@ -1,0 +1,50 @@
+name: Stonehenge MOI027 publish completed sixteen voices
+on:
+  push:
+    branches: [codex/stonehenge-moi027-production-20261117]
+    paths: [.github/workflows/stonehenge-moi027-publish-final.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  publish_completed_audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: stonehenge-moi027
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python stonehenge-moi027/extract_content.py
+          python stonehenge-moi027/build_documents.py
+          python stonehenge-moi027/finalize_translations.py
+          python stonehenge-moi027/voice_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0
+          python stonehenge-moi027/ensure_ffmpeg.py
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: stonehenge-moi027-voice-*
+          path: voice_artifacts
+          merge-multiple: false
+          run-id: 44099494167
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: stonehenge-moi027-voice-en-US
+          path: voice_artifacts/stonehenge-moi027-voice-en-US
+          run-id: 44096963783
+          github-token: ${{ github.token }}
+      - run: python -u stonehenge-moi027/publish_voices.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stonehenge-moi027-final-release-reports
+          path: |
+            stonehenge-moi027/voice_delivery/*.json
+            stonehenge-moi027/voice_delivery/SHA256SUMS.txt
+          retention-days: 30
