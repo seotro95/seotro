@@ -42,6 +42,7 @@ jobs:
           python-version: '3.12'
       - run: |
           python stonehenge-moi027/extract_content.py
+          python stonehenge-moi027/build_documents.py
           python stonehenge-moi027/finalize_translations.py
           python stonehenge-moi027/voice_gate.py
           python stonehenge-moi027/english_gate.py
