@@ -27,7 +27,7 @@ jobs:
           python -u qanat-moi030/verify_and_archive.py
         env:
           GH_TOKEN: ${{ github.token }}
-          COUNTRY_DELIVERY_RUN: '44161974765'
+          COUNTRY_DELIVERY_RUN: '44163767689'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
