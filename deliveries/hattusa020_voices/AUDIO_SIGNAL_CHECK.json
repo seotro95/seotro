@@ -1,0 +1,162 @@
+[
+  {
+    "locale": "cs-CZ",
+    "filename": "HATTUSA_020_Sec.mp3",
+    "sha256": "7ac2f728332650e1c66b95672fce741e7c539ae2775dc908222f7abddf5fa344",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09359550549811532,
+    "peak": 0.6104450225830078,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "HATTUSA_020_Dan_Mach.mp3",
+    "sha256": "0f1681ab7bd8feab2d80aa1b111ac171087dc0f59cb3aa6ebebbe60f304bd8ff",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09025206141387848,
+    "peak": 0.5109720230102539,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "HATTUSA_020_Duc.mp3",
+    "sha256": "adba9a0a2691b3d922576abccc93872d8965505531b30d13aa7713700ff132a1",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0931737347607827,
+    "peak": 0.5851465463638306,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "en-US",
+    "filename": "HATTUSA_020_My_Tieng_Anh.mp3",
+    "sha256": "7463054a94cb207bc2565518ffc8d83b018c278c47f808a9df7590404b8167a4",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.10122277356229455,
+    "peak": 0.6935480833053589,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "HATTUSA_020_Tay_Ban_Nha.mp3",
+    "sha256": "3422a51c54b36ab276ab199f7b5d15dd5bf9b6c26b0391e3ea871baaf47da3ef",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07968917232831343,
+    "peak": 0.4799032509326935,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "HATTUSA_020_Phan_Lan.mp3",
+    "sha256": "0531e57a3503a90faaa7b0025fa93e12cdfb8a5fe0d4fc87cf2ba57135308ebc",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06441989601175173,
+    "peak": 0.45306602120399475,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "HATTUSA_020_Phap.mp3",
+    "sha256": "e69e2d0dabc485d551dd04ff5151ecb0404f8270fe7376e713867c68817985f8",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07402180907167999,
+    "peak": 0.42106157541275024,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "HATTUSA_020_Y.mp3",
+    "sha256": "922e100087298d31127f317b34a5ad5c4927413c47594e551dc0eeb25dee16aa",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08556843637869335,
+    "peak": 0.45156577229499817,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "HATTUSA_020_Nhat_Ban.mp3",
+    "sha256": "7676c3130367ce33ae92de42f9de8d2db244ef75f266cb9b4f0d058d92936131",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0774160461808504,
+    "peak": 0.584148645401001,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "HATTUSA_020_Han_Quoc.mp3",
+    "sha256": "765171399f298730b9e95f400dc76bac804304011e0d105493c48f3e4af9a02c",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.10003252834930798,
+    "peak": 0.5181741118431091,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "HATTUSA_020_Na_Uy.mp3",
+    "sha256": "74315285a73426ba06b6d455ac503e3ed76c1d846474f6469547e5abdf78f902",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07605805117200086,
+    "peak": 0.5417813658714294,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "HATTUSA_020_Ha_Lan.mp3",
+    "sha256": "31aa3e70359b32fb7d3d51ab82b255852ee9067a068b50ed706f6962eb373c57",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.10183749382583493,
+    "peak": 0.5428400039672852,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "HATTUSA_020_Ba_Lan.mp3",
+    "sha256": "117f73dc96415544abf83aef116a6aeb7c7a8ff7777325e92c9e0508afd2db90",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08675903415386378,
+    "peak": 0.4767388701438904,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "HATTUSA_020_Bo_Dao_Nha.mp3",
+    "sha256": "157df7ca695979ed47431a21ba29df9932bda066b49876c9df7131fcd568ef4a",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06409607801464481,
+    "peak": 0.44620251655578613,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "HATTUSA_020_Thuy_Dien.mp3",
+    "sha256": "e8306718f43e8d3f9f29600e850b4253c74642c09eb3e84381c8d3e9f672df69",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07976167595204786,
+    "peak": 0.5055932998657227,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "HATTUSA_020_Viet_Nam.mp3",
+    "sha256": "8ded4b49f4eeafaf0147087e23480e7a326fd2464b03f046ccafa9fef077306c",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09430125253360751,
+    "peak": 0.4929015040397644,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  }
+]

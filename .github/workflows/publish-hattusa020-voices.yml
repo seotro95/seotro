@@ -1,0 +1,21 @@
+name: Publish requested hattusa020 voices and saved profiles
+on:
+  push:
+    branches: [codex/hattusa020-22m42s]
+    paths: ['deliveries/hattusa020_voices/VOICE_EXPORT_READY.json']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: /deliveries/hattusa020_voices/
+      - name: Verify and upload completed narration files
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python deliveries/hattusa020_voices/publish_voices.py

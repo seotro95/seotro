@@ -1,0 +1,27 @@
+{
+  "topic": "020-Hattusa",
+  "target_seconds": 1362,
+  "expected_samples_48000": 65376000,
+  "export_scope": "16 completed male MP3 voices, saved voice profiles and audio verification only",
+  "existing_document_zip_preserved": true,
+  "profile_files": {
+    "VOICE_PROFILES_LOCKED.json": {
+      "sha256": "b2800da41b899724ff027687ae08a4f7f5916c3157afc7d5036ca0bb38b749e8",
+      "bytes": 12855
+    },
+    "VOICE_FILE_NAMING.json": {
+      "sha256": "07d4ef95cf799a86a579410bc301ba6ca0c9977e8a4fc0d28aa5849c6815a345",
+      "bytes": 3206
+    },
+    "NARRATION_STYLE_LOCKED.json": {
+      "sha256": "990b909888e92f375539e57022396e92dcf13bb5cb715e46a985787f89e8670c",
+      "bytes": 1163
+    },
+    "NARRATION_DELIVERY_PROFILE.json": {
+      "sha256": "a5e5b9109a899832c3827191cde1d33b0ffdd7ebbe327bd4679a410288e3d848",
+      "bytes": 10996
+    }
+  },
+  "audio_count": 16,
+  "no_voice_generation_in_export": true
+}
