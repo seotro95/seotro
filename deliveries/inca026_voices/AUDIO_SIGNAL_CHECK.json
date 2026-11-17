@@ -1,0 +1,162 @@
+[
+  {
+    "locale": "cs-CZ",
+    "filename": "INCA_026_Sec.mp3",
+    "sha256": "4f3a3cb9c925728682396561956111829257e2f3f0839b5adf8f4feb328fc86b",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09486392252565233,
+    "peak": 0.6040303707122803,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "INCA_026_Dan_Mach.mp3",
+    "sha256": "1df3e84b5ea003df5773994c578ecff7bfb2f36702bd95a40481a35a9d00f2fd",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08346035691866968,
+    "peak": 0.5425589680671692,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "INCA_026_Duc.mp3",
+    "sha256": "4ac9f1232c0dd12e206581bb5d1c8aca30b5259197a4d39280fc439bca5bcf98",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09204538036951632,
+    "peak": 0.6027795076370239,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "en-US",
+    "filename": "INCA_026_My_Tieng_Anh.mp3",
+    "sha256": "60b16d2eab2429b58862fea43490618b632dffeb199bbba06d4fc7a993b20f15",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08524476778338892,
+    "peak": 0.5803412199020386,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "INCA_026_Tay_Ban_Nha.mp3",
+    "sha256": "6a2a47f6df4e3368fdf786bb0a8b0ef3f8caea54bf9460b1c6b196c466158cc0",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07150606147613256,
+    "peak": 0.5812596678733826,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "INCA_026_Phan_Lan.mp3",
+    "sha256": "0a002dc0a39e72bea9f97c6e369dae2a12077ee87e55a8e01dab9ca38d57fdcb",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.05717240213637728,
+    "peak": 0.41730576753616333,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "INCA_026_Phap.mp3",
+    "sha256": "33f44508acad722414feada0350ccd3e9be807621b47c601db3671abce3b1e38",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07027090038048307,
+    "peak": 0.48833778500556946,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "INCA_026_Y.mp3",
+    "sha256": "9693091af746451f6445fbabff46c5fd79eb30712e781126e6dddc8ed7b2e2c3",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07683194658511895,
+    "peak": 0.5623039603233337,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "INCA_026_Nhat_Ban.mp3",
+    "sha256": "a919aef4eb69eeff35a891888444a352bbdede08b127fe7895bc332f327e6197",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08648907987280177,
+    "peak": 0.5503065586090088,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "INCA_026_Han_Quoc.mp3",
+    "sha256": "3fe52f58e6446c1a5e8247cc1e295f8adf78161cb7e852ecb70a34250d9778e0",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07076485295582469,
+    "peak": 0.5553192496299744,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "INCA_026_Na_Uy.mp3",
+    "sha256": "c25729ea9dca5db0200372c76370682f1497af324c2de820edb397cc92b66588",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08023967981571048,
+    "peak": 0.6008948087692261,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "INCA_026_Ha_Lan.mp3",
+    "sha256": "1bd0ee67b10c1179cee2569ccff9d9bb26c32c12b80fb06dcebaec74a24afdef",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08999282315915128,
+    "peak": 0.5981613993644714,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "INCA_026_Ba_Lan.mp3",
+    "sha256": "0718b5c2a559e8d0c606abae47d97a5aa5be2f1488399448b490ad5fdcddbb2a",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0844855984433817,
+    "peak": 0.5643123388290405,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "INCA_026_Bo_Dao_Nha.mp3",
+    "sha256": "79ea70295db5f45365cf6f2616859846527738653ba219887a4275292f51e785",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.061342863648146055,
+    "peak": 0.5752933025360107,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "INCA_026_Viet_Nam.mp3",
+    "sha256": "316ce4d8e4b1d89ae894919d45cb60150f1bfe805eb34e3810ce487d5e8eb33e",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09380817817060788,
+    "peak": 0.5288567543029785,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "INCA_026_Thuy_Dien.mp3",
+    "sha256": "427f12869c8f997efc2d593fa9c36142fbdaf745ed14deaf93339a11b21be829",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08534335317175021,
+    "peak": 0.5502082705497742,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  }
+]

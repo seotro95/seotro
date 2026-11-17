@@ -1,0 +1,27 @@
+{
+  "topic": "026-Inca-Rope-Bridge",
+  "target_seconds": 1242,
+  "expected_samples_48000": 59616000,
+  "export_scope": "16 completed male MP3 voices, saved voice profiles and audio verification only",
+  "existing_document_zip_preserved": true,
+  "profile_files": {
+    "VOICE_PROFILES_LOCKED.json": {
+      "sha256": "7cf1235db2f0d6799865b77617ebded15da26f901f5398297e4586f902c84c26",
+      "bytes": 13064
+    },
+    "VOICE_FILE_NAMING.json": {
+      "sha256": "07d4ef95cf799a86a579410bc301ba6ca0c9977e8a4fc0d28aa5849c6815a345",
+      "bytes": 3206
+    },
+    "NARRATION_STYLE_LOCKED.json": {
+      "sha256": "92e1884259c90eb5e13aabaa55ca6ec3a740817ff92b73f37328de80b768e8c1",
+      "bytes": 1287
+    },
+    "NARRATION_DELIVERY_PROFILE.json": {
+      "sha256": "625b328709eb48a67c8f7d1cd58f58d976000396602762d800087672cc6fdfe6",
+      "bytes": 10962
+    }
+  },
+  "audio_count": 16,
+  "no_voice_generation_in_export": true
+}
