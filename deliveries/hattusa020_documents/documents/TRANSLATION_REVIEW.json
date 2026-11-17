@@ -1,0 +1,12 @@
+{
+  "topic": "020-Hattusa",
+  "languages": 16,
+  "english_words": 3629,
+  "localized_strategy": "Concise faithful contextual narration;preserve facts,questions anduncertainty;not word-for-word alignment",
+  "vietnamese_japanese_korean": "Assistant-written contextual narration",
+  "other12": "Machine draft ofexplicitcontextsource plus targeted archaeology,royalcourt,cuneiform,seal,regional vocabulary andchronology review",
+  "japanese_repair": "Millennium expressedasapproximate2000–1000BCErange becauseprovideromittedonewrittenunit;standardJapanesecharactercorrected",
+  "finnish_chronology": "13thcenturyBCErendered1200-lukuBCE",
+  "alignment": "English137cues;15localized14chapters13x100+62seconds",
+  "independent_native_editorial_or_listening_review": false
+}

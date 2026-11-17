@@ -1,0 +1,21 @@
+name: Publish requested hattusa020 documents
+on:
+  push:
+    branches: [codex/hattusa020-22m42s]
+    paths: ['deliveries/hattusa020_documents/READY.json']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: /deliveries/hattusa020_documents/
+      - name: Verify and upload requested text deliverables
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python deliveries/hattusa020_documents/publish_documents.py
