@@ -1,0 +1,39 @@
+name: Stonehenge MOI027 verify public downloads and archive
+on:
+  push:
+    branches: [codex/stonehenge-moi027-production-20261117]
+    paths: [.github/workflows/stonehenge-moi027-verify-archive.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  verify_and_archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/stonehenge-moi027-production-20261117
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python stonehenge-moi027/extract_content.py
+          python stonehenge-moi027/build_documents.py
+          python stonehenge-moi027/finalize_translations.py
+          python stonehenge-moi027/voice_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0
+          python stonehenge-moi027/ensure_ffmpeg.py
+          python -u stonehenge-moi027/verify_and_archive.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stonehenge-moi027-public-verification
+          path: |
+            stonehenge-moi027/PUBLIC_DELIVERY_QA.json
+            stonehenge-moi027/GITHUB_ASSET_AUDIT.json
+          if-no-files-found: ignore
+          retention-days: 30
