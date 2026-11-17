@@ -1,0 +1,90 @@
+name: Stonehenge MOI027 documents and English 21m32s
+on:
+  push:
+    branches: [codex/stonehenge-moi027-production-20261117]
+    paths: [.github/workflows/stonehenge-moi027-documents-english.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  documents:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: stonehenge-moi027
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python stonehenge-moi027/extract_content.py
+          python stonehenge-moi027/build_documents.py
+          python -u stonehenge-moi027/publish_documents.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+  english:
+    needs: documents
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: stonehenge-moi027
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python stonehenge-moi027/extract_content.py
+          python stonehenge-moi027/build_documents.py
+          python stonehenge-moi027/english_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python stonehenge-moi027/ensure_ffmpeg.py
+          python stonehenge-moi027/bootstrap_tool.py online
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: stonehenge-moi027-checkpoint-en-US
+          path: stonehenge-moi027/voice/audio/en-US
+      - name: Generate English with same Andrew voice and retain completed speech
+        run: |
+          set +e
+          python -u stonehenge-moi027/render_english_groups.py
+          code=$?
+          if [ "$code" = 75 ]; then
+            sleep 15
+            python -u stonehenge-moi027/render_english_groups.py
+            code=$?
+          fi
+          exit "$code"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stonehenge-moi027-checkpoint-en-US
+          path: |
+            stonehenge-moi027/voice/audio/en-US/group-*
+            stonehenge-moi027/voice/audio/en-US/raw-*
+            stonehenge-moi027/voice/audio/en-US/fallback-*
+            stonehenge-moi027/voice/audio/en-US/pending_*.json
+          if-no-files-found: ignore
+          retention-days: 30
+          overwrite: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stonehenge-moi027-voice-en-US
+          path: |
+            stonehenge-moi027/voice/audio/en-US/*.mp3
+            stonehenge-moi027/voice/audio/en-US/render_report.json
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true
+      - name: Publish complete English narration
+        run: gh release upload stonehenge-moi-027-21m32s stonehenge-moi027/voice/audio/en-US/*.mp3 --repo seotro95/seotro --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
