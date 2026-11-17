@@ -1,0 +1,124 @@
+name: Roman MOI022 fifteen countries and final sixteen voice delivery
+on:
+  push:
+    branches: [codex/roman-moi022-production-20261117]
+    paths: [.github/workflows/roman-moi022-countries.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  countries:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      max-parallel: 15
+      matrix:
+        locale: [vi-VN, es-ES, fr-FR, ja-JP, ko-KR, de-DE, it-IT, pt-PT, nl-NL, pl-PL, sv-SE, da-DK, fi-FI, nb-NO, cs-CZ]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: roman-concrete-moi022
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python roman-concrete-moi022/extract_content.py
+          python roman-concrete-moi022/extract_voice_inputs.py
+          python roman-concrete-moi022/voice_gate.py
+          python roman-concrete-moi022/english_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python roman-concrete-moi022/ensure_ffmpeg.py
+          python roman-concrete-moi022/bootstrap_tool.py online
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: roman-moi022-checkpoint-${{ matrix.locale }}
+          path: roman-concrete-moi022/voice/audio/${{ matrix.locale }}
+      - name: Generate saved male country voice with retained successful speech
+        run: |
+          set +e
+          python -u roman-concrete-moi022/render_online.py "${{ matrix.locale }}"
+          code=$?
+          if [ "$code" = 75 ]; then
+            sleep 15
+            python -u roman-concrete-moi022/render_online.py "${{ matrix.locale }}"
+            code=$?
+          fi
+          exit "$code"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: roman-moi022-checkpoint-${{ matrix.locale }}
+          path: |
+            roman-concrete-moi022/voice/audio/${{ matrix.locale }}/raw-*
+            roman-concrete-moi022/voice/audio/${{ matrix.locale }}/pending_*.json
+          if-no-files-found: ignore
+          retention-days: 30
+          overwrite: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roman-moi022-voice-${{ matrix.locale }}
+          path: |
+            roman-concrete-moi022/voice/audio/${{ matrix.locale }}/*.mp3
+            roman-concrete-moi022/voice/audio/${{ matrix.locale }}/render_report.json
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true
+  english_ready:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: roman-concrete-moi022
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -u roman-concrete-moi022/wait_for_english.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+  publish:
+    needs: [countries, english_ready]
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: roman-concrete-moi022
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python roman-concrete-moi022/extract_content.py
+          python roman-concrete-moi022/extract_voice_inputs.py
+          python -m pip install imageio-ffmpeg==0.6.0
+          python roman-concrete-moi022/ensure_ffmpeg.py
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: roman-moi022-voice-*
+          path: voice_artifacts
+          merge-multiple: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: roman-moi022-voice-en-US
+          path: voice_artifacts/roman-moi022-voice-en-US
+          run-id: 44033941869
+          github-token: ${{ github.token }}
+      - name: Decode all full waveforms, verify saved identities and publish sixteen voices
+        run: python -u roman-concrete-moi022/publish_voices.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roman-moi022-final-release-reports
+          path: |
+            roman-concrete-moi022/voice_delivery/*.json
+            roman-concrete-moi022/voice_delivery/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true

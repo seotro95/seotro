@@ -35,7 +35,7 @@ def configure(locale):
  online_backend.download_audio=download
  return online_backend
 BACKENDS={}
-def request(locale,text,path,rate,attempts=5):
+def request(locale,text,path,rate,attempts=2):
  if locale not in BACKENDS:BACKENDS[locale]=configure(locale)
  assert 0<len(text)<=1200
  assert 1<=attempts<=5
