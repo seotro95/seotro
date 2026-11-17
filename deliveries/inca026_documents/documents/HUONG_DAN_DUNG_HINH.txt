@@ -1,0 +1,22 @@
+125 CẢNH CHÍNH — TỔNG THỜI LƯỢNG 20:42
+
+124 cảnh × 10 giây + cảnh kết 2 giây = 1.242 giây. Tạo mỗi clip dài 10 giây; riêng cảnh 125 chỉ lấy giây 8–10.
+
+Có 130 prompt trong 13 TXT, mỗi tệp đúng 10 prompt, đánh số 1–130. Tệp 13 gồm năm cảnh chính 121–125 và năm cảnh dự phòng 126–130. Dự phòng chỉ thay hình theo BROLL_DU_PHONG_126_130.csv, không nối thêm vào cuối phim.
+
+Ưu tiên ngoài trời: thung lũng Andes, bờ sông, đường đá, dấu tích khối xây, bàn tay người lớn làm dây, bện cáp và sơ đồ nguyên lý. Không có phòng thí nghiệm hoặc nhà khoa học. Đoạn lời nhắc nghiên cứu, thử mẫu, ảnh hay văn bản được minh họa bằng vật liệu, cảnh quan và sơ đồ ngoài trời.
+
+Phân biệt cột era trong timeline:
+- living: minh họa truyền thống Quechua đang sống; người lớn đương đại, không phải footage thật của một lần dựng cầu cụ thể.
+- historical: tái dựng thời Inca; không khẳng định mọi cầu cổ cùng thiết kế với Qeswachaka.
+- archaeology: dấu tích hoặc cảnh quan khảo cổ ngoài trời; không tự gán niên đại cho khối đá.
+- landscape: phong cảnh minh họa.
+- concept: sơ đồ giải thích nguyên lý, không phải mô hình khảo sát hoặc phép thử thực tế.
+
+Thêm nhãn phù hợp trong editor khi chuyển loại hình. Khi giải thích Qeswachaka được ghi chép, dùng bốn cáp dưới và hai tay vịn, có sàn và dây nối. Không mặc định chia tải đều. Không cho AI bịa số đo, sức chịu tải, dữ liệu hay phương trình. Vectơ lực, địa danh, niên đại và chữ thumbnail thêm sau khi kiểm chứng.
+
+Mỗi prompt ghi không âm thanh, không lời nói và không hình trẻ em, kể cả nền, tranh, bóng và phản chiếu. Mọi người rõ từ 25 tuổi. Nếu công cụ trả thêm stream tiếng, xóa trước khi dựng; dùng voice riêng.
+
+Giữ đúng mốc voice, không cộng thêm intro. Hòa cảnh phải bù phần chồng để tổng vẫn 20:42. HOOK_30_GIAY_10_SHOT.csv là phương án thay hình 30 giây đầu bằng 10 shot, mỗi shot 3 giây, lấy từ clip đã có; giữ nguyên voice 0–30 giây.
+
+Chưa tạo hoặc kiểm tra footage. Khi có clip thật, rà lại độ tuổi nhân vật, tính liên tục của dây, mối neo, số cáp, nhãn thời kỳ và âm thanh trước khi xuất bản.

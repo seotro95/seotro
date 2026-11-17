@@ -1,0 +1,32 @@
+{
+  "topic": "026-Inca-Rope-Bridge",
+  "target_seconds": 1242,
+  "expected_samples_48000": 59616000,
+  "english_words": 3357,
+  "timeline_slots": 125,
+  "duration_math": "124x10+2=1242",
+  "main_prompt_count": 125,
+  "optional_broll_count": 5,
+  "total_generated_prompts": 130,
+  "prompt_txt_count": 13,
+  "prompts_each_txt": 10,
+  "numbering": "1-130",
+  "silent_no_speech_no_children_every_prompt": true,
+  "all_visuals_exterior_or_concept_on_outdoor_background": true,
+  "laboratory_scene_count": 0,
+  "scientists_excluded": true,
+  "image_status_counts": {
+    "living": 73,
+    "historical": 12,
+    "landscape": 14,
+    "concept": 20,
+    "archaeology": 6
+  },
+  "living_practice_separate_from_historical_reconstruction": true,
+  "generated_footage_checked": false,
+  "title_thumbnail_pairs": 5,
+  "narration_text_languages": 16,
+  "male_voice_count": 16,
+  "vietnamese_voice": "vi-VN-NamMinhNeural",
+  "independent_native_listening_review": false
+}

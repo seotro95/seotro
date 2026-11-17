@@ -1,0 +1,255 @@
+{
+  "transport_revision": 3,
+  "topic": "026-Inca-Rope-Bridge",
+  "target_seconds": 1242,
+  "expected_samples_48000": 59616000,
+  "documents_inventory": [
+    {
+      "path": "documents/5_TIEU_DE_5_PROMPT_THUMBNAIL.txt",
+      "bytes": 6463,
+      "sha256": "cc47cd6178c2430bb165614fc354d3d87754748cab2b3994c933030a0e0afba6"
+    },
+    {
+      "path": "documents/BROLL_DU_PHONG_126_130.csv",
+      "bytes": 462,
+      "sha256": "a3c7f31a494a7f3a0775ceed127cf1cb85af6f9a0a33cb2c792743c4a7eead6a"
+    },
+    {
+      "path": "documents/DOCUMENT_QA.json",
+      "bytes": 955,
+      "sha256": "0b26167cbee50c21158aa710fc085107ca9d715c4a8928543e02ef7062c9ea9c"
+    },
+    {
+      "path": "documents/DOI_CHIEU_BANG_CHUNG.csv",
+      "bytes": 1334,
+      "sha256": "d0c1a5ac4114ef95bbc8c8a64fc8718ade22b608ac8b369c8698ddc8b7f7d10f"
+    },
+    {
+      "path": "documents/EDL_125_CANH.csv",
+      "bytes": 7631,
+      "sha256": "93dbc102fef7ab69da8b11bf2104f6a462786e2ba41ecd77943afc161056ca5f"
+    },
+    {
+      "path": "documents/GIONG_DA_LUU.md",
+      "bytes": 1541,
+      "sha256": "6be637f3dbe25ca43d8a82df8ec81a44423356299ecb7923b31deeb232568746"
+    },
+    {
+      "path": "documents/HOOK_30_GIAY_10_SHOT.csv",
+      "bytes": 1207,
+      "sha256": "5e106c42e34953beae2a0947965012a605a65c2c3954504087fdbe6bad57d290"
+    },
+    {
+      "path": "documents/HUONG_DAN_DUNG_HINH.txt",
+      "bytes": 2568,
+      "sha256": "b7481406cc1e40ac2cb5c2ee1173efebc8db359f4c923f6e694bdcf55e829633"
+    },
+    {
+      "path": "documents/KICH_BAN_EN_20m42s.txt",
+      "bytes": 22158,
+      "sha256": "b524290e6044dd73aedcb9f9eda6ebd13db5534e388ae8abfb83f3a33894641f"
+    },
+    {
+      "path": "documents/KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 30423,
+      "sha256": "5c92f8e959d26cb92128a38e6941b93019cd854e9c892039d75f3403debd0042"
+    },
+    {
+      "path": "documents/LOI_DAN_EN_125_CANH.srt",
+      "bytes": 26300,
+      "sha256": "615cfb6a02c65449c2cbcf3297986f99bb23f988111668ecf6dc1c0dca67adbf"
+    },
+    {
+      "path": "documents/NARRATION_STYLE_LOCKED.json",
+      "bytes": 1287,
+      "sha256": "92e1884259c90eb5e13aabaa55ca6ec3a740817ff92b73f37328de80b768e8c1"
+    },
+    {
+      "path": "documents/NGUON_KIEM_CHUNG.md",
+      "bytes": 5822,
+      "sha256": "878204e944b4f564f4e15068261a5c9b22332b22eacbcced50602cb8b3a07e48"
+    },
+    {
+      "path": "documents/PHAN_TICH_VIDEO_NGUON.md",
+      "bytes": 2767,
+      "sha256": "7e242c68c910be1a3b328c5dd3a999548feecf252413fe7857816a65d54c3e60"
+    },
+    {
+      "path": "documents/PROMPTS/01_PROMPT_001_010.txt",
+      "bytes": 33268,
+      "sha256": "ecf426e54b2dec13d43608cebb170ef459be661ba4720582bcda159c48222337"
+    },
+    {
+      "path": "documents/PROMPTS/02_PROMPT_011_020.txt",
+      "bytes": 33310,
+      "sha256": "18e6bd5c3b90342fa858a08c5521a7feb00d881515c5dba00b53835b41fe155b"
+    },
+    {
+      "path": "documents/PROMPTS/03_PROMPT_021_030.txt",
+      "bytes": 33273,
+      "sha256": "eb1178e21905bcbccb4e2cce7eb23443c91a3a36eb5d51332d2d5c8ccbe8ba88"
+    },
+    {
+      "path": "documents/PROMPTS/04_PROMPT_031_040.txt",
+      "bytes": 33170,
+      "sha256": "78fa46d3a2d0af17386d7dc467c8482f3feaf639355feee3e42c181639f46b9e"
+    },
+    {
+      "path": "documents/PROMPTS/05_PROMPT_041_050.txt",
+      "bytes": 33333,
+      "sha256": "f14f4f316c20c9d0f06af5fbf8047618f828b81d4c9ad70ddeefad35fa277346"
+    },
+    {
+      "path": "documents/PROMPTS/06_PROMPT_051_060.txt",
+      "bytes": 33345,
+      "sha256": "f0ca0e0d39345fd9a7d0c8db119464653a17175bdfe498099d3698b48c6853c2"
+    },
+    {
+      "path": "documents/PROMPTS/07_PROMPT_061_070.txt",
+      "bytes": 33147,
+      "sha256": "de688ba7904c9f13a1e0833db1e445870701bfbad00af12ba23712d031e69786"
+    },
+    {
+      "path": "documents/PROMPTS/08_PROMPT_071_080.txt",
+      "bytes": 33516,
+      "sha256": "7e36d4666df564c16b2d9ff9b9db77dc937f625c895a41cf4f521cef9d4a4933"
+    },
+    {
+      "path": "documents/PROMPTS/09_PROMPT_081_090.txt",
+      "bytes": 33606,
+      "sha256": "02837005b35ce2aa55a27d9def108d72dd843b6724007ac7425acda4f8bf5bb9"
+    },
+    {
+      "path": "documents/PROMPTS/10_PROMPT_091_100.txt",
+      "bytes": 33410,
+      "sha256": "14fbec2bf50c48d2630569add21f3c3c00e0c847a66594dba24a83f7a4633115"
+    },
+    {
+      "path": "documents/PROMPTS/11_PROMPT_101_110.txt",
+      "bytes": 33508,
+      "sha256": "12e18af19d264144c5c4d411fdc41d4c12471c40e0fea845127a6e2296569ff6"
+    },
+    {
+      "path": "documents/PROMPTS/12_PROMPT_111_120.txt",
+      "bytes": 33337,
+      "sha256": "10122263414b975058d31d061c1ecd1b313d77fb9ebb20d615b1dde5571ded8d"
+    },
+    {
+      "path": "documents/PROMPTS/13_PROMPT_121_130.txt",
+      "bytes": 33462,
+      "sha256": "6153ae9247b3ad6992a47b79e40ddfb15f49a05f18ff05304be8bdfdc942e07d"
+    },
+    {
+      "path": "documents/README.md",
+      "bytes": 2877,
+      "sha256": "cb0c46afceb5121f74cfb499c11e9c6a158cdd89d6d892f1374677d588bb76cf"
+    },
+    {
+      "path": "documents/TIMELINE_125_CANH.csv",
+      "bytes": 44760,
+      "sha256": "4c59e967cfeb2a3bad9f7215b226343f6e36caa01bab345bba3db350b51d65ef"
+    },
+    {
+      "path": "documents/TRANSLATION_REVIEW.json",
+      "bytes": 898,
+      "sha256": "97da3a9db27dc2e2428820a91e73dcff2621b7135115a87250b07a34c002b889"
+    },
+    {
+      "path": "documents/VISUAL_STYLE_LOCKED.json",
+      "bytes": 889,
+      "sha256": "79a3d53023d40812925e5d60c0f2d4a73aa6b55ded222291de1a799c10d185bb"
+    },
+    {
+      "path": "documents/VOICE_FILE_NAMING.json",
+      "bytes": 3206,
+      "sha256": "07d4ef95cf799a86a579410bc301ba6ca0c9977e8a4fc0d28aa5849c6815a345"
+    },
+    {
+      "path": "documents/VOICE_PROFILES_LOCKED.json",
+      "bytes": 13064,
+      "sha256": "7cf1235db2f0d6799865b77617ebded15da26f901f5398297e4586f902c84c26"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/cs-CZ.txt",
+      "bytes": 24288,
+      "sha256": "b1b74202b6d1f0912e2ce1d10ab8feb113c0315c6beef1179fff06ecaa4bff76"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/da-DK.txt",
+      "bytes": 23882,
+      "sha256": "8af31edec31a3b8a3c1de8307934681009b727e0a249c58d4062d853442d0844"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/de-DE.txt",
+      "bytes": 27212,
+      "sha256": "0711302945bc5f0ee3e0e1da28e5a487fc5262cb4b48c0214176250082cc39ff"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/en-US.txt",
+      "bytes": 23564,
+      "sha256": "d86f317696bd6e6a3b43efec3fdb13a896f24b619666b907c42a531ad904f2de"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/es-ES.txt",
+      "bytes": 26434,
+      "sha256": "520c41ad8206571df458b90ea2aa1900c9ce877a493299109cd81b567c40d083"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/fi-FI.txt",
+      "bytes": 24659,
+      "sha256": "1d1b6e204706d20dd9c685ce278d0bc3858e3227a7a2776713dbb8fdcb12f4ba"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/fr-FR.txt",
+      "bytes": 28178,
+      "sha256": "3f056eeedfba1070c7691a858a084953f1b18d7b5b266ea2309b95e1ffaade36"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/it-IT.txt",
+      "bytes": 26297,
+      "sha256": "609978efd3263d86dd8538fb539988155616fbe1bf5bec0044dc85359622300e"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/ja-JP.txt",
+      "bytes": 19224,
+      "sha256": "579eb4f7752a5efb237abd0e56d2d7136b57437de0b86b46485833f6fbd53f0f"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/ko-KR.txt",
+      "bytes": 18934,
+      "sha256": "ee04bf0a514f545a05beb6bf07c8ed4e1e9a3d1d081f071da52cdd0ecc5d6306"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/nb-NO.txt",
+      "bytes": 23185,
+      "sha256": "60b8f75763b852f6d864a850ec419e4d6dc638aac14b62abfc15fed49eb58a2f"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/nl-NL.txt",
+      "bytes": 26086,
+      "sha256": "789de8479683c5728b0f4b8f30e5ac857c7aeb3d16f6e5c43448356aa7fc944e"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/pl-PL.txt",
+      "bytes": 25647,
+      "sha256": "98c161acf3a83afe205452f7276b251f641d573b7286128f6c5a4fd5b59f8c55"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/pt-PT.txt",
+      "bytes": 25827,
+      "sha256": "bba1ed51f2b0d59f4275ad742e0d497f8ac89d6be3b955e0a255b9eaddbb4c86"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/sv-SE.txt",
+      "bytes": 22839,
+      "sha256": "2c39dba925d9ec993f0ca0ab73e49fff68fdfabfa190fdf67ca8610121a5fb9b"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/vi-VN.txt",
+      "bytes": 22917,
+      "sha256": "96c38558c493d880fe5cf9d4fc60ac58a8a4bbdde49df4aa80e9b2fb1bb274d5"
+    }
+  ],
+  "release_tag": "inca-bridge-video-026-20m42s",
+  "scope": "New user-requested Inca026 original English script,125main+5optional silent no-children outdoor Inca and separately-labelled living Quechua tradition prompts excluding scientists and modern research settings in13TXT,timeline,source analysis,scientific references,16localized narration texts,saved voice identities including VietnameseNamMinh,EnglishGuy,GermanChristoph,5title/thumbnail prompt suggestions;document export only;no MP3files inthis document export,source video,models,credentials,other topics or private messages"
+}

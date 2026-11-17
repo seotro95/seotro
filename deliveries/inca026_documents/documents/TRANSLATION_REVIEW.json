@@ -1,0 +1,19 @@
+{
+  "topic": "026-Inca-Rope-Bridge",
+  "languages": 16,
+  "english_words": 3357,
+  "localized_strategy": "Contextual localization preserving mechanisms,facts andevidence limits;not word-for-word subtitle alignment",
+  "vietnamese_japanese_korean": "Assistant-written contextual rewrites of13chapters",
+  "other12": "Full chapter machine draft withambiguities expanded beforetranslation;targeted engineering/date/regionterm review",
+  "ambiguities_addressed": [
+    "riverbank notfinancialbank",
+    "plantfiber notopticalfiber",
+    "shortconnectingrope notnecktie",
+    "plantfiber notknifeblade",
+    "2013UNESCOrecognition not213",
+    "French neveronly notonly"
+  ],
+  "alignment": "English125cues;15localized13chapters12x100+42seconds",
+  "independent_native_editorial_or_listening_review": false,
+  "swedish_chapters_10_11": "Assistant contextual pacing rewrite;all chapter topics retained"
+}
