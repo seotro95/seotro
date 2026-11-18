@@ -151,8 +151,8 @@
     },
     {
       "path": "documents/README.md",
-      "bytes": 2908,
-      "sha256": "4da84993cefb7badd9af21980b37c6be976df3f188946fed40063bcc9d3bfade"
+      "bytes": 2941,
+      "sha256": "d0136a12a37db6dc2df42a146f66c1b3a921cb7821dc204c79842002cf6238c3"
     },
     {
       "path": "documents/TIMELINE_143_CANH.csv",
@@ -161,8 +161,8 @@
     },
     {
       "path": "documents/TRANSLATION_REVIEW.json",
-      "bytes": 749,
-      "sha256": "57a55401192c83bc623d2506c15318d0f5eebf83c69947c271909936643f3f91"
+      "bytes": 961,
+      "sha256": "bf66445230bdc911184d8fe0204376059a67bb9c0a607d7a0cae6a5af344db6b"
     },
     {
       "path": "documents/VISUAL_STYLE_LOCKED.json",
@@ -251,8 +251,8 @@
     },
     {
       "path": "documents/VOICE_SCRIPTS/sv-SE.txt",
-      "bytes": 32358,
-      "sha256": "deba5916908d49d29f8fd6f8ef635b4fcc491c637f5249b79b62af819a1f1365"
+      "bytes": 31926,
+      "sha256": "d8b088852ded169944066ba1355d50170e9c0b5536f959bea479cc14c4667fa1"
     },
     {
       "path": "documents/VOICE_SCRIPTS/vi-VN.txt",

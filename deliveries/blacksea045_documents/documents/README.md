@@ -16,4 +16,4 @@ Hình ưu tiên xác tàu, ROV ngoài biển, mặt biển, bờ, cảnh đóng 
 
 Mạch kể: mật độ và trộn nước → nguồn và tiêu thụ oxy → hóa học → sinh vật → bảo tồn có chọn lọc. Thiếu oxy ở một tầng không đồng nghĩa cả Biển Đen không có sự sống, cũng không đồng nghĩa vô trùng. Gỗ còn hình không tự chứng minh còn độ bền. Không gán một độ sâu cố định cho cả lưu vực hoặc dựng tàu hoàn hảo, sẵn sàng ra khơi.
 
-Việt, Nhật và Hàn được biên tập theo ngữ cảnh. 12 bản khác từ dịch máy có rà thuật ngữ và vùng dùng; một đoạn Ý được viết gọn để vừa nhịp đọc. Chưa có nghe duyệt bản ngữ độc lập; cần rà độ tự nhiên và tên riêng trước khi xuất bản cuối. Metadata dịch vụ không thay thế nghe duyệt. Chưa tạo footage hoặc MP4; mọi hình AI đều là minh họa.
+Việt, Nhật và Hàn được biên tập theo ngữ cảnh. 12 bản khác từ dịch máy có rà thuật ngữ và vùng dùng; một đoạn Ý và một đoạn Thụy Điển được viết gọn để vừa nhịp đọc. Chưa có nghe duyệt bản ngữ độc lập; cần rà độ tự nhiên và tên riêng trước khi xuất bản cuối. Metadata dịch vụ không thay thế nghe duyệt. Chưa tạo footage hoặc MP4; mọi hình AI đều là minh họa.
