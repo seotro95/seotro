@@ -1,0 +1,20 @@
+143 CẢNH CHÍNH — TỔNG 23:42
+
+142 cảnh × 10 giây + cảnh kết 2 giây = 1.422 giây. Tạo mỗi clip dài 10 giây; riêng cảnh 143 chỉ lấy giây 8–10.
+Có 150 prompt trong 15 TXT, mỗi tệp đúng 10 prompt, đánh số 1–150. Tệp 15 gồm ba cảnh chính 141–143 và bảy cảnh dự phòng 144–150. Dự phòng chỉ thay hình theo CSV, không nối thêm thời lượng.
+
+Ưu tiên xác tàu dưới nước, ROV ngoài biển, mặt biển, bờ và cảnh đóng tàu lịch sử ngoài trời. Không có phòng thí nghiệm hoặc nhà khoa học. ROV cùng đèn, máy quay, dây cáp của nó được phép xuất hiện.
+
+Cột era trong timeline:
+- deep: xác tàu sâu trong bóng tối, chỉ đèn ROV, không cá, ánh nắng hay người lặn.
+- rov: thiết bị điều khiển từ xa ở ngoài nước, không phòng điều khiển.
+- upper: tầng trên có oxy; có thể có cá và ánh nắng.
+- shore: mặt biển hoặc bờ.
+- historical: phục dựng công việc đóng tàu hoặc hàng hải cổ.
+- concept: sơ đồ nguyên lý hoặc minh họa vi sinh, không phải phép đo hay ảnh hiển vi thật.
+
+Gắn nhãn rõ khi chuyển loại hình. Không đưa cá tầng trên xuống xác tàu sâu để trang trí; không dùng nắng ở độ sâu hai kilômét; không vẽ tường kính giữa các lớp nước hoặc một mốc độ sâu cố định cho cả biển. Thiếu oxy không đồng nghĩa vô trùng. Mọi hình AI là minh họa, không phải footage của chuyến khảo sát hoặc cấu hình chính xác của một xác tàu có tên.
+
+Mỗi prompt ghi không âm thanh, không lời nói và không hình trẻ em, kể cả nền, tranh, bóng và phản chiếu. Mọi người rõ từ 25 tuổi. Nếu công cụ trả thêm stream tiếng, xóa trước khi dựng; dùng riêng voice phù hợp.
+
+Giữ đúng 23:42, không cộng intro. Hòa cảnh phải bù phần chồng. HOOK_30_GIAY_10_SHOT.csv chỉ thay hình 30 giây đầu bằng 10 shot, mỗi shot 3 giây; giữ nguyên voice 0–30 giây. Chữ, nhãn, số liệu và vectơ thêm trong editor sau khi kiểm chứng. Chưa tạo footage hoặc MP4; rà lại clip thật trước khi xuất bản.

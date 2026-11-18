@@ -1,0 +1,11 @@
+shot,start,end,clip_id,source_in,source_out,instruction
+1,0,3,1,2,5,Replaceopeningpicture0–30sonly;keepnarrationandtotal23:42;removeclipaudio;labelimageenvironment
+2,3,6,12,2,5,Replaceopeningpicture0–30sonly;keepnarrationandtotal23:42;removeclipaudio;labelimageenvironment
+3,6,9,13,2,5,Replaceopeningpicture0–30sonly;keepnarrationandtotal23:42;removeclipaudio;labelimageenvironment
+4,9,12,71,2,5,Replaceopeningpicture0–30sonly;keepnarrationandtotal23:42;removeclipaudio;labelimageenvironment
+5,12,15,29,2,5,Replaceopeningpicture0–30sonly;keepnarrationandtotal23:42;removeclipaudio;labelimageenvironment
+6,15,18,34,2,5,Replaceopeningpicture0–30sonly;keepnarrationandtotal23:42;removeclipaudio;labelimageenvironment
+7,18,21,38,2,5,Replaceopeningpicture0–30sonly;keepnarrationandtotal23:42;removeclipaudio;labelimageenvironment
+8,21,24,54,2,5,Replaceopeningpicture0–30sonly;keepnarrationandtotal23:42;removeclipaudio;labelimageenvironment
+9,24,27,9,2,5,Replaceopeningpicture0–30sonly;keepnarrationandtotal23:42;removeclipaudio;labelimageenvironment
+10,27,30,5,2,5,Replaceopeningpicture0–30sonly;keepnarrationandtotal23:42;removeclipaudio;labelimageenvironment

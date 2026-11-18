@@ -1,0 +1,21 @@
+name: Publish requested blacksea045 documents
+on:
+  push:
+    branches: [codex/blacksea045-23m42s]
+    paths: ['deliveries/blacksea045_documents/READY.json']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: /deliveries/blacksea045_documents/
+      - name: Verify and upload requested text deliverables
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python deliveries/blacksea045_documents/publish_documents.py
