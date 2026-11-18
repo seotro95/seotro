@@ -1,0 +1,27 @@
+{
+  "topic": "045-Black-Sea",
+  "target_seconds": 1422,
+  "expected_samples_48000": 68256000,
+  "export_scope": "16 completed male MP3 voices, saved voice profiles and audio verification only",
+  "existing_document_zip_preserved": true,
+  "profile_files": {
+    "VOICE_PROFILES_LOCKED.json": {
+      "sha256": "321439ee303205c0203140de63adb36c6ecee92f1ec429d5d9b135fc29a6bd7c",
+      "bytes": 12987
+    },
+    "VOICE_FILE_NAMING.json": {
+      "sha256": "07d4ef95cf799a86a579410bc301ba6ca0c9977e8a4fc0d28aa5849c6815a345",
+      "bytes": 3206
+    },
+    "NARRATION_STYLE_LOCKED.json": {
+      "sha256": "ad5db5a6dc7229f6e52aa1e004b422eab9a62d84124aae4192d2ea2e008cf9c6",
+      "bytes": 1384
+    },
+    "NARRATION_DELIVERY_PROFILE.json": {
+      "sha256": "d29ae8ed92d3032108ca79749f11bfa1e59f9a905834bd54b16332707297c6eb",
+      "bytes": 10925
+    }
+  },
+  "audio_count": 16,
+  "no_voice_generation_in_export": true
+}

@@ -1,0 +1,29 @@
+{
+  "style_id": "science-documentary-expressive-v1",
+  "applies_to": "Topic 3 and subsequent topics unless changed by user",
+  "user_request": "Giữ16giọngnam,NamMinhViệt;voiceđọcnhanhhơnmộtchút",
+  "identity": "16 saved male online voices including Vietnamese Nam Minh",
+  "delivery": "Friendlyclear documentary;Englishapproximately180–185words/minute,slightlyfasterthanBaiae043;preserveidentityandpitch",
+  "online": {
+    "pitch": "+0Hz",
+    "segment_rate_percent_range": [
+      6,
+      13
+    ],
+    "word_accents_db": 1.2,
+    "max_accents_per_piece": 2,
+    "pause_seconds_range": [
+      0.07,
+      0.16
+    ],
+    "method": "Original Melo backend with documented Edge prosody/word-boundary adapter; pitch-preserving cue timing afterwards"
+  },
+  "timing": "BlackSea045:1422seconds;English142x10+2;15localized14chapters13x100+122",
+  "limits": "Engine controls preserve saved voice identity and pitch. Independent native-language listening and proper-name review remain pending.",
+  "english_cue_strategy": "Complete immutable English cue per request using Guy;faithful smaller fallback only forprovider text/noaudio failures;pitch-preserving exact cue timing",
+  "episode": "045-Black-Sea",
+  "english_cues": 143,
+  "localized_chapters": 14,
+  "source": "Inherited voice IDs; new Inca rope bridge narration",
+  "slightly_faster_than_previous_episode": true
+}

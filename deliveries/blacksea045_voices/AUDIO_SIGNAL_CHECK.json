@@ -1,0 +1,162 @@
+[
+  {
+    "locale": "da-DK",
+    "filename": "BLACK_SEA_045_Dan_Mach.mp3",
+    "sha256": "c438a2cf073ee9cb8f78682e1ceecac4edc633966f4508dc5e5758543483cc4e",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08065654329224146,
+    "peak": 0.4907703995704651,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "BLACK_SEA_045_Duc.mp3",
+    "sha256": "f261690bc4aa25f9c7973fce1006e40058a4e7bc7d74590550b65f80c181911d",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09353035996863009,
+    "peak": 0.6633516550064087,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "en-US",
+    "filename": "BLACK_SEA_045_My_Tieng_Anh.mp3",
+    "sha256": "c919894b39ba8effc46d94da8ea34d3281f52f150a0dde49b6c07aba52468e07",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.10622278911190186,
+    "peak": 0.7671983242034912,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "BLACK_SEA_045_Tay_Ban_Nha.mp3",
+    "sha256": "215ea084e0a6f94a539cbb68d53d8d3e28dbde77efcf66c7959641a696645b49",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07522900942891732,
+    "peak": 0.5006322860717773,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "BLACK_SEA_045_Phap.mp3",
+    "sha256": "9baaa593f7c31f15655e4013933145935143b9f6f02a6cf60bcce287c0c8dfe6",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07285470765830307,
+    "peak": 0.44670045375823975,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "BLACK_SEA_045_Y.mp3",
+    "sha256": "370a9945fc363ea37325bb427f5d0524384d32351c4114472e2c8eed1698bf25",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08251241268249179,
+    "peak": 0.46599018573760986,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "BLACK_SEA_045_Nhat_Ban.mp3",
+    "sha256": "8e5c9381965a546cb23e21ebdf72788bd93538a7f2962324eda5c6a81e7434d3",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09982122554928702,
+    "peak": 0.6357154846191406,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "BLACK_SEA_045_Han_Quoc.mp3",
+    "sha256": "28980c2ca63fc6fef8b6ccff7fab87495761819a7d7e74219ebb8f50a1a443fe",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07580938270856115,
+    "peak": 0.5966205596923828,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "BLACK_SEA_045_Ha_Lan.mp3",
+    "sha256": "2fc6e27c3a7c607806afb132bdcccf166219f822d3f8d8513f39d85f4be4b836",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.10031052071441109,
+    "peak": 0.6225060224533081,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "BLACK_SEA_045_Ba_Lan.mp3",
+    "sha256": "e55522692d8521ef171f21807322d65a2d80ac812b356c6f99aad3cfbb5fee67",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09680380537282893,
+    "peak": 0.5873511433601379,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "BLACK_SEA_045_Bo_Dao_Nha.mp3",
+    "sha256": "cfe60985ae18446ee3ab132dc2019838e5b15b6d762539c4f1243b4ae5a99b26",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07761450521970613,
+    "peak": 0.5662952661514282,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "BLACK_SEA_045_Thuy_Dien.mp3",
+    "sha256": "09c100836eefa52438ecdc3c35692e01f35b5c19dcaa64226deb025a0f6705a3",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08760427240886937,
+    "peak": 0.6146811246871948,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "BLACK_SEA_045_Viet_Nam.mp3",
+    "sha256": "ed6104b30fe1264ab99227a8a8a881c7378337814cddf2724d9227d8e6d40758",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08218346986630624,
+    "peak": 0.5337845087051392,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "cs-CZ",
+    "filename": "BLACK_SEA_045_Sec.mp3",
+    "sha256": "f36144f893803810dc210c181c28374dfe2f1401d38c5a1ae91763a5179ca935",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08861339960062277,
+    "peak": 0.55194091796875,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "BLACK_SEA_045_Phan_Lan.mp3",
+    "sha256": "27583c7eb4efece2d7699f14d49092775bd2d2f0150c9842f00c7370e0727d38",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.05778826316103648,
+    "peak": 0.44413334131240845,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "BLACK_SEA_045_Na_Uy.mp3",
+    "sha256": "eb543c6846d6e5912d8819701d8e20cb55c2eb1e7f9b775097cb73a3e4bfc8d4",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07588077507822198,
+    "peak": 0.6759480834007263,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  }
+]
