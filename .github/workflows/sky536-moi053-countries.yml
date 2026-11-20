@@ -1,0 +1,112 @@
+name: Sky 536 MOI053 fifteen saved male country voices
+permissions:
+  contents: read
+  actions: read
+jobs:
+  validate_inputs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: sky536-moi053
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: 'python sky536-moi053/extract_content.py
+
+        python sky536-moi053/extract_voice_inputs.py
+
+        python sky536-moi053/build_documents.py
+
+        python sky536-moi053/voice_gate.py
+
+        python -m compileall -q sky536-moi053
+
+        '
+  countries:
+    needs: validate_inputs
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      max-parallel: 15
+      matrix:
+        locale:
+        - vi-VN
+        - es-ES
+        - fr-FR
+        - ja-JP
+        - ko-KR
+        - de-DE
+        - it-IT
+        - pt-PT
+        - nl-NL
+        - pl-PL
+        - sv-SE
+        - da-DK
+        - fi-FI
+        - nb-NO
+        - cs-CZ
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: sky536-moi053
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: 'python sky536-moi053/extract_content.py
+
+        python sky536-moi053/extract_voice_inputs.py
+
+        python sky536-moi053/build_documents.py
+
+        python sky536-moi053/voice_gate.py
+
+        python sky536-moi053/english_gate.py
+
+        python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+
+        python sky536-moi053/ensure_ffmpeg.py
+
+        python sky536-moi053/bootstrap_tool.py online
+
+        '
+    - uses: actions/download-artifact@v4
+      continue-on-error: true
+      with:
+        name: sky536-moi053-checkpoint-${{ matrix.locale }}
+        path: sky536-moi053/voice/audio/${{ matrix.locale }}
+    - name: Render saved male voice retaining successful speech
+      run: "set +e\npython -u sky536-moi053/render_online.py \"${{ matrix.locale }}\"\ncode=$?\nif [ \"$code\" = 75 ]; then\n\
+        \  sleep 15\n  python -u sky536-moi053/render_online.py \"${{ matrix.locale }}\"\n  code=$?\nfi\nexit \"$code\"\n"
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: sky536-moi053-checkpoint-${{ matrix.locale }}
+        path: 'sky536-moi053/voice/audio/${{ matrix.locale }}/raw-*
+
+          sky536-moi053/voice/audio/${{ matrix.locale }}/pending_*.json
+
+          '
+        if-no-files-found: ignore
+        retention-days: 30
+        overwrite: true
+    - uses: actions/upload-artifact@v4
+      with:
+        name: sky536-moi053-voice-${{ matrix.locale }}
+        path: 'sky536-moi053/voice/audio/${{ matrix.locale }}/*.mp3
+
+          sky536-moi053/voice/audio/${{ matrix.locale }}/render_report.json
+
+          '
+        if-no-files-found: error
+        retention-days: 30
+        overwrite: true
+'on':
+  push:
+    branches:
+    - codex/sky536-moi053-production-20261120
+    paths:
+    - .github/workflows/sky536-moi053-countries.yml
+  workflow_dispatch: null
