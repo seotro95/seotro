@@ -1,0 +1,35 @@
+{
+  "status": "windows_tests_and_uploaded_asset_sha256_verified",
+  "version": "1.13.0",
+  "source_commit": "74cc98f46806b1345148b8dcd66c47378ca34bd6",
+  "source_branch": "codex/muse-113-concurrency-names-proxy",
+  "workflow_run_id": 44769432635,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/44769432635",
+  "workflow_conclusion": "success",
+  "release_id": 452904699,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/untagged-bfbac9f8a0d0399fb017",
+  "draft": true,
+  "zip": {
+    "file": "Muse-AI-Studio-1.13.0-Windows-x64.zip",
+    "bytes": 160752240,
+    "sha256": "3436940329cb56160a338de1dc3b2818305b1aee7e193817a1aa2b8cbc768339",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-bfbac9f8a0d0399fb017/Muse-AI-Studio-1.13.0-Windows-x64.zip"
+  },
+  "checksum_file": {
+    "file": "Muse-AI-Studio-1.13.0-Windows-x64.zip.sha256",
+    "bytes": 105,
+    "sha256": "33bdae0532337626711da4f3e588d18904561a670df0b83c6ead8eb495990910",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-bfbac9f8a0d0399fb017/Muse-AI-Studio-1.13.0-Windows-x64.zip.sha256"
+  },
+  "validation": {
+    "windows_ui_checks": 20,
+    "account_pool": "60 simultaneous fixture jobs; six per account; independent cancellation",
+    "real_browser_bridge": "Six simultaneous video turns on one account using independent fixture conversations; one cancellation leaves five results",
+    "electron_proxy": "Two authenticated fixture proxies return distinct exit IPs; no session cookies sent",
+    "packaged_executable": "Startup/recovery, ten overlapping image workers, persistent counters, Unicode prompt filenames, individual and folder downloads, remembered settings/sessions",
+    "supplied_txt": "10 parent sections; 20 complete render prompts preserved and named",
+    "live_muse_account_render_tested": false,
+    "desktop_source": "Ten overlapping image workers and ten image-to-video workers; individual/all cancellation; saved sessions and popup login"
+  },
+  "verified_at_utc": "2026-11-20T16:09:06Z"
+}
