@@ -4,7 +4,7 @@ test('generation replies distinguish refusal, confirmation and genuine backgroun
  assert.equal(replyProblem('Tôi không thể tạo video bằng mô hình này.'),'MUSE_GENERATION_REFUSED');
  assert.equal(replyProblem('Would you like me to create a video using the available model?'),'MUSE_ACTION_REQUIRED');
  assert.equal(replyProblem('Please clarify the scene.'),'MUSE_PROMPT_CLARIFICATION');
- for(const text of ['Started generation. The video will appear when ready.','Đang tạo video. Tôi sẽ gửi tệp khi hoàn tất.','Generating the requested video.'])assert.equal(replyProblem(text),null);
+ for(const text of ['Started generation. The video will appear when ready.','Đang tạo video. Tôi sẽ gửi tệp khi hoàn tất.','Generating the requested video.',"I cannot use that exact model. I've started generating a video with the available model."])assert.equal(replyProblem(text),null);
  assert.equal(replyPreview('https://cdn.example/file?token=private user@example.com').includes('private'),false);
 });
 for(const scenario of ['unlabelled-confirmation','unlabelled-refusal','image-with-sandbox-link','image-extensionless-download','video-with-source-child'])test(scenario,{timeout:30000},async t=>{
