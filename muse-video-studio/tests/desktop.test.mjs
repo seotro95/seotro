@@ -44,8 +44,10 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
     await waitFor(() => { shell = desktop.context().pages().find(page => page.url() === shellURL); return shell; }, 'desktop shell');
     let studio;
     await waitFor(() => { studio = desktop.context().pages().find(page => page.url().startsWith('http://127.0.0.1:') && !page.url().startsWith(fixtureURL)); return studio; }, 'Studio page');
-    await studio.waitForFunction(()=>Boolean(localStorage.getItem('muse-workstation-v1')));
-    await studio.evaluate(()=>{const value=JSON.parse(localStorage.getItem('muse-workstation-v1'));value.settings.requestedConcurrency=10;localStorage.setItem('muse-workstation-v1',JSON.stringify(value))});await studio.reload();
+    // Set state through the UI; editing localStorage while React is saving it
+    // can race a startup effect and put the requested count back to six.
+    await studio.getByLabel('Số luồng mỗi tài khoản:',{exact:true}).selectOption('10');
+    assert.equal(await studio.getByLabel('Số luồng mỗi tài khoản:',{exact:true}).inputValue(),'10');
     let login;
     await t.test('one app window contains the real login view, isolated from Node APIs', async () => {
       await studio.getByRole('button', { name: 'Đăng nhập Muse trong tool', exact: true }).click();

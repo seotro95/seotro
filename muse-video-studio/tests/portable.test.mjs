@@ -194,6 +194,23 @@ test('portable app submits ten independent scenes concurrently, views images and
     const namedFolder=await desktop.evaluate(()=>globalThis.lastFolder);const namedFiles=await readdir(namedFolder);
     assert.equal(namedFiles.length,9);assert.ok(namedFiles.includes(namedStem+'.png'));assert.equal((await readdir(exportsRoot)).length,3);assert.equal(fixture.state.submitted.length,10);
 
+    const compactNames=['nam','thái','nga','thang','hoang','thu','thao','tuan','phang','phu'];
+    const compactScript=compactNames.map((name,i)=>`[${i%3?'':' '}${i+1}${i%3?'':' '}]${i%2?'':' '}${name}\nPortable prompt ${i+1}.`).join('\r\n');
+    await studio.getByRole('button',{name:'Nhập TXT / SRT',exact:true}).click();
+    await studio.getByLabel('Nội dung TXT / SRT',{exact:true}).fill(compactScript);
+    assert.equal(await studio.locator('.script-preview>div').count(),10);
+    await studio.getByRole('button',{name:'Nạp vào Studio',exact:true}).click();
+    assert.deepEqual(await studio.locator('.scene-title').allTextContents(),compactNames.map((name,i)=>`[${i+1}] ${name}`));
+    await studio.getByRole('button',{name:'TẠO 10 ẢNH',exact:true}).click();
+    await waitFor(async()=>await studio.locator('.generated-image').count()===10,60000);
+    await desktop.evaluate(()=>{globalThis.lastFolder=null});
+    await studio.getByRole('button',{name:'Tải tất cả (10/10)',exact:true}).click();
+    await waitFor(async()=>Boolean(await desktop.evaluate(()=>globalThis.lastFolder)));
+    const compactFolder=await desktop.evaluate(()=>globalThis.lastFolder);
+    assert.deepEqual((await readdir(compactFolder)).sort(),compactNames.map(name=>name+'.png').sort());
+    assert.equal(fixture.state.submitted.length,20);
+    console.log('Portable stage: all ten compact headings imported and saved with exact names');
+
   } finally {
     await desktop?.close();
     fixture.server.closeAllConnections();
