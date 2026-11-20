@@ -42,10 +42,10 @@ export class MuseAccounts {
     if(!isLaneCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 10 ô mỗi tài khoản.',400);
     const saved=(this.preferenceSave||Promise.resolve()).catch(()=>{}).then(async()=>{await mkdir(this.profileRoot,{recursive:true,mode:0o700});const file=path.join(this.profileRoot,'single-concurrency.json');await writeFile(file+'.tmp',JSON.stringify(count),{mode:0o600});await rename(file+'.tmp',file);this.preferredConcurrency=count;});this.preferenceSave=saved;await saved;
   }
-  async setConcurrency(count,signal,id=1) {
+  async setConcurrency(count,signal,id=1,options={}) {
     this.validateId(id);this.singleId=id;
     await this.requestConcurrency(count);this.concurrencyWarning='';this.fallbacks.delete(id);this.fallbackRequested.delete(id);
-    try{return {...await this.driver(id).setConcurrency(count,signal),preferredConcurrency:count};}
+    try{return {...await this.driver(id).setConcurrency(count,signal,options),preferredConcurrency:count};}
     catch(error){if(/MUSE_PARALLEL_UNVERIFIED|MUSE_NEW_CHAT_UNAVAILABLE|MUSE_COMPOSER_NOT_READY/.test(error.message))this.concurrencyWarning=error.message;throw error;}
   }
   rememberImage(data,result){if(!result.fingerprint||!data.batchId)return;const previous=this.images.get(result.fingerprint);if(previous&&previous.sceneId!==data.sceneId)throw fail('MUSE_DUPLICATE_MEDIA',`Ảnh trùng hoàn toàn với cảnh #${previous.sceneId}; chưa ghi nhận là kết quả mới.`);this.images.set(result.fingerprint,{sceneId:data.sceneId,batchId:data.batchId});while(this.images.size>160)this.images.delete(this.images.keys().next().value);}
@@ -60,7 +60,7 @@ export class MuseAccounts {
     if(!retryParallel&&this.driver(id).parallelStrategy==='shared-conversation'&&this.driver(id).concurrencyProbe?.requested===count)return {executionConcurrency:this.driver(id).maxConcurrency,preferredConcurrency:count,parallelStrategy:'shared-conversation',concurrencyWarning:this.concurrencyWarning};
     if(!retryParallel&&count>1&&this.fallbacks.has(id)&&this.fallbackRequested.get(id)===count)return {executionConcurrency:1,preferredConcurrency:count,concurrencyWarning:this.fallbacks.get(id),serialFallback:true};
     if(this.driver(id).maxConcurrency===count&&this.driver(id).parallelReady!==false){this.concurrencyWarning='';this.fallbacks.delete(id);this.fallbackRequested.delete(id);if(this.preferredConcurrency!==count)await this.requestConcurrency(count);return {executionConcurrency:this.maxConcurrency,preferredConcurrency:count,concurrencyWarning:''};}
-    try{return await this.setConcurrency(count,signal,id)}catch(error){
+    try{return await this.setConcurrency(count,signal,id,{allowSharedFastPath:!retryParallel})}catch(error){
       if(count===1||signal.aborted||!/MUSE_PARALLEL_|MUSE_NEW_CHAT_UNAVAILABLE|MUSE_COMPOSER_NOT_READY/.test(error.message))throw error;
       if(error.parallelReason==='MUSE_NEW_CHAT_UNAVAILABLE'&&this.driver(id).useSharedConversation){
         try{const result=await this.driver(id).useSharedConversation(count,signal);this.concurrencyWarning=result.executionConcurrency<count?`Muse ${id}: gửi tối đa 6 yêu cầu đồng thời trong cùng cuộc trò chuyện; các ô còn lại chờ.`:'';return {...result,preferredConcurrency:count,concurrencyWarning:this.concurrencyWarning}}catch(sharedError){if(signal.aborted)throw sharedError;}

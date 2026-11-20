@@ -326,7 +326,7 @@ export class MuseBrowser {
     if(/[?&#](?:access_token|id_token|code|state)=/i.test(url.search+url.hash))return null;
     return url.href;
   }
-  async setConcurrency(count, signal) {
+  async setConcurrency(count, signal, {allowSharedFastPath=false}={}) {
     if(!isLaneCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 10 ô mỗi tài khoản.',400);
     if(this.reserved||this.workers.size)throw fail('MUSE_CHAT_BUSY','Đợi các cảnh hoàn tất trước khi đổi số luồng.',409);
     await this.closePreparedPages();this.parallelStrategy='workers';this.maxConcurrency=1;this.concurrencyProbe={requested:count,checked:0,state:'checking'};
@@ -335,7 +335,7 @@ export class MuseBrowser {
     if(!this.account(1).authenticated)throw fail('MUSE_LOGIN_REQUIRED','Đăng nhập Muse và kiểm tra phiên trước khi bật song song.',401);
     // A verified single-chat page without New chat cannot provide independent
     // worker conversations. Avoid opening four redundant copies per account.
-    if(!await this.newChatControl(this.active.page)){this.concurrencyProbe.state='unavailable';throw Object.assign(fail('MUSE_PARALLEL_UNVERIFIED','Trang hiện tại dùng một cuộc trò chuyện; chuyển sang gửi trong cùng chat.',409),{parallelReason:'MUSE_NEW_CHAT_UNAVAILABLE'})}
+    if(allowSharedFastPath&&!await this.newChatControl(this.active.page)){this.concurrencyProbe.state='unavailable';throw Object.assign(fail('MUSE_PARALLEL_UNVERIFIED','Trang hiện tại dùng một cuộc trò chuyện; chuyển sang gửi trong cùng chat.',409),{parallelReason:'MUSE_NEW_CHAT_UNAVAILABLE'})}
     const owned=this.active;const pages=new Set();const lanes=[];let next=0;let failure;
     // Let in-flight page creation settle before closing any probe. Closing
     // targets while Chromium is creating sibling targets can stall on Windows.
