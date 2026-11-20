@@ -544,7 +544,7 @@ export class MuseBrowser {
       progress.phase = 'done'; return result;
     } catch (error) {
       progress.phase = signal.aborted ? 'cancelled' : 'error';
-      const wrapped=Object.assign(new Error(error.message),{status:error.status,notSubmitted:!sending,safeSerialRetry:error.safeSerialRetry===true,parallelFailure:parallelAttempt&&!signal.aborted&&((!sending&&!/MUSE_LOGIN_|MUSE_SESSION_|MUSE_WORKSPACE_ORIGIN|MUSE_DRAFT_|MUSE_ATTACHMENT_|MUSE_UPLOAD_/.test(error.message))||/MUSE_SHARED_CONVERSATION|MUSE_PARALLEL_LIMIT|MUSE_SUBMIT_NOT_ACKNOWLEDGED/.test(error.message))});
+      const wrapped=Object.assign(new Error(error.message),{status:error.status,notSubmitted:!sending,safeSerialRetry:error.safeSerialRetry===true,parallelFailure:parallelAttempt&&!signal.aborted&&((!sending&&!/MUSE_LOGIN_|MUSE_SESSION_|MUSE_WORKSPACE_ORIGIN|MUSE_DRAFT_|MUSE_ATTACHMENT_|MUSE_UPLOAD_/.test(error.message))||/MUSE_SHARED_CONVERSATION|MUSE_PARALLEL_LIMIT|MUSE_SUBMIT_NOT_ACKNOWLEDGED|MUSE_TIMEOUT/.test(error.message))});
       throw signal.aborted?signal.reason:wrapped;
     } finally {
       progress.active = false;
@@ -649,7 +649,7 @@ export class MuseBrowser {
           onStage('downloading');
           return {...await this.downloadMedia(page,media,output,signal),captionPending:!sharedConversation&&output==='video'&&result.streaming};
         }
-        if (output !== 'text' && result.text && !media && !result.streaming && Date.now() - stableSince > 20000) throw fail(output === 'image' ? 'MUSE_NO_IMAGE' : 'MUSE_NO_VIDEO', `Muse chưa trả ${output === 'image' ? 'ảnh' : 'video'} cho yêu cầu này. Phản hồi: ${result.text.slice(0, 1000)}`);
+        if (!sharedConversation&&output !== 'text' && result.text && !media && !result.streaming && Date.now() - stableSince > 20000) throw fail(output === 'image' ? 'MUSE_NO_IMAGE' : 'MUSE_NO_VIDEO', `Muse chưa trả ${output === 'image' ? 'ảnh' : 'video'} cho yêu cầu này. Phản hồi: ${result.text.slice(0, 1000)}`);
       }
       throw fail('MUSE_TIMEOUT', 'Hết thời gian chờ Muse. Kiểm tra cửa sổ Muse trước khi thử lại để tránh tạo trùng hoặc tính phí hai lần.', 504);
     } catch (error) {

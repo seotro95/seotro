@@ -29,3 +29,12 @@ test('cancelling one sent shared-chat request preserves the others and holds its
 
  }finally{fixture.state.hold=false;fixture.releaseAll();await runtime.close();fixture.server.closeAllConnections();await new Promise(r=>fixture.server.close(r));await rm(root,{recursive:true,force:true})}
 });
+
+test('background jobs keep waiting beyond the ordinary no-media quiet interval without treating acknowledgement text as a failed generation',{timeout:90000},async()=>{
+ const root=await mkdtemp(path.join(os.tmpdir(),'muse-shared-background-'));const fixture=createMuseFixture({image,clip});Object.assign(fixture.state,{newChat:false,behavior:'video',hold:true,backgroundGeneration:true});await new Promise(r=>fixture.server.listen(0,'127.0.0.1',r));
+ const driver=new MuseBrowser({profileRoot:root,serviceURL:`http://127.0.0.1:${fixture.server.address().port}/`,launchOptions:{executablePath:process.env.CHROMIUM_PATH||chromium.executablePath(),headless:true},pollMs:50,timeoutMs:60000});const pool=new MuseAccounts({profileRoot:root,createDriver:()=>driver});const runtime=await startStudioServer({museDriver:pool,port:0});
+ try{await pool.connect(1);await driver.active.page.getByRole('button',{name:'Fixture login',exact:true}).click();await driver.refreshActive();await pool.prepareSingle(new AbortController().signal,2,1);let finished=0;
+  const jobs=[1,2].map(sceneId=>pool.generateVideo({accountId:1,accountMode:'single',sceneId,batchId:crypto.randomUUID(),prompt:'Background scene '+sceneId,modelDisplayName:'Omni 1.1 Flash',durationSeconds:4,resolution:'720p',aspectRatio:'16:9'},new AbortController().signal).finally(()=>finished++));const all=Promise.allSettled(jobs);
+  await until(()=>fixture.state.pending.size===2);await new Promise(resolve=>setTimeout(resolve,21000));assert.equal(finished,0,'Shared background work must not fail just because an acknowledgement stopped streaming');fixture.state.hold=false;fixture.releaseAll();const result=await all;assert.ok(result.every(row=>row.status==='fulfilled'));assert.equal(fixture.state.submitted.length,2);
+ }finally{fixture.state.hold=false;fixture.releaseAll();await runtime.close();fixture.server.closeAllConnections();await new Promise(r=>fixture.server.close(r));await rm(root,{recursive:true,force:true})}
+});
