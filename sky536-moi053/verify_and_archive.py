@@ -14,14 +14,14 @@ def fetch(url,out):
    if attempt==2:raise
    time.sleep(3)
 def ghapi(path):return json.loads(subprocess.check_output(['gh','api',f'repos/{REPO}/'+path]))
-jobs=ghapi(f'actions/runs/{RUN}/jobs?per_page=100')['jobs']
+jobs=ghapi(f'actions/runs/{RUN}/jobs?per_page=100&filter=all')['jobs']
 assert any(j['name']=='publish' and j['conclusion']=='success' for j in jobs),'Same-workflow publisher must have succeeded before verification'
 release=ghapi(f'releases/tags/{TAG}');assets={x['name']:x for x in release['assets']}
 D=R/'verified-public-documents';D.mkdir(exist_ok=True)
 reports=[]
 with tempfile.TemporaryDirectory(prefix='maryrose-public-') as td:
  tmp=Path(td);doc=tmp/'documents.zip';audio=tmp/'voices.zip';prompts=tmp/'prompts.zip'
- for name,dest in [('SKY536_MOI053_TAI_LIEU_22m12s.zip',doc),('SKY536_MOI053_16_VOICES_22m12s.zip',audio),('SKY536_MOI053_PROMPT_14_TXT.zip',prompts)]:
+ for name,dest in [('SKY536_MOI053_TAI_LIEU_22m12s.zip',doc),('SKY536_MOI053_16_VOICES_22m12s.zip',audio),('SKY536_MOI053_PROMPT_15_TXT.zip',prompts)]:
   fetch(BASE+name,dest);assert sha(dest)==assets[name]['digest'].removeprefix('sha256:'),(name,'public SHA mismatch')
   with zipfile.ZipFile(dest) as z:assert z.testzip() is None
   print('PUBLIC_ZIP_VERIFIED',name,dest.stat().st_size,flush=True)
