@@ -59,3 +59,6 @@
 .script-entry-name{display:block;margin-bottom:4px;color:var(--text)}
 
 .scene-error pre{user-select:text;-webkit-user-select:text;white-space:pre-wrap;overflow-wrap:anywhere}.error-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.scene-observation { font-size: 11px; color: #adc6f0; padding: 8px 0; }
+.scene-observation p { margin: 0 0 6px; }
+.scene-observation pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 150px; overflow: auto; user-select: text; }

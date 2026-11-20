@@ -6,6 +6,7 @@ import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { readMuseBalance } from './muse-balance.mjs';
+import {replyProblem,replyPreview} from './muse-reply.mjs';
 
 // Public UI selectors observed in community Muse clients, not an official SDK.
 // Muse retains a prehydration textarea before its hydrated rich editor. It may
@@ -40,7 +41,7 @@ const pause = (ms, signal) => new Promise((resolve, reject) => {
 });
 
 export class MuseBrowser {
-  constructor({ profileRoot, accountProfile, serviceURL = 'https://muse.ai/', launchOptions, sessionFactory, onVerified, timeoutMs = 600000, pollMs = 500, quietMs = 1500, composerTimeoutMs = 45000, submitTimeoutMs = 15000, maxConcurrency = 1 } = {}) {
+  constructor({ profileRoot, accountProfile, serviceURL = 'https://muse.ai/', launchOptions, sessionFactory, onVerified, timeoutMs = 600000, pollMs = 500, quietMs = 1500, composerTimeoutMs = 45000, submitTimeoutMs = 15000, replyQuietMs = 1500, maxConcurrency = 1 } = {}) {
     this.profileRoot = profileRoot;
     this.serviceURL = serviceURL;
     this.launchOptions = launchOptions;
@@ -54,6 +55,7 @@ export class MuseBrowser {
     this.quietMs = quietMs;
     this.composerTimeoutMs = composerTimeoutMs;
     this.submitTimeoutMs = submitTimeoutMs;
+    this.replyQuietMs=replyQuietMs;
     this.maxConcurrency = Math.max(1, Math.min(MAX_ACCOUNT_LANES, maxConcurrency));
     this.reserved = 0;
     this.executing = 0;
@@ -529,7 +531,7 @@ export class MuseBrowser {
       signal.throwIfAborted();
       if (!sharedConversation&&await conversation.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
       if (checkOnly) return { ready: true, message: 'Đã mở được ô Message trong trang luồng riêng. Chưa gửi prompt hoặc yêu cầu tạo nội dung.', details: await this.composerDiagnostics(page) };
-      const result = await this.sendTurn({ page: conversation, prompt, image, output, signal,sharedConversation,trackAtStart:reuseLogin, onSubmit: () => { sending = true; progress.phase = 'sending';progress.sentAt=Date.now(); }, beforeSubmit:submitBarrier?()=>submitBarrier.ready():undefined,onStage: phase => { progress.phase = phase; if (phase === 'submitted'){progress.submitted = true;progress.submittedAt=Date.now();} } });
+      const result = await this.sendTurn({ page: conversation, prompt, image, output, signal,sharedConversation,trackAtStart:reuseLogin, onSubmit: () => { sending = true; progress.phase = 'sending';progress.sentAt=Date.now(); }, beforeSubmit:submitBarrier?()=>submitBarrier.ready():undefined,onObservation: details=>{progress.observation=details;}, onStage: phase => { progress.phase = phase; if (phase === 'submitted'){progress.submitted = true;progress.submittedAt=Date.now();} } });
       if(result.captionPending)this.pendingCaptions.add(conversationKey);
       if (output === 'image' && batchId && sceneId && result.fingerprint) {
         let batch = this.imageBatches.get(batchId);
@@ -543,7 +545,7 @@ export class MuseBrowser {
       }
       progress.phase = 'done'; return result;
     } catch (error) {
-      progress.phase = signal.aborted ? 'cancelled' : 'error';
+      progress.phase = signal.aborted ? /TIMEOUT/.test(signal.reason?.message||'')?'timeout':'cancelled' : 'error';
       const wrapped=Object.assign(new Error(error.message),{status:error.status,notSubmitted:!sending,safeSerialRetry:error.safeSerialRetry===true,parallelFailure:parallelAttempt&&!signal.aborted&&((!sending&&!/MUSE_LOGIN_|MUSE_SESSION_|MUSE_WORKSPACE_ORIGIN|MUSE_DRAFT_|MUSE_ATTACHMENT_|MUSE_UPLOAD_/.test(error.message))||/MUSE_SHARED_CONVERSATION|MUSE_PARALLEL_LIMIT|MUSE_SUBMIT_NOT_ACKNOWLEDGED|MUSE_TIMEOUT/.test(error.message))});
       throw signal.aborted?signal.reason:wrapped;
     } finally {
@@ -585,7 +587,7 @@ export class MuseBrowser {
     }
     throw fail('MUSE_EDITOR_CHANGED', 'Muse đổi ô nhập nhưng chưa giữ đủ prompt. Chưa nhấn gửi. Kiểm tra cuộc trò chuyện rồi thử lại.', 409);
   }
-  async sendTurn({ page, prompt, image, output, signal, onSubmit, beforeSubmit, onStage = () => {},sharedConversation=false,trackAtStart=false }) {
+  async sendTurn({ page, prompt, image, output, signal, onSubmit, beforeSubmit, onStage = () => {},onObservation=()=>{},sharedConversation=false,trackAtStart=false }) {
     let releaseComposer=sharedConversation?await this.acquireComposer(signal):null;
     try{
     if(sharedConversation&&this.parallelStrategy!=='shared-conversation')throw fail('MUSE_PARALLEL_UNVERIFIED','Đã chuyển về tuần tự trước khi gửi ô này.',409);
@@ -596,9 +598,10 @@ export class MuseBrowser {
     signal.throwIfAborted();
     const marker = `studio-request-${randomUUID()}`;
     const fileToken='MUSE_'+marker.slice('studio-request-'.length).replaceAll('-','');
-    const delivery=sharedConversation?`\nOutput attribution: name the generated downloadable file exactly ${fileToken} with its real extension. Provide a Markdown download link labelled ${fileToken}. Prefix any error for this task with ${fileToken}. Other generation requests in this conversation are independent; start this task without waiting for them.`:'';
+    const delivery=sharedConversation?`\nTracking label for this task: ${fileToken}. Generate the media now and return the native image/video attachment. Include this label in the same reply as its result. If the service provides a real download link, label that link ${fileToken} while preserving its actual working URL and filename. Do not invent file paths or delay generation to rename a file. Prefix any error for this task with ${fileToken}. Other requests are independent; start this task without waiting for their results.`:'';
     const requestTag=`[Request marker: ${marker}. Do not include this marker in your reply.]`;
     const message=sharedConversation?`[${fileToken}]\n${requestTag}\n${prompt}${delivery}`:trackAtStart?`${requestTag}\n${prompt}`:`${prompt}\n\n${requestTag}`;
+    const earlierAssistantIds=await page.evaluate(()=>[...document.querySelectorAll('[data-message-item][data-message-role="assistant"]')].map(node=>{node.dataset.museStudioObservationId||=crypto.randomUUID();return node.dataset.museStudioObservationId}));
     editor = await this.writeMessage(page, message, signal);
     signal.throwIfAborted();
     if(beforeSubmit){onStage('waiting-cohort');await beforeSubmit();signal.throwIfAborted();}
@@ -614,12 +617,14 @@ export class MuseBrowser {
       while (Date.now() < deadline) {
         await pause(this.pollMs, signal);
         if (this.unsafeMarkers.has(marker)) throw fail('MUSE_SHARED_CONVERSATION', 'Các luồng Muse đang dùng chung hội thoại. Đã dừng nhận kết quả để tránh ghép nhầm; không tự gửi lại.', 409);
-        const result = await page.evaluate(({ messages, stop, notice, marker, otherMarkers,sharedConversation,fileToken,output,acknowledged }) => {
+        const result = await page.evaluate(({ messages, stop, notice, marker, otherMarkers,sharedConversation,fileToken,output,acknowledged,earlierAssistantIds }) => {
           const visible = el => Boolean(el && el.getClientRects().length);
+          const prior=new Set(earlierAssistantIds);
+          const isNew=node=>{node.dataset.museStudioObservationId||=crypto.randomUUID();return !prior.has(node.dataset.museStudioObservationId)};
           const nodes = Array.from(document.querySelectorAll(messages));
           const anchor = nodes.findLastIndex(node => node.getAttribute('data-message-role') === 'user' && (node.textContent.includes(marker)||(sharedConversation&&node.textContent.trimStart().startsWith('['+fileToken+']'))));
           const nextUser = anchor < 0 ? -1 : nodes.findIndex((node, index) => index > anchor && node.getAttribute('data-message-role') === 'user');
-          const replies = (sharedConversation&&acknowledged?nodes:anchor<0?[]:nodes.slice(anchor+1,sharedConversation?undefined:nextUser<0?undefined:nextUser)).filter(node=>node.getAttribute('data-message-role')==='assistant');
+          const replies = (sharedConversation&&acknowledged?nodes:anchor<0?[]:nodes.slice(anchor+1,sharedConversation?undefined:nextUser<0?undefined:nextUser)).filter(node=>node.getAttribute('data-message-role')==='assistant'&&isNew(node));
           const shared = nodes.some(node => node.getAttribute('data-message-role') === 'user' && otherMarkers.some(other => node.textContent.includes(other)));
           // A generated player often uses preload=none: currentSrc/readyState
           // stay empty until a human presses Play. Read the file source instead
@@ -628,14 +633,18 @@ export class MuseBrowser {
           const players=replies.flatMap(node=>Array.from(node.querySelectorAll('video'))).map(el=>({src:el.currentSrc||el.getAttribute('src')||el.querySelector('source[src]')?.src,duration:Number.isFinite(el.duration)?el.duration:undefined,width:el.videoWidth,height:el.videoHeight})).filter(el=>el.src);
           const videos=[...links,...players];
           const images = replies.flatMap(node => Array.from(node.querySelectorAll('img'))).filter(el => !el.closest('video') && el.complete && el.naturalWidth >= 128 && el.naturalHeight >= 128).map(el => ({ src: el.currentSrc || el.src, width: el.naturalWidth, height: el.naturalHeight }));
-          const namedLinks=sharedConversation?replies.flatMap(node=>Array.from(node.querySelectorAll('a[href]'))).filter(el=>[el.textContent,el.getAttribute('download'),el.href].some(value=>value?.includes(fileToken))):[];
+          const mediaURL=(value)=>{try{const url=new URL(value,location.href);return ['https:','blob:','data:'].includes(url.protocol)||(url.protocol==='http:'&&url.hostname==='127.0.0.1')}catch{return false}};
+          const namedLinks=sharedConversation?replies.flatMap(node=>Array.from(node.querySelectorAll('a[href]'))).filter(el=>mediaURL(el.href)&&[el.textContent,el.getAttribute('download'),el.href].some(value=>value?.includes(fileToken))&&(output==='video'?/\.(mp4|webm|mov)(?:$|[?#])/i.test(el.href)||/\.(mp4|webm|mov)$/i.test(el.download||'')||/^video\//i.test(el.type||''):/\.(png|jpe?g|webp|avif|gif)(?:$|[?#])/i.test(el.href)||/\.(png|jpe?g|webp|avif|gif)$/i.test(el.download||'')||/^image\//i.test(el.type||''))):[];
           const namedElements=sharedConversation?replies.flatMap(node=>Array.from(node.querySelectorAll(output==='video'?'video':'img'))).filter(el=>{if([el.getAttribute('alt'),el.getAttribute('aria-label'),el.getAttribute('src')].some(value=>value?.includes(fileToken)))return true;const container=el.closest('figure')||el.closest('[data-message-item]');const tokens=new Set(container?.textContent.match(/\bMUSE_[a-f0-9]{32}\b/g)||[]);return tokens.size===1&&tokens.has(fileToken)&&container.querySelectorAll(output==='video'?'video':'img').length===1;}):[];
-          const namedMedia=namedLinks.length?{src:namedLinks[0].href,width:0,height:0}:namedElements.length?{src:namedElements[0].currentSrc||namedElements[0].src,width:0,height:0}:null;
+          const namedSources=namedElements.map(el=>({src:el.currentSrc||el.getAttribute('src')||el.querySelector('source[src]')?.src,width:el.videoWidth||el.naturalWidth||0,height:el.videoHeight||el.naturalHeight||0})).filter(media=>media.src&&mediaURL(media.src));
+          const namedMedia=namedSources[0]||(namedLinks.length?{src:namedLinks[0].href,width:0,height:0}:null);
           const error = replies.flatMap(node => Array.from(node.querySelectorAll(notice))).find(el=>visible(el)&&(!sharedConversation||el.closest('[data-message-item]')?.textContent.includes(fileToken)));
           const ownedText=sharedConversation?replies.filter(node=>{const tokens=new Set(node.textContent.match(/\bMUSE_[a-f0-9]{32}\b/g)||[]);return tokens.size===1&&tokens.has(fileToken)}).map(node=>node.innerText).join('\n\n'):'';
-          return {ownedText,namedMedia,anchored: anchor >= 0, shared, interrupted: nextUser >= 0, text: replies.map(node => node.innerText).join('\n\n').trim(), videos, images,
+          const freshReplies=replies.filter(isNew);
+          const contextText=freshReplies.filter(node=>!Array.from(node.textContent.matchAll(/\bMUSE_[a-f0-9]{32}\b/g)).some(match=>match[0]!==fileToken)).map(node=>node.innerText).join('\n\n').trim();
+          return {contextText,replyCount:freshReplies.length,ownedText,namedMedia,anchored: anchor >= 0, shared, interrupted: nextUser >= 0, text: replies.map(node => node.innerText).join('\n\n').trim(), videos, images,
             streaming: visible(document.querySelector(stop)), error: error?.innerText || '' };
-        }, { messages: MESSAGES, stop: STOP, notice: NOTICE, marker, otherMarkers: [...this.inFlightMarkers].filter(other => other !== marker),sharedConversation,fileToken,output,acknowledged });
+        }, { messages: MESSAGES, stop: STOP, notice: NOTICE, marker, otherMarkers: [...this.inFlightMarkers].filter(other => other !== marker),sharedConversation,fileToken,output,acknowledged,earlierAssistantIds });
         if (!sharedConversation&&(result.shared || (result.interrupted && !result.images.length && !result.videos.length && !result.text))) {
           for (const active of this.inFlightMarkers) this.unsafeMarkers.add(active);
           this.maxConcurrency = 1;
@@ -644,6 +653,8 @@ export class MuseBrowser {
         if(result.error){const capacity=/concurren|at (?:the same|a) time|already (?:generating|processing)|too many (?:active|parallel|simultaneous)|tác vụ.{0,40}đồng thời/i.test(result.error);const error=fail(capacity?'MUSE_PARALLEL_LIMIT':'MUSE_GENERATION_ERROR',result.error);if(capacity)error.safeSerialRetry=true;throw error;}
         if ((result.anchored||(sharedConversation&&result.namedMedia)) && !acknowledged) { acknowledged = true; onStage('submitted');releaseComposer?.();releaseComposer=null; }
         if (!result.anchored && !acknowledged && Date.now() >= acknowledgementDeadline) throw fail('MUSE_SUBMIT_NOT_ACKNOWLEDGED', 'Muse chưa xác nhận đã nhận prompt sau thao tác gửi. Tool không tự gửi lại. Mở cuộc trò chuyện kiểm tra trước khi thử lại để tránh tạo trùng.', 504);
+        onObservation({checkedAt:new Date().toISOString(),messageAcknowledged:acknowledged,assistantReplies:result.replyCount,visibleVideos:result.videos.length,visibleImages:result.images.length,matchedMedia:sharedConversation?Boolean(result.namedMedia):output==='video'?result.videos.length>0:output==='image'?result.images.length>0:false,streaming:result.streaming,replyScope:result.ownedText?'scene':'conversation',reply:replyPreview(result.ownedText||result.contextText)});
+        if(acknowledged&&result.contextText&&!result.namedMedia)onStage('reply-received');
         if (result.text !== lastText) { lastText = result.text; stableSince = Date.now(); }
         if (output === 'text' && result.anchored && result.text && !result.streaming && Date.now() - stableSince >= this.quietMs) return { text: result.text };
         const media = sharedConversation?result.namedMedia:output === 'video' ? result.videos[0] : output === 'image' ? result.images[0] : null;
@@ -651,7 +662,10 @@ export class MuseBrowser {
           onStage('downloading');
           return {...await this.downloadMedia(page,media,output,signal),captionPending:!sharedConversation&&output==='video'&&result.streaming};
         }
-        if(sharedConversation&&!result.streaming&&!media&&result.ownedText&&Date.now()-stableSince>=Math.max(this.quietMs,1000)&&/(?:please|could you|can you)\s+(?:clarify|provide|describe|explain)|(?:don't|do not|cannot|can't)\s+understand|(?:need|require)\s+(?:a|more)\s+(?:clear|specific|detailed)|không\s*hiểu|vui lòng\s*(?:mô tả|làm rõ|cung cấp)/i.test(result.ownedText))throw fail('MUSE_PROMPT_CLARIFICATION',`Muse cần prompt rõ hơn: ${result.ownedText.slice(0,1000)}`,422);
+        if(output!=='text'&&!result.streaming&&!media&&!result.videos.length&&!result.images.length&&Date.now()-stableSince>=this.replyQuietMs){
+          const reply=result.ownedText||result.contextText;const problem=replyProblem(reply);
+          if(problem)throw fail(problem,`Muse đã trả lời nhưng chưa tạo ${output==='video'?'video':'ảnh'}. Phản hồi ${result.ownedText?'của cảnh':'trong cuộc trò chuyện'}: ${replyPreview(reply)}`,422);
+        }
         if (!sharedConversation&&output !== 'text' && result.text && !media && !result.streaming && Date.now() - stableSince > 20000) throw fail(output === 'image' ? 'MUSE_NO_IMAGE' : 'MUSE_NO_VIDEO', `Muse chưa trả ${output === 'image' ? 'ảnh' : 'video'} cho yêu cầu này. Phản hồi: ${result.text.slice(0, 1000)}`);
       }
       throw fail('MUSE_TIMEOUT', 'Hết thời gian chờ Muse. Kiểm tra cửa sổ Muse trước khi thử lại để tránh tạo trùng hoặc tính phí hai lần.', 504);
@@ -688,16 +702,17 @@ export class MuseBrowser {
           const abortDownload=()=>{void page.evaluate(key=>{if(globalThis[key]?.abort)globalThis[key].abort();else globalThis[key]='aborted'},downloadKey).catch(()=>{})};
           signal.addEventListener('abort',abortDownload,{once:true});
           try{
-          const base64 = await page.evaluate(async ({ src, output,downloadKey }) => {
+          const read=async nativeMedia=>await page.evaluate(async ({ src, output,downloadKey,nativeMedia }) => {
             const url = new URL(src, location.href);
-            if (!['https:', 'blob:', 'data:'].includes(url.protocol) && !(url.protocol === 'http:' && url.hostname === '127.0.0.1')) throw new Error('Unsupported media URL');
+            if (!['https:', 'blob:', 'data:'].includes(url.protocol) && !(url.protocol === 'http:' && url.hostname === '127.0.0.1')) throw new Error('MEDIA_URL_UNSUPPORTED');
             const cancelled=globalThis[downloadKey]==='aborted';const control=new AbortController();globalThis[downloadKey]=control;if(cancelled)control.abort();
             const timer=setTimeout(()=>control.abort(),120000);
             try{
-            const response = await fetch(url.href,{signal:control.signal});
-            if (!response.ok) throw new Error('Video download failed');
-            let blob = await response.blob();
-            if (!blob.size || blob.size > 100 * 1024 * 1024) throw new Error('Video must be between 1 byte and 100 MB');
+            let blob;
+            if(nativeMedia){const bytes=Uint8Array.from(atob(nativeMedia.base64),char=>char.charCodeAt(0));blob=new Blob([bytes],{type:nativeMedia.mimeType})}
+            else{let response;try{response=await fetch(url.href,{signal:control.signal,credentials:'same-origin'})}catch{throw Error('MEDIA_FETCH_FAILED')}
+              if(!response.ok)throw Error('MEDIA_HTTP_'+response.status);if(/^(?:text\/html|application\/json)(?:;|$)/i.test(response.headers.get('content-type')||''))throw Error('MEDIA_RESPONSE_NOT_MEDIA');blob=await response.blob();}
+            if(!blob.size)throw Error('MEDIA_EMPTY');if(blob.size>100*1024*1024)throw Error('MEDIA_TOO_LARGE');
             let fingerprint, width, height,duration;
             if(output==='video'){
               const head=new Uint8Array(await blob.slice(0,16).arrayBuffer());
@@ -739,14 +754,21 @@ export class MuseBrowser {
             }
             return await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve({ base64: String(reader.result).split(',')[1], mimeType: blob.type, fingerprint, width, height,duration }); reader.onerror = reject; reader.readAsDataURL(blob); });
             }finally{clearTimeout(timer);delete globalThis[downloadKey]}
-          }, { src: media.src, output,downloadKey }).catch(() => { throw fail('MUSE_MEDIA_UNREADABLE', 'Chưa tải hoặc giải mã được tệp Muse trả về. Tool không xuất tệp hỏng; mở lịch sử Muse để kiểm tra.', 502); });
+          }, { src: media.src, output,downloadKey,nativeMedia });
+          let base64;try{base64=await read(null)}catch(error){
+            if(signal.aborted)throw signal.reason;
+            try{if(!this.active?.readMedia||!/MEDIA_FETCH_FAILED|MEDIA_HTTP_40[13]/.test(error.message))throw error;const nativeMedia=await this.active.readMedia(new URL(media.src,page.url()).href,signal);signal.throwIfAborted();base64=await read(nativeMedia)}catch(cause){
+              if(signal.aborted)throw signal.reason;
+              throw fail('MUSE_MEDIA_UNREADABLE',`Không tải hoặc giải mã được tệp Muse. Chi tiết: ${replyPreview(cause.message).slice(0,500)}. Tool không tạo lại yêu cầu đã gửi.`,502);
+            }
+          }
           signal.throwIfAborted();
           return { ...base64,captionPending:false, mimeType: base64.mimeType?.startsWith(`${output}/`) ? base64.mimeType : output === 'image' ? 'image/png' : 'video/mp4', metadata: { ...(output === 'video' ? { duration: base64.duration||media.duration } : {}), width: base64.width || media.width, height: base64.height || media.height } };
           }finally{signal.removeEventListener('abort',abortDownload);void page.evaluate(key=>{delete globalThis[key]},downloadKey).catch(()=>{})}
   }
   async generateVideo(data, signal) {
     const referenceInstruction = data.sourceMode === 'image' ? 'Animate the attached image as the starting frame.' : data.referenceImage ? 'Use the attached image as a character reference, not as an unrelated example.' : 'Create the video from the text prompt.';
-    const prompt = `Use your video-generation tool to create exactly one new video, not a link to an existing example. Requested model: ${data.modelDisplayName}. Requested duration: ${data.durationSeconds} seconds, aspect ratio: ${data.aspectRatio}, resolution: ${data.resolution}. If these capabilities are unavailable, explain that clearly. ${referenceInstruction} ${data.characterLock !== false ? 'Preserve the referenced character identity and appearance across scenes.' : 'Follow this scene prompt independently; character consistency is not requested.'}\nScene:\n${data.prompt}`;
+    const prompt = `Use your video-generation tool to create exactly one new video, not a link to an existing example. Requested model: ${data.modelDisplayName}. Requested duration: ${data.durationSeconds} seconds, aspect ratio: ${data.aspectRatio}, resolution: ${data.resolution}. Start the available video-generation tool now. These are target settings: if an exact model name or parameter is unavailable, use supported generation settings and report the actual settings instead of stopping at a text-only explanation. Do not invent model options, return only a written plan, or ask for confirmation to start this requested generation. If no video generation is available, state the concrete reason. ${referenceInstruction} ${data.characterLock !== false ? 'Preserve the referenced character identity and appearance across scenes.' : 'Follow this scene prompt independently; character consistency is not requested.'}\nScene:\n${data.prompt}`;
     return this.turn({ accountId: data.accountId, prompt, image: data.referenceImage, video: true, signal, batchId: data.batchId, sceneId: data.sceneId, submissionGroup:data.submissionGroup, singleLane: data.singleLane });
   }
   async generateImage(data, signal) {

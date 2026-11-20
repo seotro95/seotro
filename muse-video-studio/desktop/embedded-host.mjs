@@ -3,6 +3,7 @@ import { chromium } from 'playwright-core';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
+import {readSessionMedia} from './media-download.mjs';
 
 export const remotePreferences = { partition: 'persist:muse', sandbox: true, contextIsolation: true, nodeIntegration: false, webSecurity: true, backgroundThrottling: false };
 
@@ -115,6 +116,7 @@ export class EmbeddedMuseHost {
       context: login.page.context(), page: login.page,
       showLogin: () => this.showLogin(),
       isLoginVisible: () => this.loginVisible,
+      readMedia: (src,signal) => readSessionMedia(login.view.webContents.session,src,{signal,serviceURL:this.serviceURL}),
       createWorkerPage: async () => (await this.createView({ worker: true })).page,
       destroyWorkerPage: page => this.removePage(page),
       close: async () => {

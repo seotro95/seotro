@@ -64,7 +64,7 @@ app = resources / 'app'
 app.mkdir()
 for name in ['desktop', 'dist']:
     shutil.copytree(ROOT / name, app / name)
-for name in ['submit-groups.mjs', 'output-names.mjs', 'limits.mjs', 'server.mjs', 'muse-browser.mjs', 'muse-accounts.mjs', 'muse-balance.mjs', 'browser.mjs', '.env.example', 'README.md', 'VALIDATION.md', 'API-AUTOMATION.md', 'MCP-CODEX.md', 'CODEX-MCP.toml', 'CAP-NHAT-1.9.md', 'BAN-DAY-DU-1.10.md', 'BLACK-SCREEN-1.12.1.md', 'RECOVERY-1.12.2.md', 'CAP-NHAT-1.13.0.md', 'CAP-NHAT-1.13.1.md', 'CAP-NHAT-1.13.2.md', 'CAP-NHAT-1.13.3.md', 'LICENSE']:
+for name in ['submit-groups.mjs', 'output-names.mjs', 'limits.mjs', 'server.mjs', 'muse-browser.mjs', 'muse-reply.mjs', 'muse-accounts.mjs', 'muse-balance.mjs', 'browser.mjs', '.env.example', 'README.md', 'VALIDATION.md', 'API-AUTOMATION.md', 'MCP-CODEX.md', 'CODEX-MCP.toml', 'CAP-NHAT-1.9.md', 'BAN-DAY-DU-1.10.md', 'BLACK-SCREEN-1.12.1.md', 'RECOVERY-1.12.2.md', 'CAP-NHAT-1.13.0.md', 'CAP-NHAT-1.13.1.md', 'CAP-NHAT-1.13.2.md', 'CAP-NHAT-1.13.3.md', 'CAP-NHAT-1.13.4.md', 'LICENSE']:
     shutil.copyfile(ROOT / name, app / name)
 modules = app / 'node_modules'
 modules.mkdir()

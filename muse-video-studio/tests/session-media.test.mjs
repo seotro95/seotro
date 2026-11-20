@@ -1,0 +1,8 @@
+import{test}from'node:test';import assert from'node:assert/strict';import{readSessionMedia}from'../desktop/media-download.mjs';
+test('account-session media reader preserves credentials, limits redirects and rejects HTML, local files and oversized responses',async()=>{
+ const calls=[];const session={fetch:async(url,options)=>{calls.push({url,options});return new Response(new Uint8Array([1,2,3]),{headers:{'content-type':'image/png'}})}};
+ const result=await readSessionMedia(session,'https://cdn.example/image',{serviceURL:'https://muse.ai/'});assert.equal(result.base64,'AQID');assert.equal(calls[0].options.credentials,'include');assert.equal(calls[0].options.redirect,'manual');
+ for(const url of ['file:///secret','http://127.0.0.1:80/secret','sandbox:/mnt/data/file'])await assert.rejects(readSessionMedia(session,url,{serviceURL:'https://muse.ai/'}),/MEDIA_URL_UNSUPPORTED/);assert.equal(calls.length,1);
+ for(const [response,expected] of [[new Response('<html>login</html>',{headers:{'content-type':'text/html'}}),'MEDIA_RESPONSE_NOT_MEDIA'],[new Response('quota',{status:403}),'MEDIA_HTTP_403'],[new Response('x',{headers:{'content-length':String(101*1024*1024)}}),'MEDIA_TOO_LARGE'],[new Response(null,{status:302,headers:{location:'file:///secret'}}),'MEDIA_URL_UNSUPPORTED']])await assert.rejects(readSessionMedia({fetch:async()=>response},'https://cdn.example/media',{serviceURL:'https://muse.ai/'}),new RegExp(expected));
+ const control=new AbortController();control.abort(Error('Cancelled fixture'));await assert.rejects(readSessionMedia(session,'https://cdn.example/media',{signal:control.signal,serviceURL:'https://muse.ai/'}),/Cancelled fixture/);
+});

@@ -63,6 +63,9 @@ export function errorInfo(error: unknown): { raw: string; hint: string } {
   const raw = error instanceof Error ? error.message : String(error);
   let hint = 'Thử lại sau hoặc mở Chẩn đoán API để kiểm tra kết nối.';
   if (/MUSE_LOCAL_CONNECTION|MUSE_LOCAL_TIMEOUT|MUSE_LOCAL_RESPONSE/i.test(raw)) hint = 'Kết nối giữa giao diện và máy chủ trong tool bị lỗi. Giữ tool mở và dùng Sao chép lỗi để xem mã kết nối; kiểm tra lịch sử Muse trước khi tạo lại.';
+  else if (/MUSE_MEDIA_UNREADABLE/i.test(raw)) hint = 'Tool chưa tải hoặc giải mã được tệp trả về. Xem chi tiết lỗi gốc và lịch sử Muse; không cần tạo lại nếu media đã hoàn thành ở Muse.';
+  else if (/MUSE_ACTION_REQUIRED/i.test(raw)) hint = 'Muse đang yêu cầu xác nhận thay vì tạo nội dung. Xem câu trả lời Muse trong mã lỗi; tool không tự xác nhận hoặc gửi lại yêu cầu đã nhận.';
+  else if (/MUSE_GENERATION_REFUSED/i.test(raw)) hint = 'Muse đã trả lời rằng chưa thể tạo nội dung theo yêu cầu. Xem lý do gốc về mô hình, quyền hoặc số dư, rồi điều chỉnh trước khi tạo lại.';
   else if (/MUSE_PROMPT_CLARIFICATION/i.test(raw)) hint = 'Muse yêu cầu làm rõ prompt. Viết mô tả ảnh/video cụ thể rồi tạo lại ô này.';
   else if (/MUSE_LOGIN_REQUIRED/i.test(raw)) hint = 'Mở Tài khoản Muse, đăng nhập trong tool rồi bấm Kiểm tra phiên. Mỗi cảnh dùng tài khoản được ghi trên ô.';
   else if (/MUSE_SESSION_REFRESH_FAILED|MUSE_SESSION_CHECK_FAILED/i.test(raw)) hint = 'Chưa cập nhật được phiên Muse. Kiểm tra kết nối và tab Muse rồi bấm Kiểm tra phiên; thông tin đăng nhập vẫn được giữ trên máy.';
