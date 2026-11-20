@@ -1,5 +1,5 @@
 import json,subprocess,time
-REPO='seotro95/seotro';RUNS=[44761841149,44763939449]
+REPO='seotro95/seotro';RUNS=[44810226775,44763939449]
 for attempt in range(110):
  pending=[]
  for run_id in RUNS:
