@@ -1,5 +1,5 @@
 import {MAX_SLOTS} from '../limits.mjs';
-import { app, BrowserWindow, WebContentsView, ipcMain, dialog, session, clipboard, shell, safeStorage } from 'electron';
+import { app, BrowserWindow, WebContentsView, ipcMain, dialog, session, clipboard, shell, safeStorage, net } from 'electron';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -12,6 +12,7 @@ import { FolderExports } from './folder-export.mjs';
 import { AutomationServer } from './automation-server.mjs';
 import { randomUUID } from 'node:crypto';
 import {AccountStorage} from './account-storage.mjs';
+import {requestProxyIP} from './proxy-ip.mjs';
 import {AccountProxies} from './account-proxy.mjs';
 import {storageCodec} from './storage-codec.mjs';
 import {dataLocation,importData} from './data-location.mjs';
@@ -66,7 +67,7 @@ async function start() {
   const codec=await storageCodec(safeStorage);
   accountStorage=new AccountStorage({userData,codec,serviceURL,allowBasic:Boolean(fixture)});
   const savedAccountIds=await accountStorage.savedIds();
-  const proxies=await new AccountProxies({storage:accountStorage,inheritedProxy:process.env.HTTPS_PROXY||process.env.HTTP_PROXY}).load();
+  const proxies=await new AccountProxies({storage:accountStorage,inheritedProxy:process.env.HTTPS_PROXY||process.env.HTTP_PROXY,sessionForAccount:id=>session.fromPartition(partitionFor(id)),lookupIP:(accountSession,credentials,signal)=>requestProxyIP({session:accountSession,request:options=>net.request(options),credentials,signal})}).load();
   app.on('login',(event,contents,_details,info,callback)=>{const credentials=proxies.credentials(contents,info);if(credentials){event.preventDefault();callback(credentials.username,credentials.password)}});
   const saveSession=(id,changed=false)=>{
     if(!muse?.drivers.get(id)?.active)return Promise.resolve();
@@ -77,12 +78,12 @@ async function start() {
     }while(dirtySessions.has(id))})();
     savingSessions.set(id,task);saves.add(task);void task.finally(()=>{savingSessions.delete(id);saves.delete(task)});return task;
   };
-  window = new BrowserWindow({ width: 1480, height: 1000, minWidth: 850, minHeight: 650, title: `Muse AI Studio ${version} · 1 hoặc nhiều tài khoản / tối đa 40 ô`, autoHideMenuBar: true,
+  window = new BrowserWindow({ width: 1480, height: 1000, minWidth: 850, minHeight: 650, title: `Muse AI Studio ${version} · 1 hoặc nhiều tài khoản / tối đa 400 ô`, autoHideMenuBar: true,
     webPreferences: { preload: path.join(directory, 'preload.cjs'), sandbox: true, contextIsolation: true, nodeIntegration: false } });
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
   muse = await new MuseAccounts({profileRoot:userData,preferredConcurrency:fixture&&process.env.MUSE_TEST_PARALLEL==='1'?10:2,
     persistenceStatus:id=>accountStorage.metadata(id),saveSessions:async()=>{const ids=[...new Set([...await accountStorage.savedIds(),...muse.drivers.keys()])];await Promise.all(ids.map(id=>saveSession(id)));return {accounts:muse.snapshot(),saved:ids.filter(id=>accountStorage.metadata(id).hasSession).length};},
-    proxyStatus:id=>proxies.snapshot(id),configureProxy:async(id,data)=>{await saveSession(id);await muse.closeAccount(id);return proxies.configure(id,data)},
+    proxyStatus:id=>proxies.snapshot(id),checkProxyIP:(id,signal)=>proxies.checkIP(id,signal),configureProxy:async(id,data)=>{await saveSession(id);await muse.closeAccount(id);return proxies.configure(id,data)},
     createDriver: id => {
       const partition=partitionFor(id); const museSession=session.fromPartition(partition);
       const log=loginRecorder(serviceURL); loginLogs.set(id,log);
@@ -219,7 +220,7 @@ async function start() {
   // Remote Muse views do not receive this preload or access to these handlers.
   ipcMain.handle('studio:api', async (event, value) => {
     if (event.sender !== studio.webContents || !value || !/^[a-z0-9-]{36}$/i.test(value.id) || !['/api/image', '/api/video', '/api/text'].includes(value.endpoint)) throw new Error('Invalid Studio request');
-    if (requests.size >= MAX_SLOTS || requests.has(value.id)) return { ok: false, body: { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 40 luồng đang chạy.' } };
+    if (requests.size >= MAX_SLOTS || requests.has(value.id)) return { ok: false, body: { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 400 ô đang chạy.' } };
     const body = JSON.stringify(value.data);
     if (Buffer.byteLength(body) > 12 * 1024 * 1024) return { ok: false, body: { error: 'Yêu cầu vượt giới hạn 12 MB.' } };
     const control = new AbortController(); requests.set(value.id, control);
@@ -293,7 +294,7 @@ async function start() {
   await studio.webContents.loadURL(studioURL()).catch(()=>startup.fail('STUDIO_LOAD_FAILED'));
   void muse.restoreSessions(savedAccountIds).catch(()=>{});
   window.on('close', event => { if (!closing) { event.preventDefault(); void shutdown(); } });
-  console.log('Muse desktop ready: dang nhap trong tool, toi da 40 o, mot hoac nhieu tai khoan, hang doi an toan.');
+  console.log('Muse desktop ready: dang nhap trong tool, toi da 400 o, mot hoac nhieu tai khoan, hang doi an toan.');
 }
 
 async function shutdown() {

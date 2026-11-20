@@ -1,4 +1,4 @@
-import {MAX_SLOTS} from './limits.mjs';
+import {MAX_SLOTS,MAX_ACCOUNTS} from './limits.mjs';
 import http from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -34,7 +34,7 @@ function validate(data, kind) {
   const invalid = message => { throw Object.assign(new Error(message), { status: 400 }); };
   if (!data || typeof data.prompt !== 'string' || !data.prompt.trim() || data.prompt.length > 12000) invalid('Prompt cần có 1–12.000 ký tự.');
   if (data.accountMode !== undefined && !['single','multiple'].includes(data.accountMode)) invalid('Chế độ tài khoản không hợp lệ.');
-  if (!Number.isInteger(data.accountId) || data.accountId<1 || data.accountId>MAX_SLOTS || (!muse?.supportsMultiAccount && (data.accountId!==1 || data.accountMode==='multiple'))) invalid('ACCOUNT_INVALID: Chọn tài khoản Muse phù hợp với chế độ đang dùng.');
+  if (!Number.isInteger(data.accountId) || data.accountId<1 || data.accountId>MAX_ACCOUNTS || (!muse?.supportsMultiAccount && (data.accountId!==1 || data.accountMode==='multiple'))) invalid('ACCOUNT_INVALID: Chọn tài khoản Muse phù hợp với chế độ đang dùng.');
   if (data.batchId !== undefined || data.sceneId !== undefined) {
     if (typeof data.batchId !== 'string' || !/^[a-f0-9-]{36}$/i.test(data.batchId) || !Number.isInteger(data.sceneId) || data.sceneId < 1 || data.sceneId > MAX_SLOTS) invalid('Bộ yêu cầu hoặc số cảnh không hợp lệ.');
   }
@@ -90,7 +90,7 @@ async function api(req, res, pathname) {
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
   if (!req.headers['content-type']?.startsWith('application/json')) return json(res, 415, { error: 'Cần Content-Type application/json.' });
-  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close|composer|concurrency|prepare|import|select|proxy|save)$/);
+  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close|composer|concurrency|prepare|import|select|proxy|proxy-ip|save)$/);
   const legacyAccountRoute = pathname.match(/^\/api\/accounts\/(\d+)\/(connect|check|close)$/);
   if (!['/api/video', '/api/image', '/api/text'].includes(pathname) && !accountRoute && !legacyAccountRoute) return json(res, 404, { error: 'API không tồn tại.' });
   let acquired = false;
@@ -103,14 +103,15 @@ async function api(req, res, pathname) {
     if (accountRoute || legacyAccountRoute) {
       const accountId = legacyAccountRoute ? Number(legacyAccountRoute[1]) : data.accountId ?? 1;
       const action = accountRoute ? accountRoute[1] : legacyAccountRoute[2];
-      if (!Number.isInteger(accountId) || accountId<1 || accountId>MAX_SLOTS || (!muse?.supportsMultiAccount && accountId!==1)) return json(res,400,{error:'ACCOUNT_INVALID: Tài khoản không hợp lệ.'});
+      if (!Number.isInteger(accountId) || accountId<1 || accountId>MAX_ACCOUNTS || (!muse?.supportsMultiAccount && accountId!==1)) return json(res,400,{error:'ACCOUNT_INVALID: Tài khoản không hợp lệ.'});
       if (!muse) return json(res, 409, { error: 'Tài khoản đang do adapter riêng quản lý. Chọn MUSE_TRANSPORT=browser để đăng nhập bằng Chrome/Edge.' });
       if(action==='save'){if(!muse.saveSessions)return json(res,409,{error:'Lưu tất cả phiên có trong bản desktop.'});return json(res,200,await muse.saveSessions());}
       if (activeRequests || accountBusy||muse.restoring) return json(res, 409, { error: 'Đang có tác vụ hoặc khôi phục phiên. Đợi hoàn tất trước khi thay đổi phiên tài khoản.' });
       muse.account(accountId);
       accountBusy = accountAcquired = true;
+      if(action==='proxy-ip'){if(!muse.checkProxyIP)return json(res,409,{error:'Kiểm tra IP proxy cần bản desktop.'});const proxy=await muse.checkProxyIP(accountId,abort.signal);return json(res,200,{proxy,accounts:muse.snapshot()})}
       if(action==='proxy'){await muse.setProxy(accountId,data.proxy);return json(res,200,{accounts:muse.snapshot()})}
-      if (action === 'prepare') {if(!muse.prepareSingle)return json(res,200,{executionConcurrency:muse.maxConcurrency});return json(res,200,await muse.prepareSingle(abort.signal,data.concurrency,accountId));}
+      if (action === 'prepare') {if(!muse.prepareSingle)return json(res,200,{executionConcurrency:muse.maxConcurrency});return json(res,200,{...await muse.prepareSingle(abort.signal,data.concurrency,accountId),accounts:muse.snapshot()});}
       if (action === 'select') {if(muse.select)await muse.select(accountId);return json(res,200,{accounts:muse.snapshot()});}
       if (action === 'import') { if (!muse.supportsMultiAccount) return json(res,409,{error:'Kết nối chưa hỗ trợ nhiều tài khoản.'}); return json(res,200,{accounts:await muse.importLabels(data.labels)}); }
       if (action === 'concurrency') return json(res, 200, await muse.setConcurrency(data.concurrency, abort.signal,accountId));
@@ -124,7 +125,7 @@ async function api(req, res, pathname) {
     const endpoint = `/${kind}`;
     if (!muse) adapterURL(endpoint);
     if (accountBusy) return json(res, 409, { error: 'Đang kiểm tra tài khoản Muse. Vui lòng đợi.' });
-    if (activeRequests >= maxConcurrency) return json(res, 429, { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 40 luồng AI đang chạy. Đợi một luồng hoàn tất.' });
+    if (activeRequests >= maxConcurrency) return json(res, 429, { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 400 ô AI đang chạy. Đợi một luồng hoàn tất.' });
     activeRequests++; acquired = true;
     const useImage = data.image && (data.characterLock !== false || (kind === 'video' && data.sourceMode === 'image'));
     const payload = { accountId: data.accountId, ...(muse ? {accountMode: data.accountMode || 'single'} : {}), prompt: data.prompt, ...(muse && data.batchId ? { batchId: data.batchId, sceneId: data.sceneId } : {}),
@@ -180,7 +181,7 @@ return { server, url, muse, close: async () => {
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   startStudioServer({ dev: process.argv.includes('--dev') }).then(runtime => {
     console.log('Giu cua so nay mo khi su dung. Ctrl+C chi dung khi muon tat tool.');
-    console.log('Muse Studio: toi da 40 canh, kiem tra hoi thoai rieng truoc khi bat song song. Dang nhap trong tool.');
+    console.log('Muse Studio: toi da 400 canh, kiem tra hoi thoai rieng truoc khi bat song song. Dang nhap trong tool.');
     if (process.argv.includes('--open')) openBrowser(runtime.url);
     let stopping = false;
     for (const name of ['SIGINT', 'SIGTERM']) process.on(name, async () => {

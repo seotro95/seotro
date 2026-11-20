@@ -66,8 +66,8 @@ test('portable app submits ten independent scenes concurrently, views images and
     await waitFor(async () => (await studio.locator('.connection-pill').innerText()).includes('Đã xác minh'));
     assert.equal(fixture.state.submitted.length, 0);
     console.log('Portable stage: verified');
-    await studio.getByLabel('Số luồng:',{exact:true}).selectOption('10');
-    try { await waitFor(async()=> (await studio.getByLabel('Số luồng:',{exact:true}).inputValue())==='10',90000); } catch(error) { console.error('Parallel selection',JSON.stringify({feedback:await studio.locator('.composer-feedback').allTextContents(),status:await studio.evaluate(async()=>(await fetch('/api/status')).json())}));throw error; }
+    await studio.getByLabel('Số luồng mỗi tài khoản:',{exact:true}).selectOption('10');
+    try { await waitFor(async()=> (await studio.getByLabel('Số luồng mỗi tài khoản:',{exact:true}).inputValue())==='10',90000); } catch(error) { console.error('Parallel selection',JSON.stringify({feedback:await studio.locator('.composer-feedback').allTextContents(),status:await studio.evaluate(async()=>(await fetch('/api/status')).json())}));throw error; }
     console.log('Portable stage: parallel-selected');
     fixture.state.hold=true;
     await studio.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
@@ -128,12 +128,12 @@ test('portable app submits ten independent scenes concurrently, views images and
     const saved = await desktop.evaluate(() => globalThis.fixtureDownloads);
     assert.equal(saved.length,1,'Saving a folder must not start a ZIP download');
     assert.equal(saved[0].state,'completed');
-    assert.equal(saved[0].filename, `image-001000-scene-01-${'b'.repeat(32)}.png`);
+    assert.equal(saved[0].filename, '1000.png');
     console.log('Portable stage: folder-saved');
     const folder=await desktop.evaluate(()=>globalThis.lastFolder);
     assert.equal(await desktop.evaluate(()=>globalThis.directoryChoices),1);
     const names=(await readdir(folder)).sort();
-    assert.deepEqual(names,Array.from({length:10},(_,index)=>`image-${String(index+1001).padStart(6,'0')}-scene-${String(index+1).padStart(2,'0')}-${'b'.repeat(32)}.png`));
+    assert.deepEqual(names,Array.from({length:10},(_,index)=>`${index+1001}.png`));
     const archive=await Promise.all(names.map(async name=>({name,bytes:await readFile(path.join(folder,name))})));
     const hashes=new Set();
     const single = await readFile(path.join(downloads, saved[0].filename));
@@ -156,7 +156,7 @@ test('portable app submits ten independent scenes concurrently, views images and
     await waitFor(() => { studio = desktop.context().pages().find(page => page.url() === studioURL); return studio; });
     console.log('Portable stage: reopened');
     assert.equal(await studio.getByLabel('Kịch bản cảnh 2', { exact: true }).inputValue(), savedPrompt);
-    assert.equal(await studio.getByLabel('Số luồng:',{exact:true}).inputValue(),'10','The explicit concurrency preference must persist across an executable restart');
+    assert.equal(await studio.getByLabel('Số luồng mỗi tài khoản:',{exact:true}).inputValue(),'10','The explicit concurrency preference must persist across an executable restart');
     await waitFor(async () => await studio.locator('.generated-image').count() === 9);
     assert.equal(await studio.locator('.history-entry').count(), 10, 'Generated files must persist across a full executable restart');
     assert.equal(fixture.state.submitted.length, 10, 'Restoring saved results must not render again');

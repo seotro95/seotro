@@ -5,7 +5,7 @@ export type DownloadRange = { first: bigint; last: bigint; namespace: string };
 // across Studio tabs. Decimal strings keep numbering exact beyond 1,000 and
 // Number.MAX_SAFE_INTEGER. The profile ID distinguishes fresh installations.
 export async function reserveDownloadNumbers(count: number): Promise<DownloadRange> {
-  if (!Number.isInteger(count) || count < 1 || count > MAX_SLOTS) throw new Error('Mỗi lượt tải cần từ 1 đến 40 tệp.');
+  if (!Number.isInteger(count) || count < 0 || count > MAX_SLOTS) throw new Error('Mỗi lượt tải cần từ 0 đến 400 tệp.');
   const db = await new Promise<IDBDatabase>((resolve, reject) => {
     const request = indexedDB.open('muse-studio-downloads-v1', 1);
     let abandoned = false;
@@ -35,4 +35,4 @@ export async function reserveDownloadNumbers(count: number): Promise<DownloadRan
   } finally { db.close(); }
 }
 
-export const formatDownloadNumber = (value: bigint) => String(value).padStart(6, '0');
+export const formatDownloadNumber = (value: bigint) => String(value);

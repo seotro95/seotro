@@ -1,8 +1,9 @@
 import type { Mode, Reference, Settings, MediaResult } from './core.ts';
+import { outputStem, uniqueOutputFilename } from '../output-names.mjs';
 import { reserveDownloadNumbers, formatDownloadNumber } from './download-sequence.ts';
 
 type ResponseMedia = { base64: string; mimeType: string; metadata?: { duration?: number; width: number; height: number } };
-type RequestContext = { batchId: string; sceneId: number; accountId?: number; accountMode?: Settings['accountMode'] };
+type RequestContext = { batchId: string; sceneId: number; accountId?: number; accountMode?: Settings['accountMode']; outputName?: string };
 declare global {
   interface Window { museTransport?: { rendererState?(state:'ready'|'error'):void; rendererStage?(stage:'workspace'|'interface'|'media-library'|'ready'):void; dataControl?(action:string):Promise<any>; request(id: string, endpoint: string, data: unknown): Promise<{ ok: boolean; body: any }>; cancel(id: string): void; export?(action: string, data?: unknown): Promise<any>; automationControl?(action: string, data?: unknown): Promise<any>; onAutomation?(callback: (action: string, data: any) => Promise<any>): () => void; onSessionRefresh?(callback: () => void): () => void }; showDirectoryPicker?: () => Promise<ExportDirectory> }
 }
@@ -100,7 +101,7 @@ async function generate(kind: Settings['output'], prompt: string, reference: Ref
     image: prepared ? { imageBytes: prepared.imageBytes, mimeType: prepared.mimeType } : undefined
   }, signal);
   signal.throwIfAborted();
-  return { ...await mediaResult(kind, result, settings), referenceCompressed: prepared?.compressed || false };
+  return { ...await mediaResult(kind, result, settings), outputName:outputStem(context?.outputName)||undefined, referenceCompressed: prepared?.compressed || false };
 }
 export const generateVideo = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, context?: RequestContext) => generate('video', prompt, reference, settings, signal, context);
 export const generateImage = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, context?: RequestContext) => generate('image', prompt, reference, settings, signal, context);
@@ -125,9 +126,6 @@ async function mediaFile(media: MediaResult, id: number) {
   if (!response.ok) throw new Error(`Không đọc được kết quả cảnh ${id} để tải xuống.`);
   return { prefix: `${media.demo ? 'kiem-thu-' : ''}video`, extension: ext, blob: await response.blob() };
 }
-function numberedFilename(file: { prefix: string; extension: string }, id: number, number: bigint, namespace: string) {
-  return `${file.prefix}-${formatDownloadNumber(number)}-scene-${String(id).padStart(2, '0')}-${namespace}.${file.extension}`;
-}
 function downloadBlob(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
@@ -135,23 +133,29 @@ function downloadBlob(blob: Blob, filename: string) {
 }
 export async function downloadVideo(media: MediaResult, id: number) {
   const file = await mediaFile(media, id);
-  const range = await reserveDownloadNumbers(1);
-  downloadBlob(file.blob, numberedFilename(file, id, range.first, range.namespace));
+  const stem=outputStem(media.outputName);
+  const range = await reserveDownloadNumbers(stem?0:1);
+  downloadBlob(file.blob, `${stem||String(range.first)}.${file.extension}`);
 }
 export async function downloadMediaBatch(items: { media: MediaResult; id: number }[], kind: Settings['output']) {
   if (!items.length) throw new Error('Chưa có kết quả để tải.');
   const native = window.museTransport?.export;
   const destination = native ? await native('ensure') : webExportDirectory ? { cancelled: false } : await chooseExportDirectory();
   if (destination.cancelled) return { cancelled: true as const };
-  const files = [];
+  const files: Awaited<ReturnType<typeof mediaFile>>[] = [];
   for (const item of items) files.push(await mediaFile(item.media, item.id));
-  const range = await reserveDownloadNumbers(items.length);
+  const unnamed=items.filter(item=>!outputStem(item.media.outputName)).length;
+  const range = await reserveDownloadNumbers(unnamed);
+  const used=new Set<string>(); let nextNumber=range.first;
+  // Allocate named files first so a user-supplied numeric title keeps its name.
+  const names=items.map((item,index)=>outputStem(item.media.outputName)?uniqueOutputFilename(outputStem(item.media.outputName),files[index].extension,used):'');
+  for(let index=0;index<items.length;index++)if(!names[index])names[index]=uniqueOutputFilename(String(nextNumber++),files[index].extension,used);
   const first = formatDownloadNumber(range.first); const last = formatDownloadNumber(range.last);
   const label = `Muse-${kind === 'image' ? 'Images' : 'Videos'}-${items.length}-${first}-${last}-${range.namespace}`;
   let session: { id: string; name: string } | undefined;
   try {
     let directory: ExportDirectory | undefined;
-    if (native) session = await native('begin', { kind, count: items.length, first, last, namespace: range.namespace });
+    if (native) session = await native('begin', { kind, count: items.length, numberedCount:unnamed, first, last, namespace: range.namespace });
     else {
       for (let suffix=0;suffix<100;suffix++) {
         const candidate=label+(suffix?`-${suffix+1}`:'');
@@ -164,7 +168,7 @@ export async function downloadMediaBatch(items: { media: MediaResult; id: number
       if (!directory) throw new Error('Chưa tạo được thư mục mới cho bộ kết quả.');
     }
     for (const [index,file] of files.entries()) {
-      const name=numberedFilename(file,items[index].id,range.first+BigInt(index),range.namespace);
+      const name=names[index];
       if (native) await native('write',{id:session!.id,name,bytes:await file.blob.arrayBuffer()});
       else {
         const handle=await directory!.getFileHandle(name,{create:true});
@@ -172,8 +176,8 @@ export async function downloadMediaBatch(items: { media: MediaResult; id: number
       }
     }
     const saved=native?await native('finish',session!.id):{directory:directory!.name,count:files.length};
-    return { cancelled:false as const,first,last,folder:saved.directory,count:saved.count };
+    return { cancelled:false as const,first,last,folder:saved.directory,count:saved.count,numberedCount:unnamed };
   } catch (error) { if (native&&session) await native('abort',session.id).catch(()=>{}); throw error; }
 }
 export const providerStatus = () => api('/api/status');
-export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer' | 'concurrency' | 'import' | 'select' | 'prepare' | 'proxy' | 'save', data: Record<string, unknown> = {}) => api(`/api/account/${action}`, data);
+export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer' | 'concurrency' | 'import' | 'select' | 'prepare' | 'proxy' | 'proxy-ip' | 'save', data: Record<string, unknown> = {}) => api(`/api/account/${action}`, data);

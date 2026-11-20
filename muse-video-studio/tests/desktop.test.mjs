@@ -44,6 +44,8 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
     await waitFor(() => { shell = desktop.context().pages().find(page => page.url() === shellURL); return shell; }, 'desktop shell');
     let studio;
     await waitFor(() => { studio = desktop.context().pages().find(page => page.url().startsWith('http://127.0.0.1:') && !page.url().startsWith(fixtureURL)); return studio; }, 'Studio page');
+    await studio.waitForFunction(()=>Boolean(localStorage.getItem('muse-workstation-v1')));
+    await studio.evaluate(()=>{const value=JSON.parse(localStorage.getItem('muse-workstation-v1'));value.settings.requestedConcurrency=10;localStorage.setItem('muse-workstation-v1',JSON.stringify(value))});await studio.reload();
     let login;
     await t.test('one app window contains the real login view, isolated from Node APIs', async () => {
       await studio.getByRole('button', { name: 'Đăng nhập Muse trong tool', exact: true }).click();
@@ -61,7 +63,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       assert.match(await studio.locator('.connection-feedback').innerText(), /đã được xác minh/);
       const status = await studio.evaluate(async () => (await fetch('/api/status')).json());
       assert.equal(status.embeddedLogin, true);
-      assert.equal(status.maxConcurrency, 40);
+      assert.equal(status.maxConcurrency, 400);
       assert.equal(status.accounts.length, 40);
       assert.equal(status.accounts[0].authenticated, true);
       assert.equal(status.accounts[0].composerReady, false);

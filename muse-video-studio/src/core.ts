@@ -1,4 +1,4 @@
-import {MAX_SLOTS,DEFAULT_SLOTS,isSlotCount} from '../limits.mjs';
+import {MAX_SLOTS,MAX_ACCOUNTS,MAX_ACCOUNT_LANES,DEFAULT_SLOTS,isSlotCount,isAccountId,isLaneCount} from '../limits.mjs';
 export const MUSE_MODELS = ['Omni 1.1 Flash', 'Veo 3.1 - Lite', 'Veo 3.1 - Fast'] as const;
 export const VIDEO_RESOLUTIONS = ['360p', '720p', '1080p', '2k', '4k'] as const;
 export type Model = typeof MUSE_MODELS[number];
@@ -7,15 +7,15 @@ export type Mode = 'muse' | 'demo';
 export type Output = 'video' | 'image';
 export type Status = 'ready' | 'queued' | 'running' | 'done' | 'error' | 'cancelled';
 export type Reference = { id: string; name: string; url: string; base64?: string; mimeType?: string };
-export type Settings = { slotCount: number; singleAccountId?: number; multipleSlotIds?: number[]; requestedConcurrency?: number; syncOperations: boolean; accountMode: 'single' | 'multiple'; model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
+export type Settings = { selectedAccountIds?: number[]; slotCount: number; singleAccountId?: number; multipleSlotIds?: number[]; requestedConcurrency?: number; syncOperations: boolean; accountMode: 'single' | 'multiple'; model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
 export const RENDER_KEYS = ['model','aspectRatio','duration','resolution','imageResolution','videoInput','r2v','modifier'] as const;
 export type SceneSettings = Pick<Settings,typeof RENDER_KEYS[number]>;
 export function renderingSettings(settings:Settings):SceneSettings{return Object.fromEntries(RENDER_KEYS.map(key=>[key,settings[key]])) as SceneSettings}
 export function sceneSettings(settings:Settings,scene:Pick<Scene,'renderSettings'>):Settings{return normalizeSettings({...settings,...scene.renderSettings})}
-export type MediaResult = { kind: Output; base64: string; mimeType: string; url: string; demo: boolean; savedId?: string; referenceCompressed?: boolean; metadata?: { duration?: number; width: number; height: number }; requestedResolution?: Resolution; aspectRatio?: Settings['aspectRatio'] };
+export type MediaResult = { outputName?: string; kind: Output; base64: string; mimeType: string; url: string; demo: boolean; savedId?: string; referenceCompressed?: boolean; metadata?: { duration?: number; width: number; height: number }; requestedResolution?: Resolution; aspectRatio?: Settings['aspectRatio'] };
 export type VideoResult = MediaResult;
 export type ImageResult = MediaResult;
-export type Scene = { id: number; accountId?: number; enabled: boolean; syncSelected?: boolean; renderSettings?: SceneSettings; prompt: string; reference: Reference | null; status: Status; error?: string; video?: VideoResult; image?: ImageResult; enhancing?: boolean; stopping?: boolean; activeOutput?: Output };
+export type Scene = { outputName?: string; id: number; accountId?: number; enabled: boolean; syncSelected?: boolean; renderSettings?: SceneSettings; prompt: string; reference: Reference | null; status: Status; error?: string; video?: VideoResult; image?: ImageResult; enhancing?: boolean; stopping?: boolean; activeOutput?: Output };
 export const ADVENTURE = [
   'Một người thám hiểm bước vào ngôi đền cổ xưa trong rừng nhiệt đới, tia nắng vàng rọi xuyên qua tán lá, máy quay tiến chậm từ phía sau.',
   'Khám phá bức tường khắc cổ ngữ bí ẩn phát sáng ánh lân tinh xanh ngọc, máy quay lia chậm ngang qua các chi tiết.',
@@ -40,31 +40,13 @@ export const RUNWAY = [
   'Người mẫu ngoái nhìn qua vai với nụ cười nhẹ, camera chân dung 85mm.',
   'Người mẫu đứng giữa sân khấu trong ánh đèn cuối buổi, toàn cảnh runway sang trọng.'
 ];
-export const DEFAULT_SETTINGS: Settings = { slotCount: DEFAULT_SLOTS, syncOperations:true, accountMode: 'single', model: 'Omni 1.1 Flash', aspectRatio: '16:9', duration: 4, resolution: '720p', imageResolution: '2k', output: 'video', videoInput: 'text', autoSync: true, r2v: true, modifier: '', mode: 'muse' };
+export const DEFAULT_SETTINGS: Settings = { slotCount: DEFAULT_SLOTS, requestedConcurrency:6, syncOperations:true, accountMode: 'single', model: 'Omni 1.1 Flash', aspectRatio: '16:9', duration: 4, resolution: '720p', imageResolution: '2k', output: 'video', videoInput: 'text', autoSync: true, r2v: true, modifier: '', mode: 'muse' };
 export const createScenes = (count: number = DEFAULT_SLOTS): Scene[] => Array.from({length:isSlotCount(count)?count:DEFAULT_SLOTS},(_,i)=>({id:i+1,enabled:true,prompt:ADVENTURE[i]||'',reference:null,status:'ready'}));
 
-// Subtitle blocks become scenes; TXT uses paragraphs, or one non-empty line per scene.
-export function parseScript(text: string): string[] {
-  const normalized = text.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n').trim();
-  if (!normalized) return [];
-  const timestamp = /\d{1,2}:\d{2}:\d{2}[,.]\d{3}\s*-->\s*\d{1,2}:\d{2}:\d{2}[,.]\d{3}/;
-  if (timestamp.test(normalized)) {
-    const scenes: string[] = [];
-    let current: string[] = [];
-    const flush = () => { if (current.length) scenes.push(current.join(' ').replace(/<[^>]*>/g, '').trim()); current = []; };
-    for (const line of normalized.split('\n')) {
-      if (timestamp.test(line)) { flush(); continue; }
-      if (!line.trim()) { flush(); continue; }
-      if (/^\d+$/.test(line.trim())) continue;
-      current.push(line.trim());
-    }
-    flush();
-    return scenes.filter(Boolean);
-  }
-  const paragraphs = normalized.split(/\n\s*\n/);
-  return (paragraphs.length > 1 ? paragraphs : normalized.split('\n'))
-    .map(s => s.replace(/^\s*(?:#?\d+[.)\-:]|[-•])\s+/, '').trim()).filter(Boolean);
-}
+export { parseScriptEntries, extractScriptEntry } from './script-import.ts';
+import { parseScriptEntries } from './script-import.ts';
+import { outputStem } from '../output-names.mjs';
+export function parseScript(text:string):string[]{return parseScriptEntries(text).map(entry=>entry.prompt)}
 export function normalizeSettings(settings: Settings): Settings {
   return settings.model === 'Omni 1.1 Flash' ? settings : { ...settings, duration: 8 };
 }
@@ -108,16 +90,17 @@ export function restoreWorkspace(raw: string | null): { scenes: Scene[]; setting
     const data = JSON.parse(raw);
     if (data.version !== 1 || !Array.isArray(data.scenes) || !isSlotCount(data.scenes.length)) return fallback;
     fallback.scenes = createScenes(data.scenes.length).map((scene, i) => ({ ...scene,
+      outputName:outputStem(data.scenes[i]?.outputName)||undefined,
       prompt: typeof data.scenes[i]?.prompt === 'string' ? data.scenes[i].prompt.slice(0, 8000) : scene.prompt,
       enabled: data.scenes[i]?.enabled !== false, syncSelected:data.scenes[i]?.syncSelected!==false,
-      accountId:validAccountId(data.scenes[i]?.accountId) ?? scene.id,
+      accountId:validAccountId(data.scenes[i]?.accountId) ?? (data.settings?.selectedAccountIds===undefined&&scene.id<=MAX_ACCOUNTS?scene.id:undefined),
       renderSettings:validSceneSettings(data.scenes[i]?.renderSettings)
     }));
     const s = data.settings ?? {};
     fallback.settings = normalizeSettings({ ...DEFAULT_SETTINGS,
-      slotCount: isSlotCount(s.slotCount)?s.slotCount:data.scenes.length, requestedConcurrency:isSlotCount(s.requestedConcurrency)?s.requestedConcurrency:undefined,syncOperations:s.syncOperations!==false,
+      slotCount: isSlotCount(s.slotCount)?s.slotCount:data.scenes.length, requestedConcurrency:isLaneCount(s.requestedConcurrency)?s.requestedConcurrency:(isSlotCount(s.requestedConcurrency)?MAX_ACCOUNT_LANES:DEFAULT_SETTINGS.requestedConcurrency),syncOperations:s.syncOperations!==false,
       singleAccountId:validAccountId(s.singleAccountId) ?? 1,
-      multipleSlotIds:normalizeSlotIds(s.multipleSlotIds),
+      multipleSlotIds:normalizeSlotIds(s.multipleSlotIds), selectedAccountIds:normalizeAccountIds(s.selectedAccountIds),
       accountMode: s.accountMode === 'multiple' ? 'multiple' : 'single',
       model: MUSE_MODELS.includes(s.model) ? s.model : DEFAULT_SETTINGS.model,
       aspectRatio: s.aspectRatio === '9:16' ? '9:16' : '16:9',
@@ -135,12 +118,12 @@ function validSceneSettings(value:unknown):SceneSettings|undefined{
   return renderingSettings(normalizeSettings({...DEFAULT_SETTINGS,model:MUSE_MODELS.includes(s.model)?s.model:DEFAULT_SETTINGS.model,aspectRatio:s.aspectRatio==='9:16'?'9:16':'16:9',duration:[4,6,8,10].includes(s.duration)?s.duration:4,resolution:VIDEO_RESOLUTIONS.includes(s.resolution)?s.resolution:'720p',imageResolution:s.imageResolution==='4k'?'4k':'2k',videoInput:s.videoInput==='image'?'image':'text',r2v:s.r2v!==false,modifier:typeof s.modifier==='string'?s.modifier.slice(0,2000):''}));
 }
 
-export function validAccountId(id:unknown):number|undefined{return Number.isInteger(id)&&Number(id)>=1&&Number(id)<=MAX_SLOTS?Number(id):undefined}
-export function accountForScene(scene:Pick<Scene,'id'|'accountId'>,settings:Settings):number{return settings.accountMode==='multiple'?(validAccountId(scene.accountId)??scene.id):(validAccountId(settings.singleAccountId)??1)}
+export function validAccountId(id:unknown):number|undefined{return isAccountId(id)?Number(id):undefined}
+export function accountForScene(scene:Pick<Scene,'id'|'accountId'>,settings:Settings):number{return settings.accountMode==='multiple'?(validAccountId(scene.accountId)??accountPool(settings)[Math.floor((scene.id-1)/(settings.requestedConcurrency??6))%accountPool(settings).length]):(validAccountId(settings.singleAccountId)??1)}
 
 export function normalizeSlotIds(value:unknown):number[]|undefined{
   if(!Array.isArray(value))return undefined;
-  return [...new Set(value.filter(id=>validAccountId(id)!==undefined) as number[])].sort((a,b)=>a-b);
+  return [...new Set(value.filter(id=>isSlotCount(id)) as number[])].sort((a,b)=>a-b);
 }
 export function visibleSlotIds(settings:Settings):number[]{
   return settings.accountMode==='multiple'&&settings.multipleSlotIds!==undefined
@@ -149,4 +132,14 @@ export function visibleSlotIds(settings:Settings):number[]{
 }
 export function visibleWorkspace(scenes:Scene[],settings:Settings):Scene[]{
   const ids=new Set(visibleSlotIds(settings));return scenes.filter(scene=>ids.has(scene.id));
+}
+
+export function normalizeAccountIds(value:unknown):number[]|undefined{
+ if(!Array.isArray(value))return undefined;
+ return [...new Set(value.filter(id=>isAccountId(id)) as number[])].sort((a,b)=>a-b);
+}
+export function accountPool(settings:Settings):number[]{return settings.accountMode==='single'?[validAccountId(settings.singleAccountId)??1]:(normalizeAccountIds(settings.selectedAccountIds)?.length?normalizeAccountIds(settings.selectedAccountIds)!:Array.from({length:10},(_,i)=>i+1))}
+export function accountLayout(ids:number[],lanes:number):{id:number;accountId:number}[]{
+ if(!ids.length||ids.length>MAX_ACCOUNTS||new Set(ids).size!==ids.length||ids.some(id=>!isAccountId(id))||!isLaneCount(lanes))throw new Error('Chọn 1–40 tài khoản và 1–10 ô mỗi tài khoản.');
+ return ids.flatMap((accountId,index)=>Array.from({length:lanes},(_,lane)=>({id:index*lanes+lane+1,accountId})));
 }

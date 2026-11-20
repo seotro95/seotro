@@ -64,7 +64,7 @@ app = resources / 'app'
 app.mkdir()
 for name in ['desktop', 'dist']:
     shutil.copytree(ROOT / name, app / name)
-for name in ['limits.mjs', 'server.mjs', 'muse-browser.mjs', 'muse-accounts.mjs', 'muse-balance.mjs', 'browser.mjs', '.env.example', 'README.md', 'VALIDATION.md', 'API-AUTOMATION.md', 'MCP-CODEX.md', 'CODEX-MCP.toml', 'CAP-NHAT-1.9.md', 'BAN-DAY-DU-1.10.md', 'BLACK-SCREEN-1.12.1.md', 'RECOVERY-1.12.2.md', 'LICENSE']:
+for name in ['output-names.mjs', 'limits.mjs', 'server.mjs', 'muse-browser.mjs', 'muse-accounts.mjs', 'muse-balance.mjs', 'browser.mjs', '.env.example', 'README.md', 'VALIDATION.md', 'API-AUTOMATION.md', 'MCP-CODEX.md', 'CODEX-MCP.toml', 'CAP-NHAT-1.9.md', 'BAN-DAY-DU-1.10.md', 'BLACK-SCREEN-1.12.1.md', 'RECOVERY-1.12.2.md', 'CAP-NHAT-1.13.0.md', 'LICENSE']:
     shutil.copyfile(ROOT / name, app / name)
 modules = app / 'node_modules'
 modules.mkdir()
@@ -87,7 +87,7 @@ for name in ['react', 'react-dom', 'lucide-react']:
 1. Giai nen TOAN BO ZIP vao thu muc moi, vi du D:\\Muse-AI-Studio-{version}.
 2. Mo "{executable}". Khong chay ung dung ngay trong cua so xem ZIP.
 3. Dang nhap Muse trong tool, quay Ve Studio, bam Kiem tra phien.
-4. Chon so o/luong 20, 30 hoac 40. Dung 1 tai khoan hoac nhieu tai khoan.
+4. Chon 1-40 tai khoan va 1-10 o moi tai khoan. Vi du 10 x 6 = 60 o.
 5. Quan ly toi da 40 tai khoan: nhap danh sach email/ten, dang nhap tung phien Muse.
 6. Nhap prompt hoac TXT/SRT, chon anh/video va bam Tao theo so o da chon.
 

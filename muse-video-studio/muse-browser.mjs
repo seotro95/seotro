@@ -1,4 +1,4 @@
-import {MAX_SLOTS,isSlotCount} from './limits.mjs';
+import {MAX_SLOTS,MAX_ACCOUNT_LANES,isLaneCount} from './limits.mjs';
 import { chromium } from 'playwright-core';
 import { existsSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
@@ -53,7 +53,7 @@ export class MuseBrowser {
     this.quietMs = quietMs;
     this.composerTimeoutMs = composerTimeoutMs;
     this.submitTimeoutMs = submitTimeoutMs;
-    this.maxConcurrency = Math.max(1, Math.min(MAX_SLOTS, maxConcurrency));
+    this.maxConcurrency = Math.max(1, Math.min(MAX_ACCOUNT_LANES, maxConcurrency));
     this.reserved = 0;
     this.executing = 0;
     this.queue = [];
@@ -297,7 +297,7 @@ export class MuseBrowser {
     return url.href;
   }
   async setConcurrency(count, signal) {
-    if(!isSlotCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 40 luồng.',400);
+    if(!isLaneCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 10 ô mỗi tài khoản.',400);
     if(this.reserved||this.workers.size)throw fail('MUSE_CHAT_BUSY','Đợi các cảnh hoàn tất trước khi đổi số luồng.',409);
     this.maxConcurrency=1;this.parallelRoutes=[];this.concurrencyProbe={requested:count,checked:0,state:'checking'};
     if(count===1){this.concurrencyProbe.state='ready';return {executionConcurrency:1,message:'Đã chọn một luồng. Các cảnh được xử lý lần lượt.'};}
@@ -438,7 +438,7 @@ export class MuseBrowser {
   }
   async executeTurn({ accountId, prompt, image, video, output = video ? 'video' : 'text', signal, checkOnly = false, batchId, sceneId, singleLane = false }) {
     this.requireSingleAccount(accountId);
-    if (this.workers.size >= MAX_SLOTS) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã có 40 luồng đang chạy trên tài khoản Muse.', 429);
+    if (this.workers.size >= MAX_ACCOUNT_LANES) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã chạy đủ 10 ô trên tài khoản Muse.', 429);
     const key = randomUUID();
     this.workers.set(key, null);
     const progress = { batchId: batchId || null, sceneId: sceneId || null, output, phase: 'preparing', submitted: false, active: true, startedAt: Date.now() };

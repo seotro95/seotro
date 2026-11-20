@@ -1,4 +1,8 @@
-export const MAX_SLOTS = 40;
+export const MAX_ACCOUNTS = 40;
+export const MAX_ACCOUNT_LANES = 10;
+export const MAX_SLOTS = MAX_ACCOUNTS * MAX_ACCOUNT_LANES;
 export const DEFAULT_SLOTS = 10;
-export const STREAM_OPTIONS = Object.freeze([1, 2, 3, 5, 10, 20, 30, 40]);
+export const STREAM_OPTIONS = Object.freeze([1, 2, 3, 5, 6, 10, 20, 30, 40, 60, 100, 200, 400]);
 export const isSlotCount = value => Number.isInteger(value) && value >= 1 && value <= MAX_SLOTS;
+export const isAccountId = value => Number.isInteger(value) && value >= 1 && value <= MAX_ACCOUNTS;
+export const isLaneCount = value => Number.isInteger(value) && value >= 1 && value <= MAX_ACCOUNT_LANES;

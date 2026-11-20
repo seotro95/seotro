@@ -52,6 +52,6 @@ test('forty-file export includes numbered scenes 20, 30 and 40 without renaming 
     for(let id=1;id<=40;id++)await manager.write({id:batch.id,name:`video-${String(id).padStart(6,'0')}-scene-${String(id).padStart(2,'0')}-${namespace}.mp4`,bytes:new Uint8Array([id]).buffer});
     const saved=await manager.finish(batch.id);const names=await readdir(saved.directory);assert.equal(names.length,40);
     for(const id of [20,30,40])assert.ok(names.includes(`video-${String(id).padStart(6,'0')}-scene-${id}-${namespace}.mp4`));
-    await assert.rejects(manager.begin({kind:'video',count:41,first:'1',last:'41',namespace}));
+    await assert.rejects(manager.begin({kind:'video',count:401,first:'1',last:'401',namespace}));
   }finally{await rm(root,{recursive:true,force:true})}
 });

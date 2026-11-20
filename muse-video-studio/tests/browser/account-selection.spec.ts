@@ -5,7 +5,8 @@ test('per-slot accounts and corresponding proxies persist without replacing work
  await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'browser',embeddedLogin:true,multiAccount:true,executionConcurrency:10,preferredConcurrency:10,accounts}}));
  await page.route('**/api/account/select',route=>route.fulfill({json:{accounts}}));
  const proxies:any[]=[];await page.route('**/api/account/proxy',route=>{proxies.push(route.request().postDataJSON());return route.fulfill({json:{accounts}})});
- await page.goto('/');await page.getByLabel('Chế độ tài khoản',{exact:true}).selectOption('multiple');
+ await page.goto('/');await page.getByLabel('Chế độ tài khoản',{exact:true}).selectOption('multiple');await page.getByLabel('Ô chạy mỗi tài khoản',{exact:true}).selectOption('1');
+ await page.route('**/api/account/prepare',route=>route.fulfill({json:{executionConcurrency:1,accounts}}));
  await page.getByLabel('Tài khoản cảnh 1',{exact:true}).selectOption('27');
  await page.getByLabel('Tài khoản cảnh 2',{exact:true}).selectOption('27');
  await page.getByLabel('Proxy cảnh 1',{exact:true}).click();
@@ -24,11 +25,11 @@ test('per-slot accounts and corresponding proxies persist without replacing work
 });
 
 test('any signed-in account can run ten shared lanes and survives reload',async({page})=>{
- const accounts=[1,27].map(id=>({id,label:`owner${id}`,authenticated:true,sessionAuthenticated:true,state:'ready'}));
+ const accounts=[1,27].map(id=>({executionConcurrency:10,id,label:`owner${id}`,authenticated:true,sessionAuthenticated:true,state:'ready'}));
  await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'browser',multiAccount:true,executionConcurrency:10,preferredConcurrency:10,accounts}}));
  await page.route('**/api/account/select',route=>route.fulfill({json:{accounts}}));
  const preparation:any[]=[];await page.route('**/api/account/prepare',route=>{preparation.push(route.request().postDataJSON());return route.fulfill({json:{executionConcurrency:10,preferredConcurrency:10}})});
  await page.goto('/');await page.getByLabel('Tài khoản chạy mọi ô',{exact:true}).selectOption('27');await page.reload();await expect(page.getByLabel('Tài khoản chạy mọi ô',{exact:true})).toHaveValue('27');
  const calls:any[]=[];await page.route('**/api/video',route=>{calls.push(route.request().postDataJSON());return new Promise(()=>{})});
- await page.getByRole('button',{name:'TẠO 10 VIDEO',exact:true}).click();await expect.poll(()=>calls.length).toBe(10);expect(calls.every(call=>call.accountId===27&&call.accountMode==='single')).toBe(true);expect(preparation[0].accountId).toBe(27);
+ await page.getByRole('button',{name:'TẠO SONG SONG 10 Ô',exact:true}).click();await expect.poll(()=>calls.length).toBe(10);expect(calls.every(call=>call.accountId===27&&call.accountMode==='single')).toBe(true);expect(preparation[0].accountId).toBe(27);
 });

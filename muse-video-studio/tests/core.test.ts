@@ -60,9 +60,9 @@ test('errors distinguish credit, filtering, service capacity and missing Muse in
 test('dynamic layouts restore up to forty slots and preserve hidden prompts while shrinking',()=>{
   const all=createScenes(40).map(scene=>({...scene,prompt:`Scene ${scene.id}`}));
   const restored=restoreWorkspace(JSON.stringify({version:1,settings:{...DEFAULT_SETTINGS,slotCount:20,requestedConcurrency:30},scenes:all}));
-  assert.equal(restored.settings.slotCount,20);assert.equal(restored.settings.requestedConcurrency,30);assert.equal(restored.scenes.length,40);assert.equal(restored.scenes[39].prompt,'Scene 40');
-  assert.equal(createScenes(30).length,30);assert.equal(createScenes(41).length,10);
-  assert.equal(restoreWorkspace(JSON.stringify({version:1,scenes:Array(41).fill({prompt:'invalid'})})).scenes.length,10);
+  assert.equal(restored.settings.slotCount,20);assert.equal(restored.settings.requestedConcurrency,10);assert.equal(restored.scenes.length,40);assert.equal(restored.scenes[39].prompt,'Scene 40');
+  assert.equal(createScenes(30).length,30);assert.equal(createScenes(401).length,10);
+  assert.equal(restoreWorkspace(JSON.stringify({version:1,scenes:Array(401).fill({prompt:'invalid'})})).scenes.length,10);
 });
 
 test('chosen shared account and per-slot assignments restore safely',()=>{
@@ -73,7 +73,7 @@ test('chosen shared account and per-slot assignments restore safely',()=>{
 
 test('nonconsecutive visible slots restore without changing the forty scene records',async()=>{
  const {visibleSlotIds,visibleWorkspace}=await import('../src/core.ts');
- const restored=restoreWorkspace(JSON.stringify({version:1,scenes:createScenes(40),settings:{accountMode:'multiple',multipleSlotIds:[7,3,1,4,3,99,'2',-1]}}));
+ const restored=restoreWorkspace(JSON.stringify({version:1,scenes:createScenes(40),settings:{accountMode:'multiple',multipleSlotIds:[7,3,1,4,3,999,'2',-1]}}));
  assert.deepEqual(visibleSlotIds(restored.settings),[1,3,4,7]);assert.deepEqual(visibleWorkspace(restored.scenes,restored.settings).map(s=>s.id),[1,3,4,7]);assert.equal(restored.scenes.length,40);
  assert.deepEqual(visibleSlotIds({...restored.settings,multipleSlotIds:[]}),[]);
  assert.equal(visibleSlotIds({...restored.settings,accountMode:'single',slotCount:40}).length,40);

@@ -1,16 +1,18 @@
 import {test,expect} from '@playwright/test';
 import {readFile} from 'node:fs/promises';
 const image=(await readFile(new URL('../../public/demo-image.png',import.meta.url))).toString('base64');
-const accounts=Array.from({length:40},(_,i)=>({id:i+1,label:`Owner ${i+1}`,authenticated:true,sessionAuthenticated:true,state:'ready'}));
+const accounts=Array.from({length:40},(_,i)=>({id:i+1,label:`Owner ${i+1}`,authenticated:true,sessionAuthenticated:true,state:'ready',executionConcurrency:10}));
+
+test.beforeEach(async({page})=>{await page.route('**/api/account/prepare',route=>route.fulfill({json:{executionConcurrency:1,accounts}}))});
 
 test('only selected nonconsecutive slots receive TXT/SRT, run and persist; hidden data survives',async({page})=>{
- await page.addInitScript(()=>{if(!localStorage.getItem('muse-workstation-v1'))localStorage.setItem('muse-workstation-v1',JSON.stringify({version:1,settings:{slotCount:10,accountMode:'multiple',output:'image'},scenes:Array.from({length:40},(_,i)=>({prompt:`Keep ${i+1}`,enabled:true,accountId:i+1}))}));});
+ await page.addInitScript(()=>{if(!localStorage.getItem('muse-workstation-v1'))localStorage.setItem('muse-workstation-v1',JSON.stringify({version:1,settings:{slotCount:10,requestedConcurrency:1,accountMode:'multiple',output:'image'},scenes:Array.from({length:40},(_,i)=>({prompt:`Keep ${i+1}`,enabled:true,accountId:i+1}))}));});
  await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'browser',multiAccount:true,accounts,executionConcurrency:1}}));
  await page.route('**/api/image',route=>route.fulfill({json:{base64:image,mimeType:'image/png'}}));
  await page.goto('/');await page.getByTestId('scene-2').getByRole('button',{name:'Tạo cảnh này',exact:true}).click();await expect(page.getByTestId('scene-2').locator('.generated-image')).toBeVisible();
  await page.getByRole('button',{name:'Ẩn tất cả ô',exact:true}).click();await expect(page.locator('.scene-card')).toHaveCount(0);
  for(const id of [1,3,4,7])await page.getByLabel(`Hiện ô ${id}`,{exact:true}).check();
- await expect(page.locator('.scene-number')).toHaveText(['#01','#03','#04','#07']);await expect(page.getByLabel('Số ô',{exact:true})).toHaveValue('4');await expect(page.getByLabel('Số luồng:',{exact:true})).toHaveValue('4');
+ await expect(page.locator('.scene-number')).toHaveText(['#01','#03','#04','#07']);await expect(page.getByLabel('Số ô',{exact:true})).toHaveValue('4');await expect(page.getByLabel('Số luồng mỗi tài khoản:',{exact:true})).toHaveValue('1');
  await page.getByRole('button',{name:'Nhập TXT / SRT',exact:true}).click();
  await page.getByRole('button',{name:'Chọn TXT / SRT',exact:true}).click({trial:true});
  await page.locator('input[type=file][accept=".txt,.srt"]').setInputFiles({name:'script.txt',mimeType:'text/plain',buffer:Buffer.from('First\nThird\nFourth\nSeventh')});
@@ -50,5 +52,5 @@ test('parallel-ten action sends no prompt if ten independent conversations canno
  await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'browser',multiAccount:true,accounts,executionConcurrency:1}}));
  await page.route('**/api/account/prepare',route=>route.fulfill({json:{executionConcurrency:1,preferredConcurrency:10,concurrencyWarning:'Shared conversation only'}}));
  let calls=0;await page.route('**/api/video',route=>{calls++;return route.fulfill({status:500,json:{error:'Unexpected submission'}})});
- await page.goto('/');await page.getByRole('button',{name:'TẠO SONG SONG 10 Ô',exact:true}).click();await expect(page.getByText('Chưa thể chạy song song 10 ô:',{exact:false})).toBeVisible();expect(calls).toBe(0);await expect(page.locator('.status-badge.running')).toHaveCount(0);
+ await page.goto('/');await page.getByRole('button',{name:'TẠO SONG SONG 10 Ô',exact:true}).click();await expect(page.getByText('mới xác minh 1/10 hội thoại',{exact:false})).toBeVisible();expect(calls).toBe(0);await expect(page.locator('.status-badge.running')).toHaveCount(0);
 });
