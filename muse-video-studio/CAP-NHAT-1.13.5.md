@@ -12,6 +12,7 @@ Sáu ô trong mỗi tài khoản được gửi mà không đợi kết quả ô
 
 - Chuẩn bị tối đa ba tài khoản đồng thời thay cho chuẩn bị lần lượt. Các thao tác thay đổi phiên và gửi render vẫn được khóa trong lúc chuẩn bị; không chạy trùng bước chuẩn bị trên cùng tài khoản.
 - Nếu trang đăng nhập đã xác minh không có New chat, dùng thẳng cùng chat. Không mở bốn trang thử vô ích cho mỗi tài khoản.
+- Dùng lại khung đã xác định khi tìm ô Message, giảm truy vấn DOM/handle mỗi lần chuyển cảnh tuần tự và giữ đúng iframe.
 - Ghi lựa chọn số luồng nối tiếp để việc chuẩn bị đồng thời không giẫm lên cùng một tệp cấu hình tạm.
 - Không nạp metadata/decoder của hàng chục video chỉ để hiển thị danh sách; video tải để phát khi người dùng bấm Play. Ảnh xem trước nạp khi đến vùng nhìn thấy; Chromium bỏ qua vẽ/bố trí các thẻ ngoài màn hình mà vẫn giữ đủ prompt và ô trong DOM.
 - Dùng sáu lượt tải/giải mã media chung cho toàn bộ tài khoản, tránh hàng chục canvas/file lớn xử lý đồng thời. Ngân sách này chỉ áp dụng sau khi Muse trả kết quả; không hạ 60/72 yêu cầu tạo thành sáu yêu cầu. Tác vụ hủy trong hàng chờ tải không bắt đầu tải.

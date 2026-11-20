@@ -66,7 +66,7 @@ export class MuseBrowser {
     this.imageBatches = new Map();
     this.parallelRoutes = [];
     this.submitGroups=new SubmitGroups();this.parallelStrategy='workers';this.composerQueue=[];this.composerBusy=false;this.sharedSignals=new Map();this.sharedStopPromise=null;
-    this.pendingCaptions=new Set();
+    this.pendingCaptions=new Set();this.composerOwners=new WeakMap();
     this.active = null;
     this.profilePath = accountProfile || path.join(this.profileRoot, 'slot-01');
     this.accounts = [{ id: 1, state: existsSync(this.profile(1)) ? 'saved' : 'disconnected', authenticated: false, sessionAuthenticated: false, composerReady: false, connectionMessage: '', checkedAt: null, balance: null }];
@@ -244,7 +244,7 @@ export class MuseBrowser {
       const matches = [];
       for (const frame of frames) {
         const candidates = frame.locator(selector);
-        for (let index = 0, count = await candidates.count(); index < count; index++) matches.push(candidates.nth(index));
+        for (let index = 0, count = await candidates.count(); index < count; index++){const editor=candidates.nth(index);this.composerOwners.set(editor,frame);matches.push(editor)}
       }
       if (matches.length === 1) return matches[0];
       if (matches.length > 1) throw fail('MUSE_COMPOSER_AMBIGUOUS', 'Có nhiều ô nhập phù hợp trong cuộc trò chuyện Muse. Chưa gửi prompt để tránh nhập nhầm ô.');
@@ -276,7 +276,7 @@ export class MuseBrowser {
     const matches = [];
     for (const frame of await this.composerFrames(page)) {
       const candidates = frame.locator(PREHYDRATION);
-      for (let index = 0, count = await candidates.count(); index < count; index++) matches.push(candidates.nth(index));
+      for (let index = 0, count = await candidates.count(); index < count; index++){const editor=candidates.nth(index);this.composerOwners.set(editor,frame);matches.push(editor)}
     }
     if (matches.length > 1) throw fail('MUSE_COMPOSER_AMBIGUOUS', 'Có nhiều ô Message ban đầu trong trang Muse. Chưa kích hoạt hoặc gửi prompt để tránh chọn nhầm ô.');
     return matches[0] || null;
@@ -410,10 +410,8 @@ export class MuseBrowser {
   }
   async prepareConversation(page, { reuse = false } = {}) {
     const editor = await this.waitForComposer(page, { openConversation: true });
-    const handle = await editor.elementHandle();
-    let frame;
-    try { frame = await handle.ownerFrame(); }
-    finally { await handle.dispose(); }
+    const frame=this.composerOwners.get(editor);
+    if(!frame)throw fail('MUSE_COMPOSER_NOT_READY','Chưa xác định được khung chứa ô Message. Chưa gửi prompt.',409);
     const users = frame.locator(`${MESSAGES}[data-message-role="user"]`);
     if (!await users.count()) return frame;
     // A Muse account may expose one persistent conversation. Serial requests
