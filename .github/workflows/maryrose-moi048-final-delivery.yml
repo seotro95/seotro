@@ -1,0 +1,84 @@
+name: Mary Rose MOI048 publish verify and archive sixteen voices
+on:
+  push:
+    branches: [codex/maryrose-moi048-production-20261120]
+    paths: [.github/workflows/maryrose-moi048-final-delivery.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: maryrose-moi048
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python maryrose-moi048/extract_content.py
+          python maryrose-moi048/extract_voice_inputs.py
+          python maryrose-moi048/build_documents.py
+          python maryrose-moi048/voice_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0
+          python maryrose-moi048/ensure_ffmpeg.py
+          python -u maryrose-moi048/wait_for_sources.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: maryrose-moi048-voice-*
+          path: voice_artifacts
+          merge-multiple: false
+          run-id: 44704980586
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: maryrose-moi048-voice-en-US
+          path: voice_artifacts/maryrose-moi048-voice-en-US
+          run-id: 44703983383
+          github-token: ${{ github.token }}
+      - name: Decode and publish all sixteen complete voices
+        run: python -u maryrose-moi048/publish_voices.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: maryrose-moi048-final-release-reports
+          path: |
+            maryrose-moi048/voice_delivery/*.json
+            maryrose-moi048/voice_delivery/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 30
+  verify_and_archive:
+    needs: publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/maryrose-moi048-production-20261120
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python maryrose-moi048/extract_content.py
+          python maryrose-moi048/extract_voice_inputs.py
+          python maryrose-moi048/build_documents.py
+          python maryrose-moi048/voice_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0
+          python -u maryrose-moi048/verify_and_archive.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: maryrose-moi048-public-verification
+          path: |
+            maryrose-moi048/PUBLIC_DELIVERY_QA.json
+            maryrose-moi048/GITHUB_ASSET_AUDIT.json
+          if-no-files-found: ignore
+          retention-days: 30
