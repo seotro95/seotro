@@ -10,7 +10,7 @@ permissions:
   contents: write
 concurrency:
   group: muse-1131-parallel
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   windows:
     runs-on: windows-latest

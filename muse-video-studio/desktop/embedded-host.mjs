@@ -54,10 +54,8 @@ export class EmbeddedMuseHost {
     const browser = await this.attach();
     const view = new WebContentsView({ webPreferences: this.preferences });
     this.secure(view.webContents);
-    // Keep workers visible to the service, underneath Studio/login. Hiding a
-    // WebContentsView changes document.visibilityState even without throttling.
-    this.window.contentView.addChildView(view, worker ? 0 : undefined);
-    view.setVisible(worker);
+    this.window.contentView.addChildView(view);
+    view.setVisible(false);
     const marker = `about:blank#studio-${randomUUID()}`;
     try {
       await view.webContents.loadURL(marker);

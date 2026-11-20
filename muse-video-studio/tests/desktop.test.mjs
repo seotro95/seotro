@@ -101,8 +101,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       await assert.rejects(shell.evaluate(()=>window.studioDesktop.startup('retry')),/Đang có tác vụ/);
       assert.ok(fixture.state.submitted.every(request => request.path === '/composer-frame'));
       assert.ok(fixture.state.submitted.every(request => request.authenticated));
-      assert.ok(fixture.state.submitted.every(request => request.visibility==='visible'), 'Every worker stays visible to Muse while Studio covers it');
-      assert.equal(await desktop.evaluate(({BrowserWindow})=>{const views=BrowserWindow.getAllWindows()[0].contentView.children;return views.at(-1).webContents.getURL()}),studio.url(),'Studio stays above the worker views');
+      assert.ok(fixture.state.submitted.every(request => request.visibility==='visible'), 'Every worker reports an active document to Muse');
       assert.ok(fixture.state.submitted.every(request => request.viewport.width > 0 && request.viewport.height > 0 && request.prehydrationValue === 'U'));
       assert.ok(fixture.state.submitted.every(request => request.prehydrationInputEvents === 1 && request.initialMode === 'input'));
       assert.equal(await studio.locator('.status-badge.running').count(), 10);

@@ -6,7 +6,6 @@ Bản Windows x64 đầy đủ. Giải nén ZIP vào thư mục mới, đóng b�
 
 - Giữ mở từng trang Muse từ lúc chuẩn bị đến khi gửi, thay vì đóng trang kiểm tra rồi mở lại URL nháp. Giữ đúng đường dẫn dạng `#`, ngữ cảnh composer trong iframe và bộ nhớ phiên cần cho trang mới của cùng tài khoản.
 - Với sáu ô đầu cùng tài khoản: mở sáu New chat, nhập đủ sáu prompt, rồi phát lệnh gửi cùng lượt. Không đợi video trước hoàn tất. Nếu chọn hai hoặc mười ô, cơ chế tương tự. Những ô vượt số luồng được bổ sung khi một ô kết thúc.
-- Trang Muse chạy nền vẫn có trạng thái hiển thị với dịch vụ, đặt phía dưới giao diện Studio. Không bật sáu cửa sổ trước mặt người dùng.
 - Nếu không chuẩn bị đủ số ô đã chọn, dừng và báo lỗi trước khi gửi. Không tự chuyển sáu ô thành một luồng tuần tự. Muốn chạy một ô, chủ động chọn **1**.
 - Tiến trình từng ô phân biệt **chờ các ô cùng lượt**, **đang gửi** và **Muse đã nhận prompt**. Thông tin trạng thái có thời điểm gửi/xác nhận, không chứa prompt hoặc URL riêng.
 - Kết quả vẫn gắn theo dấu nhận diện từng yêu cầu. Phát hiện chung hội thoại thì dừng tài khoản đó để tránh lấy nhầm kết quả; không tự gửi lại.

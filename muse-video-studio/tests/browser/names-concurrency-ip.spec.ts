@@ -33,7 +33,8 @@ test('10 accounts × 6 submits sixty concurrent videos, caps each account at six
  await expect(page.getByLabel('Số tài khoản chạy',{exact:true})).toHaveValue('10');await expect(page.getByLabel('Ô chạy mỗi tài khoản',{exact:true})).toHaveValue('6');await expect(page.locator('.scene-card')).toHaveCount(60);await page.screenshot({path:'test-results/muse-113-60-slots.png'});
  await page.getByRole('button',{name:'Nhập TXT / SRT',exact:true}).click();await page.getByLabel('Nội dung TXT / SRT',{exact:true}).fill(Array.from({length:60},(_,i)=>`Scene ${i+1} plain prompt`).join('\n'));await page.getByRole('button',{name:'Nạp vào Studio',exact:true}).click();
  await page.getByRole('button',{name:'TẠO 60 VIDEO',exact:true}).click();await expect.poll(()=>calls.length).toBe(60);await expect(page.locator('.status-badge.running')).toHaveCount(60);
- for(let id=1;id<=10;id++)expect(calls.filter(call=>call.accountId===id)).toHaveLength(6);
+ for(let id=1;id<=10;id++){const wave=calls.filter(call=>call.accountId===id);expect(wave).toHaveLength(6);expect(wave.every(call=>call.submissionGroup?.size===6)).toBe(true);expect(new Set(wave.map(call=>call.submissionGroup.id)).size).toBe(1);}
+ expect(new Set(calls.map(call=>call.submissionGroup.id)).size).toBe(10);
  expect(prepares).toHaveLength(10);expect(prepares.every(value=>value.concurrency===6)).toBe(true);
  await Promise.all(release.map(fn=>fn()));await expect(page.locator('.scene-card video')).toHaveCount(60,{timeout:30000});await expect(page.getByLabel('Chế độ tài khoản',{exact:true})).toBeEnabled();
  await page.reload();await expect(page.locator('.scene-card')).toHaveCount(60);await expect(page.getByLabel('Kịch bản cảnh 60',{exact:true})).toHaveValue('Scene 60 plain prompt');await expect(page.getByLabel('Tài khoản cảnh 60',{exact:true})).toHaveValue('10');
