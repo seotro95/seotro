@@ -52,25 +52,27 @@ test('parallel mode verifies service-created chat routes without rendering, and 
       assert.ok(outputs.every(output=>output.status==='rejected'&&/MUSE_SHARED_CONVERSATION/.test(output.reason.message)));
       assert.equal(fixture.state.submitted.length,2,'No automatic retry');
       fixture.releaseAll();fixture.state.hold=false;fixture.state.sharedLiveHistory=false;
-      fixture.state.submitted.length=0;
     });
     await t.test('ten persistent chat URLs permit ten requests, one Stop leaves nine running', async () => {
       fixture.state.chatRoutes = true;
+      // Keep request IDs monotonic: resetting submitted while released contains
+      // old IDs would make later held requests finish before the overlap check.
+      const baseline=fixture.state.submitted.length;
       const result = await change(10);
       assert.equal(result.status, 200);
       assert.equal((await result.json()).executionConcurrency, 10);
-      assert.equal(fixture.state.submitted.length, 0, 'capability checking must not generate paid content');
+      assert.equal(fixture.state.submitted.length, baseline, 'capability checking must not generate paid content');
       assert.equal(new Set(driver.parallelRoutes.map(route => route.url)).size, 10);
       fixture.state.hold = true;
       const controls = Array.from({ length: 10 }, () => new AbortController());
       const batchId = randomUUID();
       const tasks = controls.map((control, index) => driver.generateImage({ accountId: 1, prompt: `Parallel scene ${index + 1}`, aspectRatio: '16:9', resolution: '2k', characterLock: false, batchId, sceneId: index + 1 }, control.signal));
       const settled = Promise.allSettled(tasks);
-      await waitFor(() => fixture.state.submitted.length === 10);
+      await waitFor(() => fixture.state.submitted.length === baseline+10);
       await waitFor(() => driver.progress().filter(stage => stage.active && stage.submitted).length === 10);
       assert.ok(driver.progress().every(stage => !('prompt' in stage) && !('url' in stage)));
       assert.equal(fixture.state.peak, 10);
-      assert.equal(new Set(fixture.state.submitted.map(request => request.path)).size, 10);
+      assert.equal(new Set(fixture.state.submitted.slice(baseline).map(request => request.path)).size, 10);
       assert.equal((await change(1)).status, 409);
       controls[3].abort();
       await waitFor(() => fixture.state.stops === 1);
