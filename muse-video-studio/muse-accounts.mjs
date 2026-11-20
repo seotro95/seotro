@@ -40,7 +40,7 @@ export class MuseAccounts {
   }
   async requestConcurrency(count) {
     if(!isLaneCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 10 ô mỗi tài khoản.',400);
-    await mkdir(this.profileRoot,{recursive:true,mode:0o700});const file=path.join(this.profileRoot,'single-concurrency.json');await writeFile(file+'.tmp',JSON.stringify(count),{mode:0o600});await rename(file+'.tmp',file);this.preferredConcurrency=count;
+    const saved=(this.preferenceSave||Promise.resolve()).catch(()=>{}).then(async()=>{await mkdir(this.profileRoot,{recursive:true,mode:0o700});const file=path.join(this.profileRoot,'single-concurrency.json');await writeFile(file+'.tmp',JSON.stringify(count),{mode:0o600});await rename(file+'.tmp',file);this.preferredConcurrency=count;});this.preferenceSave=saved;await saved;
   }
   async setConcurrency(count,signal,id=1) {
     this.validateId(id);this.singleId=id;

@@ -62,3 +62,6 @@
 .scene-observation { font-size: 11px; color: #adc6f0; padding: 8px 0; }
 .scene-observation p { margin: 0 0 6px; }
 .scene-observation pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 150px; overflow: auto; user-select: text; }
+
+/* Keep large workspaces in the DOM; skip offscreen layout/painting. */
+.scene-card { content-visibility: auto; contain-intrinsic-size: auto 920px; }

@@ -7,6 +7,7 @@ import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { readMuseBalance } from './muse-balance.mjs';
 import {replyProblem,replyPreview} from './muse-reply.mjs';
+import{mediaQueue}from'./media-queue.mjs';
 
 // Public UI selectors observed in community Muse clients, not an official SDK.
 // Muse retains a prehydration textarea before its hydrated rich editor. It may
@@ -332,6 +333,9 @@ export class MuseBrowser {
     if(count===1){this.concurrencyProbe.state='ready';return {executionConcurrency:1,message:'Đã chọn một ô chạy lần lượt.'}}
     await this.open();await this.refreshActive();
     if(!this.account(1).authenticated)throw fail('MUSE_LOGIN_REQUIRED','Đăng nhập Muse và kiểm tra phiên trước khi bật song song.',401);
+    // A verified single-chat page without New chat cannot provide independent
+    // worker conversations. Avoid opening four redundant copies per account.
+    if(!await this.newChatControl(this.active.page)){this.concurrencyProbe.state='unavailable';throw Object.assign(fail('MUSE_PARALLEL_UNVERIFIED','Trang hiện tại dùng một cuộc trò chuyện; chuyển sang gửi trong cùng chat.',409),{parallelReason:'MUSE_NEW_CHAT_UNAVAILABLE'})}
     const owned=this.active;const pages=new Set();const lanes=[];let next=0;let failure;
     const stop=()=>{for(const page of pages)void(owned.destroyWorkerPage?owned.destroyWorkerPage(page):page.close()).catch(()=>{})};
     signal.addEventListener('abort',stop,{once:true});
@@ -699,7 +703,8 @@ export class MuseBrowser {
       if(completed)return;await pause(100);
     }
   }
-  async downloadMedia(page,media,output,signal){
+  async downloadMedia(page,media,output,signal){return mediaQueue.run(()=>this.downloadMediaNow(page,media,output,signal),signal)}
+  async downloadMediaNow(page,media,output,signal){
           const downloadKey=`__studio_download_${randomUUID().replaceAll('-','')}`;
           signal.throwIfAborted();
           const abortDownload=()=>{void page.evaluate(key=>{if(globalThis[key]?.abort)globalThis[key].abort();else globalThis[key]='aborted'},downloadKey).catch(()=>{})};

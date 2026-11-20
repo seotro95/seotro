@@ -59,7 +59,7 @@ const fixture = http.createServer(async (req, res) => {
   if (req.url === '/stop') { state.stops++; return res.end('ok'); }
   if (req.url?.startsWith('/asset-file?')) { res.setHeader('Content-Type','image/png'); return res.end(image); }
   if (req.url?.endsWith('.png')) { (state.assetCookies||=[]).push(req.headers.cookie||''); res.setHeader('Content-Type', state.assetImageMime || 'image/png'); return res.end(state.assetImageBytes || image); }
-  if (req.url?.endsWith('.mp4')) { res.setHeader('Content-Type', 'video/mp4'); return res.end(state.assetVideoBytes||clip); }
+  if (req.url?.endsWith('.mp4')) { res.setHeader('Content-Type', 'video/mp4'); if(state.uniqueVideos){const request=state.submitted.find(row=>row.fileToken&&req.url.includes(row.fileToken));const box=Buffer.alloc(12);box.writeUInt32BE(12,0);box.write('free',4);box.writeUInt32BE(request?.id||0,8);return res.end(Buffer.concat([clip,box]));}return res.end(state.assetVideoBytes||clip); }
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   const requestPath = new URL(req.url, 'http://127.0.0.1').pathname;
   if(req.headers['sec-fetch-dest']==='document')state.pageLoads=(state.pageLoads||0)+1;

@@ -6,6 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { openBrowser } from './browser.mjs';
 import { MuseAccounts } from './muse-accounts.mjs';
+import{mediaQueue}from'./media-queue.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 if (existsSync(path.join(ROOT, '.env'))) process.loadEnvFile(path.join(ROOT, '.env'));
@@ -18,6 +19,7 @@ const muse = transport === 'browser' ? museDriver || await new MuseAccounts({ ac
 const MAX_BODY = 12 * 1024 * 1024;
 let activeRequests = 0;
 let accountBusy = false;
+const preparingAccounts=new Set();
 const maxConcurrency = MAX_SLOTS;
 const vite = dev ? await (await import('vite')).createServer({ root: ROOT, server: { middlewareMode: true, hmr: false } }) : null;
 const json = (res, status, value) => { if (!res.destroyed) { res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(value)); } };
@@ -86,8 +88,8 @@ async function callAdapter(endpoint, data, signal) {
 }
 async function api(req, res, pathname) {
   if (req.method === 'GET' && pathname === '/api/status') {
-    if (muse && !activeRequests && !accountBusy&&!muse.restoring) await muse.refreshActive({ background: true });
-    return json(res, 200, {version:appVersion, museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, ...(muse ? {restoringSessions:Boolean(muse.restoring), executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), ...(muse?.supportsMultiAccount ? {multiAccount:true, executionAccountId:muse.singleId??1, preferredConcurrency:muse.preferredConcurrency,concurrencyWarning:muse.concurrencyWarning,concurrencyProbe:muse.driver?.(muse.singleId??1).concurrencyProbe} : {}), embeddedLogin, credit: null, gpu: null });
+    if (muse && !activeRequests && !accountBusy&&!preparingAccounts.size&&!muse.restoring) await muse.refreshActive({ background: true });
+    return json(res, 200, {version:appVersion, museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy || preparingAccounts.size>0, activeRequests, maxConcurrency, ...(muse ? {preparingAccounts:[...preparingAccounts],mediaTransfers:mediaQueue.snapshot(),restoringSessions:Boolean(muse.restoring), executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), ...(muse?.supportsMultiAccount ? {multiAccount:true, executionAccountId:muse.singleId??1, preferredConcurrency:muse.preferredConcurrency,concurrencyWarning:muse.concurrencyWarning,concurrencyProbe:muse.driver?.(muse.singleId??1).concurrencyProbe} : {}), embeddedLogin, credit: null, gpu: null });
   }
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
@@ -97,6 +99,7 @@ async function api(req, res, pathname) {
   if (!['/api/video', '/api/image', '/api/text'].includes(pathname) && !accountRoute && !legacyAccountRoute) return json(res, 404, { error: 'API không tồn tại.' });
   let acquired = false;
   let accountAcquired = false;
+  let preparingAccountId=null;
   const abort = new AbortController();
   res.on('close', () => abort.abort());
   const timeout = setTimeout(() => abort.abort(new Error('TIMEOUT: Hết 10 phút chờ. Yêu cầu đã gửi có thể vẫn được tính phí.')), 10 * 60 * 1000);
@@ -108,9 +111,11 @@ async function api(req, res, pathname) {
       if (!Number.isInteger(accountId) || accountId<1 || accountId>MAX_ACCOUNTS || (!muse?.supportsMultiAccount && accountId!==1)) return json(res,400,{error:'ACCOUNT_INVALID: Tài khoản không hợp lệ.'});
       if (!muse) return json(res, 409, { error: 'Tài khoản đang do adapter riêng quản lý. Chọn MUSE_TRANSPORT=browser để đăng nhập bằng Chrome/Edge.' });
       if(action==='save'){if(!muse.saveSessions)return json(res,409,{error:'Lưu tất cả phiên có trong bản desktop.'});return json(res,200,await muse.saveSessions());}
-      if (activeRequests || accountBusy||muse.restoring) return json(res, 409, { error: 'Đang có tác vụ hoặc khôi phục phiên. Đợi hoàn tất trước khi thay đổi phiên tài khoản.' });
+      const preparing=action==='prepare';
+      if(activeRequests||accountBusy||muse.restoring||(!preparing&&preparingAccounts.size)||preparingAccounts.has(accountId))return json(res,409,{error:'Đang có tác vụ hoặc chuẩn bị phiên. Đợi hoàn tất trước khi thay đổi tài khoản.'});
+      if(preparing&&preparingAccounts.size>=3)return json(res,429,{error:'ACCOUNT_PREPARE_BUSY: Đang chuẩn bị ba tài khoản. Đợi một phiên hoàn tất.'});
       muse.account(accountId);
-      accountBusy = accountAcquired = true;
+      if(preparing){preparingAccounts.add(accountId);preparingAccountId=accountId}else accountBusy=accountAcquired=true;
       if(action==='proxy-ip'){if(!muse.checkProxyIP)return json(res,409,{error:'Kiểm tra IP proxy cần bản desktop.'});const proxy=await muse.checkProxyIP(accountId,abort.signal);return json(res,200,{proxy,accounts:muse.snapshot()})}
       if(action==='proxy'){await muse.setProxy(accountId,data.proxy);return json(res,200,{accounts:muse.snapshot()})}
       if (action === 'prepare') {if(!muse.prepareSingle)return json(res,200,{executionConcurrency:muse.maxConcurrency});return json(res,200,{...await muse.prepareSingle(abort.signal,data.concurrency,accountId,data.retryParallel===true),accounts:muse.snapshot()});}
@@ -126,7 +131,7 @@ async function api(req, res, pathname) {
     validate(data, kind);
     const endpoint = `/${kind}`;
     if (!muse) adapterURL(endpoint);
-    if (accountBusy) return json(res, 409, { error: 'Đang kiểm tra tài khoản Muse. Vui lòng đợi.' });
+    if (accountBusy||preparingAccounts.size) return json(res, 409, { error: 'Đang kiểm tra tài khoản Muse. Vui lòng đợi.' });
     if (activeRequests >= maxConcurrency) return json(res, 429, { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 400 ô AI đang chạy. Đợi một luồng hoàn tất.' });
     activeRequests++; acquired = true;
     const useImage = data.image && (data.characterLock !== false || (kind === 'video' && data.sourceMode === 'image'));
@@ -142,7 +147,7 @@ async function api(req, res, pathname) {
     const metadata = result.metadata && Number.isFinite(result.metadata.width) && Number.isFinite(result.metadata.height) ? result.metadata : undefined;
     return json(res, 200, kind !== 'text' ? { base64: result.base64, mimeType: result.mimeType, ...(metadata ? { metadata } : {}) } : { text: result.text });
   } catch (error) { json(res, Number.isInteger(error.status) && error.status >= 400 && error.status <= 599 ? error.status : 502, { error: safeError(error) }); }
-  finally { clearTimeout(timeout); if (acquired) activeRequests--; if (accountAcquired) accountBusy = false; }
+  finally { clearTimeout(timeout); if (acquired) activeRequests--; if (accountAcquired) accountBusy = false;if(preparingAccountId!==null)preparingAccounts.delete(preparingAccountId); }
 }
 const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.mp4': 'video/mp4', '.png': 'image/png', '.ico': 'image/x-icon' };
 const server = http.createServer(async (req, res) => {
