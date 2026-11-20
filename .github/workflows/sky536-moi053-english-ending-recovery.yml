@@ -1,0 +1,48 @@
+name: Sky 536 MOI053 recover English final phrase preserving 133 cues
+on:
+  push:
+    branches: [codex/sky536-moi053-production-20261120]
+    paths: [.github/workflows/sky536-moi053-english-ending-recovery.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  english_ending:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: sky536-moi053
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python sky536-moi053/extract_content.py
+          python sky536-moi053/extract_voice_inputs.py
+          python sky536-moi053/build_documents.py
+          python sky536-moi053/voice_gate.py
+          python sky536-moi053/english_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python sky536-moi053/ensure_ffmpeg.py
+          python sky536-moi053/bootstrap_tool.py online
+      - uses: actions/download-artifact@v4
+        with:
+          name: sky536-moi053-checkpoint-en-US
+          path: sky536-moi053/voice/audio/en-US
+          run-id: 44761841149
+          github-token: ${{ github.token }}
+      - run: python -u sky536-moi053/recover_english_ending.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sky536-moi053-voice-en-US
+          path: |
+            sky536-moi053/voice/audio/en-US/*.mp3
+            sky536-moi053/voice/audio/en-US/render_report.json
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true
+      - run: gh release upload sky536-moi-053-22m12s sky536-moi053/voice/audio/en-US/*.mp3 --repo seotro95/seotro --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
