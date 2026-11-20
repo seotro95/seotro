@@ -1,0 +1,50 @@
+{
+  "status": "windows_tests_and_uploaded_asset_sha256_verified",
+  "version": "1.13.5",
+  "source_commit": "bf4b8db8bb1117fdfa4e4be0bf310cfd7461de40",
+  "source_branch": "codex/muse-1135-performance",
+  "workflow_run_id": 44806776881,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/44806776881",
+  "workflow_conclusion": "success",
+  "release_id": 453128361,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/untagged-a14ffd022c987a76383d",
+  "draft": true,
+  "zip": {
+    "file": "Muse-AI-Studio-1.13.5-Windows-x64.zip",
+    "bytes": 160777945,
+    "sha256": "befd8c18cad5325988bf28274be161bfedca09618d0f16bda2b150c6383fed7a",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-a14ffd022c987a76383d/Muse-AI-Studio-1.13.5-Windows-x64.zip"
+  },
+  "checksum_file": {
+    "file": "Muse-AI-Studio-1.13.5-Windows-x64.zip.sha256",
+    "bytes": 105,
+    "sha256": "79e6397697640e05e9315a6b46b616f582a4fa293f42fa25cce0eb2230807655",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-a14ffd022c987a76383d/Muse-AI-Studio-1.13.5-Windows-x64.zip.sha256"
+  },
+  "validation": {
+    "windows_ui_checks": 24,
+    "electron_desktop_checks": 8,
+    "throughput_fixture": {
+      "accounts": 12,
+      "lanesPerAccount": 6,
+      "submittedBeforeAnyResult": 72,
+      "pages": 12,
+      "extraWorkerPages": 0,
+      "preparationMs": 3045,
+      "submissionMs": 6820,
+      "downloadConcurrency": 6
+    },
+    "exact_attribution": "72 unique valid MP4 byte sequences returned in reversed completion order match their original scenes across 12 isolated account sessions.",
+    "preparation": "At most three accounts prepared concurrently; per-account duplicate preparation, generation during preparation, and session mutations protected; preference writes serialized.",
+    "probe_recovery": "Slow sibling page creation settles before any probe closes; unauthenticated worker sessions fall back and complete all ten scenes sequentially on Windows.",
+    "direct_concurrency": "Explicit worker checks still refresh service-created conversations, detect shared histories, preserve ten independent requests and isolate cancellation.",
+    "resource_limits": "Only twelve pages for twelve shared-chat accounts; no extra worker pages. Six download/decoder slots are independent from remote generation capacity. Offscreen cards retained in DOM; lazy images; video preload none.",
+    "media_recovery": "Native image/player sources preferred over invalid sandbox links; source child read; extensionless real downloads retained; account-session download recovers deliberately broken page fetch; unsupported media-only links report a concrete error.",
+    "replies": "Completed unlabelled confirmations/refusals do not wait to the generation timeout; active generation acknowledgements retained. Reply preview and status TXT available while running; URLs and emails redacted.",
+    "packaged_executable": "Standalone EXE startup; ten overlapping images despite deliberately failing loopback global fetch; saved directories, numbering and exact TXT names persist after restart; ten shared-chat videos with six simultaneous generations; explicit concurrency rejection completes all ten serially; native media fetch recovery rerun on packaged EXE.",
+    "preserved_features": "All TXT/SRT prompts and names, account choices and overrides, individual proxies/IP, session persistence, image-to-video, cancellation and renderer recovery.",
+    "live_muse_account_render_tested": false,
+    "limitation": "All automated generation tests use fixture service and no real Muse credits. Original video report did not contain verbatim Muse reply; exact service-side reason for no video remains unconfirmed."
+  },
+  "verified_at_utc": "2026-11-20T20:05:56Z"
+}
