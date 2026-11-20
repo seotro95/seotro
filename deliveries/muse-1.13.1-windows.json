@@ -1,0 +1,40 @@
+{
+  "status": "windows_tests_and_uploaded_asset_sha256_verified",
+  "version": "1.13.1",
+  "source_commit": "06bd1f1b0aea2ae71db4345d78cbcee88ea537de",
+  "source_branch": "codex/muse-1131-parallel-start",
+  "workflow_run_id": 44778816239,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/44778816239",
+  "workflow_conclusion": "success",
+  "release_id": 452963989,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/untagged-0f856b75fdcb89d635db",
+  "draft": true,
+  "zip": {
+    "file": "Muse-AI-Studio-1.13.1-Windows-x64.zip",
+    "bytes": 160756277,
+    "sha256": "c6156dfbdeb1aed3fc52046268c80f80366ef0fb3efe04cd074165796e18e19d",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-0f856b75fdcb89d635db/Muse-AI-Studio-1.13.1-Windows-x64.zip"
+  },
+  "checksum_file": {
+    "file": "Muse-AI-Studio-1.13.1-Windows-x64.zip.sha256",
+    "bytes": 105,
+    "sha256": "3b2abdd974c92999f524ecc54333d665b40753c777d407d18ba852a5958a0118",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-0f856b75fdcb89d635db/Muse-AI-Studio-1.13.1-Windows-x64.zip.sha256"
+  },
+  "validation": {
+    "windows_ui_checks": 21,
+    "real_browser_bridge": "Six video submissions on one account before any result; delayed sixth editor prevents early Enter; draft, hash and iframe contexts; per-account cohorts; no silent serial fallback",
+    "windows_six_request_submission_span_ms": {
+      "draft": 8,
+      "hash": 9,
+      "iframe": 7
+    },
+    "shared_chat_safety": "Shared live history detected without assigning another scene's result or automatically retrying",
+    "desktop_source": "Ten overlapping image and image-to-video workers; independent cancellation; session restore; startup recovery",
+    "packaged_executable": "Ten simultaneous fixture image jobs, restart/counter persistence, Unicode filenames, native folder export, all ten compact bracket headings imported and exported with exact names",
+    "supplied_txt": "Troaimusic.txt: all ten names and prompts preserved in order; former character dossier: all twenty named render prompts retained",
+    "electron_proxy": "Two authenticated fixture proxies return distinct IPs without session cookies",
+    "live_muse_account_render_tested": false
+  },
+  "verified_at_utc": "2026-11-20T17:04:19Z"
+}
