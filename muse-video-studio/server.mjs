@@ -38,6 +38,7 @@ function validate(data, kind) {
   if (data.batchId !== undefined || data.sceneId !== undefined) {
     if (typeof data.batchId !== 'string' || !/^[a-f0-9-]{36}$/i.test(data.batchId) || !Number.isInteger(data.sceneId) || data.sceneId < 1 || data.sceneId > MAX_SLOTS) invalid('Bộ yêu cầu hoặc số cảnh không hợp lệ.');
   }
+  if(data.submissionGroup!==undefined&&(!data.submissionGroup||typeof data.submissionGroup.id!=='string'||! /^[a-f0-9-]{36}$/i.test(data.submissionGroup.id)||!Number.isInteger(data.submissionGroup.size)||data.submissionGroup.size<1||data.submissionGroup.size>10||!data.batchId))invalid('Nhóm gửi đồng thời không hợp lệ.');
   if (kind === 'text') return;
   if (!['16:9', '9:16'].includes(data.aspectRatio)) invalid('Tỉ lệ khung hình không hợp lệ.');
   if (kind === 'video') {
@@ -128,7 +129,7 @@ async function api(req, res, pathname) {
     if (activeRequests >= maxConcurrency) return json(res, 429, { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 400 ô AI đang chạy. Đợi một luồng hoàn tất.' });
     activeRequests++; acquired = true;
     const useImage = data.image && (data.characterLock !== false || (kind === 'video' && data.sourceMode === 'image'));
-    const payload = { accountId: data.accountId, ...(muse ? {accountMode: data.accountMode || 'single'} : {}), prompt: data.prompt, ...(muse && data.batchId ? { batchId: data.batchId, sceneId: data.sceneId } : {}),
+    const payload = { accountId: data.accountId, ...(muse ? {accountMode: data.accountMode || 'single'} : {}), prompt: data.prompt, ...(muse && data.batchId ? { batchId: data.batchId, sceneId: data.sceneId,submissionGroup:data.submissionGroup } : {}),
       ...(kind !== 'text' ? { aspectRatio: data.aspectRatio, resolution: data.resolution, characterLock: data.characterLock !== false,
         referenceImage: useImage ? { base64: data.image.imageBytes, mimeType: data.image.mimeType } : undefined } : {}),
       ...(kind === 'video' ? { modelDisplayName: data.model, durationSeconds: data.duration, sourceMode: data.sourceMode || 'text' } : {})

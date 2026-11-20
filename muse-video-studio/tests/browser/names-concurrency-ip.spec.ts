@@ -57,3 +57,32 @@ test('different account limits submit exactly two and four simultaneous videos o
  await page.getByRole('button',{name:'TẠO 6 VIDEO',exact:true}).click();await expect.poll(()=>calls.length).toBe(6);expect(calls.filter(x=>x.accountId===1)).toHaveLength(2);expect(calls.filter(x=>x.accountId===2)).toHaveLength(4);expect(prepares).toEqual([{accountId:1,concurrency:2},{accountId:2,concurrency:4}]);
  await Promise.all(release.map(fn=>fn()));await expect(page.locator('.scene-card video')).toHaveCount(6);
 });
+
+test('ten mixed bracket headings import in order, display names on every card and retain exact names in image/video downloads',async({page})=>{
+ await mockFolderPicker(page.context());
+ await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'adapter',accounts:[],maxConcurrency:400}}));
+ await page.route('**/api/image',route=>route.fulfill({json:{base64:image,mimeType:'image/png'}}));
+ await page.route('**/api/video',route=>route.fulfill({json:{base64:video,mimeType:'video/mp4'}}));
+ const names=['nam','thái','nga','thang','hoang','thu','thao','tuan','phang','phu'];
+ const headings=[' [1] nam ',' [2] thái',' [3] nga',' [4]thang',' [5] hoang',' [6] thu',' [7]  thao',' [8]tuan',' [ 9 ] phang','[10]phu '];
+ const sections=headings.map((heading,i)=>`${heading}\nFull prompt ${i+1}.\nSecond line ${i+1}.`);
+ await page.goto('/');await page.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();
+ await page.getByRole('button',{name:'Nhập TXT / SRT',exact:true}).click();
+ await page.locator('input[type=file][accept=".txt,.srt"]').setInputFiles({name:'Troaimusic.txt',mimeType:'text/plain',buffer:Buffer.from(sections.join('\r\n'))});
+ await expect(page.locator('.script-preview>div')).toHaveCount(10);await expect(page.locator('.script-entry-name')).toHaveText(names);
+ await page.getByRole('button',{name:'Nạp vào Studio',exact:true}).click();
+ for(const [i,name]of names.entries()){
+  await expect(page.getByLabel(`Tên tệp cảnh ${i+1}`,{exact:true})).toHaveValue(name);
+  await expect(page.getByLabel(`Kịch bản cảnh ${i+1}`,{exact:true})).toHaveValue(`Full prompt ${i+1}.\nSecond line ${i+1}.`);
+ }
+ await expect(page.locator('.scene-title')).toHaveText(names.map((name,i)=>`[${i+1}] ${name}`));
+ await page.getByRole('button',{name:'TẠO 10 ẢNH',exact:true}).click();await expect(page.locator('.generated-image')).toHaveCount(10);
+ await page.getByRole('button',{name:'Tải tất cả (10/10)',exact:true}).click();await expect.poll(async()=>(await exportedFolders(page))[0]?.files.map(f=>f.name)).toEqual(names.map(name=>name+'.png'));
+ await page.reload();await expect(page.locator('.scene-title')).toHaveText(names.map((name,i)=>`[${i+1}] ${name}`));
+ await page.getByRole('button',{name:'Tạo video',exact:true}).click();await page.getByRole('button',{name:'Nhập TXT / SRT',exact:true}).click();
+ const srt=sections.map((section,i)=>`${i+1}\n00:00:${String(i).padStart(2,'0')},000 --> 00:00:${String(i+1).padStart(2,'0')},000\n${section}`).join('\n\n');
+ await page.locator('input[type=file][accept=".txt,.srt"]').setInputFiles({name:'titles.srt',mimeType:'application/x-subrip',buffer:Buffer.from(srt)});await expect(page.locator('.script-entry-name')).toHaveText(names);await page.getByRole('button',{name:'Nạp vào Studio',exact:true}).click();
+ await page.getByRole('button',{name:'TẠO 10 VIDEO',exact:true}).click();await expect(page.locator('.scene-card video')).toHaveCount(10);
+ await page.getByRole('button',{name:'Tải tất cả (10/10)',exact:true}).click();await expect.poll(async()=>(await exportedFolders(page))[0]?.files.map(f=>f.name)).toEqual(names.map(name=>name+'.mp4'));
+ const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'Tải cảnh 8',exact:true}).click();expect((await downloaded).suggestedFilename()).toBe('tuan.mp4');
+});

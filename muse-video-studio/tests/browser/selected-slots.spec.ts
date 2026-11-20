@@ -52,5 +52,5 @@ test('parallel-ten action sends no prompt if ten independent conversations canno
  await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'browser',multiAccount:true,accounts,executionConcurrency:1}}));
  await page.route('**/api/account/prepare',route=>route.fulfill({json:{executionConcurrency:1,preferredConcurrency:10,concurrencyWarning:'Shared conversation only'}}));
  let calls=0;await page.route('**/api/video',route=>{calls++;return route.fulfill({status:500,json:{error:'Unexpected submission'}})});
- await page.goto('/');await page.getByRole('button',{name:'TẠO SONG SONG 10 Ô',exact:true}).click();await expect(page.getByText('mới xác minh 1/10 hội thoại',{exact:false})).toBeVisible();expect(calls).toBe(0);await expect(page.locator('.status-badge.running')).toHaveCount(0);
+ await page.goto('/');await page.getByRole('button',{name:'TẠO SONG SONG 10 Ô',exact:true}).click();await expect(page.getByText('mới chuẩn bị 1/10 ô',{exact:false})).toBeVisible();expect(calls).toBe(0);await expect(page.locator('.status-badge.running')).toHaveCount(0);
 });

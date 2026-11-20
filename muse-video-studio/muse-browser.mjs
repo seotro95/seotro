@@ -1,4 +1,5 @@
 import {MAX_SLOTS,MAX_ACCOUNT_LANES,isLaneCount} from './limits.mjs';
+import {SubmitGroups} from './submit-groups.mjs';
 import { chromium } from 'playwright-core';
 import { existsSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
@@ -61,6 +62,7 @@ export class MuseBrowser {
     this.unsafeMarkers = new Set();
     this.imageBatches = new Map();
     this.parallelRoutes = [];
+    this.submitGroups=new SubmitGroups();
     this.pendingCaptions=new Set();
     this.active = null;
     this.profilePath = accountProfile || path.join(this.profileRoot, 'slot-01');
@@ -75,6 +77,7 @@ export class MuseBrowser {
   snapshot() { return this.accounts.map(a => ({ ...a, active: this.active?.id === a.id })); }
   progress() { return [...this.workerStages.values()].map(stage => ({ ...stage })); }
   async close() {
+    this.submitGroups.clear();
     const active = this.active;
     this.active = null;
     if (active) {
@@ -285,47 +288,61 @@ export class MuseBrowser {
   workerURL() {
     // Use the user's verified app route, rather than sending every worker back
     // to a marketing/landing page. OAuth query parameters are never copied.
-    const current = new URL(this.active.page.url());
-    const service = new URL(this.serviceURL);
-    return current.origin === service.origin && !/\/(?:auth|oauth|login|signin|callback)(?:\/|$)/i.test(current.pathname)
-      ? new URL(current.pathname, service.origin).href : this.serviceURL;
+    return this.conversationURL(this.active.page)||this.serviceURL;
   }
+  async createWorkerPage(){
+    const owned=this.active;
+    const origin=new URL(this.serviceURL).origin;
+    const storage=await owned.page.evaluate(origin=>location.origin===origin?Object.fromEntries(Object.entries(sessionStorage)): {},origin).catch(()=>({}));
+    const page=owned.createWorkerPage?await owned.createWorkerPage():await owned.context.newPage();
+    await page.addInitScript(({origin,storage})=>{if(location.origin===origin)for(const [key,value]of Object.entries(storage))if(typeof value==='string'&&sessionStorage.getItem(key)===null)sessionStorage.setItem(key,value)},{origin,storage});
+    return page;
+  }
+  async closePreparedPages(){
+    const owned=this.active;const lanes=this.parallelRoutes;this.parallelRoutes=[];
+    await Promise.allSettled(lanes.filter(lane=>lane.page&&!lane.page.isClosed()).map(lane=>owned?.destroyWorkerPage?owned.destroyWorkerPage(lane.page):lane.page.close()));
+  }
+  get parallelReady(){return this.maxConcurrency===1||this.parallelRoutes.length===this.maxConcurrency&&this.parallelRoutes.every(lane=>lane.page&&!lane.page.isClosed())}
+  async freshConversation(page,signal){
+    const entry=await this.newChatControl(page);
+    if(!entry)throw fail('MUSE_PARALLEL_UNVERIFIED','Chưa mở được New chat riêng cho từng ô. Không tự đổi sang chạy lần lượt.',409);
+    signal.throwIfAborted();await entry.click({timeout:5000});
+    const editor=await this.waitForComposer(page);const handle=await editor.elementHandle();let frame;
+    try{frame=await handle.ownerFrame()}finally{await handle.dispose()}
+    if(!frame)throw fail('MUSE_COMPOSER_NOT_READY','Chưa tìm được khung soạn cho ô riêng.',409);
+    await frame.waitForFunction(selector=>!document.querySelectorAll(selector).length,`${MESSAGES}[data-message-role="user"]`,{timeout:10000});
+    if((await this.editorText(editor)).trim()||await frame.locator(STOP).first().isVisible().catch(()=>false))throw fail('MUSE_PARALLEL_UNVERIFIED','Hội thoại mới chưa trống hoặc vẫn có lượt khác. Chưa gửi prompt.',409);
+    return frame;
+  }
+
   conversationURL(page) {
     const url = new URL(page.url());
     if (url.origin !== new URL(this.serviceURL).origin || url.username || url.password || /\/(?:auth|oauth|login|signin|callback)(?:\/|$)/i.test(url.pathname)) return null;
-    url.hash = '';
+    if(/[?&#](?:access_token|id_token|code|state)=/i.test(url.search+url.hash))return null;
     return url.href;
   }
   async setConcurrency(count, signal) {
     if(!isLaneCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 10 ô mỗi tài khoản.',400);
     if(this.reserved||this.workers.size)throw fail('MUSE_CHAT_BUSY','Đợi các cảnh hoàn tất trước khi đổi số luồng.',409);
-    this.maxConcurrency=1;this.parallelRoutes=[];this.concurrencyProbe={requested:count,checked:0,state:'checking'};
-    if(count===1){this.concurrencyProbe.state='ready';return {executionConcurrency:1,message:'Đã chọn một luồng. Các cảnh được xử lý lần lượt.'};}
+    await this.closePreparedPages();this.maxConcurrency=1;this.concurrencyProbe={requested:count,checked:0,state:'checking'};
+    if(count===1){this.concurrencyProbe.state='ready';return {executionConcurrency:1,message:'Đã chọn một ô chạy lần lượt.'}}
     await this.open();await this.refreshActive();
     if(!this.account(1).authenticated)throw fail('MUSE_LOGIN_REQUIRED','Đăng nhập Muse và kiểm tra phiên trước khi bật song song.',401);
-    const owned=this.active;const pages=new Set();const routes=new Set();let next=0;let failure;
+    const owned=this.active;const pages=new Set();const lanes=[];let next=0;let failure;
     const stop=()=>{for(const page of pages)void(owned.destroyWorkerPage?owned.destroyWorkerPage(page):page.close()).catch(()=>{})};
     signal.addEventListener('abort',stop,{once:true});
     const probe=async()=>{while(!failure&&next<count){next++;let page;try{
-      signal.throwIfAborted();page=owned.createWorkerPage?await owned.createWorkerPage():await owned.context.newPage();pages.add(page);
+      signal.throwIfAborted();page=await this.createWorkerPage();pages.add(page);
       await page.goto(this.workerURL(),{waitUntil:'domcontentloaded',timeout:45000});
       if(!this.conversationURL(page)||!await this.authenticated(page))throw fail('MUSE_LOGIN_REQUIRED','Chưa xác minh được phiên trong trang luồng riêng.',401);
-      const before=this.conversationURL(page);const entry=await this.newChatControl(page);
-      if(!entry)throw fail('MUSE_PARALLEL_UNVERIFIED','Muse hiện không có nút mở hội thoại riêng. Chưa gửi prompt tạo nội dung.',409);
-      await entry.click({timeout:5000});
-      await page.waitForURL(url=>{url.hash='';return url.origin===new URL(this.serviceURL).origin&&url.href!==before},{timeout:5000}).catch(()=>{throw fail('MUSE_PARALLEL_UNVERIFIED','New chat chưa cung cấp địa chỉ hội thoại riêng. Chưa gửi prompt tạo nội dung.',409)});
-      const route=this.conversationURL(page);const editor=await this.waitForComposer(page);const handle=await editor.elementHandle();let frame;
-      try{frame=await handle.ownerFrame()}finally{await handle.dispose()}
-      if(!route||routes.has(route)||(frame&&await frame.locator(`${MESSAGES}[data-message-role="user"]`).count()))throw fail('MUSE_PARALLEL_UNVERIFIED','Các trang chưa có hội thoại trống độc lập. Chưa gửi prompt tạo nội dung.',409);
-      routes.add(route);await page.goto(route,{waitUntil:'domcontentloaded',timeout:45000});await this.waitForComposer(page);
-      if(this.conversationURL(page)!==route)throw fail('MUSE_PARALLEL_UNVERIFIED','Muse không giữ địa chỉ hội thoại riêng sau khi mở lại. Chưa gửi prompt tạo nội dung.',409);
-      this.concurrencyProbe.checked++;
-    }catch(error){if(!failure)failure=error;stop();}finally{if(page){await(owned.destroyWorkerPage?owned.destroyWorkerPage(page):page.close()).catch(()=>{});pages.delete(page)}}}};
+      await this.freshConversation(page,signal);
+      lanes.push({page,url:this.conversationURL(page),busy:false});this.concurrencyProbe.checked++;
+    }catch(error){if(!failure)failure=error;stop()}}};
     try{
       await Promise.all(Array.from({length:Math.min(4,count)},probe));if(failure)throw failure;signal.throwIfAborted();
-      this.parallelRoutes=[...routes].map(url=>({url,busy:false}));this.maxConcurrency=count;this.concurrencyProbe.state='ready';
-      return {executionConcurrency:count,message:`Đã kiểm tra ${count} địa chỉ hội thoại riêng và bật tối đa ${count} luồng. Muse vẫn quyết định hạn mức và thời gian xử lý.`};
-    }catch(error){this.concurrencyProbe.state='unavailable';throw error}finally{signal.removeEventListener('abort',stop);await Promise.allSettled([...pages].map(page=>owned.destroyWorkerPage?owned.destroyWorkerPage(page):page.close()))}
+      this.parallelRoutes=lanes;this.maxConcurrency=count;this.concurrencyProbe.state='ready';
+      return {executionConcurrency:count,message:`Đã chuẩn bị sẵn ${count} trang Muse riêng; các ô gửi cùng lượt sau khi nhập đủ prompt. Không đợi kết quả ô trước.`};
+    }catch(error){stop();this.concurrencyProbe.state='unavailable';throw error}finally{signal.removeEventListener('abort',stop)}
   }
   async composerDiagnostics(page) {
     const frames = page.frames ? page.frames() : [page];
@@ -430,13 +447,16 @@ export class MuseBrowser {
   }
   async turn(data) {
     this.requireSingleAccount(data.accountId);
-    if (this.reserved >= MAX_SLOTS) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã có 40 cảnh đang xử lý hoặc chờ.', 429);
+    if (this.reserved >= MAX_SLOTS) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã có 400 cảnh đang xử lý hoặc chờ.', 429);
+    if(data.submissionGroup?.size>this.maxConcurrency)throw fail('MUSE_PARALLEL_UNVERIFIED','Số ô cùng lượt vượt số trang Muse đã chuẩn bị. Chưa gửi prompt.',409);
+    const submitBarrier=this.submitGroups.register(data.submissionGroup,data.batchId,data.sceneId,data.signal);
     this.reserved++;
     let release;
-    try { release = await this.takeTurn(data.signal); return await this.executeTurn(data); }
+    try { release = await this.takeTurn(data.signal); return await this.executeTurn({...data,submitBarrier}); }
+    catch(error){if(!data.signal.aborted)submitBarrier?.fail(error);throw error}
     finally { release?.(); this.reserved--; }
   }
-  async executeTurn({ accountId, prompt, image, video, output = video ? 'video' : 'text', signal, checkOnly = false, batchId, sceneId, singleLane = false }) {
+  async executeTurn({ accountId, prompt, image, video, output = video ? 'video' : 'text', signal, checkOnly = false, batchId, sceneId, singleLane = false, submitBarrier }) {
     this.requireSingleAccount(accountId);
     if (this.workers.size >= MAX_ACCOUNT_LANES) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã chạy đủ 10 ô trên tài khoản Muse.', 429);
     const key = randomUUID();
@@ -465,18 +485,13 @@ export class MuseBrowser {
         throw fail(code, account.connectionMessage || 'Đăng nhập tài khoản Muse trong tool, rồi bấm Kiểm tra phiên.', code === 'MUSE_LOGIN_REQUIRED' ? 401 : 503);
       }
       signal.throwIfAborted();
-      // In multiple-account mode the pool already grants exactly one lease per
-      // account. Reuse that account's hydrated tab and sessionStorage instead of
-      // booting another full Muse app and repeating auth for every render.
       reuseLogin=singleLane&&!owned.page.isClosed()&&new URL(owned.page.url()).origin===new URL(this.serviceURL).origin;
-      progress.phase=reuseLogin?'waiting-editor':'opening-page';
-      page = reuseLogin?owned.page:owned.createWorkerPage ? await owned.createWorkerPage() : await owned.context.newPage();
-      this.workers.set(key, page);
-      signal.throwIfAborted();
-      if(!reuseLogin)await page.goto(lease?.url || this.workerURL(), { waitUntil: 'domcontentloaded', timeout: 45000 });
-      if (lease && this.conversationURL(page) !== lease.url) {
-        this.maxConcurrency = 1; this.parallelRoutes = [];
-        throw fail('MUSE_PARALLEL_UNVERIFIED', 'Muse chuyển hội thoại sang địa chỉ khác. Đã về một luồng; chưa gửi prompt của cảnh này.', 409);
+      progress.phase='opening-page';
+      page=reuseLogin?owned.page:lease?.page&&!lease.page.isClosed()?lease.page:await this.createWorkerPage();
+      this.workers.set(key,page);signal.throwIfAborted();
+      if(!reuseLogin&&page.url().startsWith('about:blank')){
+        await page.goto(this.workerURL(),{waitUntil:'domcontentloaded',timeout:45000});
+        if(lease)await this.freshConversation(page,signal);
       }
       if (new URL(page.url()).origin !== new URL(this.serviceURL).origin) throw fail('MUSE_WORKSPACE_ORIGIN', 'Trang luồng chuyển sang miền khác Muse. Chưa nhập hoặc gửi prompt. Hoàn tất đăng nhập trong tab Muse rồi kiểm tra lại phiên.', 409);
       const workerProbe = reuseLogin?{authenticated:true}:await this.inspectAuthentication(page);
@@ -484,7 +499,7 @@ export class MuseBrowser {
         Object.assign(this.account(accountId), { authenticated: false, sessionAuthenticated: false, composerReady: false, state: workerProbe.state, connectionMessage: workerProbe.message });
         throw fail(workerProbe.state === 'check_failed' ? 'MUSE_SESSION_CHECK_FAILED' : 'MUSE_LOGIN_REQUIRED', workerProbe.message, workerProbe.state === 'check_failed' ? 503 : 401);
       }
-      const conversationKey=this.conversationURL(page)||this.workerURL();
+      const conversationKey=page;
       if(this.pendingCaptions.has(conversationKey)){
         progress.phase='waiting-provider';const deadline=Date.now()+this.timeoutMs;
         for(;;){signal.throwIfAborted();let pending=false;for(const frame of await this.composerFrames(page))if(await frame.locator(STOP).first().isVisible().catch(()=>false)){pending=true;break}if(!pending)break;if(Date.now()>=deadline)throw fail('MUSE_CHAT_BUSY','Muse còn xử lý lượt trước. Video trước đã được lưu; chưa gửi prompt mới.',409);await pause(250,signal)}
@@ -495,7 +510,7 @@ export class MuseBrowser {
       signal.throwIfAborted();
       if (await conversation.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
       if (checkOnly) return { ready: true, message: 'Đã mở được ô Message trong trang luồng riêng. Chưa gửi prompt hoặc yêu cầu tạo nội dung.', details: await this.composerDiagnostics(page) };
-      const result = await this.sendTurn({ page: conversation, prompt, image, output, signal, onSubmit: () => { sending = true; progress.phase = 'sending'; }, onStage: phase => { progress.phase = phase; if (phase === 'submitted') progress.submitted = true; } });
+      const result = await this.sendTurn({ page: conversation, prompt, image, output, signal, onSubmit: () => { sending = true; progress.phase = 'sending';progress.sentAt=Date.now(); }, beforeSubmit:submitBarrier?()=>submitBarrier.ready():undefined,onStage: phase => { progress.phase = phase; if (phase === 'submitted'){progress.submitted = true;progress.submittedAt=Date.now();} } });
       if(result.captionPending)this.pendingCaptions.add(conversationKey);
       if (output === 'image' && batchId && sceneId && result.fingerprint) {
         let batch = this.imageBatches.get(batchId);
@@ -515,7 +530,8 @@ export class MuseBrowser {
       signal.removeEventListener('abort', cancelled);
       if (page&&!reuseLogin) await (owned?.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()).catch(() => {});
       this.workers.delete(key);
-      if (lease) lease.busy = false;
+      if (lease) {lease.busy = false;lease.page=null;}
+      if(page&&!reuseLogin)this.pendingCaptions.delete(page);
     }
   }
   async checkComposer(signal) { return this.turn({ accountId: 1, checkOnly: true, signal }); }
@@ -548,7 +564,7 @@ export class MuseBrowser {
     }
     throw fail('MUSE_EDITOR_CHANGED', 'Muse đổi ô nhập nhưng chưa giữ đủ prompt. Chưa nhấn gửi. Kiểm tra cuộc trò chuyện rồi thử lại.', 409);
   }
-  async sendTurn({ page, prompt, image, output, signal, onSubmit, onStage = () => {} }) {
+  async sendTurn({ page, prompt, image, output, signal, onSubmit, beforeSubmit, onStage = () => {} }) {
     let editor = await this.findComposer(page) || await this.initialComposer(page) || await this.waitForComposer(page);
     if ((await editor.innerText().catch(() => '')).trim() || (await editor.inputValue().catch(() => '')).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có nội dung chưa gửi. Gửi hoặc xóa bản nháp đó trước; tool không ghi đè.', 409);
     if (await editor.locator('xpath=ancestor::*[@data-hatch-composer-root or self::form][1]').locator('img[src^="blob:"]:not([data-message-item] *)').count()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có ảnh chưa gửi. Xử lý bản nháp đó trước; tool không gửi kèm ảnh cũ.', 409);
@@ -558,6 +574,7 @@ export class MuseBrowser {
     const message = `${prompt}\n\n[Request marker: ${marker}. Do not include this marker in your reply.]`;
     editor = await this.writeMessage(page, message, signal);
     signal.throwIfAborted();
+    if(beforeSubmit){onStage('waiting-cohort');await beforeSubmit();signal.throwIfAborted();}
     onSubmit();
     this.inFlightMarkers.add(marker);
     const deadline = Date.now() + this.timeoutMs;
@@ -591,7 +608,7 @@ export class MuseBrowser {
         if (result.shared || (result.interrupted && !result.images.length && !result.videos.length && !result.text)) {
           for (const active of this.inFlightMarkers) this.unsafeMarkers.add(active);
           this.maxConcurrency = 1;
-          throw fail('MUSE_SHARED_CONVERSATION', 'Một hội thoại nhận nhiều yêu cầu xen kẽ. Tool dừng để tránh lấy nhầm ảnh; các lần sau sẽ xử lý lần lượt. Không tự gửi lại.', 409);
+          throw fail('MUSE_SHARED_CONVERSATION', 'Một hội thoại nhận nhiều yêu cầu xen kẽ. Tool dừng để tránh lấy nhầm ảnh; hãy chuẩn bị lại các ô trước khi chạy tiếp. Không tự gửi lại.', 409);
         }
         if (result.error) throw fail('MUSE_GENERATION_ERROR', result.error);
         if (result.anchored && !acknowledged) { acknowledged = true; onStage('submitted'); }
@@ -683,14 +700,14 @@ export class MuseBrowser {
   async generateVideo(data, signal) {
     const referenceInstruction = data.sourceMode === 'image' ? 'Animate the attached image as the starting frame.' : data.referenceImage ? 'Use the attached image as a character reference, not as an unrelated example.' : 'Create the video from the text prompt.';
     const prompt = `Use your video-generation tool to create exactly one new video, not a link to an existing example. Requested model: ${data.modelDisplayName}. Requested duration: ${data.durationSeconds} seconds, aspect ratio: ${data.aspectRatio}, resolution: ${data.resolution}. If these capabilities are unavailable, explain that clearly. ${referenceInstruction} ${data.characterLock !== false ? 'Preserve the referenced character identity and appearance across scenes.' : 'Follow this scene prompt independently; character consistency is not requested.'}\nScene:\n${data.prompt}`;
-    return this.turn({ accountId: data.accountId, prompt, image: data.referenceImage, video: true, signal, batchId: data.batchId, sceneId: data.sceneId, singleLane: data.singleLane });
+    return this.turn({ accountId: data.accountId, prompt, image: data.referenceImage, video: true, signal, batchId: data.batchId, sceneId: data.sceneId, submissionGroup:data.submissionGroup, singleLane: data.singleLane });
   }
   async generateImage(data, signal) {
     const longEdge = data.resolution === '4k' ? 3840 : 2560;
     const dimensions = data.aspectRatio === '9:16' ? `${Math.round(longEdge * 9 / 16)}x${longEdge}` : `${longEdge}x${Math.round(longEdge * 9 / 16)}`;
     const useReference = data.characterLock !== false && data.referenceImage;
     const prompt = `Use your image-generation tool to create exactly one new image for this scene. Requested native output: ${data.resolution.toUpperCase()} (${dimensions} pixels), aspect ratio ${data.aspectRatio}. Return the generated image, not a stock image or an old response. Do not claim a higher resolution than the image actually has. ${useReference ? 'Use the attached portrait as a character reference; preserve identity, face and appearance consistently.' : data.characterLock !== false ? 'Follow the character description in this prompt. No portrait is attached; cross-scene identity is not guaranteed without a reference.' : 'Follow this prompt independently. Do not reuse characters or appearance from earlier scenes unless the prompt explicitly requests them.'}\nScene:\n${data.prompt}`;
-    return this.turn({ accountId: data.accountId, prompt, image: useReference || undefined, output: 'image', signal, batchId: data.batchId, sceneId: data.sceneId, singleLane: data.singleLane });
+    return this.turn({ accountId: data.accountId, prompt, image: useReference || undefined, output: 'image', signal, batchId: data.batchId, sceneId: data.sceneId, submissionGroup:data.submissionGroup, singleLane: data.singleLane });
   }
-  async generateText(data, signal) { return this.turn({ accountId: data.accountId, prompt: data.prompt, video: false, signal, batchId: data.batchId, sceneId: data.sceneId, singleLane: data.singleLane }); }
+  async generateText(data, signal) { return this.turn({ accountId: data.accountId, prompt: data.prompt, video: false, signal, batchId: data.batchId, sceneId: data.sceneId, submissionGroup:data.submissionGroup, singleLane: data.singleLane }); }
 }

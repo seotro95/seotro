@@ -54,3 +54,6 @@
 .import-name-preview{margin:12px 0;padding:10px;border:1px solid #34415c;border-radius:6px;max-height:220px;overflow:auto}
 
 .account-plan-item{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0}.account-plan-item label{overflow:hidden;text-overflow:ellipsis}.account-plan-item select{background:#182338;color:#e8eefc;border:1px solid #34415c;border-radius:4px;padding:4px;max-width:70px}
+
+.scene-title{margin:0 0 12px;font-size:15px;line-height:1.45;overflow-wrap:anywhere;color:var(--text)}
+.script-entry-name{display:block;margin-bottom:4px;color:var(--text)}

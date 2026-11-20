@@ -5,7 +5,7 @@ const nameLabel = /^(?:\[\s*)?(?:t[eê]n\s*(?:(?:ảnh|anh|video|t[eệ]p|file)(
 function headingEntries(text:string):ScriptEntry[]|undefined {
   // Character dossiers have numbered parent titles and nested render prompts.
   // Nested voice descriptions and identity notes are metadata, not render jobs.
-  const bracketed=[...text.matchAll(/^\s*\[(\d+)\]\s+([^\n]+)$/gm)];
+  const bracketed=[...text.matchAll(/^[ \t]*\[[ \t]*(\d+)[ \t]*\][ \t]*([^\n]+)$/gm)];
   const numbered=[...text.matchAll(/^\s*(\d+)[.)]\s+([^\n]+)$/gm)];
   const headings=bracketed.length?bracketed:numbered.filter(match=>match[2].length<180&&!/^\[?TIMELINE\b|^(?:PROMPT|MO TA GIONG|TEN THONG)/i.test(match[2].normalize('NFD').replace(/\p{M}/gu,'')));
   if(!headings.length)return undefined;

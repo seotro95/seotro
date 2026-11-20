@@ -3,7 +3,7 @@ import { outputStem, uniqueOutputFilename } from '../output-names.mjs';
 import { reserveDownloadNumbers, formatDownloadNumber } from './download-sequence.ts';
 
 type ResponseMedia = { base64: string; mimeType: string; metadata?: { duration?: number; width: number; height: number } };
-type RequestContext = { batchId: string; sceneId: number; accountId?: number; accountMode?: Settings['accountMode']; outputName?: string };
+type RequestContext = { batchId: string; sceneId: number; accountId?: number; accountMode?: Settings['accountMode']; outputName?: string; submissionGroup?:{id:string;size:number} };
 declare global {
   interface Window { museTransport?: { rendererState?(state:'ready'|'error'):void; rendererStage?(stage:'workspace'|'interface'|'media-library'|'ready'):void; dataControl?(action:string):Promise<any>; request(id: string, endpoint: string, data: unknown): Promise<{ ok: boolean; body: any }>; cancel(id: string): void; export?(action: string, data?: unknown): Promise<any>; automationControl?(action: string, data?: unknown): Promise<any>; onAutomation?(callback: (action: string, data: any) => Promise<any>): () => void; onSessionRefresh?(callback: () => void): () => void }; showDirectoryPicker?: () => Promise<ExportDirectory> }
 }

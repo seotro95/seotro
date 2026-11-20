@@ -36,3 +36,13 @@ test('individual account lane choices generate exact variable groups and survive
  const rows=accountLayout([1,2,3],6,{'1':2,'3':10});assert.equal(rows.length,18);assert.equal(rows.filter(r=>r.accountId===1).length,2);assert.equal(rows.filter(r=>r.accountId===2).length,6);assert.equal(rows.filter(r=>r.accountId===3).length,10);
  const restored=restoreWorkspace(JSON.stringify({version:1,scenes:createScenes(40),settings:{...DEFAULT_SETTINGS,accountMode:'multiple',accountLaneOverrides:{'1':2,'2':11,'41':6}}}));assert.deepEqual(restored.settings.accountLaneOverrides,{'1':2});
 });
+
+
+test('all ten compact or spaced bracket headings keep names and prompt order in TXT and SRT',()=>{
+ const names=['nam','thái','nga','thang','hoang','thu','thao','tuan','phang','phu'];
+ const sections=names.map((name,i)=>`${i%2?' ':''}[${i%3?'':' '}${i+1}${i%3?'':' '}]${i%2?'':' '}${name} \nPrompt line ${i+1}.\nKeep all content ${i+1}.`);
+ const expected=names.map((name,i)=>({outputName:name,prompt:`Prompt line ${i+1}.\nKeep all content ${i+1}.`}));
+ assert.deepEqual(parseScriptEntries('\uFEFF'+sections.join('\n').replace(/\n/g,'\r\n')),expected);
+ const srt=sections.map((section,i)=>`${i+1}\n00:00:${String(i).padStart(2,'0')},000 --> 00:00:${String(i+1).padStart(2,'0')},000\n${section}`).join('\n\n');
+ assert.deepEqual(parseScriptEntries(srt),expected.map(entry=>({...entry,prompt:entry.prompt.replaceAll('\n',' ')})));
+});

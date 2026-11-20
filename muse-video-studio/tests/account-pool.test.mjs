@@ -17,13 +17,13 @@ test('ten accounts admit sixty simultaneous jobs, enforce six per account and re
   const outputs=await settled;await replacement;assert.equal(outputs.filter(x=>x.status==='fulfilled').length,59);assert.equal(outputs[18].status,'rejected');assert.equal(pool.usage.size,0);
  }finally{await rm(root,{recursive:true,force:true})}
 });
-test('one verified lane retains warm-tab behavior and requested six remains visible when parallel conversations are unavailable',async()=>{
+test('unavailable parallel conversations reject preparation; serial execution requires an explicit one-lane choice',async()=>{
  const root=await mkdtemp(path.join(os.tmpdir(),'muse-fallback-'));const calls=[];
  const driver={maxConcurrency:1,queue:[],account:()=>({authenticated:true}),progress:()=>[],setConcurrency:async()=>{throw new Error('MUSE_PARALLEL_UNVERIFIED: Shared chat only')},generateText:async data=>{calls.push(data);return {text:'ok'}}};const pool=new MuseAccounts({profileRoot:root,createDriver:()=>driver});
  try{
-  const prepared=await pool.prepareSingle(new AbortController().signal,6,27);assert.equal(prepared.executionConcurrency,1);assert.equal(prepared.preferredConcurrency,6);assert.match(prepared.concurrencyWarning,/Shared chat/);
-  await pool.generateText({accountId:27,accountMode:'multiple'},new AbortController().signal);assert.equal(calls[0].singleLane,true);assert.equal((await new MuseAccounts({profileRoot:root}).load()).preferredConcurrency,6);
+  await assert.rejects(pool.prepareSingle(new AbortController().signal,6,27),/MUSE_PARALLEL_UNVERIFIED/);assert.equal(calls.length,0);assert.equal((await new MuseAccounts({profileRoot:root}).load()).preferredConcurrency,6);
   await pool.prepareSingle(new AbortController().signal,1,27);assert.equal(pool.concurrencyWarning,'');
+  await pool.generateText({accountId:27,accountMode:'multiple'},new AbortController().signal);assert.equal(calls[0].singleLane,true);
   for(const count of [0,11,40,'6'])await assert.rejects(pool.prepareSingle(new AbortController().signal,count,27),/MUSE_CONCURRENCY_INVALID/);
   await writeFile(path.join(root,'single-concurrency.json'),'40');assert.equal((await new MuseAccounts({profileRoot:root}).load()).preferredConcurrency,10);
  }finally{await rm(root,{recursive:true,force:true})}

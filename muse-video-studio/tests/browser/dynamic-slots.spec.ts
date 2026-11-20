@@ -31,7 +31,7 @@ test('forty imported prompts generate all forty image and video slots and export
   await page.getByRole('button',{name:'Tải tất cả (40/40)',exact:true}).click();await expect.poll(async()=>(await exportedFolders(page))[0]?.files.length).toBe(40);const videos=(await exportedFolders(page))[0];expect(videos.files[0].name).toMatch(/^41\.mp4$/);expect(videos.files[39].name).toMatch(/^80\.mp4$/);expect(videos.files.every(file=>file.bytes.toString('base64')===video)).toBe(true);
 });
 
-test('a shared-chat-only Muse keeps all thirty selected slots and runs one verified worker instead of blocking the batch',async({page})=>{
+test('insufficient prepared lanes preserve thirty prompts and send nothing instead of silently running one at a time',async({page})=>{
   const account={id:1,authenticated:true,sessionAuthenticated:true,active:true,state:'ready'};let warning='MUSE_PARALLEL_UNVERIFIED: Shared chat';
   await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'browser',executionConcurrency:1,preferredConcurrency:6,concurrencyWarning:warning,accounts:[account]}}));
   await page.route('**/api/account/concurrency',route=>{warning='MUSE_PARALLEL_UNVERIFIED: Shared chat';return route.fulfill({status:409,json:{error:warning}})});
@@ -39,7 +39,7 @@ test('a shared-chat-only Muse keeps all thirty selected slots and runs one verif
   await page.reload();await page.getByLabel('Số ô',{exact:true}).selectOption('30');await expect(page.locator('.scene-card')).toHaveCount(30);await expect(page.getByLabel('Số ô',{exact:true})).toHaveValue('30');
   await page.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();await page.getByRole('button',{name:'Nhập TXT / SRT',exact:true}).click();await page.getByLabel('Nội dung TXT / SRT',{exact:true}).fill(Array.from({length:30},(_,i)=>`Queued scene ${i+1}`).join('\n'));await page.getByRole('button',{name:'Nạp vào Studio',exact:true}).click();
   let calls=0;await page.route('**/api/image',route=>{calls++;return new Promise(()=>{})});
-  await page.getByRole('button',{name:'TẠO 30 ẢNH',exact:true}).click();await expect.poll(()=>calls).toBe(1);await expect(page.locator('.status-badge.running')).toHaveCount(1);await expect(page.locator('.status-badge.queued')).toHaveCount(29);await expect(page.getByText('sẵn sàng 1/6 ô',{exact:false})).toBeVisible();await page.getByRole('button',{name:'Dừng tất cả luồng',exact:true}).click();await expect(page.locator('.status-badge.cancelled')).toHaveCount(30);
+  await page.getByRole('button',{name:'TẠO 30 ẢNH',exact:true}).click();await expect(page.getByText('mới chuẩn bị 1/6 ô',{exact:false})).toBeVisible();expect(calls).toBe(0);await expect(page.locator('.status-badge.running')).toHaveCount(0);await expect(page.locator('.scene-card')).toHaveCount(30);await expect(page.getByLabel('Kịch bản cảnh 30',{exact:true})).toHaveValue('Queued scene 30');
 });
 
 test('Codex MCP configuration points at the chosen local port and never copies the secret key',async({page})=>{

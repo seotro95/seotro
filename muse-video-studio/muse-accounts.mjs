@@ -50,8 +50,8 @@ export class MuseAccounts {
   async prepareSingle(signal,count=this.preferredConcurrency,id=1) {
     this.validateId(id);this.singleId=id;
     if(!isLaneCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 10 ô mỗi tài khoản.',400);
-    if(this.driver(id).maxConcurrency===count){this.concurrencyWarning='';if(this.preferredConcurrency!==count)await this.requestConcurrency(count);return {executionConcurrency:this.maxConcurrency,preferredConcurrency:count,concurrencyWarning:''};}
-    try{return await this.setConcurrency(count,signal,id)}catch(error){if(!this.concurrencyWarning)throw error;return {executionConcurrency:this.maxConcurrency,preferredConcurrency:count,concurrencyWarning:this.concurrencyWarning,message:'Muse chưa xác minh được hội thoại riêng. Các ô sẽ chạy theo số luồng đã xác minh, không trộn kết quả.'};}
+    if(this.driver(id).maxConcurrency===count&&this.driver(id).parallelReady!==false){this.concurrencyWarning='';if(this.preferredConcurrency!==count)await this.requestConcurrency(count);return {executionConcurrency:this.maxConcurrency,preferredConcurrency:count,concurrencyWarning:''};}
+    return this.setConcurrency(count,signal,id);
   }
   async checkComposer(signal,id=1) { return this.driver(id).checkComposer(signal); }
   async closeAccount(id) { if (this.usage.has(id)) throw fail('MUSE_CHAT_BUSY','Tài khoản này đang có tác vụ.'); await this.driver(id).close(); }
