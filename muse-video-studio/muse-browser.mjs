@@ -634,7 +634,9 @@ export class MuseBrowser {
           const videos=[...links,...players];
           const images = replies.flatMap(node => Array.from(node.querySelectorAll('img'))).filter(el => !el.closest('video') && el.complete && el.naturalWidth >= 128 && el.naturalHeight >= 128).map(el => ({ src: el.currentSrc || el.src, width: el.naturalWidth, height: el.naturalHeight }));
           const mediaURL=(value)=>{try{const url=new URL(value,location.href);return ['https:','blob:','data:'].includes(url.protocol)||(url.protocol==='http:'&&url.hostname==='127.0.0.1')}catch{return false}};
-          const namedLinks=sharedConversation?replies.flatMap(node=>Array.from(node.querySelectorAll('a[href]'))).filter(el=>mediaURL(el.href)&&[el.textContent,el.getAttribute('download'),el.href].some(value=>value?.includes(fileToken))):[];
+          const attributedLinks=sharedConversation?replies.flatMap(node=>Array.from(node.querySelectorAll('a[href]'))).filter(el=>[el.textContent,el.getAttribute('download'),el.href].some(value=>value?.includes(fileToken))):[];
+          const namedLinks=attributedLinks.filter(el=>mediaURL(el.href));
+          const unsupportedMediaLinks=attributedLinks.filter(el=>!mediaURL(el.href)).length;
           const namedElements=sharedConversation?replies.flatMap(node=>Array.from(node.querySelectorAll(output==='video'?'video':'img'))).filter(el=>{if([el.getAttribute('alt'),el.getAttribute('aria-label'),el.getAttribute('src'),el.querySelector('source[src]')?.src].some(value=>value?.includes(fileToken)))return true;const container=el.closest('figure')||el.closest('[data-message-item]');const tokens=new Set(container?.textContent.match(/\bMUSE_[a-f0-9]{32}\b/g)||[]);return tokens.size===1&&tokens.has(fileToken)&&container.querySelectorAll(output==='video'?'video':'img').length===1;}):[];
           const namedSources=namedElements.map(el=>({src:el.currentSrc||el.getAttribute('src')||el.querySelector('source[src]')?.src,width:el.videoWidth||el.naturalWidth||0,height:el.videoHeight||el.naturalHeight||0})).filter(media=>media.src&&mediaURL(media.src));
           const namedMedia=namedSources[0]||(namedLinks.length?{src:namedLinks[0].href,width:0,height:0}:null);
@@ -642,7 +644,7 @@ export class MuseBrowser {
           const ownedText=sharedConversation?replies.filter(node=>{const tokens=new Set(node.textContent.match(/\bMUSE_[a-f0-9]{32}\b/g)||[]);return tokens.size===1&&tokens.has(fileToken)}).map(node=>node.innerText).join('\n\n'):'';
           const freshReplies=replies.filter(isNew);
           const contextText=freshReplies.filter(node=>!Array.from(node.textContent.matchAll(/\bMUSE_[a-f0-9]{32}\b/g)).some(match=>match[0]!==fileToken)).map(node=>node.innerText).join('\n\n').trim();
-          return {contextText,replyCount:freshReplies.length,ownedText,namedMedia,anchored: anchor >= 0, shared, interrupted: nextUser >= 0, text: replies.map(node => node.innerText).join('\n\n').trim(), videos, images,
+          return {unsupportedMediaLinks,contextText,replyCount:freshReplies.length,ownedText,namedMedia,anchored: anchor >= 0, shared, interrupted: nextUser >= 0, text: replies.map(node => node.innerText).join('\n\n').trim(), videos, images,
             streaming: visible(document.querySelector(stop)), error: error?.innerText || '' };
         }, { messages: MESSAGES, stop: STOP, notice: NOTICE, marker, otherMarkers: [...this.inFlightMarkers].filter(other => other !== marker),sharedConversation,fileToken,output,acknowledged,earlierAssistantIds });
         if (!sharedConversation&&(result.shared || (result.interrupted && !result.images.length && !result.videos.length && !result.text))) {
@@ -662,6 +664,7 @@ export class MuseBrowser {
           onStage('downloading');
           return {...await this.downloadMedia(page,media,output,signal),captionPending:!sharedConversation&&output==='video'&&result.streaming};
         }
+        if(sharedConversation&&!media&&!result.streaming&&result.unsupportedMediaLinks&&Date.now()-stableSince>=this.replyQuietMs)throw fail('MUSE_MEDIA_UNREADABLE','MEDIA_URL_UNSUPPORTED: Muse trả liên kết không tải trực tiếp được và chưa có ảnh/video thật thay thế. Xem phản hồi Muse; tool không tự tạo lại yêu cầu.',502);
         if(output!=='text'&&!result.streaming&&!media&&!result.videos.length&&!result.images.length&&Date.now()-stableSince>=this.replyQuietMs){
           const reply=result.ownedText||result.contextText;const problem=replyProblem(reply);
           if(problem)throw fail(problem,`Muse đã trả lời nhưng chưa tạo ${output==='video'?'video':'ảnh'}. Phản hồi ${result.ownedText?'của cảnh':'trong cuộc trò chuyện'}: ${replyPreview(reply)}`,422);
