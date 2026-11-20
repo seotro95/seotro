@@ -1,0 +1,36 @@
+{
+  "status": "windows_tests_and_uploaded_asset_sha256_verified",
+  "version": "1.13.2",
+  "source_commit": "e08b4e2ba0f06006f46542b9d6ba3451d92e4a01",
+  "source_branch": "codex/muse-1132-auto-fallback",
+  "workflow_run_id": 44786208406,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/44786208406",
+  "workflow_conclusion": "success",
+  "release_id": 453009326,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/untagged-eed5905d17c8bbbcf0dc",
+  "draft": true,
+  "zip": {
+    "file": "Muse-AI-Studio-1.13.2-Windows-x64.zip",
+    "bytes": 160761845,
+    "sha256": "f401d34004ca99f3d23097cf0cfc8542f91e0c9fc1d5740973d3ada9ff598a3d",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-eed5905d17c8bbbcf0dc/Muse-AI-Studio-1.13.2-Windows-x64.zip"
+  },
+  "checksum_file": {
+    "file": "Muse-AI-Studio-1.13.2-Windows-x64.zip.sha256",
+    "bytes": 105,
+    "sha256": "eeaaa7d7d31fc714cd30e238b1f40b26c419a5dfc0b5ed50e032f596f4ab902d",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-eed5905d17c8bbbcf0dc/Muse-AI-Studio-1.13.2-Windows-x64.zip.sha256"
+  },
+  "validation": {
+    "windows_ui_checks": 22,
+    "single_account_shared_chat": "2 messages submitted before any result; 10 slots with at most 6 simultaneous requests; one logged-in page; correct attribution of out-of-order images by unique output token",
+    "shared_chat_cancellation": "One cancellation preserves other tasks and reserves its provider slot until output arrives; Stop all sends one shared Stop and releases permits",
+    "background_generation": "Acknowledgement text can stop streaming while generation continues; waits past normal 20-second no-media quiet interval",
+    "automatic_fallback": "Unavailable preparation or unsent worker failures retry once serially; explicit service concurrency rejection retries serially; ambiguous submitted requests are not replayed",
+    "preserved_features": "TXT/SRT names, all imported prompts, download counters, independent account limits, proxy IPs, sessions and renderer recovery",
+    "packaged_executable": "Standalone EXE startup, ten independent fixture workers, persistent folders and names, ten shared-chat videos capped at six, then explicit concurrency rejection completing all ten slots serially",
+    "account_limit_basis": "Shared-chat capacity capped at six using the user's supplied Muse capability screenshot; requested slots and preference up to ten are retained",
+    "live_muse_account_render_tested": false
+  },
+  "verified_at_utc": "2026-11-20T17:51:47Z"
+}
