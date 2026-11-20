@@ -1,0 +1,12 @@
+{
+  "topic": "051-Akrotiri",
+  "languages": 16,
+  "english_words": 3748,
+  "strategy": "Faithful contextual adaptations,not word-for-word subtitlealignment",
+  "vi_ja_ko": "Assistant-written adaptations14chapters with core facts,mechanisms and evidence limits retained",
+  "other12": "Full-chapter machine translations,rebuilt beforeTTS using unambiguous ceramic-container,sediment-cover,molded-replica and archaeological-age context;targeted regional/terminology review",
+  "chronology": "2023Therasia,2025Egypt,2026radiocarbon,andNov2026thesis kept attributed;1630–1550BCE not consensusyear",
+  "alignment": "English122cues;15localized14chapters13x90+42s",
+  "specific_corrections": "Initial ambiguous terms corrected before production;capitalized sediment term in chapter11corrected in six completed locales by resynthesizing that chapter and retaining13verified unchanged chapters;Swedish chapters8and11rewritten concisely before final export;full original inputs/reports and reuse provenance retained",
+  "independent_native_editorial_or_listening_review": false
+}

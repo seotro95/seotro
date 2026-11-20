@@ -1,0 +1,255 @@
+{
+  "transport_revision": 3,
+  "topic": "051-Akrotiri",
+  "target_seconds": 1212,
+  "expected_samples_48000": 58176000,
+  "documents_inventory": [
+    {
+      "path": "documents/5_TIEU_DE_5_PROMPT_THUMBNAIL.txt",
+      "bytes": 6966,
+      "sha256": "34ebafd2bfd655c169d84964ab68e51577de46ecea2247ad937c9276b73acb4f"
+    },
+    {
+      "path": "documents/BROLL_DU_PHONG_123_130.csv",
+      "bytes": 693,
+      "sha256": "6b51e8541be73874846ef2ddf97b78a31404ef04ab8b9c505e5a20e8783382e2"
+    },
+    {
+      "path": "documents/DOCUMENT_QA.json",
+      "bytes": 1138,
+      "sha256": "cadddf835f88b3c646b4143cb03c76a2b9becbe47c0d7d0e2b2e2ea4bc490ec8"
+    },
+    {
+      "path": "documents/DOI_CHIEU_BANG_CHUNG.csv",
+      "bytes": 1166,
+      "sha256": "068e641f0206717bec99560a827bcc81bfdac37a946c82620f9cc526e3f9ea18"
+    },
+    {
+      "path": "documents/EDL_122_CANH.csv",
+      "bytes": 11841,
+      "sha256": "28e5b3566ba5cae781e1cf96ba3b4ba26f8bd85f6fd919c4ae391cef827569a2"
+    },
+    {
+      "path": "documents/GIONG_DA_LUU.md",
+      "bytes": 1852,
+      "sha256": "17b9c34085f26c8aa39ecdf54dbe77fafa37910269bfbcd1bc9f8a68b7aa368a"
+    },
+    {
+      "path": "documents/HOOK_30_GIAY_10_SHOT.csv",
+      "bytes": 1086,
+      "sha256": "44cdc3acd352258cf5f1322ad0b335baeda6fb7e64f7dd9ee0ccb2af40d1d215"
+    },
+    {
+      "path": "documents/HUONG_DAN_DUNG_HINH.txt",
+      "bytes": 2098,
+      "sha256": "8e24011a2f78287fe4d4ca914e966b8e2f1b626c4344b11953471e6e4140a06f"
+    },
+    {
+      "path": "documents/KICH_BAN_EN_20m12s.txt",
+      "bytes": 26061,
+      "sha256": "9eea3d2e9b0e258da5f88928a0b6e3d3bdae6890b6e93785e53034513b667e27"
+    },
+    {
+      "path": "documents/KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 34280,
+      "sha256": "0912e1f67f9d6db09ad7bfe2e54860dce974953a80d9c4f8d2f966aa56d5fa48"
+    },
+    {
+      "path": "documents/LOI_DAN_EN_122_CANH.srt",
+      "bytes": 30101,
+      "sha256": "797be48fe2298f9a972248327c0811c225a184f5f0e9de885e3f3fb437ab1a4b"
+    },
+    {
+      "path": "documents/NARRATION_STYLE_LOCKED.json",
+      "bytes": 1485,
+      "sha256": "773764504ef1dc327f36ee66f5f3e507bdf87bae6f4eee28cf7d76e37b697974"
+    },
+    {
+      "path": "documents/NGUON_KIEM_CHUNG.md",
+      "bytes": 7821,
+      "sha256": "59b855eee02dc2be1d3d396aa97c111f192514e08f9c391896761136b028ea65"
+    },
+    {
+      "path": "documents/PHAN_TICH_VIDEO_NGUON.md",
+      "bytes": 3009,
+      "sha256": "8cc1dba62520024118cd6f7aba2ee5e8d84658ea88596fd991f3575cdeff878c"
+    },
+    {
+      "path": "documents/PROMPTS/01_PROMPT_001_010.txt",
+      "bytes": 26777,
+      "sha256": "5fdd329ee325f289e3f099d2aec17f63af0fc0996cce9f9f7dff9a271de22cb1"
+    },
+    {
+      "path": "documents/PROMPTS/02_PROMPT_011_020.txt",
+      "bytes": 26988,
+      "sha256": "661525335ac0a80a6a0d1462d8d1551a4c3acc636b406da856f18590dfe877bf"
+    },
+    {
+      "path": "documents/PROMPTS/03_PROMPT_021_030.txt",
+      "bytes": 26996,
+      "sha256": "e69185c617c03dc94d46c96dd9b2b8cb45dc45c93eac16f2964ebf6204758fae"
+    },
+    {
+      "path": "documents/PROMPTS/04_PROMPT_031_040.txt",
+      "bytes": 27192,
+      "sha256": "40481276f1c5813614d8a14d60c5870b40af5c129d688632e705a50ace5865da"
+    },
+    {
+      "path": "documents/PROMPTS/05_PROMPT_041_050.txt",
+      "bytes": 27092,
+      "sha256": "8a10954fe6667adccc5692c3824b7242b0e025f62af9c2811b447445c28894e4"
+    },
+    {
+      "path": "documents/PROMPTS/06_PROMPT_051_060.txt",
+      "bytes": 27125,
+      "sha256": "6b95491f356f59fa7bc75b46e86147890b2c75060e9d42a6d8b9bd151a24367e"
+    },
+    {
+      "path": "documents/PROMPTS/07_PROMPT_061_070.txt",
+      "bytes": 27220,
+      "sha256": "a29c38a70b42e9e704fc8132680b47720353fbf808f22700bb6cf98860f348f4"
+    },
+    {
+      "path": "documents/PROMPTS/08_PROMPT_071_080.txt",
+      "bytes": 27241,
+      "sha256": "2821d8bf094ee716d788d202770fc4a4986aed7313ae0f4e6509142c316bcfa8"
+    },
+    {
+      "path": "documents/PROMPTS/09_PROMPT_081_090.txt",
+      "bytes": 27224,
+      "sha256": "051083b1b0de7383c559d7fff22ba84fd789f27f3defd9d5872d773f2a588137"
+    },
+    {
+      "path": "documents/PROMPTS/10_PROMPT_091_100.txt",
+      "bytes": 27231,
+      "sha256": "08a1f20aea7ea57251ac7483241426956acdfaf07437b0615ea54ee4a7c8800c"
+    },
+    {
+      "path": "documents/PROMPTS/11_PROMPT_101_110.txt",
+      "bytes": 27137,
+      "sha256": "c6f25f1e27ccc9708c1640265b5a3bad758dbcb13cc17daed231457fd358798b"
+    },
+    {
+      "path": "documents/PROMPTS/12_PROMPT_111_120.txt",
+      "bytes": 27158,
+      "sha256": "fd2d79f6c7ba1cf5b63f483aa7da50e0bd8e87a288389d356ad29f3cf2c9499b"
+    },
+    {
+      "path": "documents/PROMPTS/13_PROMPT_121_130.txt",
+      "bytes": 27183,
+      "sha256": "5ac02f7d75728b9d705ad6ab5a2fa5b957cad497f837cd90a235caadae4d5d9d"
+    },
+    {
+      "path": "documents/README.md",
+      "bytes": 2769,
+      "sha256": "355cfb7cd8f136544a67c91f2fec888bd49a94652fa59ad993aa4635c53394c6"
+    },
+    {
+      "path": "documents/TIMELINE_122_CANH.csv",
+      "bytes": 42102,
+      "sha256": "ffd13ca93694fc9bad9a7aecbbc416dcbef79dd1ee3e570ae8358bc1d8924333"
+    },
+    {
+      "path": "documents/TRANSLATION_REVIEW.json",
+      "bytes": 1071,
+      "sha256": "dc680b670ca336e361288eda1a8e7a5a086ffa693d29a8d9e5142caab829a705"
+    },
+    {
+      "path": "documents/VISUAL_STYLE_LOCKED.json",
+      "bytes": 1039,
+      "sha256": "fc20fc59ce0fa553bbb07733f77f5a03bd7ecf438106ff64a5a80e9069ca297f"
+    },
+    {
+      "path": "documents/VOICE_FILE_NAMING.json",
+      "bytes": 3206,
+      "sha256": "07d4ef95cf799a86a579410bc301ba6ca0c9977e8a4fc0d28aa5849c6815a345"
+    },
+    {
+      "path": "documents/VOICE_PROFILES_LOCKED.json",
+      "bytes": 12987,
+      "sha256": "321439ee303205c0203140de63adb36c6ecee92f1ec429d5d9b135fc29a6bd7c"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/cs-CZ.txt",
+      "bytes": 28272,
+      "sha256": "24ea813382dffe10970aac162439cf85e08e22964e1aef4830785483f5292f9e"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/da-DK.txt",
+      "bytes": 27907,
+      "sha256": "4aca864220e81549f8c90bd3d7ccd418458815abb180f407572b91a676ba81d4"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/de-DE.txt",
+      "bytes": 32074,
+      "sha256": "91856dfadb2f14f6c3ce9423562d9dd7874ef4f9454e709d4dbbd9c5b3757fa5"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/en-US.txt",
+      "bytes": 27428,
+      "sha256": "d1d3e114c199b101bf2916720456b7776a621731b64138d14b944d4322e4ab17"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/es-ES.txt",
+      "bytes": 30851,
+      "sha256": "221b277c9322ea27f736effd021c547ebf42d29be11f265f1bae4fc55e2700f0"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/fi-FI.txt",
+      "bytes": 28956,
+      "sha256": "f495197c051c9d1e6b7978e5933fe524d42af1f42313d62ffe47e0d10d3918c1"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/fr-FR.txt",
+      "bytes": 32586,
+      "sha256": "8dc8c2832eddecda2289cffdfac428f865c37f49a291fd92697aaac798922590"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/it-IT.txt",
+      "bytes": 30526,
+      "sha256": "91a04def5c58e9ce4d87ca25b767b665603ef293858ef8cb4ab44ef441da6c9f"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/ja-JP.txt",
+      "bytes": 18677,
+      "sha256": "ef36cc0f3e3dae9e4c0b05d6cc47d5df26d6aadaf0ad23d63f7fd5b5675266ff"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/ko-KR.txt",
+      "bytes": 18440,
+      "sha256": "cb8dc6f3cbeba62ccd82db5713d67b236354617eb4ce83342747ddbc8eddcac1"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/nb-NO.txt",
+      "bytes": 27017,
+      "sha256": "f5f9d6471f3eaf5357c4428f808d8cb558bba3188b78df303f770fe7c61bfa68"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/nl-NL.txt",
+      "bytes": 30220,
+      "sha256": "c9753a5585908c6b74cf7674d173354cfb3d96f23e875451a9bda77f2426b74d"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/pl-PL.txt",
+      "bytes": 29482,
+      "sha256": "98c6099c8049b4352bc443313f5fe19ed6f5367f554e12f22ef5fcea2b404d02"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/pt-PT.txt",
+      "bytes": 29777,
+      "sha256": "1d635b65e8dc5f19c7c67a972c956e4d712fd9ea812837e0011ebb26e98d956a"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/sv-SE.txt",
+      "bytes": 27298,
+      "sha256": "aa50b0a0bb6212465312537f8f77ebff0561b97a05a5166fd3f154e1c5d33e16"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/vi-VN.txt",
+      "bytes": 22784,
+      "sha256": "e5c3b4bb83f473a9285000317d31dadf9c35cb754667356b03bb94b570ff8b22"
+    }
+  ],
+  "release_tag": "akrotiri-video-051-20m12s",
+  "scope": "User-requested Akrotiri051 original English script,122main+8optional silent no-children prompts in13TXT,archaeological/historical/outdoor/conceptual imagery withno labs,current Thera chronology references,timeline,16localized narration texts,16saved male voice identities and5title-thumbnail pairs;no MP3,source media,models,credentials,private messages or other-topic files inthis document export"
+}

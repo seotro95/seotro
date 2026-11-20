@@ -1,0 +1,20 @@
+{
+  "style_id": "akrotiri-outdoor-bronze-age-archaeology-no-labs-v5",
+  "topic": "051-Akrotiri",
+  "historical_settings_preferred": true,
+  "outdoor_archaeological_landscape_preferred": true,
+  "laboratory_scene_count": 0,
+  "exclude_scientists_and_modern_research_settings": true,
+  "human_minimum_age": 25,
+  "no_children_including_artwork_screens_reflections": true,
+  "exclude_boxing_boys_and_any_young_fresco_figures": true,
+  "preferred_fresco_motifs": "Illustrative lilies,swallows,rocks and abstract plaster fragments;no human figures in murals",
+  "historical_context": "Late Cycladic I Aegean Bronze Age,not Classical Greece or modern Santorini",
+  "modern_protective_roof_acknowledged": true,
+  "historical_reconstruction_separate_from_modern_protected_ruins": true,
+  "eruption_imagery_conceptual_not_witnessed_timing": true,
+  "every_generated_clip_seconds": 10,
+  "silent_no_speech_each_prompt": true,
+  "lab_replaced_by_outdoor_material_views_and_conceptual_models": true,
+  "no_single_fixed_consensus_eruption_year": true
+}

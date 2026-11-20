@@ -1,0 +1,10 @@
+AKROTIRI051 —20:12
+
+121cảnh×10 giây+cảnh kết2giây=1.212 giây. Tạo mỗi clip10 giây; riêng cảnh122chỉ lấy giây8–10.
+Có130 prompt trong13 TXT,mỗi tệp10 prompt,số1–130. Tệp13có2cảnh chính121–122và8 dự phòng123–130. Dự phòng chỉ thay hình theoCSV,không nối thêm thời lượng.
+Ưu tiên khảo cổ,cảnh quan,đường phố,sân mở và mô hình ngoài trời. Có10 cảnh loại room cho căn phòng dẫn chuyện; không phòng thí nghiệm hoặc nhà khoa học. Di tích hiện nay có mái che bảo vệ; không dựng như phố cổ còn người ở. Cảnh sinh hoạt thời đồ đồng là minh họa,không phải sự kiện có nhân chứng.
+Bích họa chỉ hoa huệ,chim én,đá và trang trí phi nhân vật. Không dùng Boxing Boys hay bất kỳ nhân vật trẻ nào trong tranh,nền,bóng,phản chiếu. Mọi người xuất hiện rõ từ25 tuổi.
+Mỗi prompt ghi không âm thanh,không lời nói. Nếu công cụ vẫn tạo tiếng,xóa hoàn toàn trước khi dựng; dùng voice riêng.
+Không biển dung nham tràn phố,không Atlantis,không khẳng định toàn bộ đô thị nguyên vẹn. Tro là phần hạt mịn;đá bọt và vật liệu khác cũng góp vào lớp phủ. Bản đúc hiện đại không phải gỗ gốc. Chưa có di cốt trong khu khai quật không chứng minh số phận tất cả cư dân.
+Niên đại phải có nguồn kèm theo: nghiên cứu2023,2025,2026và luận án tháng11/2026khác nhau về mẫu và mô hình. Không đặt một năm như đồng thuận đã chốt. Đường bờ hiện tại không tự là đường bờ thời đồ đồng.
+Giữ20:12;không cộng intro. HOOK_30_GIAY_10_SHOT.csvchỉ thay hình30 giây đầu bằng10shot3giây,giữ nguyên voice. Hòa cảnh phải bù phần chồng. Thêm chữ,nhãn,nguồn và dữ liệu kiểm chứng trong editor;không yêu cầuAI tự vẽ số liệu. Chưa tạo footage/MP4để kiểm tra;rà lại hình sinh thực tế trước xuất bản.
