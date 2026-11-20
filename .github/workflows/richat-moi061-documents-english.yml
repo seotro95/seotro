@@ -1,0 +1,91 @@
+name: Richat MOI061 documents and English 21m42s
+on:
+  push:
+    branches: [codex/richat-moi061-production-20261121]
+    paths: [.github/workflows/richat-moi061-documents-english.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  documents:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: richat-moi061
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python richat-moi061/extract_content.py
+          python richat-moi061/build_documents.py
+          python -u richat-moi061/publish_documents.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+  english:
+    needs: documents
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: richat-moi061
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python richat-moi061/extract_content.py
+          python richat-moi061/build_documents.py
+          python richat-moi061/english_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python richat-moi061/ensure_ffmpeg.py
+          python richat-moi061/bootstrap_tool.py online
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: richat-moi061-checkpoint-en-US
+          path: richat-moi061/voice/audio/en-US
+      - name: Generate English with same Andrew voice and retain completed speech
+        run: |
+          set +e
+          python -u richat-moi061/render_english_groups.py
+          code=$?
+          if [ "$code" = 75 ]; then
+            sleep 15
+            python -u richat-moi061/render_english_groups.py
+            code=$?
+          fi
+          exit "$code"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: richat-moi061-checkpoint-en-US
+          path: |
+            richat-moi061/voice/audio/en-US/group-*
+            richat-moi061/voice/audio/en-US/raw-*
+            richat-moi061/voice/audio/en-US/fallback-*
+            richat-moi061/voice/audio/en-US/pending_*.json
+          if-no-files-found: ignore
+          retention-days: 30
+          overwrite: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: richat-moi061-voice-en-US
+          path: |
+            richat-moi061/voice/audio/en-US/*.mp3
+            richat-moi061/voice/audio/en-US/render_report.json
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true
+      - name: Publish complete English narration
+        run: gh release upload richat-moi-061-21m42s richat-moi061/voice/audio/en-US/*.mp3 --repo seotro95/seotro --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
+
