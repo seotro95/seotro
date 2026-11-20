@@ -1,0 +1,27 @@
+{
+  "topic": "055-Maya-Drought",
+  "target_seconds": 1362,
+  "expected_samples_48000": 65376000,
+  "export_scope": "16 completed male MP3 voices, saved voice profiles and audio verification only",
+  "existing_document_zip_preserved": true,
+  "profile_files": {
+    "VOICE_PROFILES_LOCKED.json": {
+      "sha256": "321439ee303205c0203140de63adb36c6ecee92f1ec429d5d9b135fc29a6bd7c",
+      "bytes": 12987
+    },
+    "VOICE_FILE_NAMING.json": {
+      "sha256": "07d4ef95cf799a86a579410bc301ba6ca0c9977e8a4fc0d28aa5849c6815a345",
+      "bytes": 3206
+    },
+    "NARRATION_STYLE_LOCKED.json": {
+      "sha256": "81a4992eb447fe06f0650deeceae8d0ef4db88758a3720fd3025067a31d9d738",
+      "bytes": 1446
+    },
+    "NARRATION_DELIVERY_PROFILE.json": {
+      "sha256": "73ba052458c00cbe7e2abf339f6a978d8a8e2f0984576b6d5b5cf2f758289d35",
+      "bytes": 29290
+    }
+  },
+  "audio_count": 16,
+  "no_voice_generation_in_export": true
+}

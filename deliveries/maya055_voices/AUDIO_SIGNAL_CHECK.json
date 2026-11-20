@@ -1,0 +1,162 @@
+[
+  {
+    "locale": "cs-CZ",
+    "filename": "MAYA_DROUGHT_055_Sec.mp3",
+    "sha256": "444c358a76f88f159cbd329b41e73858154074ae407d6054bebe8a8af7f4653b",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09157918436016654,
+    "peak": 0.6035570502281189,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "MAYA_DROUGHT_055_Duc.mp3",
+    "sha256": "8297b7d9e12bb4a54bf5543bbc68a1db37402d31804b04f7828fffc9b79babe9",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09592012698132864,
+    "peak": 0.5904130339622498,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "en-US",
+    "filename": "MAYA_DROUGHT_055_My_Tieng_Anh.mp3",
+    "sha256": "7e25ae5722fb1216e1a3b6b0e5bc1c78bc164738b90db27aca121919d9ab5fe5",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09477666362813589,
+    "peak": 0.6349605917930603,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "MAYA_DROUGHT_055_Tay_Ban_Nha.mp3",
+    "sha256": "5edf9781ac160c059e213d0a638e030a02bfb817b73c4208dbacfaac3d5cf510",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06440841115217039,
+    "peak": 0.4210492968559265,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "MAYA_DROUGHT_055_Phap.mp3",
+    "sha256": "1a0f25bb38cef06a05a31455b0917e9f5147c90f46d8f6e223c73b8889c02c63",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06652425007379202,
+    "peak": 0.4852536618709564,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "MAYA_DROUGHT_055_Y.mp3",
+    "sha256": "7ae5356723289f4538fc6bcca3cf7780c95852ec3366cb52603b3c3c10e4faff",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07887952441057326,
+    "peak": 0.5348384380340576,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "MAYA_DROUGHT_055_Nhat_Ban.mp3",
+    "sha256": "59e2863dffb4c8d12efdffa0e9de0fb6d361c69c8922efb248e635d3eb5e8fb7",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08521076233631601,
+    "peak": 0.6635448336601257,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "MAYA_DROUGHT_055_Han_Quoc.mp3",
+    "sha256": "9087721b3f3aa72f426b53e3d0ffbf7a80d8a51eeceacc0ab22aa9a385d90455",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09019732857359401,
+    "peak": 0.5472502708435059,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "MAYA_DROUGHT_055_Ha_Lan.mp3",
+    "sha256": "8270a495bb5e47a40937b0adff740caf63225f82c3277cd347f2f096af486804",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09548681394191989,
+    "peak": 0.5852628350257874,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "MAYA_DROUGHT_055_Ba_Lan.mp3",
+    "sha256": "6266208d8a4dfeec5f0c516377ee991e54666817a5ef401222933b4166ccc6ad",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08829270652623564,
+    "peak": 0.5826973915100098,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "MAYA_DROUGHT_055_Bo_Dao_Nha.mp3",
+    "sha256": "cd4e025caaade16273a9c11f6e88dd3bc2d4478e7703153ec5d85ee91361c22b",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06118705097928853,
+    "peak": 0.40512287616729736,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "MAYA_DROUGHT_055_Viet_Nam.mp3",
+    "sha256": "e97e856836d0658afa45060072a521ed79785f4c06f1493a2f45c39c295d2468",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.10261858090979507,
+    "peak": 0.5569858551025391,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "MAYA_DROUGHT_055_Thuy_Dien.mp3",
+    "sha256": "da5a6ee4000961d29b5d442405adc311bee85bd7e3dd14ff3306a85486bf213e",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07581262277072345,
+    "peak": 0.5294949412345886,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "MAYA_DROUGHT_055_Dan_Mach.mp3",
+    "sha256": "9637a59fd43025966bc7f0d26cca6f19bc97a301d88845c29f87c71d6c6e73f3",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07991752726291117,
+    "peak": 0.4846307039260864,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "MAYA_DROUGHT_055_Phan_Lan.mp3",
+    "sha256": "185401a492e1ccf543fe18130b55c4701c426ef8e6d0de58b3e71917087bb73d",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.05983423309555345,
+    "peak": 0.39174753427505493,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "MAYA_DROUGHT_055_Na_Uy.mp3",
+    "sha256": "59d37ce6d306b704526454ab560079d944afc30b59fc63ffc74c2397aca0b58a",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0661581867286153,
+    "peak": 0.5815023183822632,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  }
+]

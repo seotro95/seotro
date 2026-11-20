@@ -1,0 +1,694 @@
+{
+  "topic": "055-Maya-Drought",
+  "duration_seconds": 1362,
+  "expected_samples_48000": 65376000,
+  "profile_set_id": "science-history-16-v4-namminh",
+  "vietnamese_voice": "vi-VN-NamMinhNeural",
+  "english_voice": "en-US-GuyNeural",
+  "german_voice": "de-DE-ChristophNeural",
+  "provider_availability_changes": [
+    {
+      "locale": "de-DE",
+      "previous": "de-DE-ConradNeural",
+      "selected": "de-DE-ChristophNeural",
+      "reason": "Provider catalog no longer offers Conrad"
+    },
+    {
+      "locale": "en-US",
+      "previous": "en-US-AndrewNeural",
+      "selected": "en-US-GuyNeural",
+      "reason": "Repeated synthesis failures;stable same-text sample with Guy"
+    }
+  ],
+  "voices": [
+    {
+      "locale": "en-US",
+      "voice_id": "en-US-GuyNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "7e25ae5722fb1216e1a3b6b0e5bc1c78bc164738b90db27aca121919d9ab5fe5",
+      "min_post_tempo": 1.0438,
+      "max_post_tempo": 1.4542,
+      "max_padding_seconds": 0.0196875,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "vi-VN",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "e97e856836d0658afa45060072a521ed79785f4c06f1493a2f45c39c295d2468",
+      "min_post_tempo": 0.6735483870967742,
+      "max_post_tempo": 0.85976,
+      "max_padding_seconds": 0.037,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "es-ES",
+      "voice_id": "es-ES-AlvaroNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "5edf9781ac160c059e213d0a638e030a02bfb817b73c4208dbacfaac3d5cf510",
+      "min_post_tempo": 1.0,
+      "max_post_tempo": 1.09458,
+      "max_padding_seconds": 0.03660416666666667,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "fr-FR",
+      "voice_id": "fr-FR-HenriNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "1a0f25bb38cef06a05a31455b0917e9f5147c90f46d8f6e223c73b8889c02c63",
+      "min_post_tempo": 1.0,
+      "max_post_tempo": 1.01418,
+      "max_padding_seconds": 0.021333333333333333,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "ja-JP",
+      "voice_id": "ja-JP-KeitaNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "59e2863dffb4c8d12efdffa0e9de0fb6d361c69c8922efb248e635d3eb5e8fb7",
+      "min_post_tempo": 0.77062,
+      "max_post_tempo": 0.8995,
+      "max_padding_seconds": 0.03358333333333333,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "ko-KR",
+      "voice_id": "ko-KR-InJoonNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "9087721b3f3aa72f426b53e3d0ffbf7a80d8a51eeceacc0ab22aa9a385d90455",
+      "min_post_tempo": 0.81526,
+      "max_post_tempo": 0.95518,
+      "max_padding_seconds": 0.027229166666666665,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "de-DE",
+      "voice_id": "de-DE-ChristophNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "8297b7d9e12bb4a54bf5543bbc68a1db37402d31804b04f7828fffc9b79babe9",
+      "min_post_tempo": 1.15266,
+      "max_post_tempo": 1.56538,
+      "max_padding_seconds": 0.016833333333333332,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "it-IT",
+      "voice_id": "it-IT-DiegoNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "7ae5356723289f4538fc6bcca3cf7780c95852ec3366cb52603b3c3c10e4faff",
+      "min_post_tempo": 1.17378,
+      "max_post_tempo": 1.580516129032258,
+      "max_padding_seconds": 0.019479166666666665,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "pt-PT",
+      "voice_id": "pt-PT-DuarteNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "cd4e025caaade16273a9c11f6e88dd3bc2d4478e7703153ec5d85ee91361c22b",
+      "min_post_tempo": 0.94458,
+      "max_post_tempo": 1.0,
+      "max_padding_seconds": 0.023104166666666665,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "nl-NL",
+      "voice_id": "nl-NL-MaartenNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "8270a495bb5e47a40937b0adff740caf63225f82c3277cd347f2f096af486804",
+      "min_post_tempo": 1.08642,
+      "max_post_tempo": 1.4284,
+      "max_padding_seconds": 0.0185625,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "pl-PL",
+      "voice_id": "pl-PL-MarekNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "6266208d8a4dfeec5f0c516377ee991e54666817a5ef401222933b4166ccc6ad",
+      "min_post_tempo": 0.97244,
+      "max_post_tempo": 1.356774193548387,
+      "max_padding_seconds": 0.022208333333333333,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "sv-SE",
+      "voice_id": "sv-SE-MattiasNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "da5a6ee4000961d29b5d442405adc311bee85bd7e3dd14ff3306a85486bf213e",
+      "min_post_tempo": 1.20836,
+      "max_post_tempo": 1.5963870967741935,
+      "max_padding_seconds": 0.01725,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "da-DK",
+      "voice_id": "da-DK-JeppeNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "9637a59fd43025966bc7f0d26cca6f19bc97a301d88845c29f87c71d6c6e73f3",
+      "min_post_tempo": 1.02332,
+      "max_post_tempo": 1.36762,
+      "max_padding_seconds": 0.020583333333333332,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "fi-FI",
+      "voice_id": "fi-FI-HarriNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "185401a492e1ccf543fe18130b55c4701c426ef8e6d0de58b3e71917087bb73d",
+      "min_post_tempo": 1.13252,
+      "max_post_tempo": 1.516258064516129,
+      "max_padding_seconds": 0.017541666666666667,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "nb-NO",
+      "voice_id": "nb-NO-FinnNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "59d37ce6d306b704526454ab560079d944afc30b59fc63ffc74c2397aca0b58a",
+      "min_post_tempo": 1.00244,
+      "max_post_tempo": 1.3753548387096775,
+      "max_padding_seconds": 0.02125,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "cs-CZ",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "444c358a76f88f159cbd329b41e73858154074ae407d6054bebe8a8af7f4653b",
+      "min_post_tempo": 0.9758,
+      "max_post_tempo": 1.326967741935484,
+      "max_padding_seconds": 0.022104166666666668,
+      "pitch_shift": false,
+      "alignment": "English137cues;15localized14chapters13x100+62s",
+      "independent_native_listening_review": false
+    }
+  ],
+  "online_text_metadata_audit": {
+    "languages": 16,
+    "full_normalized_input_matches": true,
+    "scope": "Provider metadata comparedwithinput;not independent output transcription/listening"
+  },
+  "localization": "Vietnamese,Japanese,Korean contextual adaptations;12fullchaptermachine draftswithwater/climate/archaeologicalage andregionaltermreview. All12chapter11rewrittenforclearhousehold-worklinksandnaturalpacing. Rainfall41–54percentandpeakUPTO70keptlocal/modelbased;ClassicWitznaandPostclassicMayapanseparate;Maya people andculturescontinuetoday. Independent native listening pending.",
+  "independent_native_review": false,
+  "input_provenance": "Narration+timing hashes match canonical text, authentic engine snapshot and render report for all16 voices. All16completedtracks usecurrentepisode narration;authenticengineinputsnapshots preserved.",
+  "swedish_concise_revisions": {
+    "locale": "sv-SE",
+    "chapters": [
+      2,
+      9
+    ],
+    "reason": "Concise contextual Swedish;preserve facts and fit100seconds without exceeding1.6tempo cap",
+    "other_chapters_reused": 12,
+    "voice_id_unchanged": true
+  },
+  "chapter_audio_reuse": [
+    {
+      "locale": "es-ES",
+      "resynthesized_chapters": [
+        11
+      ],
+      "source_mp3_sha256": "854a4c19fc34edb38e77b55dbfe5158642fdd9967fdebf5e9e68c91c077cf74c",
+      "unchanged_chapters": [
+        {
+          "chapter": 1,
+          "start_frame": 0,
+          "end_frame": 4800000,
+          "original_decoded_chapter_sha256": "5cbd11e2a278bd3ae8a6c14cd6919f8341e45c44b0399df09cf86fbd14ee35e6",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 2,
+          "start_frame": 4800000,
+          "end_frame": 9600000,
+          "original_decoded_chapter_sha256": "2acd445a47451b9ac1ceac18b18b4b7206e524c1a1fc1963babaf355e21668d7",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 3,
+          "start_frame": 9600000,
+          "end_frame": 14400000,
+          "original_decoded_chapter_sha256": "33a4fefd26afe6f57126142a50e24c1b6cb9c69facd0faecfdde123c1bd3726a",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 4,
+          "start_frame": 14400000,
+          "end_frame": 19200000,
+          "original_decoded_chapter_sha256": "005f2175eac409c877b417290ad7b6fa6395cdfa9d7d35f179920bc9697e3514",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 5,
+          "start_frame": 19200000,
+          "end_frame": 24000000,
+          "original_decoded_chapter_sha256": "ea6923c2672b179880e113024f2ba8dadfd330ce67fc6bed853885fa67c4c181",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 6,
+          "start_frame": 24000000,
+          "end_frame": 28800000,
+          "original_decoded_chapter_sha256": "e1bc6470d02fe39c43c6b9f06a9f88388227ead07c29d37ba8835af794f09b40",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 7,
+          "start_frame": 28800000,
+          "end_frame": 33600000,
+          "original_decoded_chapter_sha256": "4389adfca23352e776ddb588cb9bffa26d8c8826a3c3c42f84066cf846a34ff6",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 8,
+          "start_frame": 33600000,
+          "end_frame": 38400000,
+          "original_decoded_chapter_sha256": "dd3d053a493e0e68f0a13ae24f00590cb17a3acbaa44161fd49378978b326a53",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 9,
+          "start_frame": 38400000,
+          "end_frame": 43200000,
+          "original_decoded_chapter_sha256": "bf802149951ac08b82ca1551c3d651e0a34437384807d4b1159e1be14dbb8192",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 10,
+          "start_frame": 43200000,
+          "end_frame": 48000000,
+          "original_decoded_chapter_sha256": "9fd3431b42c87882f695563ebd91540f209a5925cc9fc5dec8efe571c1f41d54",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 12,
+          "start_frame": 52800000,
+          "end_frame": 57600000,
+          "original_decoded_chapter_sha256": "52feb93efcd638ff08aead3e07805e7bf7f405d0d6709c352b0ca8b11d7bc7c6",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 13,
+          "start_frame": 57600000,
+          "end_frame": 62400000,
+          "original_decoded_chapter_sha256": "0a56a7deb3ee44e5a982aed2daf2dcf39378be09aba51f618cff6a8df7b25533",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 14,
+          "start_frame": 62400000,
+          "end_frame": 65376000,
+          "original_decoded_chapter_sha256": "dd13e3601c37b87c69cae60a48f01f3570e6343bac45f4775c0dab61c06fadca",
+          "contiguous_partitions_match_original": true
+        }
+      ],
+      "scope": "Samevoice;13unchanged chapters retained from verified audio;only chapter11rephrased and resynthesized. Originalinput/report/provider metadata preserved;old temporarysourceaudioRAMcache."
+    },
+    {
+      "locale": "fr-FR",
+      "resynthesized_chapters": [
+        11
+      ],
+      "source_mp3_sha256": "b38fc715f922a71a4c3097d476b1489e8fde8e87b1757ce64f1c7c29e180c4fb",
+      "unchanged_chapters": [
+        {
+          "chapter": 1,
+          "start_frame": 0,
+          "end_frame": 4800000,
+          "original_decoded_chapter_sha256": "05f09223e142facf6b00949ab31a976aa7e044a452caabf79f02f3883925e95b",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 2,
+          "start_frame": 4800000,
+          "end_frame": 9600000,
+          "original_decoded_chapter_sha256": "ed0ac9564d1dfdb4f33f87b813017b0afee96b317304494da39781c065d96579",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 3,
+          "start_frame": 9600000,
+          "end_frame": 14400000,
+          "original_decoded_chapter_sha256": "d6f0ec6e75d4d3cfe360b32d109ba4c778c72fcf0e8586178e9b85b06568f295",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 4,
+          "start_frame": 14400000,
+          "end_frame": 19200000,
+          "original_decoded_chapter_sha256": "1c61c7dd4a28cf6caf24f7650c0a60a336734f0cfdd1047d4035b40328ce01b4",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 5,
+          "start_frame": 19200000,
+          "end_frame": 24000000,
+          "original_decoded_chapter_sha256": "b9fe798b633dee92a69546b051b7a6cea5bc280b731b7e7634de7164495a2fdd",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 6,
+          "start_frame": 24000000,
+          "end_frame": 28800000,
+          "original_decoded_chapter_sha256": "3f5d3e5ccca2f26b282a0ec045eabfb882d1f04e6ca8e705f3100f5940daa16f",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 7,
+          "start_frame": 28800000,
+          "end_frame": 33600000,
+          "original_decoded_chapter_sha256": "eed1a94d40906af18f6510161a64a31866ecfcd40ca3ebad2b293a89a6f731bf",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 8,
+          "start_frame": 33600000,
+          "end_frame": 38400000,
+          "original_decoded_chapter_sha256": "63dce26713289b9e93ae864ef4cbabf4ded00aa544dc25f7cbfd0814fd3c2869",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 9,
+          "start_frame": 38400000,
+          "end_frame": 43200000,
+          "original_decoded_chapter_sha256": "3d180141875600b7c9b4b3f096d56df8e0b82c0f1338dbed32b80fa0106f2483",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 10,
+          "start_frame": 43200000,
+          "end_frame": 48000000,
+          "original_decoded_chapter_sha256": "525736dbcf2d67a0b84b323b730fe12e4ea32b06976aa9a8e847ec131175f72b",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 12,
+          "start_frame": 52800000,
+          "end_frame": 57600000,
+          "original_decoded_chapter_sha256": "28da36fe8d60b3187e972a8294a07164d0749c7a7096a193ae4b01ec4c434612",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 13,
+          "start_frame": 57600000,
+          "end_frame": 62400000,
+          "original_decoded_chapter_sha256": "7c56b1793d1dd95a75fd50f59a9b55d013ba684defc54dd7709724d6c2ae5bab",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 14,
+          "start_frame": 62400000,
+          "end_frame": 65376000,
+          "original_decoded_chapter_sha256": "43a97fb0773d2c6a84977f0d2a7124aadd3dd6ea43890b3e92a86150b10973c0",
+          "contiguous_partitions_match_original": true
+        }
+      ],
+      "scope": "Samevoice;13unchanged chapters retained from verified audio;only chapter11rephrased and resynthesized. Originalinput/report/provider metadata preserved;old temporarysourceaudioRAMcache."
+    },
+    {
+      "locale": "pt-PT",
+      "resynthesized_chapters": [
+        11
+      ],
+      "source_mp3_sha256": "8e8589b98f33c49b596c0e76ef7048dd36cb106f83b60111422206a537198601",
+      "unchanged_chapters": [
+        {
+          "chapter": 1,
+          "start_frame": 0,
+          "end_frame": 4800000,
+          "original_decoded_chapter_sha256": "740fefa6cf13945e0f3fbf02b4240150a0e3ce08e5a0e0a7c90b91f043b0e045",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 2,
+          "start_frame": 4800000,
+          "end_frame": 9600000,
+          "original_decoded_chapter_sha256": "7262a7e19f0a6a8cc9fbe6f615c6bd4b19eea4992162441c267aa09775897ebc",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 3,
+          "start_frame": 9600000,
+          "end_frame": 14400000,
+          "original_decoded_chapter_sha256": "15ad7cbfc9b73b6177735b95a640c3a8403ee74468e0e16bef3f364a8f40b768",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 4,
+          "start_frame": 14400000,
+          "end_frame": 19200000,
+          "original_decoded_chapter_sha256": "b3d69e748cb7644ba6b4bad5055d9352f7fb9f087b41c391fc504a6a1af8865e",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 5,
+          "start_frame": 19200000,
+          "end_frame": 24000000,
+          "original_decoded_chapter_sha256": "16b7497cffab2962f6896506c6b00e6a2106d708e47352c4083cd5ead9a3d0f6",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 6,
+          "start_frame": 24000000,
+          "end_frame": 28800000,
+          "original_decoded_chapter_sha256": "53a21cc53599ef1d270c3aef3501cc9a3db06b3b38c02ed75bef0270f1d27f9f",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 7,
+          "start_frame": 28800000,
+          "end_frame": 33600000,
+          "original_decoded_chapter_sha256": "b77a6d6d27b8cff5460b6e448a10bb901aa651dd57db7cb99ad1d99346790b89",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 8,
+          "start_frame": 33600000,
+          "end_frame": 38400000,
+          "original_decoded_chapter_sha256": "f29c462af313ea844ed1011b97721606f6039467766840850ad280136d011e30",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 9,
+          "start_frame": 38400000,
+          "end_frame": 43200000,
+          "original_decoded_chapter_sha256": "31946b557f107c494dfc95d65b349c9e051f2581803bb6aae45d2e4ed2cc49f9",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 10,
+          "start_frame": 43200000,
+          "end_frame": 48000000,
+          "original_decoded_chapter_sha256": "3fcf4c0421c556e0696fe78adbaf4a75333ecd70c19ca1fa89971bb9a3e0eaf4",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 12,
+          "start_frame": 52800000,
+          "end_frame": 57600000,
+          "original_decoded_chapter_sha256": "995751c6dca1e98909812aac25c39cb76199c22257cc7d7f3e0b6a1d6afcc80e",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 13,
+          "start_frame": 57600000,
+          "end_frame": 62400000,
+          "original_decoded_chapter_sha256": "7ab1661969295404b50cac302417ef44ef0c90dd29586063ebed8635e11fe0cc",
+          "contiguous_partitions_match_original": true
+        },
+        {
+          "chapter": 14,
+          "start_frame": 62400000,
+          "end_frame": 65376000,
+          "original_decoded_chapter_sha256": "12c33206b3be4f28ca311ee5d2d9c2367676da7fe09c5d656f17ae8c7456edb5",
+          "contiguous_partitions_match_original": true
+        }
+      ],
+      "scope": "Samevoice;13unchanged chapters retained from verified audio;only chapter11rephrased and resynthesized. Originalinput/report/provider metadata preserved;old temporarysourceaudioRAMcache."
+    }
+  ],
+  "audio_storage": {
+    "durable": "Verified GitHub release assets",
+    "working_cache": "RAM;not durable local storage",
+    "local_references_after_public_success": [
+      "en-US",
+      "vi-VN"
+    ]
+  },
+  "public_audio_reference_index": [
+    {
+      "locale": "en-US",
+      "voice_id": "en-US-GuyNeural",
+      "filename": "MAYA_DROUGHT_055_My_Tieng_Anh.mp3",
+      "sha256": "7e25ae5722fb1216e1a3b6b0e5bc1c78bc164738b90db27aca121919d9ab5fe5",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_My_Tieng_Anh.mp3"
+    },
+    {
+      "locale": "vi-VN",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "MAYA_DROUGHT_055_Viet_Nam.mp3",
+      "sha256": "e97e856836d0658afa45060072a521ed79785f4c06f1493a2f45c39c295d2468",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Viet_Nam.mp3"
+    },
+    {
+      "locale": "es-ES",
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "MAYA_DROUGHT_055_Tay_Ban_Nha.mp3",
+      "sha256": "5edf9781ac160c059e213d0a638e030a02bfb817b73c4208dbacfaac3d5cf510",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Tay_Ban_Nha.mp3"
+    },
+    {
+      "locale": "fr-FR",
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "MAYA_DROUGHT_055_Phap.mp3",
+      "sha256": "1a0f25bb38cef06a05a31455b0917e9f5147c90f46d8f6e223c73b8889c02c63",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Phap.mp3"
+    },
+    {
+      "locale": "ja-JP",
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "MAYA_DROUGHT_055_Nhat_Ban.mp3",
+      "sha256": "59e2863dffb4c8d12efdffa0e9de0fb6d361c69c8922efb248e635d3eb5e8fb7",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Nhat_Ban.mp3"
+    },
+    {
+      "locale": "ko-KR",
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "MAYA_DROUGHT_055_Han_Quoc.mp3",
+      "sha256": "9087721b3f3aa72f426b53e3d0ffbf7a80d8a51eeceacc0ab22aa9a385d90455",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Han_Quoc.mp3"
+    },
+    {
+      "locale": "de-DE",
+      "voice_id": "de-DE-ChristophNeural",
+      "filename": "MAYA_DROUGHT_055_Duc.mp3",
+      "sha256": "8297b7d9e12bb4a54bf5543bbc68a1db37402d31804b04f7828fffc9b79babe9",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Duc.mp3"
+    },
+    {
+      "locale": "it-IT",
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "MAYA_DROUGHT_055_Y.mp3",
+      "sha256": "7ae5356723289f4538fc6bcca3cf7780c95852ec3366cb52603b3c3c10e4faff",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Y.mp3"
+    },
+    {
+      "locale": "pt-PT",
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "MAYA_DROUGHT_055_Bo_Dao_Nha.mp3",
+      "sha256": "cd4e025caaade16273a9c11f6e88dd3bc2d4478e7703153ec5d85ee91361c22b",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Bo_Dao_Nha.mp3"
+    },
+    {
+      "locale": "nl-NL",
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "MAYA_DROUGHT_055_Ha_Lan.mp3",
+      "sha256": "8270a495bb5e47a40937b0adff740caf63225f82c3277cd347f2f096af486804",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Ha_Lan.mp3"
+    },
+    {
+      "locale": "pl-PL",
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "MAYA_DROUGHT_055_Ba_Lan.mp3",
+      "sha256": "6266208d8a4dfeec5f0c516377ee991e54666817a5ef401222933b4166ccc6ad",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Ba_Lan.mp3"
+    },
+    {
+      "locale": "sv-SE",
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "MAYA_DROUGHT_055_Thuy_Dien.mp3",
+      "sha256": "da5a6ee4000961d29b5d442405adc311bee85bd7e3dd14ff3306a85486bf213e",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Thuy_Dien.mp3"
+    },
+    {
+      "locale": "da-DK",
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "MAYA_DROUGHT_055_Dan_Mach.mp3",
+      "sha256": "9637a59fd43025966bc7f0d26cca6f19bc97a301d88845c29f87c71d6c6e73f3",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Dan_Mach.mp3"
+    },
+    {
+      "locale": "fi-FI",
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "MAYA_DROUGHT_055_Phan_Lan.mp3",
+      "sha256": "185401a492e1ccf543fe18130b55c4701c426ef8e6d0de58b3e71917087bb73d",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Phan_Lan.mp3"
+    },
+    {
+      "locale": "nb-NO",
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "MAYA_DROUGHT_055_Na_Uy.mp3",
+      "sha256": "59d37ce6d306b704526454ab560079d944afc30b59fc63ffc74c2397aca0b58a",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Na_Uy.mp3"
+    },
+    {
+      "locale": "cs-CZ",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "MAYA_DROUGHT_055_Sec.mp3",
+      "sha256": "444c358a76f88f159cbd329b41e73858154074ae407d6054bebe8a8af7f4653b",
+      "url": "https://github.com/seotro95/seotro/releases/download/maya-drought-video-055-22m42s/MAYA_DROUGHT_055_Sec.mp3"
+    }
+  ]
+}
