@@ -1,0 +1,39 @@
+{
+  "status": "windows_tests_and_uploaded_asset_sha256_verified",
+  "version": "1.13.3",
+  "source_commit": "48106776b76746db4ce342b7e55d7241ad5d4cbf",
+  "source_branch": "codex/muse-1133-result-recovery",
+  "workflow_run_id": 44794967112,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/44794967112",
+  "workflow_conclusion": "success",
+  "release_id": 453060149,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/untagged-58d5f3f00450c0b38563",
+  "draft": true,
+  "zip": {
+    "file": "Muse-AI-Studio-1.13.3-Windows-x64.zip",
+    "bytes": 160767255,
+    "sha256": "844bc2d468c370262b5b95303d9cb8ee39bbfe34a663d93b019d7d2817f281e9",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-58d5f3f00450c0b38563/Muse-AI-Studio-1.13.3-Windows-x64.zip"
+  },
+  "checksum_file": {
+    "file": "Muse-AI-Studio-1.13.3-Windows-x64.zip.sha256",
+    "bytes": 105,
+    "sha256": "ca27f2e1d480f996fa87f8502ca75da3d7274485a7a79bf2ea39c4568b626de1",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-58d5f3f00450c0b38563/Muse-AI-Studio-1.13.3-Windows-x64.zip.sha256"
+  },
+  "validation": {
+    "windows_ui_checks": 23,
+    "local_transport": "Private loopback HTTP client; ten waiting requests complete despite deliberately failed global fetch with UND_ERR_HEADERS_TIMEOUT and invalid inherited proxy. Cancellation, timeout, disconnection, invalid JSON, whitelist and no replay verified.",
+    "shared_chat": "Six cropped user messages acknowledged before any result; named outputs matched after user rows removed; another task streaming cannot suppress acknowledgement deadline.",
+    "error_reports": "Native clipboard, web clipboard, automatic TXT fallback, selectable raw error, version and progress in report.",
+    "prompt_clarification": "Completed owned clarification response reported without waiting for media or replaying.",
+    "shutdown": "Active and queued pool work aborted without reopening a session.",
+    "windows_browser_checks": "Account six-way video requests; warm draft/hash/iframe conversations; independent chats; cancellation; five serial fallback cases; shared conversation; four acknowledgement/clarification cases.",
+    "electron_desktop_checks": 8,
+    "packaged_executable": "Actual packaged EXE startup; ten concurrent named images with loopback fetch deliberately failed; persistent saved folders and numbering after restart; ten exact compact TXT names; ten videos in one chat capped at six; explicit concurrency rejection followed by ten successful serial slots.",
+    "preserved_features": "TXT/SRT names, all imported prompts, download counters, account limits, proxy IPs, sessions and renderer recovery.",
+    "live_muse_account_render_tested": false,
+    "limitation": "Screenshot alone does not identify the original underlying system error. Tests use fixture service, not live Muse credit."
+  },
+  "verified_at_utc": "2026-11-20T18:47:26Z"
+}
