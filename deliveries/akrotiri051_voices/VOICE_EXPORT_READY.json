@@ -1,0 +1,27 @@
+{
+  "topic": "051-Akrotiri",
+  "target_seconds": 1212,
+  "expected_samples_48000": 58176000,
+  "export_scope": "16 completed male MP3 voices, saved voice profiles and audio verification only",
+  "existing_document_zip_preserved": true,
+  "profile_files": {
+    "VOICE_PROFILES_LOCKED.json": {
+      "sha256": "321439ee303205c0203140de63adb36c6ecee92f1ec429d5d9b135fc29a6bd7c",
+      "bytes": 12987
+    },
+    "VOICE_FILE_NAMING.json": {
+      "sha256": "07d4ef95cf799a86a579410bc301ba6ca0c9977e8a4fc0d28aa5849c6815a345",
+      "bytes": 3206
+    },
+    "NARRATION_STYLE_LOCKED.json": {
+      "sha256": "773764504ef1dc327f36ee66f5f3e507bdf87bae6f4eee28cf7d76e37b697974",
+      "bytes": 1485
+    },
+    "NARRATION_DELIVERY_PROFILE.json": {
+      "sha256": "813649a9d44fd69337d62328a5e2c12037ab0dc2ba86bfb9039f1e2aaba71262",
+      "bytes": 36831
+    }
+  },
+  "audio_count": 16,
+  "no_voice_generation_in_export": true
+}

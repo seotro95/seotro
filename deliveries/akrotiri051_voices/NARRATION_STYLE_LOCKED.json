@@ -1,0 +1,29 @@
+{
+  "style_id": "science-documentary-expressive-v1",
+  "applies_to": "Topic 3 and subsequent topics unless changed by user",
+  "user_request": "Giữ16giọngnam,NamMinhViệt;voiceđọcnhanhhơnmộtchút",
+  "identity": "16 saved male online voices including Vietnamese Nam Minh",
+  "delivery": "Friendly, clear documentary narration; approximately180–185 English words/minute, slightly faster delivery retained from user preference. Preserve all saved voice IDs and pitch.",
+  "online": {
+    "pitch": "+0Hz",
+    "segment_rate_percent_range": [
+      6,
+      13
+    ],
+    "word_accents_db": 1.2,
+    "max_accents_per_piece": 2,
+    "pause_seconds_range": [
+      0.07,
+      0.16
+    ],
+    "method": "Original Melo backend with documented Edge prosody/word-boundary adapter; pitch-preserving cue timing afterwards"
+  },
+  "timing": "Akrotiri051:1212seconds;English121x10+2;15localized14chapters13x90+42",
+  "limits": "Engine controls preserve saved voice identity and pitch. Independent native-language listening and proper-name review remain pending.",
+  "english_cue_strategy": "Complete immutable English cue per request using Guy;faithful smaller fallback only forprovider text/noaudio failures;pitch-preserving exact cue timing",
+  "episode": "051-Akrotiri",
+  "english_cues": 122,
+  "localized_chapters": 14,
+  "source": "Voice identities and delivery preference inherited from Black Sea045; new Akrotiri051 narration",
+  "slightly_faster_than_previous_episode": true
+}

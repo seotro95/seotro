@@ -1,0 +1,2819 @@
+[
+  {
+    "locale": "cs-CZ",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1407,
+        "metadata_characters": 1407
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1436,
+        "metadata_characters": 1436
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1492,
+        "metadata_characters": 1492
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1556,
+        "metadata_characters": 1556
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1536,
+        "metadata_characters": 1536
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1578,
+        "metadata_characters": 1578
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1567,
+        "metadata_characters": 1567
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1655,
+        "metadata_characters": 1655
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1634,
+        "metadata_characters": 1634
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1659,
+        "metadata_characters": 1659
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1641,
+        "metadata_characters": 1641
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1612,
+        "metadata_characters": 1612
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1565,
+        "metadata_characters": 1565
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 730,
+        "metadata_characters": 730
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "da-DK",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1458,
+        "metadata_characters": 1458
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1543,
+        "metadata_characters": 1543
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1577,
+        "metadata_characters": 1577
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1697,
+        "metadata_characters": 1697
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1696,
+        "metadata_characters": 1696
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1741,
+        "metadata_characters": 1741
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1639,
+        "metadata_characters": 1639
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1768,
+        "metadata_characters": 1768
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1752,
+        "metadata_characters": 1752
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [
+          "raw-010-02.words.jsonl"
+        ],
+        "source_characters": 1770,
+        "metadata_characters": 1770
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1755,
+        "metadata_characters": 1755
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1758,
+        "metadata_characters": 1758
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [
+          "raw-013-02.words.jsonl"
+        ],
+        "source_characters": 1729,
+        "metadata_characters": 1729
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 818,
+        "metadata_characters": 818
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "de-DE",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1754,
+        "metadata_characters": 1754
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1894,
+        "metadata_characters": 1894
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1823,
+        "metadata_characters": 1823
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1961,
+        "metadata_characters": 1961
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 2004,
+        "metadata_characters": 2004
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 2086,
+        "metadata_characters": 2086
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1952,
+        "metadata_characters": 1952
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 2065,
+        "metadata_characters": 2065
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 2061,
+        "metadata_characters": 2061
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 2055,
+        "metadata_characters": 2055
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 2028,
+        "metadata_characters": 2028
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 2055,
+        "metadata_characters": 2055
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 2100,
+        "metadata_characters": 2100
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 891,
+        "metadata_characters": 891
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "en-US",
+    "matched_cues": 122,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 137,
+        "metadata_characters": 137
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 151,
+        "metadata_characters": 151
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 175,
+        "metadata_characters": 175
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 139,
+        "metadata_characters": 139
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 160,
+        "metadata_characters": 160
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 165,
+        "metadata_characters": 165
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 159,
+        "metadata_characters": 159
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 159,
+        "metadata_characters": 159
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 164,
+        "metadata_characters": 164
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 191,
+        "metadata_characters": 191
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 150,
+        "metadata_characters": 150
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 175,
+        "metadata_characters": 175
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 175,
+        "metadata_characters": 175
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 177,
+        "metadata_characters": 177
+      },
+      {
+        "cue": 15,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 173,
+        "metadata_characters": 173
+      },
+      {
+        "cue": 16,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 127,
+        "metadata_characters": 127
+      },
+      {
+        "cue": 17,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 184,
+        "metadata_characters": 184
+      },
+      {
+        "cue": 18,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 144,
+        "metadata_characters": 144
+      },
+      {
+        "cue": 19,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 152,
+        "metadata_characters": 152
+      },
+      {
+        "cue": 20,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 178,
+        "metadata_characters": 178
+      },
+      {
+        "cue": 21,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 184,
+        "metadata_characters": 184
+      },
+      {
+        "cue": 22,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 156,
+        "metadata_characters": 156
+      },
+      {
+        "cue": 23,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 204,
+        "metadata_characters": 204
+      },
+      {
+        "cue": 24,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 167,
+        "metadata_characters": 167
+      },
+      {
+        "cue": 25,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 146,
+        "metadata_characters": 146
+      },
+      {
+        "cue": 26,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 178,
+        "metadata_characters": 178
+      },
+      {
+        "cue": 27,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 159,
+        "metadata_characters": 159
+      },
+      {
+        "cue": 28,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 199,
+        "metadata_characters": 199
+      },
+      {
+        "cue": 29,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 180,
+        "metadata_characters": 180
+      },
+      {
+        "cue": 30,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 168,
+        "metadata_characters": 168
+      },
+      {
+        "cue": 31,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 155,
+        "metadata_characters": 155
+      },
+      {
+        "cue": 32,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 176,
+        "metadata_characters": 176
+      },
+      {
+        "cue": 33,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 195,
+        "metadata_characters": 195
+      },
+      {
+        "cue": 34,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 195,
+        "metadata_characters": 195
+      },
+      {
+        "cue": 35,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 184,
+        "metadata_characters": 184
+      },
+      {
+        "cue": 36,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 161,
+        "metadata_characters": 161
+      },
+      {
+        "cue": 37,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 218,
+        "metadata_characters": 218
+      },
+      {
+        "cue": 38,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 164,
+        "metadata_characters": 164
+      },
+      {
+        "cue": 39,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 132,
+        "metadata_characters": 132
+      },
+      {
+        "cue": 40,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 178,
+        "metadata_characters": 178
+      },
+      {
+        "cue": 41,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 192,
+        "metadata_characters": 192
+      },
+      {
+        "cue": 42,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 156,
+        "metadata_characters": 156
+      },
+      {
+        "cue": 43,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 171,
+        "metadata_characters": 171
+      },
+      {
+        "cue": 44,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 143,
+        "metadata_characters": 143
+      },
+      {
+        "cue": 45,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 193,
+        "metadata_characters": 193
+      },
+      {
+        "cue": 46,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 185,
+        "metadata_characters": 185
+      },
+      {
+        "cue": 47,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 171,
+        "metadata_characters": 171
+      },
+      {
+        "cue": 48,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 179,
+        "metadata_characters": 179
+      },
+      {
+        "cue": 49,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 176,
+        "metadata_characters": 176
+      },
+      {
+        "cue": 50,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 177,
+        "metadata_characters": 177
+      },
+      {
+        "cue": 51,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 206,
+        "metadata_characters": 206
+      },
+      {
+        "cue": 52,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 201,
+        "metadata_characters": 201
+      },
+      {
+        "cue": 53,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 160,
+        "metadata_characters": 160
+      },
+      {
+        "cue": 54,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 197,
+        "metadata_characters": 197
+      },
+      {
+        "cue": 55,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 157,
+        "metadata_characters": 157
+      },
+      {
+        "cue": 56,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 215,
+        "metadata_characters": 215
+      },
+      {
+        "cue": 57,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 218,
+        "metadata_characters": 218
+      },
+      {
+        "cue": 58,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 191,
+        "metadata_characters": 191
+      },
+      {
+        "cue": 59,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 155,
+        "metadata_characters": 155
+      },
+      {
+        "cue": 60,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 187,
+        "metadata_characters": 187
+      },
+      {
+        "cue": 61,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 165,
+        "metadata_characters": 165
+      },
+      {
+        "cue": 62,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 159,
+        "metadata_characters": 159
+      },
+      {
+        "cue": 63,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 193,
+        "metadata_characters": 193
+      },
+      {
+        "cue": 64,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 199,
+        "metadata_characters": 199
+      },
+      {
+        "cue": 65,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 179,
+        "metadata_characters": 179
+      },
+      {
+        "cue": 66,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 196,
+        "metadata_characters": 196
+      },
+      {
+        "cue": 67,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 181,
+        "metadata_characters": 181
+      },
+      {
+        "cue": 68,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 189,
+        "metadata_characters": 189
+      },
+      {
+        "cue": 69,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 191,
+        "metadata_characters": 191
+      },
+      {
+        "cue": 70,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 192,
+        "metadata_characters": 192
+      },
+      {
+        "cue": 71,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 200,
+        "metadata_characters": 200
+      },
+      {
+        "cue": 72,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 198,
+        "metadata_characters": 198
+      },
+      {
+        "cue": 73,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 172,
+        "metadata_characters": 172
+      },
+      {
+        "cue": 74,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 184,
+        "metadata_characters": 184
+      },
+      {
+        "cue": 75,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 151,
+        "metadata_characters": 151
+      },
+      {
+        "cue": 76,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 191,
+        "metadata_characters": 191
+      },
+      {
+        "cue": 77,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 202,
+        "metadata_characters": 202
+      },
+      {
+        "cue": 78,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 192,
+        "metadata_characters": 192
+      },
+      {
+        "cue": 79,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 170,
+        "metadata_characters": 170
+      },
+      {
+        "cue": 80,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 160,
+        "metadata_characters": 160
+      },
+      {
+        "cue": 81,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 184,
+        "metadata_characters": 184
+      },
+      {
+        "cue": 82,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 179,
+        "metadata_characters": 179
+      },
+      {
+        "cue": 83,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 188,
+        "metadata_characters": 188
+      },
+      {
+        "cue": 84,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 179,
+        "metadata_characters": 179
+      },
+      {
+        "cue": 85,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 188,
+        "metadata_characters": 188
+      },
+      {
+        "cue": 86,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 217,
+        "metadata_characters": 217
+      },
+      {
+        "cue": 87,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 186,
+        "metadata_characters": 186
+      },
+      {
+        "cue": 88,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 206,
+        "metadata_characters": 206
+      },
+      {
+        "cue": 89,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 181,
+        "metadata_characters": 181
+      },
+      {
+        "cue": 90,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 178,
+        "metadata_characters": 178
+      },
+      {
+        "cue": 91,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 181,
+        "metadata_characters": 181
+      },
+      {
+        "cue": 92,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 174,
+        "metadata_characters": 174
+      },
+      {
+        "cue": 93,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 168,
+        "metadata_characters": 168
+      },
+      {
+        "cue": 94,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 182,
+        "metadata_characters": 182
+      },
+      {
+        "cue": 95,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 196,
+        "metadata_characters": 196
+      },
+      {
+        "cue": 96,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 201,
+        "metadata_characters": 201
+      },
+      {
+        "cue": 97,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 169,
+        "metadata_characters": 169
+      },
+      {
+        "cue": 98,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 193,
+        "metadata_characters": 193
+      },
+      {
+        "cue": 99,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 199,
+        "metadata_characters": 199
+      },
+      {
+        "cue": 100,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 189,
+        "metadata_characters": 189
+      },
+      {
+        "cue": 101,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 194,
+        "metadata_characters": 194
+      },
+      {
+        "cue": 102,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 172,
+        "metadata_characters": 172
+      },
+      {
+        "cue": 103,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 187,
+        "metadata_characters": 187
+      },
+      {
+        "cue": 104,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 178,
+        "metadata_characters": 178
+      },
+      {
+        "cue": 105,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 190,
+        "metadata_characters": 190
+      },
+      {
+        "cue": 106,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 165,
+        "metadata_characters": 165
+      },
+      {
+        "cue": 107,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 171,
+        "metadata_characters": 171
+      },
+      {
+        "cue": 108,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 187,
+        "metadata_characters": 187
+      },
+      {
+        "cue": 109,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 177,
+        "metadata_characters": 177
+      },
+      {
+        "cue": 110,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 196,
+        "metadata_characters": 196
+      },
+      {
+        "cue": 111,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 181,
+        "metadata_characters": 181
+      },
+      {
+        "cue": 112,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 180,
+        "metadata_characters": 180
+      },
+      {
+        "cue": 113,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 149,
+        "metadata_characters": 149
+      },
+      {
+        "cue": 114,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 184,
+        "metadata_characters": 184
+      },
+      {
+        "cue": 115,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 192,
+        "metadata_characters": 192
+      },
+      {
+        "cue": 116,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 210,
+        "metadata_characters": 210
+      },
+      {
+        "cue": 117,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 177,
+        "metadata_characters": 177
+      },
+      {
+        "cue": 118,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 176,
+        "metadata_characters": 176
+      },
+      {
+        "cue": 119,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 211,
+        "metadata_characters": 211
+      },
+      {
+        "cue": 120,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 200,
+        "metadata_characters": 200
+      },
+      {
+        "cue": 121,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 181,
+        "metadata_characters": 181
+      },
+      {
+        "cue": 122,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 16,
+        "metadata_characters": 16
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "es-ES",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1662,
+        "metadata_characters": 1662
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1690,
+        "metadata_characters": 1690
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1736,
+        "metadata_characters": 1736
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1899,
+        "metadata_characters": 1899
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1883,
+        "metadata_characters": 1883
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1942,
+        "metadata_characters": 1942
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1764,
+        "metadata_characters": 1764
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1922,
+        "metadata_characters": 1922
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1910,
+        "metadata_characters": 1910
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1957,
+        "metadata_characters": 1957
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1970,
+        "metadata_characters": 1970
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1927,
+        "metadata_characters": 1927
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1951,
+        "metadata_characters": 1951
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 886,
+        "metadata_characters": 886
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "fi-FI",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1574,
+        "metadata_characters": 1574
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1588,
+        "metadata_characters": 1588
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [
+          "raw-003-01.words.jsonl"
+        ],
+        "source_characters": 1621,
+        "metadata_characters": 1621
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1782,
+        "metadata_characters": 1782
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [
+          "raw-005-03.words.jsonl"
+        ],
+        "source_characters": 1754,
+        "metadata_characters": 1754
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1784,
+        "metadata_characters": 1784
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1762,
+        "metadata_characters": 1762
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1880,
+        "metadata_characters": 1880
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1825,
+        "metadata_characters": 1825
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1863,
+        "metadata_characters": 1863
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1872,
+        "metadata_characters": 1872
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1899,
+        "metadata_characters": 1899
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1831,
+        "metadata_characters": 1831
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 843,
+        "metadata_characters": 843
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "fr-FR",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1688,
+        "metadata_characters": 1688
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1766,
+        "metadata_characters": 1766
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1800,
+        "metadata_characters": 1800
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1937,
+        "metadata_characters": 1937
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1902,
+        "metadata_characters": 1902
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1975,
+        "metadata_characters": 1975
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1925,
+        "metadata_characters": 1925
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1992,
+        "metadata_characters": 1992
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1900,
+        "metadata_characters": 1900
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1991,
+        "metadata_characters": 1991
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1984,
+        "metadata_characters": 1984
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 2028,
+        "metadata_characters": 2028
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 2010,
+        "metadata_characters": 2010
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 885,
+        "metadata_characters": 885
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "it-IT",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1658,
+        "metadata_characters": 1658
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1773,
+        "metadata_characters": 1773
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1787,
+        "metadata_characters": 1787
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1867,
+        "metadata_characters": 1867
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1873,
+        "metadata_characters": 1873
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1891,
+        "metadata_characters": 1891
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1892,
+        "metadata_characters": 1892
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1948,
+        "metadata_characters": 1948
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1920,
+        "metadata_characters": 1920
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1909,
+        "metadata_characters": 1909
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1956,
+        "metadata_characters": 1956
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1909,
+        "metadata_characters": 1909
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1958,
+        "metadata_characters": 1958
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 858,
+        "metadata_characters": 858
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "ja-JP",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 452,
+        "metadata_characters": 452
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 405,
+        "metadata_characters": 405
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 413,
+        "metadata_characters": 413
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 448,
+        "metadata_characters": 448
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 404,
+        "metadata_characters": 404
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 438,
+        "metadata_characters": 438
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 432,
+        "metadata_characters": 432
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 446,
+        "metadata_characters": 446
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 406,
+        "metadata_characters": 406
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 407,
+        "metadata_characters": 407
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 409,
+        "metadata_characters": 409
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 408,
+        "metadata_characters": 408
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 413,
+        "metadata_characters": 413
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 208,
+        "metadata_characters": 208
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "ko-KR",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 404,
+        "metadata_characters": 404
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 373,
+        "metadata_characters": 373
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 349,
+        "metadata_characters": 349
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 425,
+        "metadata_characters": 425
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 372,
+        "metadata_characters": 372
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 407,
+        "metadata_characters": 407
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 398,
+        "metadata_characters": 398
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 439,
+        "metadata_characters": 439
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 400,
+        "metadata_characters": 400
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 406,
+        "metadata_characters": 406
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 393,
+        "metadata_characters": 393
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 429,
+        "metadata_characters": 429
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 399,
+        "metadata_characters": 399
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 199,
+        "metadata_characters": 199
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "nb-NO",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1447,
+        "metadata_characters": 1447
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1546,
+        "metadata_characters": 1546
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [
+          "raw-003-01.words.jsonl"
+        ],
+        "source_characters": 1552,
+        "metadata_characters": 1552
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1659,
+        "metadata_characters": 1659
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1652,
+        "metadata_characters": 1652
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1698,
+        "metadata_characters": 1698
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1565,
+        "metadata_characters": 1565
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [
+          "raw-008-02.words.jsonl"
+        ],
+        "source_characters": 1717,
+        "metadata_characters": 1717
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [
+          "raw-009-01.words.jsonl"
+        ],
+        "source_characters": 1706,
+        "metadata_characters": 1706
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1699,
+        "metadata_characters": 1699
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1723,
+        "metadata_characters": 1723
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1730,
+        "metadata_characters": 1730
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1702,
+        "metadata_characters": 1702
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 773,
+        "metadata_characters": 773
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "nl-NL",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1608,
+        "metadata_characters": 1608
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1716,
+        "metadata_characters": 1716
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1758,
+        "metadata_characters": 1758
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1878,
+        "metadata_characters": 1878
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1863,
+        "metadata_characters": 1863
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1947,
+        "metadata_characters": 1947
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1898,
+        "metadata_characters": 1898
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1969,
+        "metadata_characters": 1969
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1980,
+        "metadata_characters": 1980
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1990,
+        "metadata_characters": 1990
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1881,
+        "metadata_characters": 1881
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1962,
+        "metadata_characters": 1962
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1957,
+        "metadata_characters": 1957
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 874,
+        "metadata_characters": 874
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "pl-PL",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1529,
+        "metadata_characters": 1529
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1584,
+        "metadata_characters": 1584
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1722,
+        "metadata_characters": 1722
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1870,
+        "metadata_characters": 1870
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1704,
+        "metadata_characters": 1704
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1762,
+        "metadata_characters": 1762
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1731,
+        "metadata_characters": 1731
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1744,
+        "metadata_characters": 1744
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1826,
+        "metadata_characters": 1826
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1766,
+        "metadata_characters": 1766
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1861,
+        "metadata_characters": 1861
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1859,
+        "metadata_characters": 1859
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1744,
+        "metadata_characters": 1744
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 803,
+        "metadata_characters": 803
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "pt-PT",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1570,
+        "metadata_characters": 1570
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1617,
+        "metadata_characters": 1617
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1676,
+        "metadata_characters": 1676
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1769,
+        "metadata_characters": 1769
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1752,
+        "metadata_characters": 1752
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1841,
+        "metadata_characters": 1841
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1749,
+        "metadata_characters": 1749
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1837,
+        "metadata_characters": 1837
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1808,
+        "metadata_characters": 1808
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1844,
+        "metadata_characters": 1844
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1846,
+        "metadata_characters": 1846
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1866,
+        "metadata_characters": 1866
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1814,
+        "metadata_characters": 1814
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 851,
+        "metadata_characters": 851
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "sv-SE",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1428,
+        "metadata_characters": 1428
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1585,
+        "metadata_characters": 1585
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1556,
+        "metadata_characters": 1556
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1680,
+        "metadata_characters": 1680
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1682,
+        "metadata_characters": 1682
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1713,
+        "metadata_characters": 1713
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [
+          "raw-007-01.words.jsonl",
+          "raw-007-02.words.jsonl"
+        ],
+        "source_characters": 1619,
+        "metadata_characters": 1619
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1499,
+        "metadata_characters": 1499
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1712,
+        "metadata_characters": 1712
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1732,
+        "metadata_characters": 1732
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1477,
+        "metadata_characters": 1477
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1739,
+        "metadata_characters": 1739
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1683,
+        "metadata_characters": 1683
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 778,
+        "metadata_characters": 778
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  },
+  {
+    "locale": "vi-VN",
+    "matched_cues": 14,
+    "unavailable_cues": 0,
+    "mismatched_cues": 0,
+    "cues": [
+      {
+        "cue": 1,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 914,
+        "metadata_characters": 914
+      },
+      {
+        "cue": 2,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 927,
+        "metadata_characters": 927
+      },
+      {
+        "cue": 3,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 876,
+        "metadata_characters": 876
+      },
+      {
+        "cue": 4,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 922,
+        "metadata_characters": 922
+      },
+      {
+        "cue": 5,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 878,
+        "metadata_characters": 878
+      },
+      {
+        "cue": 6,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 1159,
+        "metadata_characters": 1159
+      },
+      {
+        "cue": 7,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 958,
+        "metadata_characters": 958
+      },
+      {
+        "cue": 8,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 997,
+        "metadata_characters": 997
+      },
+      {
+        "cue": 9,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 941,
+        "metadata_characters": 941
+      },
+      {
+        "cue": 10,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 988,
+        "metadata_characters": 988
+      },
+      {
+        "cue": 11,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 882,
+        "metadata_characters": 882
+      },
+      {
+        "cue": 12,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 928,
+        "metadata_characters": 928
+      },
+      {
+        "cue": 13,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 911,
+        "metadata_characters": 911
+      },
+      {
+        "cue": 14,
+        "status": "matched",
+        "missing_metadata": [],
+        "validated_fallback_text_parts": [],
+        "source_characters": 429,
+        "metadata_characters": 429
+      }
+    ],
+    "scope": "Provider word metadata compared with synthesis input; this is not independent listening or ASR"
+  }
+]

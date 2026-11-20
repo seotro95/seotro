@@ -1,0 +1,877 @@
+{
+  "topic": "051-Akrotiri",
+  "duration_seconds": 1212,
+  "expected_samples_48000": 58176000,
+  "profile_set_id": "science-history-16-v4-namminh",
+  "vietnamese_voice": "vi-VN-NamMinhNeural",
+  "english_voice": "en-US-GuyNeural",
+  "german_voice": "de-DE-ChristophNeural",
+  "provider_availability_changes": [
+    {
+      "locale": "de-DE",
+      "previous": "de-DE-ConradNeural",
+      "selected": "de-DE-ChristophNeural",
+      "reason": "Provider catalog no longer offers Conrad"
+    },
+    {
+      "locale": "en-US",
+      "previous": "en-US-AndrewNeural",
+      "selected": "en-US-GuyNeural",
+      "reason": "Repeated synthesis failures;stable same-text sample with Guy"
+    }
+  ],
+  "voices": [
+    {
+      "locale": "en-US",
+      "voice_id": "en-US-GuyNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "e33bfba41d99d714f5b649e5edd292c0a67ec208d8a60c70f7481258123a1cb9",
+      "min_post_tempo": 0.9598,
+      "max_post_tempo": 1.4902,
+      "max_padding_seconds": 0.022833333333333334,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "vi-VN",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "f53ecc29175b5f83e091de275488544cb25d380da1333cc2580019010b832e2b",
+      "min_post_tempo": 0.7295555555555555,
+      "max_post_tempo": 0.9593555555555555,
+      "max_padding_seconds": 0.0314375,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "es-ES",
+      "voice_id": "es-ES-AlvaroNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "71028512846530a7ce2235af23c55cb47f0a0fe6944abe52ec43da474e52430e",
+      "min_post_tempo": 1.2692,
+      "max_post_tempo": 1.4975333333333334,
+      "max_padding_seconds": 0.034208333333333334,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "fr-FR",
+      "voice_id": "fr-FR-HenriNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "0c9e7e02f8daf28ea0c6613d204ac01a4c89d6022ee56d5b2e38c12d197b29fe",
+      "min_post_tempo": 1.1385333333333334,
+      "max_post_tempo": 1.3295333333333332,
+      "max_padding_seconds": 0.018520833333333334,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "ja-JP",
+      "voice_id": "ja-JP-KeitaNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "0822ddcf242d0ed8c4ba62c91199a09fb5918bdf43c26d705b504eb960d731b2",
+      "min_post_tempo": 0.8013111111111111,
+      "max_post_tempo": 0.9237111111111111,
+      "max_padding_seconds": 0.02875,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "ko-KR",
+      "voice_id": "ko-KR-InJoonNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "47b643b7404843d7561684eaffe8dcf66c3be5465f71a0dc82f90dbcb282bc92",
+      "min_post_tempo": 0.7863777777777777,
+      "max_post_tempo": 0.9508571428571428,
+      "max_padding_seconds": 0.0293125,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "de-DE",
+      "voice_id": "de-DE-ChristophNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "6386212b9aa8ed1503e022b8d900db18e4fe79b3d16aee9ec918dac84375be1a",
+      "min_post_tempo": 1.3185333333333333,
+      "max_post_tempo": 1.5444,
+      "max_padding_seconds": 0.01625,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "it-IT",
+      "voice_id": "it-IT-DiegoNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "cda883016deee60923be701e74f71f8a77b943c0a142d1f3c25f505125c6283a",
+      "min_post_tempo": 1.3796,
+      "max_post_tempo": 1.5916666666666666,
+      "max_padding_seconds": 0.01525,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "pt-PT",
+      "voice_id": "pt-PT-DuarteNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "d821bd27939aca319656b46641f6fb78a12ea2a47d79fcbafad265429227617e",
+      "min_post_tempo": 1.1006666666666667,
+      "max_post_tempo": 1.2599333333333333,
+      "max_padding_seconds": 0.018875,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "nl-NL",
+      "voice_id": "nl-NL-MaartenNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "530c78fc60c45da1f284e03f3ae9ad70a6d80a98b791cb8d18b350b170beb07b",
+      "min_post_tempo": 1.0,
+      "max_post_tempo": 1.369,
+      "max_padding_seconds": 0.021333333333333333,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "pl-PL",
+      "voice_id": "pl-PL-MarekNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "e6dde8e5c82e5700eb8fe2d0496394cec48f5c6bc80a9f5d3b64f3eddc239007",
+      "min_post_tempo": 1.0,
+      "max_post_tempo": 1.3556666666666666,
+      "max_padding_seconds": 0.021333333333333333,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "sv-SE",
+      "voice_id": "sv-SE-MattiasNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "594a12aee25235be27ef37b5bbf7b055bad51855974de323dda1575b76eadac8",
+      "min_post_tempo": 1.4178222222222223,
+      "max_post_tempo": 1.5914,
+      "max_padding_seconds": 0.014645833333333334,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "da-DK",
+      "voice_id": "da-DK-JeppeNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "b0448d9e04b7b1be2904e9fef3a08211105550b82d94ba3fe38af2587d94fcd9",
+      "min_post_tempo": 1.0,
+      "max_post_tempo": 1.3663333333333334,
+      "max_padding_seconds": 0.021333333333333333,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "fi-FI",
+      "voice_id": "fi-FI-HarriNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "b563ae28e3f60348c64184fa4a1daf18d75a6bf3536235de681aa53cf8774c30",
+      "min_post_tempo": 1.0,
+      "max_post_tempo": 1.4887333333333332,
+      "max_padding_seconds": 0.021333333333333333,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "nb-NO",
+      "voice_id": "nb-NO-FinnNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "2b54bc5ad96e5ae3c3ef000390d3ff0e76b6a59b9d4c85476008854bd38d26f6",
+      "min_post_tempo": 1.0,
+      "max_post_tempo": 1.3660666666666668,
+      "max_padding_seconds": 0.021333333333333333,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "cs-CZ",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "70dc9a6d29d287a852df2347baef96e0d7d2137585cbd91ebf4c519a1521cac8",
+      "min_post_tempo": 1.0,
+      "max_post_tempo": 1.3156666666666668,
+      "max_padding_seconds": 0.021333333333333333,
+      "pitch_shift": false,
+      "alignment": "English122cues;15localized14chapters13x90+42s",
+      "independent_native_listening_review": false
+    }
+  ],
+  "online_text_metadata_audit": {
+    "languages": 16,
+    "full_normalized_input_matches": true,
+    "scope": "Provider metadata comparedwithinput;not independent output transcription/listening"
+  },
+  "localization": "Vietnamese,Japanese,Korean contextual adaptations;12full-chapter machine translations using ceramic-container,sediment-cover,molded-replica and archaeological-age context,with targeted region/terminology review. Thera chronology2023/2025/2026andNov2026thesis kept attributed. Independent native listening pending.",
+  "independent_native_review": false,
+  "input_provenance": "Narration+timing hashes match canonical text, authentic engine snapshot and render report for all16 voices. All16completedtracks usecurrentepisode narration;authenticengineinputsnapshots preserved.",
+  "chapter_audio_reuse": [
+    {
+      "locale": "cs-CZ",
+      "old_term": "Vklady",
+      "corrected_term": "Sopečné usazeniny",
+      "resynthesized_chapters": [
+        11
+      ],
+      "reused_unchanged_chapters": [
+        {
+          "chapter": 1,
+          "start_frame": 0,
+          "end_frame": 4320000,
+          "contiguous_partition_sha256": "58b935931b3e5f32aab27174d917a675b7fcd1440d24095fa1ea50b56bd7bee9",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 2,
+          "start_frame": 4320000,
+          "end_frame": 8640000,
+          "contiguous_partition_sha256": "f572a9475c9b266ca0a1c7a06f370f9c55d85b2cf1f8edd042885b302aab0758",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 3,
+          "start_frame": 8640000,
+          "end_frame": 12960000,
+          "contiguous_partition_sha256": "f0906e41bcd44f152521e10d2036cce34be2d519dd060b8fd780a1f1663ddb44",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 4,
+          "start_frame": 12960000,
+          "end_frame": 17280000,
+          "contiguous_partition_sha256": "34767981cb9b6c7ea68217015fea0fdeb04788d3e8847e7005b74aefc322b3af",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 5,
+          "start_frame": 17280000,
+          "end_frame": 21600000,
+          "contiguous_partition_sha256": "21986439a29e666d740251256f2fca0a47647b2a7b1acd8c90a10774bb9aa878",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 6,
+          "start_frame": 21600000,
+          "end_frame": 25920000,
+          "contiguous_partition_sha256": "ce7c273ba43e0f9273374e5c30c4c314fddb84dc5fc5d244ab837dc676f4d56a",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 7,
+          "start_frame": 25920000,
+          "end_frame": 30240000,
+          "contiguous_partition_sha256": "e9735ebd99bf0b010a7d1aee7da72463bc76314da4715b34622941cad080bfa2",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 8,
+          "start_frame": 30240000,
+          "end_frame": 34560000,
+          "contiguous_partition_sha256": "91b5f53e4327a38b02deb04a368cf7526a0c8ff499a282ff1cc18149986c0c7f",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 9,
+          "start_frame": 34560000,
+          "end_frame": 38880000,
+          "contiguous_partition_sha256": "6f05b1f3bea24b31b37f39c34ea03895a6bcc94fe581217ca819822945271c42",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 10,
+          "start_frame": 38880000,
+          "end_frame": 43200000,
+          "contiguous_partition_sha256": "fdaeeb36364068476fa7b4dc6eeda122566745e40738e6afabf5cd8b7cf2865b",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 12,
+          "start_frame": 47520000,
+          "end_frame": 51840000,
+          "contiguous_partition_sha256": "a6aad46276449ecbf09bd561a3b8d66921a67dcb5b616bea990a2508ff5a00b1",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 13,
+          "start_frame": 51840000,
+          "end_frame": 56160000,
+          "contiguous_partition_sha256": "dbbbc8714d1d4125471e1abc361388f4f54c901d609f2b1e5178080e1027e20f",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 14,
+          "start_frame": 56160000,
+          "end_frame": 58176000,
+          "contiguous_partition_sha256": "04493d38dff6bef956aabc364cb2065c32f578638f1a9c7083b7455badc5d4bf",
+          "joined_partitions_match_original_decoded_chapter": true
+        }
+      ],
+      "source_mp3_sha256": "0972e92911e5b5acb039fa0e05ac43f33e6a8a70879ba938175ebafd34b2b318",
+      "scope": "Same voice and exact original chapter contents retained for unchanged chapters. Current input snapshot and report describe combined production;pre-correction authentic input/report/audio preserved here."
+    },
+    {
+      "locale": "da-DK",
+      "old_term": "Indskud",
+      "corrected_term": "Vulkanske aflejringer",
+      "resynthesized_chapters": [
+        11
+      ],
+      "reused_unchanged_chapters": [
+        {
+          "chapter": 1,
+          "start_frame": 0,
+          "end_frame": 4320000,
+          "contiguous_partition_sha256": "54d2668bd9f79bb30b7063a778e48a4619c4474ef740703b1f3b6681d5379249",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 2,
+          "start_frame": 4320000,
+          "end_frame": 8640000,
+          "contiguous_partition_sha256": "5274f3db2e5ca37ac969aee40e53ea9ecf0725eb8fd65c67b1ab88b9e674318f",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 3,
+          "start_frame": 8640000,
+          "end_frame": 12960000,
+          "contiguous_partition_sha256": "ad41b585d258d958912294d3e0114651bc1ae8d513358bcd73898da9401a248a",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 4,
+          "start_frame": 12960000,
+          "end_frame": 17280000,
+          "contiguous_partition_sha256": "15ce5ddf5d7697062f8afd9aac51c56ba4c48b1fc6b9f1b4b357eb32821e170e",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 5,
+          "start_frame": 17280000,
+          "end_frame": 21600000,
+          "contiguous_partition_sha256": "f0976b4a3cc88b472c0dd894957d496e4d1bcd166aa02d3e295a41f641b8b2be",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 6,
+          "start_frame": 21600000,
+          "end_frame": 25920000,
+          "contiguous_partition_sha256": "c78ed0fbf015452e027d5650957d5fed7a2f5813e8f0e428d30136f657c5ea24",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 7,
+          "start_frame": 25920000,
+          "end_frame": 30240000,
+          "contiguous_partition_sha256": "e1b32d99f5af8a6d37a44e10942005527dad55b8cf513277cec94e06b895400f",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 8,
+          "start_frame": 30240000,
+          "end_frame": 34560000,
+          "contiguous_partition_sha256": "670167d53afd40c2e331ab12fdaf320520e4be8be5e4548d9e7b86059cd5b4fd",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 9,
+          "start_frame": 34560000,
+          "end_frame": 38880000,
+          "contiguous_partition_sha256": "32fb4f0c1e693c2c73160f792c3377a02305313553d391c33e5dee0de3af3907",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 10,
+          "start_frame": 38880000,
+          "end_frame": 43200000,
+          "contiguous_partition_sha256": "33aa125f117396ef9374c43fb2063f75ee3090b8fca6803353e25caa47d9a235",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 12,
+          "start_frame": 47520000,
+          "end_frame": 51840000,
+          "contiguous_partition_sha256": "6b5a665deb284d42e0df0d955b4267a62dc33bfef30c8fc4f6d4c7601d921149",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 13,
+          "start_frame": 51840000,
+          "end_frame": 56160000,
+          "contiguous_partition_sha256": "3ab98c19f72f063cfd066d9aa1a2d08174c63ac0e10e91d873ee3f2c4b88ff71",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 14,
+          "start_frame": 56160000,
+          "end_frame": 58176000,
+          "contiguous_partition_sha256": "a9aa18d7c81075281f35ba254017a59b1d6e99ee7aebf25623e4d7b8d2459990",
+          "joined_partitions_match_original_decoded_chapter": true
+        }
+      ],
+      "source_mp3_sha256": "17063ff991183fc9f3a5e3addf7150c67600a043b90b22a3be15650b1b3b85b4",
+      "scope": "Same voice and exact original chapter contents retained for unchanged chapters. Current input snapshot and report describe combined production;pre-correction authentic input/report/audio preserved here."
+    },
+    {
+      "locale": "fi-FI",
+      "old_term": "Talletukset",
+      "corrected_term": "Vulkaaniset kerrostumat",
+      "resynthesized_chapters": [
+        11
+      ],
+      "reused_unchanged_chapters": [
+        {
+          "chapter": 1,
+          "start_frame": 0,
+          "end_frame": 4320000,
+          "contiguous_partition_sha256": "183670bf6c27040c4bcb78f01ae1d08ae81285a62ac67e7922d0dd57fcbce7eb",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 2,
+          "start_frame": 4320000,
+          "end_frame": 8640000,
+          "contiguous_partition_sha256": "df856a6a423ee75248c35372d7ee105952f1c4850ec22004fa0244bf7516f63c",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 3,
+          "start_frame": 8640000,
+          "end_frame": 12960000,
+          "contiguous_partition_sha256": "e33e37e2e325369c77795c3ac89768efbb153668e7d2089039e5de00f28b9787",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 4,
+          "start_frame": 12960000,
+          "end_frame": 17280000,
+          "contiguous_partition_sha256": "1718c419945e3fe9d0495446d65a02ecbc8b92da9ecce0e221ae8b6ea06249c5",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 5,
+          "start_frame": 17280000,
+          "end_frame": 21600000,
+          "contiguous_partition_sha256": "9e2d366038ba345fd573f0115a0a1d554902e8bfa48f2a975a60e2fd5081e878",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 6,
+          "start_frame": 21600000,
+          "end_frame": 25920000,
+          "contiguous_partition_sha256": "5ad65acd3ef02fa91b51b48cad6b17f840af1bc622bbe3b68eec962683d0815e",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 7,
+          "start_frame": 25920000,
+          "end_frame": 30240000,
+          "contiguous_partition_sha256": "ae062a886de808c3fbb0d13e4877dd489721d50d31c65673ffa6d7d90e91513c",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 8,
+          "start_frame": 30240000,
+          "end_frame": 34560000,
+          "contiguous_partition_sha256": "97402ca98c1257982a563482568ad0d8940246a2eb5a37fec214bb8c70497baf",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 9,
+          "start_frame": 34560000,
+          "end_frame": 38880000,
+          "contiguous_partition_sha256": "dd02542403e645529478b831a15c181fec809f693e400269e093dc9405fd0dbf",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 10,
+          "start_frame": 38880000,
+          "end_frame": 43200000,
+          "contiguous_partition_sha256": "6ecd048ab513c029eb4d63278faaa4ea3c578160dbdad819a1b9951c37513950",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 12,
+          "start_frame": 47520000,
+          "end_frame": 51840000,
+          "contiguous_partition_sha256": "c6a433f7590f256f3aa87d73893ab3c28f9ebc318db51597071c552dcbe52d57",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 13,
+          "start_frame": 51840000,
+          "end_frame": 56160000,
+          "contiguous_partition_sha256": "6ba6c8a6722c5c8370de405355ce6ae2bef113d87b724533cca880fc8fc776ea",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 14,
+          "start_frame": 56160000,
+          "end_frame": 58176000,
+          "contiguous_partition_sha256": "9ccd4f4961ce3aa97a8e92da97a656f2ae90e5047760693f90246f6153ed1c61",
+          "joined_partitions_match_original_decoded_chapter": true
+        }
+      ],
+      "source_mp3_sha256": "d31a19b2d7f8f00363cddd902c46dc88a99b1aa4ae64ef8db285772265a2ca9f",
+      "scope": "Same voice and exact original chapter contents retained for unchanged chapters. Current input snapshot and report describe combined production;pre-correction authentic input/report/audio preserved here."
+    },
+    {
+      "locale": "nb-NO",
+      "old_term": "Innskudd",
+      "corrected_term": "Vulkanske avsetninger",
+      "resynthesized_chapters": [
+        11
+      ],
+      "reused_unchanged_chapters": [
+        {
+          "chapter": 1,
+          "start_frame": 0,
+          "end_frame": 4320000,
+          "contiguous_partition_sha256": "5a527c3ddb625d2b702411d9c81eb4b776c6d983a201ab1bc32728881e237460",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 2,
+          "start_frame": 4320000,
+          "end_frame": 8640000,
+          "contiguous_partition_sha256": "4f8e02951ff041bb8985aa0f79de514e4313c2dcac20543fc97b8bff6ef5c7d6",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 3,
+          "start_frame": 8640000,
+          "end_frame": 12960000,
+          "contiguous_partition_sha256": "d0c86423f0eb0cee4a57e588a6f58d4b7487a2e437aff094d35d8d6087e09891",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 4,
+          "start_frame": 12960000,
+          "end_frame": 17280000,
+          "contiguous_partition_sha256": "61d9b4c336b1402bd3fb85906185dabbef30080d45955d55e4cd55a2d6438d39",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 5,
+          "start_frame": 17280000,
+          "end_frame": 21600000,
+          "contiguous_partition_sha256": "f7dedfc23df0010296a3d6dd593c77f31b64dfb68742c01eb71138a78510a242",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 6,
+          "start_frame": 21600000,
+          "end_frame": 25920000,
+          "contiguous_partition_sha256": "397ef1e309fa2abd83e233d181706f9b04dc3a1c05e8c7d507495c3aaaa444ab",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 7,
+          "start_frame": 25920000,
+          "end_frame": 30240000,
+          "contiguous_partition_sha256": "215e0b2b6b03cd7e0206730aa126fe3cd238e2ad8a10e20e96573ed00a3fbd8f",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 8,
+          "start_frame": 30240000,
+          "end_frame": 34560000,
+          "contiguous_partition_sha256": "9a07904b41da6c8c96d9ac1268a14afd77974c5e7ab3d7b01bf2defea4b8881c",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 9,
+          "start_frame": 34560000,
+          "end_frame": 38880000,
+          "contiguous_partition_sha256": "0b982f4270d954d141051a724239ae9ef80755e85cf7649d0064748d32bbd26a",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 10,
+          "start_frame": 38880000,
+          "end_frame": 43200000,
+          "contiguous_partition_sha256": "a6c41e1737c4710ffd653c0cca1faeb3e84babf73e3d6f761329b5b31ae9d0f5",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 12,
+          "start_frame": 47520000,
+          "end_frame": 51840000,
+          "contiguous_partition_sha256": "84e41d075c9defce210b21d1374f771a8e74dbbd0503b7565ac681ad3fd2f9dd",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 13,
+          "start_frame": 51840000,
+          "end_frame": 56160000,
+          "contiguous_partition_sha256": "b55e4625cc1f6744f32d7ca36445a7ea73b51ff074aa312430538032207ecf21",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 14,
+          "start_frame": 56160000,
+          "end_frame": 58176000,
+          "contiguous_partition_sha256": "80af3cc78518fe3303734ebf583bf0916116b43ea0f54e795c8066ebccab8274",
+          "joined_partitions_match_original_decoded_chapter": true
+        }
+      ],
+      "source_mp3_sha256": "81159f209e74fd355cfe17b6045350d3af822fbe6939dc229277d36c93c63abf",
+      "scope": "Same voice and exact original chapter contents retained for unchanged chapters. Current input snapshot and report describe combined production;pre-correction authentic input/report/audio preserved here."
+    },
+    {
+      "locale": "nl-NL",
+      "old_term": "Deposito's",
+      "corrected_term": "Sedimentlagen",
+      "resynthesized_chapters": [
+        11
+      ],
+      "reused_unchanged_chapters": [
+        {
+          "chapter": 1,
+          "start_frame": 0,
+          "end_frame": 4320000,
+          "contiguous_partition_sha256": "bc756288d6fad604af9c82d11e9d8ece764c3b91cead35bfdcf97242a6ac696c",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 2,
+          "start_frame": 4320000,
+          "end_frame": 8640000,
+          "contiguous_partition_sha256": "b78955adb851d3468435725e6ea0af6c8cbf183b92196559fb265848182de833",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 3,
+          "start_frame": 8640000,
+          "end_frame": 12960000,
+          "contiguous_partition_sha256": "58ead55e788d8ce4c70ae05d0b164aa041f397362007a344246c70a45fd204c0",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 4,
+          "start_frame": 12960000,
+          "end_frame": 17280000,
+          "contiguous_partition_sha256": "1018968306ad680584d2a78110042c1f496bfbf1d35046d6c9d4e9395deebb7c",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 5,
+          "start_frame": 17280000,
+          "end_frame": 21600000,
+          "contiguous_partition_sha256": "213d1e1a5a6d32cadb43efacd7c435908419c6d9fc635c7b331842fa4e5cac66",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 6,
+          "start_frame": 21600000,
+          "end_frame": 25920000,
+          "contiguous_partition_sha256": "fe91e34e58eac188ee523dcf2b10805aec15b704527ff3232c229217f5466619",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 7,
+          "start_frame": 25920000,
+          "end_frame": 30240000,
+          "contiguous_partition_sha256": "e847850d5c41282d770360557df39b4ffd2b1ebe9bc1e032fd188ca199346d96",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 8,
+          "start_frame": 30240000,
+          "end_frame": 34560000,
+          "contiguous_partition_sha256": "6ad9246866656e310b1c5ca4f0c05857a3f8e7748eb2ff2dfdb27777f755de44",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 9,
+          "start_frame": 34560000,
+          "end_frame": 38880000,
+          "contiguous_partition_sha256": "6527a5687dae9f1fb747eb8c050a05d9fcd870f0a7d3e64c81863bfcb2d26f68",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 10,
+          "start_frame": 38880000,
+          "end_frame": 43200000,
+          "contiguous_partition_sha256": "f2f93772a7bdd857f179ac5bbfe122ad7e1dba9a7995dec6420f372f3e9c7a00",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 12,
+          "start_frame": 47520000,
+          "end_frame": 51840000,
+          "contiguous_partition_sha256": "67002f991de4f6ed36e02e8d923cfe3b0155f10a8f196256a5acb2b05dfb9676",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 13,
+          "start_frame": 51840000,
+          "end_frame": 56160000,
+          "contiguous_partition_sha256": "398f9b46a26d23ecd900f9a16a0e4487aab583802013ce946e90c6cb76fd1734",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 14,
+          "start_frame": 56160000,
+          "end_frame": 58176000,
+          "contiguous_partition_sha256": "dd1f260ab9bff09c2c42f316dc6a2915a40b03b966e5a700aa726f1d91c73ec8",
+          "joined_partitions_match_original_decoded_chapter": true
+        }
+      ],
+      "source_mp3_sha256": "5471184c25586a9ad96dcf4be32453b9224c07d48c8009dddef8c5a66d28b130",
+      "scope": "Same voice and exact original chapter contents retained for unchanged chapters. Current input snapshot and report describe combined production;pre-correction authentic input/report/audio preserved here."
+    },
+    {
+      "locale": "pl-PL",
+      "old_term": "Depozyty",
+      "corrected_term": "Osady wulkaniczne",
+      "resynthesized_chapters": [
+        11
+      ],
+      "reused_unchanged_chapters": [
+        {
+          "chapter": 1,
+          "start_frame": 0,
+          "end_frame": 4320000,
+          "contiguous_partition_sha256": "071532e6aa3fd1401da96a3f59a8930a033bf3cf09211eda7db0b642d989c9d2",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 2,
+          "start_frame": 4320000,
+          "end_frame": 8640000,
+          "contiguous_partition_sha256": "19685001dab794b91ca1416192987963bef6bc258325f807ccb0df28d72de5bf",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 3,
+          "start_frame": 8640000,
+          "end_frame": 12960000,
+          "contiguous_partition_sha256": "acdd1bcad78c8ff3861c721b2ab7fa5e1ab0bbed0e04d29aa850caca3c62f5eb",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 4,
+          "start_frame": 12960000,
+          "end_frame": 17280000,
+          "contiguous_partition_sha256": "0a8164970b6c27a88af77a86de84c3d07729ddb0c14cc9dd49f3f7a91fad8480",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 5,
+          "start_frame": 17280000,
+          "end_frame": 21600000,
+          "contiguous_partition_sha256": "1d061c2b7a61d4b670138b5e471b9761ed16eae3c14a2c52d3cbb772b88f70fe",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 6,
+          "start_frame": 21600000,
+          "end_frame": 25920000,
+          "contiguous_partition_sha256": "da184b6410e6709fc3604ab2b8511ecc765672b95806f01ea2207abacc312386",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 7,
+          "start_frame": 25920000,
+          "end_frame": 30240000,
+          "contiguous_partition_sha256": "3156f7718d8bbbca3fac456fb90fdaec247b74400ca775d3ceb8f1d47843d0b7",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 8,
+          "start_frame": 30240000,
+          "end_frame": 34560000,
+          "contiguous_partition_sha256": "62916f64566bc52b701060ae39016bfff76c4c48c28cfbf2a881ea632520874e",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 9,
+          "start_frame": 34560000,
+          "end_frame": 38880000,
+          "contiguous_partition_sha256": "5a95969b85ec83f37e5b70534b4b288e992e00b861aca290d4545a4ae0bfae70",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 10,
+          "start_frame": 38880000,
+          "end_frame": 43200000,
+          "contiguous_partition_sha256": "45de6693c8c1a021d742943468268b56d3d02106839233dd686615aeab258280",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 12,
+          "start_frame": 47520000,
+          "end_frame": 51840000,
+          "contiguous_partition_sha256": "268044d86fdbbf616c5a3292139384c29655e1c44c67b48f47c03d34bf9c11e6",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 13,
+          "start_frame": 51840000,
+          "end_frame": 56160000,
+          "contiguous_partition_sha256": "0fbd31d020c0f6f260fd9a2bd5e6ddcf6856813b19b9e5e6f4090fa7529eba70",
+          "joined_partitions_match_original_decoded_chapter": true
+        },
+        {
+          "chapter": 14,
+          "start_frame": 56160000,
+          "end_frame": 58176000,
+          "contiguous_partition_sha256": "7fc448c1e853ba144b66f270bcc8dfc4397de25b47b57517d1f0be58c7579a04",
+          "joined_partitions_match_original_decoded_chapter": true
+        }
+      ],
+      "source_mp3_sha256": "ac94497d6feb9a7a0d87f162ebeddddb7cb0363d2e6091b95ae9b9924dc3694d",
+      "scope": "Same voice and exact original chapter contents retained for unchanged chapters. Current input snapshot and report describe combined production;pre-correction authentic input/report/audio preserved here."
+    }
+  ]
+}

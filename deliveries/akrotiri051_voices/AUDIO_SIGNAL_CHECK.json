@@ -1,0 +1,162 @@
+[
+  {
+    "locale": "cs-CZ",
+    "filename": "AKROTIRI_051_Sec.mp3",
+    "sha256": "70dc9a6d29d287a852df2347baef96e0d7d2137585cbd91ebf4c519a1521cac8",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08580901010320718,
+    "peak": 0.5591386556625366,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "AKROTIRI_051_Dan_Mach.mp3",
+    "sha256": "b0448d9e04b7b1be2904e9fef3a08211105550b82d94ba3fe38af2587d94fcd9",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07486395163140097,
+    "peak": 0.4267471432685852,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "AKROTIRI_051_Duc.mp3",
+    "sha256": "6386212b9aa8ed1503e022b8d900db18e4fe79b3d16aee9ec918dac84375be1a",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08794868849776327,
+    "peak": 0.7224061489105225,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "en-US",
+    "filename": "AKROTIRI_051_My_Tieng_Anh.mp3",
+    "sha256": "e33bfba41d99d714f5b649e5edd292c0a67ec208d8a60c70f7481258123a1cb9",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09464173452884339,
+    "peak": 0.5701985359191895,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "AKROTIRI_051_Tay_Ban_Nha.mp3",
+    "sha256": "71028512846530a7ce2235af23c55cb47f0a0fe6944abe52ec43da474e52430e",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07367432432037191,
+    "peak": 0.5909343957901001,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "AKROTIRI_051_Phan_Lan.mp3",
+    "sha256": "b563ae28e3f60348c64184fa4a1daf18d75a6bf3536235de681aa53cf8774c30",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.055984588171085835,
+    "peak": 0.45696625113487244,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "AKROTIRI_051_Phap.mp3",
+    "sha256": "0c9e7e02f8daf28ea0c6613d204ac01a4c89d6022ee56d5b2e38c12d197b29fe",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06593146078914457,
+    "peak": 0.5061399936676025,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "AKROTIRI_051_Y.mp3",
+    "sha256": "cda883016deee60923be701e74f71f8a77b943c0a142d1f3c25f505125c6283a",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07948452708384272,
+    "peak": 0.5662811398506165,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "AKROTIRI_051_Nhat_Ban.mp3",
+    "sha256": "0822ddcf242d0ed8c4ba62c91199a09fb5918bdf43c26d705b504eb960d731b2",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08323070503607498,
+    "peak": 0.561074435710907,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "AKROTIRI_051_Han_Quoc.mp3",
+    "sha256": "47b643b7404843d7561684eaffe8dcf66c3be5465f71a0dc82f90dbcb282bc92",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07741907242716488,
+    "peak": 0.6172386407852173,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "AKROTIRI_051_Na_Uy.mp3",
+    "sha256": "2b54bc5ad96e5ae3c3ef000390d3ff0e76b6a59b9d4c85476008854bd38d26f6",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06430891188623054,
+    "peak": 0.5349858403205872,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "AKROTIRI_051_Ha_Lan.mp3",
+    "sha256": "530c78fc60c45da1f284e03f3ae9ad70a6d80a98b791cb8d18b350b170beb07b",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08503851781270637,
+    "peak": 0.483498752117157,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "AKROTIRI_051_Ba_Lan.mp3",
+    "sha256": "e6dde8e5c82e5700eb8fe2d0496394cec48f5c6bc80a9f5d3b64f3eddc239007",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08349748159267759,
+    "peak": 0.5592780709266663,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "AKROTIRI_051_Bo_Dao_Nha.mp3",
+    "sha256": "d821bd27939aca319656b46641f6fb78a12ea2a47d79fcbafad265429227617e",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06782712309039089,
+    "peak": 0.5160459280014038,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "AKROTIRI_051_Thuy_Dien.mp3",
+    "sha256": "594a12aee25235be27ef37b5bbf7b055bad51855974de323dda1575b76eadac8",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07331015814551724,
+    "peak": 0.5685457587242126,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "AKROTIRI_051_Viet_Nam.mp3",
+    "sha256": "f53ecc29175b5f83e091de275488544cb25d380da1333cc2580019010b832e2b",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08515647162434578,
+    "peak": 0.5248561501502991,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  }
+]
