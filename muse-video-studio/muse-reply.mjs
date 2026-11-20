@@ -4,6 +4,7 @@ export function replyProblem(text) {
   const value=String(text||'').replace(/\bMUSE_[a-f0-9]{32}\b/g,'').trim();
   if(!value)return null;
   const started=/\bI(?:'ve| have)? (?:already )?(?:started|begun) (?:generating|creating)|\bgeneration (?:has started|is (?:now )?in progress)|(?:tôi )?đã bắt đầu tạo (?:video|ảnh)|đang tạo (?:video|ảnh)/i.test(value);
+  if(started&&!/failed|error|quota|insufficient|bị lỗi|không thành công/i.test(value))return null;
   if(/too many (?:active|parallel|simultaneous)|only one (?:generation|request|video)[\s\S]{0,35}at (?:a|one) time|already (?:generating|processing)[\s\S]{0,50}(?:wait|finish)|chỉ (?:được|có thể)[\s\S]{0,35}một[\s\S]{0,35}(?:mỗi lần|tại một thời điểm)/i.test(value))return 'MUSE_PARALLEL_LIMIT';
   if(/(?:please|could you|can you)\s+(?:clarify|provide|describe|explain)|(?:don't|do not|cannot|can't)\s+understand|vui lòng\s*(?:mô tả|làm rõ|cung cấp)|không\s*hiểu/i.test(value))return 'MUSE_PROMPT_CLARIFICATION';
   if(/(?:would you like|shall I|should I|do you want me to)|(?:please|need (?:you )?to)\s+confirm|(?:bạn có muốn|bạn muốn tôi|vui lòng xác nhận|cần bạn xác nhận|hãy xác nhận)/i.test(value))return 'MUSE_ACTION_REQUIRED';

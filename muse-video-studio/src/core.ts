@@ -62,7 +62,8 @@ export function meetsResolution(media: MediaResult): boolean | null {
 export function errorInfo(error: unknown): { raw: string; hint: string } {
   const raw = error instanceof Error ? error.message : String(error);
   let hint = 'Thử lại sau hoặc mở Chẩn đoán API để kiểm tra kết nối.';
-  if (/MUSE_LOCAL_CONNECTION|MUSE_LOCAL_TIMEOUT|MUSE_LOCAL_RESPONSE/i.test(raw)) hint = 'Kết nối giữa giao diện và máy chủ trong tool bị lỗi. Giữ tool mở và dùng Sao chép lỗi để xem mã kết nối; kiểm tra lịch sử Muse trước khi tạo lại.';
+  if (/MUSE_WAIT_LIMIT|MUSE_TIMEOUT/i.test(raw)) hint = 'Đã chạm giới hạn chờ tối đa 200 giây. Kiểm tra phản hồi và kết quả trong Muse; yêu cầu đã gửi không được tự tạo lại.';
+  else if (/MUSE_LOCAL_CONNECTION|MUSE_LOCAL_TIMEOUT|MUSE_LOCAL_RESPONSE/i.test(raw)) hint = 'Kết nối giữa giao diện và máy chủ trong tool bị lỗi. Giữ tool mở và dùng Sao chép lỗi để xem mã kết nối; kiểm tra lịch sử Muse trước khi tạo lại.';
   else if (/MUSE_MEDIA_UNREADABLE/i.test(raw)) hint = 'Tool chưa tải hoặc giải mã được tệp trả về. Xem chi tiết lỗi gốc và lịch sử Muse; không cần tạo lại nếu media đã hoàn thành ở Muse.';
   else if (/MUSE_ACTION_REQUIRED/i.test(raw)) hint = 'Muse đang yêu cầu xác nhận thay vì tạo nội dung. Xem câu trả lời Muse trong mã lỗi; tool không tự xác nhận hoặc gửi lại yêu cầu đã nhận.';
   else if (/MUSE_GENERATION_REFUSED/i.test(raw)) hint = 'Muse đã trả lời rằng chưa thể tạo nội dung theo yêu cầu. Xem lý do gốc về mô hình, quyền hoặc số dư, rồi điều chỉnh trước khi tạo lại.';

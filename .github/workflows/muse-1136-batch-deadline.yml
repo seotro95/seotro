@@ -1,0 +1,136 @@
+name: Muse 1.13.6 one-message cohorts and 200-second cap
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/muse-1136-batched-chat]
+    paths:
+      - 'muse-video-studio/**'
+      - '.github/workflows/muse-1136-batch-deadline.yml'
+permissions:
+  contents: write
+concurrency:
+  group: muse-1136-parallel
+  cancel-in-progress: true
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: muse-video-studio
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: muse-video-studio/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npx playwright install chromium
+      - name: Verify names, sixty slots, selected accounts, proxies and recovery UI
+        id: ui
+        continue-on-error: true
+        run: npm run test:e2e -- tests/browser/names-concurrency-ip.spec.ts tests/browser/sync-proxy.spec.ts tests/browser/recovery.spec.ts tests/browser/selected-slots.spec.ts tests/browser/account-selection.spec.ts tests/browser/dynamic-slots.spec.ts tests/browser/error-report.spec.ts tests/browser/wait-limit.spec.ts
+      - name: Six overlapping browser video requests
+        id: bridge
+        continue-on-error: true
+        timeout-minutes: 4
+        run: node tests/account-parallel-video.test.mjs
+      - name: Prepared draft hash and iframe conversation waves
+        id: warm
+        continue-on-error: true
+        timeout-minutes: 4
+        run: node tests/warm-parallel.test.mjs
+      - name: Independent chats and cancellation
+        id: isolation
+        continue-on-error: true
+        timeout-minutes: 4
+        run: node tests/muse-parallel.test.mjs
+      - name: Automatic sequential fallback
+        id: fallback
+        continue-on-error: true
+        timeout-minutes: 4
+        run: node tests/auto-fallback-browser.test.mjs
+      - name: Shared conversation and background results
+        id: shared
+        continue-on-error: true
+        timeout-minutes: 4
+        run: node tests/shared-conversation.test.mjs
+      - name: Cropped messages acknowledgement and clarification
+        id: ack
+        continue-on-error: true
+        timeout-minutes: 4
+        run: node tests/result-acknowledgement.test.mjs
+      - name: Refusal replies and native media sources
+        id: reply
+        continue-on-error: true
+        timeout-minutes: 4
+        run: node tests/reply-recovery.test.mjs
+      - name: One chat message for six files and exclude old history
+        id: batched
+        continue-on-error: true
+        timeout-minutes: 4
+        run: node tests/batched-chat.test.mjs
+      - name: Account-session media download recovery
+        id: media
+        continue-on-error: true
+        timeout-minutes: 4
+        run: node tests/media-recovery-desktop.test.mjs
+      - name: Seventy-two overlapping browser video requests on twelve accounts
+        id: throughput
+        continue-on-error: true
+        timeout-minutes: 4
+        run: node tests/multi-account-throughput.test.mjs
+      - name: Verify independent IPs through authenticated Electron proxies
+        id: proxy
+        continue-on-error: true
+        run: npm run test:proxy-desktop
+      - run: npm run test:startup
+        id: startup
+        continue-on-error: true
+      - run: npm run test:desktop
+        id: desktop
+        continue-on-error: true
+      - name: Require every independent Windows check to pass
+        shell: pwsh
+        run: |
+          $outcomes = @('${{ steps.ui.outcome }}', '${{ steps.bridge.outcome }}', '${{ steps.warm.outcome }}', '${{ steps.isolation.outcome }}', '${{ steps.fallback.outcome }}', '${{ steps.shared.outcome }}', '${{ steps.ack.outcome }}', '${{ steps.reply.outcome }}', '${{ steps.batched.outcome }}', '${{ steps.media.outcome }}', '${{ steps.throughput.outcome }}', '${{ steps.proxy.outcome }}', '${{ steps.startup.outcome }}', '${{ steps.desktop.outcome }}')
+          if (@($outcomes | Where-Object { $_ -ne 'success' }).Count) { throw "A required Windows check failed: $($outcomes -join ', '). Packaging and release are blocked." }
+      - run: python scripts/package_portable.py --platform win32 --output "${{ runner.temp }}/muse-artifacts"
+      - name: Test the packaged Windows executable
+        shell: pwsh
+        run: |
+          $version = (Get-Content package.json | ConvertFrom-Json).version
+          $env:MUSE_PORTABLE_EXECUTABLE = "${{ runner.temp }}/muse-artifacts/Muse-AI-Studio-$version-Windows-x64/Muse AI Studio.exe"
+          node tests/startup-desktop.test.mjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node tests/portable.test.mjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node tests/media-recovery-desktop.test.mjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Muse-AI-Studio-1.13.6-Windows-x64
+          path: ${{ runner.temp }}/muse-artifacts/*.zip
+          if-no-files-found: error
+      - name: Save the verified Windows ZIP as a draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $version = (Get-Content package.json | ConvertFrom-Json).version
+          $tag = "muse-v$version"
+          gh release view $tag --repo "${{ github.repository }}" *> $null
+          if ($LASTEXITCODE -eq 0) { Write-Output "Release tag already exists; preserving it and keeping this workflow artifact."; exit 0 }
+          $zip = Get-ChildItem "${{ runner.temp }}/muse-artifacts/*.zip"
+          $hash = (Get-FileHash $zip.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash  $($zip.Name)" | Set-Content -Encoding utf8 "${{ runner.temp }}/Muse-AI-Studio-$version-Windows-x64.zip.sha256"
+          $checksum = "${{ runner.temp }}/Muse-AI-Studio-$version-Windows-x64.zip.sha256"
+          Copy-Item CAP-NHAT-1.13.6.md "${{ runner.temp }}/muse-release-notes.txt"
+          gh release create $tag $zip.FullName $checksum --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Muse AI Studio $version - Batched chat and 200-second cap - Windows x64" --notes-file "${{ runner.temp }}/muse-release-notes.txt" --draft --latest=false
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

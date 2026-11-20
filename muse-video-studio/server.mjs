@@ -1,4 +1,4 @@
-import {MAX_SLOTS,MAX_ACCOUNTS} from './limits.mjs';
+import {MAX_SLOTS,MAX_ACCOUNTS,RENDER_TIMEOUT_MS} from './limits.mjs';
 import http from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -10,8 +10,9 @@ import{mediaQueue}from'./media-queue.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 if (existsSync(path.join(ROOT, '.env'))) process.loadEnvFile(path.join(ROOT, '.env'));
-export async function startStudioServer({ museDriver, embeddedLogin = false, port = Number(process.env.PORT || 8788), dev = false } = {}) {
+export async function startStudioServer({ museDriver, embeddedLogin = false, port = Number(process.env.PORT || 8788), dev = false, requestTimeoutMs=RENDER_TIMEOUT_MS } = {}) {
 const host = '127.0.0.1';
+const apiBudget=Number.isFinite(requestTimeoutMs)?Math.max(1,Math.min(RENDER_TIMEOUT_MS,requestTimeoutMs)):RENDER_TIMEOUT_MS;
 const appVersion=JSON.parse(await readFile(path.join(ROOT,'package.json'),'utf8')).version;
 const transport = process.env.MUSE_TRANSPORT || (process.env.MUSE_ADAPTER_URL ? 'adapter' : 'browser');
 if (!['browser', 'adapter'].includes(transport)) throw new Error('MUSE_TRANSPORT must be browser or adapter.');
@@ -102,7 +103,7 @@ async function api(req, res, pathname) {
   let preparingAccountId=null;
   const abort = new AbortController();
   res.on('close', () => abort.abort());
-  const timeout = setTimeout(() => abort.abort(new Error('TIMEOUT: Hết 10 phút chờ. Yêu cầu đã gửi có thể vẫn được tính phí.')), 10 * 60 * 1000);
+  const timeout = setTimeout(() => abort.abort(new Error('MUSE_TIMEOUT: Đã dừng chờ sau 190 giây, trước giới hạn 200 giây. Kiểm tra kết quả Muse trước khi tạo lại.')), apiBudget);
   try {
     const data = await body(req);
     if (accountRoute || legacyAccountRoute) {

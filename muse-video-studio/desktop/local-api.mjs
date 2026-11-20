@@ -1,5 +1,5 @@
 import http from 'node:http';
-import {MAX_SLOTS} from '../limits.mjs';
+import {MAX_SLOTS,LOCAL_RENDER_TIMEOUT_MS} from '../limits.mjs';
 
 const endpoints=new Set(['/api/image','/api/video','/api/text']);
 const codes=new Set(['ECONNREFUSED','ECONNRESET','ETIMEDOUT','EPIPE','ENETUNREACH','EHOSTUNREACH','ENOBUFS']);
@@ -8,7 +8,7 @@ const failure=(code,message)=>Object.assign(new Error(`${code}: ${message}`),{co
 // Electron session/proxy. No global fetch dispatcher, proxy or five-minute
 // response-header timeout may affect a long-running generation request here.
 export class LocalApiClient {
-  constructor({timeoutMs=11*60*1000,maxResponseBytes=140*1024*1024}={}){
+  constructor({timeoutMs=LOCAL_RENDER_TIMEOUT_MS,maxResponseBytes=140*1024*1024}={}){
     this.timeoutMs=timeoutMs;this.maxResponseBytes=maxResponseBytes;
     this.agent=new http.Agent({keepAlive:true,maxSockets:MAX_SLOTS,maxFreeSockets:16,timeout:0,proxyEnv:{}});
   }

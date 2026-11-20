@@ -1,3 +1,4 @@
+import{withinDeadline}from'./request-deadline.ts';
 import type { Mode, Reference, Settings, MediaResult } from './core.ts';
 import { outputStem, uniqueOutputFilename } from '../output-names.mjs';
 import { reserveDownloadNumbers, formatDownloadNumber } from './download-sequence.ts';
@@ -15,7 +16,7 @@ export async function chooseExportDirectory() {
   try { webExportDirectory = await window.showDirectoryPicker(); return { cancelled: false, name: webExportDirectory.name }; }
   catch (error) { if ((error as Error).name === 'AbortError') return { cancelled: true }; throw error; }
 }
-async function api(path: string, data?: unknown, signal?: AbortSignal) {
+async function rawApi(path: string, data?: unknown, signal?: AbortSignal) {
   const transport = window.museTransport;
   if (transport && ['/api/video', '/api/image', '/api/text'].includes(path)) {
     signal?.throwIfAborted();
@@ -36,6 +37,7 @@ async function api(path: string, data?: unknown, signal?: AbortSignal) {
   if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
   return result;
 }
+async function api(path:string,data?:unknown,signal?:AbortSignal){return withinDeadline(combined=>rawApi(path,data,combined),signal)}
 export async function readImage(file: File): Promise<Reference> {
   if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) throw new Error('Chọn ảnh PNG, JPG hoặc WebP.');
   if (file.size > 8 * 1024 * 1024) throw new Error('Ảnh tham chiếu tối đa 8 MB.');
@@ -101,7 +103,8 @@ async function generate(kind: Settings['output'], prompt: string, reference: Ref
     image: prepared ? { imageBytes: prepared.imageBytes, mimeType: prepared.mimeType } : undefined
   }, signal);
   signal.throwIfAborted();
-  return { ...await mediaResult(kind, result, settings), outputName:outputStem(context?.outputName)||undefined, referenceCompressed: prepared?.compressed || false };
+  const media=await mediaResult(kind,result,settings);if(signal.aborted){releaseVideo(media);signal.throwIfAborted();}
+  return { ...media, outputName:outputStem(context?.outputName)||undefined, referenceCompressed: prepared?.compressed || false };
 }
 export const generateVideo = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, context?: RequestContext) => generate('video', prompt, reference, settings, signal, context);
 export const generateImage = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, context?: RequestContext) => generate('image', prompt, reference, settings, signal, context);
@@ -180,4 +183,4 @@ export async function downloadMediaBatch(items: { media: MediaResult; id: number
   } catch (error) { if (native&&session) await native('abort',session.id).catch(()=>{}); throw error; }
 }
 export const providerStatus = () => api('/api/status');
-export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer' | 'concurrency' | 'import' | 'select' | 'prepare' | 'proxy' | 'proxy-ip' | 'save', data: Record<string, unknown> = {}) => api(`/api/account/${action}`, data);
+export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer' | 'concurrency' | 'import' | 'select' | 'prepare' | 'proxy' | 'proxy-ip' | 'save', data: Record<string, unknown> = {},signal?:AbortSignal) => api(`/api/account/${action}`, data,signal);

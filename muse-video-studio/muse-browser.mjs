@@ -1,4 +1,4 @@
-import {MAX_SLOTS,MAX_ACCOUNT_LANES,isLaneCount} from './limits.mjs';
+import {MAX_SLOTS,MAX_ACCOUNT_LANES,isLaneCount,RENDER_TIMEOUT_MS} from './limits.mjs';
 import {SubmitGroups} from './submit-groups.mjs';
 import { chromium } from 'playwright-core';
 import { existsSync } from 'node:fs';
@@ -8,6 +8,8 @@ import { randomUUID } from 'node:crypto';
 import { readMuseBalance } from './muse-balance.mjs';
 import {replyProblem,replyPreview} from './muse-reply.mjs';
 import{mediaQueue}from'./media-queue.mjs';
+import{ChatBatches}from'./chat-batches.mjs';
+import{inspectBatchDOM}from'./muse-batch-dom.mjs';
 
 // Public UI selectors observed in community Muse clients, not an official SDK.
 // Muse retains a prehydration textarea before its hydrated rich editor. It may
@@ -42,7 +44,7 @@ const pause = (ms, signal) => new Promise((resolve, reject) => {
 });
 
 export class MuseBrowser {
-  constructor({ profileRoot, accountProfile, serviceURL = 'https://muse.ai/', launchOptions, sessionFactory, onVerified, timeoutMs = 600000, pollMs = 500, quietMs = 1500, composerTimeoutMs = 45000, submitTimeoutMs = 15000, replyQuietMs = 1500, maxConcurrency = 1 } = {}) {
+  constructor({ profileRoot, accountProfile, serviceURL = 'https://muse.ai/', launchOptions, sessionFactory, onVerified, timeoutMs = RENDER_TIMEOUT_MS, pollMs = 500, quietMs = 1500, composerTimeoutMs = 45000, submitTimeoutMs = 15000, replyQuietMs = 1500, maxConcurrency = 1 } = {}) {
     this.profileRoot = profileRoot;
     this.serviceURL = serviceURL;
     this.launchOptions = launchOptions;
@@ -66,7 +68,7 @@ export class MuseBrowser {
     this.imageBatches = new Map();
     this.parallelRoutes = [];
     this.submitGroups=new SubmitGroups();this.parallelStrategy='workers';this.composerQueue=[];this.composerBusy=false;this.sharedSignals=new Map();this.sharedStopPromise=null;
-    this.pendingCaptions=new Set();this.composerOwners=new WeakMap();
+    this.pendingCaptions=new Set();this.composerOwners=new WeakMap();this.chatBatches=new ChatBatches((rows,group)=>this.sendSharedBatch(rows,group),{limit:()=>Math.min(6,this.maxConcurrency)});
     this.active = null;
     this.profilePath = accountProfile || path.join(this.profileRoot, 'slot-01');
     this.accounts = [{ id: 1, state: existsSync(this.profile(1)) ? 'saved' : 'disconnected', authenticated: false, sessionAuthenticated: false, composerReady: false, connectionMessage: '', checkedAt: null, balance: null }];
@@ -79,7 +81,8 @@ export class MuseBrowser {
   }
   snapshot() { return this.accounts.map(a => ({ ...a, active: this.active?.id === a.id })); }
   progress() { return [...this.workerStages.values()].map(stage => ({ ...stage })); }
-  async close() {
+  async close({preserveBatch=false}={}) {
+    if(!preserveBatch)this.chatBatches.cancelAll();
     this.submitGroups.clear();
     const active = this.active;
     this.active = null;
@@ -98,7 +101,7 @@ export class MuseBrowser {
     return this.opening;
   }
   async openSession(id, { show = false } = {}) {
-    await this.close();
+    await this.close({preserveBatch:true});
     if (this.sessionFactory) {
       const owned = await this.sessionFactory();
       this.active = { id, ...owned };
@@ -479,7 +482,7 @@ export class MuseBrowser {
     catch(error){if(!data.signal.aborted)submitBarrier?.fail(error);throw error}
     finally { release?.(); this.reserved--; }
   }
-  async executeTurn({ accountId, prompt, image, video, output = video ? 'video' : 'text', signal, checkOnly = false, batchId, sceneId, singleLane = false, submitBarrier }) {
+  async executeTurn({ accountId, prompt, image, video, output = video ? 'video' : 'text', signal, checkOnly = false, batchId, sceneId, singleLane = false, submitBarrier,submissionGroup }) {
     this.requireSingleAccount(accountId);
     if (this.workers.size >= MAX_ACCOUNT_LANES) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã chạy đủ 10 ô trên tài khoản Muse.', 429);
     const key = randomUUID();
@@ -536,7 +539,7 @@ export class MuseBrowser {
       signal.throwIfAborted();
       if (!sharedConversation&&await conversation.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
       if (checkOnly) return { ready: true, message: 'Đã mở được ô Message trong trang luồng riêng. Chưa gửi prompt hoặc yêu cầu tạo nội dung.', details: await this.composerDiagnostics(page) };
-      const result = await this.sendTurn({ page: conversation, prompt, image, output, signal,sharedConversation,trackAtStart:reuseLogin, onSubmit: () => { sending = true; progress.phase = 'sending';progress.sentAt=Date.now(); }, beforeSubmit:submitBarrier?()=>submitBarrier.ready():undefined,onObservation: details=>{progress.observation=details;}, onStage: phase => { progress.phase = phase; if (phase === 'submitted'){progress.submitted = true;progress.submittedAt=Date.now();} } });
+      const result = await this.sendTurn({ page: conversation, prompt, image, output, signal,batchId,sceneId,submissionGroup,sharedConversation,trackAtStart:reuseLogin, onSubmit: () => { sending = true; progress.phase = 'sending';progress.sentAt=Date.now(); }, beforeSubmit:submitBarrier?()=>submitBarrier.ready():undefined,onObservation: details=>{progress.observation=details;}, onStage: phase => { progress.phase = phase; if (phase === 'submitted'){progress.submitted = true;progress.submittedAt=Date.now();} } });
       if(result.captionPending)this.pendingCaptions.add(conversationKey);
       if (output === 'image' && batchId && sceneId && result.fingerprint) {
         let batch = this.imageBatches.get(batchId);
@@ -551,7 +554,7 @@ export class MuseBrowser {
       progress.phase = 'done'; return result;
     } catch (error) {
       progress.phase = signal.aborted ? /TIMEOUT/.test(signal.reason?.message||'')?'timeout':'cancelled' : 'error';
-      const wrapped=Object.assign(new Error(error.message),{status:error.status,notSubmitted:!sending,safeSerialRetry:error.safeSerialRetry===true,parallelFailure:parallelAttempt&&!signal.aborted&&((!sending&&!/MUSE_LOGIN_|MUSE_SESSION_|MUSE_WORKSPACE_ORIGIN|MUSE_DRAFT_|MUSE_ATTACHMENT_|MUSE_UPLOAD_/.test(error.message))||/MUSE_SHARED_CONVERSATION|MUSE_PARALLEL_LIMIT|MUSE_SUBMIT_NOT_ACKNOWLEDGED|MUSE_TIMEOUT/.test(error.message))});
+      const wrapped=Object.assign(new Error(error.message),{status:error.status,notSubmitted:!sending,safeSerialRetry:error.safeSerialRetry===true,parallelFailure:parallelAttempt&&!signal.aborted&&((!sending&&!/MUSE_LOGIN_|MUSE_SESSION_|MUSE_WORKSPACE_ORIGIN|MUSE_DRAFT_|MUSE_ATTACHMENT_|MUSE_UPLOAD_/.test(error.message))||/MUSE_SHARED_CONVERSATION|MUSE_PARALLEL_LIMIT|MUSE_BATCH_UNMATCHED|MUSE_SUBMIT_NOT_ACKNOWLEDGED|MUSE_TIMEOUT/.test(error.message))});
       throw signal.aborted?signal.reason:wrapped;
     } finally {
       progress.active = false;
@@ -592,7 +595,74 @@ export class MuseBrowser {
     }
     throw fail('MUSE_EDITOR_CHANGED', 'Muse đổi ô nhập nhưng chưa giữ đủ prompt. Chưa nhấn gửi. Kiểm tra cuộc trò chuyện rồi thử lại.', 409);
   }
-  async sendTurn({ page, prompt, image, output, signal, onSubmit, beforeSubmit, onStage = () => {},onObservation=()=>{},sharedConversation=false,trackAtStart=false }) {
+  async sendSharedBatch(input,group){
+    let rows=input.filter(row=>!row.done);let release;let sent=false;const downloads=new Set(),attempts=new Map();
+    const rejectPending=error=>rows.forEach(row=>{if(!row.done)row.reject(error)});
+    try{
+      release=await this.acquireComposer(group.control.signal);
+      for(const row of rows)if(row.signal.aborted)row.reject(row.signal.reason);
+      rows=rows.filter(row=>!row.done);if(!rows.length)return;
+      if(this.parallelStrategy!=='shared-conversation')throw fail('MUSE_PARALLEL_UNVERIFIED','Đã chuyển sang tuần tự trước khi gửi lượt gộp.',409);
+      const page=rows[0].page,output=rows[0].output;const marker=`studio-batch-${randomUUID()}`;
+      const budget=Math.min(...rows.map(row=>row.createdAt+this.timeoutMs));const snapshot=await page.evaluate(inspectBatchDOM,{captureOnly:true,output});const baseline=snapshot.keys;
+      let editor=await this.findComposer(page)||await this.initialComposer(page)||await this.waitForComposer(page);
+      if((await this.editorText(editor)).trim())throw fail('MUSE_DRAFT_EXISTS','Muse đang có bản nháp. Chưa gửi lượt gộp.',409);
+      if(await editor.locator('xpath=ancestor::*[@data-hatch-composer-root or self::form][1]').locator('img[src^="blob:"]:not([data-message-item] *)').count())throw fail('MUSE_DRAFT_EXISTS','Muse đang có ảnh trong bản nháp. Tool chưa gửi lượt gộp.',409);
+      rows.forEach((row,index)=>row.label=`CLIP_${String(row.sceneId||index+1).padStart(3,'0')}_${marker.slice('studio-batch-'.length, 'studio-batch-'.length+8)}`);
+      const prefixes=rows.map(row=>{const at=row.prompt.indexOf('\nScene:\n');return at<0?null:{head:row.prompt.slice(0,at),scene:row.prompt.slice(at+8)}});
+      const common=prefixes.every(value=>value&&value.head===prefixes[0]?.head)?prefixes[0].head:'';
+      const tasks=rows.map((row,index)=>`[BEGIN_CLIP ${row.label} ${row.fileToken}]\n${common?prefixes[index].scene:row.prompt}\n[END_CLIP ${row.fileToken}]`).join('\n\n');
+      const message=`[${marker}]\nCreate ${rows.length} independent ${output==='video'?'video':'image'} file${rows.length===1?'':'s'} now in this ONE request. Each task below is a separate output; use the available generation tool for every task. ${output==='video'?'Keep the requested duration for EACH video; do not stitch the tasks into one long film.':''} Do not just write a plan or ask whether to start.\nFor each result, put its CLIP label in the same list item or heading as its native attachment or real download link. Preserve the real working URL; never invent file paths or rename files just for tracking. If a task cannot be generated, give its label and concrete reason.\n\n${common?'Apply these instructions to EACH task:\n'+common+'\n\n':''}${tasks}`;
+      const maxLength=Number(await editor.getAttribute('maxlength'));if(maxLength>0&&message.length>maxLength)throw fail('MUSE_BATCH_TOO_LONG','Yêu cầu gộp vượt độ dài Muse cho phép. Chưa gửi prompt; chuyển sang từng ô và giữ đủ nội dung.',409);
+      if(rows[0].image)await this.attach(page,rows[0].image);
+      editor=await this.writeMessage(page,message,group.control.signal);group.control.signal.throwIfAborted();
+      for(const row of rows){row.onSubmit();this.sharedSignals.set(row.fileToken,row.signal)}sent=true;
+      await editor.press('Enter');
+      let acknowledged=false,lastSignature='',stableSince=Date.now();const ackDeadline=Date.now()+Math.min(this.submitTimeoutMs,this.timeoutMs);
+      while(Date.now()<budget&&!group.cancelled){
+        if(rows.every(row=>row.done))return;
+        if([...this.sharedSignals.values()].every(signal=>signal.aborted)){
+          if(!this.sharedStopPromise)this.sharedStopPromise=(async()=>{await page.locator(STOP).first().evaluate(button=>button.click(),undefined,{timeout:3000}).catch(()=>{});await pause(200)})();
+          await this.sharedStopPromise;for(const row of rows)if(!row.done)row.reject(row.signal.reason||fail('ABORTED','Đã dừng lượt tạo.'));return;
+        }
+        const state=await page.evaluate(inspectBatchDOM,{marker,rows:rows.map(row=>({fileToken:row.fileToken,label:row.label})),baseline,baselineTexts:snapshot.texts,acknowledged,output,allowSingle:rows.length===1&&this.sharedSignals.size===1});
+        if(state.anchored&&!acknowledged){acknowledged=true;for(const row of rows)if(!row.done)row.onStage('submitted')}
+        if(!acknowledged&&Date.now()>=ackDeadline)throw fail('MUSE_SUBMIT_NOT_ACKNOWLEDGED','Muse chưa xác nhận đã nhận yêu cầu gộp. Tool không tự gửi trùng.',504);
+        const signature=JSON.stringify([state.text,state.media.map(item=>item.key)]);if(signature!==lastSignature){lastSignature=signature;stableSince=Date.now()}
+        const unique=new Set(state.media.filter(item=>!item.uncertain).map(item=>item.owner||item.key)).size;
+        for(const row of rows){
+          if(row.done)continue;
+          row.onObservation?.({checkedAt:new Date().toISOString(),messageAcknowledged:acknowledged,assistantReplies:state.replyCount,visibleVideos:output==='video'?unique:0,visibleImages:output==='image'?unique:0,matchedMedia:Boolean(state.matches[row.fileToken]),streaming:state.streaming,replyScope:'batch',reply:replyPreview(state.text),batchSize:rows.length,messagesSent:1,waitLimitSeconds:200});
+          if(row.signal.aborted)row.onStage('cancelled-provider');else if(state.text&&!state.matches[row.fileToken])row.onStage('reply-received');
+          const media=state.matches[row.fileToken];
+          if(!media&&state.rowErrors[row.fileToken]){const message=state.rowErrors[row.fileToken];const code=replyProblem(message)||'MUSE_GENERATION_ERROR';const error=fail(code,`Muse báo lỗi của ${row.label}: ${replyPreview(message)}`,502);if(code==='MUSE_PARALLEL_LIMIT')error.safeSerialRetry=true;row.reject(error);this.sharedSignals.delete(row.fileToken);continue;}
+          if(!media&&!state.streaming&&state.rowTexts[row.fileToken]&&Date.now()-stableSince>=this.replyQuietMs){const problem=replyProblem(state.rowTexts[row.fileToken]);if(problem){row.reject(fail(problem,`Muse chưa trả tệp của ${row.label}: ${replyPreview(state.rowTexts[row.fileToken])}`,422));this.sharedSignals.delete(row.fileToken);continue;}}
+          if(!media||downloads.has(row))continue;const last=attempts.get(row);if(last?.key===media.key&&last.nextAt>Date.now())continue;
+          if(row.signal.aborted){row.reject(row.signal.reason);this.sharedSignals.delete(row.fileToken);continue;}
+          downloads.add(row);row.onStage('downloading');
+          void this.downloadMedia(page,media,output,row.signal).then(value=>row.resolve({...value,captionPending:false}),error=>{
+            if(!row.signal.aborted&&(/MEDIA_HTTP_404|MEDIA_EMPTY/.test(error.message)||(media.uncertain&&/MEDIA_RESPONSE_NOT_MEDIA/.test(error.message)))){const count=(attempts.get(row)?.count||0)+1;attempts.set(row,{key:media.key,count,nextAt:Date.now()+Math.min(10000,500*2**Math.min(count,6))});downloads.delete(row);row.onStage('reply-received');return;}row.reject(error);
+          }).finally(()=>{if(row.done)this.sharedSignals.delete(row.fileToken)});
+        }
+        // An acknowledged user bubble alone never releases the next chat turn.
+        // Wait for an actual output and for the assistant to finish its reply.
+        if(release&&!state.streaming&&Object.keys(state.matches).length){release();release=null}
+        if(!state.streaming&&!state.media.length&&state.text&&Date.now()-stableSince>=this.replyQuietMs){
+          const problem=replyProblem(state.generalText);if(problem){const error=fail(problem,`Muse chưa tạo ${output==='video'?'video':'ảnh'} cho lượt gộp: ${replyPreview(state.generalText)}`,422);if(problem==='MUSE_PARALLEL_LIMIT'&&/no (?:videos?|images?|generations?) (?:were|was|have been|has been) (?:created|started)|did not start any|chưa tạo.*(?:video|ảnh) nào|không tạo được.*(?:video|ảnh) nào/i.test(state.generalText))error.safeSerialRetry=true;throw error;}
+        }
+        if(!state.streaming&&state.unclaimed&&this.sharedSignals.size<=rows.filter(row=>!row.done).length&&Date.now()-stableSince>=Math.max(3000,this.replyQuietMs))throw fail('MUSE_BATCH_UNMATCHED','Muse đã trả media mới nhưng thiếu nhãn để xác định đúng ô. Tool không đoán thứ tự hoặc tự tạo lại; các ô chưa gửi tiếp sẽ chạy tuần tự.',409);
+        if(!state.streaming&&!state.media.length&&state.unsupported.length&&Date.now()-stableSince>=this.replyQuietMs)throw fail('MUSE_MEDIA_UNREADABLE','MEDIA_URL_UNSUPPORTED: Muse chỉ trả liên kết không tải trực tiếp được, chưa có tệp thật thay thế.',502);
+        await pause(this.pollMs);
+      }
+      throw fail('MUSE_TIMEOUT','Đã hết thời gian của lượt tạo, trước giới hạn 200 giây. Tool không tự tạo lại yêu cầu đã gửi.',504);
+    }catch(error){rejectPending(error)}finally{
+      release?.();
+      for(const row of rows){if(!row.done)row.reject(row.signal.aborted?row.signal.reason:fail('MUSE_BATCH_INCOMPLETE','Chưa nhận được kết quả của ô.'));if(sent)this.sharedSignals.delete(row.fileToken)}
+      if(!this.sharedSignals.size)this.sharedStopPromise=null;
+    }
+  }
+  async sendTurn(options){return options.sharedConversation?this.chatBatches.add(options):this.sendOneTurn(options)}
+  async sendOneTurn({ page, prompt, image, output, signal, onSubmit, beforeSubmit, onStage = () => {},onObservation=()=>{},sharedConversation=false,trackAtStart=false }) {
     let releaseComposer=sharedConversation?await this.acquireComposer(signal):null;
     try{
     if(sharedConversation&&this.parallelStrategy!=='shared-conversation')throw fail('MUSE_PARALLEL_UNVERIFIED','Đã chuyển về tuần tự trước khi gửi ô này.',409);
