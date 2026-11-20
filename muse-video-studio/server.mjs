@@ -112,7 +112,7 @@ async function api(req, res, pathname) {
       accountBusy = accountAcquired = true;
       if(action==='proxy-ip'){if(!muse.checkProxyIP)return json(res,409,{error:'Kiểm tra IP proxy cần bản desktop.'});const proxy=await muse.checkProxyIP(accountId,abort.signal);return json(res,200,{proxy,accounts:muse.snapshot()})}
       if(action==='proxy'){await muse.setProxy(accountId,data.proxy);return json(res,200,{accounts:muse.snapshot()})}
-      if (action === 'prepare') {if(!muse.prepareSingle)return json(res,200,{executionConcurrency:muse.maxConcurrency});return json(res,200,{...await muse.prepareSingle(abort.signal,data.concurrency,accountId),accounts:muse.snapshot()});}
+      if (action === 'prepare') {if(!muse.prepareSingle)return json(res,200,{executionConcurrency:muse.maxConcurrency});return json(res,200,{...await muse.prepareSingle(abort.signal,data.concurrency,accountId,data.retryParallel===true),accounts:muse.snapshot()});}
       if (action === 'select') {if(muse.select)await muse.select(accountId);return json(res,200,{accounts:muse.snapshot()});}
       if (action === 'import') { if (!muse.supportsMultiAccount) return json(res,409,{error:'Kết nối chưa hỗ trợ nhiều tài khoản.'}); return json(res,200,{accounts:await muse.importLabels(data.labels)}); }
       if (action === 'concurrency') return json(res, 200, await muse.setConcurrency(data.concurrency, abort.signal,accountId));

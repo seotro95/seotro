@@ -64,7 +64,7 @@ export function errorInfo(error: unknown): { raw: string; hint: string } {
   let hint = 'Thử lại sau hoặc mở Chẩn đoán API để kiểm tra kết nối.';
   if (/MUSE_LOGIN_REQUIRED/i.test(raw)) hint = 'Mở Tài khoản Muse, đăng nhập trong tool rồi bấm Kiểm tra phiên. Mỗi cảnh dùng tài khoản được ghi trên ô.';
   else if (/MUSE_SESSION_REFRESH_FAILED|MUSE_SESSION_CHECK_FAILED/i.test(raw)) hint = 'Chưa cập nhật được phiên Muse. Kiểm tra kết nối và tab Muse rồi bấm Kiểm tra phiên; thông tin đăng nhập vẫn được giữ trên máy.';
-  else if (/MUSE_PARALLEL_UNVERIFIED/i.test(raw)) hint = 'Chưa chuẩn bị đủ các ô Muse để gửi đồng thời. Chưa gửi prompt và không tự chạy từng ô. Kiểm tra phiên hoặc chọn 1 ô nếu muốn chạy lần lượt.';
+  else if (/MUSE_PARALLEL_UNVERIFIED/i.test(raw)) hint = 'Chưa mở được các hội thoại riêng. Tool tự chuyển tài khoản đó sang từng luồng một và giữ đủ các ô chờ.';
   else if (/MUSE_WORKSPACE_ORIGIN/i.test(raw)) hint = 'Trang luồng chuyển sang miền khác Muse. Hoàn tất đăng nhập trong tab Muse rồi kiểm tra lại phiên; chưa có prompt được gửi.';
   else if (/MUSE_SUBMIT_NOT_ACKNOWLEDGED/i.test(raw)) hint = 'Muse chưa xác nhận đã nhận prompt. Mở cuộc trò chuyện kiểm tra trước khi thử lại để tránh tạo trùng; tool không tự gửi lại.';
   else if (/MUSE_NEW_CHAT_UNAVAILABLE/i.test(raw)) hint = 'Tool chưa mở được hội thoại riêng. Dùng chế độ hàng đợi một cảnh mỗi lượt; lỗi này không xác nhận Muse đang bận hoặc hết hạn mức.';

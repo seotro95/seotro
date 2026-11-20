@@ -87,3 +87,14 @@ test('ten mixed bracket headings import in order, display names on every card an
  await page.getByRole('button',{name:'Tải tất cả (10/10)',exact:true}).click();await expect.poll(async()=>(await exportedFolders(page))[0]?.files.map(f=>f.name)).toEqual(names.map(name=>name+'.mp4'));
  const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'Tải cảnh 8',exact:true}).click();expect((await downloaded).suggestedFilename()).toBe('tuan.mp4');
 });
+
+test('automatic serial fallback completes all ten named prompts and exports every original filename',async({page})=>{
+ await mockFolderPicker(page.context());const account={id:1,authenticated:true,sessionAuthenticated:true,active:true,state:'ready',executionConcurrency:1};
+ await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'browser',multiAccount:true,accounts:[account],executionConcurrency:1,concurrencyWarning:'Tự chuyển sang từng luồng một'}}));
+ await page.route('**/api/account/prepare',route=>route.fulfill({json:{executionConcurrency:1,serialFallback:true,accounts:[account],concurrencyWarning:'Tự chuyển sang từng luồng một'}}));
+ let active=0,peak=0;const calls:any[]=[];await page.route('**/api/image',async route=>{calls.push(route.request().postDataJSON());active++;peak=Math.max(peak,active);await new Promise(r=>setTimeout(r,20));active--;await route.fulfill({json:{base64:image,mimeType:'image/png'}})});
+ await page.goto('/');await page.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();await page.getByRole('button',{name:'Nhập TXT / SRT',exact:true}).click();
+ const names=['nam','thái','nga','thang','hoang','thu','thao','tuan','phang','phu'];await page.getByLabel('Nội dung TXT / SRT',{exact:true}).fill(names.map((name,i)=>`[${i+1}]${name}\nSerial prompt ${i+1}.`).join('\n'));await page.getByRole('button',{name:'Nạp vào Studio',exact:true}).click();await page.getByRole('button',{name:'TẠO 10 ẢNH',exact:true}).click();await expect(page.locator('.generated-image')).toHaveCount(10);
+ expect(peak).toBe(1);expect(calls.map(call=>call.sceneId)).toEqual(Array.from({length:10},(_,i)=>i+1));expect(calls.every(call=>!call.submissionGroup)).toBe(true);await expect(page.locator('.scene-card')).toHaveCount(10);
+ await page.getByRole('button',{name:'Tải tất cả (10/10)',exact:true}).click();await expect.poll(async()=>(await exportedFolders(page))[0]?.files.map(f=>f.name)).toEqual(names.map(name=>name+'.png'));
+});

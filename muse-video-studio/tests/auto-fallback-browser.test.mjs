@@ -1,0 +1,22 @@
+import{test}from'node:test';import assert from'node:assert/strict';import{readFile,mkdtemp,rm}from'node:fs/promises';import path from'node:path';import os from'node:os';import{chromium}from'playwright-core';import{MuseBrowser}from'../muse-browser.mjs';import{MuseAccounts}from'../muse-accounts.mjs';import{startStudioServer}from'../server.mjs';import{createMuseFixture}from'./fixtures/muse.mjs';
+const image=await readFile(new URL('../public/demo-image.png',import.meta.url)),clip=await readFile(new URL('../public/demo.mp4',import.meta.url));
+async function until(fn){const end=Date.now()+30000;while(!await fn()){if(Date.now()>end)throw Error('Fallback fixture timed out');await new Promise(r=>setTimeout(r,25))}}
+for(const mode of ['no-new-chat-2','worker-auth-10','unsent-wave','provider-capacity','icon-new-chat'])test(`real browser parallel and automatic fallback: ${mode}`,{timeout:120000},async()=>{
+ const root=await mkdtemp(path.join(os.tmpdir(),'muse-auto-browser-'));const fixture=createMuseFixture({image,clip});Object.assign(fixture.state,{behavior:'video',newChat:mode!=='no-new-chat-2',chatRoutes:!mode.startsWith('no-new'),lazyVideo:true,iconNewChat:mode==='icon-new-chat',rejectConcurrency:mode==='provider-capacity'?1:0});await new Promise(r=>fixture.server.listen(0,'127.0.0.1',r));
+ const driver=new MuseBrowser({profileRoot:root,serviceURL:`http://127.0.0.1:${fixture.server.address().port}/`,launchOptions:{executablePath:process.env.CHROMIUM_PATH||chromium.executablePath(),headless:true},pollMs:25,timeoutMs:30000});const pool=new MuseAccounts({profileRoot:root,createDriver:()=>driver});const runtime=await startStudioServer({museDriver:pool,port:0});
+ try{
+  await pool.connect(1);await driver.active.page.getByRole('button',{name:'Fixture login',exact:true}).click();await driver.refreshActive();
+  if(mode==='worker-auth-10'){const inspect=driver.inspectAuthentication.bind(driver);driver.inspectAuthentication=page=>page===driver.active.page?inspect(page):Promise.resolve({authenticated:false,state:'login_open',message:'Fixture workers cannot inherit login'});}
+  if(mode==='no-new-chat-2')driver.useSharedConversation=undefined;
+  const count=mode==='no-new-chat-2'||mode==='icon-new-chat'?2:mode==='worker-auth-10'?10:6;
+  const prepared=await pool.prepareSingle(new AbortController().signal,count,1);assert.equal(prepared.executionConcurrency,mode==='icon-new-chat'?2:mode==='unsent-wave'||mode==='provider-capacity'?6:1);assert.equal(fixture.state.submitted.length,0);
+  if(mode==='unsent-wave'){const write=driver.writeMessage.bind(driver);let failed=false;driver.writeMessage=async(page,text,signal)=>{if(!failed&&page!==driver.active.page){failed=true;throw new Error('MUSE_COMPOSER_NOT_READY: fixture worker lost composer before Enter')}return write(page,text,signal)};}
+  fixture.state.hold=true;const batchId=crypto.randomUUID(),submissionGroup={id:crypto.randomUUID(),size:count};
+  const jobs=Array.from({length:count},(_,i)=>fetch(runtime.url+'/api/video',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accountId:1,accountMode:'single',sceneId:i+1,batchId,submissionGroup,prompt:`Unique scene ${i+1}.`,model:'Omni 1.1 Flash',duration:4,resolution:'720p',aspectRatio:'16:9'})}).then(async r=>({status:r.status,body:await r.json()})));
+  const all=Promise.all(jobs);
+  if(mode==='provider-capacity'||mode==='icon-new-chat'){await until(()=>fixture.state.pending.size===count);fixture.state.hold=false;fixture.releaseAll();}
+  else for(let i=0;i<count;i++){await until(()=>fixture.state.submitted.length===i+1);assert.equal(fixture.state.pending.size,1);assert.equal(pool.snapshot()[0].running,1);fixture.releaseAll();}
+  const result=await all;assert.ok(result.every(r=>r.status===200),JSON.stringify(result));assert.equal(fixture.state.submitted.length,count+(mode==='provider-capacity'?1:0));assert.equal(pool.snapshot()[0].executionConcurrency,mode==='icon-new-chat'?2:1);assert.equal(pool.snapshot()[0].authenticated,true);await until(()=>pool.usage.size===0);assert.equal(pool.waiters.size,0);
+  if(mode!=='provider-capacity'){assert.equal(fixture.state.peak,mode==='icon-new-chat'?2:1);for(let i=1;i<=count;i++)assert.equal(fixture.state.submitted.filter(r=>r.prompt.includes(`Unique scene ${i}.`)).length,1);}
+ }finally{fixture.state.hold=false;fixture.releaseAll();await runtime.close();fixture.server.closeAllConnections();await new Promise(r=>fixture.server.close(r));await rm(root,{recursive:true,force:true})}
+});

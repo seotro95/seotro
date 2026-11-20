@@ -1,6 +1,6 @@
-# Muse AI Studio 1.13.1
+# Muse AI Studio 1.13.2
 
-Ứng dụng Windows tạo ảnh/video qua các tài khoản Muse riêng, nhập TXT/SRT và lưu kết quả trên máy. Xem [cách dùng bản mới](CAP-NHAT-1.13.1.md).
+Ứng dụng Windows tạo ảnh/video qua các tài khoản Muse riêng, nhập TXT/SRT và lưu kết quả trên máy. Xem [cách dùng bản mới](CAP-NHAT-1.13.2.md).
 
 ## Tên ảnh/video theo TXT/SRT
 
@@ -25,7 +25,7 @@ Mỗi tài khoản có bộ đếm và giới hạn riêng. Bộ xếp hàng cù
 
 Có thể chọn số ô riêng cho từng tài khoản trong bảng chọn: ví dụ Muse 01 chạy 2 ô, Muse 02 chạy 6 ô, Muse 03 chạy 10 ô. Tổng ô bằng tổng lựa chọn từng tài khoản. Đổi ô mặc định cho cả nhóm hoặc bấm preset 10 × 6 sẽ áp dụng lại đồng đều; số ô riêng được lưu khi mở lại.
 
-**Muse quyết định hạn mức và credit thực tế.** Số ô cấu hình là yêu cầu, không tạo thêm quyền trên dịch vụ. Nếu chưa chuẩn bị đủ các ô đã chọn, tool dừng trước khi gửi; không tự hạ về chạy từng ô. Với sáu ô, cả sáu trang New chat được giữ mở, nhập đủ prompt rồi mới gửi cùng lượt. Trang nháp chưa có URL cố định, đường dẫn dạng # và composer trong iframe đều được giữ đúng ngữ cảnh. Tool không tự gửi lại prompt đã được nhận.
+**Muse quyết định hạn mức và credit thực tế.** Số ô cấu hình là yêu cầu, không tạo thêm quyền trên dịch vụ. Khi Muse không có New chat, tool gửi liên tiếp trong cùng cuộc trò chuyện và chờ kết quả đồng thời (tối đa 6 yêu cầu trong chế độ này). Nếu không dùng được các cách chạy song song hoặc lỗi ở ô chưa gửi, tool tự chuyển tài khoản đó sang một luồng, giữ toàn bộ ô chờ theo thứ tự. Chế độ một luồng dùng lại trang Muse đã đăng nhập. Prompt đã gửi nhưng kết quả chưa rõ sẽ không tự gửi lại; khi Muse báo rõ từ chối vì giới hạn đồng thời, tool thử lại một lần ở chế độ tuần tự. Với sáu ô, cả sáu trang New chat được giữ mở, nhập đủ prompt rồi mới gửi cùng lượt. Trang nháp chưa có URL cố định, đường dẫn dạng # và composer trong iframe đều được giữ đúng ngữ cảnh. Tool không tự gửi lại prompt đã được nhận.
 
 TXT/SRT được nạp theo thứ tự vào các ô đang hiện. Kịch bản vượt số ô được chọn không tự cắt bỏ. Thu gọn/ẩn ô giữ dữ liệu; mở lại hoặc xuất/nhập dự án giữ tên, prompt, thiết lập và tài khoản. Bố cục cũ tới 40 ô vẫn được giữ; số luồng cũ lớn hơn 10 được đưa về tối đa 10 mỗi tài khoản và phần còn lại chờ.
 

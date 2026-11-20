@@ -6,7 +6,7 @@ export class SubmitGroups {
  register(spec,batchId,sceneId,signal){
   if(!spec||spec.size===1)return null;
   const key=batchId+':'+spec.id;let group=this.groups.get(key);
-  if(!group){group={size:spec.size,needed:spec.size,members:new Map(),closed:false};this.groups.set(key,group);group.timer=setTimeout(()=>this.fail(group,error('Các ô chưa chuẩn bị đủ để gửi cùng lượt. Chưa gửi prompt; không tự chuyển sang từng ô.')),this.timeoutMs);group.timer.unref?.()}
+  if(!group){group={size:spec.size,needed:spec.size,members:new Map(),closed:false};this.groups.set(key,group);group.timer=setTimeout(()=>this.fail(group,error('Các ô chưa chuẩn bị đủ để gửi cùng lượt. Nhóm này chưa gửi prompt; có thể chuyển sang hàng chờ tuần tự.')),this.timeoutMs);group.timer.unref?.()}
   if(group.closed||group.size!==spec.size||group.members.has(sceneId))throw error('Nhóm gửi hoặc số cảnh bị trùng/không khớp.');
   let resolve,reject;const promise=new Promise((yes,no)=>{resolve=yes;reject=no});promise.catch(()=>{});
   const member={ready:false,resolve,reject,signal,abort:null};group.members.set(sceneId,member);

@@ -48,9 +48,9 @@ test('one click runs ten simultaneous slots and queues the other thirty without 
  await release.shift()!();await expect.poll(()=>calls.length).toBe(11);holding=false;await Promise.all(release.map(fn=>fn()));await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow','40');expect(calls).toHaveLength(40);expect(calls.every(call=>call.accountId===27)).toBe(true);await expect(page.locator('.scene-card')).toHaveCount(40);
 });
 
-test('parallel-ten action sends no prompt if ten independent conversations cannot be verified',async({page})=>{
+test('parallel-ten action automatically falls back to one active request and retains all ten slots',async({page})=>{
  await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'browser',multiAccount:true,accounts,executionConcurrency:1}}));
  await page.route('**/api/account/prepare',route=>route.fulfill({json:{executionConcurrency:1,preferredConcurrency:10,concurrencyWarning:'Shared conversation only'}}));
- let calls=0;await page.route('**/api/video',route=>{calls++;return route.fulfill({status:500,json:{error:'Unexpected submission'}})});
- await page.goto('/');await page.getByRole('button',{name:'TẠO SONG SONG 10 Ô',exact:true}).click();await expect(page.getByText('mới chuẩn bị 1/10 ô',{exact:false})).toBeVisible();expect(calls).toBe(0);await expect(page.locator('.status-badge.running')).toHaveCount(0);
+ let calls=0;await page.route('**/api/video',route=>{calls++;return new Promise(()=>{})});
+ await page.goto('/');await page.getByRole('button',{name:'TẠO SONG SONG 10 Ô',exact:true}).click();await expect.poll(()=>calls).toBe(1);await expect(page.locator('.status-badge.running')).toHaveCount(1);await expect(page.locator('.status-badge.queued')).toHaveCount(9);await expect(page.locator('.scene-card')).toHaveCount(10);
 });

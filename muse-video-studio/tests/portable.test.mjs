@@ -210,6 +210,30 @@ test('portable app submits ten independent scenes concurrently, views images and
     assert.deepEqual((await readdir(compactFolder)).sort(),compactNames.map(name=>name+'.png').sort());
     assert.equal(fixture.state.submitted.length,20);
     console.log('Portable stage: all ten compact headings imported and saved with exact names');
+    fixture.state.newChat=false;fixture.state.behavior='video';fixture.state.peak=0;fixture.state.hold=true;
+    await studio.getByRole('button',{name:'Tạo video',exact:true}).click();
+    await studio.getByRole('button',{name:'TẠO 10 VIDEO',exact:true}).click();
+    await waitFor(()=>fixture.state.pending.size===6,60000);assert.equal(fixture.state.submitted.length,26,'Six new messages must arrive before any of their results');fixture.state.hold=false;fixture.releaseAll();
+    await waitFor(async()=>await studio.locator('.scene-card video').count()===10,90000);
+    assert.equal(fixture.state.peak,6,'One chat without New chat must run six overlapping videos');
+    assert.equal(fixture.state.submitted.length,30);
+    assert.equal(await studio.getByLabel('Số luồng mỗi tài khoản:',{exact:true}).inputValue(),'10','Requested setting must remain intact');
+    const automaticStatus=await studio.evaluate(async()=>(await fetch('/api/status')).json());
+    assert.equal(automaticStatus.accounts[0].executionConcurrency,6);
+    assert.deepEqual(await studio.locator('.scene-title').allTextContents(),compactNames.map((name,i)=>`[${i+1}] ${name}`));
+    await desktop.evaluate(()=>{globalThis.lastFolder=null});
+    await studio.getByRole('button',{name:'Tải tất cả (10/10)',exact:true}).click();await waitFor(async()=>Boolean(await desktop.evaluate(()=>globalThis.lastFolder)));
+    const sequentialFolder=await desktop.evaluate(()=>globalThis.lastFolder);
+    assert.deepEqual((await readdir(sequentialFolder)).sort(),compactNames.map(name=>name+'.mp4').sort());
+    console.log('Portable stage: one chat without New chat completed all ten named videos with six simultaneous generations');
+    fixture.state.rejectConcurrency=1;fixture.state.peak=0;
+    for(let id=1;id<=10;id++)await studio.getByLabel(`Kịch bản cảnh ${id}`,{exact:true}).fill(`Serial fallback video ${id}.`);
+    await studio.getByRole('button',{name:'TẠO 10 VIDEO',exact:true}).click();await waitFor(async()=>await studio.locator('.scene-card video').count()===10,90000);
+    assert.equal(fixture.state.peak,1);assert.equal(fixture.state.submitted.length,41,'Only the explicit rejected request may be retried; ten final generations are retained');
+    const fallbackStatus=await studio.evaluate(async()=>(await fetch('/api/status')).json());assert.equal(fallbackStatus.accounts[0].executionConcurrency,1);assert.ok(fallbackStatus.accounts[0].concurrencyWarning);
+    assert.deepEqual(await studio.locator('.scene-title').allTextContents(),compactNames.map((name,i)=>`[${i+1}] ${name}`));
+    console.log('Portable stage: explicit concurrency rejection automatically completed all ten slots sequentially');
+
 
   } finally {
     await desktop?.close();

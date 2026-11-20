@@ -17,7 +17,7 @@ const FIELD = 'textarea:not([data-hatch-composer-prehydration-input="true"]):not
 const NAMED_EDITOR = ['Message', 'Message Muse', 'Tin nhắn', 'Nhập tin nhắn'].flatMap(label => FIELD.split(', ').flatMap(field =>
   [`${field}[aria-label="${label}" i]:visible`, `${field}[placeholder="${label}" i]:visible`]
 )).concat('[data-lexical-editor="true"][contenteditable="true"]:visible').map(selector => `${selector}:not([data-message-item] *)`).join(', ');
-const NEW_CHAT = /^(new chat|new conversation|cuộc trò chuyện mới|trò chuyện mới|bắt đầu trò chuyện)$/i;
+const NEW_CHAT = /^(new chat|new conversation|new thread|cuộc trò chuyện mới|cuộc hội thoại mới|trò chuyện mới|chat mới|bắt đầu trò chuyện)(?:\s*(?:\([^)]{1,30}\)|\[[^\]]{1,30}\]|(?:ctrl|cmd|alt|⌘)[+\s].{0,20}))?$/i;
 const MESSAGES = '[data-message-item]';
 const STOP = '[data-testid="hatch-composer-stop-button"]';
 const NOTICE = '[data-testid="assistant-response-error-notice"]';
@@ -62,7 +62,7 @@ export class MuseBrowser {
     this.unsafeMarkers = new Set();
     this.imageBatches = new Map();
     this.parallelRoutes = [];
-    this.submitGroups=new SubmitGroups();
+    this.submitGroups=new SubmitGroups();this.parallelStrategy='workers';this.composerQueue=[];this.composerBusy=false;this.sharedSignals=new Map();this.sharedStopPromise=null;
     this.pendingCaptions=new Set();
     this.active = null;
     this.profilePath = accountProfile || path.join(this.profileRoot, 'slot-01');
@@ -282,6 +282,8 @@ export class MuseBrowser {
     for (const frame of await this.composerFrames(page)) {
       const entry = frame.getByRole('button', { name: NEW_CHAT }).or(frame.getByRole('link', { name: NEW_CHAT })).filter({ visible: true }).first();
       if (await entry.count()) return entry;
+      const icon=frame.locator('[data-testid="new-chat-button"], [data-testid="new-conversation-button"], [data-testid="hatch-new-chat-button"], button[title="New chat" i], a[href$="/chat/new"], a[href$="/chats/new"]').filter({visible:true}).first();
+      if(await icon.count())return icon;
     }
     return null;
   }
@@ -302,10 +304,10 @@ export class MuseBrowser {
     const owned=this.active;const lanes=this.parallelRoutes;this.parallelRoutes=[];
     await Promise.allSettled(lanes.filter(lane=>lane.page&&!lane.page.isClosed()).map(lane=>owned?.destroyWorkerPage?owned.destroyWorkerPage(lane.page):lane.page.close()));
   }
-  get parallelReady(){return this.maxConcurrency===1||this.parallelRoutes.length===this.maxConcurrency&&this.parallelRoutes.every(lane=>lane.page&&!lane.page.isClosed())}
+  get parallelReady(){return this.parallelStrategy==='shared-conversation'||this.maxConcurrency===1||this.parallelRoutes.length===this.maxConcurrency&&this.parallelRoutes.every(lane=>lane.page&&!lane.page.isClosed())}
   async freshConversation(page,signal){
     const entry=await this.newChatControl(page);
-    if(!entry)throw fail('MUSE_PARALLEL_UNVERIFIED','Chưa mở được New chat riêng cho từng ô. Không tự đổi sang chạy lần lượt.',409);
+    if(!entry)throw fail('MUSE_NEW_CHAT_UNAVAILABLE','Chưa tìm được nút mở hội thoại mới riêng cho từng ô.',409);
     signal.throwIfAborted();await entry.click({timeout:5000});
     const editor=await this.waitForComposer(page);const handle=await editor.elementHandle();let frame;
     try{frame=await handle.ownerFrame()}finally{await handle.dispose()}
@@ -324,7 +326,7 @@ export class MuseBrowser {
   async setConcurrency(count, signal) {
     if(!isLaneCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 10 ô mỗi tài khoản.',400);
     if(this.reserved||this.workers.size)throw fail('MUSE_CHAT_BUSY','Đợi các cảnh hoàn tất trước khi đổi số luồng.',409);
-    await this.closePreparedPages();this.maxConcurrency=1;this.concurrencyProbe={requested:count,checked:0,state:'checking'};
+    await this.closePreparedPages();this.parallelStrategy='workers';this.maxConcurrency=1;this.concurrencyProbe={requested:count,checked:0,state:'checking'};
     if(count===1){this.concurrencyProbe.state='ready';return {executionConcurrency:1,message:'Đã chọn một ô chạy lần lượt.'}}
     await this.open();await this.refreshActive();
     if(!this.account(1).authenticated)throw fail('MUSE_LOGIN_REQUIRED','Đăng nhập Muse và kiểm tra phiên trước khi bật song song.',401);
@@ -334,7 +336,7 @@ export class MuseBrowser {
     const probe=async()=>{while(!failure&&next<count){next++;let page;try{
       signal.throwIfAborted();page=await this.createWorkerPage();pages.add(page);
       await page.goto(this.workerURL(),{waitUntil:'domcontentloaded',timeout:45000});
-      if(!this.conversationURL(page)||!await this.authenticated(page))throw fail('MUSE_LOGIN_REQUIRED','Chưa xác minh được phiên trong trang luồng riêng.',401);
+      if(!this.conversationURL(page)||!await this.authenticated(page))throw fail('MUSE_PARALLEL_UNVERIFIED','Trang luồng riêng chưa dùng được phiên Muse đã đăng nhập; cần dùng lại trang đăng nhập để chạy tuần tự.',409);
       await this.freshConversation(page,signal);
       lanes.push({page,url:this.conversationURL(page),busy:false});this.concurrencyProbe.checked++;
     }catch(error){if(!failure)failure=error;stop()}}};
@@ -342,8 +344,22 @@ export class MuseBrowser {
       await Promise.all(Array.from({length:Math.min(4,count)},probe));if(failure)throw failure;signal.throwIfAborted();
       this.parallelRoutes=lanes;this.maxConcurrency=count;this.concurrencyProbe.state='ready';
       return {executionConcurrency:count,message:`Đã chuẩn bị sẵn ${count} trang Muse riêng; các ô gửi cùng lượt sau khi nhập đủ prompt. Không đợi kết quả ô trước.`};
-    }catch(error){stop();this.concurrencyProbe.state='unavailable';throw error}finally{signal.removeEventListener('abort',stop)}
+    }catch(error){stop();await Promise.allSettled([...pages].map(page=>owned.destroyWorkerPage?owned.destroyWorkerPage(page):page.close()));this.concurrencyProbe.state='unavailable';if(signal.aborted||/MUSE_LOGIN_REQUIRED|MUSE_SESSION_|MUSE_CHAT_BUSY/.test(error.message))throw error;throw Object.assign(fail('MUSE_PARALLEL_UNVERIFIED','Chưa chuẩn bị được các trang Muse riêng để chạy đồng thời.',409),{parallelReason:error.message.split(':')[0]})}finally{signal.removeEventListener('abort',stop)}
   }
+  async useSharedConversation(count,signal){
+    if(!isLaneCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn 1–10 ô.',400);
+    signal.throwIfAborted();await this.closePreparedPages();await this.refreshActive({includeDetails:false});if(!this.account(1).authenticated)throw fail('MUSE_LOGIN_REQUIRED','Cần đăng nhập Muse.',401);
+    const frame=await this.prepareConversation(this.active.page,{reuse:true});const editor=await this.findComposer(frame)||await this.initialComposer(frame)||await this.waitForComposer(frame);if((await this.editorText(editor)).trim())throw fail('MUSE_DRAFT_EXISTS','Ô Muse có bản nháp; chưa ghi đè.',409);
+    this.parallelStrategy='shared-conversation';this.maxConcurrency=Math.min(count,6);this.concurrencyProbe={requested:count,checked:this.maxConcurrency,state:'ready',strategy:'shared-conversation'};
+    return {executionConcurrency:this.maxConcurrency,parallelStrategy:'shared-conversation',message:`Gửi ${this.maxConcurrency} tin nhắn liên tiếp trong cùng cuộc trò chuyện, không đợi kết quả trước. Các ô còn lại chờ.`};
+  }
+  acquireComposer(signal){
+    signal.throwIfAborted();return new Promise((resolve,reject)=>{
+      const row={start:()=>{signal.removeEventListener('abort',row.abort);this.composerBusy=true;let released=false;resolve(()=>{if(released)return;released=true;this.composerBusy=false;this.pumpComposer()})},abort:()=>{const index=this.composerQueue.indexOf(row);if(index>=0)this.composerQueue.splice(index,1);signal.removeEventListener('abort',row.abort);reject(signal.reason)}};
+      signal.addEventListener('abort',row.abort,{once:true});this.composerQueue.push(row);this.pumpComposer();
+    });
+  }
+  pumpComposer(){if(!this.composerBusy&&this.composerQueue.length)this.composerQueue.shift().start()}
   async composerDiagnostics(page) {
     const frames = page.frames ? page.frames() : [page];
     const known = new Set(['app', 'chat', 'chats', 'new', 'home', 'workspace', 'studio', 'login', 'auth', 'signin', 'callback']);
@@ -449,7 +465,7 @@ export class MuseBrowser {
     this.requireSingleAccount(data.accountId);
     if (this.reserved >= MAX_SLOTS) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã có 400 cảnh đang xử lý hoặc chờ.', 429);
     if(data.submissionGroup?.size>this.maxConcurrency)throw fail('MUSE_PARALLEL_UNVERIFIED','Số ô cùng lượt vượt số trang Muse đã chuẩn bị. Chưa gửi prompt.',409);
-    const submitBarrier=this.submitGroups.register(data.submissionGroup,data.batchId,data.sceneId,data.signal);
+    const submitBarrier=this.parallelStrategy==='shared-conversation'?null:this.submitGroups.register(data.submissionGroup,data.batchId,data.sceneId,data.signal);
     this.reserved++;
     let release;
     try { release = await this.takeTurn(data.signal); return await this.executeTurn({...data,submitBarrier}); }
@@ -470,6 +486,8 @@ export class MuseBrowser {
     }
     const lease = this.maxConcurrency > 1 && !singleLane ? this.parallelRoutes.find(route => !route.busy) : null;
     if (lease) lease.busy = true;
+    const sharedConversation=this.parallelStrategy==='shared-conversation'&&output!=='text';
+    const parallelAttempt=this.maxConcurrency>1&&(!singleLane||sharedConversation);
     let page; let owned; let sending = false;let reuseLogin=false;
     const cancelled = () => { if (page && !sending&&!reuseLogin) void (owned?.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()).catch(() => {}); };
     signal.addEventListener('abort', cancelled, { once: true });
@@ -496,11 +514,12 @@ export class MuseBrowser {
       if (new URL(page.url()).origin !== new URL(this.serviceURL).origin) throw fail('MUSE_WORKSPACE_ORIGIN', 'Trang luồng chuyển sang miền khác Muse. Chưa nhập hoặc gửi prompt. Hoàn tất đăng nhập trong tab Muse rồi kiểm tra lại phiên.', 409);
       const workerProbe = reuseLogin?{authenticated:true}:await this.inspectAuthentication(page);
       if (!workerProbe.authenticated) {
+        if(parallelAttempt)throw fail('MUSE_PARALLEL_UNVERIFIED','Trang chạy song song chưa xác minh được phiên; chuyển sang dùng phiên đang đăng nhập.',409);
         Object.assign(this.account(accountId), { authenticated: false, sessionAuthenticated: false, composerReady: false, state: workerProbe.state, connectionMessage: workerProbe.message });
         throw fail(workerProbe.state === 'check_failed' ? 'MUSE_SESSION_CHECK_FAILED' : 'MUSE_LOGIN_REQUIRED', workerProbe.message, workerProbe.state === 'check_failed' ? 503 : 401);
       }
       const conversationKey=page;
-      if(this.pendingCaptions.has(conversationKey)){
+      if(this.pendingCaptions.has(conversationKey)&&!sharedConversation){
         progress.phase='waiting-provider';const deadline=Date.now()+this.timeoutMs;
         for(;;){signal.throwIfAborted();let pending=false;for(const frame of await this.composerFrames(page))if(await frame.locator(STOP).first().isVisible().catch(()=>false)){pending=true;break}if(!pending)break;if(Date.now()>=deadline)throw fail('MUSE_CHAT_BUSY','Muse còn xử lý lượt trước. Video trước đã được lưu; chưa gửi prompt mới.',409);await pause(250,signal)}
         this.pendingCaptions.delete(conversationKey);
@@ -508,9 +527,9 @@ export class MuseBrowser {
       progress.phase='waiting-editor';
       const conversation = await this.prepareConversation(page, { reuse: Boolean(lease) || singleLane });
       signal.throwIfAborted();
-      if (await conversation.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
+      if (!sharedConversation&&await conversation.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
       if (checkOnly) return { ready: true, message: 'Đã mở được ô Message trong trang luồng riêng. Chưa gửi prompt hoặc yêu cầu tạo nội dung.', details: await this.composerDiagnostics(page) };
-      const result = await this.sendTurn({ page: conversation, prompt, image, output, signal, onSubmit: () => { sending = true; progress.phase = 'sending';progress.sentAt=Date.now(); }, beforeSubmit:submitBarrier?()=>submitBarrier.ready():undefined,onStage: phase => { progress.phase = phase; if (phase === 'submitted'){progress.submitted = true;progress.submittedAt=Date.now();} } });
+      const result = await this.sendTurn({ page: conversation, prompt, image, output, signal,sharedConversation, onSubmit: () => { sending = true; progress.phase = 'sending';progress.sentAt=Date.now(); }, beforeSubmit:submitBarrier?()=>submitBarrier.ready():undefined,onStage: phase => { progress.phase = phase; if (phase === 'submitted'){progress.submitted = true;progress.submittedAt=Date.now();} } });
       if(result.captionPending)this.pendingCaptions.add(conversationKey);
       if (output === 'image' && batchId && sceneId && result.fingerprint) {
         let batch = this.imageBatches.get(batchId);
@@ -524,7 +543,9 @@ export class MuseBrowser {
       }
       progress.phase = 'done'; return result;
     } catch (error) {
-      progress.phase = signal.aborted ? 'cancelled' : 'error'; throw error;
+      progress.phase = signal.aborted ? 'cancelled' : 'error';
+      const wrapped=Object.assign(new Error(error.message),{status:error.status,notSubmitted:!sending,safeSerialRetry:error.safeSerialRetry===true,parallelFailure:parallelAttempt&&!signal.aborted&&((!sending&&!/MUSE_LOGIN_|MUSE_SESSION_|MUSE_WORKSPACE_ORIGIN|MUSE_DRAFT_|MUSE_ATTACHMENT_|MUSE_UPLOAD_/.test(error.message))||/MUSE_SHARED_CONVERSATION|MUSE_PARALLEL_LIMIT|MUSE_SUBMIT_NOT_ACKNOWLEDGED/.test(error.message))});
+      throw signal.aborted?signal.reason:wrapped;
     } finally {
       progress.active = false;
       signal.removeEventListener('abort', cancelled);
@@ -564,19 +585,24 @@ export class MuseBrowser {
     }
     throw fail('MUSE_EDITOR_CHANGED', 'Muse đổi ô nhập nhưng chưa giữ đủ prompt. Chưa nhấn gửi. Kiểm tra cuộc trò chuyện rồi thử lại.', 409);
   }
-  async sendTurn({ page, prompt, image, output, signal, onSubmit, beforeSubmit, onStage = () => {} }) {
+  async sendTurn({ page, prompt, image, output, signal, onSubmit, beforeSubmit, onStage = () => {},sharedConversation=false }) {
+    let releaseComposer=sharedConversation?await this.acquireComposer(signal):null;
+    try{
+    if(sharedConversation&&this.parallelStrategy!=='shared-conversation')throw fail('MUSE_PARALLEL_UNVERIFIED','Đã chuyển về tuần tự trước khi gửi ô này.',409);
     let editor = await this.findComposer(page) || await this.initialComposer(page) || await this.waitForComposer(page);
     if ((await editor.innerText().catch(() => '')).trim() || (await editor.inputValue().catch(() => '')).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có nội dung chưa gửi. Gửi hoặc xóa bản nháp đó trước; tool không ghi đè.', 409);
     if (await editor.locator('xpath=ancestor::*[@data-hatch-composer-root or self::form][1]').locator('img[src^="blob:"]:not([data-message-item] *)').count()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có ảnh chưa gửi. Xử lý bản nháp đó trước; tool không gửi kèm ảnh cũ.', 409);
     if (image) await this.attach(page, image);
     signal.throwIfAborted();
     const marker = `studio-request-${randomUUID()}`;
-    const message = `${prompt}\n\n[Request marker: ${marker}. Do not include this marker in your reply.]`;
+    const fileToken='MUSE_'+marker.slice('studio-request-'.length).replaceAll('-','');
+    const delivery=sharedConversation?`\nOutput attribution: name the generated downloadable file exactly ${fileToken} with its real extension. Provide a Markdown download link labelled ${fileToken}. Prefix any error for this task with ${fileToken}. Other generation requests in this conversation are independent; start this task without waiting for them.`:'';
+    const message = `${prompt}\n\n[Request marker: ${marker}. Do not include this marker in your reply.]${delivery}`;
     editor = await this.writeMessage(page, message, signal);
     signal.throwIfAborted();
     if(beforeSubmit){onStage('waiting-cohort');await beforeSubmit();signal.throwIfAborted();}
     onSubmit();
-    this.inFlightMarkers.add(marker);
+    this.inFlightMarkers.add(marker);if(sharedConversation)this.sharedSignals.set(marker,signal);
     const deadline = Date.now() + this.timeoutMs;
     const acknowledgementDeadline = Date.now() + Math.min(this.submitTimeoutMs, this.timeoutMs);
     let lastText = '';
@@ -587,12 +613,12 @@ export class MuseBrowser {
       while (Date.now() < deadline) {
         await pause(this.pollMs, signal);
         if (this.unsafeMarkers.has(marker)) throw fail('MUSE_SHARED_CONVERSATION', 'Các luồng Muse đang dùng chung hội thoại. Đã dừng nhận kết quả để tránh ghép nhầm; không tự gửi lại.', 409);
-        const result = await page.evaluate(({ messages, stop, notice, marker, otherMarkers }) => {
+        const result = await page.evaluate(({ messages, stop, notice, marker, otherMarkers,sharedConversation,fileToken,output }) => {
           const visible = el => Boolean(el && el.getClientRects().length);
           const nodes = Array.from(document.querySelectorAll(messages));
           const anchor = nodes.findLastIndex(node => node.getAttribute('data-message-role') === 'user' && node.textContent.includes(marker));
           const nextUser = anchor < 0 ? -1 : nodes.findIndex((node, index) => index > anchor && node.getAttribute('data-message-role') === 'user');
-          const replies = anchor < 0 ? [] : nodes.slice(anchor + 1, nextUser < 0 ? undefined : nextUser).filter(node => node.getAttribute('data-message-role') === 'assistant');
+          const replies = anchor < 0 ? [] : nodes.slice(anchor + 1,sharedConversation?undefined:nextUser < 0 ? undefined : nextUser).filter(node => node.getAttribute('data-message-role') === 'assistant');
           const shared = nodes.some(node => node.getAttribute('data-message-role') === 'user' && otherMarkers.some(other => node.textContent.includes(other)));
           // A generated player often uses preload=none: currentSrc/readyState
           // stay empty until a human presses Play. Read the file source instead
@@ -601,23 +627,59 @@ export class MuseBrowser {
           const players=replies.flatMap(node=>Array.from(node.querySelectorAll('video'))).map(el=>({src:el.currentSrc||el.getAttribute('src')||el.querySelector('source[src]')?.src,duration:Number.isFinite(el.duration)?el.duration:undefined,width:el.videoWidth,height:el.videoHeight})).filter(el=>el.src);
           const videos=[...links,...players];
           const images = replies.flatMap(node => Array.from(node.querySelectorAll('img'))).filter(el => !el.closest('video') && el.complete && el.naturalWidth >= 128 && el.naturalHeight >= 128).map(el => ({ src: el.currentSrc || el.src, width: el.naturalWidth, height: el.naturalHeight }));
-          const error = replies.flatMap(node => Array.from(node.querySelectorAll(notice))).find(visible);
-          return { anchored: anchor >= 0, shared, interrupted: nextUser >= 0, text: replies.map(node => node.innerText).join('\n\n').trim(), videos, images,
+          const namedLinks=sharedConversation?replies.flatMap(node=>Array.from(node.querySelectorAll('a[href]'))).filter(el=>[el.textContent,el.getAttribute('download'),el.href].some(value=>value?.includes(fileToken))):[];
+          const namedElements=sharedConversation?replies.flatMap(node=>Array.from(node.querySelectorAll(output==='video'?'video':'img'))).filter(el=>{if([el.getAttribute('alt'),el.getAttribute('aria-label'),el.getAttribute('src')].some(value=>value?.includes(fileToken)))return true;const container=el.closest('figure')||el.closest('[data-message-item]');const tokens=new Set(container?.textContent.match(/\bMUSE_[a-f0-9]{32}\b/g)||[]);return tokens.size===1&&tokens.has(fileToken)&&container.querySelectorAll(output==='video'?'video':'img').length===1;}):[];
+          const namedMedia=namedLinks.length?{src:namedLinks[0].href,width:0,height:0}:namedElements.length?{src:namedElements[0].currentSrc||namedElements[0].src,width:0,height:0}:null;
+          const error = replies.flatMap(node => Array.from(node.querySelectorAll(notice))).find(el=>visible(el)&&(!sharedConversation||el.closest('[data-message-item]')?.textContent.includes(fileToken)));
+          return {namedMedia,anchored: anchor >= 0, shared, interrupted: nextUser >= 0, text: replies.map(node => node.innerText).join('\n\n').trim(), videos, images,
             streaming: visible(document.querySelector(stop)), error: error?.innerText || '' };
-        }, { messages: MESSAGES, stop: STOP, notice: NOTICE, marker, otherMarkers: [...this.inFlightMarkers].filter(other => other !== marker) });
-        if (result.shared || (result.interrupted && !result.images.length && !result.videos.length && !result.text)) {
+        }, { messages: MESSAGES, stop: STOP, notice: NOTICE, marker, otherMarkers: [...this.inFlightMarkers].filter(other => other !== marker),sharedConversation,fileToken,output });
+        if (!sharedConversation&&(result.shared || (result.interrupted && !result.images.length && !result.videos.length && !result.text))) {
           for (const active of this.inFlightMarkers) this.unsafeMarkers.add(active);
           this.maxConcurrency = 1;
           throw fail('MUSE_SHARED_CONVERSATION', 'Một hội thoại nhận nhiều yêu cầu xen kẽ. Tool dừng để tránh lấy nhầm ảnh; hãy chuẩn bị lại các ô trước khi chạy tiếp. Không tự gửi lại.', 409);
         }
-        if (result.error) throw fail('MUSE_GENERATION_ERROR', result.error);
-        if (result.anchored && !acknowledged) { acknowledged = true; onStage('submitted'); }
+        if(result.error){const capacity=/concurren|at (?:the same|a) time|already (?:generating|processing)|too many (?:active|parallel|simultaneous)|tác vụ.{0,40}đồng thời/i.test(result.error);const error=fail(capacity?'MUSE_PARALLEL_LIMIT':'MUSE_GENERATION_ERROR',result.error);if(capacity)error.safeSerialRetry=true;throw error;}
+        if (result.anchored && !acknowledged) { acknowledged = true; onStage('submitted');releaseComposer?.();releaseComposer=null; }
         if (!result.anchored && !result.streaming && Date.now() >= acknowledgementDeadline) throw fail('MUSE_SUBMIT_NOT_ACKNOWLEDGED', 'Muse chưa xác nhận đã nhận prompt sau thao tác gửi. Tool không tự gửi lại. Mở cuộc trò chuyện kiểm tra trước khi thử lại để tránh tạo trùng.', 504);
         if (result.text !== lastText) { lastText = result.text; stableSince = Date.now(); }
         if (output === 'text' && result.anchored && result.text && !result.streaming && Date.now() - stableSince >= this.quietMs) return { text: result.text };
-        const media = output === 'video' ? result.videos[0] : output === 'image' ? result.images[0] : null;
-        if (media && (!result.streaming||output==='video')) {
+        const media = sharedConversation?result.namedMedia:output === 'video' ? result.videos[0] : output === 'image' ? result.images[0] : null;
+        if (media && (sharedConversation||!result.streaming||output==='video')) {
           onStage('downloading');
+          return {...await this.downloadMedia(page,media,output,signal),captionPending:!sharedConversation&&output==='video'&&result.streaming};
+        }
+        if (output !== 'text' && result.text && !media && !result.streaming && Date.now() - stableSince > 20000) throw fail(output === 'image' ? 'MUSE_NO_IMAGE' : 'MUSE_NO_VIDEO', `Muse chưa trả ${output === 'image' ? 'ảnh' : 'video'} cho yêu cầu này. Phản hồi: ${result.text.slice(0, 1000)}`);
+      }
+      throw fail('MUSE_TIMEOUT', 'Hết thời gian chờ Muse. Kiểm tra cửa sổ Muse trước khi thử lại để tránh tạo trùng hoặc tính phí hai lần.', 504);
+    } catch (error) {
+      if (signal.aborted) {
+        if(sharedConversation){onStage('cancelled-provider');await this.finishCancelledShared(page,fileToken,deadline);throw signal.reason;}
+        // A hidden worker still has a live DOM. Dispatch Stop there and give its
+        // request time to finish before disposing the view, which aborts fetches.
+        await page.locator(STOP).first().evaluate(button => button.click(), undefined, { timeout: 3000 }).catch(() => {});
+        // Let the website dispatch its Stop request before tearing down several
+        // views together. A previously idle frame may report networkidle before
+        // the click's new fetch has entered Playwright's network bookkeeping.
+        await pause(200);
+        await page.waitForLoadState('networkidle', { timeout: 3000 }).catch(() => {});
+        throw signal.reason;
+      }
+      throw error;
+    } finally { this.inFlightMarkers.delete(marker); this.unsafeMarkers.delete(marker);if(sharedConversation){this.sharedSignals.delete(marker);if(!this.sharedSignals.size)this.sharedStopPromise=null;} }
+    }finally{releaseComposer?.();}
+  }
+  async finishCancelledShared(page,fileToken,deadline){
+    while(Date.now()<deadline&&this.active&&!this.active.page.isClosed()){
+      if([...this.sharedSignals.values()].every(signal=>signal.aborted)){
+        if(!this.sharedStopPromise)this.sharedStopPromise=(async()=>{await page.locator(STOP).first().evaluate(button=>button.click(),undefined,{timeout:3000}).catch(()=>{});await pause(200)})();
+        await this.sharedStopPromise;return;
+      }
+      const completed=await page.evaluate(token=>[...document.querySelectorAll('[data-message-item][data-message-role="assistant"]')].some(node=>[...node.querySelectorAll('a[href],img,video')].some(el=>[el.textContent,el.getAttribute('alt'),el.getAttribute('aria-label'),el.getAttribute('href'),el.getAttribute('src'),el.getAttribute('download')].some(value=>value?.includes(token)))),fileToken).catch(()=>false);
+      if(completed)return;await pause(100);
+    }
+  }
+  async downloadMedia(page,media,output,signal){
           const downloadKey=`__studio_download_${randomUUID().replaceAll('-','')}`;
           signal.throwIfAborted();
           const abortDownload=()=>{void page.evaluate(key=>{if(globalThis[key]?.abort)globalThis[key].abort();else globalThis[key]='aborted'},downloadKey).catch(()=>{})};
@@ -676,26 +738,8 @@ export class MuseBrowser {
             }finally{clearTimeout(timer);delete globalThis[downloadKey]}
           }, { src: media.src, output,downloadKey }).catch(() => { throw fail('MUSE_MEDIA_UNREADABLE', 'Chưa tải hoặc giải mã được tệp Muse trả về. Tool không xuất tệp hỏng; mở lịch sử Muse để kiểm tra.', 502); });
           signal.throwIfAborted();
-          return { ...base64,captionPending:output==='video'&&result.streaming, mimeType: base64.mimeType?.startsWith(`${output}/`) ? base64.mimeType : output === 'image' ? 'image/png' : 'video/mp4', metadata: { ...(output === 'video' ? { duration: base64.duration||media.duration } : {}), width: base64.width || media.width, height: base64.height || media.height } };
+          return { ...base64,captionPending:false, mimeType: base64.mimeType?.startsWith(`${output}/`) ? base64.mimeType : output === 'image' ? 'image/png' : 'video/mp4', metadata: { ...(output === 'video' ? { duration: base64.duration||media.duration } : {}), width: base64.width || media.width, height: base64.height || media.height } };
           }finally{signal.removeEventListener('abort',abortDownload);void page.evaluate(key=>{delete globalThis[key]},downloadKey).catch(()=>{})}
-        }
-        if (output !== 'text' && result.text && !media && !result.streaming && Date.now() - stableSince > 20000) throw fail(output === 'image' ? 'MUSE_NO_IMAGE' : 'MUSE_NO_VIDEO', `Muse chưa trả ${output === 'image' ? 'ảnh' : 'video'} cho yêu cầu này. Phản hồi: ${result.text.slice(0, 1000)}`);
-      }
-      throw fail('MUSE_TIMEOUT', 'Hết thời gian chờ Muse. Kiểm tra cửa sổ Muse trước khi thử lại để tránh tạo trùng hoặc tính phí hai lần.', 504);
-    } catch (error) {
-      if (signal.aborted) {
-        // A hidden worker still has a live DOM. Dispatch Stop there and give its
-        // request time to finish before disposing the view, which aborts fetches.
-        await page.locator(STOP).first().evaluate(button => button.click(), undefined, { timeout: 3000 }).catch(() => {});
-        // Let the website dispatch its Stop request before tearing down several
-        // views together. A previously idle frame may report networkidle before
-        // the click's new fetch has entered Playwright's network bookkeeping.
-        await pause(200);
-        await page.waitForLoadState('networkidle', { timeout: 3000 }).catch(() => {});
-        throw signal.reason;
-      }
-      throw error;
-    } finally { this.inFlightMarkers.delete(marker); this.unsafeMarkers.delete(marker); }
   }
   async generateVideo(data, signal) {
     const referenceInstruction = data.sourceMode === 'image' ? 'Animate the attached image as the starting frame.' : data.referenceImage ? 'Use the attached image as a character reference, not as an unrelated example.' : 'Create the video from the text prompt.';

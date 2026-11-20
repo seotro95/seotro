@@ -10,18 +10,18 @@ test('ten accounts admit sixty simultaneous jobs, enforce six per account and re
   const controls=Array.from({length:60},()=>new AbortController());
   const settled=Promise.allSettled(controls.map((control,i)=>pool.generateVideo({accountId:Math.floor(i/6)+1,accountMode:'multiple',sceneId:i+1,prompt:`video ${i+1}`},control.signal)));
   assert.equal(calls.length,60);assert.equal(pool.usage.size,10);assert.ok(pool.snapshot().slice(0,10).every(a=>a.running===6&&a.executionConcurrency===6));assert.ok(calls.every(c=>c.accountId===1&&!c.singleLane));
-  await assert.rejects(pool.generateVideo({accountId:4,sceneId:61,accountMode:'multiple'},new AbortController().signal),/MUSE_ACCOUNT_BUSY/);
+  const queuedControl=new AbortController();const queued=pool.generateVideo({accountId:4,sceneId:61,accountMode:'multiple'},queuedControl.signal);assert.equal(pool.snapshot()[3].queued,1);const cancelledQueued=assert.rejects(queued);queuedControl.abort();await cancelledQueued;
   controls[18].abort();await new Promise(resolve=>setImmediate(resolve));assert.equal(pool.usage.get(4).count,5);assert.equal(pool.usage.get(5).count,6);
   const replacement=pool.generateVideo({accountId:4,sceneId:61,accountMode:'multiple'},new AbortController().signal);assert.equal(pool.usage.get(4).count,6);
   for(const [id,resolve] of pending)if(id!==19)resolve({base64:'Zml4dHVyZQ==',mimeType:'video/mp4'});
   const outputs=await settled;await replacement;assert.equal(outputs.filter(x=>x.status==='fulfilled').length,59);assert.equal(outputs[18].status,'rejected');assert.equal(pool.usage.size,0);
  }finally{await rm(root,{recursive:true,force:true})}
 });
-test('unavailable parallel conversations reject preparation; serial execution requires an explicit one-lane choice',async()=>{
+test('unavailable parallel conversations automatically prepare one lane without losing the requested count',async()=>{
  const root=await mkdtemp(path.join(os.tmpdir(),'muse-fallback-'));const calls=[];
- const driver={maxConcurrency:1,queue:[],account:()=>({authenticated:true}),progress:()=>[],setConcurrency:async()=>{throw new Error('MUSE_PARALLEL_UNVERIFIED: Shared chat only')},generateText:async data=>{calls.push(data);return {text:'ok'}}};const pool=new MuseAccounts({profileRoot:root,createDriver:()=>driver});
+ const driver={maxConcurrency:1,queue:[],account:()=>({authenticated:true}),progress:()=>[],setConcurrency:async count=>{if(count>1)throw new Error('MUSE_PARALLEL_UNVERIFIED: Shared chat only');return {executionConcurrency:1}},generateText:async data=>{calls.push(data);return {text:'ok'}}};const pool=new MuseAccounts({profileRoot:root,createDriver:()=>driver});
  try{
-  await assert.rejects(pool.prepareSingle(new AbortController().signal,6,27),/MUSE_PARALLEL_UNVERIFIED/);assert.equal(calls.length,0);assert.equal((await new MuseAccounts({profileRoot:root}).load()).preferredConcurrency,6);
+  const prepared=await pool.prepareSingle(new AbortController().signal,6,27);assert.equal(prepared.executionConcurrency,1);assert.equal(prepared.serialFallback,true);assert.equal(calls.length,0);assert.equal((await new MuseAccounts({profileRoot:root}).load()).preferredConcurrency,6);
   await pool.prepareSingle(new AbortController().signal,1,27);assert.equal(pool.concurrencyWarning,'');
   await pool.generateText({accountId:27,accountMode:'multiple'},new AbortController().signal);assert.equal(calls[0].singleLane,true);
   for(const count of [0,11,40,'6'])await assert.rejects(pool.prepareSingle(new AbortController().signal,count,27),/MUSE_CONCURRENCY_INVALID/);
