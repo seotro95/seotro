@@ -18,6 +18,6 @@ test('one account submits six real browser-bridge video turns simultaneously in 
   const settled=Promise.allSettled(requests);await waitFor(()=>fixture.state.pending.size===6);
   assert.equal(fixture.state.peak,6);assert.equal(new Set(fixture.state.submitted.map(row=>row.path)).size,6);assert.equal(pool.snapshot()[0].running,6);
   controls[2].abort();await waitFor(()=>fixture.state.stops===1);assert.equal(pool.snapshot()[0].running<=6,true);fixture.releaseAll();fixture.state.hold=false;
-  const results=await settled;assert.equal(results.filter(r=>r.status==='fulfilled'&&r.value.status===200).length,5);assert.equal(results[2].status,'rejected');assert.equal(fixture.state.submitted.length,6);assert.equal(fixture.state.stops,1);assert.equal(pool.usage.size,0);
+  const results=await settled;assert.equal(results.filter(r=>r.status==='fulfilled'&&r.value.status===200).length,5);assert.equal(results[2].status,'rejected');assert.equal(fixture.state.submitted.length,6);assert.equal(fixture.state.stops,1);await waitFor(()=>pool.usage.size===0);assert.equal(pool.usage.size,0);
  }finally{fixture.releaseAll();await runtime.close();fixture.server.closeAllConnections();await new Promise(resolve=>fixture.server.close(resolve));await rm(root,{recursive:true,force:true})}
 });

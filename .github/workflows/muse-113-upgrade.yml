@@ -33,13 +33,28 @@ jobs:
       - run: npm test
       - run: npx playwright install chromium
       - name: Verify names, sixty slots, selected accounts, proxies and recovery UI
+        id: ui
+        continue-on-error: true
         run: npm run test:e2e -- tests/browser/names-concurrency-ip.spec.ts tests/browser/sync-proxy.spec.ts tests/browser/recovery.spec.ts tests/browser/selected-slots.spec.ts tests/browser/account-selection.spec.ts tests/browser/dynamic-slots.spec.ts
       - name: Verify six concurrent browser-bridge video turns on one account
+        id: bridge
+        continue-on-error: true
         run: npm run test:parallel-six
       - name: Verify independent IPs through authenticated Electron proxies
+        id: proxy
+        continue-on-error: true
         run: npm run test:proxy-desktop
       - run: npm run test:startup
+        id: startup
+        continue-on-error: true
       - run: npm run test:desktop
+        id: desktop
+        continue-on-error: true
+      - name: Require every independent Windows check to pass
+        shell: pwsh
+        run: |
+          $outcomes = @('${{ steps.ui.outcome }}', '${{ steps.bridge.outcome }}', '${{ steps.proxy.outcome }}', '${{ steps.startup.outcome }}', '${{ steps.desktop.outcome }}')
+          if (@($outcomes | Where-Object { $_ -ne 'success' }).Count) { throw "A required Windows check failed: $($outcomes -join ', '). Packaging and release are blocked." }
       - run: python scripts/package_portable.py --platform win32 --output "${{ runner.temp }}/muse-artifacts"
       - name: Test the packaged Windows executable
         shell: pwsh
