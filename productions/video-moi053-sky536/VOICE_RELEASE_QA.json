@@ -1,0 +1,150 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-053",
+  "voices": 16,
+  "male_voices": 16,
+  "all_decoded_seconds": 1332,
+  "all_decoded_frames_48000": 63936000,
+  "all_current_episode_ids_locked": true,
+  "previous_voice_ids_retained": 16,
+  "voice_changes": [],
+  "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+  "unique_audio_hashes": 16,
+  "english_cue_count": 134,
+  "other_language_chapter_count": 13,
+  "word_metadata_checked": true,
+  "english_word_boundary_split_checked": true,
+  "pitch_shift_applied": false,
+  "independent_native_listening_review": false,
+  "translated_voice_alignment": "13 shared chapter boundaries; localized retellings, not word-by-word synchronization",
+  "reports": {
+    "cs-CZ": {
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "SKY536_MOI053_Sec.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8294753704445335,
+      "max_tempo": 0.9414497396876251,
+      "word_accents": 41
+    },
+    "da-DK": {
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "SKY536_MOI053_Dan_Mach.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8643171806167401,
+      "max_tempo": 0.9765318382058471,
+      "word_accents": 47
+    },
+    "vi-VN": {
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "SKY536_MOI053_Viet_Nam_Nam_Minh.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.739847817380857,
+      "max_tempo": 0.8770524629555466,
+      "word_accents": 17
+    },
+    "it-IT": {
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "SKY536_MOI053_Y.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.9947937525030036,
+      "max_tempo": 1.1017220664797758,
+      "word_accents": 35
+    },
+    "fi-FI": {
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "SKY536_MOI053_Phan_Lan.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.9272727272727274,
+      "max_tempo": 1.0868241890268324,
+      "word_accents": 43
+    },
+    "es-ES": {
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "SKY536_MOI053_Tay_Ban_Nha.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.9200640768922708,
+      "max_tempo": 1.0808169803764518,
+      "word_accents": 48
+    },
+    "nl-NL": {
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "SKY536_MOI053_Ha_Lan.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.901561874249099,
+      "max_tempo": 1.035883059671606,
+      "word_accents": 39
+    },
+    "nb-NO": {
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "SKY536_MOI053_Na_Uy.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8484581497797358,
+      "max_tempo": 0.9681528662420383,
+      "word_accents": 48
+    },
+    "fr-FR": {
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "SKY536_MOI053_Phap.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8503804565478575,
+      "max_tempo": 0.9899879855826993,
+      "word_accents": 54
+    },
+    "de-DE": {
+      "voice_id": "de-DE-ChristophNeural",
+      "filename": "SKY536_MOI053_Duc.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.9880656788145775,
+      "max_tempo": 1.1226271525830998,
+      "word_accents": 39
+    },
+    "pt-PT": {
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "SKY536_MOI053_Bo_Dao_Nha.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8092911493792551,
+      "max_tempo": 0.9265518622346817,
+      "word_accents": 47
+    },
+    "ko-KR": {
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "SKY536_MOI053_Han_Quoc.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.9577893472166601,
+      "max_tempo": 1.1553063676411695,
+      "word_accents": 28
+    },
+    "sv-SE": {
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "SKY536_MOI053_Thuy_Dien.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.9976772126551863,
+      "max_tempo": 1.1872647176611935,
+      "word_accents": 46
+    },
+    "en-US": {
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "SKY536_MOI053_My_Tieng_Anh.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.7603491902834008,
+      "max_tempo": 1.6205465587044532,
+      "word_accents": 79
+    },
+    "ja-JP": {
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "SKY536_MOI053_Nhat_Ban.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8929114937925511,
+      "max_tempo": 1.1603275705186533,
+      "word_accents": 28
+    },
+    "pl-PL": {
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "SKY536_MOI053_Ba_Lan.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8696035242290748,
+      "max_tempo": 0.9657188626351623,
+      "word_accents": 32
+    }
+  }
+}

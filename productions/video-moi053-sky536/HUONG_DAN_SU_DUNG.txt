@@ -1,0 +1,10 @@
+MỚI-053 — NĂM 536 — 22:12
+
+Kịch bản Anh 3984 từ, 179.5 từ/phút; 134 mốc = 133 × 10 giây + 2 giây cuối.
+150 prompt clip 10 giây trong 15 TXT × 10, SKY536_001.mp4–SKY536_150.mp4. Timeline 141 cảnh: 001–010 lấy 3 giây/cảnh, 011–140 lấy 10 giây/cảnh, 141 lấy 2 giây. Prompt 142–150 là 9 dự phòng, không cộng thêm thời lượng. CSV có mốc và ID lời tương ứng.
+Toàn bộ cảnh ở ngoài trời hoặc mái hiên mở; lịch sử, khảo cổ, rừng, băng vùng cực và mô hình giải thích. Không lab, trẻ em, chữ đọc được. Mọi prompt kết “Video không có âm thanh, không có lời nói.”. Khi dựng xóa âm clip và chỉ dùng voice Anh, không nhạc/SFX. Thiếu cảnh dùng video chuyển động liên quan, không ảnh đứng có chữ.
+Tái hiện chỉ minh họa. Không đêm đen toàn cầu, xác định chắc núi lửa 536/540, dải tro đen trong lõi băng, vòng cây tự ghi năm hoặc chuỗi núi lửa tự gây dịch hạch/sụp đổ đế chế. Tách 536 và khoảng 540. Mô hình không phải dữ liệu đo. Xem nguồn và giới hạn trong NGUON_KIEM_CHUNG.md.
+Giữ 16 giọng nam đã lưu, gồm Andrew và Nam Minh. Backend online khóa của Melo-Viet-Studio 1.3.1 / Microsoft Edge qua edge-tts; không UI Windows hoặc model Melo đa ngôn ngữ cục bộ. Không đổi cao độ. Mỗi MP3 phải giải mã đúng 63.936.000 mẫu mono 48 kHz = 1.332 giây. Anh căn 134 mốc; các ngôn ngữ khác căn 13 chương, 12 × 100 giây + 132 giây cuối, không đồng bộ từng từ. SRT dịch theo chương cần chia nhỏ trước khi hiển thị.
+Các bản nước ngoài là chuyển thể gọn giữ ý chính và giới hạn bằng chứng, không dịch từng câu toàn bộ Anh. Bản Việt viết lại toàn bộ; các bản khác dịch tự động rồi rà chọn lọc. Chưa kiểm nghe/biên tập bản ngữ độc lập. Chưa tạo footage, thumbnail hoặc MP4.
+
+KẾT QUẢ: Đã tạo đủ 16 MP3 nam, mỗi tệp giải mã đúng 22:12; giữ nguyên cả 16 ID. Việt viết lại toàn bộ. Các ngôn ngữ khác chuyển thể từ nguồn Anh ngắn gọn, giữ trục chuyện và giới hạn bằng chứng; rà các đoạn quan trọng, không phải dịch từng câu nguyên bản. Chưa kiểm nghe/biên tập bản ngữ độc lập.

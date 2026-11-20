@@ -1,0 +1,143 @@
+{
+  "status": "passed",
+  "locale": "de-DE",
+  "voice_id": "de-DE-ChristophNeural",
+  "gender": "Male",
+  "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "target_seconds": 1332,
+  "decoded_frames_48000": 63936000,
+  "decoded_seconds": 1332.0,
+  "filename": "SKY536_MOI053_Duc.mp3",
+  "bytes": 15984620,
+  "sha256": "ceb8e1ce1120fe4c684f3c311fb1519f01fa67c26f58d93baea701ec5e0bfbfa",
+  "script_sha256": "a2358d014695017911953585b30066f1dafb126bd4009cbe6ea1045a878b7ae5",
+  "cues": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 100,
+      "raw_seconds": 98.688,
+      "tempo": 0.9880656788145775,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 2,
+      "start": 100,
+      "end": 200,
+      "raw_seconds": 105.72,
+      "tempo": 1.0584701641970364,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 3,
+      "start": 200,
+      "end": 300,
+      "raw_seconds": 110.328,
+      "tempo": 1.1046055266319583,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 4,
+      "start": 300,
+      "end": 400,
+      "raw_seconds": 100.992,
+      "tempo": 1.0111333600320385,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 5,
+      "start": 400,
+      "end": 500,
+      "raw_seconds": 101.64,
+      "tempo": 1.0176211453744495,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 6,
+      "start": 500,
+      "end": 600,
+      "raw_seconds": 111.168,
+      "tempo": 1.113015618742491,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 7,
+      "start": 600,
+      "end": 700,
+      "raw_seconds": 100.008,
+      "tempo": 1.0012815378454145,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 8,
+      "start": 700,
+      "end": 800,
+      "raw_seconds": 105.096,
+      "tempo": 1.052222667200641,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 9,
+      "start": 800,
+      "end": 900,
+      "raw_seconds": 102.12,
+      "tempo": 1.0224269122947538,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 10,
+      "start": 900,
+      "end": 1000,
+      "raw_seconds": 108.072,
+      "tempo": 1.0820184221065279,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 11,
+      "start": 1000,
+      "end": 1100,
+      "raw_seconds": 103.536,
+      "tempo": 1.0366039247096517,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 12,
+      "start": 1100,
+      "end": 1200,
+      "raw_seconds": 112.128,
+      "tempo": 1.1226271525830998,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 13,
+      "start": 1200,
+      "end": 1332,
+      "raw_seconds": 144.6,
+      "tempo": 1.0964513193812557,
+      "trailing_pause_target": 0.12,
+      "parts": 4
+    }
+  ],
+  "pitch_shift_applied": false,
+  "voice_identity_preserved": true,
+  "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh",
+  "prosody_method": "Native phrase rate and question/reflective pacing plus at most two 1.2dB word accents per English cue or per localized request",
+  "word_metadata_pieces": 40,
+  "minimum_word_coverage_ratio": 1.0,
+  "word_accents": 39,
+  "independent_native_listening_review": false,
+  "timing_alignment": "13 shared chapter boundaries"
+}

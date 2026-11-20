@@ -1,0 +1,478 @@
+{
+  "topic_id": "MOI-053",
+  "independent_native_review": false,
+  "independent_native_listening_review": false,
+  "source_adaptation": "Thirteen condensed contextual English chapters preserve narrative, core facts and uncertainty while removing repeated transitions. Vietnamese rewritten by assistant. Other languages are localized retellings, not verbatim translations of all English sentences.",
+  "assistant_review_scope": "Full Vietnamese rewrite; selected scientific passages checked for tree growth rings, 536 as a year rather than a count, sulfate versus sulfur dioxide, dating versus personal dating, written accounts versus bank accounts, atmospheric altitude, uncertain source attribution and plague causation; ten full chapter rewrites in Italian, Japanese, Korean and Dutch, Swedish, Finnish and Norwegian untranslated-passage repairs plus full-script five-word English leak scan. No independent native editorial or listening review.",
+  "locales": {
+    "vi-VN": {
+      "chapters": 13,
+      "assistant_full_rewrite": true,
+      "targeted_edits": [],
+      "independent_native_review": false
+    },
+    "es-ES": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "de los cuales 536 se destacan",
+          "new": "y el año 536 destaca"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "fr-FR": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "dont 536 se démarquent",
+          "new": "l’année 536 se démarquant"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "ja-JP": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 2,
+          "old": "空の相性",
+          "new": "大気の化学組成"
+        },
+        {
+          "chapter": 3,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 5,
+          "old": "デートがミステリーの中心",
+          "new": "年代測定が謎の中心"
+        },
+        {
+          "chapter": 7,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 8,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 10,
+          "old": "埋蔵量",
+          "new": "食料の備蓄"
+        },
+        {
+          "chapter": 11,
+          "old": "デートの解決策も重要です",
+          "new": "年代の時間分解能も重要です"
+        },
+        {
+          "chapter": 11,
+          "old": "不安なアカウントは不安を記録します",
+          "new": "不安を語る記録は当時の心配を伝えます"
+        },
+        {
+          "chapter": 11,
+          "old": "植林の決定",
+          "new": "作付けの判断"
+        },
+        {
+          "chapter": 11,
+          "old": "埋蔵量",
+          "new": "食料の備蓄"
+        },
+        {
+          "chapter": 11,
+          "old": "536 年、歴史調査が始まります",
+          "new": "西暦536年は歴史を調べる入口です"
+        },
+        {
+          "chapter": 12,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 13,
+          "old": "埋蔵量",
+          "new": "食料の備蓄"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "ko-KR": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 5,
+          "old": "데이트가 미스터리의 핵심",
+          "new": "연대 측정이 미스터리의 핵심"
+        },
+        {
+          "chapter": 6,
+          "old": "예비금",
+          "new": "식량 비축량"
+        },
+        {
+          "chapter": 7,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 8,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 11,
+          "old": "데이트 결심도 중요합니다",
+          "new": "연대의 시간 해상도도 중요합니다"
+        },
+        {
+          "chapter": 11,
+          "old": "불안한 계정은 우려를 기록합니다",
+          "new": "불안이 담긴 기록은 당시의 걱정을 보여 줍니다"
+        },
+        {
+          "chapter": 12,
+          "action": "Assistant contextual chapter rewrite"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "de-DE": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "wobei 536 in Rekonstruktionen der Sommerbedingungen hervorstechen",
+          "new": "wobei das Jahr 536 in Rekonstruktionen der Sommerbedingungen hervorsticht"
+        },
+        {
+          "chapter": 11,
+          "old": "Ein ängstlicher Kontodatensatz betrifft Bedenken; es misst nicht unbedingt die endgültige Ernte.",
+          "new": "Ein besorgter Bericht hält Befürchtungen fest; er misst nicht unbedingt die endgültige Ernte."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "it-IT": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "con 536 esemplari che spiccano",
+          "new": "con l’anno 536 che spicca"
+        },
+        {
+          "chapter": 5,
+          "old": "gli appuntamenti sono al centro del mistero",
+          "new": "la datazione è al centro del mistero"
+        },
+        {
+          "chapter": 6,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 11,
+          "old": "la risoluzione degli appuntamenti",
+          "new": "la precisione cronologica"
+        },
+        {
+          "chapter": 12,
+          "old": "negli anni '40",
+          "new": "negli anni Cinquecentoquaranta"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "pt-PT": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "com 536 a destacar-se",
+          "new": "com o ano 536 a destacar-se"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "nl-NL": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "waarbij 536 opvallen",
+          "new": "waarbij het jaar 536 opvalt"
+        },
+        {
+          "chapter": 8,
+          "old": "Een bronvermelding moet",
+          "new": "Een identificatie van de vulkanische bron moet"
+        },
+        {
+          "chapter": 9,
+          "old": "Late Antique Little Ice Age",
+          "new": "Laatantieke Kleine IJstijd"
+        },
+        {
+          "chapter": 13,
+          "action": "Assistant contextual chapter rewrite"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "pl-PL": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "przy czym 536 wyróżnia się",
+          "new": "przy czym rok 536 wyróżnia się"
+        },
+        {
+          "chapter": 5,
+          "old": "randkowanie",
+          "new": "datowanie"
+        },
+        {
+          "chapter": 8,
+          "old": "jego randki lub chemia",
+          "new": "jego datowanie lub skład chemiczny"
+        },
+        {
+          "chapter": 11,
+          "old": "Niespokojne konto rejestruje obawy",
+          "new": "Relacja pełna niepokoju zapisuje obawy"
+        },
+        {
+          "chapter": 11,
+          "old": "Rozwiązanie randek",
+          "new": "Dokładność datowania"
+        },
+        {
+          "chapter": 12,
+          "old": "w latach czterdziestych XX wieku",
+          "new": "w latach pięćset czterdziestych naszej ery"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "sv-SE": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "Several temperature-sensitive Northern Hemisphere records show exceptional cooling during the middle of the sixth century, with 536 standing out in reconstructions of summer conditions.",
+          "new": "Flera temperaturkänsliga serier från norra halvklotet visar en exceptionell avkylning under mitten av femhundratalet. År 536 utmärker sig i rekonstruktionerna av sommarförhållandena."
+        },
+        {
+          "chapter": 11,
+          "old": "En orolig kontobokföring oro",
+          "new": "En orolig berättelse vittnar om bekymmer"
+        },
+        {
+          "chapter": 11,
+          "old": "Dejtingupplösning",
+          "new": "Dateringens tidsupplösning"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "da-DK": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 2,
+          "old": "datingproblem",
+          "new": "dateringsproblem"
+        },
+        {
+          "chapter": 3,
+          "old": "hvor 536 skiller sig ud",
+          "new": "hvor året 536 skiller sig ud"
+        },
+        {
+          "chapter": 5,
+          "old": "dating er centralt",
+          "new": "datering er centralt"
+        },
+        {
+          "chapter": 11,
+          "old": "Datingopløsning",
+          "new": "Dateringens tidsopløsning"
+        },
+        {
+          "chapter": 11,
+          "old": "En bekymret konto registrerer bekymring",
+          "new": "En beretning præget af uro viser bekymring"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "fi-FI": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 2,
+          "old": "treffiongelman",
+          "new": "ajoitusongelman"
+        },
+        {
+          "chapter": 3,
+          "old": "Crossdating",
+          "new": "Ristiinajoitus"
+        },
+        {
+          "chapter": 3,
+          "old": "kun 536 erottui",
+          "new": "kun vuosi 536 erottui"
+        },
+        {
+          "chapter": 7,
+          "old": "Coarse ash and sulfate aerosol behave differently. Much ash settles relatively quickly, while smaller particles aloft can spread climatic effects far beyond the source. Altitude, circulation, and particle properties influence persistence and distribution.",
+          "new": "Karkea tuhka ja sulfaattiaerosolit käyttäytyvät eri tavoin. Suuri osa tuhkasta laskeutuu suhteellisen nopeasti, kun taas korkealla olevat pienet hiukkaset voivat ulottaa ilmastovaikutuksia kauas lähteestä. Korkeus, ilmavirtaus ja hiukkasten ominaisuudet vaikuttavat niiden kestoon ja leviämiseen."
+        },
+        {
+          "chapter": 7,
+          "old": "Daylight remains, but scattering alters incoming energy. The atmosphere is not a flat ceiling producing identical weather everywhere. Eruption latitude matters because material follows different pathways.",
+          "new": "Päivänvalo säilyy, mutta sironta muuttaa saapuvaa energiaa. Ilmakehä ei ole tasainen katto, joka tuottaa kaikkialla saman sään. Purkauksen leveysaste on tärkeä, sillä aines kulkee eri reittejä."
+        },
+        {
+          "chapter": 7,
+          "old": "Knowing a direction of approach is not the same as knowing a place of origin.",
+          "new": "Tulossuunnan tunteminen ei tarkoita lähtöpaikan tuntemista."
+        },
+        {
+          "chapter": 11,
+          "old": "treffipäätöksellä",
+          "new": "ajoituksen tarkkuudella"
+        },
+        {
+          "chapter": 11,
+          "old": "Ahdistunut tilikirjaa koskeva huoli",
+          "new": "Huolestunut kertomus tallentaa huolta"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "nb-NO": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 2,
+          "old": "datingproblem",
+          "new": "dateringsproblem"
+        },
+        {
+          "chapter": 3,
+          "old": "med 536 som skiller seg ut",
+          "new": "med året 536 som skiller seg ut"
+        },
+        {
+          "chapter": 5,
+          "old": "dating er sentralt",
+          "new": "datering er sentralt"
+        },
+        {
+          "chapter": 11,
+          "old": "Datingoppløsning",
+          "new": "Dateringens tidsoppløsning"
+        },
+        {
+          "chapter": 11,
+          "old": "En engstelig konto registrerer bekymring",
+          "new": "En bekymret beretning formidler uro"
+        },
+        {
+          "chapter": 13,
+          "old": "These archives were not created to support one another: a chronicler could not arrange a later ice measurement, and a tree could not imitate a written account.",
+          "new": "Disse arkivene ble ikke skapt for å støtte hverandre. En krønikeskriver kunne ikke organisere en senere ismåling, og et tre kunne ikke etterligne en skriftlig beretning."
+        },
+        {
+          "chapter": 13,
+          "old": "Cooling can threaten crops, and repeated shocks can deplete reserves, but adaptation, famine, migration, and political change depend on local circumstances.",
+          "new": "Avkjøling kan true avlingene, og gjentatte sjokk kan tømme matlagrene. Men tilpasning, hungersnød, migrasjon og politiske endringer avhenger av lokale forhold."
+        },
+        {
+          "chapter": 13,
+          "old": "Avtalen deres krever",
+          "new": "Samsvaret mellom dem krever"
+        },
+        {
+          "chapter": 13,
+          "old": "Vår gjeninnføring",
+          "new": "Vår historiske rekonstruksjon"
+        },
+        {
+          "chapter": 13,
+          "old": "Trevekster viser",
+          "new": "Årringene viser"
+        },
+        {
+          "chapter": 13,
+          "old": "Vi kan montere saken",
+          "new": "Vi kan samle sporene"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "cs-CZ": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "Crossdating",
+          "new": "Křížové datování"
+        },
+        {
+          "chapter": 3,
+          "old": "přičemž 536 vyniklo",
+          "new": "přičemž rok 536 vyniká"
+        },
+        {
+          "chapter": 3,
+          "old": "Stromy zpevňují pouzdro pro skutečné narušení.",
+          "new": "Letokruhy posilují důkazy o skutečném narušení klimatu."
+        },
+        {
+          "chapter": 5,
+          "old": "randění",
+          "new": "datování"
+        },
+        {
+          "chapter": 11,
+          "old": "Obavy z úzkostných účtů; nemusí nutně měřit konečnou sklizeň.",
+          "new": "Znepokojená zpráva zachycuje obavy; nemusí však měřit konečnou sklizeň."
+        },
+        {
+          "chapter": 11,
+          "old": "Důležité je také řešení seznamky.",
+          "new": "Důležitá je také časová přesnost datování."
+        },
+        {
+          "chapter": 11,
+          "old": "Nezapomenutelnou podobností nejsou nezávislé hodiny.",
+          "new": "Zapamatovatelná podobnost není nezávislým časovým ukazatelem."
+        }
+      ],
+      "independent_native_review": false
+    }
+  }
+}

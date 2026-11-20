@@ -1,0 +1,118 @@
+{
+  "topic_id": "MOI-053",
+  "catalogue_id": "new-100-topics-20261116",
+  "title": "Năm 536: lần theo dấu vết một bầu trời mờ tối",
+  "phase": "completed_documents_and_16_voices_publicly_verified",
+  "completed_at_utc": "2026-11-20T20:25:28.469971+00:00",
+  "target_seconds": 1332,
+  "english_words": 3984,
+  "english_wpm": 179.459,
+  "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh",
+  "english_cues": 134,
+  "prompts": 150,
+  "prompt_txt_files": 15,
+  "prompts_per_txt": 10,
+  "timeline_shots": 141,
+  "backup_prompt_ids": [
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150
+  ],
+  "opening_shots": 10,
+  "opening_seconds": 30,
+  "visual_revision": "sky536-archaeology-outdoors-v1",
+  "outdoor_scenes": 150,
+  "underwater_scenes": 0,
+  "historical_interior_scenes": 0,
+  "laboratory_scenes": 0,
+  "voice_count": 16,
+  "male_voices": 16,
+  "main_voice_locale": "en-US",
+  "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+  "profile_set_id": "science-documentary-16-male-upano-moi011-v2-christoph",
+  "previous_voice_ids_retained": 16,
+  "voice_changes": [],
+  "seconds_each": 1332,
+  "decoded_frames_48000_each": 63936000,
+  "english_regenerated_cue_ids": [
+    134
+  ],
+  "english_original_cues_retained": 133,
+  "english_final_cue_native_rate": "-12%",
+  "translated_alignment": "Thirteen shared chapters: twelve 100-second chapters and final 132-second chapter; localized retellings, not word synchronization",
+  "independent_native_listening_review": false,
+  "branch": "codex/sky536-moi053-production-20261120",
+  "canonical_branch": "codex/beringia-video-01",
+  "release_tag": "sky536-moi-053-22m12s",
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/sky536-moi-053-22m12s",
+  "document_directory": "productions/video-moi053-sky536",
+  "public_delivery_qa": "productions/video-moi053-sky536/PUBLIC_DELIVERY_QA.json",
+  "voice_profile": "research/channel-analysis-20261116/VOICE_PROFILES_LOCKED.json",
+  "workflow_runs": {
+    "documents_only_original_run": 44761841149,
+    "english_ending_recovery": 44810226775,
+    "country_voice_generation": 44763939449,
+    "final_voice_delivery_and_archive": 44810422909
+  },
+  "source_backend": "Pinned Melo-Viet-Studio 1.3.1 online backend / Microsoft Edge via edge-tts; not Windows UI or native multilingual Melo model",
+  "source_backend_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "public_delivery_qa_status": "passed",
+  "audio_zip_sha256": "1c1dcfe9fe07a1f45db0ee5a6c6db4c0bedf3390cc97a3a347468e8a4f00e85f",
+  "documents_zip_sha256": "7858db567fcea17babfa85c36e8e800705e97e5844dd26482e4fd7e1f50924a0",
+  "footage_generated": false,
+  "thumbnail_generated": false,
+  "video_edited": false,
+  "old_series_topics_and_state_unchanged": true,
+  "no_auto_start_next_topic": true,
+  "next_topic_id": null,
+  "completed_topics": [
+    {
+      "topic_id": "MOI-011",
+      "title": "Upano: mạng lưới đô thị hiện ra dưới tán rừng Amazon",
+      "directory": "productions/video-moi011-upano",
+      "release_url": "https://github.com/seotro95/seotro/releases/tag/upano-moi-011-20m22s",
+      "target_seconds": 1222
+    },
+    {
+      "topic_id": "MOI-022",
+      "title": "Bê tông La Mã: vết nứt nào có thể tự khép lại?",
+      "directory": "productions/video-moi022-roman-concrete",
+      "release_url": "https://github.com/seotro95/seotro/releases/tag/roman-concrete-moi-022-21m22s",
+      "target_seconds": 1282
+    },
+    {
+      "topic_id": "MOI-027",
+      "title": "Stonehenge: lần theo hành trình của những khối đá lớn",
+      "directory": "productions/video-moi027-stonehenge",
+      "release_url": "https://github.com/seotro95/seotro/releases/tag/stonehenge-moi-027-21m32s",
+      "target_seconds": 1292
+    },
+    {
+      "topic_id": "MOI-030",
+      "title": "Qanat: đưa nước qua sa mạc mà không cần máy bơm",
+      "directory": "productions/video-moi030-qanat",
+      "release_url": "https://github.com/seotro95/seotro/releases/tag/qanat-moi-030-22m42s",
+      "target_seconds": 1362
+    },
+    {
+      "topic_id": "MOI-048",
+      "title": "Mary Rose: đồ dùng trên tàu kể đời sống thủy thủ ra sao?",
+      "directory": "productions/video-moi048-maryrose",
+      "release_url": "https://github.com/seotro95/seotro/releases/tag/maryrose-moi-048-21m42s",
+      "target_seconds": 1302
+    },
+    {
+      "topic_id": "MOI-053",
+      "title": "Năm 536: lần theo dấu vết một bầu trời mờ tối",
+      "directory": "productions/video-moi053-sky536",
+      "release_url": "https://github.com/seotro95/seotro/releases/tag/sky536-moi-053-22m12s",
+      "target_seconds": 1332
+    }
+  ]
+}

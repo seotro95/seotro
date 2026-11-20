@@ -1,0 +1,183 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-053",
+  "verified_at_utc": "2026-11-20T20:25:28.469971+00:00",
+  "target_seconds": 1332,
+  "voices": 16,
+  "all_decoded_frames_48000": 63936000,
+  "all_16_ids_retained": true,
+  "public_mp3_urls_checked": 16,
+  "zip_crc_and_public_github_sha_verified": true,
+  "english_script_words": 3984,
+  "prompt_txt_files": 15,
+  "unique_prompts": 150,
+  "timeline_shots": 141,
+  "outdoor_scenes": 150,
+  "underwater_scenes": 0,
+  "historical_interior_scenes": 0,
+  "laboratory_scenes": 0,
+  "backup_prompt_ids": [
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150
+  ],
+  "audio_zip_sha256": "1c1dcfe9fe07a1f45db0ee5a6c6db4c0bedf3390cc97a3a347468e8a4f00e85f",
+  "documents_zip_sha256": "7858db567fcea17babfa85c36e8e800705e97e5844dd26482e4fd7e1f50924a0",
+  "prompts_zip_sha256": "5853da6208e38a9c71b336ea88fae81d83d097ff73bca25313af91ea5ecd200f",
+  "independent_native_listening_review": false,
+  "footage_generated": false,
+  "thumbnail_generated": false,
+  "video_edited": false,
+  "reports": [
+    {
+      "locale": "en-US",
+      "filename": "SKY536_MOI053_My_Tieng_Anh.mp3",
+      "voice_id": "en-US-AndrewNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "9a42e0141f72ec94e77c03864ff746e9a54a9e9dd66900288d41a757dce04d3e",
+      "public_url_status": 200
+    },
+    {
+      "locale": "vi-VN",
+      "filename": "SKY536_MOI053_Viet_Nam_Nam_Minh.mp3",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "99dcf5c9f60f98e4ab5db782d5b76bb05d5eb371931d0364c5721e52a75081c0",
+      "public_url_status": 200
+    },
+    {
+      "locale": "es-ES",
+      "filename": "SKY536_MOI053_Tay_Ban_Nha.mp3",
+      "voice_id": "es-ES-AlvaroNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "74b1d789aa5a71c05cb37aae10b252f9d404b08e981ef2593822db30e4bba4a3",
+      "public_url_status": 200
+    },
+    {
+      "locale": "fr-FR",
+      "filename": "SKY536_MOI053_Phap.mp3",
+      "voice_id": "fr-FR-HenriNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "a9cf445802e3e6418a64ab48e6b0fe86cd8ba14a03d50d3597b9b9da1dede070",
+      "public_url_status": 200
+    },
+    {
+      "locale": "ja-JP",
+      "filename": "SKY536_MOI053_Nhat_Ban.mp3",
+      "voice_id": "ja-JP-KeitaNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "664398276dd58882879971ecb0884fcc6476a8d0dc66ab002917e32ec7a4fcd3",
+      "public_url_status": 200
+    },
+    {
+      "locale": "ko-KR",
+      "filename": "SKY536_MOI053_Han_Quoc.mp3",
+      "voice_id": "ko-KR-InJoonNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "ef811433459dbd086f99546a4070150fba6fab5009c948482554efdb3c953526",
+      "public_url_status": 200
+    },
+    {
+      "locale": "de-DE",
+      "filename": "SKY536_MOI053_Duc.mp3",
+      "voice_id": "de-DE-ChristophNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "ceb8e1ce1120fe4c684f3c311fb1519f01fa67c26f58d93baea701ec5e0bfbfa",
+      "public_url_status": 200
+    },
+    {
+      "locale": "it-IT",
+      "filename": "SKY536_MOI053_Y.mp3",
+      "voice_id": "it-IT-DiegoNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "23ced2c1668142fd97182cf3abc86ba4cf7b46ff6a6ecc14613cdd362c392fbc",
+      "public_url_status": 200
+    },
+    {
+      "locale": "pt-PT",
+      "filename": "SKY536_MOI053_Bo_Dao_Nha.mp3",
+      "voice_id": "pt-PT-DuarteNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "d28e20512f872191350eb16276b244f00deede45ccbd00cffd27fac3cac2ec54",
+      "public_url_status": 200
+    },
+    {
+      "locale": "nl-NL",
+      "filename": "SKY536_MOI053_Ha_Lan.mp3",
+      "voice_id": "nl-NL-MaartenNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "82db8a8652fed9be20581fc46b4ab3e368b7c22092e220e126a02b37c398c922",
+      "public_url_status": 200
+    },
+    {
+      "locale": "pl-PL",
+      "filename": "SKY536_MOI053_Ba_Lan.mp3",
+      "voice_id": "pl-PL-MarekNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "657f33cad5c8a545b4818af544d95f0acf05403156f611d473741187e494625c",
+      "public_url_status": 200
+    },
+    {
+      "locale": "sv-SE",
+      "filename": "SKY536_MOI053_Thuy_Dien.mp3",
+      "voice_id": "sv-SE-MattiasNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "49081c1652fb638ba020965cf90ab213ea63e0d8bf91b6292e7c2a5c1de12f92",
+      "public_url_status": 200
+    },
+    {
+      "locale": "da-DK",
+      "filename": "SKY536_MOI053_Dan_Mach.mp3",
+      "voice_id": "da-DK-JeppeNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "60fbd3989402435e9fe9ba2c9962514b79ee077b3b40b7bae3310cf578b12daa",
+      "public_url_status": 200
+    },
+    {
+      "locale": "fi-FI",
+      "filename": "SKY536_MOI053_Phan_Lan.mp3",
+      "voice_id": "fi-FI-HarriNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "7ed86168482af1b4ece57f41adeb019dca2d3c8a175c750e300a10e9e80a1373",
+      "public_url_status": 200
+    },
+    {
+      "locale": "nb-NO",
+      "filename": "SKY536_MOI053_Na_Uy.mp3",
+      "voice_id": "nb-NO-FinnNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "67a5d88e032ce099140872ae7f82a9e851348c0cc888e54b35ca7216cb06c1d5",
+      "public_url_status": 200
+    },
+    {
+      "locale": "cs-CZ",
+      "filename": "SKY536_MOI053_Sec.mp3",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "decoded_frames_48000": 63936000,
+      "seconds": 1332,
+      "sha256": "1ab2673be9cddbf04fb778d6fabd568f6d0c481fcb696e9a9c7450277309a43d",
+      "public_url_status": 200
+    }
+  ]
+}
