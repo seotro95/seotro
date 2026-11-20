@@ -16,6 +16,8 @@ Lỗi kết nối mới có mã riêng: `MUSE_LOCAL_CONNECTION_FAILED`, `MUSE_LO
 
 Nếu Muse trả lời rõ rằng cần làm rõ prompt, tool hiện `MUSE_PROMPT_CLARIFICATION` thay vì tiếp tục chờ ảnh/video. Ví dụ các chữ thử tên tệp như `fadhah` hoặc `gsjsj` nên được thay bằng mô tả cảnh khi kiểm tra tạo nội dung.
 
+Đóng tool cũng hủy các tác vụ đang chạy và ô trong hàng chờ ở lớp điều phối, tránh tự khởi tạo lại phiên khi đang dọn kết nối.
+
 ## Sao chép lỗi
 
 Mỗi ô lỗi có **Sao chép lỗi** và **Tải lỗi TXT**. Bản desktop ghi clipboard bằng cầu nối cục bộ; bản web tải TXT thay thế nếu trình duyệt chặn clipboard. Báo cáo có phiên bản, thời điểm, số ô, tài khoản theo số thứ tự, trạng thái và lỗi gốc; không chủ động thêm prompt, nhãn email hoặc proxy. Phần mã lỗi cũng có thể chọn chữ trực tiếp.

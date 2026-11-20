@@ -30,3 +30,10 @@ test('text enhancement owns the shared editor exclusively after existing generat
  const pool=new MuseAccounts({profileRoot:root,createDriver:()=>driver});
  try{const one=pool.generateVideo({accountId:1,sceneId:1},new AbortController().signal);const text=pool.generateText({accountId:1,sceneId:2},new AbortController().signal);const three=pool.generateVideo({accountId:1,sceneId:3},new AbortController().signal);assert.deepEqual(calls,['video1']);finishVideo({ok:true});await one;await tick();assert.deepEqual(calls,['video1','text']);finishText({text:'enhanced'});await Promise.all([text,three]);assert.deepEqual(calls,['video1','text','video3']);assert.equal(pool.usage.size,0);}finally{await rm(root,{recursive:true,force:true})}
 });
+
+test('closing the pool aborts active and queued work without reopening or automatically retrying requests',{timeout:10000},async()=>{
+ const root=await mkdtemp(path.join(os.tmpdir(),'muse-close-'));let calls=0,closed=0;
+ const driver={maxConcurrency:1,queue:[],progress:()=>[],account:()=>({authenticated:true}),close:async()=>{closed++},generateVideo:async(_data,signal)=>{calls++;return new Promise((_resolve,reject)=>signal.addEventListener('abort',()=>reject(Object.assign(new Error('MUSE_COMPOSER_NOT_READY: closing'),{parallelFailure:true,notSubmitted:true})),{once:true}))}};
+ const pool=new MuseAccounts({profileRoot:root,createDriver:()=>driver});
+ try{const all=Promise.allSettled([1,2,3].map(sceneId=>pool.generateVideo({accountId:1,sceneId},new AbortController().signal)));await pool.close();const result=await all;assert.equal(calls,1);assert.equal(closed,1);assert.ok(result.every(row=>row.status==='rejected'));assert.equal(pool.usage.size,0);assert.equal(pool.waiters.size,0);await assert.rejects(pool.generateVideo({accountId:1,sceneId:4},new AbortController().signal));}finally{await rm(root,{recursive:true,force:true})}
+});

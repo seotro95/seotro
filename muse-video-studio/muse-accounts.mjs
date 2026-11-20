@@ -8,7 +8,7 @@ export class MuseAccounts {
   constructor({ profileRoot, accountProfile, createDriver, preferredConcurrency = 6, onSelect = () => {}, proxyStatus, configureProxy, checkProxyIP, persistenceStatus,saveSessions }) {
     this.profileRoot = profileRoot; this.preferredConcurrency=preferredConcurrency;this.concurrencyWarning='';
     this.createDriver = createDriver || (id => new MuseBrowser({ profileRoot, ...(id === 1 ? {accountProfile} : { accountProfile: path.join(profileRoot, `slot-${String(id).padStart(2,'0')}`) }) }));
-    this.waiters=new Map();this.fallbacks=new Map();this.fallbackRequested=new Map();
+    this.shutdown=new AbortController();this.waiters=new Map();this.fallbacks=new Map();this.fallbackRequested=new Map();
     this.onSelect = onSelect; this.selectedId = 1; this.singleId = 1; this.drivers = new Map(); this.usage = new Map(); this.labels = [];
     this.supportsMultiAccount = true; this.images = new Map();
     this.checkProxyIP=checkProxyIP;this.proxyStatus=proxyStatus;this.configureProxy=configureProxy;this.restoring=false;
@@ -71,7 +71,7 @@ export class MuseAccounts {
   }
   async checkComposer(signal,id=1) { return this.driver(id).checkComposer(signal); }
   async closeAccount(id) { if (this.usage.has(id)) throw fail('MUSE_CHAT_BUSY','Tài khoản này đang có tác vụ.'); await this.driver(id).close(); }
-  async close() { for(const rows of this.waiters.values())for(const row of [...rows])row.cancel();await Promise.allSettled([...this.drivers.values()].map(driver=>driver.close())); }
+  async close() { this.shutdown.abort();for(const rows of this.waiters.values())for(const row of [...rows])row.cancel();await Promise.allSettled([...this.drivers.values()].map(driver=>driver.close())); }
   async reopenLogin() { return this.driver(this.selectedId).reopenLogin(); }
   async openEmailLink(link) { return this.driver(this.selectedId).openEmailLink(link); }
   validateLabels(labels) {
@@ -106,6 +106,7 @@ export class MuseAccounts {
     if(!rows?.length)this.waiters.delete(id);
   }
   async generate(method,data,signal) {
+    signal=AbortSignal.any([signal,this.shutdown.signal]);signal.throwIfAborted();
     const id=data.accountId;this.validateId(id);let retried=false;const request={...data,exclusive:method==='generateText'&&this.driver(id).parallelStrategy==='shared-conversation'};let lease=this.acquire(id,request,signal);
     for(;;){
       const release=typeof lease==='function'?lease:await lease;let retry;
