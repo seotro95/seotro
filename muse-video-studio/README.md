@@ -23,6 +23,8 @@ Chọn **Một tài khoản** hoặc **Nhiều tài khoản**, số tài khoản
 
 Mỗi tài khoản có bộ đếm và giới hạn riêng. Bộ xếp hàng cùng backend cho phép sáu tác vụ đồng thời trên một tài khoản khi sáu hội thoại riêng đã được xác minh; không còn khóa một luồng ở chế độ nhiều tài khoản. Một ô kết thúc nhường lượt cho ô chờ; hủy một ô giữ các ô khác. Tối đa bố cục 400 ô (40 × 10).
 
+Có thể chọn số ô riêng cho từng tài khoản trong bảng chọn: ví dụ Muse 01 chạy 2 ô, Muse 02 chạy 6 ô, Muse 03 chạy 10 ô. Tổng ô bằng tổng lựa chọn từng tài khoản. Đổi ô mặc định cho cả nhóm hoặc bấm preset 10 × 6 sẽ áp dụng lại đồng đều; số ô riêng được lưu khi mở lại.
+
 **Muse quyết định hạn mức và credit thực tế.** Số ô cấu hình là yêu cầu, không tạo thêm quyền trên dịch vụ. Nếu hội thoại độc lập chưa được xác minh, tool hiển thị số ô sẵn sàng thực tế và xếp hàng phần còn lại, không trộn phản hồi hoặc tự gửi lại prompt đã được nhận.
 
 TXT/SRT được nạp theo thứ tự vào các ô đang hiện. Kịch bản vượt số ô được chọn không tự cắt bỏ. Thu gọn/ẩn ô giữ dữ liệu; mở lại hoặc xuất/nhập dự án giữ tên, prompt, thiết lập và tài khoản. Bố cục cũ tới 40 ô vẫn được giữ; số luồng cũ lớn hơn 10 được đưa về tối đa 10 mỗi tài khoản và phần còn lại chờ.

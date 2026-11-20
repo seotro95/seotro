@@ -35,8 +35,9 @@ test('10 accounts × 6 submits sixty concurrent videos, caps each account at six
  await page.getByRole('button',{name:'TẠO 60 VIDEO',exact:true}).click();await expect.poll(()=>calls.length).toBe(60);await expect(page.locator('.status-badge.running')).toHaveCount(60);
  for(let id=1;id<=10;id++)expect(calls.filter(call=>call.accountId===id)).toHaveLength(6);
  expect(prepares).toHaveLength(10);expect(prepares.every(value=>value.concurrency===6)).toBe(true);
- await Promise.all(release.map(fn=>fn()));await expect(page.locator('.scene-card video')).toHaveCount(60);await expect(page.getByLabel('Chế độ tài khoản',{exact:true})).toBeEnabled();
+ await Promise.all(release.map(fn=>fn()));await expect(page.locator('.scene-card video')).toHaveCount(60,{timeout:30000});await expect(page.getByLabel('Chế độ tài khoản',{exact:true})).toBeEnabled();
  await page.reload();await expect(page.locator('.scene-card')).toHaveCount(60);await expect(page.getByLabel('Kịch bản cảnh 60',{exact:true})).toHaveValue('Scene 60 plain prompt');await expect(page.getByLabel('Tài khoản cảnh 60',{exact:true})).toHaveValue('10');
+ await page.getByLabel('Ô chạy tài khoản 1',{exact:true}).selectOption('2');await expect(page.locator('.scene-card')).toHaveCount(56);await page.reload();await expect(page.getByLabel('Ô chạy tài khoản 1',{exact:true})).toHaveValue('2');await expect(page.getByLabel('Ô chạy tài khoản 2',{exact:true})).toHaveValue('6');
  await page.getByLabel('Ô chạy mỗi tài khoản',{exact:true}).selectOption('10');await expect(page.locator('.scene-card')).toHaveCount(100);await page.getByLabel('Ô chạy mỗi tài khoản',{exact:true}).selectOption('1');await expect(page.locator('.scene-card')).toHaveCount(10);await page.getByLabel('Ô chạy mỗi tài khoản',{exact:true}).selectOption('6');await expect(page.getByLabel('Kịch bản cảnh 60',{exact:true})).toHaveValue('Scene 60 plain prompt');
 });
 test('each proxy has an independent read-only IP, check action and error state',async({page})=>{
@@ -45,4 +46,14 @@ test('each proxy has an independent read-only IP, check action and error state',
  const calls:number[]=[];await page.route('**/api/account/proxy-ip',route=>{const id=route.request().postDataJSON().accountId;calls.push(id);rows[id-1].proxy={...rows[id-1].proxy,exitIP:id===2?'203.0.113.2':'',ipState:id===2?'ready':'error'};return route.fulfill({json:{accounts:rows,proxy:{...rows[id-1].proxy,ipError:id===2?'':'Proxy connection failed'}}})});
  await page.goto('/');await page.getByRole('button',{name:'Quản lý tài khoản',exact:true}).click();await expect(page.getByLabel('IP proxy 2',{exact:true})).toHaveValue('Chưa kiểm tra');
  await page.getByRole('button',{name:'Kiểm tra IP proxy 2',exact:true}).click();await expect(page.getByLabel('IP proxy 2',{exact:true})).toHaveValue('203.0.113.2');await expect(page.getByLabel('IP proxy 1',{exact:true})).toHaveValue('Chưa kiểm tra');expect(calls).toEqual([2]);
+});
+test('different account limits submit exactly two and four simultaneous videos on their assigned accounts',async({page})=>{
+ const rows=accounts.map(account=>({...account}));const prepares:any[]=[];const calls:any[]=[];const release:Array<()=>Promise<void>>=[];
+ await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'browser',multiAccount:true,accounts:rows}}));
+ await page.route('**/api/account/prepare',route=>{const data=route.request().postDataJSON();prepares.push(data);rows[data.accountId-1].executionConcurrency=data.concurrency;return route.fulfill({json:{executionConcurrency:data.concurrency,accounts:rows}})});
+ await page.route('**/api/video',route=>{calls.push(route.request().postDataJSON());return new Promise<void>(resolve=>release.push(async()=>{await route.fulfill({json:{base64:video,mimeType:'video/mp4'}});resolve()}))});
+ await page.goto('/');await page.getByLabel('Chế độ tài khoản',{exact:true}).selectOption('multiple');await page.getByLabel('Số tài khoản chạy',{exact:true}).fill('2');
+ await page.getByLabel('Ô chạy tài khoản 1',{exact:true}).selectOption('2');await page.getByLabel('Ô chạy tài khoản 2',{exact:true}).selectOption('4');await expect(page.locator('.scene-card')).toHaveCount(6);
+ await page.getByRole('button',{name:'TẠO 6 VIDEO',exact:true}).click();await expect.poll(()=>calls.length).toBe(6);expect(calls.filter(x=>x.accountId===1)).toHaveLength(2);expect(calls.filter(x=>x.accountId===2)).toHaveLength(4);expect(prepares).toEqual([{accountId:1,concurrency:2},{accountId:2,concurrency:4}]);
+ await Promise.all(release.map(fn=>fn()));await expect(page.locator('.scene-card video')).toHaveCount(6);
 });

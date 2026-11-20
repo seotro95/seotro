@@ -28,7 +28,7 @@ export class FolderExports {
   async begin(data) {
     if (!data || !['image','video'].includes(data.kind) || !/^[a-f0-9]{32}$/.test(data.namespace) || !/^\d{1,100}$/.test(data.first) || !/^\d{1,100}$/.test(data.last) || !Number.isInteger(data.count) || data.count < 1 || data.count > MAX_SLOTS || !Number.isInteger(data.numberedCount??data.count) || (data.numberedCount??data.count)<0 || (data.numberedCount??data.count)>data.count || BigInt(data.last) - BigInt(data.first) + 1n !== BigInt(data.numberedCount??data.count)) throw new Error('Bộ tệp xuất không hợp lệ.');
     if (this.sessions.size >= 2 || !this.root) throw new Error('Chọn thư mục lưu và đợi lượt lưu hiện tại hoàn tất.');
-    const label = `Muse-${data.kind === 'image' ? 'Images' : 'Videos'}-${data.count}-${data.first}-${data.last}-${data.namespace}`;
+    const label = `Muse-${data.kind === 'image' ? 'Images' : 'Videos'}-${data.count}-${(data.numberedCount??data.count)?`${data.first}-${data.last}`:`Named-${randomUUID().slice(0,8)}`}-${data.namespace}`;
     let directory;
     for (let suffix = 0; suffix < 100; suffix++) {
       const candidate = path.join(this.root, label + (suffix ? `-${suffix+1}` : ''));

@@ -189,7 +189,9 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       let popup;
       await waitFor(() => { popup = desktop.context().pages().find(page => page.url() === fixtureURL + 'fixture-auth-popup'); return popup; }, 'owned login popup');
       assert.equal(await popup.evaluate(() => typeof window.museTransport), 'undefined');
-      await popup.getByRole('button', { name: 'Finish fixture login', exact: true }).click();
+      await popup.bringToFront();
+      if(process.env.MUSE_ELECTRON_HEADLESS==='1')await popup.getByRole('button',{name:'Finish fixture login',exact:true}).dispatchEvent('click');
+      else await popup.getByRole('button', { name: 'Finish fixture login', exact: true }).click();
       await waitFor(() => popup.isClosed(), 'finished popup');
       assert.equal(await login.locator('[data-lexical-editor="true"]').isVisible(), false);
       const verified = studio.waitForResponse(response => response.url().endsWith('/api/account/check'));

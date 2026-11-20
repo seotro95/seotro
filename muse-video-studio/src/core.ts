@@ -7,7 +7,7 @@ export type Mode = 'muse' | 'demo';
 export type Output = 'video' | 'image';
 export type Status = 'ready' | 'queued' | 'running' | 'done' | 'error' | 'cancelled';
 export type Reference = { id: string; name: string; url: string; base64?: string; mimeType?: string };
-export type Settings = { selectedAccountIds?: number[]; slotCount: number; singleAccountId?: number; multipleSlotIds?: number[]; requestedConcurrency?: number; syncOperations: boolean; accountMode: 'single' | 'multiple'; model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
+export type Settings = { accountLaneOverrides?: Record<string,number>; selectedAccountIds?: number[]; slotCount: number; singleAccountId?: number; multipleSlotIds?: number[]; requestedConcurrency?: number; syncOperations: boolean; accountMode: 'single' | 'multiple'; model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
 export const RENDER_KEYS = ['model','aspectRatio','duration','resolution','imageResolution','videoInput','r2v','modifier'] as const;
 export type SceneSettings = Pick<Settings,typeof RENDER_KEYS[number]>;
 export function renderingSettings(settings:Settings):SceneSettings{return Object.fromEntries(RENDER_KEYS.map(key=>[key,settings[key]])) as SceneSettings}
@@ -100,7 +100,7 @@ export function restoreWorkspace(raw: string | null): { scenes: Scene[]; setting
     fallback.settings = normalizeSettings({ ...DEFAULT_SETTINGS,
       slotCount: isSlotCount(s.slotCount)?s.slotCount:data.scenes.length, requestedConcurrency:isLaneCount(s.requestedConcurrency)?s.requestedConcurrency:(isSlotCount(s.requestedConcurrency)?MAX_ACCOUNT_LANES:DEFAULT_SETTINGS.requestedConcurrency),syncOperations:s.syncOperations!==false,
       singleAccountId:validAccountId(s.singleAccountId) ?? 1,
-      multipleSlotIds:normalizeSlotIds(s.multipleSlotIds), selectedAccountIds:normalizeAccountIds(s.selectedAccountIds),
+      multipleSlotIds:normalizeSlotIds(s.multipleSlotIds), selectedAccountIds:normalizeAccountIds(s.selectedAccountIds), accountLaneOverrides:normalizeLaneOverrides(s.accountLaneOverrides),
       accountMode: s.accountMode === 'multiple' ? 'multiple' : 'single',
       model: MUSE_MODELS.includes(s.model) ? s.model : DEFAULT_SETTINGS.model,
       aspectRatio: s.aspectRatio === '9:16' ? '9:16' : '16:9',
@@ -119,7 +119,13 @@ function validSceneSettings(value:unknown):SceneSettings|undefined{
 }
 
 export function validAccountId(id:unknown):number|undefined{return isAccountId(id)?Number(id):undefined}
-export function accountForScene(scene:Pick<Scene,'id'|'accountId'>,settings:Settings):number{return settings.accountMode==='multiple'?(validAccountId(scene.accountId)??accountPool(settings)[Math.floor((scene.id-1)/(settings.requestedConcurrency??6))%accountPool(settings).length]):(validAccountId(settings.singleAccountId)??1)}
+export function accountForScene(scene:Pick<Scene,'id'|'accountId'>,settings:Settings):number{
+ if(settings.accountMode!=='multiple')return validAccountId(settings.singleAccountId)??1;
+ const explicit=validAccountId(scene.accountId);if(explicit)return explicit;
+ const ids=accountPool(settings);let offset=(scene.id-1)%ids.reduce((sum,id)=>sum+lanesForAccount(settings,id),0);
+ for(const id of ids){const count=lanesForAccount(settings,id);if(offset<count)return id;offset-=count}
+ return ids[0];
+}
 
 export function normalizeSlotIds(value:unknown):number[]|undefined{
   if(!Array.isArray(value))return undefined;
@@ -139,7 +145,16 @@ export function normalizeAccountIds(value:unknown):number[]|undefined{
  return [...new Set(value.filter(id=>isAccountId(id)) as number[])].sort((a,b)=>a-b);
 }
 export function accountPool(settings:Settings):number[]{return settings.accountMode==='single'?[validAccountId(settings.singleAccountId)??1]:(normalizeAccountIds(settings.selectedAccountIds)?.length?normalizeAccountIds(settings.selectedAccountIds)!:Array.from({length:10},(_,i)=>i+1))}
-export function accountLayout(ids:number[],lanes:number):{id:number;accountId:number}[]{
+export function accountLayout(ids:number[],lanes:number,overrides?:Record<string,number>):{id:number;accountId:number}[]{
  if(!ids.length||ids.length>MAX_ACCOUNTS||new Set(ids).size!==ids.length||ids.some(id=>!isAccountId(id))||!isLaneCount(lanes))throw new Error('Chọn 1–40 tài khoản và 1–10 ô mỗi tài khoản.');
- return ids.flatMap((accountId,index)=>Array.from({length:lanes},(_,lane)=>({id:index*lanes+lane+1,accountId})));
+ let next=1;return ids.flatMap(accountId=>Array.from({length:isLaneCount(overrides?.[accountId])?overrides![accountId]:lanes},()=>({id:next++,accountId})));
+}
+
+export function normalizeLaneOverrides(value:unknown):Record<string,number>|undefined{
+ if(!value||typeof value!=='object'||Array.isArray(value))return undefined;
+ return Object.fromEntries(Object.entries(value).filter(([id,count])=>/^[1-9]\d*$/.test(id)&&isAccountId(Number(id))&&isLaneCount(count)));
+}
+export function lanesForAccount(settings:Settings,id:number):number{
+ const override=settings.accountMode==='multiple'?settings.accountLaneOverrides?.[id]:undefined;
+ return isLaneCount(override)?override!:isLaneCount(settings.requestedConcurrency)?settings.requestedConcurrency!:6;
 }

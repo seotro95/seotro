@@ -31,3 +31,8 @@ test('expanded custom-account layouts do not acquire unrelated legacy accounts a
  const restored=restoreWorkspace(JSON.stringify({version:1,settings,scenes:createScenes(400)}));
  for(const id of [1,7,13,20,40])assert.equal(accountForScene(restored.scenes[id-1],restored.settings),accountForScene({id},settings));
 });
+
+test('individual account lane choices generate exact variable groups and survive restore',()=>{
+ const rows=accountLayout([1,2,3],6,{'1':2,'3':10});assert.equal(rows.length,18);assert.equal(rows.filter(r=>r.accountId===1).length,2);assert.equal(rows.filter(r=>r.accountId===2).length,6);assert.equal(rows.filter(r=>r.accountId===3).length,10);
+ const restored=restoreWorkspace(JSON.stringify({version:1,scenes:createScenes(40),settings:{...DEFAULT_SETTINGS,accountMode:'multiple',accountLaneOverrides:{'1':2,'2':11,'41':6}}}));assert.deepEqual(restored.settings.accountLaneOverrides,{'1':2});
+});

@@ -151,7 +151,7 @@ export async function downloadMediaBatch(items: { media: MediaResult; id: number
   const names=items.map((item,index)=>outputStem(item.media.outputName)?uniqueOutputFilename(outputStem(item.media.outputName),files[index].extension,used):'');
   for(let index=0;index<items.length;index++)if(!names[index])names[index]=uniqueOutputFilename(String(nextNumber++),files[index].extension,used);
   const first = formatDownloadNumber(range.first); const last = formatDownloadNumber(range.last);
-  const label = `Muse-${kind === 'image' ? 'Images' : 'Videos'}-${items.length}-${first}-${last}-${range.namespace}`;
+  const label = `Muse-${kind === 'image' ? 'Images' : 'Videos'}-${items.length}-${unnamed?`${first}-${last}`:`Named-${crypto.randomUUID().slice(0,8)}`}-${range.namespace}`;
   let session: { id: string; name: string } | undefined;
   try {
     let directory: ExportDirectory | undefined;

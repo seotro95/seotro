@@ -28,6 +28,8 @@ Nếu không có tên: tải thành `1.png`, `2.png` hoặc `3.mp4`... Bộ đ�
 - Có thể giữ nhiều prompt hơn số luồng; một ô xong sẽ nhường chỗ cho ô chờ cùng tài khoản. Ẩn/thu gọn bố cục giữ dữ liệu các ô cũ. Có thể thay tài khoản riêng trong từng ô; khi đó phân phối thực tế theo tài khoản của từng ô.
 - Bộ xếp hàng và backend đều đã bỏ khóa cũ “mỗi tài khoản nhiều-account chỉ một luồng”. Mỗi tài khoản dùng các hội thoại riêng đã xác minh, với giới hạn riêng; một tài khoản chậm hoặc một ô bị hủy không khóa các tài khoản khác.
 
+Có thể chọn số ô riêng cho từng tài khoản trong bảng chọn: ví dụ Muse 01 chạy 2 ô, Muse 02 chạy 6 ô, Muse 03 chạy 10 ô. Tổng ô bằng tổng lựa chọn từng tài khoản. Đổi ô mặc định cho cả nhóm hoặc bấm preset 10 × 6 sẽ áp dụng lại đồng đều; số ô riêng được lưu khi mở lại.
+
 Bố cục là số ô yêu cầu chạy. Muse vẫn quyết định hạn mức, credit và số tác vụ dịch vụ chấp nhận. Nếu không xác minh được hội thoại độc lập, tool báo số ô thực tế đã sẵn sàng và giữ phần còn lại trong hàng chờ; không báo giả là đang chạy đủ sáu và không tự gửi lại prompt đã được Muse nhận.
 
 ## IP proxy của từng tài khoản

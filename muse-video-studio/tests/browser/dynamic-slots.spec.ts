@@ -46,5 +46,5 @@ test('Codex MCP configuration points at the chosen local port and never copies t
   await page.context().grantPermissions(['clipboard-read','clipboard-write']);
   await page.addInitScript(()=>{(window as any).museTransport={automationControl:async()=>({enabled:true,listening:true,port:9876,address:'http://127.0.0.1:9876',key:'c'.repeat(64),error:''})}});
   await page.reload();await page.getByRole('button',{name:'Cổng API',exact:true}).click();const dialog=page.getByRole('dialog',{name:'Cổng API cho công cụ bên ngoài',exact:true});await dialog.getByRole('button',{name:'Sao chép cấu hình Codex MCP',exact:true}).click();
-  const config=await page.evaluate(()=>navigator.clipboard.readText());expect(config).toContain('[mcp_servers.muse_studio]\n');expect(config).toContain('url = "http://127.0.0.1:9876/mcp"');expect(config).toContain('bearer_token_env_var = "MUSE_STUDIO_KEY"');expect(config).not.toContain('c'.repeat(64));
+  const config=(await page.evaluate(()=>navigator.clipboard.readText())).replace(/\r\n/g,'\n');expect(config).toContain('[mcp_servers.muse_studio]\n');expect(config).toContain('url = "http://127.0.0.1:9876/mcp"');expect(config).toContain('bearer_token_env_var = "MUSE_STUDIO_KEY"');expect(config).not.toContain('c'.repeat(64));
 });

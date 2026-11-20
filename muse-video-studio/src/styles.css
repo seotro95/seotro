@@ -52,3 +52,5 @@
 .scene-output-name input,.proxy-ip-field input{width:100%;min-width:0;background:#0d1524;border:1px solid #34415c;border-radius:5px;color:#e8eefc;padding:8px;font:inherit}
 .proxy-ip-field input[readonly]{font-family:ui-monospace,monospace;color:#a1e8ce}
 .import-name-preview{margin:12px 0;padding:10px;border:1px solid #34415c;border-radius:6px;max-height:220px;overflow:auto}
+
+.account-plan-item{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0}.account-plan-item label{overflow:hidden;text-overflow:ellipsis}.account-plan-item select{background:#182338;color:#e8eefc;border:1px solid #34415c;border-radius:4px;padding:4px;max-width:70px}
