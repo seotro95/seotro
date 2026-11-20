@@ -12,6 +12,7 @@ Sáu ô trong mỗi tài khoản được gửi mà không đợi kết quả ô
 
 - Chuẩn bị tối đa ba tài khoản đồng thời thay cho chuẩn bị lần lượt. Các thao tác thay đổi phiên và gửi render vẫn được khóa trong lúc chuẩn bị; không chạy trùng bước chuẩn bị trên cùng tài khoản.
 - Nếu trang đăng nhập đã xác minh không có New chat, dùng thẳng cùng chat. Không mở bốn trang thử vô ích cho mỗi tài khoản.
+- Đợi các trang thử tạo xong rồi đóng lần lượt khi không dùng được phiên riêng. Tránh cuộc đua đóng/mở trang trong bước thăm dò trên Windows, vốn có thể làm kẹt việc chuyển tuần tự trước khi gửi prompt.
 - Dùng lại khung đã xác định khi tìm ô Message, giảm truy vấn DOM/handle mỗi lần chuyển cảnh tuần tự và giữ đúng iframe.
 - Ghi lựa chọn số luồng nối tiếp để việc chuẩn bị đồng thời không giẫm lên cùng một tệp cấu hình tạm.
 - Không nạp metadata/decoder của hàng chục video chỉ để hiển thị danh sách; video tải để phát khi người dùng bấm Play. Ảnh xem trước nạp khi đến vùng nhìn thấy; Chromium bỏ qua vẽ/bố trí các thẻ ngoài màn hình mà vẫn giữ đủ prompt và ô trong DOM.

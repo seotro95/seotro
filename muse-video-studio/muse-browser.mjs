@@ -337,20 +337,23 @@ export class MuseBrowser {
     // worker conversations. Avoid opening four redundant copies per account.
     if(!await this.newChatControl(this.active.page)){this.concurrencyProbe.state='unavailable';throw Object.assign(fail('MUSE_PARALLEL_UNVERIFIED','Trang hiện tại dùng một cuộc trò chuyện; chuyển sang gửi trong cùng chat.',409),{parallelReason:'MUSE_NEW_CHAT_UNAVAILABLE'})}
     const owned=this.active;const pages=new Set();const lanes=[];let next=0;let failure;
-    const stop=()=>{for(const page of pages)void(owned.destroyWorkerPage?owned.destroyWorkerPage(page):page.close()).catch(()=>{})};
+    // Let in-flight page creation settle before closing any probe. Closing
+    // targets while Chromium is creating sibling targets can stall on Windows.
+    const stop=()=>{failure||=signal.reason||fail('ABORTED','Đã dừng chuẩn bị tài khoản.')};
+    const dispose=async()=>{for(const page of pages)await(owned.destroyWorkerPage?owned.destroyWorkerPage(page):page.close()).catch(()=>{})};
     signal.addEventListener('abort',stop,{once:true});
     const probe=async()=>{while(!failure&&next<count){next++;let page;try{
-      signal.throwIfAborted();page=await this.createWorkerPage();pages.add(page);
+      signal.throwIfAborted();page=await this.createWorkerPage();pages.add(page);if(failure)return;signal.throwIfAborted();
       await page.goto(this.workerURL(),{waitUntil:'domcontentloaded',timeout:45000});
       if(!this.conversationURL(page)||!await this.authenticated(page))throw fail('MUSE_PARALLEL_UNVERIFIED','Trang luồng riêng chưa dùng được phiên Muse đã đăng nhập; cần dùng lại trang đăng nhập để chạy tuần tự.',409);
       await this.freshConversation(page,signal);
       lanes.push({page,url:this.conversationURL(page),busy:false});this.concurrencyProbe.checked++;
-    }catch(error){if(!failure)failure=error;stop()}}};
+    }catch(error){if(!failure)failure=error}}};
     try{
       await Promise.all(Array.from({length:Math.min(4,count)},probe));if(failure)throw failure;signal.throwIfAborted();
       this.parallelRoutes=lanes;this.maxConcurrency=count;this.concurrencyProbe.state='ready';
       return {executionConcurrency:count,message:`Đã chuẩn bị sẵn ${count} trang Muse riêng; các ô gửi cùng lượt sau khi nhập đủ prompt. Không đợi kết quả ô trước.`};
-    }catch(error){stop();await Promise.allSettled([...pages].map(page=>owned.destroyWorkerPage?owned.destroyWorkerPage(page):page.close()));this.concurrencyProbe.state='unavailable';if(signal.aborted||/MUSE_LOGIN_REQUIRED|MUSE_SESSION_|MUSE_CHAT_BUSY/.test(error.message))throw error;throw Object.assign(fail('MUSE_PARALLEL_UNVERIFIED','Chưa chuẩn bị được các trang Muse riêng để chạy đồng thời.',409),{parallelReason:error.message.split(':')[0]})}finally{signal.removeEventListener('abort',stop)}
+    }catch(error){await dispose();this.concurrencyProbe.state='unavailable';if(signal.aborted||/MUSE_LOGIN_REQUIRED|MUSE_SESSION_|MUSE_CHAT_BUSY/.test(error.message))throw error;throw Object.assign(fail('MUSE_PARALLEL_UNVERIFIED','Chưa chuẩn bị được các trang Muse riêng để chạy đồng thời.',409),{parallelReason:error.message.split(':')[0]})}finally{signal.removeEventListener('abort',stop)}
   }
   async useSharedConversation(count,signal){
     if(!isLaneCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn 1–10 ô.',400);
