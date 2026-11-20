@@ -1,0 +1,91 @@
+name: Sky 536 MOI053 documents and English 22m12s
+on:
+  push:
+    branches: [codex/sky536-moi053-production-20261120]
+    paths: [.github/workflows/sky536-moi053-documents-english.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  documents:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: sky536-moi053
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python sky536-moi053/extract_content.py
+          python sky536-moi053/build_documents.py
+          python -u sky536-moi053/publish_documents.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+  english:
+    needs: documents
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: sky536-moi053
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python sky536-moi053/extract_content.py
+          python sky536-moi053/build_documents.py
+          python sky536-moi053/english_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python sky536-moi053/ensure_ffmpeg.py
+          python sky536-moi053/bootstrap_tool.py online
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: sky536-moi053-checkpoint-en-US
+          path: sky536-moi053/voice/audio/en-US
+      - name: Generate English with same Andrew voice and retain completed speech
+        run: |
+          set +e
+          python -u sky536-moi053/render_english_groups.py
+          code=$?
+          if [ "$code" = 75 ]; then
+            sleep 15
+            python -u sky536-moi053/render_english_groups.py
+            code=$?
+          fi
+          exit "$code"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sky536-moi053-checkpoint-en-US
+          path: |
+            sky536-moi053/voice/audio/en-US/group-*
+            sky536-moi053/voice/audio/en-US/raw-*
+            sky536-moi053/voice/audio/en-US/fallback-*
+            sky536-moi053/voice/audio/en-US/pending_*.json
+          if-no-files-found: ignore
+          retention-days: 30
+          overwrite: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sky536-moi053-voice-en-US
+          path: |
+            sky536-moi053/voice/audio/en-US/*.mp3
+            sky536-moi053/voice/audio/en-US/render_report.json
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true
+      - name: Publish complete English narration
+        run: gh release upload sky536-moi-053-22m12s sky536-moi053/voice/audio/en-US/*.mp3 --repo seotro95/seotro --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
+
