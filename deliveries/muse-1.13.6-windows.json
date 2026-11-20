@@ -1,0 +1,53 @@
+{
+  "status": "windows_tests_and_uploaded_asset_sha256_verified",
+  "version": "1.13.6",
+  "source_commit": "34d066c84f9b3833dadfef16ed46612ff3250cf6",
+  "source_branch": "codex/muse-1136-batched-chat",
+  "workflow_run_id": 44818806881,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/44818806881",
+  "workflow_conclusion": "success",
+  "release_id": 453192510,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/untagged-09cd7a049bea3fbaa71f",
+  "draft": true,
+  "zip": {
+    "file": "Muse-AI-Studio-1.13.6-Windows-x64.zip",
+    "bytes": 160788303,
+    "sha256": "a409232bf6e1ee2942b808dedbf28b364e6c3c645eb8f147cbbc477cc054a7f1",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-09cd7a049bea3fbaa71f/Muse-AI-Studio-1.13.6-Windows-x64.zip"
+  },
+  "checksum_file": {
+    "file": "Muse-AI-Studio-1.13.6-Windows-x64.zip.sha256",
+    "bytes": 105,
+    "sha256": "1ae29fc290265c76786cdb4f013b03e01359b765aac8047a929b6ff981bb61ea",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-09cd7a049bea3fbaa71f/Muse-AI-Studio-1.13.6-Windows-x64.zip.sha256"
+  },
+  "validation": {
+    "windows_ui_checks": 25,
+    "electron_desktop_checks": 8,
+    "throughput_fixture": {
+      "accounts": 12,
+      "lanesPerAccount": 6,
+      "submittedBeforeAnyResult": 72,
+      "chatMessages": 12,
+      "pages": 12,
+      "extraWorkerPages": 0,
+      "preparationMs": 3190,
+      "submissionMs": 1361,
+      "downloadConcurrency": 6
+    },
+    "wait_limits_ms": {
+      "server": 190000,
+      "desktop_local_http": 195000,
+      "frontend_absolute": 200000
+    },
+    "deadline": "Stalled requests release the server slot without generation replay. Advancing the UI clock past 200 seconds ends loading with MUSE_WAIT_LIMIT, retains the full prompt, and records one request only.",
+    "batched_chat": "Six prompts in one native user message. Six out-of-order videos in one assistant response are attributed by short CLIP labels without UUID filenames. A task-specific explicit capacity rejection retries only that task.",
+    "old_history": "Re-rendered historical media nodes and late media tagged to another cohort are excluded from both attribution and fresh media counters.",
+    "download_retry": "Temporary 404 file readiness is retried as a download only, inside the deadline, without a second generation message.",
+    "packaged_executable": "Standalone EXE startup; ten overlapping images despite deliberately failing loopback global fetch; exact names and numbered directory exports persist after restart; ten named shared-chat videos with six concurrent tasks; explicit capacity rejection completes remaining scenes serially; account-session media recovery rerun on packaged EXE.",
+    "preserved_features": "TXT/SRT names and full prompts; account choices and individual proxies/IP; image-to-video; session persistence; cancellation and renderer recovery.",
+    "live_muse_account_render_tested": false,
+    "limitation": "Generation checks use a fixture service and no real Muse credits. One-message batching is verified locally and on Windows but not on the user's live account. The 200-second cap ends waiting; it cannot guarantee remote completion within that time."
+  },
+  "verified_at_utc": "2026-11-20T21:24:36Z"
+}
