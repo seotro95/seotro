@@ -1,0 +1,25 @@
+MAYA 055 — HƯỚNG DẪN DỰNG 22:42
+
+1. Thời lượng
+136 cảnh × 10 giây + cảnh kết 2 giây = 1.362 giây. Tạo tất cả clip dài 10 giây. Riêng cảnh 137 chỉ dùng giây 8–10. Không cộng thêm intro vào tổng thời lượng.
+
+2. Tệp prompt
+Có 140 prompt trong 14 TXT, mỗi tệp 10 prompt, đánh số liên tục 1–140. Tệp 14 có 7 cảnh chính 131–137 và 3 cảnh dự phòng 138–140. Dự phòng chỉ thay hình theo CSV, không nối thêm thời lượng.
+
+3. Hình ảnh và thời kỳ
+Ưu tiên di tích, cảnh quan, rừng, ruộng, hồ chứa, đường đi, sân mở và mô hình ngoại cảnh. Không dùng nhà khoa học hoặc phòng thí nghiệm. Gắn nhãn để phân biệt khảo cổ minh họa, phục dựng lịch sử, mô hình và đời sống hiện nay. Tikal thời Cổ điển, Mayapán thời Hậu Cổ điển và Maya hiện tại là các bối cảnh khác nhau.
+
+4. Nhân vật và âm thanh
+Mọi người rõ từ 25 tuổi. Không có hình trẻ em, kể cả trong nền, tranh, chạm khắc, bóng và phản chiếu. Không nhân vật người trong tranh hoặc phù điêu; không để AI bịa văn tự đọc được. Mỗi prompt yêu cầu video không âm thanh, không lời nói. Nếu công cụ vẫn sinh tiếng, xóa hoàn toàn trước dựng và dùng voice riêng.
+
+5. Giới hạn minh họa
+Không biến toàn vùng thành sa mạc hoặc rừng chết, không dựng các đô thị cùng sập vật lý trong một ngày. Hồ cạn hiện nay không phải số đo hạn hán cổ. Mô hình lọc Corriental thể hiện một cách diễn giải, không phải thiết bị được khôi phục nguyên vẹn và không chứng minh nước sạch mọi độc chất. Tín hiệu ô nhiễm không tự chẩn đoán sức khỏe của mọi cư dân.
+
+6. Biểu đồ và số liệu
+Mức giảm mưa 41–54% và đỉnh tới 70% thuộc mô hình từ hồ Chichancanab trong nghiên cứu Evans và cộng sự năm 2018. Không áp dụng cho mọi đô thị, mọi năm. Dùng DATA_FOR_EDITOR.csv và ghi nguồn khi dựng; không dùng AI vẽ đường số liệu. Không tự gán khoảng tin cậy 95% cho một khoảng mà nguồn không định nghĩa như vậy.
+
+7. Nhịp mở đầu
+HOOK_30_GIAY_10_SHOT.csv là phương án thay hình 30 giây đầu bằng 10 shot × 3 giây, giữ nguyên voice. Hình Maya hiện nay ở giây 21–27 đi cùng lời khẳng định cộng đồng vẫn tiếp nối. Hòa cảnh phải bù phần chồng để giữ đúng 22:42.
+
+8. Căn lời
+Bản Anh căn theo 137 mốc. Các bản địa hóa căn theo 14 chương và tổng 22:42. Nếu muốn từng câu bản địa hóa trùng từng clip 10 giây, editor cần căn phụ đề hoặc thay hình trong chương tương ứng. Tất cả bản hình AI là minh họa; bộ này chưa tạo footage.

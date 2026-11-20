@@ -1,0 +1,265 @@
+{
+  "transport_revision": 3,
+  "topic": "055-Maya-Drought",
+  "target_seconds": 1362,
+  "expected_samples_48000": 65376000,
+  "documents_inventory": [
+    {
+      "path": "documents/5_TIEU_DE_5_PROMPT_THUMBNAIL.txt",
+      "bytes": 6980,
+      "sha256": "16769985a1549dcbd6a2d48936226f86ab7e916aed12e23e43699fdfe5fa30aa"
+    },
+    {
+      "path": "documents/BROLL_DU_PHONG_138_140.csv",
+      "bytes": 277,
+      "sha256": "544e5d5726876f1329f1767d5d289043d99b81543664c8c4c8c238a4bde523a1"
+    },
+    {
+      "path": "documents/DATA_FOR_EDITOR.csv",
+      "bytes": 600,
+      "sha256": "a6fee0c982c9ca6a2412cf219280f79a368b8bff51a70f8abe8efcccb74989c6"
+    },
+    {
+      "path": "documents/DOCUMENT_QA.json",
+      "bytes": 1267,
+      "sha256": "41f3e5b35b23b52366b8de905ad785482761582616f4356fdf6f7cafb229b0a7"
+    },
+    {
+      "path": "documents/DOI_CHIEU_BANG_CHUNG.csv",
+      "bytes": 1231,
+      "sha256": "f311de70cea2fe483e263976dacfc47b571715ceb07e4b681c86fd4554305949"
+    },
+    {
+      "path": "documents/EDL_137_CANH.csv",
+      "bytes": 13752,
+      "sha256": "065b7ff31929b89f8cf7cb5bd0fbbf0becb021921434ab2dba384d94b9b5e516"
+    },
+    {
+      "path": "documents/GIONG_DA_LUU.md",
+      "bytes": 2191,
+      "sha256": "499b072e61ea9cd2c6ace402551337a1dc5a4ace5e80be505ccbdb6af96a2204"
+    },
+    {
+      "path": "documents/HOOK_30_GIAY_10_SHOT.csv",
+      "bytes": 1305,
+      "sha256": "e69cc42ba15ca0e30e26fa66744037d6fcccbf41b7a292d403418db8add3fb2c"
+    },
+    {
+      "path": "documents/HUONG_DAN_DUNG_HINH.txt",
+      "bytes": 2964,
+      "sha256": "90f818aceff18e5c014c549ba1eb5a428d0d01f30333b96daf7034d7315268ea"
+    },
+    {
+      "path": "documents/KICH_BAN_EN_22m42s.txt",
+      "bytes": 30905,
+      "sha256": "fdce157ece3c018f3730e8b93a348ff51ea553fe612a92216e7bf60eacc27208"
+    },
+    {
+      "path": "documents/KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 40158,
+      "sha256": "d51ef013b371487a35402f4f574d26188d02f77a8539f18c39ed3c619ebffef1"
+    },
+    {
+      "path": "documents/LOI_DAN_EN_137_CANH.srt",
+      "bytes": 35455,
+      "sha256": "223f07b47e85780fdc718eb61deffc53ef120c4f84c31b3e43e34c1e4d920466"
+    },
+    {
+      "path": "documents/NARRATION_STYLE_LOCKED.json",
+      "bytes": 1446,
+      "sha256": "81a4992eb447fe06f0650deeceae8d0ef4db88758a3720fd3025067a31d9d738"
+    },
+    {
+      "path": "documents/NGUON_KIEM_CHUNG.md",
+      "bytes": 8677,
+      "sha256": "7573633b1d70c38be7f3a2c81233647b375d01fc10865a1533d6a1595913b104"
+    },
+    {
+      "path": "documents/PHAN_TICH_VIDEO_NGUON.md",
+      "bytes": 4148,
+      "sha256": "40082d44fd3556069ecfb5463b87d8497e4dc1d87eb5d3fadce9e003cb24b8cf"
+    },
+    {
+      "path": "documents/PROMPTS/01_PROMPT_001_010.txt",
+      "bytes": 29659,
+      "sha256": "afc641836020498fc2350565cba8c5c9a488a6b32079239b9ec8d90dc72dca9d"
+    },
+    {
+      "path": "documents/PROMPTS/02_PROMPT_011_020.txt",
+      "bytes": 29912,
+      "sha256": "25ccb00780c394e6bda9428113322114b0f6f6c02420ce084daed183291eeb5a"
+    },
+    {
+      "path": "documents/PROMPTS/03_PROMPT_021_030.txt",
+      "bytes": 30160,
+      "sha256": "463147e56f6fccd7a4d7edcb130dfbbaba478dff78b781b6abec7e9d1801f92c"
+    },
+    {
+      "path": "documents/PROMPTS/04_PROMPT_031_040.txt",
+      "bytes": 30013,
+      "sha256": "88b0ab083f0e5a816637e7efda6f8b195d81425b0cc5cd513d7bda3a4e8a401b"
+    },
+    {
+      "path": "documents/PROMPTS/05_PROMPT_041_050.txt",
+      "bytes": 30087,
+      "sha256": "d85c87bea20a20d1d67328f83247b1c0ed49b3c043a83a1c64d7b6ab305ac8ac"
+    },
+    {
+      "path": "documents/PROMPTS/06_PROMPT_051_060.txt",
+      "bytes": 30204,
+      "sha256": "1abdb1d120d6f7f146a4864bb2d00bbd77f34ba51b42a8ed5bf1d6e131523a65"
+    },
+    {
+      "path": "documents/PROMPTS/07_PROMPT_061_070.txt",
+      "bytes": 29889,
+      "sha256": "b274d833c61005e6a2b055a68e2659f41759f0a8541a11026c1e4b5e4936a167"
+    },
+    {
+      "path": "documents/PROMPTS/08_PROMPT_071_080.txt",
+      "bytes": 30109,
+      "sha256": "861f834a1c79bf68c91b3164364bb8bf99f5d187b406a6c63be18cc07b516206"
+    },
+    {
+      "path": "documents/PROMPTS/09_PROMPT_081_090.txt",
+      "bytes": 30011,
+      "sha256": "e350c3d8f23484ae32cf4a198bf5c76c2315826c0f4383b17582c36b755d816c"
+    },
+    {
+      "path": "documents/PROMPTS/10_PROMPT_091_100.txt",
+      "bytes": 30126,
+      "sha256": "a06f23d4ef990e08bef311e3ef7ad4fcc12c6daf273f0efced65a4650b71f28a"
+    },
+    {
+      "path": "documents/PROMPTS/11_PROMPT_101_110.txt",
+      "bytes": 30200,
+      "sha256": "ecb5476c77897cade9096f37ddfbfffcdb2740fb94f1607e00768b19a426472f"
+    },
+    {
+      "path": "documents/PROMPTS/12_PROMPT_111_120.txt",
+      "bytes": 30077,
+      "sha256": "e080d0186a65b582a208659ad75a391372e8b9194c518018f81bdbdfd4206bb3"
+    },
+    {
+      "path": "documents/PROMPTS/13_PROMPT_121_130.txt",
+      "bytes": 29960,
+      "sha256": "b273dba6e895bc6a3bbade72950f0a5163ed189ecb8a35a6ed3a8ecf4c9cf7d5"
+    },
+    {
+      "path": "documents/PROMPTS/14_PROMPT_131_140.txt",
+      "bytes": 29739,
+      "sha256": "28940250a608451c538c1162691127df291110db5ed9f03b3be88b56f4cac2d4"
+    },
+    {
+      "path": "documents/README.md",
+      "bytes": 3740,
+      "sha256": "231a7a1eae36ef9066f5bed491bf857bf338649ec3cfc41d55a2ed7ac3afa155"
+    },
+    {
+      "path": "documents/TIMELINE_137_CANH.csv",
+      "bytes": 49683,
+      "sha256": "b2326998062d4299f959b9e5ce84315013b807cec1f9e64548d00c97d65e5af6"
+    },
+    {
+      "path": "documents/TRANSLATION_REVIEW.json",
+      "bytes": 1061,
+      "sha256": "43093bb34a77cca70cbd26f38fcea55fc57cb1d57c1185f371418febccc9522c"
+    },
+    {
+      "path": "documents/VISUAL_STYLE_LOCKED.json",
+      "bytes": 986,
+      "sha256": "f2ef09ae6173401482092fe4158a00d4ca4dcaaae0a98bcea503d0dcd4824f6d"
+    },
+    {
+      "path": "documents/VOICE_FILE_NAMING.json",
+      "bytes": 3206,
+      "sha256": "07d4ef95cf799a86a579410bc301ba6ca0c9977e8a4fc0d28aa5849c6815a345"
+    },
+    {
+      "path": "documents/VOICE_PROFILES_LOCKED.json",
+      "bytes": 12987,
+      "sha256": "321439ee303205c0203140de63adb36c6ecee92f1ec429d5d9b135fc29a6bd7c"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/cs-CZ.txt",
+      "bytes": 32474,
+      "sha256": "08f4fb8376d0cdc0b5813b737015b85564e0e329ef652199cc7d4c1ab5738527"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/da-DK.txt",
+      "bytes": 31726,
+      "sha256": "b2aa0b7033ac16c95ded16a4cb32c271b0aae42904ddb0b07ad02b50ab22e4dc"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/de-DE.txt",
+      "bytes": 37161,
+      "sha256": "b097c71779b374af4ad69ad7c774f3721503b1fa77a2882aba7805c52d7e1c49"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/en-US.txt",
+      "bytes": 32467,
+      "sha256": "929f75b0f9a7f139e107be38d49d1dbd2750ad3901bdbff0d82c02637e9552cf"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/es-ES.txt",
+      "bytes": 35679,
+      "sha256": "e6d59df9a97311a4ef072897fe964b42931b351e351fb4dd6d890ed69739e799"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/fi-FI.txt",
+      "bytes": 32972,
+      "sha256": "c5899052193cc84bdb98f302af25ce0e9d5c60f4107c9b2bea4c6a2baf46e40d"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/fr-FR.txt",
+      "bytes": 37964,
+      "sha256": "328e7ec4c84be745481a314fa1150a29a714f7a3b1339199589ef00e60ae3780"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/it-IT.txt",
+      "bytes": 35226,
+      "sha256": "cf766863935dee7af8bfd7d09054adc971191e0a805bff98b4655f76acc721c6"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/ja-JP.txt",
+      "bytes": 20174,
+      "sha256": "999882e59838e9190f8c20f10b8e85dd6bd8e37cff8e38ef12b3cb0c103d94c7"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/ko-KR.txt",
+      "bytes": 21060,
+      "sha256": "45ff92d18f4ddfec99b010e455db61292949d7a882cd4dcb2e1f77c2f7e4d73e"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/nb-NO.txt",
+      "bytes": 30609,
+      "sha256": "8aebf5dff1d32507b9a8d3c2495b3e1147a5f992ff29873945c5d60c48df566a"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/nl-NL.txt",
+      "bytes": 35242,
+      "sha256": "e276e52d9d062066e9e0ffae3ae2048cd5da4e0446632b923bdec0d40af20664"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/pl-PL.txt",
+      "bytes": 33744,
+      "sha256": "7abc9fdbeb6937a870618577b7c3c3665856612c0218f33b65a9ff1bee6af8e4"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/pt-PT.txt",
+      "bytes": 34590,
+      "sha256": "eb7034121407c7fd44fd39d7291ede570b33ce0b3d20ab30056e4f2e8173ff8e"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/sv-SE.txt",
+      "bytes": 31098,
+      "sha256": "d893476d88b3dba44157e53058c40ae3c566e5df1a53e017828616a5f9181425"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/vi-VN.txt",
+      "bytes": 26302,
+      "sha256": "b1f08a5d4b285957c304e0559cc34c8e210898d6efc1bb6bc6bda4c8fe8f9224"
+    }
+  ],
+  "release_tag": "maya-drought-video-055-22m42s",
+  "scope": "User-requested Maya055 original English script,137main+3optional silent no-children outdoor/archaeological/historical/conceptual/contemporary prompts in14TXT,no laboratories,16localized scripts,Maya livingcontinuity,sourceanalysis,bibliography,evidence matrix,editor dataCSV,16saved male voice IDs and5title-thumbnail pairs;no MP3,source media,models,credentials,private messages or other-topic files inthis document export"
+}

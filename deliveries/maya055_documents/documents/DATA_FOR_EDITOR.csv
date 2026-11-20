@@ -1,0 +1,3 @@
+item,geographic_archive,published_year,quantity,lower,upper,unit,interpretation,source,limit
+modeled_annual_rainfall_reduction,"LakeChichancanab,Mexico",2018,reductionrelative_study_reference,41,54,percent,Published modeled range;not annual observations,https://doi.org/10.1126/science.aas9871,Notpan-Maya;notallcities/years;notlabeled95percentCIbythis table
+modeled_peak_drought_reduction,"LakeChichancanab,Mexico",2018,reductionduringpeakdryintervals,,70,percent,UPTO70percent;notfixedannualvalue,https://doi.org/10.1126/science.aas9871,Noartificialtime-series;noinferredpopulation/cropyieldvalues

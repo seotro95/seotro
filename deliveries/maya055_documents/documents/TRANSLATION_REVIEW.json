@@ -1,0 +1,12 @@
+{
+  "topic": "055-Maya-Drought",
+  "languages": 16,
+  "english_words": 4222,
+  "strategy": "Contextual adaptation preserving mechanisms,facts and uncertainty;notword-for-wordsubtitlealignment",
+  "vi_ja_ko": "Assistant-written14chapteradaptations;Maya livingcontinuity,waterquantity/quality/access,localclimatedata,Classic/Postclassiccase distinction retained",
+  "other12": "Fullchaptermachine drafts with unambiguous water/catchment/sediment/archaeological-age context;region/terminology review;chapter11rewrittenforclearhousehold-worklinksandpacingbeforefinalexport",
+  "model_numbers": "2018LakeChichancanab41–54percentmodeledannualreduction,peakUPTO70;notpanMayatime-seriesor95CI",
+  "alignment": "English137cues;15localized14chapters13x100+62s",
+  "independent_native_editorial_or_listening_review": false,
+  "swedish_chapters_2_9": "Concise contextual revisions retain water-balance mechanisms,2026Belize association,2022PostclassicMayapan case,regionalcontinuity and boundedcausality;rerendered with same saved male voice before final audio export."
+}

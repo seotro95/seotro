@@ -1,0 +1,11 @@
+shot,start,end,clip_id,source_in,source_out,instruction
+1,0,3,1,2,5,Opening picture replacement only;keep voice0–30s and total22:42;modern Maya at21–27s;remove all clip audio
+2,3,6,6,2,5,Opening picture replacement only;keep voice0–30s and total22:42;modern Maya at21–27s;remove all clip audio
+3,6,9,9,2,5,Opening picture replacement only;keep voice0–30s and total22:42;modern Maya at21–27s;remove all clip audio
+4,9,12,8,2,5,Opening picture replacement only;keep voice0–30s and total22:42;modern Maya at21–27s;remove all clip audio
+5,12,15,14,2,5,Opening picture replacement only;keep voice0–30s and total22:42;modern Maya at21–27s;remove all clip audio
+6,15,18,18,2,5,Opening picture replacement only;keep voice0–30s and total22:42;modern Maya at21–27s;remove all clip audio
+7,18,21,28,2,5,Opening picture replacement only;keep voice0–30s and total22:42;modern Maya at21–27s;remove all clip audio
+8,21,24,3,2,5,Opening picture replacement only;keep voice0–30s and total22:42;modern Maya at21–27s;remove all clip audio
+9,24,27,94,2,5,Opening picture replacement only;keep voice0–30s and total22:42;modern Maya at21–27s;remove all clip audio
+10,27,30,12,2,5,Opening picture replacement only;keep voice0–30s and total22:42;modern Maya at21–27s;remove all clip audio

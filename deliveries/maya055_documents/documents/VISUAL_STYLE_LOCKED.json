@@ -1,0 +1,20 @@
+{
+  "style_id": "maya-water-politics-outdoor-archaeology-no-labs-v6",
+  "topic": "055-Maya-Drought",
+  "historical_settings_preferred": true,
+  "outdoor_archaeological_landscape_preferred": true,
+  "laboratory_scene_count": 0,
+  "exclude_scientists_and_modern_research_settings": true,
+  "human_minimum_age": 25,
+  "no_children_including_artwork_screens_reflections": true,
+  "no_human_figures_in_murals_or_carvings": true,
+  "historical_context": "Classic Maya lowland communities;PostclassicMayapan and contemporaryMaya explicitly separate",
+  "maya_people_and_cultures_continue_today": true,
+  "no_single_pan_maya_collapse_event": true,
+  "reservoir_filtering_reconstruction_is_hypothesis_not_exact_hardware": true,
+  "climate_curves_editor_only_verified_data_not_AI_generated": true,
+  "modern_dry_reservoir_not_a_historical_rain_gauge": true,
+  "every_generated_clip_seconds": 10,
+  "silent_no_speech_each_prompt": true,
+  "no_aztec_inca_egyptian_or_fantasy_visual_hybrids": true
+}
