@@ -1,0 +1,112 @@
+name: Mary Rose MOI048 fifteen saved male country voices
+permissions:
+  contents: read
+  actions: read
+jobs:
+  validate_inputs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: maryrose-moi048
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: 'python maryrose-moi048/extract_content.py
+
+        python maryrose-moi048/extract_voice_inputs.py
+
+        python maryrose-moi048/build_documents.py
+
+        python maryrose-moi048/voice_gate.py
+
+        python -m compileall -q maryrose-moi048
+
+        '
+  countries:
+    needs: validate_inputs
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      max-parallel: 15
+      matrix:
+        locale:
+        - vi-VN
+        - es-ES
+        - fr-FR
+        - ja-JP
+        - ko-KR
+        - de-DE
+        - it-IT
+        - pt-PT
+        - nl-NL
+        - pl-PL
+        - sv-SE
+        - da-DK
+        - fi-FI
+        - nb-NO
+        - cs-CZ
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: maryrose-moi048
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: 'python maryrose-moi048/extract_content.py
+
+        python maryrose-moi048/extract_voice_inputs.py
+
+        python maryrose-moi048/build_documents.py
+
+        python maryrose-moi048/voice_gate.py
+
+        python maryrose-moi048/english_gate.py
+
+        python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+
+        python maryrose-moi048/ensure_ffmpeg.py
+
+        python maryrose-moi048/bootstrap_tool.py online
+
+        '
+    - uses: actions/download-artifact@v4
+      continue-on-error: true
+      with:
+        name: maryrose-moi048-checkpoint-${{ matrix.locale }}
+        path: maryrose-moi048/voice/audio/${{ matrix.locale }}
+    - name: Render saved male voice retaining successful speech
+      run: "set +e\npython -u maryrose-moi048/render_online.py \"${{ matrix.locale }}\"\ncode=$?\nif [ \"$code\" = 75 ]; then\n\
+        \  sleep 15\n  python -u maryrose-moi048/render_online.py \"${{ matrix.locale }}\"\n  code=$?\nfi\nexit \"$code\"\n"
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: maryrose-moi048-checkpoint-${{ matrix.locale }}
+        path: 'maryrose-moi048/voice/audio/${{ matrix.locale }}/raw-*
+
+          maryrose-moi048/voice/audio/${{ matrix.locale }}/pending_*.json
+
+          '
+        if-no-files-found: ignore
+        retention-days: 30
+        overwrite: true
+    - uses: actions/upload-artifact@v4
+      with:
+        name: maryrose-moi048-voice-${{ matrix.locale }}
+        path: 'maryrose-moi048/voice/audio/${{ matrix.locale }}/*.mp3
+
+          maryrose-moi048/voice/audio/${{ matrix.locale }}/render_report.json
+
+          '
+        if-no-files-found: error
+        retention-days: 30
+        overwrite: true
+'on':
+  push:
+    branches:
+    - codex/maryrose-moi048-production-20261120
+    paths:
+    - .github/workflows/maryrose-moi048-countries.yml
+  workflow_dispatch: null
