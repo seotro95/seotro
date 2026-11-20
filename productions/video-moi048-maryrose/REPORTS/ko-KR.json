@@ -1,0 +1,143 @@
+{
+  "status": "passed",
+  "locale": "ko-KR",
+  "voice_id": "ko-KR-InJoonNeural",
+  "gender": "Male",
+  "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "target_seconds": 1302,
+  "decoded_frames_48000": 62496000,
+  "decoded_seconds": 1302.0,
+  "filename": "MARYROSE_MOI048_Han_Quoc.mp3",
+  "bytes": 15624620,
+  "sha256": "90e1616adf134131cfa7694ec7d4c1665d53972e4731ad0862fd054227e810a9",
+  "script_sha256": "32125b8f5d4e6b19031f7ec99fa9224428784ea55b2497088f0d1553c2b55eba",
+  "cues": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 100,
+      "raw_seconds": 111.504,
+      "tempo": 1.116379655586704,
+      "trailing_pause_target": 0.12,
+      "parts": 2
+    },
+    {
+      "id": 2,
+      "start": 100,
+      "end": 200,
+      "raw_seconds": 125.016,
+      "tempo": 1.251661994393272,
+      "trailing_pause_target": 0.12,
+      "parts": 2
+    },
+    {
+      "id": 3,
+      "start": 200,
+      "end": 300,
+      "raw_seconds": 116.16,
+      "tempo": 1.1629955947136563,
+      "trailing_pause_target": 0.12,
+      "parts": 2
+    },
+    {
+      "id": 4,
+      "start": 300,
+      "end": 400,
+      "raw_seconds": 113.592,
+      "tempo": 1.137284741690028,
+      "trailing_pause_target": 0.12,
+      "parts": 2
+    },
+    {
+      "id": 5,
+      "start": 400,
+      "end": 500,
+      "raw_seconds": 114.984,
+      "tempo": 1.1512214657589106,
+      "trailing_pause_target": 0.12,
+      "parts": 2
+    },
+    {
+      "id": 6,
+      "start": 500,
+      "end": 600,
+      "raw_seconds": 114.552,
+      "tempo": 1.1468962755306369,
+      "trailing_pause_target": 0.12,
+      "parts": 2
+    },
+    {
+      "id": 7,
+      "start": 600,
+      "end": 700,
+      "raw_seconds": 111.312,
+      "tempo": 1.1144573488185823,
+      "trailing_pause_target": 0.12,
+      "parts": 2
+    },
+    {
+      "id": 8,
+      "start": 700,
+      "end": 800,
+      "raw_seconds": 111.84,
+      "tempo": 1.1197436924309172,
+      "trailing_pause_target": 0.12,
+      "parts": 2
+    },
+    {
+      "id": 9,
+      "start": 800,
+      "end": 900,
+      "raw_seconds": 120.072,
+      "tempo": 1.202162595114137,
+      "trailing_pause_target": 0.12,
+      "parts": 2
+    },
+    {
+      "id": 10,
+      "start": 900,
+      "end": 1000,
+      "raw_seconds": 119.688,
+      "tempo": 1.1983179815778935,
+      "trailing_pause_target": 0.12,
+      "parts": 2
+    },
+    {
+      "id": 11,
+      "start": 1000,
+      "end": 1100,
+      "raw_seconds": 113.904,
+      "tempo": 1.1404084901882259,
+      "trailing_pause_target": 0.12,
+      "parts": 2
+    },
+    {
+      "id": 12,
+      "start": 1100,
+      "end": 1200,
+      "raw_seconds": 122.664,
+      "tempo": 1.2281137364837806,
+      "trailing_pause_target": 0.12,
+      "parts": 2
+    },
+    {
+      "id": 13,
+      "start": 1200,
+      "end": 1302,
+      "raw_seconds": 114.72,
+      "tempo": 1.1260306242638398,
+      "trailing_pause_target": 0.12,
+      "parts": 2
+    }
+  ],
+  "pitch_shift_applied": false,
+  "voice_identity_preserved": true,
+  "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh",
+  "prosody_method": "Native phrase rate and question/reflective pacing plus at most two1.2dB word accents per request",
+  "word_metadata_pieces": 26,
+  "minimum_word_coverage_ratio": 0.9979381443298969,
+  "word_accents": 25,
+  "independent_native_listening_review": false,
+  "timing_alignment": "13 shared chapter boundaries"
+}

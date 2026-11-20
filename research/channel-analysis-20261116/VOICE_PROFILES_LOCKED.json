@@ -1,8 +1,6 @@
 {
   "profile_set_id": "science-documentary-16-male-upano-moi011-v2-christoph",
   "catalogue_id": "new-100-topics-20261116",
-  "topic_id": "MOI-030",
-  "target_seconds": 1362,
   "profiles": [
     {
       "locale": "en-US",
@@ -12,11 +10,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_My_Tieng_Anh.mp3",
-      "mp3_sha256": "e140cdd315d51b839a8c9f43913d3b5c593bb0ab0e7c900f2c957e1da585e48f",
-      "alignment_granularity": "137Englishcues",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_My_Tieng_Anh.mp3",
+      "mp3_sha256": "8616dc03420e1879c7cfb617c0a1a015900693eb91c568ce7d5ec6670d3f298a",
+      "alignment_granularity": "131Englishcues",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "vi-VN",
@@ -26,11 +24,11 @@
       "engine": "Melo-Viet-Studio1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Viet_Nam_Nam_Minh.mp3",
-      "mp3_sha256": "964d950511168c867bcaf6807017a69c94e8df1e923f4c95a0d96483cf700ccc",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Viet_Nam_Nam_Minh.mp3",
+      "mp3_sha256": "6159edb7086c54b4c38655fc5c22586936e4ea2c882ae6a1adaeab907692cc83",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "es-ES",
@@ -40,11 +38,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Tay_Ban_Nha.mp3",
-      "mp3_sha256": "d5e9f1295f1b7303015945644dce36360c340187ac9d635b191faa689a771401",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Tay_Ban_Nha.mp3",
+      "mp3_sha256": "b9725d4089b6e057d764c1bc4825047c2cc60329e0c1cba3ec47805785ebdb51",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "fr-FR",
@@ -54,11 +52,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Phap.mp3",
-      "mp3_sha256": "8d35533a37a7c0fbebe08c1fd9392de9bb924ef36302fb7bc60d15a0a879df96",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Phap.mp3",
+      "mp3_sha256": "52e5068276fd5f41193b325fc07291d57ef558d687c21b77678a00c78a6ce722",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "ja-JP",
@@ -68,11 +66,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Nhat_Ban.mp3",
-      "mp3_sha256": "8682565972eed81c02ebff5da216e8c5b9376bf6a98fdf07ec9af91cd27f6218",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Nhat_Ban.mp3",
+      "mp3_sha256": "30ddb8c9bc103882f63800451dcc71949da13d84229fb9c9d5f207073b11697f",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "ko-KR",
@@ -82,11 +80,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Han_Quoc.mp3",
-      "mp3_sha256": "c70d067acc7faba07009b769ee9c5aab91bf08269993eadcdb886b765e908f3f",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Han_Quoc.mp3",
+      "mp3_sha256": "90e1616adf134131cfa7694ec7d4c1665d53972e4731ad0862fd054227e810a9",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "de-DE",
@@ -98,11 +96,11 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "previous_voice_id": "de-DE-ConradNeural",
       "voice_change_reason": "Previous voice absent from live provider catalogue; Christoph is currently listed as German male. User authorized selection of friendly male voices. Change disclosed in chat.",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Duc.mp3",
-      "mp3_sha256": "b04d53ab3c0736c8abeaaabb12f1855056454b9ab24b216dc952dfe8fcb336e1",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Duc.mp3",
+      "mp3_sha256": "39b0eb8e336ec7011710b2c25ee374bbe69dc047e270574a486f426fd1d9d76f",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "it-IT",
@@ -112,11 +110,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Y.mp3",
-      "mp3_sha256": "352c8edf3764b312713429b4d40aba7ff7da23b4eca3dfb9e717ec43106c753e",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Y.mp3",
+      "mp3_sha256": "ebb1b55f58cce6706da15e0d4feab16206598006a1183eded2f49d1abb8f4ea8",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "pt-PT",
@@ -126,11 +124,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Bo_Dao_Nha.mp3",
-      "mp3_sha256": "f6d4f94d343be891aa596d8563ec86754322136ed5376fb61ad4662f37935069",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Bo_Dao_Nha.mp3",
+      "mp3_sha256": "bca6703d661c4c9d2edc061dc035ad4ef2b2c4a569a43ab3753143014dfa05c4",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "nl-NL",
@@ -140,11 +138,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Ha_Lan.mp3",
-      "mp3_sha256": "af2e0de72aea7fd18cc0b675f0b9b1884e44d30063bd7b3ea8b86b4f8a220c9d",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Ha_Lan.mp3",
+      "mp3_sha256": "d116367c8c5e299c625a44f42e9e025e150e3d5b0a0185dffc33b8d08ed463e8",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "pl-PL",
@@ -154,11 +152,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Ba_Lan.mp3",
-      "mp3_sha256": "4d3f4ce4ff4db41f16cb729376d5b4f4ddfafb32290271ee5e21a84d3693bcbb",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Ba_Lan.mp3",
+      "mp3_sha256": "c4b0b74c3b8ee6c44a58fa3df1e59c46cf0e31ffc296efde9bb2c2a94734888c",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "sv-SE",
@@ -168,11 +166,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Thuy_Dien.mp3",
-      "mp3_sha256": "7d664244ea0844194ad6d11c9af41271526cbe19c39285b9ee2f605453fe30e7",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Thuy_Dien.mp3",
+      "mp3_sha256": "05b8c8ca6ad4d4b77f8609785faf5f1e5346e540a4ee10bdbec4891eeedcd4f5",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "da-DK",
@@ -182,11 +180,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Dan_Mach.mp3",
-      "mp3_sha256": "183009afe2932290f04ef3495983f22b4ce3febcb42294e4aeadd4944933a9fa",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Dan_Mach.mp3",
+      "mp3_sha256": "0323a04d2dff29506511899338694a52cd5249510f70b3d8bf0c1620ec57e0ee",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "fi-FI",
@@ -196,11 +194,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Phan_Lan.mp3",
-      "mp3_sha256": "5f116d03f86d6b763a87a4ff86ee888933383584c7ae7c6a7030757bac1b6d27",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Phan_Lan.mp3",
+      "mp3_sha256": "753fb601e256e35814156ee48fbfca9d20a3b9d9394ac286ca0be0fc9b965b81",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "nb-NO",
@@ -210,11 +208,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Na_Uy.mp3",
-      "mp3_sha256": "dc946fce18cd98c81c77cd76e6d03a17c1ea382f53055b471896ec9b4a762b0b",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Na_Uy.mp3",
+      "mp3_sha256": "0c5a9e59d16fdf46005c192a8f23106c6aa264dcfa7b4373cb896a966a5f6f20",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     },
     {
       "locale": "cs-CZ",
@@ -224,16 +222,18 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1362,
-      "delivery_filename": "QANAT_MOI030_Sec.mp3",
-      "mp3_sha256": "3f3f91b34a4d5c213ba596b7defe358f685d593d251360f8b02d64b9440ef719",
-      "alignment_granularity": "14 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Qanat-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "MARYROSE_MOI048_Sec.mp3",
+      "mp3_sha256": "0b03fdd5cad74befc28fcb41319d7abc7d7e777918322812ea4101ca199be220",
+      "alignment_granularity": "13 shared chapter boundaries",
+      "narration_style_id": "science-documentary-brisk-v4-Mary Rose-NamMinh"
     }
   ],
   "locked_from": "productions/video-moi027-stonehenge/VOICE_PROFILES_LOCKED.json",
   "independent_native_listening_review": false,
   "voice_changes": [],
   "previous_voice_ids_retained": 16,
-  "note": "All 16 previously saved male voice IDs retained, including Andrew, Nam Minh and Christoph. Every MP3 decoded to 1362 seconds. Independent native listening review pending."
+  "note": "All sixteen previously saved male IDs retained, including Andrew and Nam Minh. All MP3s decoded to 1302 seconds. Independent native listening review pending.",
+  "topic_id": "MOI-048",
+  "target_seconds": 1302
 }

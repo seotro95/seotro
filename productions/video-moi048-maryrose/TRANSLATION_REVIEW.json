@@ -1,0 +1,694 @@
+{
+  "topic_id": "MOI-048",
+  "independent_native_review": false,
+  "independent_native_listening_review": false,
+  "source_adaptation": "Thirteen condensed contextual English chapters preserve narrative, core facts and uncertainty while removing repeated transitions. Vietnamese rewritten by assistant. Other languages are localized retellings, not verbatim translations of all English sentences.",
+  "assistant_review_scope": "Full Vietnamese rewrite; selected passages in fourteen other languages checked for ship cabins, hand planes, navigational dividers, pilot role, humoral theory, contemporary versus modern medicine, missing tool metal, later deposition and sinking uncertainty; four chapter rewrites and full-script five-word English leak scan. No independent native editorial or listening review.",
+  "locales": {
+    "vi-VN": {
+      "chapters": 13,
+      "assistant_full_rewrite": true,
+      "targeted_edits": [],
+      "independent_native_review": false
+    },
+    "es-ES": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 7,
+          "old": "cabaña",
+          "new": "camarote"
+        },
+        {
+          "chapter": 7,
+          "old": "conocimiento médico contemporáneo",
+          "new": "conocimiento médico de aquella época"
+        },
+        {
+          "chapter": 7,
+          "old": "hemorragias",
+          "new": "sangrías"
+        },
+        {
+          "chapter": 9,
+          "old": "divisores",
+          "new": "compases de puntas"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "fr-FR": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "cabane",
+          "new": "cabine"
+        },
+        {
+          "chapter": 7,
+          "old": "cabane",
+          "new": "cabine"
+        },
+        {
+          "chapter": 7,
+          "old": "connaissances médicales contemporaines",
+          "new": "connaissances médicales de cette époque"
+        },
+        {
+          "chapter": 7,
+          "old": "saignements",
+          "new": "saignées"
+        },
+        {
+          "chapter": 9,
+          "old": "séparateurs",
+          "new": "compas à pointes sèches"
+        },
+        {
+          "chapter": 9,
+          "old": "diviseurs",
+          "new": "compas à pointes sèches"
+        },
+        {
+          "chapter": 12,
+          "action": "Assistant contextual chapter rewrite"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "ja-JP": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "大工小屋",
+          "new": "大工の船室"
+        },
+        {
+          "chapter": 4,
+          "old": "大工小屋",
+          "new": "大工の船室"
+        },
+        {
+          "chapter": 4,
+          "old": "木製の容器には、引き続き使用できる接続された部品が必要です。",
+          "new": "木造船は、組み合わされた部材が働き続けることで成り立ちます。"
+        },
+        {
+          "chapter": 7,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 9,
+          "old": "パイロット",
+          "new": "航海士"
+        },
+        {
+          "chapter": 11,
+          "old": "ソレント号",
+          "new": "ソレント海峡"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "ko-KR": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 1,
+          "old": "Trust",
+          "new": "메리 로즈 재단"
+        },
+        {
+          "chapter": 1,
+          "old": "Solent",
+          "new": "솔렌트 해협"
+        },
+        {
+          "chapter": 3,
+          "old": "목수의 오두막",
+          "new": "목수의 선실"
+        },
+        {
+          "chapter": 4,
+          "old": "목수의 오두막",
+          "new": "목수의 선실"
+        },
+        {
+          "chapter": 7,
+          "old": "현대 의학 지식",
+          "new": "당시의 의학 지식"
+        },
+        {
+          "chapter": 7,
+          "old": "출혈",
+          "new": "사혈"
+        },
+        {
+          "chapter": 9,
+          "old": "칸막이",
+          "new": "해도용 디바이더"
+        },
+        {
+          "chapter": 9,
+          "old": "조종사",
+          "new": "항해사"
+        },
+        {
+          "chapter": 11,
+          "old": "점토 연기가 나는 파이프",
+          "new": "점토 담뱃대"
+        },
+        {
+          "chapter": 11,
+          "old": "Trust",
+          "new": "메리 로즈 재단"
+        },
+        {
+          "chapter": 11,
+          "old": "Solent",
+          "new": "솔렌트 해협"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "de-DE": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "Hütte",
+          "new": "Kajüte"
+        },
+        {
+          "chapter": 7,
+          "old": "aktuelles medizinisches Wissen",
+          "new": "das damalige medizinische Wissen"
+        },
+        {
+          "chapter": 7,
+          "old": "Blutungen",
+          "new": "Aderlässen"
+        },
+        {
+          "chapter": 9,
+          "old": "Teiler",
+          "new": "Stechzirkel"
+        },
+        {
+          "chapter": 9,
+          "old": "Piloten",
+          "new": "Navigators"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "it-IT": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "maglio",
+          "new": "mazzuolo"
+        },
+        {
+          "chapter": 7,
+          "old": "conoscenze mediche contemporanee",
+          "new": "conoscenze mediche dell’epoca"
+        },
+        {
+          "chapter": 7,
+          "old": "sanguinamento",
+          "new": "salasso"
+        },
+        {
+          "chapter": 7,
+          "old": "maniglia sopravvissuta",
+          "new": "manico conservato"
+        },
+        {
+          "chapter": 9,
+          "old": "divisori",
+          "new": "compassi nautici a punte"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "pt-PT": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "cabana",
+          "new": "cabine"
+        },
+        {
+          "chapter": 4,
+          "old": "cabana",
+          "new": "cabine"
+        },
+        {
+          "chapter": 7,
+          "old": "conhecimento médico contemporâneo",
+          "new": "conhecimento médico da época"
+        },
+        {
+          "chapter": 7,
+          "old": "hemorragias",
+          "new": "sangrias"
+        },
+        {
+          "chapter": 7,
+          "old": "Um identificador sobrevivente",
+          "new": "Um cabo preservado"
+        },
+        {
+          "chapter": 7,
+          "old": "contentores",
+          "new": "recipientes"
+        },
+        {
+          "chapter": 9,
+          "old": "divisórias",
+          "new": "compassos de pontas"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "nl-NL": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "houten lichamen van houtbewerkingsvlakken",
+          "new": "houten schaaflichamen"
+        },
+        {
+          "chapter": 4,
+          "old": "houtschip",
+          "new": "houten schip"
+        },
+        {
+          "chapter": 7,
+          "old": "hedendaagse medische kennis",
+          "new": "medische kennis uit die tijd"
+        },
+        {
+          "chapter": 7,
+          "old": "bloedingen",
+          "new": "aderlatingen"
+        },
+        {
+          "chapter": 7,
+          "old": "lichaamshumeurs",
+          "new": "lichaamssappen"
+        },
+        {
+          "chapter": 9,
+          "old": "verdelers",
+          "new": "steekpassers"
+        },
+        {
+          "chapter": 9,
+          "old": "piloot",
+          "new": "navigator"
+        },
+        {
+          "chapter": 9,
+          "old": "volledig standpunt",
+          "new": "volledige positie"
+        },
+        {
+          "chapter": 11,
+          "old": "verzamelrekeningen",
+          "new": "collectiebeschrijvingen"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "pl-PL": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "strugarek do obróbki drewna",
+          "new": "strugów stolarskich"
+        },
+        {
+          "chapter": 3,
+          "old": "warkocza",
+          "new": "taśmy ozdobnej"
+        },
+        {
+          "chapter": 7,
+          "old": "współczesnej wiedzy medycznej",
+          "new": "ówczesnej wiedzy medycznej"
+        },
+        {
+          "chapter": 7,
+          "old": "krwawieniem",
+          "new": "upuszczaniem krwi"
+        },
+        {
+          "chapter": 9,
+          "old": "dzielniki",
+          "new": "cyrkle nawigacyjne"
+        },
+        {
+          "chapter": 9,
+          "old": "Dzielniki",
+          "new": "Cyrkle nawigacyjne"
+        },
+        {
+          "chapter": 9,
+          "old": "metod pilota",
+          "new": "metod nawigatora"
+        },
+        {
+          "chapter": 9,
+          "old": "pełnego stanowiska",
+          "new": "pełnej pozycji"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "sv-SE": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "Snickarstugan",
+          "new": "Snickarens hytt"
+        },
+        {
+          "chapter": 3,
+          "old": "försörjning för ett lås",
+          "new": "plats för ett lås"
+        },
+        {
+          "chapter": 3,
+          "old": "En finare valnötskrin",
+          "new": "Ett finare skrin av valnöt"
+        },
+        {
+          "chapter": 4,
+          "old": "snickarstugan",
+          "new": "snickarens hytt"
+        },
+        {
+          "chapter": 4,
+          "old": "timmerfartyg",
+          "new": "träfartyg"
+        },
+        {
+          "chapter": 7,
+          "old": "stuga",
+          "new": "hytt"
+        },
+        {
+          "chapter": 7,
+          "old": "kroppslig humor",
+          "new": "kroppens fyra vätskor"
+        },
+        {
+          "chapter": 7,
+          "old": "blödning",
+          "new": "åderlåtning"
+        },
+        {
+          "chapter": 7,
+          "old": "sin metallbearbetning",
+          "new": "sina verksamma metalldelar"
+        },
+        {
+          "chapter": 9,
+          "old": "avdelare",
+          "new": "passare"
+        },
+        {
+          "chapter": 9,
+          "old": "Avdelare",
+          "new": "Passare"
+        },
+        {
+          "chapter": 9,
+          "old": "pilotens",
+          "new": "navigatörens"
+        },
+        {
+          "chapter": 9,
+          "old": "Piloten",
+          "new": "Navigatören"
+        },
+        {
+          "chapter": 11,
+          "old": "lerrökande pipor",
+          "new": "kritpipor"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "da-DK": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "Tømrerhytten",
+          "new": "Tømrerens kahyt"
+        },
+        {
+          "chapter": 3,
+          "old": "træbearbejdningsplaner",
+          "new": "høvle"
+        },
+        {
+          "chapter": 3,
+          "old": "tinplader",
+          "new": "tintallerkener"
+        },
+        {
+          "chapter": 4,
+          "old": "tømmerskib",
+          "new": "træskib"
+        },
+        {
+          "chapter": 7,
+          "old": "hytte",
+          "new": "kahyt"
+        },
+        {
+          "chapter": 7,
+          "old": "nutidig medicinsk viden",
+          "new": "datidens medicinske viden"
+        },
+        {
+          "chapter": 7,
+          "old": "kropslig humor",
+          "new": "kroppens fire væsker"
+        },
+        {
+          "chapter": 7,
+          "old": "blødning",
+          "new": "åreladning"
+        },
+        {
+          "chapter": 9,
+          "old": "skillelinjer",
+          "new": "stikpassere"
+        },
+        {
+          "chapter": 9,
+          "old": "pilotens",
+          "new": "navigatørens"
+        },
+        {
+          "chapter": 9,
+          "old": "fuldstændig stillingtagen",
+          "new": "fuldstændig position"
+        },
+        {
+          "chapter": 11,
+          "action": "Assistant contextual chapter rewrite"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "fi-FI": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "puuntyöstötasojen",
+          "new": "käsihöylien"
+        },
+        {
+          "chapter": 3,
+          "old": "tinalevyjä",
+          "new": "tinalautasia"
+        },
+        {
+          "chapter": 5,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 7,
+          "old": "nykyaikaista lääketieteellistä tietoa",
+          "new": "sen ajan lääketieteellistä tietoa"
+        },
+        {
+          "chapter": 7,
+          "old": "kehon huumorista",
+          "new": "kehon nesteistä"
+        },
+        {
+          "chapter": 7,
+          "old": "Verenvuotoon",
+          "new": "Suoneniskentään"
+        },
+        {
+          "chapter": 9,
+          "old": "jakajat",
+          "new": "harpit"
+        },
+        {
+          "chapter": 9,
+          "old": "lentäjän",
+          "new": "luotsin"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "nb-NO": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "old": "Snekkerhytta",
+          "new": "Snekkerens lugar"
+        },
+        {
+          "chapter": 3,
+          "old": "trekropper av trebearbeidingsfly",
+          "new": "høvlenes trekropper"
+        },
+        {
+          "chapter": 3,
+          "old": "trebearbeidingsfly",
+          "new": "høvler"
+        },
+        {
+          "chapter": 3,
+          "old": "tinnplater",
+          "new": "tinntallerkener"
+        },
+        {
+          "chapter": 4,
+          "old": "snekkerhytta",
+          "new": "snekkerens lugar"
+        },
+        {
+          "chapter": 4,
+          "old": "tømmerfartøy",
+          "new": "treskip"
+        },
+        {
+          "chapter": 7,
+          "old": "hytte",
+          "new": "lugar"
+        },
+        {
+          "chapter": 7,
+          "old": "moderne medisinsk kunnskap",
+          "new": "datidens medisinske kunnskap"
+        },
+        {
+          "chapter": 7,
+          "old": "kroppslig humor",
+          "new": "kroppens fire væsker"
+        },
+        {
+          "chapter": 7,
+          "old": "blødninger",
+          "new": "årelating"
+        },
+        {
+          "chapter": 7,
+          "old": "Fartøyene viser lagring, bæring og dispensering",
+          "new": "Beholderne viser oppbevaring, transport og utdeling"
+        },
+        {
+          "chapter": 9,
+          "old": "skillelinjer",
+          "new": "stikkpassere"
+        },
+        {
+          "chapter": 9,
+          "old": "pilotens",
+          "new": "navigatørens"
+        },
+        {
+          "chapter": 9,
+          "old": "fullstendig stilling",
+          "new": "fullstendig posisjon"
+        },
+        {
+          "chapter": 11,
+          "old": "leirrøykepiper",
+          "new": "leirpiper"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "cs-CZ": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 7,
+          "old": "současné lékařské znalosti",
+          "new": "tehdejší lékařské znalosti"
+        },
+        {
+          "chapter": 7,
+          "old": "krvácením",
+          "new": "pouštěním žilou"
+        },
+        {
+          "chapter": 9,
+          "old": "děliče",
+          "new": "navigační kružítka"
+        },
+        {
+          "chapter": 9,
+          "old": "Děliče",
+          "new": "Navigační kružítka"
+        },
+        {
+          "chapter": 9,
+          "old": "pilotovým",
+          "new": "navigátorovým"
+        },
+        {
+          "chapter": 9,
+          "old": "pilota",
+          "new": "navigátora"
+        }
+      ],
+      "independent_native_review": false
+    }
+  }
+}

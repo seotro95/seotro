@@ -1,0 +1,36 @@
+[
+  {
+    "id": 139,
+    "start": null,
+    "end": null,
+    "kind": "backup_not_on_timeline",
+    "visual": "Closed plain Tudor replica sea chest, small wooden bowl and boxwood comb on an empty weather deck, calm Solent behind.",
+    "camera": "Low 65 mm restrained side slide across fixed objects.",
+    "setting": "outdoor",
+    "used": false,
+    "generation_seconds": 10,
+    "use_seconds": 0,
+    "source_filename": "MARYROSE_139.mp4",
+    "voice_cue_ids": [],
+    "voice": "",
+    "visual_revision": "maryrose-historical-outdoors-v1",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical archaeology documentary, realistic wood, water, cloth and leather, restrained camera movement. Closed plain Tudor replica sea chest, small wooden bowl and boxwood comb on an empty weather deck, calm Solent behind. Camera: Low 65 mm restrained side slide across fixed objects. Prioritize outdoor Tudor weather decks, Portsmouth dockside workyards, Solent shorelines and open-air physical teaching models. Show a below-deck cabin or galley only when explicitly requested. No laboratory, white-coated scientist or modern clinical room. Historical scenes are illustrative mid-sixteenth-century English carrack settings, not authenticated archival footage, a surveyed complete ship plan, an excavated assemblage or a witnessed final-day event. Plain linen and wool, modest leather jerkins, soft Tudor caps and period shoes; plausible carvel oak hull, high fore and stern castles. No pirate styling, skull flags, Union Jack, modern steering wheel, sextant, electric machinery, plastic or modern firearms in Tudor scenes. Modern archaeology, the 1982 lifting-cradle illustration and modern outdoor study trays must remain visibly modern and separate from Tudor life. Later clay-pipe fragments appear only in modern archaeological trays or later sediment layers, never used by Tudor sailors. Objects in demonstrations are replicas. Keep incomplete recovered-form objects visibly separate from complete comparison replicas; no morphing, instant restoration or metal growing from a handle. Charts and layered models are explanatory, not original recovered maps or measured data. The opening bowl-comb-tool grouping is illustrative, not a verified shared chest. Anonymous adult casting must not imitate an identified historical face. Stable geometry, object scale, hand anatomy and material identity throughout the shot. No children, infants, adolescents, minors, child portraits or minors in backgrounds, screens, shadows or reflections. Every visible person and hand must be clearly adult age 35–65; this is a casting rule, not a claim about every actual crew member. No human remains, drowning, graphic injury, medical procedure, treasure glow, explosions, rapid flooding, timelapse, lip-sync, readable text, labels, captions, logos or watermark. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 140,
+    "start": null,
+    "end": null,
+    "kind": "backup_not_on_timeline",
+    "visual": "Modern adult diver records a small replica object beside a wreck timber, no lifting or readable slate.",
+    "camera": "Steady underwater oblique track stopping beside the object.",
+    "setting": "underwater",
+    "used": false,
+    "generation_seconds": 10,
+    "use_seconds": 0,
+    "source_filename": "MARYROSE_140.mp4",
+    "voice_cue_ids": [],
+    "voice": "",
+    "visual_revision": "maryrose-historical-outdoors-v1",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical archaeology documentary, realistic wood, water, cloth and leather, restrained camera movement. Modern adult diver records a small replica object beside a wreck timber, no lifting or readable slate. Camera: Steady underwater oblique track stopping beside the object. Prioritize outdoor Tudor weather decks, Portsmouth dockside workyards, Solent shorelines and open-air physical teaching models. Show a below-deck cabin or galley only when explicitly requested. No laboratory, white-coated scientist or modern clinical room. Historical scenes are illustrative mid-sixteenth-century English carrack settings, not authenticated archival footage, a surveyed complete ship plan, an excavated assemblage or a witnessed final-day event. Plain linen and wool, modest leather jerkins, soft Tudor caps and period shoes; plausible carvel oak hull, high fore and stern castles. No pirate styling, skull flags, Union Jack, modern steering wheel, sextant, electric machinery, plastic or modern firearms in Tudor scenes. Modern archaeology, the 1982 lifting-cradle illustration and modern outdoor study trays must remain visibly modern and separate from Tudor life. Later clay-pipe fragments appear only in modern archaeological trays or later sediment layers, never used by Tudor sailors. Objects in demonstrations are replicas. Keep incomplete recovered-form objects visibly separate from complete comparison replicas; no morphing, instant restoration or metal growing from a handle. Charts and layered models are explanatory, not original recovered maps or measured data. The opening bowl-comb-tool grouping is illustrative, not a verified shared chest. Anonymous adult casting must not imitate an identified historical face. Stable geometry, object scale, hand anatomy and material identity throughout the shot. No children, infants, adolescents, minors, child portraits or minors in backgrounds, screens, shadows or reflections. Every visible person and hand must be clearly adult age 35–65; this is a casting rule, not a claim about every actual crew member. No human remains, drowning, graphic injury, medical procedure, treasure glow, explosions, rapid flooding, timelapse, lip-sync, readable text, labels, captions, logos or watermark. Video không có âm thanh, không có lời nói."
+  }
+]

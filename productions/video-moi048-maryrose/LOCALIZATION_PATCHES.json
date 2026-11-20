@@ -1,0 +1,542 @@
+{
+  "es-ES": [
+    [
+      "cabaña",
+      "camarote"
+    ],
+    [
+      "divisores",
+      "compases de puntas"
+    ],
+    [
+      "Divisores",
+      "Compases de puntas"
+    ],
+    [
+      "conocimiento médico contemporáneo",
+      "conocimiento médico de aquella época"
+    ],
+    [
+      "hemorragias",
+      "sangrías"
+    ]
+  ],
+  "fr-FR": [
+    [
+      "cabane",
+      "cabine"
+    ],
+    [
+      "séparateurs",
+      "compas à pointes sèches"
+    ],
+    [
+      "diviseurs",
+      "compas à pointes sèches"
+    ],
+    [
+      "connaissances médicales contemporaines",
+      "connaissances médicales de cette époque"
+    ],
+    [
+      "saignements",
+      "saignées"
+    ]
+  ],
+  "it-IT": [
+    [
+      "divisori",
+      "compassi nautici a punte"
+    ],
+    [
+      "Divisori",
+      "Compassi nautici a punte"
+    ],
+    [
+      "maglio",
+      "mazzuolo"
+    ],
+    [
+      "conoscenze mediche contemporanee",
+      "conoscenze mediche dell’epoca"
+    ],
+    [
+      "sanguinamento",
+      "salasso"
+    ],
+    [
+      "maniglia sopravvissuta",
+      "manico conservato"
+    ]
+  ],
+  "pt-PT": [
+    [
+      "cabana",
+      "cabine"
+    ],
+    [
+      "divisórias",
+      "compassos de pontas"
+    ],
+    [
+      "Divisórias",
+      "Compassos de pontas"
+    ],
+    [
+      "conhecimento médico contemporâneo",
+      "conhecimento médico da época"
+    ],
+    [
+      "hemorragias",
+      "sangrias"
+    ],
+    [
+      "Um identificador sobrevivente",
+      "Um cabo preservado"
+    ],
+    [
+      "contentores",
+      "recipientes"
+    ]
+  ],
+  "de-DE": [
+    [
+      "Hütte",
+      "Kajüte"
+    ],
+    [
+      "Teiler",
+      "Stechzirkel"
+    ],
+    [
+      "Piloten",
+      "Navigators"
+    ],
+    [
+      "Pilotenmethoden",
+      "Navigationsmethoden"
+    ],
+    [
+      "aktuelles medizinisches Wissen",
+      "das damalige medizinische Wissen"
+    ],
+    [
+      "Blutungen",
+      "Aderlässen"
+    ]
+  ],
+  "nl-NL": [
+    [
+      "houten lichamen van houtbewerkingsvlakken",
+      "houten schaaflichamen"
+    ],
+    [
+      "houtbewerkingsvlakken",
+      "houten schaven"
+    ],
+    [
+      "verdelers",
+      "steekpassers"
+    ],
+    [
+      "Verdelers",
+      "Steekpassers"
+    ],
+    [
+      "piloot",
+      "navigator"
+    ],
+    [
+      "Piloot",
+      "Navigator"
+    ],
+    [
+      "volledig standpunt",
+      "volledige positie"
+    ],
+    [
+      "verzamelrekeningen",
+      "collectiebeschrijvingen"
+    ],
+    [
+      "hedendaagse medische kennis",
+      "medische kennis uit die tijd"
+    ],
+    [
+      "bloedingen",
+      "aderlatingen"
+    ],
+    [
+      "lichaamshumeurs",
+      "lichaamssappen"
+    ],
+    [
+      "houtschip",
+      "houten schip"
+    ]
+  ],
+  "sv-SE": [
+    [
+      "Snickarstugan",
+      "Snickarens hytt"
+    ],
+    [
+      "snickarstugan",
+      "snickarens hytt"
+    ],
+    [
+      "stuga",
+      "hytt"
+    ],
+    [
+      "avdelare",
+      "passare"
+    ],
+    [
+      "Avdelare",
+      "Passare"
+    ],
+    [
+      "pilotens",
+      "navigatörens"
+    ],
+    [
+      "Piloten",
+      "Navigatören"
+    ],
+    [
+      "försörjning för ett lås",
+      "plats för ett lås"
+    ],
+    [
+      "lerrökande pipor",
+      "kritpipor"
+    ],
+    [
+      "kroppslig humor",
+      "kroppens fyra vätskor"
+    ],
+    [
+      "blödning",
+      "åderlåtning"
+    ],
+    [
+      "sin metallbearbetning",
+      "sina verksamma metalldelar"
+    ],
+    [
+      "timmerfartyg",
+      "träfartyg"
+    ],
+    [
+      "En finare valnötskrin",
+      "Ett finare skrin av valnöt"
+    ]
+  ],
+  "da-DK": [
+    [
+      "Tømrerhytten",
+      "Tømrerens kahyt"
+    ],
+    [
+      "tømrerhytten",
+      "tømrerens kahyt"
+    ],
+    [
+      "hytte",
+      "kahyt"
+    ],
+    [
+      "træbearbejdningsplaner",
+      "høvle"
+    ],
+    [
+      "skillelinjer",
+      "stikpassere"
+    ],
+    [
+      "Skillelinjer",
+      "Stikpassere"
+    ],
+    [
+      "pilotens",
+      "navigatørens"
+    ],
+    [
+      "fuldstændig stillingtagen",
+      "fuldstændig position"
+    ],
+    [
+      "nutidig medicinsk viden",
+      "datidens medicinske viden"
+    ],
+    [
+      "kropslig humor",
+      "kroppens fire væsker"
+    ],
+    [
+      "blødning",
+      "åreladning"
+    ],
+    [
+      "træbearbejdningsplan",
+      "høvl"
+    ],
+    [
+      "tømmerskib",
+      "træskib"
+    ],
+    [
+      "tinplader",
+      "tintallerkener"
+    ]
+  ],
+  "fi-FI": [
+    [
+      "puuntyöstötasojen",
+      "käsihöylien"
+    ],
+    [
+      "jakajat",
+      "harpit"
+    ],
+    [
+      "jakajia",
+      "harppeja"
+    ],
+    [
+      "lentäjän",
+      "luotsin"
+    ],
+    [
+      "lentäjää",
+      "luotsia"
+    ],
+    [
+      "lentäjä",
+      "luotsi"
+    ],
+    [
+      "nykyaikaista lääketieteellistä tietoa",
+      "sen ajan lääketieteellistä tietoa"
+    ],
+    [
+      "kehon huumorista",
+      "kehon nesteistä"
+    ],
+    [
+      "Verenvuotoon",
+      "Suoneniskentään"
+    ],
+    [
+      "tinalevyjä",
+      "tinalautasia"
+    ]
+  ],
+  "nb-NO": [
+    [
+      "Snekkerhytta",
+      "Snekkerens lugar"
+    ],
+    [
+      "snekkerhytta",
+      "snekkerens lugar"
+    ],
+    [
+      "hytte",
+      "lugar"
+    ],
+    [
+      "trekropper av trebearbeidingsfly",
+      "høvlenes trekropper"
+    ],
+    [
+      "trebearbeidingsfly",
+      "høvler"
+    ],
+    [
+      "skillelinjer",
+      "stikkpassere"
+    ],
+    [
+      "Skillelinjer",
+      "Stikkpassere"
+    ],
+    [
+      "pilotens",
+      "navigatørens"
+    ],
+    [
+      "leirrøykepiper",
+      "leirpiper"
+    ],
+    [
+      "fullstendig stilling",
+      "fullstendig posisjon"
+    ],
+    [
+      "moderne medisinsk kunnskap",
+      "datidens medisinske kunnskap"
+    ],
+    [
+      "kroppslig humor",
+      "kroppens fire væsker"
+    ],
+    [
+      "blødninger",
+      "årelating"
+    ],
+    [
+      "Fartøyene viser lagring, bæring og dispensering",
+      "Beholderne viser oppbevaring, transport og utdeling"
+    ],
+    [
+      "trebearbeidingsplan",
+      "høvel"
+    ],
+    [
+      "tømmerfartøy",
+      "treskip"
+    ],
+    [
+      "tinnplater",
+      "tinntallerkener"
+    ]
+  ],
+  "pl-PL": [
+    [
+      "strugarek do obróbki drewna",
+      "strugów stolarskich"
+    ],
+    [
+      "warkocza",
+      "taśmy ozdobnej"
+    ],
+    [
+      "dzielniki",
+      "cyrkle nawigacyjne"
+    ],
+    [
+      "Dzielniki",
+      "Cyrkle nawigacyjne"
+    ],
+    [
+      "metod pilota",
+      "metod nawigatora"
+    ],
+    [
+      "pełnego stanowiska",
+      "pełnej pozycji"
+    ],
+    [
+      "współczesnej wiedzy medycznej",
+      "ówczesnej wiedzy medycznej"
+    ],
+    [
+      "krwawieniem",
+      "upuszczaniem krwi"
+    ]
+  ],
+  "cs-CZ": [
+    [
+      "děliče",
+      "navigační kružítka"
+    ],
+    [
+      "Děliče",
+      "Navigační kružítka"
+    ],
+    [
+      "pilotovým",
+      "navigátorovým"
+    ],
+    [
+      "pilota",
+      "navigátora"
+    ],
+    [
+      "současné lékařské znalosti",
+      "tehdejší lékařské znalosti"
+    ],
+    [
+      "krvácením",
+      "pouštěním žilou"
+    ]
+  ],
+  "ja-JP": [
+    [
+      "大工小屋",
+      "大工の船室"
+    ],
+    [
+      "パイロット",
+      "航海士"
+    ],
+    [
+      "ソレント号",
+      "ソレント海峡"
+    ],
+    [
+      "執刀医室",
+      "船医の船室"
+    ],
+    [
+      "治療スペースの確保は依然として不確かだ",
+      "実際にどこで治療したかは、はっきりしていません"
+    ],
+    [
+      "現代の医学知識",
+      "当時の医学知識"
+    ],
+    [
+      "完全な楽器",
+      "完全な医療器具"
+    ],
+    [
+      "出血",
+      "瀉血"
+    ],
+    [
+      "木製の容器には、引き続き使用できる接続された部品が必要です。",
+      "木造船は、組み合わされた部材が働き続けることで成り立ちます。"
+    ]
+  ],
+  "ko-KR": [
+    [
+      "목수의 오두막",
+      "목수의 선실"
+    ],
+    [
+      "오두막",
+      "선실"
+    ],
+    [
+      "칸막이",
+      "해도용 디바이더"
+    ],
+    [
+      "조종사",
+      "항해사"
+    ],
+    [
+      "점토 연기가 나는 파이프",
+      "점토 담뱃대"
+    ],
+    [
+      "Trust",
+      "메리 로즈 재단"
+    ],
+    [
+      "Solent",
+      "솔렌트 해협"
+    ],
+    [
+      "현대 의학 지식",
+      "당시의 의학 지식"
+    ],
+    [
+      "출혈",
+      "사혈"
+    ]
+  ]
+}

@@ -1,0 +1,13 @@
+MỚI-048 — MARY ROSE — 21:42
+
+Kịch bản Anh 3841 từ, 131 mốc: 130 × 10 giây + 2 giây cuối = 1.302 giây, khoảng 177.0 từ/phút.
+140 prompt clip 10 giây trong 14 TXT × 10, tên MARYROSE_001.mp4 đến MARYROSE_140.mp4.
+Timeline 138 cảnh: 001–010 lấy 3 giây/cảnh; 011–137 lấy 10 giây/cảnh; 138 lấy 2 giây. Prompt 139–140 là dự phòng, không cộng vào phim. CSV ghi ID lời tương ứng.
+Hình ưu tiên ngoài trời, vài cabin/bếp và khảo cổ dưới nước; không lab hoặc trẻ em, kể cả nền/phản chiếu. Nhân vật và bàn tay nhìn rõ 35–65 tuổi; đây chỉ là yêu cầu casting. Không gọi hình AI là footage khảo cổ, nhân vật có thật, bản đồ/cấu trúc khảo sát chính xác hoặc sự kiện cuối đã được chứng minh.
+Mọi prompt kết “Video không có âm thanh, không có lời nói.”. Khi dựng xóa âm clip, chỉ dùng voice Anh, không nhạc/SFX. Thiếu cảnh dùng video chuyển động liên quan, không ảnh đứng có chữ.
+Hòm bát–lược–cán dụng cụ là nhóm minh họa, không tổ hợp tìm thấy chung. Tẩu về sau không xuất hiện trong tay thủy thủ Tudor. Dụng cụ nguyên vẹn là bản sao so sánh, tách khỏi dạng cán mất kim loại. Không cướp biển, sextant, bánh lái hiện đại hoặc Union Jack.
+Giữ 16 ID giọng nam từ tập trước, gồm Anh Andrew và Việt Nam Nam Minh. Dùng backend online đã khóa của Melo-Viet-Studio 1.3.1, không UI Windows hay model Melo đa ngôn ngữ cục bộ. Nhấn từ nhẹ, không đổi cao độ.
+Mỗi MP3 phải giải mã đủ 62.496.000 mẫu mono 48 kHz = 21:42. Anh căn 131 mốc, bản dịch 13 chương: 12 × 100 giây + 102 giây. Cùng thời lượng không đồng nghĩa từng từ đồng bộ. SRT bản dịch theo chương cần chia nhỏ trước khi hiển thị.
+Bản dịch chuyển thể gọn từ nguồn làm rõ ngữ cảnh, giữ các quan hệ và mức độ chắc chắn; xem TRANSLATION_REVIEW.json khi được phát hành. Chưa có kiểm nghe/biên tập bản ngữ độc lập. Chưa tạo footage, ảnh thumbnail hoặc MP4.
+
+KẾT QUẢ: Đã tạo đủ 16 MP3 nam, mỗi tệp giải mã đúng 21:42; giữ nguyên cả 16 ID. Việt viết lại toàn bộ. Các ngôn ngữ khác chuyển thể từ nguồn Anh ngắn gọn, giữ trục chuyện và giới hạn bằng chứng; rà các đoạn quan trọng, không phải dịch từng câu nguyên bản. Chưa kiểm nghe/biên tập bản ngữ độc lập.

@@ -1,0 +1,29 @@
+MỚI-048 — MARY ROSE — 21:42
+5 TIÊU ĐỀ ANH + 5 PROMPT THUMBNAIL TƯƠNG ỨNG
+
+01. TITLE: WHAT WAS INSIDE THE MARY ROSE'S CHESTS?
+Nghĩa: Bên trong những chiếc hòm của Mary Rose có gì?
+THUMBNAIL PROMPT: Create a cinematic historical archaeology documentary thumbnail, 16:9, 1280x720. Foreground hero: a partly opened plain Tudor wooden chest on a sunlit replica warship weather deck, revealing three clearly separated illustrative replicas: a worn wooden eating bowl, a fine-toothed boxwood comb and an incomplete wooden tool handle. The grouping is a storytelling reconstruction, not a claim that these objects were excavated together in one chest. A plausible mid-sixteenth-century English carrack silhouette and cool Solent water remain softly visible behind. Strong warm wood versus cool sea contrast, close low camera, tactile detail, one clear focal hierarchy, quiet intrigue. No gold treasure, jewels spilling out, skeletons, drowning, fantasy glow, pirates, children, infants, adolescents or minors anywhere. Prefer no people; any visible hands must be mature adults age 35–65. No readable text, logo or watermark; leave a small clean area for editor-added text.
+TEXT OPTIONAL IN EDITOR: OPEN THE CHEST
+
+02. TITLE: THE EVERYDAY OBJECTS THAT BRING A TUDOR WARSHIP TO LIFE
+Nghĩa: Những vật dụng đời thường kể lại cuộc sống trên chiến hạm Tudor.
+THUMBNAIL PROMPT: Design a premium historical documentary thumbnail, 16:9, 1280x720. A weathered wooden serving bowl and a replica carpenter's plane dominate a natural-light dockside workbench; behind them, an adult anonymous Tudor worker age 40–60 and a moored mid-sixteenth-century carrack connect ordinary objects to a working community. Clothing: plain wool or linen, modest leather jerkin and soft Tudor cap, no pirate costume. The plane is a complete explanatory replica, not a claim its iron blade survived intact. Photographic textures, warm side light, strong depth, restrained composition with the objects larger than the person. No battle spectacle, laboratory, modern machines, steering wheel, sextant, Union Jack, minors, readable text, logo or watermark. Do not imitate a verified historical face or an actual museum photograph.
+TEXT OPTIONAL IN EDITOR: LIFE BETWEEN BATTLES
+
+03. TITLE: A BOWL, A COMB, A TOOL: LIFE ABOARD THE MARY ROSE
+Nghĩa: Một chiếc bát, một chiếc lược, một dụng cụ: đời sống trên Mary Rose.
+THUMBNAIL PROMPT: Create a compelling 16:9 archaeology thumbnail, 1280x720. Three large tactile replica objects across the foreground of a Tudor deck table: a plain wooden bowl with a tiny non-letter ownership notch, a boxwood nit comb and a surviving-form incomplete wooden tool handle. Each must remain visually separate with believable scale; this is an explanatory arrangement, not an authenticated archaeological assemblage. Low morning sun grazes wood grain and comb teeth; an out-of-focus ship rail and pale Solent coastline establish the setting. Use a close 85mm photographic look and crisp focal hierarchy, no extra clutter. No intact metal blade growing from the handle, no transformed ancient object, laboratory, treasure glow, children or minors, readable inscriptions, captions, logo or watermark. Prefer no people.
+TEXT OPTIONAL IN EDITOR: THREE OBJECTS. MANY LIVES.
+
+04. TITLE: BEFORE THE MARY ROSE SANK: THE WORK THAT KEPT HER ALIVE
+Nghĩa: Trước khi Mary Rose chìm: công việc giúp con tàu hoạt động.
+THUMBNAIL PROMPT: Create a dramatic but truthful historical documentary thumbnail, 16:9, 1280x720. Anonymous mature Tudor carpenter age 40–60 at a dockside workbench makes one controlled pass with a complete replica hand plane on a secured spare timber. Foreground: open practical tool box and thin wood shavings. Background: a plausible mid-sixteenth-century English carrack moored near Portsmouth and a few provision casks, conveying maintenance and supplies. Natural golden side light, believable cloth and leather, intense concentration without a staged emergency. Illustrative reconstruction, no named individual or claim to record a final-day repair. No active cannon, explosions, sinking, drowning, medical injury, modern laboratory, motor, pirate styling, Union Jack, ship wheel, sextant, children or minors, readable text, logo or watermark.
+TEXT OPTIONAL IN EDITOR: THE WORK BEHIND THE WARSHIP
+
+05. TITLE: THE MARY ROSE WRECK HELD MORE THAN ONE HISTORY
+Nghĩa: Khu di tích Mary Rose lưu dấu nhiều lớp lịch sử.
+THUMBNAIL PROMPT: Design an intriguing 16:9 maritime archaeology documentary thumbnail, 1280x720. An outdoor fixed teaching cutaway of seabed layers shows a small later-period clay smoking-pipe fragment in an upper sediment layer, distinctly separate from a replica Tudor wooden bowl and partial ship timber deeper below. The model is clearly explanatory, not an actual excavation section, measured dataset or photograph of authenticated finds. A quiet Solent shoreline behind it gives scale; dramatic natural side light reveals layered sand, silt and object textures. Keep the pipe visually secondary but legible as the chronological clue. No Tudor sailor smoking or holding the later pipe, no instant ageing, giant treasure chest, laboratory, human remains, children or minors, readable dates, labels, arrows, logos or watermarks. Prefer no people; leave a clean area for optional editor text.
+TEXT OPTIONAL IN EDITOR: ONE WRECK. MANY STORIES.
+
+GHI CHÚ: Đây là 5 prompt, chưa phải ảnh thumbnail đã tạo. Chữ tùy chọn được thêm trong phần mềm edit, không yêu cầu AI vẽ chữ. Không dùng ảnh bảo tàng hoặc gọi hình phục dựng là footage thật. Không tuyên bố đã giải quyết nguyên nhân tàu chìm hay xác định đầy đủ danh tính chủ nhân hiện vật. Hình không có trẻ em.

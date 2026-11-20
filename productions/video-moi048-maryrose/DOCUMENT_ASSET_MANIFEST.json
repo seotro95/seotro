@@ -1,0 +1,282 @@
+{
+  "topic_id": "MOI-048",
+  "stage": "all16voices_documents_and_public_downloads_verified",
+  "target_seconds": 1302,
+  "assets": [
+    {
+      "name": "5_TIEU_DE_VA_THUMBNAIL.txt",
+      "bytes": 5869,
+      "sha256": "b71ad4a5cba23d50ab45ff6dde7d4904efc71a006574a4e000e066f9d14c6905"
+    },
+    {
+      "name": "AUDIO_MANIFEST.json",
+      "bytes": 7620,
+      "sha256": "55d1800b32cc9d4c4f51bbcc229aaf8ee84f31f11a6fd1b0976704cbfb9c5362"
+    },
+    {
+      "name": "BACKUP_139_140.json",
+      "bytes": 5828,
+      "sha256": "edc2fd4ff68d55bf465e6cbf7a59651c40738a5f5841b346684544227d750677"
+    },
+    {
+      "name": "DOCUMENT_DELIVERY_STATE.json",
+      "bytes": 145,
+      "sha256": "f67263b519c1822a13ba98b98fbb606d4123ea62c9f75f4f2aa02c35d8fb8488"
+    },
+    {
+      "name": "DOCUMENT_QA.json",
+      "bytes": 1346,
+      "sha256": "d56a1351a186aef71926ca8f9e8d5c2a8de3fc78fd766e83f77a25479401b9b8"
+    },
+    {
+      "name": "DOWNLOAD_LINKS.md",
+      "bytes": 5150,
+      "sha256": "fc97d4e8fc4c8de27e6452be4624095f5fe90b0afb88a3467e9bfdca4edb0b91"
+    },
+    {
+      "name": "en-US.srt",
+      "bytes": 29333,
+      "sha256": "17c17669c7319405ca1fdec62961dda427408468dd75d2c03af4cad97c8f9181"
+    },
+    {
+      "name": "HUONG_DAN_SU_DUNG.txt",
+      "bytes": 2632,
+      "sha256": "f6163d8339d8a7fc4269702243d01883290814f063ade34493c38b72b0cef9c8"
+    },
+    {
+      "name": "KICH_BAN_EN_21m42s.txt",
+      "bytes": 24987,
+      "sha256": "1d069c88fcf44dcc1b6a5db276334b28fcfbc053b62678415813530c764ec6bd"
+    },
+    {
+      "name": "KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 29703,
+      "sha256": "89882c6be02b38f2f7564e1c15ad9f36117448362f3a03cc60a9c9ebfcb4f0ad"
+    },
+    {
+      "name": "LINK_TAI_VOICE.txt",
+      "bytes": 1928,
+      "sha256": "bc56691f8ba1d51ac9cad355e3d49f9e304c9f34d0bd522d257a288fcdbb3a46"
+    },
+    {
+      "name": "MARYROSE_MOI048_16_VOICES_21m42s.zip",
+      "bytes": 250019266,
+      "sha256": "72d2d8f4a3dc57d5efda4808535a882aa71dd2e7ac0423eef12f3711afed2279"
+    },
+    {
+      "name": "MARYROSE_MOI048_Ba_Lan.mp3",
+      "bytes": 15624620,
+      "sha256": "c4b0b74c3b8ee6c44a58fa3df1e59c46cf0e31ffc296efde9bb2c2a94734888c"
+    },
+    {
+      "name": "MARYROSE_MOI048_Bo_Dao_Nha.mp3",
+      "bytes": 15624620,
+      "sha256": "bca6703d661c4c9d2edc061dc035ad4ef2b2c4a569a43ab3753143014dfa05c4"
+    },
+    {
+      "name": "MARYROSE_MOI048_Dan_Mach.mp3",
+      "bytes": 15624620,
+      "sha256": "0323a04d2dff29506511899338694a52cd5249510f70b3d8bf0c1620ec57e0ee"
+    },
+    {
+      "name": "MARYROSE_MOI048_Duc.mp3",
+      "bytes": 15624620,
+      "sha256": "39b0eb8e336ec7011710b2c25ee374bbe69dc047e270574a486f426fd1d9d76f"
+    },
+    {
+      "name": "MARYROSE_MOI048_Han_Quoc.mp3",
+      "bytes": 15624620,
+      "sha256": "90e1616adf134131cfa7694ec7d4c1665d53972e4731ad0862fd054227e810a9"
+    },
+    {
+      "name": "MARYROSE_MOI048_Ha_Lan.mp3",
+      "bytes": 15624620,
+      "sha256": "d116367c8c5e299c625a44f42e9e025e150e3d5b0a0185dffc33b8d08ed463e8"
+    },
+    {
+      "name": "MARYROSE_MOI048_My_Tieng_Anh.mp3",
+      "bytes": 15624620,
+      "sha256": "8616dc03420e1879c7cfb617c0a1a015900693eb91c568ce7d5ec6670d3f298a"
+    },
+    {
+      "name": "MARYROSE_MOI048_Na_Uy.mp3",
+      "bytes": 15624620,
+      "sha256": "0c5a9e59d16fdf46005c192a8f23106c6aa264dcfa7b4373cb896a966a5f6f20"
+    },
+    {
+      "name": "MARYROSE_MOI048_Nhat_Ban.mp3",
+      "bytes": 15624620,
+      "sha256": "30ddb8c9bc103882f63800451dcc71949da13d84229fb9c9d5f207073b11697f"
+    },
+    {
+      "name": "MARYROSE_MOI048_Phan_Lan.mp3",
+      "bytes": 15624620,
+      "sha256": "753fb601e256e35814156ee48fbfca9d20a3b9d9394ac286ca0be0fc9b965b81"
+    },
+    {
+      "name": "MARYROSE_MOI048_Phap.mp3",
+      "bytes": 15624620,
+      "sha256": "52e5068276fd5f41193b325fc07291d57ef558d687c21b77678a00c78a6ce722"
+    },
+    {
+      "name": "MARYROSE_MOI048_PROMPT_14_TXT.zip",
+      "bytes": 33346,
+      "sha256": "8be4a0332be8bbdbd8032edd626192740999a0cbe41b2447bc30fe53d5775df8"
+    },
+    {
+      "name": "MARYROSE_MOI048_Sec.mp3",
+      "bytes": 15624620,
+      "sha256": "0b03fdd5cad74befc28fcb41319d7abc7d7e777918322812ea4101ca199be220"
+    },
+    {
+      "name": "MARYROSE_MOI048_TAI_LIEU_21m42s.zip",
+      "bytes": 515636,
+      "sha256": "7412c7e739cad097dbffad9c8cc8e41ae765704c577dc942375033308cbcc8d9"
+    },
+    {
+      "name": "MARYROSE_MOI048_Tay_Ban_Nha.mp3",
+      "bytes": 15624620,
+      "sha256": "b9725d4089b6e057d764c1bc4825047c2cc60329e0c1cba3ec47805785ebdb51"
+    },
+    {
+      "name": "MARYROSE_MOI048_Thuy_Dien.mp3",
+      "bytes": 15624620,
+      "sha256": "05b8c8ca6ad4d4b77f8609785faf5f1e5346e540a4ee10bdbec4891eeedcd4f5"
+    },
+    {
+      "name": "MARYROSE_MOI048_Viet_Nam_Nam_Minh.mp3",
+      "bytes": 15624620,
+      "sha256": "6159edb7086c54b4c38655fc5c22586936e4ea2c882ae6a1adaeab907692cc83"
+    },
+    {
+      "name": "MARYROSE_MOI048_Y.mp3",
+      "bytes": 15624620,
+      "sha256": "ebb1b55f58cce6706da15e0d4feab16206598006a1183eded2f49d1abb8f4ea8"
+    },
+    {
+      "name": "NARRATION_STYLE_LOCKED.json",
+      "bytes": 742,
+      "sha256": "6ca24f722d9b762d94ed3fbe0363dfbc5b968499d5167b8c16a1f8c0345413c7"
+    },
+    {
+      "name": "NGUON_KIEM_CHUNG.md",
+      "bytes": 10770,
+      "sha256": "607a7eb2847e38719ef93bf33e2419ac3b5d11298464e06cf186ceec50f92e42"
+    },
+    {
+      "name": "OPENING_10_SHOTS_30s.json",
+      "bytes": 30996,
+      "sha256": "66c15a5b4e835e06efd805d3b19ff387544679396037b36bff38b1c2c5e8925e"
+    },
+    {
+      "name": "PHAN_TICH_VA_KE_HOACH_DUNG.md",
+      "bytes": 4850,
+      "sha256": "7dd88a484f093252d3f21b3e33c5759ca989adc34c2e9c9200917714a37da9b2"
+    },
+    {
+      "name": "PROMPT_01_001-010.txt",
+      "bytes": 23589,
+      "sha256": "b85163b0d53b9cffb431883ab095c5bc61a99c59fdc940438af4b38a29f070a6"
+    },
+    {
+      "name": "PROMPT_02_011-020.txt",
+      "bytes": 23800,
+      "sha256": "e171d0ec6cc61ad795342405749672235b4447b6bfb7d60714702266a6ebe81c"
+    },
+    {
+      "name": "PROMPT_03_021-030.txt",
+      "bytes": 23887,
+      "sha256": "d3591958bccc53c172086a60f87b0b8f0aa263dcacffc06dc347528a7e559e6a"
+    },
+    {
+      "name": "PROMPT_04_031-040.txt",
+      "bytes": 23836,
+      "sha256": "62f7b41926ff74cbc6d5065bd7367ab1479aad3c762948010f5bfeeb90a098be"
+    },
+    {
+      "name": "PROMPT_05_041-050.txt",
+      "bytes": 23830,
+      "sha256": "42da30f5b5b69bf06382bec788912907240d45a32c18e4e1837399ab40c4e458"
+    },
+    {
+      "name": "PROMPT_06_051-060.txt",
+      "bytes": 23758,
+      "sha256": "129e87c857dc046324c16314b80bf16639751af5d1d1c8f9b393df2cb88bb343"
+    },
+    {
+      "name": "PROMPT_07_061-070.txt",
+      "bytes": 23813,
+      "sha256": "f4d0be6b383707f57f5460589d9836069adf810dc279839ef15193ea00c4f1bf"
+    },
+    {
+      "name": "PROMPT_08_071-080.txt",
+      "bytes": 23850,
+      "sha256": "b559449a8ebcbf555d7fdbd28bdf2de9e9d81f9e85072d829849dc86fd60d144"
+    },
+    {
+      "name": "PROMPT_09_081-090.txt",
+      "bytes": 23806,
+      "sha256": "9f07f36d3c069c4333bc85d0ad08eceb7abc8732ea5bf1d263bda618018327b1"
+    },
+    {
+      "name": "PROMPT_10_091-100.txt",
+      "bytes": 23828,
+      "sha256": "a8555a8465c2a67748c7c1823e02db63b21ac669eba4c0dc0f28ab6d72508037"
+    },
+    {
+      "name": "PROMPT_11_101-110.txt",
+      "bytes": 23888,
+      "sha256": "3843d5f0e44c3d77988d388dd9b3f3dc97e4c040cf53e114a5c49497b01c65d3"
+    },
+    {
+      "name": "PROMPT_12_111-120.txt",
+      "bytes": 23747,
+      "sha256": "b0fc9cdc548ef74979da7a48cbf1a893e4532a699552b19ba46210751b33acda"
+    },
+    {
+      "name": "PROMPT_13_121-130.txt",
+      "bytes": 23746,
+      "sha256": "00edbf1ec19264f519dc5acbec1dc671863d68fc85b3accfda351847919b8bb7"
+    },
+    {
+      "name": "PROMPT_14_131-140.txt",
+      "bytes": 23694,
+      "sha256": "9988fb69f44dfb6926a444ebca01856f30d46d235284c4d3f79697ec76d69198"
+    },
+    {
+      "name": "PUBLIC_DELIVERY_QA.json",
+      "bytes": 5886,
+      "sha256": "6a439691e87cb01ae765c17b3d0dc17f8d9bcf545239a08e21a33df47609c472"
+    },
+    {
+      "name": "README.md",
+      "bytes": 5150,
+      "sha256": "fc97d4e8fc4c8de27e6452be4624095f5fe90b0afb88a3467e9bfdca4edb0b91"
+    },
+    {
+      "name": "TIMELINE_138_CANH.csv",
+      "bytes": 387995,
+      "sha256": "716491c76cbda959f91aa70fa8e5fac4b14f8068046bbc626facd100addd816b"
+    },
+    {
+      "name": "TRANSLATION_REVIEW.json",
+      "bytes": 16964,
+      "sha256": "a6990e7cedf9549189428bd4acdc78272fd3fc26ff4353404c6fc9a1cbd4d66c"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED.json",
+      "bytes": 10599,
+      "sha256": "d4dbbeba60dc4d9617882a180bc7d7855920c8dc9e1e02bf1ae418ee62279ea2"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED_BASELINE.json",
+      "bytes": 5482,
+      "sha256": "2e8d485ec90dec67cef62b1adb287fb85aa59d52bd4252b0540fedbea6a8300e"
+    },
+    {
+      "name": "VOICE_RELEASE_QA.json",
+      "bytes": 4651,
+      "sha256": "da2d1981a2a17bb0ab6d999bd70f4dad959c9fc044a7153b86b036b9d7efac0c"
+    }
+  ]
+}

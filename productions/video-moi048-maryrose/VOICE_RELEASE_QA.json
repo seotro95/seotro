@@ -1,0 +1,150 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-048",
+  "voices": 16,
+  "male_voices": 16,
+  "all_decoded_seconds": 1302,
+  "all_decoded_frames_48000": 62496000,
+  "all_current_episode_ids_locked": true,
+  "previous_voice_ids_retained": 16,
+  "voice_changes": [],
+  "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+  "unique_audio_hashes": 16,
+  "english_cue_count": 131,
+  "other_language_chapter_count": 13,
+  "word_metadata_checked": true,
+  "english_word_boundary_split_checked": true,
+  "pitch_shift_applied": false,
+  "independent_native_listening_review": false,
+  "translated_voice_alignment": "13 shared chapter boundaries; localized retellings, not word-by-word synchronization",
+  "reports": {
+    "da-DK": {
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "MARYROSE_MOI048_Dan_Mach.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.9390468562274731,
+      "max_tempo": 1.0430917100520625,
+      "word_accents": 30
+    },
+    "ja-JP": {
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "MARYROSE_MOI048_Nhat_Ban.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.9642771325590709,
+      "max_tempo": 1.2680016019223068,
+      "word_accents": 20
+    },
+    "fi-FI": {
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "MARYROSE_MOI048_Phan_Lan.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.9991189427312775,
+      "max_tempo": 1.1144573488185823,
+      "word_accents": 29
+    },
+    "pl-PL": {
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "MARYROSE_MOI048_Ba_Lan.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.9219863836603924,
+      "max_tempo": 1.0125750901081298,
+      "word_accents": 9
+    },
+    "es-ES": {
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "MARYROSE_MOI048_Tay_Ban_Nha.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.9959951942330798,
+      "max_tempo": 1.1154185022026433,
+      "word_accents": 40
+    },
+    "nb-NO": {
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "MARYROSE_MOI048_Na_Uy.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.9162194633560273,
+      "max_tempo": 1.02915498598318,
+      "word_accents": 30
+    },
+    "cs-CZ": {
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "MARYROSE_MOI048_Sec.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.8799359231077294,
+      "max_tempo": 0.9866239487384862,
+      "word_accents": 30
+    },
+    "en-US": {
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "MARYROSE_MOI048_My_Tieng_Anh.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.6023003472222223,
+      "max_tempo": 1.4168986167341429,
+      "word_accents": 101
+    },
+    "it-IT": {
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "MARYROSE_MOI048_Y.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 1.0663996796155386,
+      "max_tempo": 1.1935122146575892,
+      "word_accents": 25
+    },
+    "ko-KR": {
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "MARYROSE_MOI048_Han_Quoc.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 1.1144573488185823,
+      "max_tempo": 1.251661994393272,
+      "word_accents": 25
+    },
+    "de-DE": {
+      "voice_id": "de-DE-ChristophNeural",
+      "filename": "MARYROSE_MOI048_Duc.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 1.06231477773328,
+      "max_tempo": 1.1942330796956349,
+      "word_accents": 29
+    },
+    "vi-VN": {
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "MARYROSE_MOI048_Viet_Nam_Nam_Minh.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.8459363957597174,
+      "max_tempo": 0.9179014817781339,
+      "word_accents": 19
+    },
+    "fr-FR": {
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "MARYROSE_MOI048_Phap.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.8914697637164598,
+      "max_tempo": 0.9943131758109732,
+      "word_accents": 41
+    },
+    "pt-PT": {
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "MARYROSE_MOI048_Bo_Dao_Nha.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.857243816254417,
+      "max_tempo": 0.9604325190228274,
+      "word_accents": 35
+    },
+    "sv-SE": {
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "MARYROSE_MOI048_Thuy_Dien.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 1.1022026431718062,
+      "max_tempo": 1.2189827793352022,
+      "word_accents": 26
+    },
+    "nl-NL": {
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "MARYROSE_MOI048_Ha_Lan.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.95226271525831,
+      "max_tempo": 1.057989587505006,
+      "word_accents": 35
+    }
+  }
+}
