@@ -165,7 +165,7 @@ test('portable app submits ten independent scenes concurrently, views images and
     await waitFor(async()=>await desktop.evaluate(()=>globalThis.fixtureDownloads.length)===1);
     const resumed=await desktop.evaluate(()=>globalThis.fixtureDownloads[0]);
     assert.equal(resumed.state,'completed');
-    assert.equal(resumed.filename,`image-001011-scene-01-${'b'.repeat(32)}.png`);
+    assert.equal(resumed.filename,'1011.png');
     assert.equal((await readdir(downloads)).length,2,'Reopening must continue the counter without overwriting any file');
     assert.equal(fixture.state.submitted.length,10);
     await desktop.evaluate(({dialog,shell})=>{
@@ -181,6 +181,19 @@ test('portable app submits ten independent scenes concurrently, views images and
     assert.equal((await readdir(folder)).length,10);
     assert.equal((await readdir(exportsRoot)).length,2);
     assert.equal(fixture.state.submitted.length,10);
+    const namedStem='AIKO TANAKA — JDR001 「冷めた味噌汁」 — CHAN DUNG';
+    await studio.getByLabel('Tên tệp cảnh 1',{exact:true}).fill(namedStem);
+    assert.equal(await studio.locator('.generated-image').count(),9,'Renaming a file must not regenerate or erase media');
+    await studio.getByRole('button',{name:'Tải cảnh 1',exact:true}).click();
+    await waitFor(async()=>await desktop.evaluate(()=>globalThis.fixtureDownloads.length)===2);
+    const namedDownload=await desktop.evaluate(()=>globalThis.fixtureDownloads[1]);
+    assert.equal(namedDownload.state,'completed');assert.equal(namedDownload.filename,namedStem+'.png');
+    assert.ok((await readFile(path.join(downloads,namedStem+'.png'))).subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])));
+    await desktop.evaluate(()=>{globalThis.lastFolder=null});
+    await studio.getByRole('button',{name:'Tải tất cả (9/10)',exact:true}).click();await waitFor(async()=>Boolean(await desktop.evaluate(()=>globalThis.lastFolder)));
+    const namedFolder=await desktop.evaluate(()=>globalThis.lastFolder);const namedFiles=await readdir(namedFolder);
+    assert.equal(namedFiles.length,9);assert.ok(namedFiles.includes(namedStem+'.png'));assert.equal((await readdir(exportsRoot)).length,3);assert.equal(fixture.state.submitted.length,10);
+
   } finally {
     await desktop?.close();
     fixture.server.closeAllConnections();
