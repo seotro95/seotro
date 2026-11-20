@@ -529,7 +529,7 @@ export class MuseBrowser {
       signal.throwIfAborted();
       if (!sharedConversation&&await conversation.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
       if (checkOnly) return { ready: true, message: 'Đã mở được ô Message trong trang luồng riêng. Chưa gửi prompt hoặc yêu cầu tạo nội dung.', details: await this.composerDiagnostics(page) };
-      const result = await this.sendTurn({ page: conversation, prompt, image, output, signal,sharedConversation, onSubmit: () => { sending = true; progress.phase = 'sending';progress.sentAt=Date.now(); }, beforeSubmit:submitBarrier?()=>submitBarrier.ready():undefined,onStage: phase => { progress.phase = phase; if (phase === 'submitted'){progress.submitted = true;progress.submittedAt=Date.now();} } });
+      const result = await this.sendTurn({ page: conversation, prompt, image, output, signal,sharedConversation,trackAtStart:reuseLogin, onSubmit: () => { sending = true; progress.phase = 'sending';progress.sentAt=Date.now(); }, beforeSubmit:submitBarrier?()=>submitBarrier.ready():undefined,onStage: phase => { progress.phase = phase; if (phase === 'submitted'){progress.submitted = true;progress.submittedAt=Date.now();} } });
       if(result.captionPending)this.pendingCaptions.add(conversationKey);
       if (output === 'image' && batchId && sceneId && result.fingerprint) {
         let batch = this.imageBatches.get(batchId);
@@ -585,7 +585,7 @@ export class MuseBrowser {
     }
     throw fail('MUSE_EDITOR_CHANGED', 'Muse đổi ô nhập nhưng chưa giữ đủ prompt. Chưa nhấn gửi. Kiểm tra cuộc trò chuyện rồi thử lại.', 409);
   }
-  async sendTurn({ page, prompt, image, output, signal, onSubmit, beforeSubmit, onStage = () => {},sharedConversation=false }) {
+  async sendTurn({ page, prompt, image, output, signal, onSubmit, beforeSubmit, onStage = () => {},sharedConversation=false,trackAtStart=false }) {
     let releaseComposer=sharedConversation?await this.acquireComposer(signal):null;
     try{
     if(sharedConversation&&this.parallelStrategy!=='shared-conversation')throw fail('MUSE_PARALLEL_UNVERIFIED','Đã chuyển về tuần tự trước khi gửi ô này.',409);
@@ -597,7 +597,8 @@ export class MuseBrowser {
     const marker = `studio-request-${randomUUID()}`;
     const fileToken='MUSE_'+marker.slice('studio-request-'.length).replaceAll('-','');
     const delivery=sharedConversation?`\nOutput attribution: name the generated downloadable file exactly ${fileToken} with its real extension. Provide a Markdown download link labelled ${fileToken}. Prefix any error for this task with ${fileToken}. Other generation requests in this conversation are independent; start this task without waiting for them.`:'';
-    const message = `${prompt}\n\n[Request marker: ${marker}. Do not include this marker in your reply.]${delivery}`;
+    const requestTag=`[Request marker: ${marker}. Do not include this marker in your reply.]`;
+    const message=sharedConversation?`[${fileToken}]\n${requestTag}\n${prompt}${delivery}`:trackAtStart?`${requestTag}\n${prompt}`:`${prompt}\n\n${requestTag}`;
     editor = await this.writeMessage(page, message, signal);
     signal.throwIfAborted();
     if(beforeSubmit){onStage('waiting-cohort');await beforeSubmit();signal.throwIfAborted();}
@@ -613,12 +614,12 @@ export class MuseBrowser {
       while (Date.now() < deadline) {
         await pause(this.pollMs, signal);
         if (this.unsafeMarkers.has(marker)) throw fail('MUSE_SHARED_CONVERSATION', 'Các luồng Muse đang dùng chung hội thoại. Đã dừng nhận kết quả để tránh ghép nhầm; không tự gửi lại.', 409);
-        const result = await page.evaluate(({ messages, stop, notice, marker, otherMarkers,sharedConversation,fileToken,output }) => {
+        const result = await page.evaluate(({ messages, stop, notice, marker, otherMarkers,sharedConversation,fileToken,output,acknowledged }) => {
           const visible = el => Boolean(el && el.getClientRects().length);
           const nodes = Array.from(document.querySelectorAll(messages));
-          const anchor = nodes.findLastIndex(node => node.getAttribute('data-message-role') === 'user' && node.textContent.includes(marker));
+          const anchor = nodes.findLastIndex(node => node.getAttribute('data-message-role') === 'user' && (node.textContent.includes(marker)||(sharedConversation&&node.textContent.trimStart().startsWith('['+fileToken+']'))));
           const nextUser = anchor < 0 ? -1 : nodes.findIndex((node, index) => index > anchor && node.getAttribute('data-message-role') === 'user');
-          const replies = anchor < 0 ? [] : nodes.slice(anchor + 1,sharedConversation?undefined:nextUser < 0 ? undefined : nextUser).filter(node => node.getAttribute('data-message-role') === 'assistant');
+          const replies = (sharedConversation&&acknowledged?nodes:anchor<0?[]:nodes.slice(anchor+1,sharedConversation?undefined:nextUser<0?undefined:nextUser)).filter(node=>node.getAttribute('data-message-role')==='assistant');
           const shared = nodes.some(node => node.getAttribute('data-message-role') === 'user' && otherMarkers.some(other => node.textContent.includes(other)));
           // A generated player often uses preload=none: currentSrc/readyState
           // stay empty until a human presses Play. Read the file source instead
@@ -631,17 +632,18 @@ export class MuseBrowser {
           const namedElements=sharedConversation?replies.flatMap(node=>Array.from(node.querySelectorAll(output==='video'?'video':'img'))).filter(el=>{if([el.getAttribute('alt'),el.getAttribute('aria-label'),el.getAttribute('src')].some(value=>value?.includes(fileToken)))return true;const container=el.closest('figure')||el.closest('[data-message-item]');const tokens=new Set(container?.textContent.match(/\bMUSE_[a-f0-9]{32}\b/g)||[]);return tokens.size===1&&tokens.has(fileToken)&&container.querySelectorAll(output==='video'?'video':'img').length===1;}):[];
           const namedMedia=namedLinks.length?{src:namedLinks[0].href,width:0,height:0}:namedElements.length?{src:namedElements[0].currentSrc||namedElements[0].src,width:0,height:0}:null;
           const error = replies.flatMap(node => Array.from(node.querySelectorAll(notice))).find(el=>visible(el)&&(!sharedConversation||el.closest('[data-message-item]')?.textContent.includes(fileToken)));
-          return {namedMedia,anchored: anchor >= 0, shared, interrupted: nextUser >= 0, text: replies.map(node => node.innerText).join('\n\n').trim(), videos, images,
+          const ownedText=sharedConversation?replies.filter(node=>{const tokens=new Set(node.textContent.match(/\bMUSE_[a-f0-9]{32}\b/g)||[]);return tokens.size===1&&tokens.has(fileToken)}).map(node=>node.innerText).join('\n\n'):'';
+          return {ownedText,namedMedia,anchored: anchor >= 0, shared, interrupted: nextUser >= 0, text: replies.map(node => node.innerText).join('\n\n').trim(), videos, images,
             streaming: visible(document.querySelector(stop)), error: error?.innerText || '' };
-        }, { messages: MESSAGES, stop: STOP, notice: NOTICE, marker, otherMarkers: [...this.inFlightMarkers].filter(other => other !== marker),sharedConversation,fileToken,output });
+        }, { messages: MESSAGES, stop: STOP, notice: NOTICE, marker, otherMarkers: [...this.inFlightMarkers].filter(other => other !== marker),sharedConversation,fileToken,output,acknowledged });
         if (!sharedConversation&&(result.shared || (result.interrupted && !result.images.length && !result.videos.length && !result.text))) {
           for (const active of this.inFlightMarkers) this.unsafeMarkers.add(active);
           this.maxConcurrency = 1;
           throw fail('MUSE_SHARED_CONVERSATION', 'Một hội thoại nhận nhiều yêu cầu xen kẽ. Tool dừng để tránh lấy nhầm ảnh; hãy chuẩn bị lại các ô trước khi chạy tiếp. Không tự gửi lại.', 409);
         }
         if(result.error){const capacity=/concurren|at (?:the same|a) time|already (?:generating|processing)|too many (?:active|parallel|simultaneous)|tác vụ.{0,40}đồng thời/i.test(result.error);const error=fail(capacity?'MUSE_PARALLEL_LIMIT':'MUSE_GENERATION_ERROR',result.error);if(capacity)error.safeSerialRetry=true;throw error;}
-        if (result.anchored && !acknowledged) { acknowledged = true; onStage('submitted');releaseComposer?.();releaseComposer=null; }
-        if (!result.anchored && !result.streaming && Date.now() >= acknowledgementDeadline) throw fail('MUSE_SUBMIT_NOT_ACKNOWLEDGED', 'Muse chưa xác nhận đã nhận prompt sau thao tác gửi. Tool không tự gửi lại. Mở cuộc trò chuyện kiểm tra trước khi thử lại để tránh tạo trùng.', 504);
+        if ((result.anchored||(sharedConversation&&result.namedMedia)) && !acknowledged) { acknowledged = true; onStage('submitted');releaseComposer?.();releaseComposer=null; }
+        if (!result.anchored && !acknowledged && Date.now() >= acknowledgementDeadline) throw fail('MUSE_SUBMIT_NOT_ACKNOWLEDGED', 'Muse chưa xác nhận đã nhận prompt sau thao tác gửi. Tool không tự gửi lại. Mở cuộc trò chuyện kiểm tra trước khi thử lại để tránh tạo trùng.', 504);
         if (result.text !== lastText) { lastText = result.text; stableSince = Date.now(); }
         if (output === 'text' && result.anchored && result.text && !result.streaming && Date.now() - stableSince >= this.quietMs) return { text: result.text };
         const media = sharedConversation?result.namedMedia:output === 'video' ? result.videos[0] : output === 'image' ? result.images[0] : null;
@@ -649,6 +651,7 @@ export class MuseBrowser {
           onStage('downloading');
           return {...await this.downloadMedia(page,media,output,signal),captionPending:!sharedConversation&&output==='video'&&result.streaming};
         }
+        if(sharedConversation&&!result.streaming&&!media&&result.ownedText&&Date.now()-stableSince>=Math.max(this.quietMs,1000)&&/(?:please|could you|can you)\s+(?:clarify|provide|describe|explain)|(?:don't|do not|cannot|can't)\s+understand|(?:need|require)\s+(?:a|more)\s+(?:clear|specific|detailed)|không\s*hiểu|vui lòng\s*(?:mô tả|làm rõ|cung cấp)/i.test(result.ownedText))throw fail('MUSE_PROMPT_CLARIFICATION',`Muse cần prompt rõ hơn: ${result.ownedText.slice(0,1000)}`,422);
         if (!sharedConversation&&output !== 'text' && result.text && !media && !result.streaming && Date.now() - stableSince > 20000) throw fail(output === 'image' ? 'MUSE_NO_IMAGE' : 'MUSE_NO_VIDEO', `Muse chưa trả ${output === 'image' ? 'ảnh' : 'video'} cho yêu cầu này. Phản hồi: ${result.text.slice(0, 1000)}`);
       }
       throw fail('MUSE_TIMEOUT', 'Hết thời gian chờ Muse. Kiểm tra cửa sổ Muse trước khi thử lại để tránh tạo trùng hoặc tính phí hai lần.', 504);

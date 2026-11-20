@@ -55,6 +55,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       assert.equal(await login.evaluate(() => typeof window.require), 'undefined');
       assert.equal(await login.evaluate(() => typeof window.studioDesktop), 'undefined');
       assert.equal(await login.evaluate(() => typeof window.museTransport), 'undefined');
+      await studio.evaluate(()=>window.museTransport.copyError('Fixture diagnostic copy'));assert.equal(await desktop.evaluate(({clipboard})=>clipboard.readText()),'Fixture diagnostic copy');
       assert.equal(await desktop.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows().length), 1);
       await login.getByRole('button', { name: 'Fixture login', exact: true }).click();
       const verified = studio.waitForResponse(response => response.url().endsWith('/api/account/check'));
@@ -87,6 +88,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       await waitFor(() => desktop.context().pages().length === 3, 'Message check worker disposed');
       assert.match(await studio.locator('.composer-feedback').innerText(), /Chưa gửi prompt/);
     });
+    await desktop.evaluate(()=>{const original=globalThis.fetch;globalThis.fetch=(input,...args)=>{const url=typeof input==='string'?input:input?.url;if(/^http:\/\/127\.0\.0\.1:\d+\/api\/(image|video|text)$/.test(url||''))return Promise.reject(Object.assign(new TypeError('fetch failed'),{cause:{code:'UND_ERR_HEADERS_TIMEOUT'}}));return original(input,...args)}});
     let imagesReady = false;
     await t.test('ten image jobs overlap before any response, share login, and keep scene outputs separate', async () => {
       fixture.state.behavior = 'image'; fixture.state.hold = true; fixture.state.uniqueImages = true;

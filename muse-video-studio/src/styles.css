@@ -57,3 +57,5 @@
 
 .scene-title{margin:0 0 12px;font-size:15px;line-height:1.45;overflow-wrap:anywhere;color:var(--text)}
 .script-entry-name{display:block;margin-bottom:4px;color:var(--text)}
+
+.scene-error pre{user-select:text;-webkit-user-select:text;white-space:pre-wrap;overflow-wrap:anywhere}.error-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}

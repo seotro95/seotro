@@ -1,6 +1,10 @@
-# Muse AI Studio 1.13.2
+# Muse AI Studio 1.13.3
 
-Ứng dụng Windows tạo ảnh/video qua các tài khoản Muse riêng, nhập TXT/SRT và lưu kết quả trên máy. Xem [cách dùng bản mới](CAP-NHAT-1.13.2.md).
+Ứng dụng Windows tạo ảnh/video qua các tài khoản Muse riêng, nhập TXT/SRT và lưu kết quả trên máy. Xem [cách dùng bản mới](CAP-NHAT-1.13.3.md).
+
+## Sửa kết nối nội bộ và báo lỗi
+
+Lệnh tạo ảnh/video của bản desktop dùng kết nối HTTP riêng tới Studio trên máy, không đi qua global fetch/proxy hoặc thời hạn chờ header mặc định của fetch. Mã lỗi phân biệt mất kết nối, hết thời gian và phản hồi không hợp lệ. Mỗi ô có **Sao chép lỗi** và **Tải lỗi TXT**. Bản sửa cũng nhận được xác nhận gửi khi tin nhắn bị thu gọn và tiếp tục nhận kết quả khi Muse ẩn dòng người dùng cũ.
 
 ## Tên ảnh/video theo TXT/SRT
 

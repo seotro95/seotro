@@ -1,5 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('museTransport', Object.freeze({
+  copyError: text => ipcRenderer.invoke('studio:copy-error',text),
   rendererStage: stage => { if(['bootstrap','workspace','interface','media-library','ready'].includes(stage))ipcRenderer.send('studio:renderer-stage',stage); },
   rendererState: state => { if(state==='ready'||state==='error')ipcRenderer.send('studio:renderer-state',state); },
   dataControl: action => ipcRenderer.invoke('studio:data-control',action),

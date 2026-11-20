@@ -11,6 +11,7 @@ const ROOT = path.dirname(fileURLToPath(import.meta.url));
 if (existsSync(path.join(ROOT, '.env'))) process.loadEnvFile(path.join(ROOT, '.env'));
 export async function startStudioServer({ museDriver, embeddedLogin = false, port = Number(process.env.PORT || 8788), dev = false } = {}) {
 const host = '127.0.0.1';
+const appVersion=JSON.parse(await readFile(path.join(ROOT,'package.json'),'utf8')).version;
 const transport = process.env.MUSE_TRANSPORT || (process.env.MUSE_ADAPTER_URL ? 'adapter' : 'browser');
 if (!['browser', 'adapter'].includes(transport)) throw new Error('MUSE_TRANSPORT must be browser or adapter.');
 const muse = transport === 'browser' ? museDriver || await new MuseAccounts({ accountProfile: process.env.MUSE_ACCOUNT_PROFILE, profileRoot: path.resolve(process.env.MUSE_PROFILE_ROOT || path.join(ROOT, '.data', 'muse-accounts')) }).load() : null;
@@ -86,7 +87,7 @@ async function callAdapter(endpoint, data, signal) {
 async function api(req, res, pathname) {
   if (req.method === 'GET' && pathname === '/api/status') {
     if (muse && !activeRequests && !accountBusy&&!muse.restoring) await muse.refreshActive({ background: true });
-    return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, ...(muse ? {restoringSessions:Boolean(muse.restoring), executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), ...(muse?.supportsMultiAccount ? {multiAccount:true, executionAccountId:muse.singleId??1, preferredConcurrency:muse.preferredConcurrency,concurrencyWarning:muse.concurrencyWarning,concurrencyProbe:muse.driver?.(muse.singleId??1).concurrencyProbe} : {}), embeddedLogin, credit: null, gpu: null });
+    return json(res, 200, {version:appVersion, museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, ...(muse ? {restoringSessions:Boolean(muse.restoring), executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), ...(muse?.supportsMultiAccount ? {multiAccount:true, executionAccountId:muse.singleId??1, preferredConcurrency:muse.preferredConcurrency,concurrencyWarning:muse.concurrencyWarning,concurrencyProbe:muse.driver?.(muse.singleId??1).concurrencyProbe} : {}), embeddedLogin, credit: null, gpu: null });
   }
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });

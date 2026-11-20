@@ -66,6 +66,8 @@ test('portable app submits ten independent scenes concurrently, views images and
     await waitFor(async () => (await studio.locator('.connection-pill').innerText()).includes('Đã xác minh'));
     assert.equal(fixture.state.submitted.length, 0);
     console.log('Portable stage: verified');
+    await desktop.evaluate(()=>{const original=globalThis.fetch;globalThis.fetch=(input,...args)=>{const url=typeof input==='string'?input:input?.url;if(/^http:\/\/127\.0\.0\.1:\d+\/api\/(image|video|text)$/.test(url||''))return Promise.reject(Object.assign(new TypeError('fetch failed'),{cause:{code:'UND_ERR_HEADERS_TIMEOUT'}}));return original(input,...args)}});
+    console.log('Portable stage: loopback global fetch intentionally fails; generation must use the direct local client');
     await studio.getByLabel('Số luồng mỗi tài khoản:',{exact:true}).selectOption('10');
     try { await waitFor(async()=> (await studio.getByLabel('Số luồng mỗi tài khoản:',{exact:true}).inputValue())==='10',90000); } catch(error) { console.error('Parallel selection',JSON.stringify({feedback:await studio.locator('.composer-feedback').allTextContents(),status:await studio.evaluate(async()=>(await fetch('/api/status')).json())}));throw error; }
     console.log('Portable stage: parallel-selected');

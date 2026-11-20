@@ -6,6 +6,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { startStudioServer } from '../server.mjs';
 import { MuseBrowser } from '../muse-browser.mjs';
 import { MuseAccounts } from '../muse-accounts.mjs';
+import {LocalApiClient} from './local-api.mjs';
 import { EmbeddedMuseHost,EmbeddedMuseConnection } from './embedded-host.mjs';
 import { loginRecorder } from './login-diagnostics.mjs';
 import { FolderExports } from './folder-export.mjs';
@@ -218,6 +219,7 @@ async function start() {
   layout();
   // Main-process requests avoid Chromium's six-connection HTTP/1 limit to localhost.
   // Remote Muse views do not receive this preload or access to these handlers.
+  const localApi=new LocalApiClient();
   ipcMain.handle('studio:api', async (event, value) => {
     if (event.sender !== studio.webContents || !value || !/^[a-z0-9-]{36}$/i.test(value.id) || !['/api/image', '/api/video', '/api/text'].includes(value.endpoint)) throw new Error('Invalid Studio request');
     if (requests.size >= MAX_SLOTS || requests.has(value.id)) return { ok: false, body: { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 400 ô đang chạy.' } };
@@ -225,11 +227,12 @@ async function start() {
     if (Buffer.byteLength(body) > 12 * 1024 * 1024) return { ok: false, body: { error: 'Yêu cầu vượt giới hạn 12 MB.' } };
     const control = new AbortController(); requests.set(value.id, control);
     try {
-      const response = await fetch(runtime.url + value.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body, signal: control.signal });
-      return { ok: response.ok, body: await response.json() };
+      return await localApi.request(runtime.url,value.endpoint,value.data,control.signal);
     } catch (error) { return { ok: false, body: { error: control.signal.aborted ? 'ABORTED: Đã dừng luồng.' : error.message } }; }
     finally { requests.delete(value.id); }
   });
+  ipcMain.handle('studio:copy-error',(event,text)=>{if(event.sender!==studio.webContents||typeof text!=='string'||text.length>20000)throw new Error('Invalid error report');clipboard.writeText(text)});
+  app.once('will-quit',()=>localApi.close());
   ipcMain.on('studio:cancel', (event, id) => { if (event.sender === studio.webContents) requests.get(id)?.abort(); });
   ipcMain.handle('studio:email-submit', async (event, link) => {
     if (!emailWindow || event.sender !== emailWindow.webContents) return { ok: false, message: 'Cửa sổ không được phép đăng nhập.' };

@@ -6,6 +6,7 @@ import { readFile } from 'node:fs/promises';
 
 const image = (await readFile(new URL('../public/demo-image.png', import.meta.url))).toString('base64');
 const clip = (await readFile(new URL('../public/demo.mp4', import.meta.url))).toString('base64');
+const version=JSON.parse(await readFile(new URL('../package.json',import.meta.url),'utf8')).version;
 const calls = [];
 let adapterMode = 'ok';
 const releases = [];
@@ -34,7 +35,7 @@ test('server adapter integration (local test server, not real Muse.ai)', async t
     await t.test('static app and honest status, no credential values', async () => {
       assert.equal((await fetch(base)).status, 200);
       const status = await (await fetch(base + '/api/status')).json();
-      assert.deepEqual(status, { museConfigured: true, transport: 'adapter', accounts: [], busy: false, activeRequests: 0, maxConcurrency: 400, embeddedLogin: false, credit: null, gpu: null });
+      assert.deepEqual(status, {version, museConfigured: true, transport: 'adapter', accounts: [], busy: false, activeRequests: 0, maxConcurrency: 400, embeddedLogin: false, credit: null, gpu: null });
       assert.equal(JSON.stringify(status).includes('test-bridge-secret'), false);
       assert.equal((await fetch(base + '/.env')).status, 404);
     });

@@ -62,7 +62,9 @@ export function meetsResolution(media: MediaResult): boolean | null {
 export function errorInfo(error: unknown): { raw: string; hint: string } {
   const raw = error instanceof Error ? error.message : String(error);
   let hint = 'Thử lại sau hoặc mở Chẩn đoán API để kiểm tra kết nối.';
-  if (/MUSE_LOGIN_REQUIRED/i.test(raw)) hint = 'Mở Tài khoản Muse, đăng nhập trong tool rồi bấm Kiểm tra phiên. Mỗi cảnh dùng tài khoản được ghi trên ô.';
+  if (/MUSE_LOCAL_CONNECTION|MUSE_LOCAL_TIMEOUT|MUSE_LOCAL_RESPONSE/i.test(raw)) hint = 'Kết nối giữa giao diện và máy chủ trong tool bị lỗi. Giữ tool mở và dùng Sao chép lỗi để xem mã kết nối; kiểm tra lịch sử Muse trước khi tạo lại.';
+  else if (/MUSE_PROMPT_CLARIFICATION/i.test(raw)) hint = 'Muse yêu cầu làm rõ prompt. Viết mô tả ảnh/video cụ thể rồi tạo lại ô này.';
+  else if (/MUSE_LOGIN_REQUIRED/i.test(raw)) hint = 'Mở Tài khoản Muse, đăng nhập trong tool rồi bấm Kiểm tra phiên. Mỗi cảnh dùng tài khoản được ghi trên ô.';
   else if (/MUSE_SESSION_REFRESH_FAILED|MUSE_SESSION_CHECK_FAILED/i.test(raw)) hint = 'Chưa cập nhật được phiên Muse. Kiểm tra kết nối và tab Muse rồi bấm Kiểm tra phiên; thông tin đăng nhập vẫn được giữ trên máy.';
   else if (/MUSE_PARALLEL_UNVERIFIED/i.test(raw)) hint = 'Chưa mở được các hội thoại riêng. Tool tự chuyển tài khoản đó sang từng luồng một và giữ đủ các ô chờ.';
   else if (/MUSE_WORKSPACE_ORIGIN/i.test(raw)) hint = 'Trang luồng chuyển sang miền khác Muse. Hoàn tất đăng nhập trong tab Muse rồi kiểm tra lại phiên; chưa có prompt được gửi.';
