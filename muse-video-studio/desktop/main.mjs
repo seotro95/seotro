@@ -100,7 +100,7 @@ async function start() {
           await configured;const storage=await accountStorage.restore(id,museSession);
           if(!museSession.studioSaveAttached){museSession.studioSaveAttached=true;museSession.cookies.on('changed',()=>{if(closing)return;clearTimeout(saveTimers.get(id));saveTimers.set(id,setTimeout(()=>{saveTimers.delete(id);void saveSession(id,true)},500))})}
           const owned=await ownedHost.openSession();
-          return {...owned,restoreStorage:async()=>{if(!Object.keys(storage).length)return;const changed=await owned.page.evaluate(({origin,storage})=>{if(location.origin!==origin||sessionStorage.length)return false;for(const [key,value]of Object.entries(storage))if(typeof value==='string')sessionStorage.setItem(key,value);return true},{origin:new URL(serviceURL).origin,storage});if(changed)await owned.page.reload({waitUntil:'domcontentloaded',timeout:45000})}};
+          return {...owned,initialURL:accountStorage.workspaceURL(id)||serviceURL,restoreStorage:async()=>{if(!Object.keys(storage).length)return;const changed=await owned.page.evaluate(({origin,storage})=>{if(location.origin!==origin||sessionStorage.length)return false;for(const [key,value]of Object.entries(storage))if(typeof value==='string')sessionStorage.setItem(key,value);return true},{origin:new URL(serviceURL).origin,storage});if(changed)await owned.page.reload({waitUntil:'domcontentloaded',timeout:45000})}};
         }});
     },
     onSelect: id=>{for(const owned of hosts.values())owned.hideLogin();host=hosts.get(id);window.webContents.send('studio:account',id);}

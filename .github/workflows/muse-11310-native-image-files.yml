@@ -86,6 +86,11 @@ jobs:
         continue-on-error: true
         timeout-minutes: 4
         run: node tests/native-image-files.test.mjs && node tests/native-attachment-desktop.test.mjs
+      - name: Three native accounts, independent one-lane videos and workspace restore
+        id: threeaccounts
+        continue-on-error: true
+        timeout-minutes: 4
+        run: node tests/three-accounts-desktop.test.mjs
       - name: Account-session media download recovery
         id: media
         continue-on-error: true
@@ -109,7 +114,7 @@ jobs:
       - name: Require every independent Windows check to pass
         shell: pwsh
         run: |
-          $outcomes = @('${{ steps.ui.outcome }}', '${{ steps.bridge.outcome }}', '${{ steps.warm.outcome }}', '${{ steps.isolation.outcome }}', '${{ steps.fallback.outcome }}', '${{ steps.shared.outcome }}', '${{ steps.ack.outcome }}', '${{ steps.reply.outcome }}', '${{ steps.batched.outcome }}', '${{ steps.caption.outcome }}', '${{ steps.media.outcome }}', '${{ steps.attachments.outcome }}', '${{ steps.throughput.outcome }}', '${{ steps.proxy.outcome }}', '${{ steps.startup.outcome }}', '${{ steps.desktop.outcome }}')
+          $outcomes = @('${{ steps.ui.outcome }}', '${{ steps.bridge.outcome }}', '${{ steps.warm.outcome }}', '${{ steps.isolation.outcome }}', '${{ steps.fallback.outcome }}', '${{ steps.shared.outcome }}', '${{ steps.ack.outcome }}', '${{ steps.reply.outcome }}', '${{ steps.batched.outcome }}', '${{ steps.caption.outcome }}', '${{ steps.media.outcome }}', '${{ steps.attachments.outcome }}', '${{ steps.threeaccounts.outcome }}', '${{ steps.throughput.outcome }}', '${{ steps.proxy.outcome }}', '${{ steps.startup.outcome }}', '${{ steps.desktop.outcome }}')
           if (@($outcomes | Where-Object { $_ -ne 'success' }).Count) { throw "A required Windows check failed: $($outcomes -join ', '). Packaging and release are blocked." }
       - run: python scripts/package_portable.py --platform win32 --output "${{ runner.temp }}/muse-artifacts"
       - name: Test the packaged Windows executable
@@ -124,6 +129,8 @@ jobs:
           node tests/media-recovery-desktop.test.mjs
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node tests/native-attachment-desktop.test.mjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node tests/three-accounts-desktop.test.mjs
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - uses: actions/upload-artifact@v4
         with:

@@ -10,6 +10,8 @@ Có thể bấm Tạo lại, Tạo mới hoặc Nhận lại ở ô khác khi m�
 
 Lệnh tạo ảnh/video của bản desktop dùng kết nối HTTP riêng tới Studio trên máy, không đi qua global fetch/proxy hoặc thời hạn chờ header mặc định của fetch. Mã lỗi phân biệt mất kết nối, hết thời gian và phản hồi không hợp lệ. Mỗi ô có **Sao chép lỗi** và **Tải lỗi TXT**. Bản sửa cũng nhận được xác nhận gửi khi tin nhắn bị thu gọn và tiếp tục nhận kết quả khi Muse ẩn dòng người dùng cũ.
 
+Giới hạn chờ ảnh/video là **250 giây**, gồm chuẩn bị lượt đầu. Các tài khoản khôi phục riêng trang làm việc đã lưu; số luồng được đọc riêng theo từng tài khoản.
+
 ## Hàng chờ theo tệp
 
 Nhập nhiều TXT/SRT rồi chọn **Lưu tất cả vào hàng chờ** để chọn tệp hoặc từng prompt sau. **Chạy theo số ô hiện có** nạp lần lượt đủ prompt qua các ô đang mở, kể cả khi tổng prompt lớn hơn 400. Chọn **Tải kết quả đã chọn** trong bảng hàng chờ để lưu cả các nhóm trước đúng tên gốc. Trạng thái lưu trên máy; mở lại không tự gửi prompt.

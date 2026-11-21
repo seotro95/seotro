@@ -28,3 +28,7 @@ test('unavailable parallel conversations automatically prepare one lane without 
   await writeFile(path.join(root,'single-concurrency.json'),'40');assert.equal((await new MuseAccounts({profileRoot:root}).load()).preferredConcurrency,10);
  }finally{await rm(root,{recursive:true,force:true})}
 });
+test('concurrent account preparation returns each account own lane count, never the last globally selected account',async()=>{
+ const root=await mkdtemp(path.join(os.tmpdir(),'muse-account-lanes-'));const release=new Map(),counts=new Map([[1,1],[2,6],[3,2]]);const pool=new MuseAccounts({profileRoot:root,createDriver:id=>({maxConcurrency:counts.get(id),queue:[],account:()=>({authenticated:true}),progress:()=>[],ensureComposerReady:async()=>new Promise(r=>release.set(id,r))})});
+ try{const jobs=[1,2,3].map(id=>pool.prepareSingle(new AbortController().signal,counts.get(id),id));for(const id of [2,1,3])release.get(id)();const results=await Promise.all(jobs);assert.deepEqual(results.map(row=>row.executionConcurrency),[1,6,2]);}finally{await rm(root,{recursive:true,force:true})}
+});

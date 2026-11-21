@@ -110,7 +110,7 @@ export class MuseBrowser {
       this.active = { id, ...owned };
       this.account(id).state = 'login_open';
       if (show) owned.showLogin?.();
-      try { await owned.page.goto(this.serviceURL, { waitUntil: 'domcontentloaded', timeout: 45000 }); }
+      try { await owned.page.goto(owned.initialURL||this.serviceURL, { waitUntil: 'domcontentloaded', timeout: 45000 }); }
       catch { throw fail('MUSE_CONNECTION_FAILED', 'Không tải được trang Muse. Kiểm tra Internet rồi bấm Tải lại Muse; phiên cũ vẫn được giữ.', 503); }
       await owned.restoreStorage?.();
       return owned.page;
@@ -664,7 +664,7 @@ export class MuseBrowser {
         const unique=new Set(state.media.filter(item=>!item.uncertain).map(item=>item.owner||item.key)).size;
         for(const row of rows){
           if(row.done)continue;
-          row.onObservation?.({checkedAt:new Date().toISOString(),messageAcknowledged:acknowledged,assistantReplies:state.replyCount,visibleVideos:output==='video'?unique:0,visibleImages:output==='image'?unique:0,matchedMedia:Boolean(state.matches[row.fileToken]),matchedCount:Object.keys(state.matches).length,unmatchedCount:state.unclaimed,captionLinked:state.captionLinked,replyLayout:state.replyLayout,streaming:state.streaming,replyScope:'batch',reply:replyPreview(state.text),batchSize:rows.length,messagesSent:1,waitLimitSeconds:200});
+          row.onObservation?.({checkedAt:new Date().toISOString(),messageAcknowledged:acknowledged,assistantReplies:state.replyCount,visibleVideos:output==='video'?unique:0,visibleImages:output==='image'?unique:0,matchedMedia:Boolean(state.matches[row.fileToken]),matchedCount:Object.keys(state.matches).length,unmatchedCount:state.unclaimed,captionLinked:state.captionLinked,replyLayout:state.replyLayout,streaming:state.streaming,replyScope:'batch',reply:replyPreview(state.text),batchSize:rows.length,messagesSent:1,waitLimitSeconds:250});
           if(row.signal.aborted)row.onStage('cancelled-provider');else if(state.text&&!state.matches[row.fileToken])row.onStage('reply-received');
           const media=state.matches[row.fileToken];
           if(!media&&state.rowErrors[row.fileToken]){const message=state.rowErrors[row.fileToken];const code=replyProblem(message)||'MUSE_GENERATION_ERROR';const error=fail(code,`Muse báo lỗi của ${row.label}: ${replyPreview(message)}`,502);if(code==='MUSE_PARALLEL_LIMIT')error.safeSerialRetry=true;row.reject(error);this.sharedSignals.delete(row.fileToken);continue;}
@@ -687,7 +687,7 @@ export class MuseBrowser {
         if(!state.streaming&&!state.media.length&&state.unsupported.length&&Date.now()-stableSince>=this.replyQuietMs)throw fail('MUSE_MEDIA_UNREADABLE','MEDIA_URL_UNSUPPORTED: Muse chỉ trả liên kết không tải trực tiếp được, chưa có tệp thật thay thế.',502);
         await pause(this.pollMs);
       }
-      throw fail('MUSE_TIMEOUT','Đã hết thời gian của lượt tạo, trước giới hạn 200 giây. Tool không tự tạo lại yêu cầu đã gửi.',504);
+      throw fail('MUSE_TIMEOUT','Đã hết thời gian của lượt tạo, trước giới hạn 250 giây. Tool không tự tạo lại yêu cầu đã gửi.',504);
     }catch(error){rejectPending(error)}finally{
       release?.();
       for(const row of rows){if(!row.done)row.reject(row.signal.aborted?row.signal.reason:fail('MUSE_BATCH_INCOMPLETE','Chưa nhận được kết quả của ô.'));if(sent)this.sharedSignals.delete(row.fileToken)}
@@ -713,7 +713,7 @@ export class MuseBrowser {
       do{
         signal.throwIfAborted();
         state=await frame.evaluate(inspectBatchDOM,{marker:saved.marker,rows:saved.rows,baseline:baseline.keys,baselineTexts:baseline.texts,acknowledged:true,output:data.output});
-        progress.observation={checkedAt:new Date().toISOString(),messageAcknowledged:true,assistantReplies:state.replyCount,visibleVideos:data.output==='video'?state.media.length:0,visibleImages:data.output==='image'?state.media.length:0,matchedMedia:Boolean(state.matches[saved.fileToken]),matchedCount:Object.keys(state.matches).length,unmatchedCount:state.unclaimed,captionLinked:state.captionLinked,replyLayout:state.replyLayout,streaming:state.streaming,replyScope:'saved-batch',reply:replyPreview(state.text),batchSize:saved.rows.length,messagesSent:0,recoveryOnly:true,waitLimitSeconds:200};
+        progress.observation={checkedAt:new Date().toISOString(),messageAcknowledged:true,assistantReplies:state.replyCount,visibleVideos:data.output==='video'?state.media.length:0,visibleImages:data.output==='image'?state.media.length:0,matchedMedia:Boolean(state.matches[saved.fileToken]),matchedCount:Object.keys(state.matches).length,unmatchedCount:state.unclaimed,captionLinked:state.captionLinked,replyLayout:state.replyLayout,streaming:state.streaming,replyScope:'saved-batch',reply:replyPreview(state.text),batchSize:saved.rows.length,messagesSent:0,recoveryOnly:true,waitLimitSeconds:250};
         const media=state.matches[saved.fileToken];
         if(!media){const problem=replyProblem(state.rowTexts[saved.fileToken]);if(problem)throw fail(problem,replyPreview(state.rowTexts[saved.fileToken]),422);}
         if(media){progress.phase='downloading';const result=await this.downloadMedia(frame,media,data.output,signal);progress.phase='done';return result;}

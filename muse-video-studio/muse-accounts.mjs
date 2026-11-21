@@ -60,7 +60,7 @@ export class MuseAccounts {
     await this.driver(id).ensureComposerReady?.(signal);
     if(!retryParallel&&this.driver(id).parallelStrategy==='shared-conversation'&&this.driver(id).concurrencyProbe?.requested===count)return {executionConcurrency:this.driver(id).maxConcurrency,preferredConcurrency:count,parallelStrategy:'shared-conversation',concurrencyWarning:this.concurrencyWarning};
     if(!retryParallel&&count>1&&this.fallbacks.has(id)&&this.fallbackRequested.get(id)===count)return {executionConcurrency:1,preferredConcurrency:count,concurrencyWarning:this.fallbacks.get(id),serialFallback:true};
-    if(this.driver(id).maxConcurrency===count&&this.driver(id).parallelReady!==false){this.concurrencyWarning='';this.fallbacks.delete(id);this.fallbackRequested.delete(id);if(this.preferredConcurrency!==count)await this.requestConcurrency(count);return {executionConcurrency:this.maxConcurrency,preferredConcurrency:count,concurrencyWarning:''};}
+    if(this.driver(id).maxConcurrency===count&&this.driver(id).parallelReady!==false){this.concurrencyWarning='';this.fallbacks.delete(id);this.fallbackRequested.delete(id);if(this.preferredConcurrency!==count)await this.requestConcurrency(count);return {executionConcurrency:this.driver(id).maxConcurrency,preferredConcurrency:count,concurrencyWarning:''};}
     try{return await this.setConcurrency(count,signal,id,{allowSharedFastPath:!retryParallel})}catch(error){
       if(count===1||signal.aborted||!/MUSE_PARALLEL_|MUSE_NEW_CHAT_UNAVAILABLE|MUSE_COMPOSER_NOT_READY/.test(error.message))throw error;
       if(error.parallelReason==='MUSE_NEW_CHAT_UNAVAILABLE'&&this.driver(id).useSharedConversation){

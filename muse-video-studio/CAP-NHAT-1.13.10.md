@@ -9,6 +9,13 @@
 - Nút Dừng cảnh hủy đúng ô; Dừng tất cả hủy cả hàng chờ. Prompt, tên và kết quả đã lưu được giữ.
 - Chuẩn bị tài khoản khác không chặn các tác vụ ở tài khoản đang chạy. Không thay đổi proxy hoặc phiên đang có yêu cầu.
 
+## Nhiều tài khoản và thời gian chờ
+
+- Chuẩn bị đồng thời trả đúng số luồng của từng tài khoản, không lấy nhầm số luồng từ tài khoản vừa được chọn sau cùng.
+- Giữ riêng trang làm việc đã mở của từng hồ sơ và khôi phục lại sau khi mở tool. Đường dẫn được lưu cùng phiên mã hóa; không đưa các tài khoản đã đăng nhập về trang chủ thiếu ô Message nếu đã lưu trang làm việc hợp lệ.
+- Kiểm tra ba phân vùng Electron riêng: cả ba tài khoản nhận lệnh video trước khi có kết quả, trả đúng tệp về đúng ô, và khôi phục đúng trang làm việc sau khi khởi động lại.
+- Giới hạn chờ mới là **250 giây** cho ảnh/video, gồm chuẩn bị của lượt đầu. Trình kết nối nội bộ chờ tối đa 245 giây, bên xử lý chờ tối đa 240 giây để còn thời gian trả lỗi rõ ràng; phần thời gian chuẩn bị được trừ trước, không cộng thêm 250 giây mới.
+
 ## Hàng chờ nhiều TXT/SRT với ít ô
 
 - Nhập tất cả tệp TXT/SRT cùng lúc; chọn **Lưu tất cả vào hàng chờ** để nhập trước, chưa gửi lệnh tạo.
@@ -31,4 +38,4 @@
 
 Đóng bản đang chạy, giải nén ZIP ra thư mục mới, mở Muse AI Studio.exe hoặc BAT_DAU.bat. Không cần giữ thư mục bản cũ; dữ liệu dùng chung ở %LOCALAPPDATA%\Muse AI Studio. Giữ nhập nhiều TXT/SRT cùng lúc, tên theo prompt, tài khoản, proxy và thư viện.
 
-Mỗi lượt xử lý vẫn có giới hạn chờ 200 giây. Thời gian tạo phía Muse và việc Muse cung cấp tệp thật nằm ngoài quyền điều khiển của tool. Kiểm thử dùng trang Muse mô phỏng có đăng nhập, tệp tải thật và ứng dụng Electron/EXE; không dùng credit của tài khoản Muse thực để xác nhận tốc độ hoặc nội dung đã tạo trong lịch sử của bạn.
+Mỗi lượt xử lý vẫn có giới hạn chờ 250 giây. Thời gian tạo phía Muse và việc Muse cung cấp tệp thật nằm ngoài quyền điều khiển của tool. Kiểm thử dùng trang Muse mô phỏng có đăng nhập, tệp tải thật và ứng dụng Electron/EXE; không dùng credit của tài khoản Muse thực để xác nhận tốc độ hoặc nội dung đã tạo trong lịch sử của bạn.

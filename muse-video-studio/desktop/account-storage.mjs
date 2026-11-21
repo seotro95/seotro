@@ -7,11 +7,13 @@ export class AccountStorage {
   constructor({userData,codec,serviceURL,allowBasic=false}) {
     this.directory=path.join(userData,'account-vault');this.userData=userData;this.codec=codec;
     this.origin=new URL(serviceURL).origin;this.hostname=new URL(serviceURL).hostname;this.allowBasic=allowBasic;this.writes=new Map();
-    this.records=new Map();
+    this.records=new Map();this.routes=new Map();
   }
   available(){return this.codec.isEncryptionAvailable()&&(this.allowBasic||this.codec.getSelectedStorageBackend?.()!=='basic_text')}
   file(id,kind){if(!Number.isInteger(id)||id<1||id>40||!['session','proxy'].includes(kind))throw new Error('ACCOUNT_INVALID');return path.join(this.directory,`${kind}-${id}.bin`)}
-  remember(id,value){if(value?.origin===this.origin)this.records.set(id,{savedAt:value.savedAt||null,hasSession:Boolean(value.cookies?.length||Object.keys(value.storage||{}).length)})}
+  safeWorkspace(raw){try{const url=new URL(raw);if(url.origin!==this.origin||url.username||url.password||url.search||/\/(?:auth|oauth|login|signin|callback)(?:\/|$)/i.test(url.pathname)||/[?&#](?:access_token|id_token|token|code|state)=/i.test(url.hash)||(url.pathname==='/'&&!url.hash))return null;return url.href}catch{return null}}
+  workspaceURL(id){return this.routes.get(id)||null}
+  remember(id,value){const route=this.safeWorkspace(value?.workspaceURL);if(route)this.routes.set(id,route);if(value?.origin===this.origin)this.records.set(id,{savedAt:value.savedAt||null,hasSession:Boolean(value.cookies?.length||Object.keys(value.storage||{}).length)})}
   metadata(id){return this.records.get(id)||{savedAt:null,hasSession:false}}
   async read(id,kind){try{const value=JSON.parse(await this.codec.decryptString(await readFile(this.file(id,kind))));if(kind==='session')this.remember(id,value);return value}catch{return null}}
   async write(id,kind,value){
@@ -23,13 +25,15 @@ export class AccountStorage {
   allowedCookie(cookie){const domain=cookie.domain?.replace(/^\./,'');return domain===this.hostname||domain?.endsWith('.'+this.hostname)}
   async capture(id,session,page){
     const cookies=(await session.cookies.get({})).filter(cookie=>this.allowedCookie(cookie));
+    if(!this.routes.has(id))await this.read(id,'session');
+    const workspaceURL=this.safeWorkspace(page?.url?.())||this.workspaceURL(id);
     let storage={};
     if(page&&!page.isClosed())storage=await page.evaluate(origin=>location.origin===origin?Object.fromEntries(Object.entries(sessionStorage)):null,this.origin).catch(()=>null);
     // Cookie-change saves cannot read a tab while navigating. Keep its last
     // encrypted storage snapshot, then replace it on the next verified save.
     if(storage===null||!page){const previous=await this.read(id,'session');storage=previous?.origin===this.origin?previous.storage||{}:{}}
     session.flushStorageData();await session.cookies.flushStore();
-    const value={version:1,origin:this.origin,cookies,storage,savedAt:Date.now()};await this.write(id,'session',value);this.remember(id,value);
+    const value={version:1,origin:this.origin,cookies,storage,...(workspaceURL?{workspaceURL}:{}),savedAt:Date.now()};await this.write(id,'session',value);this.remember(id,value);
   }
   async restore(id,session){
     const saved=await this.read(id,'session');if(!saved||saved.version!==1||saved.origin!==this.origin)return {};

@@ -20,8 +20,8 @@ function requestContext(context?:RequestContext){
   if(!context)return {};
   const {deadline,...data}=context;if(deadline===undefined)return data;
   const waitBudgetMs=Math.floor(deadline-performance.now());
-  if(waitBudgetMs<=0)throw new Error('MUSE_WAIT_LIMIT: Đã hết giới hạn 200 giây của lượt chạy. Chưa gửi thêm lệnh tạo.');
-  return {...data,waitBudgetMs:Math.min(200000,waitBudgetMs)};
+  if(waitBudgetMs<=0)throw new Error('MUSE_WAIT_LIMIT: Đã hết giới hạn 250 giây của lượt chạy. Chưa gửi thêm lệnh tạo.');
+  return {...data,waitBudgetMs:Math.min(250000,waitBudgetMs)};
 }
 async function rawApi(path: string, data?: unknown, signal?: AbortSignal) {
   const transport = window.museTransport;

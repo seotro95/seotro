@@ -62,7 +62,7 @@ export function meetsResolution(media: MediaResult): boolean | null {
 export function errorInfo(error: unknown): { raw: string; hint: string } {
   const raw = error instanceof Error ? error.message : String(error);
   let hint = 'Thử lại sau hoặc mở Chẩn đoán API để kiểm tra kết nối.';
-  if (/MUSE_WAIT_LIMIT|MUSE_TIMEOUT/i.test(raw)) hint = 'Đã chạm giới hạn chờ tối đa 200 giây. Kiểm tra phản hồi và kết quả trong Muse; yêu cầu đã gửi không được tự tạo lại.';
+  if (/MUSE_WAIT_LIMIT|MUSE_TIMEOUT/i.test(raw)) hint = 'Đã chạm giới hạn chờ tối đa 250 giây. Kiểm tra phản hồi và kết quả trong Muse; yêu cầu đã gửi không được tự tạo lại.';
   else if (/MUSE_BATCH_UNMATCHED/i.test(raw)) hint = 'Muse đã trả media nhưng tool chưa ghép được tệp với đúng ô. Bấm Nhận lại từ Muse để chỉ lấy kết quả đã tạo; chưa cần gửi lại prompt.';
   else if (/MUSE_RECOVER_HISTORY_MISSING/i.test(raw)) hint = 'Mở đúng cuộc trò chuyện trong Đăng nhập Muse trong tool và mở rộng tin nhắn prompt rồi bấm Nhận lại. Tool chưa gửi lệnh tạo mới.';
   else if (/MUSE_RECOVER_/i.test(raw)) hint = 'Chưa lấy lại được tệp đúng với số ô và prompt. Xem chi tiết bên dưới; thao tác này không tạo video hoặc ảnh mới.';
