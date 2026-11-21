@@ -1,0 +1,97 @@
+{
+  "version": "1.13.13",
+  "source_commit": "900e9b0c10e14a5a3fedde67670cb58d06a6cfc5",
+  "source_branch": "codex/muse-11313-image-delivery",
+  "workflow_run_id": 44895566821,
+  "workflow_job_id": 136820355117,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/44895566821",
+  "reported_case": {
+    "user_confirmed_video_working": true,
+    "latest_screenshot": "Some images completed on Muse 04 and Muse 09; other cards show unreadable media or a 250-second wait limit.",
+    "new_error_json_received": false,
+    "actual_image_uri_not_provided": true
+  },
+  "validation": {
+    "new_image_checks": 24,
+    "image_dom_cases": 7,
+    "image_navigation_cases": 3,
+    "legacy_worker_image_cases": 4,
+    "browser_image_layout_cases": 5,
+    "native_three_account_image_case": 1,
+    "late_download_race_cases": 4,
+    "preserved_wait_limit_ms": 250000,
+    "live_muse_account_tested": false,
+    "limitations": "The actual failing Muse link and new error JSON were not provided. Tests use fixture services and cannot establish universal compatibility or guarantee remote image generation within 250 seconds.",
+    "changes": [
+      "Image-only discovery of extensionless View/Open image links and image filenames in visible link text.",
+      "Image download buttons in separate native cards are matched only by unique bounded CLIP attribution.",
+      "Same-origin image links can use the browser download action with the original signed URL when fetch fails.",
+      "A timed out or cancelled image download cannot be assigned to a later scene. Native actions on that uncertain page require a full Muse reload; direct image/video URL reads and other accounts continue.",
+      "No automatic generation replay, fake resolution or placeholder image completion."
+    ],
+    "preserved_modes": "Default one account/one lane and ten accounts/ten lanes; expanded account/lane choices, six slots per account, source names, multi-file TXT/SRT queues, proxies and saved results.",
+    "windows_test_lifecycle_fix": "An existing composer-readiness check hit its 10-second whole-browser test budget. Its lifecycle budget is now 30 seconds, with timing diagnostics; the inner 800 ms composer probe, draft/no-reload/no-submit assertions and 250-second application limit are unchanged.",
+    "image_fix_windows_verified_before_feature": {
+      "source_commit": "70f38cbdcc0cc108389a5dc0fc56a1a4b0c1f931",
+      "workflow_run_id": 44894345252,
+      "workflow_job_id": 136816678728,
+      "conclusion": "success",
+      "includes_packaged_executable": true
+    },
+    "bulk_delete_checks": {
+      "atomic_browser_idb_cases": 2,
+      "ui_cases": 3,
+      "native_executable_case": 1,
+      "existing_ui_regressions": 12,
+      "scope": "All video results across batches, versions and hidden scenes; sync selection and current output mode do not restrict deletion.",
+      "atomicity": "One media-store transaction; queue history is retained unchanged and unavailable results are derived without automatic resubmission.",
+      "preserves": "Image/reference bytes and URLs, prompt/name/selection metadata, queue history, downloaded disk files and service history.",
+      "lifecycle": "Deletion is blocked during generation, preparation, recovery, queue feed/import, downloads and another deletion. UI and Blob URL cleanup follow successful transaction commit."
+    },
+    "existing_windows_ui_checks": 42,
+    "bulk_browser_checks": 5,
+    "required_windows_checks": "All required outcomes passed before packaging; the packaged EXE then passed startup, portable flows, media recovery, native attachments, separate account videos, image controls/queues, three-account images and bulk video deletion.",
+    "throughput_fixture": {
+      "accounts": 12,
+      "lanesPerAccount": 6,
+      "submittedBeforeAnyResult": 72,
+      "chatMessages": 12,
+      "pages": 12,
+      "extraWorkerPages": 0,
+      "preparationMs": 3325,
+      "submissionMs": 1084,
+      "downloadConcurrency": 6
+    },
+    "actual_draft_test_lifecycle_ms": {
+      "browser_ready": 12671,
+      "draft_hidden": 12700,
+      "preparation_rejected": 13521,
+      "browser_closed": 21226
+    },
+    "packaged_bulk_delete_test_passed": true
+  },
+  "user_added_feature": {
+    "request": "Add synchronized deletion of all generated videos.",
+    "confirmed_scope": "All video results throughout the tool, not only selected synchronization slots.",
+    "preserved": "Images, references, prompts, names, accounts, TXT/SRT queue/history, downloaded disk files and Muse service history.",
+    "native_test": "Three stored video versions including an old version and hidden scene 300 are deleted. Cancel preserves all records. One image remains visible after restart at the same studio origin; a previously downloaded MP4 remains byte-identical. No generation request is sent."
+  },
+  "status": "windows_tests_and_uploaded_asset_sha256_verified",
+  "workflow_conclusion": "success",
+  "release_id": 453598549,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/untagged-29f5196ebb894ef39bb3",
+  "draft": true,
+  "zip": {
+    "file": "Muse-AI-Studio-1.13.13-Windows-x64.zip",
+    "bytes": 160827614,
+    "sha256": "fb908a295d46e9c60699f94abe7d1998f078b7bdb91b30d3b8da3cfed5090363",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-29f5196ebb894ef39bb3/Muse-AI-Studio-1.13.13-Windows-x64.zip"
+  },
+  "checksum_file": {
+    "file": "Muse-AI-Studio-1.13.13-Windows-x64.zip.sha256",
+    "bytes": 106,
+    "sha256": "7761839a6b87bdfd52fc2f7197802a8ebb70c130b5bd9be37ebde0d33721c8aa",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-29f5196ebb894ef39bb3/Muse-AI-Studio-1.13.13-Windows-x64.zip.sha256"
+  },
+  "verified_at_utc": "2026-11-21T10:56:09.908Z"
+}
