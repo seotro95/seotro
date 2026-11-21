@@ -57,7 +57,10 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
 if pending:
  (out/'pending_groups.json').write_text(json.dumps(pending));print('Transient English parts pending; successful speech retained',flush=True);sys.exit(75)
 raws=[[out/f'raw-{r["id"]:03}-01.wav'] for r in rows]
+from repair_native_pacing import repair
+raws,pacing_report=repair('en-US',rows,raws,out)
 result=finish('en-US',rows,raws,out=out,target=rows[-1]['end'] if preview else 1242)
+result.update(native_pacing_repair=pacing_report,individual_native_repaired_cue_ids=[x['id'] for x in pacing_report['repaired']])
 result.update(grouped_requests=len(groups),word_metadata_exact_script_match=True,word_boundary_cue_split=True,transport_base_rate='+2%',prosody_method='Native2%groupedEnglish with originalpunctuation, atmosttwo1.2dBwordaccentspercue andpitch-preservingfinalfit')
 recoveries=[json.loads(p.read_text()) for p in out.glob('group-*.request.json') if 'smaller_native_requests' in json.loads(p.read_text())]
 result.update(smaller_request_recovered_groups=len(recoveries),individual_fallback_requests=sum(len(j['smaller_native_requests']) for j in recoveries),recovery_details=[j['smaller_native_requests'] for j in recoveries],grouped_requests=len(groups)-len(recoveries))

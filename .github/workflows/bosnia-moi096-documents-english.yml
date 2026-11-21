@@ -52,6 +52,8 @@ jobs:
         with:
           name: bosnia-moi096-checkpoint-en-US
           path: bosnia-moi096/voice/audio/en-US
+          run-id: 44925084497
+          github-token: ${{ github.token }}
       - name: Generate English with same Andrew voice and retain completed speech
         run: |
           set +e
@@ -72,6 +74,7 @@ jobs:
             bosnia-moi096/voice/audio/en-US/raw-*
             bosnia-moi096/voice/audio/en-US/fallback-*
             bosnia-moi096/voice/audio/en-US/pending_*.json
+            bosnia-moi096/voice/audio/en-US/native_pacing_repair.json
           if-no-files-found: ignore
           retention-days: 30
           overwrite: true
