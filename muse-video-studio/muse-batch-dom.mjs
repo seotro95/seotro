@@ -80,7 +80,7 @@ export function inspectBatchDOM({marker,rows=[],baseline=[],baselineTexts=[],cap
       if(captureOnly||loaded||lazy||pending){const src=lazy||image.currentSrc||image.getAttribute('src');if(src&&!/^(?:data:image\/svg|.*\.svg(?:[?#]|$))/i.test(src))add(image,src,'image',lazy?1:2);}
     }
     for(const link of reply.querySelectorAll('a[href]')){
-      const name=[link.href,link.download||'',link.type||''].join(' ');let kind=/\.(mp4|webm|mov)(?:$|[?#\s])|video\//i.test(name)?'video':/\.(png|jpe?g|webp|avif|gif)(?:$|[?#\s])|image\//i.test(name)?'image':null;
+      const name=[link.href,link.download||'',link.type||'',...(output==='image'?[link.textContent||'']:[])].join(' ');let kind=/\.(mp4|webm|mov)(?:$|[?#\s])|video\//i.test(name)?'video':/\.(png|jpe?g|webp|avif|gif)(?:$|[?#\s])|image\//i.test(name)?'image':null;
       const uncertain=!kind;const direct=owners([link.textContent,link.download,link.href].join(' ')).length===1;const downloadable=Boolean(link.getAttribute('download'))||/download|tải(?:\s+(?:về|video|ảnh|file|tệp))?/i.test(link.textContent||'');
       if(!kind&&(captureOnly||direct||(downloadable&&elementOwner(link))||imageLinkIntent(link)))kind=output;if(kind)add(link,link.href,kind,uncertain?3:0,uncertain);
     }

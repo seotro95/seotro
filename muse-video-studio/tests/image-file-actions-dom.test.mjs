@@ -75,3 +75,13 @@ test('image file-action discovery leaves video collection and matching unchanged
  assert.equal(state.media.length,1);assert.equal(state.matches[rows[0].fileToken],undefined);
  assert.equal(state.matches[rows[1].fileToken]?.src,'https://example.invalid/second.mp4');
 }));
+
+
+test('an image filename in visible link text identifies an opaque file action under its own CLIP caption',{timeout:15000},()=>withPage(async page=>{
+ await page.setContent(start+message('<a href="muse-file:/opaque-portrait-2">portrait-two.png</a>')+caption(2)+message('<a href="https://example.invalid/files/opaque-1">portrait-one.webp</a>')+caption(1));
+ const state=await page.evaluate(inspectBatchDOM,options);
+ assert.equal(state.media.length,2);assert.equal(state.unclaimed,0);
+ assert.equal(state.matches[rows[0].fileToken]?.src,'https://example.invalid/files/opaque-1');
+ assert.equal(state.matches[rows[1].fileToken]?.src,'muse-file:/opaque-portrait-2');
+ assert.equal(state.matches[rows[1].fileToken]?.nativeDownload,true);
+}));

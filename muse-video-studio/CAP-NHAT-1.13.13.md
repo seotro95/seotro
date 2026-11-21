@@ -4,7 +4,7 @@ Bản Windows đầy đủ, không cần thư mục bản cũ. Đóng tool cũ, 
 
 ## Các trường hợp nhận ảnh được sửa
 
-- Nhận liên kết View image/Open image và liên kết ảnh không có đuôi tệp trong URL khi đối chiếu được với một nhãn cảnh duy nhất.
+- Nhận liên kết View image/Open image, tên tệp ảnh trong chữ của liên kết và liên kết ảnh không có đuôi tệp trong URL khi đối chiếu được với một nhãn cảnh duy nhất.
 - Nhận nút Download image trong khung ảnh riêng, khi nhãn CLIP nằm ở lời trả lời trước hoặc sau khung đó. Chỉ chấp nhận kết quả ghép duy nhất; không chia ảnh theo thứ tự xuất hiện.
 - Nhận liên kết ảnh HTTP cùng miền qua thao tác tải của trình duyệt khi tải trực tiếp bị chặn, kể cả liên kết không có thuộc tính download. Giữ nguyên URL của Muse và giữ trang hội thoại.
 - Không nhận liên kết tham khảo thông thường thành ảnh, không kích hoạt liên kết thực thi mã và không gửi lại yêu cầu tạo khi đang nhận tệp đã hoàn thành.
