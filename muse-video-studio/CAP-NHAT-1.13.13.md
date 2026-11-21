@@ -1,6 +1,13 @@
-# Muse AI Studio 1.13.13 — nhận ảnh từ liên kết và nút tải riêng
+# Muse AI Studio 1.13.13 — nhận ảnh và xoá toàn bộ video trong tool
 
 Bản Windows đầy đủ, không cần thư mục bản cũ. Đóng tool cũ, giải nén ZIP mới và mở Muse AI Studio.exe. Dữ liệu vẫn ở %LOCALAPPDATA%\Muse AI Studio.
+
+## Xoá tất cả video đã tạo
+
+- Trong thanh Đồng bộ thao tác, bấm **Xoá tất cả video đã tạo** để xem số kết quả và xác nhận xoá toàn bộ video trong tool. Áp dụng cả khi Đồng bộ thao tác đang tắt hoặc không chọn ô nào.
+- Xoá mọi phiên bản video trong thư viện, gồm các lượt cũ, ô đang ẩn và kết quả của các nhóm TXT/SRT trước. Giữ prompt, tên tệp, ảnh, ảnh tham chiếu, tài khoản, tệp đã tải ra máy và lịch sử Muse.
+- Các mục hàng chờ đã hoàn thành không tự chạy lại sau khi video bị xoá. Mục không còn tệp được hiển thị rõ; ảnh còn lưu trong nhóm vẫn tải được.
+- Nút xoá chờ các tác vụ tạo, nhận lại, nhập hàng chờ và tải tệp hoàn tất. Nếu giao dịch lưu trữ bị lỗi, các video và giao diện được giữ.
 
 ## Các trường hợp nhận ảnh được sửa
 

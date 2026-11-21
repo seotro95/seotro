@@ -2,6 +2,8 @@
 
 Ứng dụng Windows tạo ảnh/video qua các tài khoản Muse riêng, nhập TXT/SRT và lưu kết quả trên máy. Xem [cách dùng bản mới](CAP-NHAT-1.13.13.md).
 
+Trong thanh **Đồng bộ thao tác**, nút **Xoá tất cả video đã tạo** xoá mọi bản video trong thư viện tool sau xác nhận; giữ ảnh, prompt, tên tệp và tệp đã tải ra máy.
+
 ## Tạo lại từng ô và nhận tệp Muse
 
 Có thể bấm Tạo lại, Tạo mới hoặc Nhận lại ở ô khác khi một ô đang chạy hoặc đang chuẩn bị phiên. Mỗi ô giữ tác vụ riêng; một luồng thì xếp hàng, sáu luồng thì dùng số luồng trống. Không gửi trùng ô đang chạy. Nhận tệp qua liên kết tải gốc của Muse khi dịch vụ cung cấp tệp thật; báo riêng ô bị từ chối tạo và kiểm tra kích thước ảnh thực tế.

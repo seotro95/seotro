@@ -1,4 +1,4 @@
-name: Muse 1.13.13 image download layouts
+name: Muse 1.13.13 image delivery and bulk video deletion
 on:
   workflow_dispatch:
   push:
@@ -44,6 +44,10 @@ jobs:
         id: imagelayouts
         timeout-minutes: 4
         run: node tests/image-file-actions-dom.test.mjs && node tests/image-late-download.test.mjs && node tests/image-navigation-download.test.mjs && node tests/legacy-image-links.test.mjs && node tests/image-download-layouts.test.mjs && node tests/three-accounts-images-desktop.test.mjs
+      - name: Delete all stored videos while preserving images and scripts
+        id: videoclear
+        timeout-minutes: 4
+        run: npx playwright test tests/browser/clear-videos.spec.ts tests/browser/media-video-delete.spec.ts && node tests/clear-videos-desktop.test.mjs
       - name: Verify names, sixty slots, selected accounts, proxies and recovery UI
         id: ui
         continue-on-error: true
@@ -121,7 +125,7 @@ jobs:
       - name: Require every independent Windows check to pass
         shell: pwsh
         run: |
-          $outcomes = @('${{ steps.ui.outcome }}', '${{ steps.bridge.outcome }}', '${{ steps.warm.outcome }}', '${{ steps.isolation.outcome }}', '${{ steps.fallback.outcome }}', '${{ steps.shared.outcome }}', '${{ steps.ack.outcome }}', '${{ steps.reply.outcome }}', '${{ steps.batched.outcome }}', '${{ steps.caption.outcome }}', '${{ steps.media.outcome }}', '${{ steps.attachments.outcome }}', '${{ steps.virtualfiles.outcome }}', '${{ steps.imagelayouts.outcome }}', '${{ steps.threeaccounts.outcome }}', '${{ steps.throughput.outcome }}', '${{ steps.proxy.outcome }}', '${{ steps.startup.outcome }}', '${{ steps.desktop.outcome }}')
+          $outcomes = @('${{ steps.ui.outcome }}', '${{ steps.bridge.outcome }}', '${{ steps.warm.outcome }}', '${{ steps.isolation.outcome }}', '${{ steps.fallback.outcome }}', '${{ steps.shared.outcome }}', '${{ steps.ack.outcome }}', '${{ steps.reply.outcome }}', '${{ steps.batched.outcome }}', '${{ steps.caption.outcome }}', '${{ steps.media.outcome }}', '${{ steps.attachments.outcome }}', '${{ steps.virtualfiles.outcome }}', '${{ steps.imagelayouts.outcome }}', '${{ steps.videoclear.outcome }}', '${{ steps.threeaccounts.outcome }}', '${{ steps.throughput.outcome }}', '${{ steps.proxy.outcome }}', '${{ steps.startup.outcome }}', '${{ steps.desktop.outcome }}')
           if (@($outcomes | Where-Object { $_ -ne 'success' }).Count) { throw "A required Windows check failed: $($outcomes -join ', '). Packaging and release are blocked." }
       - run: python scripts/package_portable.py --platform win32 --output "${{ runner.temp }}/muse-artifacts"
       - name: Test the packaged Windows executable
@@ -144,6 +148,8 @@ jobs:
           node tests/three-accounts-source-clips-desktop.test.mjs
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node tests/three-accounts-images-desktop.test.mjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node tests/clear-videos-desktop.test.mjs
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - uses: actions/upload-artifact@v4
         with:
@@ -173,8 +179,8 @@ jobs:
           if ($replaceDraft) {
             gh release upload $tag $zip.FullName $checksum --repo "${{ github.repository }}" --clobber
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-            gh release edit $tag --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Muse AI Studio $version - Separate image cards and download links - Windows x64" --notes-file "${{ runner.temp }}/muse-release-notes.txt" --draft --latest=false
+            gh release edit $tag --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Muse AI Studio $version - Image downloads and bulk video deletion - Windows x64" --notes-file "${{ runner.temp }}/muse-release-notes.txt" --draft --latest=false
           } else {
-            gh release create $tag $zip.FullName $checksum --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Muse AI Studio $version - Separate image cards and download links - Windows x64" --notes-file "${{ runner.temp }}/muse-release-notes.txt" --draft --latest=false
+            gh release create $tag $zip.FullName $checksum --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Muse AI Studio $version - Image downloads and bulk video deletion - Windows x64" --notes-file "${{ runner.temp }}/muse-release-notes.txt" --draft --latest=false
           }
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
