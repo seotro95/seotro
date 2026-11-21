@@ -1,10 +1,10 @@
 """Repair only out-of-range cue pacing with the same native voice and words."""
 import hashlib,json,math,shutil
 from render_common import PROFILES,seconds,normalized,digest,accent
-from online_transport import request
+from online_transport import request,IncompleteSpeechError
 
 def repair(locale,rows,raws,out):
-    audit=[];repaired=[];result=[]
+    audit=[];repaired=[];result=[];pending=[]
     for row,paths in zip(rows,raws):
         duration=row['end']-row['start'];pause=.12 if duration>2 else .08
         before=sum(seconds(p) for p in paths)/(duration-pause)
@@ -16,7 +16,14 @@ def repair(locale,rows,raws,out):
         rate_percent=math.ceil(((1+base)*before/target-1)*100)
         assert -25<=rate_percent<=35,('Native pacing change needs review',row['id'],rate_percent)
         rate=f'{rate_percent:+d}%';source=out/f'raw-{row["id"]:03}-native-{rate_percent:+d}.wav'
-        words=request(locale,row['voice'],source,rate,attempts=4)
+        try:
+            words=request(locale,row['voice'],source,rate,attempts=4)
+        except Exception as error:
+            import edge_tts
+            if not isinstance(error,(edge_tts.exceptions.NoAudioReceived,IncompleteSpeechError,TimeoutError)):raise
+            pending.append(row['id']);result.append(paths)
+            print('NATIVE_PACING_PENDING',locale,row['id'],type(error).__name__,flush=True)
+            continue
         assert normalized(''.join(w['text'] for w in words))==normalized(row['voice'])
         after=seconds(source)/(duration-pause)
         assert .55<=after<=1.65,('Native repair still outside pacing range',row['id'],after)
@@ -26,6 +33,6 @@ def repair(locale,rows,raws,out):
         dest.with_suffix('.meta.json').write_text(json.dumps(meta,ensure_ascii=False,indent=2))
         repaired.append(dict(id=row['id'],rate=rate,tempo_before=before,tempo_after=after,voice_id=PROFILES[locale]['voice_id'],words_preserved=True))
         result.append([dest]);print('NATIVE_PACING_REPAIRED',locale,row['id'],rate,before,after,flush=True)
-    report=dict(status='passed',locale=locale,thresholds_unchanged=[.55,1.65],cues_checked=len(rows),repaired=repaired,audit=audit)
+    report=dict(status='pending' if pending else 'passed',locale=locale,thresholds_unchanged=[.55,1.65],cues_checked=len(rows),repaired=repaired,audit=audit,pending=pending)
     (out/'native_pacing_repair.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
     return result,report

@@ -59,6 +59,8 @@ if pending:
 raws=[[out/f'raw-{r["id"]:03}-01.wav'] for r in rows]
 from repair_native_pacing import repair
 raws,pacing_report=repair('en-US',rows,raws,out)
+if pacing_report['status']!='passed':
+ print('Native pacing requests pending; successful same-voice checkpoints retained',flush=True);sys.exit(75)
 result=finish('en-US',rows,raws,out=out,target=rows[-1]['end'] if preview else 1242)
 result.update(native_pacing_repair=pacing_report,individual_native_repaired_cue_ids=[x['id'] for x in pacing_report['repaired']])
 result.update(grouped_requests=len(groups),word_metadata_exact_script_match=True,word_boundary_cue_split=True,transport_base_rate='+2%',prosody_method='Native2%groupedEnglish with originalpunctuation, atmosttwo1.2dBwordaccentspercue andpitch-preservingfinalfit')
