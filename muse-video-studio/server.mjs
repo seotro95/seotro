@@ -22,6 +22,7 @@ let activeRequests = 0;
 const activeAccountRequests=new Map();
 let accountBusy = false;
 const preparingAccounts=new Set();
+const cleaningDraftAccounts=new Set();
 const maxConcurrency = MAX_SLOTS;
 const vite = dev ? await (await import('vite')).createServer({ root: ROOT, server: { middlewareMode: true, hmr: false } }) : null;
 const json = (res, status, value) => { if (!res.destroyed) { res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(value)); } };
@@ -90,19 +91,20 @@ async function callAdapter(endpoint, data, signal) {
 }
 async function api(req, res, pathname) {
   if (req.method === 'GET' && pathname === '/api/status') {
-    if (muse && !activeRequests && !accountBusy&&!preparingAccounts.size&&!muse.restoring) await muse.refreshActive({ background: true });
-    return json(res, 200, {version:appVersion, ...(muse?.recoverMedia?{canRecoverMedia:true}:{}), museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy || preparingAccounts.size>0, activeRequests, maxConcurrency, ...(muse ? {preparingAccounts:[...preparingAccounts],mediaTransfers:mediaQueue.snapshot(),restoringSessions:Boolean(muse.restoring), executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), ...(muse?.supportsMultiAccount ? {multiAccount:true, executionAccountId:muse.singleId??1, preferredConcurrency:muse.preferredConcurrency,concurrencyWarning:muse.concurrencyWarning,concurrencyProbe:muse.driver?.(muse.singleId??1).concurrencyProbe} : {}), embeddedLogin, credit: null, gpu: null });
+    if (muse && !activeRequests && !accountBusy&&!preparingAccounts.size&&!cleaningDraftAccounts.size&&!muse.restoring) await muse.refreshActive({ background: true });
+    return json(res, 200, {version:appVersion, ...(muse?.recoverMedia?{canRecoverMedia:true}:{}), ...(muse?.clearToolDraft?{canClearToolDraft:true}:{}), museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy || preparingAccounts.size>0||cleaningDraftAccounts.size>0, activeRequests, maxConcurrency, ...(muse ? {preparingAccounts:[...preparingAccounts],cleaningDraftAccounts:[...cleaningDraftAccounts],mediaTransfers:mediaQueue.snapshot(),restoringSessions:Boolean(muse.restoring), executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), ...(muse?.supportsMultiAccount ? {multiAccount:true, executionAccountId:muse.singleId??1, preferredConcurrency:muse.preferredConcurrency,concurrencyWarning:muse.concurrencyWarning,concurrencyProbe:muse.driver?.(muse.singleId??1).concurrencyProbe} : {}), embeddedLogin, credit: null, gpu: null });
   }
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
   if (!req.headers['content-type']?.startsWith('application/json')) return json(res, 415, { error: 'Cần Content-Type application/json.' });
-  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close|composer|concurrency|prepare|import|select|proxy|proxy-ip|save)$/);
+  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close|composer|concurrency|prepare|import|select|proxy|proxy-ip|save|clear-tool-draft)$/);
   const legacyAccountRoute = pathname.match(/^\/api\/accounts\/(\d+)\/(connect|check|close)$/);
   if (!['/api/video', '/api/image', '/api/text','/api/media/recover'].includes(pathname) && !accountRoute && !legacyAccountRoute) return json(res, 404, { error: 'API không tồn tại.' });
   let acquired = false;
   let renderingAccountId=null;
   let accountAcquired = false;
   let preparingAccountId=null;
+  let cleaningDraftAccountId=null;
   const abort = new AbortController();
   res.on('close', () => abort.abort());
   const requestStarted=Date.now();const timedOut=()=>abort.abort(new Error('MUSE_TIMEOUT: Đã dừng chờ trong giới hạn 250 giây của lượt chạy. Kiểm tra kết quả Muse trước khi tạo lại.'));
@@ -111,13 +113,20 @@ async function api(req, res, pathname) {
     const data = await body(req);
     if(data?.waitBudgetMs!==undefined){if(!Number.isInteger(data.waitBudgetMs)||data.waitBudgetMs<1||data.waitBudgetMs>250000)return json(res,400,{error:'WAIT_BUDGET_INVALID: Giới hạn chờ không hợp lệ.'});clearTimeout(timeout);timeout=setTimeout(timedOut,Math.max(1,Math.min(apiBudget,data.waitBudgetMs)-(Date.now()-requestStarted)));}
     if (accountRoute || legacyAccountRoute) {
-      const accountId = legacyAccountRoute ? Number(legacyAccountRoute[1]) : data.accountId ?? 1;
+      const accountId = legacyAccountRoute ? Number(legacyAccountRoute[1]) : data?.accountId ?? 1;
       const action = accountRoute ? accountRoute[1] : legacyAccountRoute[2];
       if (!Number.isInteger(accountId) || accountId<1 || accountId>MAX_ACCOUNTS || (!muse?.supportsMultiAccount && accountId!==1)) return json(res,400,{error:'ACCOUNT_INVALID: Tài khoản không hợp lệ.'});
       if (!muse) return json(res, 409, { error: 'Tài khoản đang do adapter riêng quản lý. Chọn MUSE_TRANSPORT=browser để đăng nhập bằng Chrome/Edge.' });
+      if(action==='clear-tool-draft'){
+        if(!muse.clearToolDraft)return json(res,409,{error:'MUSE_DRAFT_CLEANUP_UNAVAILABLE: Cần bản Muse Studio mới để dọn bản nháp tool.'});
+        if(!data||typeof data!=='object'||Array.isArray(data)||data.accountId!==accountId||typeof data.prompt!=='string'||!data.prompt.trim()||data.prompt.length>12000||!['video','image'].includes(data.output)||Object.keys(data).some(key=>!['accountId','prompt','output','waitBudgetMs'].includes(key)))return json(res,400,{error:'MUSE_DRAFT_CLEANUP_INVALID: Cần đúng prompt, loại ảnh/video và tài khoản của ô bị lỗi.'});
+        if(accountBusy||muse.restoring||(activeAccountRequests.get(accountId)||0)>0||preparingAccounts.has(accountId)||cleaningDraftAccounts.has(accountId))return json(res,409,{error:'MUSE_CHAT_BUSY: Tài khoản này đang xử lý tác vụ hoặc chuẩn bị. Đợi hoàn tất trước khi dọn bản nháp.'});
+        cleaningDraftAccounts.add(accountId);cleaningDraftAccountId=accountId;
+        return json(res,200,{...await muse.clearToolDraft({accountId,prompt:data.prompt,output:data.output},abort.signal),accounts:muse.snapshot()});
+      }
       if(action==='save'){if(!muse.saveSessions)return json(res,409,{error:'Lưu tất cả phiên có trong bản desktop.'});return json(res,200,await muse.saveSessions());}
       const preparing=action==='prepare';
-      if((preparing?(activeAccountRequests.get(accountId)||0)>0:activeRequests>0)||accountBusy||muse.restoring||(!preparing&&preparingAccounts.size)||preparingAccounts.has(accountId))return json(res,409,{error:'Đang có tác vụ hoặc chuẩn bị phiên. Đợi hoàn tất trước khi thay đổi tài khoản.'});
+      if((preparing?(activeAccountRequests.get(accountId)||0)>0:activeRequests>0)||accountBusy||muse.restoring||(!preparing&&preparingAccounts.size)||preparingAccounts.has(accountId)||cleaningDraftAccounts.has(accountId))return json(res,409,{error:'Đang có tác vụ hoặc chuẩn bị phiên. Đợi hoàn tất trước khi thay đổi tài khoản.'});
       if(preparing&&preparingAccounts.size>=3)return json(res,429,{error:'ACCOUNT_PREPARE_BUSY: Đang chuẩn bị ba tài khoản. Đợi một phiên hoàn tất.'});
       muse.account(accountId);
       if(preparing){preparingAccounts.add(accountId);preparingAccountId=accountId}else accountBusy=accountAcquired=true;
@@ -139,7 +148,7 @@ async function api(req, res, pathname) {
     if(recovering&&!data.sceneId)return json(res,400,{error:'MUSE_RECOVER_INVALID: Cần đúng số cảnh và prompt để đối chiếu tệp đã tạo.'});
     const endpoint = `/${kind}`;
     if (!muse) adapterURL(endpoint);
-    if (accountBusy||preparingAccounts.has(data.accountId??1)) return json(res, 409, { error: 'Đang kiểm tra tài khoản Muse. Vui lòng đợi.' });
+    if (accountBusy||preparingAccounts.has(data.accountId??1)||cleaningDraftAccounts.has(data.accountId??1)) return json(res, 409, { error: 'Đang kiểm tra tài khoản Muse. Vui lòng đợi.' });
     if (activeRequests >= maxConcurrency) return json(res, 429, { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 400 ô AI đang chạy. Đợi một luồng hoàn tất.' });
     activeRequests++; acquired = true;renderingAccountId=data.accountId??1;activeAccountRequests.set(renderingAccountId,(activeAccountRequests.get(renderingAccountId)||0)+1);
     const useImage = data.image && (data.characterLock !== false || (kind === 'video' && data.sourceMode === 'image'));
@@ -155,7 +164,7 @@ async function api(req, res, pathname) {
     const metadata = result.metadata && Number.isFinite(result.metadata.width) && Number.isFinite(result.metadata.height) ? result.metadata : undefined;
     return json(res, 200, kind !== 'text' ? { base64: result.base64, mimeType: result.mimeType, ...(metadata ? { metadata } : {}) } : { text: result.text });
   } catch (error) { json(res, Number.isInteger(error.status) && error.status >= 400 && error.status <= 599 ? error.status : 502, { error: safeError(error) }); }
-  finally { clearTimeout(timeout); if (acquired){activeRequests--;const count=activeAccountRequests.get(renderingAccountId)||0;if(count>1)activeAccountRequests.set(renderingAccountId,count-1);else activeAccountRequests.delete(renderingAccountId);} if (accountAcquired) accountBusy = false;if(preparingAccountId!==null)preparingAccounts.delete(preparingAccountId); }
+  finally { clearTimeout(timeout); if (acquired){activeRequests--;const count=activeAccountRequests.get(renderingAccountId)||0;if(count>1)activeAccountRequests.set(renderingAccountId,count-1);else activeAccountRequests.delete(renderingAccountId);} if (accountAcquired) accountBusy = false;if(preparingAccountId!==null)preparingAccounts.delete(preparingAccountId);if(cleaningDraftAccountId!==null)cleaningDraftAccounts.delete(cleaningDraftAccountId); }
 }
 const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.mp4': 'video/mp4', '.png': 'image/png', '.ico': 'image/x-icon' };
 const server = http.createServer(async (req, res) => {

@@ -80,6 +80,9 @@ export function errorInfo(error: unknown): { raw: string; hint: string } {
   else if (/MUSE_NEW_CHAT_UNAVAILABLE/i.test(raw)) hint = 'Tool chưa mở được hội thoại riêng. Dùng chế độ hàng đợi một cảnh mỗi lượt; lỗi này không xác nhận Muse đang bận hoặc hết hạn mức.';
   else if (/MUSE_SHARED_CONVERSATION/i.test(raw)) hint = 'Hội thoại Muse nhận các yêu cầu xen kẽ. Tool dừng để tránh ghép nhầm ảnh; hãy chạy lại từng cảnh sau khi kiểm tra lịch sử.';
   else if (/MUSE_DUPLICATE_MEDIA/i.test(raw)) hint = 'Ảnh nhận được trùng hoàn toàn với một cảnh khác. Tool chưa tính là ảnh mới; kiểm tra kết quả và lịch sử Muse trước khi tạo lại.';
+  else if (/MUSE_DRAFT_UNCERTAIN/i.test(raw)) hint = 'Tool đã thử gửi lượt này nhưng chưa xác nhận được Muse đã nhận. Kiểm tra lịch sử của đúng tài khoản và bấm Nhận lại từ Muse trước khi chọn tạo mới; tool không tự gửi trùng.';
+  else if (/MUSE_DRAFT_ACKNOWLEDGED/i.test(raw)) hint = 'Muse đã nhận lượt có prompt này. Bấm Nhận lại từ Muse để lấy kết quả đã tạo; chưa gửi lại prompt.';
+  else if (/MUSE_DRAFT_EXISTS/i.test(raw)) hint = 'Ô Message đang giữ bản nháp. Nếu đây là prompt tool đã nhập, bấm Dọn bản nháp tool để đối chiếu và dọn đúng nội dung đó, rồi tự chọn tạo lại hoặc nhận kết quả cũ. Bản nháp bạn tự viết được giữ.';
   else if (/MUSE_DRAFT_CHANGED|MUSE_EDITOR_CHANGED/i.test(raw)) hint = 'Ô Message thay đổi khi đang nhập. Tool dừng trước khi gửi; kiểm tra bản nháp trong cuộc trò chuyện.';
   else if (/MUSE_COMPOSER_NOT_READY/i.test(raw)) hint = 'Chưa tìm được ô nhập Message cho cảnh này. Bấm Kiểm tra ô Message ở bảng tài khoản để xem chi tiết trang luồng; chưa có prompt được gửi.';
   else if (/MUSE_COMPOSER_AMBIGUOUS/i.test(raw)) hint = 'Có nhiều ô nhập Message phù hợp cho cảnh này. Tool chưa gửi prompt để tránh chọn nhầm ô.';

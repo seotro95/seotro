@@ -196,4 +196,4 @@ export async function downloadMediaBatch(items: { media: MediaResult; id: number
   } catch (error) { if (native&&session) await native('abort',session.id).catch(()=>{}); throw error; }
 }
 export const providerStatus = () => api('/api/status');
-export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer' | 'concurrency' | 'import' | 'select' | 'prepare' | 'proxy' | 'proxy-ip' | 'save', data: Record<string, unknown> = {},signal?:AbortSignal) => api(`/api/account/${action}`, data,signal);
+export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer' | 'concurrency' | 'import' | 'select' | 'prepare' | 'proxy' | 'proxy-ip' | 'save' | 'clear-tool-draft', data: Record<string, unknown> = {},signal?:AbortSignal) => api(`/api/account/${action}`, data,signal);

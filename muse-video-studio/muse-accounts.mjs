@@ -71,6 +71,14 @@ export class MuseAccounts {
     }
   }
   async checkComposer(signal,id=1) { return this.driver(id).checkComposer(signal); }
+  async clearToolDraft(data,signal){
+    signal=AbortSignal.any([signal,this.shutdown.signal]);signal.throwIfAborted();
+    const id=data.accountId;this.validateId(id);const driver=this.driver(id);
+    if(this.restoring||this.usage.has(id)||this.waiters.get(id)?.length||driver.reserved||driver.queue?.length||driver.workers?.size||driver.composerBusy||driver.sharedSignals?.size||driver.progress?.().some(stage=>stage.active))throw fail('MUSE_CHAT_BUSY','Tài khoản này đang có tác vụ. Đợi hoàn tất trước khi dọn bản nháp tool.');
+    if(!driver.clearToolDraft)throw fail('MUSE_DRAFT_CLEANUP_UNAVAILABLE','Kết nối này chưa hỗ trợ dọn bản nháp tool.');
+    const release=await this.acquire(id,{exclusive:true},signal);
+    try{return await driver.clearToolDraft({...data,accountId:1},signal)}finally{release()}
+  }
   async closeAccount(id) { if (this.usage.has(id)) throw fail('MUSE_CHAT_BUSY','Tài khoản này đang có tác vụ.'); await this.driver(id).close(); }
   async close() { this.shutdown.abort();for(const rows of this.waiters.values())for(const row of [...rows])row.cancel();await Promise.allSettled([...this.drivers.values()].map(driver=>driver.close())); }
   async reopenLogin() { return this.driver(this.selectedId).reopenLogin(); }
