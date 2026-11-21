@@ -370,10 +370,11 @@ function App() {
   async function clearSceneToolDraft(scene:Scene){
     if(draftCleanupLocked()||!usingBrowser||!status?.canClearToolDraft||!scene.error?.includes('MUSE_DRAFT_EXISTS'))return;
     const config=settingsRef.current,accountId=accountForScene(scene,config),prompt=scene.prompt,output=config.output;
+    const fullPrompt=[prompt.trim(),sceneSettings(config,scene).modifier.trim()].filter(Boolean).join('\n\n');
     if([...renderJobs.current.values()].some(job=>job.accountId===accountId)||status.workerProgress?.some(stage=>stage.accountId===accountId&&stage.active))return;
     draftCleanupAccounts.current.add(accountId);setDraftCleanupAccount(accountId);
     try{
-      const result=await accountAction('clear-tool-draft',{accountId,prompt,output});
+      const result=await accountAction('clear-tool-draft',{accountId,prompt:fullPrompt,output});
       if(result.accounts)setStatus(current=>current?{...current,accounts:result.accounts}:current);
       const current=scenesRef.current.find(value=>value.id===scene.id);
       if(current?.prompt===prompt&&accountForScene(current,settingsRef.current)===accountId&&current.error?.includes('MUSE_DRAFT_EXISTS')){
