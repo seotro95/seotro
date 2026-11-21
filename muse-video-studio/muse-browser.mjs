@@ -628,7 +628,7 @@ export class MuseBrowser {
     throw fail('MUSE_EDITOR_CHANGED', 'Muse đổi ô nhập nhưng chưa giữ đủ prompt. Chưa nhấn gửi. Kiểm tra cuộc trò chuyện rồi thử lại.', 409);
   }
   async sendSharedBatch(input,group){
-    let rows=input.filter(row=>!row.done);let release;let sent=false;const downloads=new Set(),attempts=new Map(),bindings={};
+    let rows=input.filter(row=>!row.done);let release;let sent=false;let overlapped=false;const downloads=new Set(),attempts=new Map(),unsupportedSince=new Map(),failedSources=new Map(),candidatesFor=new Map(),bindings={};
     const rejectPending=error=>rows.forEach(row=>{if(!row.done)row.reject(error)});
     try{
       release=await this.acquireComposer(group.control.signal);
@@ -643,6 +643,7 @@ export class MuseBrowser {
       rows.forEach((row,index)=>row.label=`CLIP_${String(row.sceneId||index+1).padStart(3,'0')}_${marker.slice('studio-batch-'.length, 'studio-batch-'.length+8)}`);
       const prefixes=rows.map(row=>{const at=row.prompt.indexOf('\nScene:\n');return at<0?null:{head:row.prompt.slice(0,at),scene:row.prompt.slice(at+8)}});
       const common=prefixes.every(value=>value&&value.head===prefixes[0]?.head)?prefixes[0].head:'';
+      rows.forEach((row,index)=>{row.sourceClip=Number((prefixes[index]?.scene||row.prompt).trim().match(/^CLIP[ _-]*(\d{1,4})\b/i)?.[1])||undefined});
       const tasks=rows.map((row,index)=>`[BEGIN_CLIP ${row.label} ${row.fileToken}]\n${common?prefixes[index].scene:row.prompt}\n[END_CLIP ${row.fileToken}]`).join('\n\n');
       const message=`[${marker}]\nCreate ${rows.length} independent ${output==='video'?'video':'image'} file${rows.length===1?'':'s'} now in this ONE request. Each task below is a separate output; use the available generation tool for every task. ${output==='video'?'Keep the requested duration for EACH video; do not stitch the tasks into one long film.':''} Do not just write a plan or ask whether to start.\nFor each result, put its CLIP label in the same list item or heading as its native attachment or real download link. Preserve the real working URL; never invent file paths or rename files just for tracking. If a task cannot be generated, give its label and concrete reason.\n\n${common?'Apply these instructions to EACH task:\n'+common+'\n\n':''}${tasks}`;
       const maxLength=Number(await editor.getAttribute('maxlength'));if(maxLength>0&&message.length>maxLength)throw fail('MUSE_BATCH_TOO_LONG','Yêu cầu gộp vượt độ dài Muse cho phép. Chưa gửi prompt; chuyển sang từng ô và giữ đủ nội dung.',409);
@@ -652,28 +653,33 @@ export class MuseBrowser {
       await editor.press('Enter');
       let acknowledged=false,lastSignature='',stableSince=Date.now();const ackDeadline=Date.now()+Math.min(this.submitTimeoutMs,this.timeoutMs);
       while(Date.now()<budget&&!group.cancelled){
+        if(this.sharedSignals.size>rows.length)overlapped=true;
         if(rows.every(row=>row.done))return;
         if([...this.sharedSignals.values()].every(signal=>signal.aborted)){
           if(!this.sharedStopPromise)this.sharedStopPromise=(async()=>{await page.locator(STOP).first().evaluate(button=>button.click(),undefined,{timeout:3000}).catch(()=>{});await pause(200)})();
           await this.sharedStopPromise;for(const row of rows)if(!row.done)row.reject(row.signal.reason||fail('ABORTED','Đã dừng lượt tạo.'));return;
         }
-        const state=await page.evaluate(inspectBatchDOM,{marker,rows:rows.map(row=>({fileToken:row.fileToken,label:row.label})),baseline,baselineTexts:snapshot.texts,acknowledged,bindings,output,allowSingle:rows.length===1&&this.sharedSignals.size===1});
+        const state=await page.evaluate(inspectBatchDOM,{marker,rows:rows.map(row=>({fileToken:row.fileToken,label:row.label,sourceClip:row.sourceClip})),baseline,baselineTexts:snapshot.texts,acknowledged,bindings,output,allowScopedLabels:!overlapped,allowSingle:!overlapped&&rows.length===1&&this.sharedSignals.size===1});
         if(state.anchored&&!acknowledged){acknowledged=true;for(const row of rows)if(!row.done)row.onStage('submitted')}
         if(!acknowledged&&Date.now()>=ackDeadline)throw fail('MUSE_SUBMIT_NOT_ACKNOWLEDGED','Muse chưa xác nhận đã nhận yêu cầu gộp. Tool không tự gửi trùng.',504);
         const signature=JSON.stringify([state.text,state.media.map(item=>item.key)]);if(signature!==lastSignature){lastSignature=signature;stableSince=Date.now()}
         const unique=new Set(state.media.filter(item=>!item.uncertain).map(item=>item.owner||item.key)).size;
         for(const row of rows){
           if(row.done)continue;
-          row.onObservation?.({checkedAt:new Date().toISOString(),messageAcknowledged:acknowledged,assistantReplies:state.replyCount,visibleVideos:output==='video'?unique:0,visibleImages:output==='image'?unique:0,matchedMedia:Boolean(state.matches[row.fileToken]),matchedCount:Object.keys(state.matches).length,unmatchedCount:state.unclaimed,captionLinked:state.captionLinked,replyLayout:state.replyLayout,streaming:state.streaming,replyScope:'batch',reply:replyPreview(state.text),batchSize:rows.length,messagesSent:1,waitLimitSeconds:250});
+          row.onObservation?.({checkedAt:new Date().toISOString(),messageAcknowledged:acknowledged,assistantReplies:state.replyCount,visibleVideos:output==='video'?unique:0,visibleImages:output==='image'?unique:0,matchedMedia:Boolean(state.matches[row.fileToken]),matchedCount:Object.keys(state.matches).length,unmatchedCount:state.unclaimed,captionLinked:state.captionLinked,mediaActions:state.media.map(item=>({kind:item.kind,action:item.nativeButton?'download-button':item.nativeDownload?'native-link':'direct-file',protocol:(()=>{try{return new URL(item.src,page.url()).protocol}catch{return 'invalid'}})(),sceneId:Number(rows.find(row=>row.fileToken===item.owner)?.sceneId)||null})),clipLabels:rows.map(item=>({sceneId:item.sceneId,label:item.label,sourceClip:item.sourceClip||null})),unsupportedMedia:state.unsupported.map(item=>({scheme:item.scheme,locationClass:item.locationClass,element:item.element,sceneId:Number(rows.find(row=>row.fileToken===item.owner)?.sceneId)||null})),replyLayout:state.replyLayout,streaming:state.streaming,replyScope:'batch',reply:replyPreview(state.text),batchSize:rows.length,messagesSent:1,waitLimitSeconds:250});
           if(row.signal.aborted)row.onStage('cancelled-provider');else if(state.text&&!state.matches[row.fileToken])row.onStage('reply-received');
-          const media=state.matches[row.fileToken];
+          const candidates=[state.matches[row.fileToken],...state.media.filter(item=>item.owner===row.fileToken)].filter(Boolean).filter((item,index,all)=>all.findIndex(value=>value.key===item.key)===index);candidatesFor.set(row,candidates);
+          const media=candidates.find(item=>!failedSources.get(row)?.has(item.key));
           if(!media&&state.rowErrors[row.fileToken]){const message=state.rowErrors[row.fileToken];const code=replyProblem(message)||'MUSE_GENERATION_ERROR';const error=fail(code,`Muse báo lỗi của ${row.label}: ${replyPreview(message)}`,502);if(code==='MUSE_PARALLEL_LIMIT')error.safeSerialRetry=true;row.reject(error);this.sharedSignals.delete(row.fileToken);continue;}
           if(!media&&!state.streaming&&state.rowTexts[row.fileToken]&&Date.now()-stableSince>=this.replyQuietMs){const problem=replyProblem(state.rowTexts[row.fileToken]);if(problem){row.reject(fail(problem,`Muse chưa trả tệp của ${row.label}: ${replyPreview(state.rowTexts[row.fileToken])}`,422));this.sharedSignals.delete(row.fileToken);continue;}}
+          const blocked=state.unsupported.filter(item=>item.owner===row.fileToken);
+          if(!media&&blocked.length){if(!unsupportedSince.has(row.fileToken))unsupportedSince.set(row.fileToken,Date.now());if(!state.streaming&&Date.now()-unsupportedSince.get(row.fileToken)>=5000&&Date.now()-stableSince>=this.replyQuietMs){row.reject(fail('MUSE_MEDIA_UNREADABLE',`MEDIA_URL_UNSUPPORTED: Liên kết của ${row.label} chưa có nguồn tệp hỗ trợ. Loại liên kết: ${[...new Set(blocked.map(item=>item.scheme+' ('+item.locationClass+', '+item.element+')'))].join(', ')}. Các ô khác tiếp tục; chưa tạo lại yêu cầu.`,502));this.sharedSignals.delete(row.fileToken);continue;}}
+          else unsupportedSince.delete(row.fileToken);
           if(!media||downloads.has(row))continue;const last=attempts.get(row);if(last?.key===media.key&&last.nextAt>Date.now())continue;
           if(row.signal.aborted){row.reject(row.signal.reason);this.sharedSignals.delete(row.fileToken);continue;}
           downloads.add(row);row.onStage('downloading');
           void this.downloadMedia(page,media,output,row.signal).then(value=>{bindings[row.fileToken]=media.key;row.resolve({...value,captionPending:false});},error=>{
-            if(!row.signal.aborted&&(/MEDIA_HTTP_404|MEDIA_EMPTY/.test(error.message)||(media.uncertain&&/MEDIA_RESPONSE_NOT_MEDIA/.test(error.message)))){const count=(attempts.get(row)?.count||0)+1;attempts.set(row,{key:media.key,count,nextAt:Date.now()+Math.min(10000,500*2**Math.min(count,6))});downloads.delete(row);row.onStage('reply-received');return;}row.reject(error);
+            if(!row.signal.aborted&&(/MEDIA_HTTP_404|MEDIA_EMPTY/.test(error.message)||(media.uncertain&&/MEDIA_RESPONSE_NOT_MEDIA/.test(error.message)))){const count=(attempts.get(row)?.count||0)+1;attempts.set(row,{key:media.key,count,nextAt:Date.now()+Math.min(10000,500*2**Math.min(count,6))});downloads.delete(row);row.onStage('reply-received');return;}const tried=failedSources.get(row)||new Set();tried.add(media.key);failedSources.set(row,tried);if(!row.signal.aborted&&candidatesFor.get(row)?.some(item=>!tried.has(item.key))){downloads.delete(row);row.onStage('reply-received');return;}row.reject(error);
           }).finally(()=>{if(row.done)this.sharedSignals.delete(row.fileToken)});
         }
         // An acknowledged user bubble alone never releases the next chat turn.
@@ -684,7 +690,7 @@ export class MuseBrowser {
           const problem=replyProblem(state.generalText);if(problem){const error=fail(problem,`Muse chưa tạo ${output==='video'?'video':'ảnh'} cho lượt gộp: ${replyPreview(state.generalText)}`,422);if(problem==='MUSE_PARALLEL_LIMIT'&&/no (?:videos?|images?|generations?) (?:were|was|have been|has been) (?:created|started)|did not start any|chưa tạo.*(?:video|ảnh) nào|không tạo được.*(?:video|ảnh) nào/i.test(state.generalText))error.safeSerialRetry=true;throw error;}
         }
         if(!state.streaming&&state.unclaimed&&state.completedRows>=rows.length&&this.sharedSignals.size<=rows.filter(row=>!row.done).length&&Date.now()-stableSince>=Math.max(8000,this.replyQuietMs))throw fail('MUSE_BATCH_UNMATCHED',`Đã thấy ${unique} nguồn media và nhãn hoàn thành nhưng chỉ ghép được ${Object.keys(state.matches).length}/${rows.length} ô. Dùng Nhận lại từ Muse để chỉ lấy tệp đã tạo, không gửi lại prompt.`,409);
-        if(!state.streaming&&!state.media.length&&state.unsupported.length&&Date.now()-stableSince>=this.replyQuietMs)throw fail('MUSE_MEDIA_UNREADABLE','MEDIA_URL_UNSUPPORTED: Muse chỉ trả liên kết không tải trực tiếp được, chưa có tệp thật thay thế.',502);
+        if(!state.streaming&&!state.media.length&&state.unsupported.length&&state.unsupported.every(item=>!item.owner)&&Date.now()-stableSince>=5000)throw fail('MUSE_MEDIA_UNREADABLE',`MEDIA_URL_UNSUPPORTED: Liên kết chưa gắn được với đúng ô. Loại liên kết: ${[...new Set(state.unsupported.map(item=>item.scheme+' ('+item.locationClass+', '+item.element+')'))].join(', ')}. Không tự tạo lại yêu cầu.`,502);
         await pause(this.pollMs);
       }
       throw fail('MUSE_TIMEOUT','Đã hết thời gian của lượt tạo, trước giới hạn 250 giây. Tool không tự tạo lại yêu cầu đã gửi.',504);
@@ -712,11 +718,12 @@ export class MuseBrowser {
       const deadline=Date.now()+Math.min(15000,this.timeoutMs);let state;
       do{
         signal.throwIfAborted();
-        state=await frame.evaluate(inspectBatchDOM,{marker:saved.marker,rows:saved.rows,baseline:baseline.keys,baselineTexts:baseline.texts,acknowledged:true,output:data.output});
-        progress.observation={checkedAt:new Date().toISOString(),messageAcknowledged:true,assistantReplies:state.replyCount,visibleVideos:data.output==='video'?state.media.length:0,visibleImages:data.output==='image'?state.media.length:0,matchedMedia:Boolean(state.matches[saved.fileToken]),matchedCount:Object.keys(state.matches).length,unmatchedCount:state.unclaimed,captionLinked:state.captionLinked,replyLayout:state.replyLayout,streaming:state.streaming,replyScope:'saved-batch',reply:replyPreview(state.text),batchSize:saved.rows.length,messagesSent:0,recoveryOnly:true,waitLimitSeconds:250};
+        state=await frame.evaluate(inspectBatchDOM,{marker:saved.marker,rows:saved.rows,baseline:baseline.keys,baselineTexts:baseline.texts,acknowledged:true,output:data.output,allowScopedLabels:true});
+        progress.observation={checkedAt:new Date().toISOString(),messageAcknowledged:true,assistantReplies:state.replyCount,visibleVideos:data.output==='video'?state.media.length:0,visibleImages:data.output==='image'?state.media.length:0,matchedMedia:Boolean(state.matches[saved.fileToken]),matchedCount:Object.keys(state.matches).length,unmatchedCount:state.unclaimed,captionLinked:state.captionLinked,unsupportedMedia:state.unsupported.map(item=>({scheme:item.scheme,locationClass:item.locationClass,element:item.element,sceneId:null})),replyLayout:state.replyLayout,streaming:state.streaming,replyScope:'saved-batch',reply:replyPreview(state.text),batchSize:saved.rows.length,messagesSent:0,recoveryOnly:true,waitLimitSeconds:250};
+        if(!state.matches[saved.fileToken]){const withinTurn=await frame.evaluate(inspectBatchDOM,{marker:saved.marker,rows:saved.rows,baseline:baseline.keys,baselineTexts:baseline.texts,acknowledged:true,output:data.output,allowScopedLabels:true,turnOnly:true});if(withinTurn.matches[saved.fileToken])state=withinTurn;}
         const media=state.matches[saved.fileToken];
         if(!media){const problem=replyProblem(state.rowTexts[saved.fileToken]);if(problem)throw fail(problem,replyPreview(state.rowTexts[saved.fileToken]),422);}
-        if(media){progress.phase='downloading';const result=await this.downloadMedia(frame,media,data.output,signal);progress.phase='done';return result;}
+        if(media){progress.phase='downloading';let lastError;const candidates=[media,...state.media.filter(item=>item.owner===saved.fileToken&&item.key!==media.key)];for(const candidate of candidates){try{const result=await this.downloadMedia(frame,candidate,data.output,signal);progress.phase='done';return result}catch(error){if(signal.aborted)throw error;lastError=error}}throw lastError;}
         await pause(Math.min(300,this.pollMs),signal);
       }while(Date.now()<deadline);
       throw fail('MUSE_RECOVER_NO_MATCH',`Lượt đã tạo có ${state?.media.length||0} nguồn media, chưa đối chiếu được tệp cho ô ${data.sceneId}. Chưa gửi prompt hoặc tạo thêm tệp.`,409);
@@ -765,8 +772,9 @@ export class MuseBrowser {
           // A generated player often uses preload=none: currentSrc/readyState
           // stay empty until a human presses Play. Read the file source instead
           // of waiting for decoder metadata or for the remaining caption stream.
-          const nativeURL=value=>{try{const url=new URL(value,location.href);return !url.username&&!url.password&&(['attachment:','artifact:'].includes(url.protocol)||(url.protocol==='sandbox:'&&url.pathname.startsWith('/mnt/data/')))}catch{return false}};
-          const linkSource=el=>{const nativeDownload=nativeURL(el.href);if(nativeDownload)el.dataset.museStudioFileId||=crypto.randomUUID();return {src:el.href,width:0,height:0,nativeDownload,nativeId:nativeDownload?el.dataset.museStudioFileId:undefined}};
+          const nativeURL=value=>{try{const url=new URL(value,location.href);return !url.username&&!url.password&&(['attachment:','artifact:'].includes(url.protocol)||(url.protocol==='sandbox:'&&Boolean(url.pathname||url.hostname)))}catch{return false}};
+          const clickSafe=value=>{try{const url=new URL(value,location.href);return !url.username&&!url.password&&!/^(?:javascript|vbscript|mailto|tel|sms|intent|shell|ms-[a-z-]+):$/i.test(url.protocol)}catch{return false}};
+          const linkSource=el=>{const url=new URL(el.href,location.href),nativeControl=clickSafe(el.href),direct=['https:','blob:','data:'].includes(url.protocol)||(url.protocol==='http:'&&url.hostname==='127.0.0.1');const nativeDownload=nativeControl&&(nativeURL(el.href)||!direct);if(nativeControl)el.dataset.museStudioFileId||=crypto.randomUUID();return {src:el.href,width:0,height:0,nativeDownload,nativeControl,nativeId:nativeControl?el.dataset.museStudioFileId:undefined}};
           const links=replies.flatMap(node=>Array.from(node.querySelectorAll('a[href]'))).filter(el=>/\.(mp4|webm|mov)(?:$|[?#])/i.test(el.href)||/\.(mp4|webm|mov)$/i.test(el.download||'')||/^video\//i.test(el.type||'')).map(linkSource);
           const players=replies.flatMap(node=>Array.from(node.querySelectorAll('video'))).map(el=>({src:el.currentSrc||el.getAttribute('src')||el.querySelector('source[src]')?.src,duration:Number.isFinite(el.duration)?el.duration:undefined,width:el.videoWidth,height:el.videoHeight})).filter(el=>el.src);
           const videos=[...links,...players];
@@ -774,11 +782,13 @@ export class MuseBrowser {
           if(output==='image')images.push(...replies.flatMap(node=>Array.from(node.querySelectorAll('a[href]'))).filter(el=>/\.(png|jpe?g|webp|avif|gif)(?:$|[?#])/i.test(el.href)||/^image\//i.test(el.type||'')).map(linkSource));
           const mediaURL=(value)=>{try{const url=new URL(value,location.href);return ['https:','blob:','data:'].includes(url.protocol)||(url.protocol==='http:'&&url.hostname==='127.0.0.1')}catch{return false}};
           const attributedLinks=sharedConversation?replies.flatMap(node=>Array.from(node.querySelectorAll('a[href]'))).filter(el=>[el.textContent,el.getAttribute('download'),el.href].some(value=>value?.includes(fileToken))):[];
-          const namedLinks=attributedLinks.filter(el=>mediaURL(el.href)||nativeURL(el.href));
-          const unsupportedMediaLinks=attributedLinks.filter(el=>!mediaURL(el.href)&&!nativeURL(el.href)).length;
+          const namedLinks=attributedLinks.filter(el=>clickSafe(el.href));
+          const unsupportedMediaLinks=attributedLinks.filter(el=>!clickSafe(el.href)).length;
           const namedElements=sharedConversation?replies.flatMap(node=>Array.from(node.querySelectorAll(output==='video'?'video':'img'))).filter(el=>{if([el.getAttribute('alt'),el.getAttribute('aria-label'),el.getAttribute('src'),el.querySelector('source[src]')?.src].some(value=>value?.includes(fileToken)))return true;const container=el.closest('figure')||el.closest('[data-message-item]');const tokens=new Set(container?.textContent.match(/\bMUSE_[a-f0-9]{32}\b/g)||[]);return tokens.size===1&&tokens.has(fileToken)&&container.querySelectorAll(output==='video'?'video':'img').length===1;}):[];
           const namedSources=namedElements.map(el=>({src:el.currentSrc||el.getAttribute('src')||el.querySelector('source[src]')?.src,width:el.videoWidth||el.naturalWidth||0,height:el.videoHeight||el.naturalHeight||0})).filter(media=>media.src&&mediaURL(media.src));
-          const namedMedia=namedSources[0]||(namedLinks.length?linkSource(namedLinks[0]):null);
+          const buttonSources=replies.flatMap(node=>[...node.querySelectorAll('button,[role="button"]')]).filter(node=>{const name=[node.getAttribute('aria-label'),node.getAttribute('title'),node.innerText].join(' ');return /\bdownload\b|\bsave (?:image|video|file)\b|tải (?:xuống|về|ảnh|video|tệp|file)/i.test(name)&&!/\b(?:all|zip|generate|create)\b|tất cả|tạo (?:ảnh|video)/i.test(name)}).map(node=>{node.dataset.museStudioFileId||=crypto.randomUUID();const name=[node.getAttribute('aria-label'),node.getAttribute('title'),node.innerText].join(' '),kind=/\bvideo\b/i.test(name)?'video':/\bimage\b|ảnh/i.test(name)?'image':output;return {src:'muse-file-control:'+node.dataset.museStudioFileId,width:0,height:0,nativeDownload:true,nativeControl:true,nativeButton:true,nativeId:node.dataset.museStudioFileId,kind,owned:node.closest('[data-message-item]')?.textContent.includes(fileToken)}});
+          images.push(...buttonSources.filter(item=>item.kind==='image'));videos.push(...buttonSources.filter(item=>item.kind==='video'));
+          const namedMedia=namedSources[0]||(namedLinks.length?linkSource(namedLinks[0]):buttonSources.find(item=>item.kind===output&&item.owned)||null);
           const error = replies.flatMap(node => Array.from(node.querySelectorAll(notice))).find(el=>visible(el)&&(!sharedConversation||el.closest('[data-message-item]')?.textContent.includes(fileToken)));
           const ownedText=sharedConversation?replies.filter(node=>{const tokens=new Set(node.textContent.match(/\bMUSE_[a-f0-9]{32}\b/g)||[]);return tokens.size===1&&tokens.has(fileToken)}).map(node=>node.innerText).join('\n\n'):'';
           const freshReplies=replies.filter(isNew);
@@ -838,7 +848,16 @@ export class MuseBrowser {
       if(completed)return;await pause(100);
     }
   }
-  async downloadMedia(page,media,output,signal){const work=()=>mediaQueue.run(()=>this.downloadMediaNow(page,media,output,signal),signal);return media.nativeDownload?this.nativeFileQueue.run(work,signal):work()}
+  async downloadMedia(page,media,output,signal){
+    const work=value=>mediaQueue.run(()=>this.downloadMediaNow(page,value,output,signal),signal);
+    if(media.nativeDownload)return this.nativeFileQueue.run(()=>work(media),signal);
+    try{return await work(media)}catch(error){
+      if(signal.aborted||!media.nativeId||!media.nativeControl||/MEDIA_HTTP_404|MEDIA_EMPTY/.test(error.message))throw error;
+      // Release the shared transfer slot before waiting for this account's
+      // download control. Other accounts keep their own download capacity.
+      return this.nativeFileQueue.run(()=>work({...media,nativeDownload:true}),signal);
+    }
+  }
   async downloadMediaNow(page,media,output,signal){
           const downloadKey=`__studio_download_${randomUUID().replaceAll('-','')}`;
           signal.throwIfAborted();

@@ -1,26 +1,32 @@
-// Activate only an existing media-file link in the owned Muse frame. This does
+// Activate only an existing media download control in the owned Muse frame. This does
 // not turn sandbox paths into local paths, guess an API, or ask for generation.
 export function nativeAttachmentURL(value){
-  try{const url=new URL(value);return !url.username&&!url.password&&(['attachment:','artifact:'].includes(url.protocol)||(url.protocol==='sandbox:'&&url.pathname.startsWith('/mnt/data/')))}catch{return false}
+  try{const url=new URL(value);return !url.username&&!url.password&&(['attachment:','artifact:'].includes(url.protocol)||(url.protocol==='sandbox:'&&Boolean(url.pathname||url.hostname)))}catch{return false}
 }
 export async function clickNativeAttachment(frame,media,signal){
-  signal.throwIfAborted();if(!nativeAttachmentURL(media.src))throw Error('MEDIA_URL_UNSUPPORTED');
-  const id=await frame.evaluate(({src,nativeId})=>{
-    const matches=[...document.querySelectorAll('a[href]')].filter(link=>{try{return new URL(link.getAttribute('href'),location.href).href===src}catch{return false}});
-    const link=matches.find(node=>nativeId&&node.dataset.museStudioFileId===nativeId)||(matches.length===1?matches[0]:null);
-    if(!link)return null;link.dataset.museStudioFileId||=crypto.randomUUID();
-    // Let the site's React/download handlers run, but prevent a plain virtual
-    // href from replacing the chat with a browser error page when no handler exists.
-    const protect=event=>{if(event.target?.closest?.('a')===link){event.preventDefault();cleanup()}};
+  signal.throwIfAborted();if(!media.nativeControl&&!nativeAttachmentURL(media.src))throw Error('MEDIA_URL_UNSUPPORTED');
+  const id=await frame.evaluate(({src,nativeId,nativeButton,nativeControl})=>{
+    const matches=[...document.querySelectorAll(nativeButton?'button,[role="button"]':'a[href]')].filter(node=>nativeButton?node.dataset.museStudioFileId===nativeId:(()=>{try{return new URL(node.getAttribute('href'),location.href).href===src}catch{return false}})());
+    const node=matches.find(item=>nativeId&&item.dataset.museStudioFileId===nativeId)||(matches.length===1?matches[0]:null);
+    if(!node)return null;
+    if(!nativeButton){const url=new URL(node.getAttribute('href'),location.href);if(url.username||url.password||/^(?:javascript|vbscript|mailto|tel|sms|intent|shell|ms-[a-z-]+):$/i.test(url.protocol))return null;}
+    else{const name=[node.getAttribute('aria-label'),node.getAttribute('title'),node.innerText].join(' ');if(!/\bdownload\b|\bsave (?:image|video|file)\b|tải (?:xuống|về|ảnh|video|tệp|file)/i.test(name)||/\b(?:all|zip|generate|create)\b|tất cả|tạo (?:ảnh|video)/i.test(name))return null;}
+    node.dataset.museStudioFileId||=crypto.randomUUID();
+    // Run the site's existing download handler, then suppress only the default
+    // link navigation. Virtual/file URIs are never fetched or read on the host.
+    const browserDownload=!nativeButton&&node.hasAttribute('download')&&/^(?:https?:|blob:|filesystem:|data:(?:image|video)\/)/i.test(node.getAttribute('href')||'');
+    const protect=event=>{if(event.target===node||node.contains(event.target)){if(!browserDownload)event.preventDefault();cleanup()}};
     const cleanup=()=>{clearTimeout(timer);window.removeEventListener('click',protect)};
     const timer=setTimeout(cleanup,6000);window.addEventListener('click',protect);
-    return link.dataset.museStudioFileId;
-  },{src:media.src,nativeId:media.nativeId});
+    return node.dataset.museStudioFileId;
+  },{src:media.src,nativeId:media.nativeId,nativeButton:Boolean(media.nativeButton),nativeControl:Boolean(media.nativeControl)});
   if(!id)throw Error('MEDIA_ATTACHMENT_LINK_CHANGED: Chưa xác định được đúng liên kết tệp Muse.');
-  const link=frame.locator(`a[data-muse-studio-file-id="${id}"]`);
-  // Activate the exact matched element without focus or scrolling dependencies
-  // between hidden Electron views and the native Studio surface.
-  await link.evaluate(node=>node.click(),undefined,{timeout:5000});
+  const link=frame.locator(`[data-muse-studio-file-id="${id}"]`);
+  // A trusted browser click preserves the user gesture required by some
+  // service download handlers. It still targets only the matched control.
+  const previousType=await link.evaluate(node=>{const type=node.getAttribute('type');if(node.tagName==='BUTTON')node.setAttribute('type','button');return type});
+  try{await link.click({timeout:5000,noWaitAfter:true})}finally{await link.evaluate((node,type)=>{if(node.tagName==='BUTTON'){if(type===null)node.removeAttribute('type');else node.setAttribute('type',type)}},previousType).catch(()=>{})}
+
 }
 export async function readPageAttachment(frame,media,signal,{timeoutMs=15000}={}){
   const page=frame.page?frame.page():frame;let captured,success=false;

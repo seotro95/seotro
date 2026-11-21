@@ -9,7 +9,8 @@ export function findSavedBatch({sceneId,prompt,output}){
     if(!marker||!new RegExp('Create \\d+ independent '+output+' files?','i').test(text))continue;
     const rows=[...text.matchAll(/\[BEGIN_CLIP (CLIP_(\d{3})_[a-f0-9]{8}) (MUSE_[a-f0-9]{32})\]\n([\s\S]*?)\n\[END_CLIP \3\]/gi)].map(match=>{
       const body=match[4],split=body.startsWith('Use your ')?body.indexOf('\nScene:\n'):-1;
-      return {label:match[1],sceneId:Number(match[2]),fileToken:match[3],prompt:normalize(split<0?body:body.slice(split+8))};
+      const original=normalize(split<0?body:body.slice(split+8)),sourceClip=Number(original.match(/^CLIP[ _-]*(\d{1,4})\b/i)?.[1])||undefined;
+      return {label:match[1],sceneId:Number(match[2]),fileToken:match[3],prompt:original,...(sourceClip?{sourceClip}:{})};
     });
     const target=rows.find(row=>row.sceneId===sceneId&&row.prompt===normalize(prompt));
     if(target)return {marker,rows:rows.map(({prompt,...row})=>row),fileToken:target.fileToken};
