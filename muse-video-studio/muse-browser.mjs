@@ -626,7 +626,7 @@ export class MuseBrowser {
     throw fail('MUSE_EDITOR_CHANGED', 'Muse đổi ô nhập nhưng chưa giữ đủ prompt. Chưa nhấn gửi. Kiểm tra cuộc trò chuyện rồi thử lại.', 409);
   }
   async sendSharedBatch(input,group){
-    let rows=input.filter(row=>!row.done);let release;let sent=false;const downloads=new Set(),attempts=new Map();
+    let rows=input.filter(row=>!row.done);let release;let sent=false;const downloads=new Set(),attempts=new Map(),bindings={};
     const rejectPending=error=>rows.forEach(row=>{if(!row.done)row.reject(error)});
     try{
       release=await this.acquireComposer(group.control.signal);
@@ -655,7 +655,7 @@ export class MuseBrowser {
           if(!this.sharedStopPromise)this.sharedStopPromise=(async()=>{await page.locator(STOP).first().evaluate(button=>button.click(),undefined,{timeout:3000}).catch(()=>{});await pause(200)})();
           await this.sharedStopPromise;for(const row of rows)if(!row.done)row.reject(row.signal.reason||fail('ABORTED','Đã dừng lượt tạo.'));return;
         }
-        const state=await page.evaluate(inspectBatchDOM,{marker,rows:rows.map(row=>({fileToken:row.fileToken,label:row.label})),baseline,baselineTexts:snapshot.texts,acknowledged,output,allowSingle:rows.length===1&&this.sharedSignals.size===1});
+        const state=await page.evaluate(inspectBatchDOM,{marker,rows:rows.map(row=>({fileToken:row.fileToken,label:row.label})),baseline,baselineTexts:snapshot.texts,acknowledged,bindings,output,allowSingle:rows.length===1&&this.sharedSignals.size===1});
         if(state.anchored&&!acknowledged){acknowledged=true;for(const row of rows)if(!row.done)row.onStage('submitted')}
         if(!acknowledged&&Date.now()>=ackDeadline)throw fail('MUSE_SUBMIT_NOT_ACKNOWLEDGED','Muse chưa xác nhận đã nhận yêu cầu gộp. Tool không tự gửi trùng.',504);
         const signature=JSON.stringify([state.text,state.media.map(item=>item.key)]);if(signature!==lastSignature){lastSignature=signature;stableSince=Date.now()}
@@ -670,7 +670,7 @@ export class MuseBrowser {
           if(!media||downloads.has(row))continue;const last=attempts.get(row);if(last?.key===media.key&&last.nextAt>Date.now())continue;
           if(row.signal.aborted){row.reject(row.signal.reason);this.sharedSignals.delete(row.fileToken);continue;}
           downloads.add(row);row.onStage('downloading');
-          void this.downloadMedia(page,media,output,row.signal).then(value=>row.resolve({...value,captionPending:false}),error=>{
+          void this.downloadMedia(page,media,output,row.signal).then(value=>{bindings[row.fileToken]=media.key;row.resolve({...value,captionPending:false});},error=>{
             if(!row.signal.aborted&&(/MEDIA_HTTP_404|MEDIA_EMPTY/.test(error.message)||(media.uncertain&&/MEDIA_RESPONSE_NOT_MEDIA/.test(error.message)))){const count=(attempts.get(row)?.count||0)+1;attempts.set(row,{key:media.key,count,nextAt:Date.now()+Math.min(10000,500*2**Math.min(count,6))});downloads.delete(row);row.onStage('reply-received');return;}row.reject(error);
           }).finally(()=>{if(row.done)this.sharedSignals.delete(row.fileToken)});
         }

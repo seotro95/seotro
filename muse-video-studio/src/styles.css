@@ -65,3 +65,7 @@
 
 /* Keep large workspaces in the DOM; skip offscreen layout/painting. */
 .scene-card { content-visibility: auto; contain-intrinsic-size: auto 920px; }
+
+.import-files{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:12px 0;padding:10px;border:1px solid #33415c;border-radius:8px;background:#111b2d}
+.import-files label{display:flex;align-items:center;gap:8px;max-width:100%;color:#b9c9e6}
+.import-files select{max-width:100%;padding:7px;border:1px solid #33415c;border-radius:6px;background:#0c1423;color:#e6eefc}

@@ -1,0 +1,6 @@
+import{test}from'node:test';import assert from'node:assert/strict';import{startStudioServer}from'../server.mjs';
+test('server enforces the remaining budget rather than starting a fresh 190-second timer',{timeout:5000},async()=>{
+ let calls=0,aborts=0;const driver={maxConcurrency:1,queue:[],snapshot:()=>[],progress:()=>[],refreshActive:async()=>{},close:async()=>{},generateVideo:async(_data,signal)=>{calls++;return new Promise((_resolve,reject)=>signal.addEventListener('abort',()=>{aborts++;reject(signal.reason)},{once:true}))}};
+ const runtime=await startStudioServer({museDriver:driver,port:0});const payload={accountId:1,prompt:'One fixed scene',model:'Omni 1.1 Flash',duration:10,resolution:'1080p',aspectRatio:'16:9',waitBudgetMs:40};const post=body=>fetch(runtime.url+'/api/video',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+ try{const started=Date.now(),response=await post(payload);assert.equal(response.status,502);assert.match((await response.json()).error,/MUSE_TIMEOUT/);assert.ok(Date.now()-started<1500);assert.equal(calls,1);assert.equal(aborts,1);assert.equal((await post({...payload,waitBudgetMs:0})).status,400);assert.equal(calls,1);assert.equal((await(await fetch(runtime.url+'/api/status')).json()).activeRequests,0)}finally{await runtime.close()}
+});

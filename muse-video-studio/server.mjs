@@ -103,9 +103,11 @@ async function api(req, res, pathname) {
   let preparingAccountId=null;
   const abort = new AbortController();
   res.on('close', () => abort.abort());
-  const timeout = setTimeout(() => abort.abort(new Error('MUSE_TIMEOUT: Đã dừng chờ sau 190 giây, trước giới hạn 200 giây. Kiểm tra kết quả Muse trước khi tạo lại.')), apiBudget);
+  const requestStarted=Date.now();const timedOut=()=>abort.abort(new Error('MUSE_TIMEOUT: Đã dừng chờ trong giới hạn 200 giây của lượt chạy. Kiểm tra kết quả Muse trước khi tạo lại.'));
+  let timeout=setTimeout(timedOut,apiBudget);
   try {
     const data = await body(req);
+    if(data?.waitBudgetMs!==undefined){if(!Number.isInteger(data.waitBudgetMs)||data.waitBudgetMs<1||data.waitBudgetMs>200000)return json(res,400,{error:'WAIT_BUDGET_INVALID: Giới hạn chờ không hợp lệ.'});clearTimeout(timeout);timeout=setTimeout(timedOut,Math.max(1,Math.min(apiBudget,data.waitBudgetMs)-(Date.now()-requestStarted)));}
     if (accountRoute || legacyAccountRoute) {
       const accountId = legacyAccountRoute ? Number(legacyAccountRoute[1]) : data.accountId ?? 1;
       const action = accountRoute ? accountRoute[1] : legacyAccountRoute[2];

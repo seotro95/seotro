@@ -1,6 +1,6 @@
-# Muse AI Studio 1.13.8
+# Muse AI Studio 1.13.9
 
-Ứng dụng Windows tạo ảnh/video qua các tài khoản Muse riêng, nhập TXT/SRT và lưu kết quả trên máy. Xem [cách dùng bản mới](CAP-NHAT-1.13.8.md).
+Ứng dụng Windows tạo ảnh/video qua các tài khoản Muse riêng, nhập TXT/SRT và lưu kết quả trên máy. Xem [cách dùng bản mới](CAP-NHAT-1.13.9.md).
 
 ## Sửa kết nối nội bộ và báo lỗi
 

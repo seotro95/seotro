@@ -1,6 +1,6 @@
 import {outputStem} from '../output-names.mjs';
 import {MAX_SLOTS,MAX_ACCOUNTS,MAX_ACCOUNT_LANES,UI_WAIT_LIMIT_MS,STREAM_OPTIONS,isSlotCount,isLaneCount} from '../limits.mjs';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState,useMemo } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Play, Download, FileText, Users, ShieldPlus, ImagePlus, ScanFace, WandSparkles, Clapperboard, X, Check, ChevronDown, RefreshCw, Square, Settings2, Activity, ArrowRight, Copy, Upload, FolderOpen, CircleAlert, Video, Link2, Trash2, Film, FlaskConical, CheckCheck, LoaderCircle } from 'lucide-react';
 import { ADVENTURE, RUNWAY, MUSE_MODELS, visibleSlotIds, visibleWorkspace, normalizeSlotIds, accountForScene, normalizeSettings, restoreWorkspace, createScenes, parseScriptEntries, accountLayout, accountPool, normalizeAccountIds, normalizeLaneOverrides, lanesForAccount, errorInfo, meetsResolution, RENDER_KEYS,renderingSettings,sceneSettings } from './core.ts';
@@ -11,6 +11,8 @@ import type { SavedMedia } from './media-library.ts';
 import {parseAutomationBatch,apiError} from './automation.ts';
 import{prepareAccounts}from'./account-prepare.ts';
 import{withinDeadline}from'./request-deadline.ts';
+import{readScriptFiles,parseScriptFiles}from'./script-files.ts';
+import type{ScriptFile}from'./script-files.ts';
 import './styles.css';
 
 const STORAGE = 'muse-workstation-v1';
@@ -20,7 +22,7 @@ type ModalName = 'import' | 'accounts' | 'diagnostics' | 'api' | 'clear-media' |
 type Balance = { valueText: string; unit: 'token' | 'credit'; label: string; observedAt: string; source: string };
 type AccountSession = {concurrencyWarning?:string;queued?:number; persistence?:{savedAt:number|null;hasSession:boolean}; executionConcurrency?:number; proxy?:{exitIP?:string;ipState?:string;ipError?:string;ipCheckedAt?:string;supported:boolean;enabled:boolean;server:string;hasUsername:boolean;hasPassword:boolean};persistenceMessage?:string;label?: string; running?: number; balance?: Balance | null; id: number; state: string; authenticated: boolean; sessionAuthenticated?: boolean; composerReady?: boolean; connectionMessage?: string; checkedAt: string | null; active: boolean };
 type ProviderStatus = {canRecoverMedia?:boolean;version?:string;executionAccountId?:number;restoringSessions?:boolean; preferredConcurrency?: number; multiAccount?: boolean; museConfigured: boolean; busy: boolean; transport?: 'browser' | 'adapter'; accounts?: AccountSession[]; embeddedLogin?: boolean; activeRequests?: number; maxConcurrency?: number; executionConcurrency?: number; concurrencyWarning?: string; concurrencyProbe?: {requested:number;checked:number;state:string}; workerProgress?: { accountId?:number; batchId: string | null; sceneId: number | null; output: string; phase: string; submitted: boolean; active: boolean; startedAt?:number; observation?:{checkedAt:string;messageAcknowledged:boolean;assistantReplies:number;visibleVideos:number;visibleImages:number;matchedMedia:boolean;matchedCount?:number;unmatchedCount?:number;captionLinked?:number;recoveryOnly?:boolean;streaming:boolean;replyScope:string;reply:string;batchSize?:number;messagesSent?:number;waitLimitSeconds?:number} }[] };
-type RenderJob = { submissionGroup?:{id:string;size:number}; accountId: number; scene: Scene; settings: Settings; action: 'render' | 'enhance' | 'recover'; control: AbortController; started: boolean };
+type RenderJob = { deadline?:number; submissionGroup?:{id:string;size:number}; accountId: number; scene: Scene; settings: Settings; action: 'render' | 'enhance' | 'recover'; control: AbortController; started: boolean };
 type RenderBatch = { control: AbortController; batchId: string; completed: number; failed: number; cancelled: number; loginRequired: boolean };
 const hasVerifiedSession = (account?: AccountSession) => Boolean(account?.sessionAuthenticated ?? account?.authenticated);
 const accountStateName = (account?: AccountSession) => !account ? 'Chưa kết nối' : account.state==='workspace_unavailable'?'Đã xác minh · chưa mở được Message':hasVerifiedSession(account) ? account.active ? 'Đã xác minh' : 'Phiên đã lưu' : account.state === 'awaiting_code' ? 'Đang chờ mã xác nhận' : account.state === 'check_failed' ? 'Chưa xác minh được phiên' : account.state === 'login_open' ? 'Chờ đăng nhập' : account.state === 'saved' || account.state === 'session_saved' ? 'Cần kiểm tra phiên' : 'Chưa kết nối';
@@ -83,6 +85,10 @@ function App() {
   const [logs, setLogs] = useState<Log[]>([]);
   const [notice, setNotice] = useState('');
   const [importText, setImportText] = useState('');
+  const [importSources,setImportSources]=useState<ScriptFile[]>([]);
+  const [importSourceIndex,setImportSourceIndex]=useState(0);
+  const [importReading,setImportReading]=useState(false);
+  const importReadId=useRef(0);
   const [status, setStatus] = useState<ProviderStatus | null>(null);
   const [connectingId, setConnectingId] = useState<number | null>(null);
   const [statusLoading, setStatusLoading] = useState(true);
@@ -125,8 +131,12 @@ function App() {
   const done = visibleScenes.filter(s => s[settings.output]).length;
   const outputLabel = settings.output === 'image' ? 'ảnh' : 'video';
   const enabled = visibleScenes.filter(s => s.enabled).length;
-  const parsed = parseScriptEntries(importText);
-  const canImport = parsed.length > 0 && parsed.length <= (settings.accountMode==='multiple'?slotCount:MAX_SLOTS);
+  const parsedSources=useMemo(()=>parseScriptFiles(importSources),[importSources]);
+  const parsed = useMemo(()=>importSources.length?parsedSources.flatMap(source=>source.entries):parseScriptEntries(importText),[parsedSources,importSources.length,importText]);
+  const expandFileQueue=importSources.length>1&&parsed.length>slotCount&&activeSlotIds.length>0&&activeSlotIds.every((id,index)=>id===index+1);
+  const importCapacity=settings.accountMode==='multiple'&&!expandFileQueue?slotCount:MAX_SLOTS;
+  const importIds=settings.accountMode==='multiple'&&!expandFileQueue?activeSlotIds:Array.from({length:Math.max(slotCount,Math.min(MAX_SLOTS,parsed.length))},(_,i)=>i+1);
+  const canImport = !importReading&&parsed.length > 0 && parsed.length <= importCapacity;
   const usingBrowser = status?.transport === 'browser';
   const embeddedLogin = Boolean(status?.embeddedLogin);
   const loginPlace = embeddedLogin ? 'tab Muse ngay trong tool' : 'cửa sổ Chrome/Edge của chế độ web';
@@ -494,19 +504,19 @@ function App() {
   async function renderOne(job: RenderJob, batch: RenderBatch) {
     const { scene, control, settings: config } = job;
     let finalStatus: Status = 'ready'; let failure: string | undefined;
-    const expires=performance.now()+UI_WAIT_LIMIT_MS;const budget=<T,>(work:(signal:AbortSignal)=>Promise<T>)=>withinDeadline(work,control.signal,Math.max(1,expires-performance.now()));
+    const expires=job.deadline??performance.now()+UI_WAIT_LIMIT_MS;const budget=<T,>(work:(signal:AbortSignal)=>Promise<T>)=>{const remaining=expires-performance.now();return remaining>0?withinDeadline(work,control.signal,remaining):Promise.reject<T>(new Error('MUSE_WAIT_LIMIT: Đã hết giới hạn 200 giây kể từ lúc bắt đầu lượt. Chưa gửi thêm lệnh tạo.'));};
     changeScene(scene.id, { status: 'running', stopping: false, error: undefined }, false);
     try {
       control.signal.throwIfAborted();
       if (job.action === 'enhance') {
-        const prompt = await budget(signal=>enhancePrompt(scene.prompt, config.mode, signal, { batchId: batch.batchId, sceneId: scene.id, accountId: job.accountId, accountMode: config.accountMode, outputName:scene.outputName,submissionGroup:job.submissionGroup }));
+        const prompt = await budget(signal=>enhancePrompt(scene.prompt, config.mode, signal, { deadline:expires,batchId: batch.batchId, sceneId: scene.id, accountId: job.accountId, accountMode: config.accountMode, outputName:scene.outputName,submissionGroup:job.submissionGroup }));
         control.signal.throwIfAborted();
         if (scenesRef.current.find(value => value.id === scene.id)?.prompt === scene.prompt) changeScene(scene.id, { prompt });
         else setNotice('Prompt đã đổi trong lúc AI xử lý; tool giữ nội dung bạn đang sửa.');
       } else {
         const reference = scene.reference || (config.output === 'video' && config.videoInput === 'image' && scene.image ? imageReference(scene.image, scene.id) : null);
         const generate = config.output === 'image' ? generateImage : generateVideo;
-        const context={batchId:batch.batchId,sceneId:scene.id,accountId:job.accountId,accountMode:config.accountMode,outputName:scene.outputName,submissionGroup:job.submissionGroup};
+        const context={deadline:expires,batchId:batch.batchId,sceneId:scene.id,accountId:job.accountId,accountMode:config.accountMode,outputName:scene.outputName,submissionGroup:job.submissionGroup};
         const media=await budget(signal=>job.action==='recover'?recoverGeneratedMedia(scene.prompt,config,signal,context):generate(scene.prompt,reference,config,signal,context));
         if (control.signal.aborted) { releaseVideo(media); throw new DOMException('Đã dừng', 'AbortError'); }
         const id = crypto.randomUUID();
@@ -538,6 +548,7 @@ function App() {
   }
   async function run(ids?: number[], override?: Scene[], external=false,requiredConcurrency?:number) {
     if (renderLocked || (controller.current && !renderBatch.current) || renderBatch.current?.control.signal.aborted || !requireProvider()) return;
+    const initialDeadline=renderJobs.current.size?undefined:performance.now()+UI_WAIT_LIMIT_MS;
     const config = { ...settingsRef.current };
     const source = visibleWorkspace(override || scenesRef.current,config);
     let targets = source.filter(scene => !renderJobs.current.has(scene.id) && scene.enabled && scene.prompt.trim() && sourceReady(scene) && accountReady(scene) && (ids ? ids.includes(scene.id) : !scene[config.output] || !matchesRequest(libraryRef.current.find(entry => entry.id === scene[config.output]?.savedId), scene, config)));
@@ -560,7 +571,7 @@ function App() {
           if(prepared.executionConcurrency<wanted)setNotice(prepared.executionConcurrency===1?`Muse ${accountId}: tự chuyển sang từng luồng một; giữ đủ ${targets.length} ô trong hàng chờ.`:`Muse ${accountId}: chạy đồng thời ${prepared.executionConcurrency} ô; các ô còn lại chờ, giữ đủ ${targets.length} ô.`);
           if(prepared.concurrencyWarning)setComposerCheck({message:`Muse ${accountId}: sẵn sàng ${prepared.executionConcurrency}/${wanted} ô; các ô khác chờ.`,error:prepared.concurrencyWarning});
           return {accountId,lanes:prepared.executionConcurrency,error:undefined};
-        }),undefined,UI_WAIT_LIMIT_MS);
+        }),undefined,initialDeadline?Math.max(1,initialDeadline-performance.now()):UI_WAIT_LIMIT_MS);
         // Seed the dispatch budget from completed prepare responses, not an
         // older status poll that may have run while another account prepared.
         for(const result of ready)if(result.lanes>0)accountLanes.current.set(result.accountId,result.lanes);
@@ -579,6 +590,7 @@ function App() {
     if(config.mode==='muse'&&usingBrowser){
       for(const accountId of new Set(targets.map(scene=>accountForScene(scene,config)))){
         const wave=targets.filter(scene=>accountForScene(scene,config)===accountId).slice(0,Math.min(lanesForAccount(config,accountId),accountLanes.current.get(accountId)??1));
+        if(initialDeadline)for(const scene of wave)renderJobs.current.get(scene.id)!.deadline=initialDeadline;
         if(wave.length>1){const submissionGroup={id:crypto.randomUUID(),size:wave.length};for(const scene of wave)renderJobs.current.get(scene.id)!.submissionGroup=submissionGroup;}
       }
     }
@@ -641,18 +653,22 @@ function App() {
   function importScenes(andRun: boolean) {
     if (!canImport || locked || (andRun && !requireProvider())) return;
     const config=settingsRef.current;
-    const ids=config.accountMode==='multiple'?visibleSlotIds(config):Array.from({length:Math.max(config.slotCount,parsed.length)},(_,i)=>i+1);
-    const next=scenesRef.current.map(scene=>{const index=ids.indexOf(scene.id);return index<0?scene:{...invalidate(scene),prompt:parsed[index]?.prompt||'',outputName:parsed[index]?.outputName};});
-    if(config.accountMode!=='multiple'&&parsed.length>config.slotCount)commitSettings({...config,slotCount:parsed.length});
+    const ids=importIds;
+    const original=visibleSlotIds(config),pattern=original.map(id=>accountForScene(scenesRef.current.find(scene=>scene.id===id)??{id},config));
+    const next=scenesRef.current.map(scene=>{const index=ids.indexOf(scene.id);return index<0?scene:{...invalidate(scene),prompt:parsed[index]?.prompt||'',outputName:parsed[index]?.outputName,...(expandFileQueue&&config.accountMode==='multiple'&&scene.id>config.slotCount&&pattern.length?{accountId:pattern[index%pattern.length]}:{})};});
+    if(parsed.length>config.slotCount&&(config.accountMode!=='multiple'||expandFileQueue))commitSettings({...config,slotCount:parsed.length,...(config.accountMode==='multiple'?{multipleSlotIds:ids}:{})});
     updateScenes(() => next); setModal(null);
     setNotice(`Đã nạp ${parsed.length} cảnh (${parsed.filter(entry=>entry.outputName).length} tên tệp). ${Math.max(0,ids.length - parsed.length)} ô đang hiện còn lại được để trống.`);
     if (andRun) void run(ids.filter(id=>next.find(scene=>scene.id===id)?.prompt.trim()), next);
   }
-  async function importFile(file?: File) {
-    if (!file) return;
-    if (file.size > 16 * 1024 * 1024) return setNotice('Kịch bản tối đa 16 MB.');
-    if (!/\.(txt|srt)$/i.test(file.name)) return setNotice('Chọn tệp .txt hoặc .srt UTF-8.');
-    try { setImportText(await file.text()); } catch { setNotice('Không đọc được tệp kịch bản.'); }
+  function standaloneImport(text:string){importReadId.current++;setImportReading(false);setImportSources([]);setImportSourceIndex(0);setImportText(text);}
+  function editImport(text:string){if(importSources.length)setImportSources(all=>all.map((source,index)=>index===importSourceIndex?{...source,text}:source));else setImportText(text);}
+  async function importFiles(files?:FileList|null){
+    if(!files?.length)return;
+    const request=++importReadId.current;setImportReading(true);
+    try{const sources=await readScriptFiles(Array.from(files));if(request!==importReadId.current)return;setImportSources(sources);setImportSourceIndex(0);setImportText('');setNotice(`Đã đọc ${sources.length} tệp. Kiểm tra thứ tự và toàn bộ prompt trước khi nạp.`);}
+    catch(error){if(request===importReadId.current)setNotice(errorInfo(error).raw);}
+    finally{if(request===importReadId.current)setImportReading(false)}
   }
   function sceneErrorReport(scene:Scene){const accountId=accountForScene(scene,settingsRef.current);const stage=status?.workerProgress?.filter(row=>row.sceneId===scene.id&&row.output===settingsRef.current.output&&(row.accountId===undefined||row.accountId===accountId)).at(-1);return JSON.stringify({version:status?.version||'unknown',time:new Date().toISOString(),output:settingsRef.current.output,sceneId:scene.id,accountId:accountForScene(scene,settingsRef.current),requestedConcurrency:settingsRef.current.requestedConcurrency,executionConcurrency:status?.accounts?.find(account=>account.id===accountForScene(scene,settingsRef.current))?.executionConcurrency,phase:stage?.phase,observation:stage?.observation,error:scene.error},null,2)}
   async function copySceneError(scene:Scene){
@@ -694,7 +710,7 @@ function App() {
   return <div className="app-shell">
     {recoveryMode&&<aside className="recovery-banner" role="status"><strong>Chế độ khôi phục Studio</strong><p>Ảnh/video đã lưu chưa được tải vào giao diện. Tài khoản, kịch bản và thư viện cũ được giữ. Đóng ứng dụng rồi mở Muse AI Studio.exe để trở về chế độ thường.</p></aside>}
     <input ref={imageInput} type="file" accept="image/png,image/jpeg,image/webp" hidden onChange={e => { void handleImage(e.target.files?.[0]); e.target.value = ''; }}/>
-    <input ref={fileInput} type="file" accept=".txt,.srt" hidden onChange={e => { void importFile(e.target.files?.[0]); e.target.value = ''; }}/>
+    <input ref={fileInput} type="file" accept=".txt,.srt" multiple hidden onChange={e => { void importFiles(e.target.files); e.target.value = ''; }}/>
     <header className="topbar">
       <div className="studio-tabs" aria-label="Loại nội dung"><button disabled={locked} aria-pressed={settings.output === 'video'} onClick={() => changeSettings({ output: 'video' })}><Video size={17}/>Tạo video</button><button disabled={locked} aria-pressed={settings.output === 'image'} onClick={() => changeSettings({ output: 'image' })}><ImagePlus size={17}/>Tạo ảnh hàng loạt</button><span>MUSE AI STUDIO · ẢNH / VIDEO</span></div>
       <div className="actions-row">
@@ -811,10 +827,13 @@ function App() {
     {modal==='clear-media'&&<Modal title="Xóa toàn bộ ảnh/video đã lưu?" eyebrow="THƯ VIỆN TRÊN MÁY" close={()=>setModal(null)}><div className="modal-body"><p>Sẽ xóa {library.length} kết quả ảnh/video và lịch sử trong thư viện tool. Kịch bản, ảnh tham chiếu và tài khoản được giữ.</p><p className="muted">Các tệp đã tải ra thư mục máy tính vẫn còn. Không thể khôi phục kết quả đã xóa trong tool.</p></div><footer className="modal-footer"><button className="button" disabled={locked} onClick={()=>setModal(null)}>Hủy</button><button className="button danger" disabled={busy||locked||downloading} onClick={()=>void clearAllResults().then(()=>setModal(null)).catch(error=>setNotice(errorInfo(error).raw))}>Xác nhận xóa toàn bộ</button></footer></Modal>}
     {modal==='api'&&<Modal title="Cổng API cho công cụ bên ngoài" eyebrow="CÙNG MÁY TÍNH" close={()=>{setModal(null);setApiShowKey(false)}}><div className="modal-body"><p>Công cụ trên cùng máy tính có thể gửi bộ prompt/TXT/SRT, đọc tiến độ, dừng và tải ảnh/video bằng HTTP. Studio phải đang mở và tài khoản Muse đã xác minh.</p>{!window.museTransport?.automationControl?<p className="muted">Mở bản desktop Muse AI Studio.exe để bật cổng điều khiển.</p>:<><label className="field-label">Cổng <input aria-label="Cổng API" type="number" min="1024" max="65535" value={apiPort} disabled={apiBusy} onChange={e=>setApiPort(e.target.value)}/></label><div className="preset-row"><button className="button primary" disabled={apiBusy} onClick={()=>void configureAutomation('configure',true)}>Bật / Áp dụng cổng</button><button className="button danger" disabled={apiBusy||!apiConfig?.listening} onClick={()=>void configureAutomation('configure',false)}>Tắt cổng API</button></div><p className={apiConfig?.listening?'mint':'muted'} role="status">{apiBusy?'Đang cập nhật…':apiConfig?.listening?'API đang mở':'API đang tắt'} · {apiConfig?.address??'http://127.0.0.1:8790'}</p><label className="field-label">Khóa truy cập <input aria-label="Khóa API" readOnly type={apiShowKey?'text':'password'} value={apiConfig?.key??''}/></label><div className="preset-row"><button className="button" disabled={!apiConfig||apiBusy} onClick={()=>setApiShowKey(value=>!value)}>{apiShowKey?'Ẩn khóa':'Hiện khóa'}</button><button className="button" disabled={!apiConfig||apiBusy} onClick={()=>void navigator.clipboard.writeText(apiConfig!.key).then(()=>setNotice('Đã sao chép khóa API.')).catch(()=>setApiErrorText('Không sao chép được. Bấm Hiện khóa để chép thủ công.'))}>Sao chép khóa</button><button className="button" disabled={apiBusy} onClick={()=>void configureAutomation('rotate')}>Đổi khóa API</button></div><div className="preset-row"><button className="button" disabled={!apiConfig||apiBusy} onClick={()=>void navigator.clipboard.writeText(`[mcp_servers.muse_studio]\nurl = "${apiConfig!.address}/mcp"\nbearer_token_env_var = "MUSE_STUDIO_KEY"\ntool_timeout_sec = 600\n`).then(()=>setNotice('Đã sao chép cấu hình MCP. Thêm vào config.toml của Codex và đặt biến MUSE_STUDIO_KEY trên máy.')).catch(()=>setApiErrorText('Không sao chép được cấu hình. Xem MCP-CODEX.md.'))}>Sao chép cấu hình Codex MCP</button></div><p className="small muted">MCP: {apiConfig?.address??'http://127.0.0.1:8790'}/mcp · Codex cùng máy có thể đọc/sửa ô, tạo/dừng và lưu kết quả. Chọn Thư mục lưu trước khi nhờ trợ lý tải bộ. Xem MCP-CODEX.md trong gói mã nguồn MIT.</p><p className="small muted">Dùng header Authorization: Bearer &lt;khóa&gt;. Khóa cho phép điều khiển Studio; giữ trong cấu hình của công cụ kết nối. Cổng chỉ lắng nghe 127.0.0.1.</p><pre className="api-example">{`GET /v1/status\nPOST /v1/batches\n{ "output": "image", "prompts": ["Một khu rừng lúc bình minh", "Ngôi làng trên núi"] }\n\nGET /v1/media\nGET /v1/media/<id>\nPOST /v1/stop`}</pre><p className="small muted">Hướng dẫn và ví dụ PowerShell/Python có trong API-AUTOMATION.md của gói đầy đủ. Dùng Idempotency-Key riêng cho mỗi bộ để tránh gửi trùng khi thử kết nối lại.</p></>}{(apiErrorText||apiConfig?.error)&&<p className="red" role="alert">{apiErrorText||apiConfig?.error}</p>}</div><footer className="modal-footer"><button className="button" onClick={()=>setModal(null)}>Đóng</button></footer></Modal>}
     {modal === 'import' && <Modal title="Nhập kịch bản thông minh" eyebrow="SCRIPT IMPORT / 40 SCENES" close={() => setModal(null)}>
-      <div className="modal-body"><p className="muted">TXT: mỗi dòng hoặc mỗi đoạn là một cảnh. SRT: mỗi khối phụ đề là một cảnh, tự bỏ số thứ tự và timestamp. Tối đa 400 cảnh.</p><div className="preset-row"><button className="button" onClick={() => setImportText(ADVENTURE.join('\n\n'))}><Film size={16}/>Điện ảnh phiêu lưu</button><button className="button" onClick={() => setImportText(RUNWAY.join('\n\n'))}><WandSparkles size={16}/>Thời trang Runway</button><button className="button" onClick={() => fileInput.current?.click()}><Upload size={16}/>Chọn TXT / SRT</button></div>
-        <textarea className="import-text" aria-label="Nội dung TXT / SRT" value={importText} onChange={e => setImportText(e.target.value)} placeholder={'Dán kịch bản hoặc phụ đề vào đây…\n\n1\n00:00:00,000 --> 00:00:04,000\nMột người thám hiểm bước vào ngôi đền cổ.'}/>
-        <p className="small muted">Tự nhận tên từ mục lớn [1], [2]… hoặc Tên tệp/Name trong TXT/SRT. Không có tên: đánh số tăng tiếp khi tải.</p>{parsed.some(entry=>entry.outputName)&&<details className="import-name-preview"><summary>Tên tệp nhận được ({parsed.filter(entry=>entry.outputName).length})</summary><ol>{parsed.slice(0,40).map((entry,index)=><li key={index}>{entry.outputName||'Tự đánh số khi tải'}</li>)}</ol></details>}<div className="import-count"><b className={!canImport&&parsed.length ? 'red' : 'mint'}>{parsed.length}/{multipleAccounts?slotCount:MAX_SLOTS} cảnh</b><span>{multipleAccounts?`Đã chọn ${slotCount} ô (${activeSlotIds.join(', ')}). ${parsed.length>slotCount?'Kịch bản vượt số ô đã chọn. Chọn thêm ô hoặc rút gọn; không tự bỏ cảnh.':'Chỉ các ô này nhận nội dung, các ô ẩn được giữ nguyên.'}`:parsed.length > MAX_SLOTS ? 'Có hơn 400 cảnh. Rút gọn trước khi nạp, không tự cắt bỏ nội dung.' : parsed.length < slotCount ? 'Các ô còn lại sẽ được để trống.' : `Nạp sẽ mở ${Math.max(slotCount,parsed.length)} ô.`}</span></div>
-        <div className="script-preview">{parsed.slice(0, MAX_SLOTS).map((text, i) => <div key={i}><span>#{String(multipleAccounts?(activeSlotIds[i]??'—'):i+1).padStart(2, '0')}</span><p>{text.outputName&&<strong className="script-entry-name">{text.outputName}</strong>}{text.prompt}</p></div>)}</div><p className="small muted">Nạp kịch bản sẽ thay prompt và xóa kết quả ảnh/video đang chọn; lịch sử đã lưu được giữ. Giữ ảnh tham chiếu và tài khoản.</p>
+      <div className="modal-body"><p className="muted">TXT: mỗi dòng hoặc mỗi đoạn là một cảnh. SRT: mỗi khối phụ đề là một cảnh, tự bỏ số thứ tự và timestamp. Tối đa 400 cảnh.</p><div className="preset-row"><button className="button" disabled={importReading} onClick={() => standaloneImport(ADVENTURE.join('\n\n'))}><Film size={16}/>Điện ảnh phiêu lưu</button><button className="button" disabled={importReading} onClick={() => standaloneImport(RUNWAY.join('\n\n'))}><WandSparkles size={16}/>Thời trang Runway</button><button className="button" onClick={() => fileInput.current?.click()}><Upload size={16}/>Chọn TXT / SRT</button></div>
+        <p className="small muted">Có thể chọn nhiều TXT và SRT cùng một lần. Tệp được xếp theo tên có xét số: 1, 2, 10. Mỗi tệp được đọc riêng để giữ tên và đầy đủ prompt.</p>
+        {importReading&&<p role="status">Đang đọc các tệp kịch bản…</p>}
+        {importSources.length>0&&<div className="import-files"><strong>{importSources.length} tệp · {parsed.length} prompt</strong><label>Tệp đang chỉnh sửa <select aria-label="Tệp TXT/SRT đang chỉnh sửa" disabled={importReading} value={importSourceIndex} onChange={e=>setImportSourceIndex(Number(e.target.value))}>{parsedSources.map((source,index)=><option key={index} value={index}>{String(index+1).padStart(2,'0')} · {source.name} · {source.entries.length} prompt</option>)}</select></label></div>}
+        <textarea className="import-text" aria-label="Nội dung TXT / SRT" disabled={importReading} value={importSources[importSourceIndex]?.text??importText} onChange={e => editImport(e.target.value)} placeholder={'Dán kịch bản hoặc phụ đề vào đây…\n\n1\n00:00:00,000 --> 00:00:04,000\nMột người thám hiểm bước vào ngôi đền cổ.'}/>
+        <p className="small muted">Tự nhận tên từ mục lớn [1], [2]… hoặc Tên tệp/Name trong TXT/SRT. Không có tên: đánh số tăng tiếp khi tải.</p>{parsed.some(entry=>entry.outputName)&&<details className="import-name-preview"><summary>Tên tệp nhận được ({parsed.filter(entry=>entry.outputName).length})</summary><ol>{parsed.slice(0,40).map((entry,index)=><li key={index}>{entry.outputName||'Tự đánh số khi tải'}</li>)}</ol></details>}<div className="import-count"><b className={!canImport&&parsed.length ? 'red' : 'mint'}>{parsed.length}/{importCapacity} cảnh</b><span>{parsed.length>MAX_SLOTS?'Có hơn 400 cảnh. Chọn ít tệp hơn trước khi nạp; tool giữ nguyên đầy đủ nội dung.':expandFileQueue?`Nạp đủ ${parsed.length} prompt sẽ mở thêm ô xếp hàng; số tài khoản và số luồng mỗi tài khoản được giữ nguyên.`:multipleAccounts?`Đã chọn ${slotCount} ô (${activeSlotIds.join(', ')}). ${parsed.length>slotCount?'Kịch bản vượt số ô đã chọn. Chọn thêm ô hoặc rút gọn; không tự bỏ cảnh.':'Chỉ các ô này nhận nội dung, các ô ẩn được giữ nguyên.'}`:parsed.length > MAX_SLOTS ? 'Có hơn 400 cảnh. Rút gọn trước khi nạp, không tự cắt bỏ nội dung.' : parsed.length < slotCount ? 'Các ô còn lại sẽ được để trống.' : `Nạp sẽ mở ${Math.max(slotCount,parsed.length)} ô.`}</span></div>
+        <div className="script-preview">{parsed.slice(0, MAX_SLOTS).map((text, i) => <div key={i}><span>#{String(importIds[i]??'—').padStart(2, '0')}</span><p>{text.outputName&&<strong className="script-entry-name">{text.outputName}</strong>}{text.prompt}</p></div>)}</div><p className="small muted">Nạp kịch bản sẽ thay prompt và xóa kết quả ảnh/video đang chọn; lịch sử đã lưu được giữ. Giữ ảnh tham chiếu và tài khoản.</p>
       </div><footer className="modal-footer"><button className="button" onClick={() => setModal(null)}>Đóng</button><button className="button" disabled={!canImport || locked} onClick={() => importScenes(false)}>Nạp vào Studio</button><button className="button primary" disabled={!canImport || locked || renderBlocked} onClick={() => importScenes(true)}><Play size={15}/>Nạp & Chạy các cảnh</button></footer>
     </Modal>}
 

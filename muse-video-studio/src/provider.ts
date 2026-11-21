@@ -4,7 +4,7 @@ import { outputStem, uniqueOutputFilename } from '../output-names.mjs';
 import { reserveDownloadNumbers, formatDownloadNumber } from './download-sequence.ts';
 
 type ResponseMedia = { base64: string; mimeType: string; metadata?: { duration?: number; width: number; height: number } };
-type RequestContext = { batchId: string; sceneId: number; accountId?: number; accountMode?: Settings['accountMode']; outputName?: string; submissionGroup?:{id:string;size:number} };
+type RequestContext = { deadline?:number; batchId: string; sceneId: number; accountId?: number; accountMode?: Settings['accountMode']; outputName?: string; submissionGroup?:{id:string;size:number} };
 declare global {
   interface Window { museTransport?: {copyError?(text:string):Promise<void>; rendererState?(state:'ready'|'error'):void; rendererStage?(stage:'workspace'|'interface'|'media-library'|'ready'):void; dataControl?(action:string):Promise<any>; request(id: string, endpoint: string, data: unknown): Promise<{ ok: boolean; body: any }>; cancel(id: string): void; export?(action: string, data?: unknown): Promise<any>; automationControl?(action: string, data?: unknown): Promise<any>; onAutomation?(callback: (action: string, data: any) => Promise<any>): () => void; onSessionRefresh?(callback: () => void): () => void }; showDirectoryPicker?: () => Promise<ExportDirectory> }
 }
@@ -15,6 +15,13 @@ export async function chooseExportDirectory() {
   if (!window.showDirectoryPicker) throw new Error('Mở Muse AI Studio.exe để lưu cả bộ vào thư mục trên máy.');
   try { webExportDirectory = await window.showDirectoryPicker(); return { cancelled: false, name: webExportDirectory.name }; }
   catch (error) { if ((error as Error).name === 'AbortError') return { cancelled: true }; throw error; }
+}
+function requestContext(context?:RequestContext){
+  if(!context)return {};
+  const {deadline,...data}=context;if(deadline===undefined)return data;
+  const waitBudgetMs=Math.floor(deadline-performance.now());
+  if(waitBudgetMs<=0)throw new Error('MUSE_WAIT_LIMIT: Đã hết giới hạn 200 giây của lượt chạy. Chưa gửi thêm lệnh tạo.');
+  return {...data,waitBudgetMs:Math.min(200000,waitBudgetMs)};
 }
 async function rawApi(path: string, data?: unknown, signal?: AbortSignal) {
   const transport = window.museTransport;
@@ -98,7 +105,7 @@ async function generate(kind: Settings['output'], prompt: string, reference: Ref
   if (sendReference && !reference.base64) throw new Error('Ảnh đầu vào chưa có dữ liệu để gửi đến Muse.');
   const prepared = sendReference && settings.mode !== 'demo' ? await referencePayload(reference, signal) : null;
   const result = settings.mode === 'demo' ? await demoMedia(kind, signal) : await api(`/api/${kind}`, {
-    accountId: 1, prompt: fullPrompt, ...context, aspectRatio: settings.aspectRatio, resolution: kind === 'image' ? settings.imageResolution : settings.resolution,
+    accountId: 1, prompt: fullPrompt, ...requestContext(context), aspectRatio: settings.aspectRatio, resolution: kind === 'image' ? settings.imageResolution : settings.resolution,
     characterLock: settings.r2v, ...(kind === 'video' ? { model: settings.model, duration: settings.duration, sourceMode: settings.videoInput } : {}),
     image: prepared ? { imageBytes: prepared.imageBytes, mimeType: prepared.mimeType } : undefined
   }, signal);
@@ -110,14 +117,14 @@ export const generateVideo = (prompt: string, reference: Reference | null, setti
 export const generateImage = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, context?: RequestContext) => generate('image', prompt, reference, settings, signal, context);
 export async function recoverGeneratedMedia(prompt:string,settings:Settings,signal:AbortSignal,context:RequestContext){
   const fullPrompt=[prompt.trim(),settings.modifier.trim()].filter(Boolean).join('\n\n');
-  const result=await api('/api/media/recover',{accountId:1,...context,prompt:fullPrompt,output:settings.output,aspectRatio:settings.aspectRatio,resolution:settings.output==='image'?settings.imageResolution:settings.resolution,model:settings.model,duration:settings.duration},signal);
+  const result=await api('/api/media/recover',{accountId:1,...requestContext(context),prompt:fullPrompt,output:settings.output,aspectRatio:settings.aspectRatio,resolution:settings.output==='image'?settings.imageResolution:settings.resolution,model:settings.model,duration:settings.duration},signal);
   signal.throwIfAborted();const media=await mediaResult(settings.output,result,settings);if(signal.aborted){releaseVideo(media);signal.throwIfAborted();}
   return {...media,outputName:outputStem(context.outputName)||undefined};
 }
 export async function enhancePrompt(prompt: string, mode: Mode, signal: AbortSignal, context?: RequestContext): Promise<string> {
   if (mode === 'demo') throw new Error('Chế độ kiểm thử không có AI Enhance. Kết nối Muse AI để trau chuốt thật.');
   const instruction = `Rewrite this scene as one concise cinematic visual prompt in English. Preserve the characters, action and narrative. Add specific composition and lighting. Return only the rewritten prompt, no headings. Scene:\n${prompt}`;
-  const result = await api('/api/text', { prompt: instruction, accountId: 1, ...context }, signal);
+  const result = await api('/api/text', { prompt: instruction, accountId: 1, ...requestContext(context) }, signal);
   signal.throwIfAborted();
   if (typeof result.text !== 'string' || !result.text.trim()) throw new Error('AI không trả về prompt văn bản.');
   return result.text.trim().slice(0, 8000);
