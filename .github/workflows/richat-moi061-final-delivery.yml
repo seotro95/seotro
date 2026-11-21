@@ -1,0 +1,84 @@
+name: Richat MOI061 publish verify and archive sixteen voices
+on:
+  push:
+    branches: [codex/richat-moi061-production-20261121]
+    paths: [.github/workflows/richat-moi061-final-delivery.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: richat-moi061
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python richat-moi061/extract_content.py
+          python richat-moi061/extract_voice_inputs.py
+          python richat-moi061/build_documents.py
+          python richat-moi061/voice_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0
+          python richat-moi061/ensure_ffmpeg.py
+          python -u richat-moi061/wait_for_sources.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: richat-moi061-voice-*
+          path: voice_artifacts
+          merge-multiple: false
+          run-id: 44854560788
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: richat-moi061-voice-en-US
+          path: voice_artifacts/richat-moi061-voice-en-US
+          run-id: 44819270070
+          github-token: ${{ github.token }}
+      - name: Decode and publish all sixteen complete voices
+        run: python -u richat-moi061/publish_voices.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: richat-moi061-final-release-reports
+          path: |
+            richat-moi061/voice_delivery/*.json
+            richat-moi061/voice_delivery/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 30
+  verify_and_archive:
+    needs: publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/richat-moi061-production-20261121
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python richat-moi061/extract_content.py
+          python richat-moi061/extract_voice_inputs.py
+          python richat-moi061/build_documents.py
+          python richat-moi061/voice_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0
+          python -u richat-moi061/verify_and_archive.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: richat-moi061-public-verification
+          path: |
+            richat-moi061/PUBLIC_DELIVERY_QA.json
+            richat-moi061/GITHUB_ASSET_AUDIT.json
+          if-no-files-found: ignore
+          retention-days: 30
