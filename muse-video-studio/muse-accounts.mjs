@@ -129,4 +129,9 @@ export class MuseAccounts {
   generateImage(data,signal) { return this.generate('generateImage',data,signal); }
   generateVideo(data,signal) { return this.generate('generateVideo',data,signal); }
   generateText(data,signal) { return this.generate('generateText',data,signal); }
+  async recoverMedia(data,signal){
+    signal=AbortSignal.any([signal,this.shutdown.signal]);signal.throwIfAborted();this.validateId(data.accountId);
+    const release=await this.acquire(data.accountId,{...data,exclusive:true},signal);
+    try{return await this.driver(data.accountId).recoverMedia({...data,accountId:1},signal)}finally{release()}
+  }
 }

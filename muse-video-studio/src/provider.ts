@@ -18,7 +18,7 @@ export async function chooseExportDirectory() {
 }
 async function rawApi(path: string, data?: unknown, signal?: AbortSignal) {
   const transport = window.museTransport;
-  if (transport && ['/api/video', '/api/image', '/api/text'].includes(path)) {
+  if (transport && ['/api/video', '/api/image', '/api/text','/api/media/recover'].includes(path)) {
     signal?.throwIfAborted();
     const id = crypto.randomUUID();
     const cancel = () => transport.cancel(id);
@@ -108,6 +108,12 @@ async function generate(kind: Settings['output'], prompt: string, reference: Ref
 }
 export const generateVideo = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, context?: RequestContext) => generate('video', prompt, reference, settings, signal, context);
 export const generateImage = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, context?: RequestContext) => generate('image', prompt, reference, settings, signal, context);
+export async function recoverGeneratedMedia(prompt:string,settings:Settings,signal:AbortSignal,context:RequestContext){
+  const fullPrompt=[prompt.trim(),settings.modifier.trim()].filter(Boolean).join('\n\n');
+  const result=await api('/api/media/recover',{accountId:1,...context,prompt:fullPrompt,output:settings.output,aspectRatio:settings.aspectRatio,resolution:settings.output==='image'?settings.imageResolution:settings.resolution,model:settings.model,duration:settings.duration},signal);
+  signal.throwIfAborted();const media=await mediaResult(settings.output,result,settings);if(signal.aborted){releaseVideo(media);signal.throwIfAborted();}
+  return {...media,outputName:outputStem(context.outputName)||undefined};
+}
 export async function enhancePrompt(prompt: string, mode: Mode, signal: AbortSignal, context?: RequestContext): Promise<string> {
   if (mode === 'demo') throw new Error('Chế độ kiểm thử không có AI Enhance. Kết nối Muse AI để trau chuốt thật.');
   const instruction = `Rewrite this scene as one concise cinematic visual prompt in English. Preserve the characters, action and narrative. Add specific composition and lighting. Return only the rewritten prompt, no headings. Scene:\n${prompt}`;

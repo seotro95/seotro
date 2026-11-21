@@ -1,0 +1,8 @@
+import{test}from'node:test';import assert from'node:assert/strict';import{readFile}from'node:fs/promises';import{startStudioServer}from'../server.mjs';
+const clip=(await readFile(new URL('../public/demo.mp4',import.meta.url))).toString('base64');
+test('the recovery endpoint validates the scene and returns existing bytes without invoking any generation method',{timeout:10000},async()=>{
+ let recovered=0,generated=0;const driver={maxConcurrency:1,queue:[],snapshot:()=>[],progress:()=>[],refreshActive:async()=>{},close:async()=>{},recoverMedia:async data=>{recovered++;assert.equal(data.sceneId,3);assert.equal(data.output,'video');return{base64:clip,mimeType:'video/mp4'}},generateVideo:async()=>{generated++;throw Error('Generation must never run during recovery')}};
+ const runtime=await startStudioServer({museDriver:driver,port:0});const payload={accountId:1,batchId:crypto.randomUUID(),sceneId:3,prompt:'An exact existing scene',output:'video',model:'Omni 1.1 Flash',duration:10,resolution:'1080p',aspectRatio:'16:9'};
+ const post=data=>fetch(runtime.url+'/api/media/recover',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+ try{assert.equal((await(await fetch(runtime.url+'/api/status')).json()).canRecoverMedia,true);const result=await post(payload);assert.equal(result.status,200);assert.equal((await result.json()).base64,clip);assert.equal(recovered,1);assert.equal(generated,0);assert.equal((await post({...payload,sceneId:0})).status,400);assert.equal((await post({...payload,output:'text'})).status,409);assert.equal(recovered,1);assert.equal(generated,0);assert.equal((await(await fetch(runtime.url+'/api/status')).json()).activeRequests,0)}finally{await runtime.close()}
+});

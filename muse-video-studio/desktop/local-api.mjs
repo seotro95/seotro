@@ -1,7 +1,7 @@
 import http from 'node:http';
 import {MAX_SLOTS,LOCAL_RENDER_TIMEOUT_MS} from '../limits.mjs';
 
-const endpoints=new Set(['/api/image','/api/video','/api/text']);
+const endpoints=new Set(['/api/image','/api/video','/api/text','/api/media/recover']);
 const codes=new Set(['ECONNREFUSED','ECONNRESET','ETIMEDOUT','EPIPE','ENETUNREACH','EHOSTUNREACH','ENOBUFS']);
 const failure=(code,message)=>Object.assign(new Error(`${code}: ${message}`),{code});
 // This is only the owned loopback Studio API. Muse continues to use its own

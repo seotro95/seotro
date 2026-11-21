@@ -228,6 +228,10 @@ test('portable app submits ten independent scenes concurrently, views images and
     const sequentialFolder=await desktop.evaluate(()=>globalThis.lastFolder);
     assert.deepEqual((await readdir(sequentialFolder)).sort(),compactNames.map(name=>name+'.mp4').sort());
     console.log('Portable stage: one chat without New chat completed all ten named videos with six simultaneous generations');
+    const recoveryCounts={submitted:fixture.state.submitted.length,messages:fixture.state.chatMessages.length};
+    const recovered=await studio.evaluate(async()=>window.museTransport.request(crypto.randomUUID(),'/api/media/recover',{accountId:1,batchId:crypto.randomUUID(),sceneId:1,output:'video',prompt:'Portable prompt 1.',model:'Omni 1.1 Flash',duration:10,resolution:'1080p',aspectRatio:'16:9'}));
+    assert.equal(recovered.ok,true,JSON.stringify(recovered.body));assert.equal(recovered.body.base64,clip.toString('base64'));assert.equal(fixture.state.submitted.length,recoveryCounts.submitted);assert.equal(fixture.state.chatMessages.length,recoveryCounts.messages);
+    console.log('Portable stage: native read-only recovery returned existing video bytes without another chat message or generation');
     fixture.state.rejectConcurrency=1;fixture.state.peak=0;
     for(let id=1;id<=10;id++)await studio.getByLabel(`Kịch bản cảnh ${id}`,{exact:true}).fill(`Serial fallback video ${id}.`);
     await studio.getByRole('button',{name:'TẠO 10 VIDEO',exact:true}).click();await waitFor(async()=>await studio.locator('.scene-card video').count()===10,90000);

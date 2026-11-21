@@ -90,14 +90,14 @@ async function callAdapter(endpoint, data, signal) {
 async function api(req, res, pathname) {
   if (req.method === 'GET' && pathname === '/api/status') {
     if (muse && !activeRequests && !accountBusy&&!preparingAccounts.size&&!muse.restoring) await muse.refreshActive({ background: true });
-    return json(res, 200, {version:appVersion, museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy || preparingAccounts.size>0, activeRequests, maxConcurrency, ...(muse ? {preparingAccounts:[...preparingAccounts],mediaTransfers:mediaQueue.snapshot(),restoringSessions:Boolean(muse.restoring), executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), ...(muse?.supportsMultiAccount ? {multiAccount:true, executionAccountId:muse.singleId??1, preferredConcurrency:muse.preferredConcurrency,concurrencyWarning:muse.concurrencyWarning,concurrencyProbe:muse.driver?.(muse.singleId??1).concurrencyProbe} : {}), embeddedLogin, credit: null, gpu: null });
+    return json(res, 200, {version:appVersion, ...(muse?.recoverMedia?{canRecoverMedia:true}:{}), museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy || preparingAccounts.size>0, activeRequests, maxConcurrency, ...(muse ? {preparingAccounts:[...preparingAccounts],mediaTransfers:mediaQueue.snapshot(),restoringSessions:Boolean(muse.restoring), executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), ...(muse?.supportsMultiAccount ? {multiAccount:true, executionAccountId:muse.singleId??1, preferredConcurrency:muse.preferredConcurrency,concurrencyWarning:muse.concurrencyWarning,concurrencyProbe:muse.driver?.(muse.singleId??1).concurrencyProbe} : {}), embeddedLogin, credit: null, gpu: null });
   }
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
   if (!req.headers['content-type']?.startsWith('application/json')) return json(res, 415, { error: 'Cần Content-Type application/json.' });
   const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close|composer|concurrency|prepare|import|select|proxy|proxy-ip|save)$/);
   const legacyAccountRoute = pathname.match(/^\/api\/accounts\/(\d+)\/(connect|check|close)$/);
-  if (!['/api/video', '/api/image', '/api/text'].includes(pathname) && !accountRoute && !legacyAccountRoute) return json(res, 404, { error: 'API không tồn tại.' });
+  if (!['/api/video', '/api/image', '/api/text','/api/media/recover'].includes(pathname) && !accountRoute && !legacyAccountRoute) return json(res, 404, { error: 'API không tồn tại.' });
   let acquired = false;
   let accountAcquired = false;
   let preparingAccountId=null;
@@ -128,8 +128,11 @@ async function api(req, res, pathname) {
       else await muse.connect(accountId, { show: action === 'connect' });
       return json(res, 200, { accounts: muse.snapshot() });
     }
-    const kind = pathname === '/api/video' ? 'video' : pathname === '/api/image' ? 'image' : 'text';
-    validate(data, kind);
+    const recovering=pathname==='/api/media/recover';
+    if(recovering&&(!['video','image'].includes(data.output)||!muse?.recoverMedia))return json(res,409,{error:'MUSE_RECOVER_UNAVAILABLE: Nhận lại tệp cần kết nối Muse trong bản desktop mới. Chưa gửi lệnh tạo.'});
+    const kind = recovering?data.output:pathname === '/api/video' ? 'video' : pathname === '/api/image' ? 'image' : 'text';
+    validate(recovering?{...data,sourceMode:'text'}:data, kind);
+    if(recovering&&!data.sceneId)return json(res,400,{error:'MUSE_RECOVER_INVALID: Cần đúng số cảnh và prompt để đối chiếu tệp đã tạo.'});
     const endpoint = `/${kind}`;
     if (!muse) adapterURL(endpoint);
     if (accountBusy||preparingAccounts.size) return json(res, 409, { error: 'Đang kiểm tra tài khoản Muse. Vui lòng đợi.' });
@@ -141,7 +144,7 @@ async function api(req, res, pathname) {
         referenceImage: useImage ? { base64: data.image.imageBytes, mimeType: data.image.mimeType } : undefined } : {}),
       ...(kind === 'video' ? { modelDisplayName: data.model, durationSeconds: data.duration, sourceMode: data.sourceMode || 'text' } : {})
     };
-    const result = muse ? await (kind === 'video' ? muse.generateVideo(payload, abort.signal) : kind === 'image' ? muse.generateImage(payload, abort.signal) : muse.generateText(payload, abort.signal)) : await callAdapter(endpoint, payload, abort.signal);
+    const result = recovering?await muse.recoverMedia({...payload,output:kind},abort.signal):muse ? await (kind === 'video' ? muse.generateVideo(payload, abort.signal) : kind === 'image' ? muse.generateImage(payload, abort.signal) : muse.generateText(payload, abort.signal)) : await callAdapter(endpoint, payload, abort.signal);
     const allowedMime = kind === 'image' ? ['image/png', 'image/jpeg', 'image/webp'] : ['video/mp4', 'video/webm', 'video/quicktime'];
     if (kind !== 'text' && (typeof result.base64 !== 'string' || !result.base64 || !/^[A-Za-z0-9+/\s]+={0,2}$/.test(result.base64) || !allowedMime.includes(result.mimeType))) throw new Error('MUSE_RESPONSE_INVALID: Cần dữ liệu base64 và MIME của tệp ảnh/video hợp lệ.');
     if (kind === 'text' && (typeof result.text !== 'string' || !result.text.trim())) throw new Error('MUSE_RESPONSE_INVALID: Cần {text} không trống.');

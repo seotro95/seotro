@@ -221,7 +221,7 @@ async function start() {
   // Remote Muse views do not receive this preload or access to these handlers.
   const localApi=new LocalApiClient();
   ipcMain.handle('studio:api', async (event, value) => {
-    if (event.sender !== studio.webContents || !value || !/^[a-z0-9-]{36}$/i.test(value.id) || !['/api/image', '/api/video', '/api/text'].includes(value.endpoint)) throw new Error('Invalid Studio request');
+    if (event.sender !== studio.webContents || !value || !/^[a-z0-9-]{36}$/i.test(value.id) || !['/api/image', '/api/video', '/api/text','/api/media/recover'].includes(value.endpoint)) throw new Error('Invalid Studio request');
     if (requests.size >= MAX_SLOTS || requests.has(value.id)) return { ok: false, body: { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 400 ô đang chạy.' } };
     const body = JSON.stringify(value.data);
     if (Buffer.byteLength(body) > 12 * 1024 * 1024) return { ok: false, body: { error: 'Yêu cầu vượt giới hạn 12 MB.' } };
