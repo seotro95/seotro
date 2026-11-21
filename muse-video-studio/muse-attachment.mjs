@@ -14,7 +14,7 @@ export async function clickNativeAttachment(frame,media,signal){
     node.dataset.museStudioFileId||=crypto.randomUUID();
     // Run the site's existing download handler, then suppress only the default
     // link navigation. Virtual/file URIs are never fetched or read on the host.
-    const browserDownload=!nativeButton&&node.hasAttribute('download')&&/^(?:https?:|blob:|filesystem:|data:(?:image|video)\/)/i.test(node.getAttribute('href')||'');
+    const browserDownload=!nativeButton&&node.hasAttribute('download')&&/^(?:https?:|blob:|filesystem:|data:(?:image|video)\/)/i.test(node.href||node.getAttribute('href')||'');
     const protect=event=>{if(event.target===node||node.contains(event.target)){if(!browserDownload)event.preventDefault();cleanup()}};
     const cleanup=()=>{clearTimeout(timer);window.removeEventListener('click',protect)};
     const timer=setTimeout(cleanup,6000);window.addEventListener('click',protect);

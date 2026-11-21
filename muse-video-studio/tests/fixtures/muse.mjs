@@ -62,6 +62,7 @@ const fixture = http.createServer(async (req, res) => {
   if (req.url === '/capture') { let text = ''; for await (const chunk of req) text += chunk; const result = JSON.parse(text); state.outputs.set(result.id, result.base64); return res.end('ok'); }
   if (req.url === '/stop') { state.stops++; return res.end('ok'); }
   if(req.url?.startsWith('/native-file?')){if(!/fixture_session=connected/.test(req.headers.cookie||'')){res.writeHead(401);return res.end()}const id=Number(new URL(req.url,'http://127.0.0.1').searchParams.get('id'));(state.nativeDownloads||=[]).push(id);res.setHeader('Content-Type','image/png');res.setHeader('Content-Disposition','attachment; filename=provider-image.png');return res.end(state.outputs.has(id)?Buffer.from(state.outputs.get(id),'base64'):image);}
+  if(req.url?.startsWith('/missing-view/')){(state.missingReads||=[]).push(req.url);res.writeHead(404,{'Content-Type':'text/plain'});return res.end('Use the site download action')}
   if(req.url?.startsWith('/file-view/')){res.setHeader('Content-Type','text/html');return res.end('<html>File viewer, not image bytes</html>')}
   if (req.url?.startsWith('/asset-file?')) { res.setHeader('Content-Type','image/png'); return res.end(image); }
   if (req.url?.endsWith('.png')) { (state.assetCookies||=[]).push(req.headers.cookie||''); res.setHeader('Content-Type', state.assetImageMime || 'image/png'); return res.end(state.assetImageBytes || image); }

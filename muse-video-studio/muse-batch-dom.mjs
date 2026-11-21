@@ -18,10 +18,10 @@ export function inspectBatchDOM({marker,rows=[],baseline=[],baselineTexts=[],cap
   const shortTokens=new Map();
   for(const row of rows)for(const id of [Number(row.label?.match(/CLIP[ _-]*(\d+)/i)?.[1]),Number(row.sourceClip)])if(id>0){if(!shortTokens.has(id))shortTokens.set(id,new Set());shortTokens.get(id).add(row.fileToken);}
   const shortLabels=raw=>[...String(raw||'').matchAll(/\bCLIP[ _-]*0*(\d{1,4})\b/gi)].map(match=>Number(match[1]));
-  const owners=text=>{
+  const owners=(text,allowShort=scoped)=>{
     const raw=String(text||''),tokens=raw.match(/MUSE_[a-f0-9]{32}/gi)||[],labels=raw.match(/CLIP[ _-]*[0-9]{3}[ _-]*[a-f0-9]{8}/gi)||[];
     if(tokens.length||labels.length){const values=tokens.length?tokens:labels,map=tokens.length?tokenOwners:labelOwners;if(values.some(value=>!map.has(compact(value))))return [];return [...new Set(values.map(value=>map.get(compact(value))))];}
-    if(!scoped)return [];
+    if(!allowShort)return [];
     const ids=shortLabels(raw);if(!ids.length||ids.some(id=>shortTokens.get(id)?.size!==1))return [];
     return [...new Set(ids.map(id=>[...shortTokens.get(id)][0]))];
   };
@@ -44,16 +44,20 @@ export function inspectBatchDOM({marker,rows=[],baseline=[],baselineTexts=[],cap
     if(node){const labels=owners(evidence(node));if(labels.length===1&&smallScope(node))return labels[0]}
     return null;
   };
+  const strongOwner=element=>{let node=element;while(node&&node.hasAttribute){const found=owners(evidence(node),false);if(found.length===1&&smallScope(node))return found[0];if(node.hasAttribute('data-message-item'))break;node=node.parentElement;}return null;};
   const foreign=element=>{let node=element;while(node&&node.hasAttribute){const value=evidence(node);if(owners(value).length)return false;if(/MUSE_[a-f0-9]{32}|CLIP[ _-]*[0-9]{3}[ _-]*[a-f0-9]{8}/i.test(value)||(scoped&&shortLabels(value).length))return true;if(node.hasAttribute('data-message-item'))break;node=node.parentElement;}return false;};
   const add=(element,src,kind,rank=1,uncertain=false)=>{
     if(!src||(!captureOnly&&foreign(element)))return;
-    const id=key(src),anchor=element.matches('a[href]'),nativeControl=anchor&&clickSafe(src);
-    const nativeDownload=anchor&&(native(src)||(!valid(src)&&nativeControl));
+    let id=key(src);const anchor=element.matches('a[href]'),nativeControl=anchor&&clickSafe(src),url=(()=>{try{return new URL(src,location.href)}catch{return null}})();
+    const placeholder=nativeControl&&(url?.protocol==='about:'||(url?.origin===location.origin&&url?.pathname===location.pathname&&url?.search===location.search));
+    const explicit=placeholder?strongOwner(element):null;if(placeholder&&!explicit){unsupported.push({owner:elementOwner(element),kind,scheme:url?.protocol||'invalid',locationClass:'unbound-download-control',element:element.tagName.toLowerCase()});return;}
+    if(placeholder)id='muse-file-action:'+explicit;
+    const nativeDownload=anchor&&(placeholder||native(src)||(!valid(src)&&nativeControl));
     if(!valid(src)&&!nativeDownload){const url=(()=>{try{return new URL(src,location.href)}catch{return null}})();unsupported.push({owner:elementOwner(element),kind,scheme:url?.protocol||'invalid',locationClass:url?url.hostname?'authority':url.pathname.startsWith('/')?'absolute':'opaque':'invalid',element:element.tagName.toLowerCase()});return;}
     if(!captureOnly&&seen.has(id))return;
     sources.push({key:id,kind,reply:element.closest('[data-message-item]')});const prior=assets.get(id);
     if(nativeDownload)rank=10;if(nativeControl)element.dataset.museStudioFileId||=crypto.randomUUID();
-    const value={nativeDownload,nativeControl,nativeId:nativeControl?element.dataset.museStudioFileId:undefined,key:id,src:new URL(src,location.href).href,kind,rank,uncertain,owner:elementOwner(element)};
+    const value={nativeDownload,nativeControl,nativeId:nativeControl?element.dataset.museStudioFileId:undefined,key:id,src:new URL(src,location.href).href,kind,rank,uncertain,owner:explicit||elementOwner(element)};
     if(prior?.ambiguous)return;
     if(prior?.owner&&value.owner&&prior.owner!==value.owner){assets.set(id,{...prior,owner:null,ambiguous:true});return;}
     if(!prior||rank<prior.rank){value.owner||=prior?.owner||null;assets.set(id,value)}else if(!prior.owner&&value.owner)prior.owner=value.owner;
