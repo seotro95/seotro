@@ -1,0 +1,66 @@
+{
+  "status": "windows_tests_and_uploaded_asset_sha256_verified",
+  "version": "1.13.7",
+  "source_commit": "58ee84524c5d8a923e823e9a5f6ab907dcd81f14",
+  "source_branch": "codex/muse-1137-media-attribution",
+  "workflow_run_id": 44855401781,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/44855401781",
+  "workflow_conclusion": "success",
+  "release_id": 453383835,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/untagged-d596fe8e9cef6996f8d1",
+  "draft": true,
+  "zip": {
+    "file": "Muse-AI-Studio-1.13.7-Windows-x64.zip",
+    "bytes": 160794087,
+    "sha256": "53bf57625f122d2c559f2492339e17bfbc87e4e20d9f68306f4eabce0aaa7f69",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-d596fe8e9cef6996f8d1/Muse-AI-Studio-1.13.7-Windows-x64.zip"
+  },
+  "checksum_file": {
+    "file": "Muse-AI-Studio-1.13.7-Windows-x64.zip.sha256",
+    "bytes": 105,
+    "sha256": "b232640a58e2931dc911a2bab9445e1140550d5f0fd5f2e88ce9afdc874a9a09",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-d596fe8e9cef6996f8d1/Muse-AI-Studio-1.13.7-Windows-x64.zip.sha256"
+  },
+  "validation": {
+    "reported_case": {
+      "version": "1.13.6",
+      "accountId": 10,
+      "requestedConcurrency": 5,
+      "executionConcurrency": 1,
+      "assistantReplies": 11,
+      "visibleVideos": 5,
+      "error": "MUSE_BATCH_UNMATCHED",
+      "user_confirmed_layout": "Native video cards are separate from their labelled assistant completions below."
+    },
+    "windows_ui_checks": 27,
+    "electron_desktop_checks": 8,
+    "throughput_fixture": {
+      "accounts": 12,
+      "lanesPerAccount": 6,
+      "submittedBeforeAnyResult": 72,
+      "chatMessages": 12,
+      "pages": 12,
+      "extraWorkerPages": 0,
+      "preparationMs": 2012,
+      "submissionMs": 870,
+      "downloadConcurrency": 6
+    },
+    "caption_regression": "The previous parser failed the five-card/eleven-reply reproduction. Native card plus its separate CLIP completion now map the exact five files, in reversed completion order.",
+    "ambiguity_guards": "No positional zipping of a block of several unlabelled cards to a list of captions; no attribution across user turns, historical baseline assets, or foreign batch captions.",
+    "delayed_captions": "A 3300ms delay after native videos appear no longer raises the old premature mapping error.",
+    "concurrency": "A mapping problem does not downgrade execution concurrency. Explicit provider concurrency rejection retains existing sequential fallback.",
+    "read_only_recovery": "Existing original batch is identified by the exact scene number and full prompt in the current account conversation. Five original outputs are recovered byte-for-byte without Enter, a new page/chat, additional user messages, generation calls, or changes to an unsent draft. Changed prompts are rejected.",
+    "recovery_api": "Dedicated /api/media/recover endpoint; origin/sender validation and exact route allowlist in the Electron bridge. UI recovery bypasses chat preparation and generation. Main action for mapping/media/time-limit failures offers retrieval, with new generation separately labelled.",
+    "wait_limits_ms": {
+      "server": 190000,
+      "desktop_local_http": 195000,
+      "frontend_absolute": 200000
+    },
+    "preserved_features": "TXT/SRT names, exact saved filenames and unnamed numbering, account choices, proxies/IP, persisted sessions, cancellation, renderer recovery and generation concurrency.",
+    "actual_resolution": "Recovered 1280x720 metadata remains 720p and is marked below a requested 1080p; output is not relabelled as 1080p.",
+    "packaged_executable": "Standalone EXE startup, exact named exports, restart persistence, ten shared-chat videos with six concurrent tasks, native bridge read-only recovery with no extra chat/generation, explicit sequential fallback and account-session media download recovery.",
+    "live_muse_account_render_tested": false,
+    "limitation": "Automated generation and recovery use a fixture service, not live Muse credits. The user's actual five files were not downloaded in this session. Recovery needs the original full prompt and the matching conversation loaded in the correct Muse account."
+  },
+  "verified_at_utc": "2026-11-21T02:28:32Z"
+}
