@@ -3,7 +3,24 @@
 export function nativeAttachmentURL(value){
   try{const url=new URL(value);return !url.username&&!url.password&&(['attachment:','artifact:'].includes(url.protocol)||(url.protocol==='sandbox:'&&Boolean(url.pathname||url.hostname)))}catch{return false}
 }
-export async function clickNativeAttachment(frame,media,signal){
+const imageCaptureGuards=new WeakMap();
+const uncertainImageCapture=()=>Error('MEDIA_ATTACHMENT_UNCERTAIN: Lượt tải ảnh trước chưa xác nhận xong; chưa bấm tải tệp tiếp để tránh ghép nhầm cảnh. Bấm Tải lại Muse, rồi Nhận lại từ Muse; không cần tạo lại ảnh.');
+const discardDownload=async item=>{await item.cancel().catch(()=>{});await item.delete().catch(()=>{})};
+const documentEpoch=page=>page.evaluate(()=>{const key=Symbol.for('muse.studio.attachment.document');return globalThis[key]||=crypto.randomUUID()});
+async function captureGuard(page,create){
+  let guard=imageCaptureGuards.get(page);if(!guard&&!create)return null;
+  const epoch=await documentEpoch(page);
+  if(!guard){
+    guard={epoch,blocked:false,changed:new Set()};imageCaptureGuards.set(page,guard);
+    guard.refresh=async()=>{const next=await documentEpoch(page);if(next!==guard.epoch){guard.epoch=next;guard.blocked=false;for(const changed of [...guard.changed])changed()}return next};
+    const download=item=>{if(guard.blocked)void guard.refresh().then(()=>{if(guard.blocked)return discardDownload(item)}).catch(()=>discardDownload(item)).catch(()=>{})};
+    const navigated=frame=>{if(frame===page.mainFrame())void guard.refresh().catch(()=>{})};
+    page.on('download',download);page.on('framenavigated',navigated);
+    page.once('close',()=>{page.off('download',download);page.off('framenavigated',navigated);imageCaptureGuards.delete(page)});
+  }else if(epoch!==guard.epoch){guard.epoch=epoch;guard.blocked=false;for(const changed of [...guard.changed])changed()}
+  if(guard.blocked)throw uncertainImageCapture();return guard;
+}
+export async function clickNativeAttachment(frame,media,signal,{onTrigger=()=>{}}={}){
   signal.throwIfAborted();if(!media.nativeControl&&!nativeAttachmentURL(media.src))throw Error('MEDIA_URL_UNSUPPORTED');
   const action=await frame.evaluate(({src,nativeId,nativeButton,nativeControl,kind})=>{
     const matches=[...document.querySelectorAll(nativeButton?'button,[role="button"]':'a[href]')].filter(node=>nativeButton?node.dataset.museStudioFileId===nativeId:(()=>{try{return new URL(node.getAttribute('href'),location.href).href===src}catch{return false}})());
@@ -33,20 +50,24 @@ export async function clickNativeAttachment(frame,media,signal){
   // A trusted browser click preserves the user gesture required by some
   // service download handlers. It still targets only the matched control.
   const previousType=await link.evaluate(node=>{const type=node.getAttribute('type');if(node.tagName==='BUTTON')node.setAttribute('type','button');return type});
-  try{await link.click({timeout:5000,noWaitAfter:true})}finally{await link.evaluate((node,{type,temporaryDownload})=>{if(node.tagName==='BUTTON'){if(type===null)node.removeAttribute('type');else node.setAttribute('type',type)}if(temporaryDownload&&node.getAttribute('download')==='')node.removeAttribute('download')},{type:previousType,temporaryDownload}).catch(()=>{})}
+  try{signal.throwIfAborted();if(onTrigger()===false)throw Error('MEDIA_ATTACHMENT_CAPTURE_ENDED: Đã dừng lượt tải trước khi bấm liên kết.');await link.click({timeout:5000,noWaitAfter:true})}finally{await link.evaluate((node,{type,temporaryDownload})=>{if(node.tagName==='BUTTON'){if(type===null)node.removeAttribute('type');else node.setAttribute('type',type)}if(temporaryDownload&&node.getAttribute('download')==='')node.removeAttribute('download')},{type:previousType,temporaryDownload}).catch(()=>{})}
 
 }
 export async function readPageAttachment(frame,media,signal,{timeoutMs=15000}={}){
-  const page=frame.page?frame.page():frame;let captured,success=false;
+  const page=frame.page?frame.page():frame,guard=await captureGuard(page,media.kind==='image'),epoch=guard?.epoch;let captured,success=false,triggered=false;
   try{return await new Promise((resolve,reject)=>{
     let settled=false;let timer=setTimeout(()=>finish(Error('MEDIA_ATTACHMENT_NOT_DELIVERED: Muse chưa trả tệp sau khi bấm liên kết tải.')),timeoutMs);
     const abort=()=>finish(signal.reason||Error('ABORTED'));
+    const changed=()=>{if(!captured)finish(Error('MEDIA_ATTACHMENT_DOCUMENT_CHANGED: Trang Muse đã tải lại trong lúc nhận tệp; dùng Nhận lại từ Muse để lấy đúng kết quả.'))};
     const downloaded=async item=>{
+      if(captured||settled)return;
+      if(guard){try{await guard.refresh()}catch{finish(Error('MEDIA_ATTACHMENT_DOCUMENT_CHANGED'));return}if(settled||guard.epoch!==epoch){if(guard.blocked)await discardDownload(item);return}}
       if(captured||settled)return;captured=item;clearTimeout(timer);timer=setTimeout(()=>finish(Error('MEDIA_ATTACHMENT_DOWNLOAD_TIMEOUT')),120000);
       try{const stream=await item.createReadStream();if(!stream)throw Error('MEDIA_ATTACHMENT_READ_FAILED');let size=0;const chunks=[];for await(const chunk of stream){signal.throwIfAborted();if(settled)return;size+=chunk.length;if(size>100*1024*1024)throw Error('MEDIA_TOO_LARGE');chunks.push(Buffer.from(chunk));}if(!size)throw Error('MEDIA_EMPTY');finish(null,{base64:Buffer.concat(chunks).toString('base64'),mimeType:'application/octet-stream'});}catch(error){finish(error)}
     };
-    function finish(error,value){if(settled)return;settled=true;success=!error;clearTimeout(timer);signal.removeEventListener('abort',abort);page.off('download',downloaded);error?reject(error):resolve(value)}
+    function finish(error,value){if(settled)return;settled=true;success=!error;if(error&&media.kind==='image'&&triggered&&!captured&&guard?.epoch===epoch){guard.blocked=true;if(!signal.aborted)error=Error(error.message+'\n'+uncertainImageCapture().message,{cause:error})}clearTimeout(timer);signal.removeEventListener('abort',abort);page.off('download',downloaded);guard?.changed.delete(changed);error?reject(error):resolve(value)}
     signal.addEventListener('abort',abort,{once:true});page.on('download',downloaded);
-    if(signal.aborted){abort();return}void clickNativeAttachment(frame,media,signal).catch(error=>finish(error));
+    guard?.changed.add(changed);
+    if(signal.aborted){abort();return}void clickNativeAttachment(frame,media,signal,{onTrigger:()=>{if(settled||(guard&&guard.epoch!==epoch))return false;triggered=true;return true}}).catch(error=>finish(error));
   })}finally{if(!success&&captured)await captured.cancel().catch(()=>{})}
 }

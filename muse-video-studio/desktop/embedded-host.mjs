@@ -118,7 +118,7 @@ export class EmbeddedMuseHost {
       context: login.page.context(), page: login.page,
       showLogin: () => this.showLogin(),
       isLoginVisible: () => this.loginVisible,
-      readAttachment:(frame,media,signal)=>captureSessionAttachment((this.views.get(frame.page?frame.page():frame)||login.view).webContents,()=>clickNativeAttachment(frame,media,signal),signal),
+      readAttachment:(frame,media,signal)=>captureSessionAttachment((this.views.get(frame.page?frame.page():frame)||login.view).webContents,onTrigger=>clickNativeAttachment(frame,media,signal,{onTrigger}),signal,{kind:media.kind}),
       readMedia: (src,signal) => readSessionMedia(login.view.webContents.session,src,{signal,serviceURL:this.serviceURL}),
       createWorkerPage: async () => (await this.createView({ worker: true })).page,
       destroyWorkerPage: page => this.removePage(page),
