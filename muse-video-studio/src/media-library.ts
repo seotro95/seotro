@@ -48,3 +48,30 @@ export async function loadMedia(): Promise<SavedMedia[]> {
 export const deleteMedia = (id: string) => write(store => store.delete(id));
 
 export const clearMedia = () => write(store => store.clear());
+
+// Delete every persisted video version, including batches and scene slots that
+// are not currently visible. A single transaction keeps images and all videos
+// intact if any delete fails; callers publish their new view only after commit.
+export async function deleteVideoMedia(): Promise<string[]> {
+  const db = await database();
+  try {
+    return await new Promise<string[]>((resolve, reject) => {
+      const tx = db.transaction('results', 'readwrite');
+      const deletedIds: string[] = [];
+      let cursorError: unknown;
+      tx.oncomplete = () => resolve(deletedIds);
+      tx.onabort = () => reject(cursorError || tx.error || new Error('Không xóa được video trong thư viện tool. Chưa thay đổi kết quả đã lưu.'));
+      const request = tx.objectStore('results').openCursor();
+      request.onerror = () => { cursorError = request.error; };
+      request.onsuccess = () => {
+        const cursor = request.result;
+        if (!cursor) return;
+        try {
+          const entry = cursor.value as StoredMedia;
+          if (entry.media.kind === 'video') { cursor.delete(); deletedIds.push(entry.id); }
+          cursor.continue();
+        } catch (error) { cursorError = error; tx.abort(); }
+      };
+    });
+  } finally { db.close(); }
+}
