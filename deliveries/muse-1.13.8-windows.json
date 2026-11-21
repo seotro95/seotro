@@ -1,0 +1,84 @@
+{
+  "status": "windows_tests_and_uploaded_asset_sha256_verified",
+  "version": "1.13.8",
+  "source_commit": "ef0e999da106821abd8b683f1ee39c7199a9454b",
+  "source_branch": "codex/muse-1138-interleaved-captions",
+  "workflow_run_id": 44859514359,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/44859514359",
+  "workflow_conclusion": "success",
+  "release_id": 453405643,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/untagged-fa088ba4bf39f0f61bfa",
+  "draft": true,
+  "zip": {
+    "file": "Muse-AI-Studio-1.13.8-Windows-x64.zip",
+    "bytes": 160799210,
+    "sha256": "a0ab4cb388a60403723ab92f83334a9c7e6f91760f7795c68115b8bc9f490419",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-fa088ba4bf39f0f61bfa/Muse-AI-Studio-1.13.8-Windows-x64.zip"
+  },
+  "checksum_file": {
+    "file": "Muse-AI-Studio-1.13.8-Windows-x64.zip.sha256",
+    "bytes": 105,
+    "sha256": "46b02cf5eb4e221e932c280d7b8673823bc7c4e4c578d1676b5a5d24a8ee183d",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-fa088ba4bf39f0f61bfa/Muse-AI-Studio-1.13.8-Windows-x64.zip.sha256"
+  },
+  "validation": {
+    "windows_ui_checks": 30,
+    "electron_desktop_checks": 8,
+    "throughput_fixture": {
+      "accounts": 12,
+      "lanesPerAccount": 6,
+      "submittedBeforeAnyResult": 72,
+      "chatMessages": 12,
+      "pages": 12,
+      "extraWorkerPages": 0,
+      "preparationMs": 2400,
+      "submissionMs": 1074,
+      "downloadConcurrency": 6
+    },
+    "user_mode_scope": {
+      "default_lanes_per_account": 1,
+      "default_ten_accounts_total": 10,
+      "expanded_controls_location": "Một tài khoản",
+      "expanded_ten_accounts_six_lanes_total": 60,
+      "maximum_account_choices": 40
+    },
+    "ui_mode_scope": "Thirty Windows UI checks include ten standard accounts preparing one lane each, the One account section sending sixty requests in cohorts of six to ten accounts, per-account overrides, and restoring separate configurations after changing modes and restarting. Existing prompts, hidden slots, names and media remain intact.",
+    "legacy_configuration": "Old multi-account workspaces with more than one lane per account migrate to the expanded UI section; old one-lane groups stay standard. Standard execution remains one lane even with stale larger values or overrides.",
+    "reported_partial_case": {
+      "version": "1.13.7",
+      "accountId": 10,
+      "sceneId": 2,
+      "visibleVideos": 5,
+      "assistantReplies": 13,
+      "matchedCount": 3,
+      "unmatchedCount": 2,
+      "captionLinked": 3
+    },
+    "caption_regression": "A thirteen-reply fixture with progress between the media and completion for scenes two and three reproduces three of five with the old parser and maps all five with the new segment parser. Pending-task references no longer replace the completed section owner; ambiguous multiple-media blocks and user-turn boundaries are still rejected.",
+    "partial_saved_recovery": "Three saved videos survive reload and only missing scenes two and three are retrieved, without another generation call. Five native files with delayed interleaved captions recover byte-for-byte with zero new messages, no New chat and an unchanged unsent draft.",
+    "reply_layout_diagnostics": "Status/error reports now include a bounded sequence of message roles, media counts, completed scene numbers and progress markers; no URLs, cookies, authentication values or prompt content are included in this layout.",
+    "reported_composer_case": {
+      "version": "1.13.7",
+      "accountId": 3,
+      "sceneId": 6,
+      "requestedConcurrency": 2,
+      "executionConcurrency": 1,
+      "origin": "https://muse.ai",
+      "composerRoots": 0,
+      "visibleEditors": 0
+    },
+    "readiness_checks": 4,
+    "composer_readiness": "Authenticated zero-composer pages fail preparation instead of reporting a ready serial fallback. The driver can use an observed same-origin workspace entry or reload once; hidden unsent drafts prevent reload/navigation. A subsequent status refresh preserves the unavailable-workspace state until an editor is found.",
+    "account_isolation": "A preparation error on account three marks its two scenes with the concrete error and preserves both prompts, while four scenes on healthy accounts one and two continue.",
+    "wait_limits_ms": {
+      "server": 190000,
+      "desktop_local_http": 195000,
+      "frontend_absolute": 200000
+    },
+    "packaged_executable": "Verified standalone startup, ten concurrent images, exact named exports and restart persistence, ten shared-chat videos with six concurrent tasks, existing-file recovery through the native bridge with no extra messages/generations, explicit serial fallback, and account-session media download recovery.",
+    "preserved_features": "Full TXT/SRT prompts and exact names, unnamed numbering, selected accounts, individual proxy/IP, persisted sessions, cancellation and renderer recovery.",
+    "live_muse_account_render_tested": false,
+    "limitation": "Automated rendering/recovery checks use fixture service and no live Muse credits. The actual two missing files and Muse 3 workspace were not accessed on the user's Windows computer; the 200-second bound limits waiting rather than guaranteeing remote completion."
+  },
+  "verified_at_utc": "2026-11-21T03:16:26Z"
+}
