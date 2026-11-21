@@ -1,0 +1,632 @@
+{
+  "topic": "060-Tunguska",
+  "duration_seconds": 1242,
+  "expected_samples_48000": 59616000,
+  "profile_set_id": "science-history-16-v4-namminh",
+  "vietnamese_voice": "vi-VN-NamMinhNeural",
+  "english_voice": "en-US-GuyNeural",
+  "german_voice": "de-DE-ChristophNeural",
+  "voice_ids_unchanged_from": "055-Maya-Drought",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "voices": [
+    {
+      "locale": "en-US",
+      "voice_id": "en-US-GuyNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "1e9b2e2fc1ed4d74e48a00c3946454170500d7b6eb68adf3e624f1e13aa14f0d",
+      "min_post_tempo": 0.7302857142857143,
+      "max_post_tempo": 1.5548,
+      "max_padding_seconds": 0.0335625,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "vi-VN",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "0ebc4031b63aa1970be2f37fa864940b70b505678624dba8e12f5a842a3f394d",
+      "min_post_tempo": 0.90045,
+      "max_post_tempo": 1.0367,
+      "max_padding_seconds": 0.025583333333333333,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "es-ES",
+      "voice_id": "es-ES-AlvaroNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "da144d54880edbee179b01f84ccfeb82c1f664f112cdd362905f60415096cd31",
+      "min_post_tempo": 1.20125,
+      "max_post_tempo": 1.4290833333333333,
+      "max_padding_seconds": 0.017541666666666667,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "fr-FR",
+      "voice_id": "fr-FR-HenriNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "8f4d0dc2bc3d4fd7cae6516c9d5fd83c1b02f1a833bc00aea48088d94b36e421",
+      "min_post_tempo": 1.08645,
+      "max_post_tempo": 1.3456833333333333,
+      "max_padding_seconds": 0.019479166666666665,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "ja-JP",
+      "voice_id": "ja-JP-KeitaNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "c336159ccc67a8a99d5f99337c3f79436e056df29bc50f2025bfac337f139b34",
+      "min_post_tempo": 0.7553833333333333,
+      "max_post_tempo": 0.9401833333333334,
+      "max_padding_seconds": 0.03177083333333333,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "ko-KR",
+      "voice_id": "ko-KR-InJoonNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "5283238105bb2491a0b6045c498cf9e9ed5f15a2e47e8def41385f23ed02f9aa",
+      "min_post_tempo": 0.8893333333333333,
+      "max_post_tempo": 1.0683333333333334,
+      "max_padding_seconds": 0.026041666666666668,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "de-DE",
+      "voice_id": "de-DE-ChristophNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "39c489c2c8217ac06c91251e7b19f7a0b11e2731e52e1669f7049a7658577a55",
+      "min_post_tempo": 1.27285,
+      "max_post_tempo": 1.5308833333333334,
+      "max_padding_seconds": 0.015833333333333335,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "it-IT",
+      "voice_id": "it-IT-DiegoNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "901f6f7e1009c10689a18f3bf1ed76ec737eb76890b2c673620dc5d9385f82fe",
+      "min_post_tempo": 1.29265,
+      "max_post_tempo": 1.5306833333333334,
+      "max_padding_seconds": 0.015583333333333333,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "pt-PT",
+      "voice_id": "pt-PT-DuarteNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "fbc8b0490e0f1cb031834a1904e04f38497d1e6ea252ec5b033a225167a85ff4",
+      "min_post_tempo": 1.02005,
+      "max_post_tempo": 1.2534333333333334,
+      "max_padding_seconds": 0.020895833333333332,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "nl-NL",
+      "voice_id": "nl-NL-MaartenNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "d0c2ecf71e4a1ef5e229e944e5c123f1e4c0b36603fffd20ce4a13c78eb3036e",
+      "min_post_tempo": 1.19685,
+      "max_post_tempo": 1.4296833333333334,
+      "max_padding_seconds": 0.017833333333333333,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "pl-PL",
+      "voice_id": "pl-PL-MarekNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "e652bebfe687b219e1acdc4f4d02288d451b981b2691e191120f04382d367e0f",
+      "min_post_tempo": 1.09565,
+      "max_post_tempo": 1.3114333333333332,
+      "max_padding_seconds": 0.019291666666666665,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "sv-SE",
+      "voice_id": "sv-SE-MattiasNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "fc8eb82de7f8262ab9a1acc805cd261bd9be5f0db5c1e525d0b4ee9b7d4c6620",
+      "min_post_tempo": 1.2799,
+      "max_post_tempo": 1.5437,
+      "max_padding_seconds": 0.015354166666666667,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "da-DK",
+      "voice_id": "da-DK-JeppeNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "ab527f9c2aab579f81a716fa6b07e6934ade2fe04ed4f9b5461a2649ba95b1da",
+      "min_post_tempo": 1.13305,
+      "max_post_tempo": 1.3556333333333332,
+      "max_padding_seconds": 0.0185,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "fi-FI",
+      "voice_id": "fi-FI-HarriNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "82849387f0a46407dad98281c8a03d410cef55609ea6f733a007ecb583442181",
+      "min_post_tempo": 1.24305,
+      "max_post_tempo": 1.4483,
+      "max_padding_seconds": 0.017020833333333332,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "nb-NO",
+      "voice_id": "nb-NO-FinnNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "bcaa31bcbeedcc16f2fba1683da185fa671945bab40fe77897cc5a9bd5e56426",
+      "min_post_tempo": 1.14045,
+      "max_post_tempo": 1.3585,
+      "max_padding_seconds": 0.018333333333333333,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "cs-CZ",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "gender": "Male",
+      "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+      "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+      "mp3_sha256": "12f49e87987ef5cc810592a7eb08a11c3bf3f5b64091a28c245c490235cba75a",
+      "min_post_tempo": 1.06545,
+      "max_post_tempo": 1.2417,
+      "max_padding_seconds": 0.0199375,
+      "pitch_shift": false,
+      "alignment": "206variable3–8secondEnglishcues;15localized10sections9x120+162",
+      "independent_native_listening_review": false
+    }
+  ],
+  "localization": "Vietnamese,Japanese,Korean assistantcontextualadaptations;12fullsectionmachine draftswithcontext/regionreview,unambiguouscalendarvaluesandspoken-numberforms.TargetedNordicdamaging-versus-being-damaged/evidence-consistencyphrasescorrected;Swedishsection6condensed.Koreanlight-trailwordingclarified.Independentnativeeditorial/listeningreviewpending.",
+  "online_text_metadata_audit": {
+    "languages": 16,
+    "full_normalized_input_matches": true,
+    "scope": "Providerwordmetadataagainstcanonicalinput;notindependenttranscriptionorlistening"
+  },
+  "independent_native_review": false,
+  "audio_storage": {
+    "durable": "VerifiedpublicGitHubReleaseassets",
+    "working_cache": "RAM;notdurablelocalstorage",
+    "local_references_after_public_success": [
+      "en-US",
+      "vi-VN"
+    ]
+  },
+  "nordic_repair_provenance": [
+    {
+      "locale": "da-DK",
+      "changed_sections": [
+        10
+      ],
+      "same_voice_id": true,
+      "reason": "Correct caused-versus-received damage and evidence consistency;concise natural Swedish chapter6;no factual topic change",
+      "restored_unchanged_lossless_pcm": [
+        "raw-009-03.wav",
+        "raw-002-03.wav",
+        "raw-006-03.wav",
+        "raw-002-02.wav",
+        "raw-008-02.wav",
+        "raw-001-03.wav",
+        "raw-004-02.wav",
+        "raw-002-01.wav",
+        "raw-006-02.wav",
+        "raw-003-03.wav",
+        "raw-007-02.wav",
+        "raw-007-01.wav",
+        "raw-007-03.wav",
+        "raw-006-01.wav",
+        "raw-004-01.wav",
+        "raw-009-01.wav",
+        "raw-004-03.wav",
+        "raw-008-01.wav",
+        "raw-001-02.wav",
+        "raw-008-03.wav",
+        "raw-005-02.wav",
+        "raw-003-01.wav",
+        "raw-005-03.wav",
+        "raw-003-02.wav",
+        "raw-009-02.wav",
+        "raw-006-04.wav",
+        "raw-005-01.wav",
+        "raw-001-01.wav"
+      ],
+      "changed_raw_retired": [],
+      "unchanged_pcm_from_preencode_source": true,
+      "no_completed_MP3_recompression_used": true
+    },
+    {
+      "locale": "fi-FI",
+      "changed_sections": [
+        6,
+        10
+      ],
+      "same_voice_id": true,
+      "reason": "Correct caused-versus-received damage and evidence consistency;concise natural Swedish chapter6;no factual topic change",
+      "restored_unchanged_lossless_pcm": [
+        "raw-009-03.wav",
+        "raw-009-02.wav",
+        "raw-009-01.wav",
+        "raw-008-04.wav",
+        "raw-008-03.wav",
+        "raw-008-02.wav",
+        "raw-008-01.wav",
+        "raw-007-03.wav",
+        "raw-007-02.wav",
+        "raw-007-01.wav",
+        "raw-005-03.wav",
+        "raw-005-02.wav",
+        "raw-002-03.wav",
+        "raw-002-02.wav",
+        "raw-001-03.wav",
+        "raw-004-02.wav",
+        "raw-002-01.wav",
+        "raw-003-03.wav",
+        "raw-004-01.wav",
+        "raw-004-03.wav",
+        "raw-001-02.wav",
+        "raw-003-01.wav",
+        "raw-003-02.wav",
+        "raw-005-01.wav",
+        "raw-001-01.wav"
+      ],
+      "changed_raw_retired": [],
+      "unchanged_pcm_from_preencode_source": true,
+      "no_completed_MP3_recompression_used": true
+    },
+    {
+      "locale": "nb-NO",
+      "changed_sections": [
+        10
+      ],
+      "same_voice_id": true,
+      "reason": "Correct caused-versus-received damage and evidence consistency;concise natural Swedish chapter6;no factual topic change",
+      "restored_unchanged_lossless_pcm": [
+        "raw-009-03.wav",
+        "raw-009-02.wav",
+        "raw-009-01.wav",
+        "raw-008-03.wav",
+        "raw-008-02.wav",
+        "raw-008-01.wav",
+        "raw-007-03.wav",
+        "raw-007-02.wav",
+        "raw-007-01.wav",
+        "raw-006-03.wav",
+        "raw-006-02.wav",
+        "raw-006-01.wav",
+        "raw-005-03.wav",
+        "raw-005-02.wav",
+        "raw-005-01.wav",
+        "raw-004-03.wav",
+        "raw-002-03.wav",
+        "raw-002-02.wav",
+        "raw-001-03.wav",
+        "raw-004-02.wav",
+        "raw-002-01.wav",
+        "raw-003-03.wav",
+        "raw-004-01.wav",
+        "raw-001-02.wav",
+        "raw-003-01.wav",
+        "raw-003-02.wav",
+        "raw-001-01.wav"
+      ],
+      "changed_raw_retired": [],
+      "unchanged_pcm_from_preencode_source": true,
+      "no_completed_MP3_recompression_used": true
+    },
+    {
+      "locale": "sv-SE",
+      "changed_sections": [
+        6,
+        8,
+        10
+      ],
+      "same_voice_id": true,
+      "reason": "Correct caused-versus-received damage and evidence consistency;concise natural Swedish chapter6;no factual topic change",
+      "restored_unchanged_lossless_pcm": [],
+      "changed_raw_retired": [
+        {
+          "name": "raw-006-01.wav",
+          "sha256": "db02fd3255af6cafad95756a0e8645a595fa1eda4786dc95f049e31812367456",
+          "bytes": 3164492
+        },
+        {
+          "name": "raw-006-02.wav",
+          "sha256": "4a2cf0a2443a819578f5f188e2ce74abd5006fe909d988dc8106b519a1f198e2",
+          "bytes": 3165644
+        },
+        {
+          "name": "raw-006-03.wav",
+          "sha256": "aa109770e78b5f4e8e171b4fa07be47dc76b233e2a21f37484d222cb7e45081a",
+          "bytes": 3096236
+        },
+        {
+          "name": "raw-008-03.wav",
+          "sha256": "5f68a4773ddc9631003d58ff1e9bdbf91819c7a0f7903828daa7c66588ed20ef",
+          "bytes": 2587052
+        },
+        {
+          "name": "raw-008-01.wav",
+          "sha256": "9bd8bc227b8c17347dbcdc1d55575034cb715cc0fbc1cd1a045c99ad8b5c442b",
+          "bytes": 3270476
+        },
+        {
+          "name": "raw-008-02.wav",
+          "sha256": "70ef287f9cd1d73e786f3be122d8e08ba18f042f943afcc249bd0a03b074ca1e",
+          "bytes": 2821196
+        },
+        {
+          "name": "raw-010-03.wav",
+          "sha256": "7ec9e9d93039b6df0fe2cc4fbc0c0620ad88b4d43e57f5a7bfaed7f9b33c0a23",
+          "bytes": 3058604
+        },
+        {
+          "name": "raw-010-01.wav",
+          "sha256": "6aff718ce26ef7c07f55132c1638a6793e0a67f3bfd30abdae444ae27692553b",
+          "bytes": 2952620
+        },
+        {
+          "name": "raw-010-02.wav",
+          "sha256": "18d97bfc19899efe90bc19588d15bd8512f1c982867669a0b1ce1402ac3dda71",
+          "bytes": 3347756
+        },
+        {
+          "name": "raw-010-04.wav",
+          "sha256": "985c3b22496ec75b49aabc1504cb1ac75b6a7943b8f1a6f75e29c728ee4fd965",
+          "bytes": 1639340
+        }
+      ],
+      "unchanged_pcm_from_preencode_source": true,
+      "no_completed_MP3_recompression_used": true
+    }
+  ],
+  "english_timing_repair": {
+    "reason": "Same immutable narration and raw synthesis;reallocate seconds within same half-section to preserve natural pauses and stay below1.6tempo cap",
+    "total_seconds": 1242,
+    "section_and_rehook_anchors_unchanged": true,
+    "changes": [
+      {
+        "cue": 93,
+        "old_seconds": 5,
+        "new_seconds": 6,
+        "styled_raw_seconds": 8.158
+      },
+      {
+        "cue": 98,
+        "old_seconds": 7,
+        "new_seconds": 6,
+        "styled_raw_seconds": 7.054
+      },
+      {
+        "cue": 110,
+        "old_seconds": 7,
+        "new_seconds": 6,
+        "styled_raw_seconds": 8.398
+      },
+      {
+        "cue": 116,
+        "old_seconds": 5,
+        "new_seconds": 6,
+        "styled_raw_seconds": 8.494
+      },
+      {
+        "cue": 123,
+        "old_seconds": 7,
+        "new_seconds": 6,
+        "styled_raw_seconds": 7.198
+      },
+      {
+        "cue": 127,
+        "old_seconds": 3,
+        "new_seconds": 4,
+        "styled_raw_seconds": 4.966
+      },
+      {
+        "cue": 130,
+        "old_seconds": 7,
+        "new_seconds": 6,
+        "styled_raw_seconds": 7.822
+      },
+      {
+        "cue": 131,
+        "old_seconds": 6,
+        "new_seconds": 7,
+        "styled_raw_seconds": 10.414
+      },
+      {
+        "cue": 152,
+        "old_seconds": 5,
+        "new_seconds": 6,
+        "styled_raw_seconds": 8.902
+      },
+      {
+        "cue": 158,
+        "old_seconds": 7,
+        "new_seconds": 6,
+        "styled_raw_seconds": 6.766
+      },
+      {
+        "cue": 194,
+        "old_seconds": 6,
+        "new_seconds": 7,
+        "styled_raw_seconds": 9.672
+      },
+      {
+        "cue": 198,
+        "old_seconds": 8,
+        "new_seconds": 7,
+        "styled_raw_seconds": 7.752
+      }
+    ]
+  },
+  "public_audio_reference_index": [
+    {
+      "locale": "en-US",
+      "voice_id": "en-US-GuyNeural",
+      "filename": "TUNGUSKA_060_My_Tieng_Anh.mp3",
+      "sha256": "1e9b2e2fc1ed4d74e48a00c3946454170500d7b6eb68adf3e624f1e13aa14f0d",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_My_Tieng_Anh.mp3"
+    },
+    {
+      "locale": "vi-VN",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "TUNGUSKA_060_Viet_Nam.mp3",
+      "sha256": "0ebc4031b63aa1970be2f37fa864940b70b505678624dba8e12f5a842a3f394d",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Viet_Nam.mp3"
+    },
+    {
+      "locale": "es-ES",
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "TUNGUSKA_060_Tay_Ban_Nha.mp3",
+      "sha256": "da144d54880edbee179b01f84ccfeb82c1f664f112cdd362905f60415096cd31",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Tay_Ban_Nha.mp3"
+    },
+    {
+      "locale": "fr-FR",
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "TUNGUSKA_060_Phap.mp3",
+      "sha256": "8f4d0dc2bc3d4fd7cae6516c9d5fd83c1b02f1a833bc00aea48088d94b36e421",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Phap.mp3"
+    },
+    {
+      "locale": "ja-JP",
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "TUNGUSKA_060_Nhat_Ban.mp3",
+      "sha256": "c336159ccc67a8a99d5f99337c3f79436e056df29bc50f2025bfac337f139b34",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Nhat_Ban.mp3"
+    },
+    {
+      "locale": "ko-KR",
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "TUNGUSKA_060_Han_Quoc.mp3",
+      "sha256": "5283238105bb2491a0b6045c498cf9e9ed5f15a2e47e8def41385f23ed02f9aa",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Han_Quoc.mp3"
+    },
+    {
+      "locale": "de-DE",
+      "voice_id": "de-DE-ChristophNeural",
+      "filename": "TUNGUSKA_060_Duc.mp3",
+      "sha256": "39c489c2c8217ac06c91251e7b19f7a0b11e2731e52e1669f7049a7658577a55",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Duc.mp3"
+    },
+    {
+      "locale": "it-IT",
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "TUNGUSKA_060_Y.mp3",
+      "sha256": "901f6f7e1009c10689a18f3bf1ed76ec737eb76890b2c673620dc5d9385f82fe",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Y.mp3"
+    },
+    {
+      "locale": "pt-PT",
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "TUNGUSKA_060_Bo_Dao_Nha.mp3",
+      "sha256": "fbc8b0490e0f1cb031834a1904e04f38497d1e6ea252ec5b033a225167a85ff4",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Bo_Dao_Nha.mp3"
+    },
+    {
+      "locale": "nl-NL",
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "TUNGUSKA_060_Ha_Lan.mp3",
+      "sha256": "d0c2ecf71e4a1ef5e229e944e5c123f1e4c0b36603fffd20ce4a13c78eb3036e",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Ha_Lan.mp3"
+    },
+    {
+      "locale": "pl-PL",
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "TUNGUSKA_060_Ba_Lan.mp3",
+      "sha256": "e652bebfe687b219e1acdc4f4d02288d451b981b2691e191120f04382d367e0f",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Ba_Lan.mp3"
+    },
+    {
+      "locale": "sv-SE",
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "TUNGUSKA_060_Thuy_Dien.mp3",
+      "sha256": "fc8eb82de7f8262ab9a1acc805cd261bd9be5f0db5c1e525d0b4ee9b7d4c6620",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Thuy_Dien.mp3"
+    },
+    {
+      "locale": "da-DK",
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "TUNGUSKA_060_Dan_Mach.mp3",
+      "sha256": "ab527f9c2aab579f81a716fa6b07e6934ade2fe04ed4f9b5461a2649ba95b1da",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Dan_Mach.mp3"
+    },
+    {
+      "locale": "fi-FI",
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "TUNGUSKA_060_Phan_Lan.mp3",
+      "sha256": "82849387f0a46407dad98281c8a03d410cef55609ea6f733a007ecb583442181",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Phan_Lan.mp3"
+    },
+    {
+      "locale": "nb-NO",
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "TUNGUSKA_060_Na_Uy.mp3",
+      "sha256": "bcaa31bcbeedcc16f2fba1683da185fa671945bab40fe77897cc5a9bd5e56426",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Na_Uy.mp3"
+    },
+    {
+      "locale": "cs-CZ",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "TUNGUSKA_060_Sec.mp3",
+      "sha256": "12f49e87987ef5cc810592a7eb08a11c3bf3f5b64091a28c245c490235cba75a",
+      "url": "https://github.com/seotro95/seotro/releases/download/tunguska-video-060-20m42s/TUNGUSKA_060_Sec.mp3"
+    }
+  ]
+}

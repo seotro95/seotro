@@ -1,0 +1,162 @@
+[
+  {
+    "locale": "cs-CZ",
+    "filename": "TUNGUSKA_060_Sec.mp3",
+    "sha256": "12f49e87987ef5cc810592a7eb08a11c3bf3f5b64091a28c245c490235cba75a",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09782484269356838,
+    "peak": 0.5832374095916748,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "TUNGUSKA_060_Dan_Mach.mp3",
+    "sha256": "ab527f9c2aab579f81a716fa6b07e6934ade2fe04ed4f9b5461a2649ba95b1da",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07016494975555831,
+    "peak": 0.46063917875289917,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "TUNGUSKA_060_Duc.mp3",
+    "sha256": "39c489c2c8217ac06c91251e7b19f7a0b11e2731e52e1669f7049a7658577a55",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08748961777249137,
+    "peak": 0.6624207496643066,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "en-US",
+    "filename": "TUNGUSKA_060_My_Tieng_Anh.mp3",
+    "sha256": "1e9b2e2fc1ed4d74e48a00c3946454170500d7b6eb68adf3e624f1e13aa14f0d",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08597445817594472,
+    "peak": 0.6475350856781006,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "TUNGUSKA_060_Tay_Ban_Nha.mp3",
+    "sha256": "da144d54880edbee179b01f84ccfeb82c1f664f112cdd362905f60415096cd31",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0755179379946223,
+    "peak": 0.48959338665008545,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "TUNGUSKA_060_Phan_Lan.mp3",
+    "sha256": "82849387f0a46407dad98281c8a03d410cef55609ea6f733a007ecb583442181",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.05770443799090888,
+    "peak": 0.39736294746398926,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "TUNGUSKA_060_Phap.mp3",
+    "sha256": "8f4d0dc2bc3d4fd7cae6516c9d5fd83c1b02f1a833bc00aea48088d94b36e421",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06844838799803138,
+    "peak": 0.4516659379005432,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "TUNGUSKA_060_Y.mp3",
+    "sha256": "901f6f7e1009c10689a18f3bf1ed76ec737eb76890b2c673620dc5d9385f82fe",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0826188870458628,
+    "peak": 0.5356960296630859,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "TUNGUSKA_060_Nhat_Ban.mp3",
+    "sha256": "c336159ccc67a8a99d5f99337c3f79436e056df29bc50f2025bfac337f139b34",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08487434987889746,
+    "peak": 0.6888378858566284,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "TUNGUSKA_060_Han_Quoc.mp3",
+    "sha256": "5283238105bb2491a0b6045c498cf9e9ed5f15a2e47e8def41385f23ed02f9aa",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0749862163858423,
+    "peak": 0.445964515209198,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "TUNGUSKA_060_Na_Uy.mp3",
+    "sha256": "bcaa31bcbeedcc16f2fba1683da185fa671945bab40fe77897cc5a9bd5e56426",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06778420089569158,
+    "peak": 0.5597165822982788,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "TUNGUSKA_060_Ha_Lan.mp3",
+    "sha256": "d0c2ecf71e4a1ef5e229e944e5c123f1e4c0b36603fffd20ce4a13c78eb3036e",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09222082820922259,
+    "peak": 0.5459837913513184,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "TUNGUSKA_060_Ba_Lan.mp3",
+    "sha256": "e652bebfe687b219e1acdc4f4d02288d451b981b2691e191120f04382d367e0f",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07777782809148409,
+    "peak": 0.5182623863220215,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "TUNGUSKA_060_Bo_Dao_Nha.mp3",
+    "sha256": "fbc8b0490e0f1cb031834a1904e04f38497d1e6ea252ec5b033a225167a85ff4",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.05539992999820149,
+    "peak": 0.4185355603694916,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "TUNGUSKA_060_Thuy_Dien.mp3",
+    "sha256": "fc8eb82de7f8262ab9a1acc805cd261bd9be5f0db5c1e525d0b4ee9b7d4c6620",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07756560725551173,
+    "peak": 0.5346895456314087,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "TUNGUSKA_060_Viet_Nam.mp3",
+    "sha256": "0ebc4031b63aa1970be2f37fa864940b70b505678624dba8e12f5a842a3f394d",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09253906307424173,
+    "peak": 0.5604846477508545,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  }
+]

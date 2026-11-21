@@ -1,0 +1,27 @@
+{
+  "topic": "060-Tunguska",
+  "target_seconds": 1242,
+  "expected_samples_48000": 59616000,
+  "export_scope": "16 completed male MP3 voices, saved voice profiles and audio verification only",
+  "existing_document_zip_preserved": true,
+  "profile_files": {
+    "VOICE_PROFILES_LOCKED.json": {
+      "sha256": "f9326605dd2706b0e099513c4ecfc7ac8776194768b6d10b7d98c9b31bd1bf9d",
+      "bytes": 13138
+    },
+    "VOICE_FILE_NAMING.json": {
+      "sha256": "07d4ef95cf799a86a579410bc301ba6ca0c9977e8a4fc0d28aa5849c6815a345",
+      "bytes": 3206
+    },
+    "NARRATION_STYLE_LOCKED.json": {
+      "sha256": "b901754c9b515ea9e25366047220fadb7201a37c437f588754515c937fe7b79a",
+      "bytes": 1478
+    },
+    "NARRATION_DELIVERY_PROFILE.json": {
+      "sha256": "4d7845731774475bdaea75ce307272f4f54617a90d51a50707a3e802dedc4839",
+      "bytes": 23820
+    }
+  },
+  "audio_count": 16,
+  "no_voice_generation_in_export": true
+}

@@ -1,0 +1,21 @@
+name: Publish requested tunguska060 voices and saved profiles
+on:
+  push:
+    branches: [codex/tunguska060-20m42s]
+    paths: ['deliveries/tunguska060_voices/VOICE_EXPORT_READY.json']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: /deliveries/tunguska060_voices/
+      - name: Verify and upload completed narration files
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python deliveries/tunguska060_voices/publish_voices.py
