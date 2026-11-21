@@ -1,0 +1,42 @@
+{
+  "topic_id": "MOI-061",
+  "title": "Mắt Sahara: những vòng tròn khổng lồ được tạo ra thế nào?",
+  "slug": "richat-moi061",
+  "prefix": "RICHAT_MOI061",
+  "release_tag": "richat-moi-061-21m42s",
+  "duration_label": "21m42s",
+  "display_duration": "21:42",
+  "target_seconds": 1302,
+  "frames": 62496000,
+  "english_cues": 200,
+  "translated_sections": 10,
+  "section_seconds": [
+    130,
+    130,
+    130,
+    130,
+    130,
+    130,
+    130,
+    130,
+    130,
+    132
+  ],
+  "prompt_count": 140,
+  "prompt_txt_files": 14,
+  "timeline_shots": 134,
+  "backup_ids": [
+    135,
+    136,
+    137,
+    138,
+    139,
+    140
+  ],
+  "opening_shots": 6,
+  "first_shot_seconds": 10,
+  "branch": "codex/richat-moi061-production-20261121",
+  "directory": "productions/video-moi061-richat",
+  "style_id": "science-documentary-retention-v5-Richat-NamMinh",
+  "canonical_branch": "codex/beringia-video-01"
+}

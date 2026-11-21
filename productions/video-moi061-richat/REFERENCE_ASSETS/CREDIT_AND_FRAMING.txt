@@ -1,0 +1,5 @@
+NASA Earth Observatory image by Lauren Dauphin, using Landsat data from the U.S. Geological Survey.
+https://science.nasa.gov/earth/earth-observatory/eyeing-the-richat-structure/
+https://www.nasa.gov/nasa-brand-center/images-and-media/
+Crop video framing to avoid bottom-left scale legend and compass; retain original ring geometry and no added labels. Source JPEG remains byte-identical.
+No endorsement implied. Source JPEG unchanged.

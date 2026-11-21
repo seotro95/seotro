@@ -10,11 +10,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_My_Tieng_Anh.mp3",
-      "mp3_sha256": "9a42e0141f72ec94e77c03864ff746e9a54a9e9dd66900288d41a757dce04d3e",
-      "alignment_granularity": "134Englishcues",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_My_Tieng_Anh.mp3",
+      "mp3_sha256": "5773714690bfe31e5856a723b022bb1f8329b129ceede7e9c54e544d0190872a",
+      "alignment_granularity": "200Englishcues",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "vi-VN",
@@ -24,11 +24,11 @@
       "engine": "Melo-Viet-Studio1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Viet_Nam_Nam_Minh.mp3",
-      "mp3_sha256": "99dcf5c9f60f98e4ab5db782d5b76bb05d5eb371931d0364c5721e52a75081c0",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Viet_Nam_Nam_Minh.mp3",
+      "mp3_sha256": "898b3a0d933a356dba51db2ce31b4fbc72bfc51616cf9da1ceb6269c0c0be1d4",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "es-ES",
@@ -38,11 +38,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Tay_Ban_Nha.mp3",
-      "mp3_sha256": "74b1d789aa5a71c05cb37aae10b252f9d404b08e981ef2593822db30e4bba4a3",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Tay_Ban_Nha.mp3",
+      "mp3_sha256": "aad9fbb6808bd24346d9d2377bd97498e53250447e6089aebceb2262c607b63b",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "fr-FR",
@@ -52,11 +52,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Phap.mp3",
-      "mp3_sha256": "a9cf445802e3e6418a64ab48e6b0fe86cd8ba14a03d50d3597b9b9da1dede070",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Phap.mp3",
+      "mp3_sha256": "23a83033c767ac92252561221da3a4efb4729bbce0359d4b0ec943cc58174268",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "ja-JP",
@@ -66,11 +66,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Nhat_Ban.mp3",
-      "mp3_sha256": "664398276dd58882879971ecb0884fcc6476a8d0dc66ab002917e32ec7a4fcd3",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Nhat_Ban.mp3",
+      "mp3_sha256": "4c148b35dde6f5d49f55bccce147778609c9ccde4882eae7042c236ead60bfe0",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "ko-KR",
@@ -80,11 +80,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Han_Quoc.mp3",
-      "mp3_sha256": "ef811433459dbd086f99546a4070150fba6fab5009c948482554efdb3c953526",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Han_Quoc.mp3",
+      "mp3_sha256": "f17890d7c6df175b3819729cf4a6be3ae5d14e027b78da579da0e33d3a94c520",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "de-DE",
@@ -96,11 +96,11 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "previous_voice_id": "de-DE-ConradNeural",
       "voice_change_reason": "Previous voice absent from live provider catalogue; Christoph is currently listed as German male. User authorized selection of friendly male voices. Change disclosed in chat.",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Duc.mp3",
-      "mp3_sha256": "ceb8e1ce1120fe4c684f3c311fb1519f01fa67c26f58d93baea701ec5e0bfbfa",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Duc.mp3",
+      "mp3_sha256": "aad81a664ca18793f16dae522ec099a64d11a79fb3123dec15d78c6e234fddaf",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "it-IT",
@@ -110,11 +110,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Y.mp3",
-      "mp3_sha256": "23ced2c1668142fd97182cf3abc86ba4cf7b46ff6a6ecc14613cdd362c392fbc",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Y.mp3",
+      "mp3_sha256": "57126281aac830e2cbf17975562f57fd452254f674408510ff127f91fe5a85a0",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "pt-PT",
@@ -124,11 +124,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Bo_Dao_Nha.mp3",
-      "mp3_sha256": "d28e20512f872191350eb16276b244f00deede45ccbd00cffd27fac3cac2ec54",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Bo_Dao_Nha.mp3",
+      "mp3_sha256": "93df463b2d8efb2bdde23982bce43cdd0020f1284fcd13d89a8d92b49b9237d3",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "nl-NL",
@@ -138,11 +138,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Ha_Lan.mp3",
-      "mp3_sha256": "82db8a8652fed9be20581fc46b4ab3e368b7c22092e220e126a02b37c398c922",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Ha_Lan.mp3",
+      "mp3_sha256": "1702b9f1e9904de65b2bfb36e1604d82ed21f3a8e8930251f66040a23d29fdb5",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "pl-PL",
@@ -152,11 +152,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Ba_Lan.mp3",
-      "mp3_sha256": "657f33cad5c8a545b4818af544d95f0acf05403156f611d473741187e494625c",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Ba_Lan.mp3",
+      "mp3_sha256": "d3266e0c82a71b7f018cb2949be659928e29451a1e38af420ca7d2debff3bcd0",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "sv-SE",
@@ -166,11 +166,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Thuy_Dien.mp3",
-      "mp3_sha256": "49081c1652fb638ba020965cf90ab213ea63e0d8bf91b6292e7c2a5c1de12f92",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Thuy_Dien.mp3",
+      "mp3_sha256": "5add0cb94d46ac3bfa6602e0acd32557fdafe964beafd303dce986c7311d7870",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "da-DK",
@@ -180,11 +180,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Dan_Mach.mp3",
-      "mp3_sha256": "60fbd3989402435e9fe9ba2c9962514b79ee077b3b40b7bae3310cf578b12daa",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Dan_Mach.mp3",
+      "mp3_sha256": "dfea8ac3e453138bed5251cf394a7cf034368d561990197f0cae08ef79a47287",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "fi-FI",
@@ -194,11 +194,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Phan_Lan.mp3",
-      "mp3_sha256": "7ed86168482af1b4ece57f41adeb019dca2d3c8a175c750e300a10e9e80a1373",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Phan_Lan.mp3",
+      "mp3_sha256": "2a50e26c817b80ce664c4d88170bfb6f3c8d3092bc3b505b038d1b9744499972",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "nb-NO",
@@ -208,11 +208,11 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Na_Uy.mp3",
-      "mp3_sha256": "67a5d88e032ce099140872ae7f82a9e851348c0cc888e54b35ca7216cb06c1d5",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Na_Uy.mp3",
+      "mp3_sha256": "afe4d827e41ab17ea5848883c1af1e3868e501a58d9525cb19627e3f3b18f7ec",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     },
     {
       "locale": "cs-CZ",
@@ -222,18 +222,18 @@
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "duration_seconds": 1332,
-      "delivery_filename": "SKY536_MOI053_Sec.mp3",
-      "mp3_sha256": "1ab2673be9cddbf04fb778d6fabd568f6d0c481fcb696e9a9c7450277309a43d",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-brisk-v4-Sky536-NamMinh"
+      "duration_seconds": 1302,
+      "delivery_filename": "RICHAT_MOI061_Sec.mp3",
+      "mp3_sha256": "2808f40c5dcf414e78271019914569925732e12eaada2f824b7e011ff70cf355",
+      "alignment_granularity": "10 shared section boundaries",
+      "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh"
     }
   ],
   "locked_from": "productions/video-moi027-stonehenge/VOICE_PROFILES_LOCKED.json",
   "independent_native_listening_review": false,
   "voice_changes": [],
   "previous_voice_ids_retained": 16,
-  "note": "All sixteen previously saved male IDs retained, including Andrew and Nam Minh. All MP3s decoded to 1332 seconds. Independent native listening review pending.",
-  "topic_id": "MOI-053",
-  "target_seconds": 1332
+  "note": "All sixteen saved male IDs retained, including Andrew and Nam Minh. Every MP3 fully decoded to the configured duration. Independent native editorial and listening review pending.",
+  "topic_id": "MOI-061",
+  "target_seconds": 1302
 }

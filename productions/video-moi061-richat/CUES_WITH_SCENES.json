@@ -1,0 +1,2002 @@
+[
+  {
+    "id": 1,
+    "section": 1,
+    "start": 0,
+    "end": 10,
+    "kind": "rehook",
+    "voice": "This layer of desert rock rises at an angle, then disappears along a curved ridge. Why does that curve continue around a circle forty kilometers wide?",
+    "visual": "Close illustrative Richat-style outcrop, a continuous tilted sandstone bed curves away into an arid ridge.",
+    "mode": "field"
+  },
+  {
+    "id": 2,
+    "section": 1,
+    "start": 10,
+    "end": 17,
+    "kind": "narration",
+    "voice": "Step back, and another ridge appears beyond it. Then another. From above, they form the Eye of the Sahara.",
+    "visual": "Wider ground-level desert ridge with two further low rocky arcs visible through dry air.",
+    "mode": "field"
+  },
+  {
+    "id": 3,
+    "section": 1,
+    "start": 17,
+    "end": 24,
+    "kind": "narration",
+    "voice": "Our question is simple: what raised these layers, cut them into rings, and left this enormous pattern exposed in the desert?",
+    "visual": "Reference-based whole Richat view, irregular slightly elliptical rocky rings amid dunes, preserved geometry.",
+    "mode": "satellite"
+  },
+  {
+    "id": 4,
+    "section": 1,
+    "start": 24,
+    "end": 27,
+    "kind": "scene",
+    "voice": "Stand beside the tilted bed. Its edge is solid rock.",
+    "visual": "Mature adult field observer beside an inclined layered outcrop, scale realistic, no touching or breaking.",
+    "mode": "field"
+  },
+  {
+    "id": 5,
+    "section": 1,
+    "start": 27,
+    "end": 37,
+    "kind": "narration",
+    "voice": "Here is the first clue: the rings follow layers in the ground. Some resist erosion better than their neighbors. The landscape is revealing its own internal structure.",
+    "visual": "Close alternation of resistant sandstone ledges and lower softer bands in an illustrative open outcrop.",
+    "mode": "macro"
+  },
+  {
+    "id": 6,
+    "section": 1,
+    "start": 37,
+    "end": 40,
+    "kind": "narration",
+    "voice": "The pattern records uplift, then removal.",
+    "visual": "Simple outdoor layered dome teaching model with its upper cover represented separately beside it.",
+    "mode": "model"
+  },
+  {
+    "id": 7,
+    "section": 1,
+    "start": 40,
+    "end": 47,
+    "kind": "narration",
+    "voice": "The place is Richat, in Mauritania, on the Adrar Plateau. The surrounding Sahara spreads well beyond the frame of a photograph.",
+    "visual": "Reference-based Richat orbital composition retaining surrounding dark plateau and orange dune fields.",
+    "mode": "satellite"
+  },
+  {
+    "id": 8,
+    "section": 1,
+    "start": 47,
+    "end": 50,
+    "kind": "narration",
+    "voice": "Forty kilometers. One immense, landscape-sized eye.",
+    "visual": "Wide reference-image view showing the full geological feature against surrounding desert, no scale label.",
+    "mode": "satellite"
+  },
+  {
+    "id": 9,
+    "section": 1,
+    "start": 50,
+    "end": 59,
+    "kind": "narration",
+    "voice": "Walk across one ridge, and the next may look like another ordinary hill. The great circle becomes harder to recognize as your viewpoint drops.",
+    "visual": "Ground-level approach through a gap between low rocky desert ridges, distant arcs partly hidden.",
+    "mode": "field"
+  },
+  {
+    "id": 10,
+    "section": 1,
+    "start": 59,
+    "end": 66,
+    "kind": "narration",
+    "voice": "That change of scale is our way in: start with the giant outline, then follow one layer into the ground.",
+    "visual": "Outdoor fixed terrain model beside a close stone slab, broad view and material detail separated.",
+    "mode": "model"
+  },
+  {
+    "id": 11,
+    "section": 1,
+    "start": 66,
+    "end": 74,
+    "kind": "rehook",
+    "voice": "Now look at the center. Older sedimentary layers are exposed inward, surrounded by younger layers. That arrangement points toward an eroded dome.",
+    "visual": "Open-air layered dome section model, older central strata exposed within younger outer concentric layers, no labels.",
+    "mode": "model"
+  },
+  {
+    "id": 12,
+    "section": 1,
+    "start": 74,
+    "end": 77,
+    "kind": "narration",
+    "voice": "The roof has been stripped away.",
+    "visual": "Detached upper dome cover rests beside the stable cutaway teaching model, no floating rock.",
+    "mode": "model"
+  },
+  {
+    "id": 13,
+    "section": 1,
+    "start": 77,
+    "end": 87,
+    "kind": "narration",
+    "voice": "Picture a stack of layers pushed upward, then cut across near its top. The exposed bands wrap around the raised center. A simple model already makes the eye less mysterious.",
+    "visual": "Clearly artificial open-air layered dome model with a flat erosion surface and exposed curved bands.",
+    "mode": "model"
+  },
+  {
+    "id": 14,
+    "section": 1,
+    "start": 87,
+    "end": 90,
+    "kind": "scene",
+    "voice": "Its missing material matters as much as the surviving stone.",
+    "visual": "Low side view of an erosion-truncated dome model with removed cover placed on the ground beside it.",
+    "mode": "model"
+  },
+  {
+    "id": 15,
+    "section": 1,
+    "start": 90,
+    "end": 99,
+    "kind": "narration",
+    "voice": "French geographers described Richat in the nineteen thirties. Spaceflight later made the immense pattern famous, rather than creating the first knowledge of the place.",
+    "visual": "Original Richat reference image displayed as an unlabelled digital camera view, no astronaut or archive claim.",
+    "mode": "satellite"
+  },
+  {
+    "id": 16,
+    "section": 1,
+    "start": 99,
+    "end": 102,
+    "kind": "narration",
+    "voice": "The view changed. The rocks remained.",
+    "visual": "Same illustrative tilted sandstone bed under side light, stable original geometry.",
+    "mode": "macro"
+  },
+  {
+    "id": 17,
+    "section": 1,
+    "start": 102,
+    "end": 109,
+    "kind": "narration",
+    "voice": "The circular outline gave researchers an obvious starting question. But the tilted layers supplied something more useful: a structure to investigate.",
+    "visual": "Mature adult field observer walks along the base of a curved resistant ridge, modern clothing.",
+    "mode": "field"
+  },
+  {
+    "id": 18,
+    "section": 1,
+    "start": 109,
+    "end": 116,
+    "kind": "narration",
+    "voice": "The surrounding ridges now become pages in a stack, with their edges turned toward the sky. Follow that stack inward.",
+    "visual": "Open-air concentric layered rock model viewed along an exposed edge toward its center.",
+    "mode": "model"
+  },
+  {
+    "id": 19,
+    "section": 1,
+    "start": 116,
+    "end": 122,
+    "kind": "caveat",
+    "voice": "The photograph shows the pattern; field evidence must establish the process. Shape alone does not settle its origin.",
+    "visual": "Reference terrain image beside a separate outdoor rock sample replica, no human-built ring imagery.",
+    "mode": "model"
+  },
+  {
+    "id": 20,
+    "section": 1,
+    "start": 122,
+    "end": 130,
+    "kind": "turn",
+    "voice": "So let us make a circle without drawing one. Start with flat layers, lift their middle, and ask what erosion would leave behind.",
+    "visual": "Broad outdoor layered physical teaching model before uplift, central support hidden beneath its rigid base.",
+    "mode": "model"
+  },
+  {
+    "id": 21,
+    "section": 2,
+    "start": 130,
+    "end": 140,
+    "kind": "rehook",
+    "voice": "An ordinary onion offers a useful comparison. Slice across its curved layers, and rings appear on the cut face. Richat exposes geological layers in a related geometric arrangement.",
+    "visual": "Unlabelled outdoor wooden teaching model of nested curved layers with a clean cross-sectional surface, not a biological specimen.",
+    "mode": "model"
+  },
+  {
+    "id": 22,
+    "section": 2,
+    "start": 140,
+    "end": 146,
+    "kind": "narration",
+    "voice": "The key is the intersection: a surface cutting through layers that were bent upward around a center.",
+    "visual": "Fixed curved layered dome section and its flat upper cut surface under natural light.",
+    "mode": "model"
+  },
+  {
+    "id": 23,
+    "section": 2,
+    "start": 146,
+    "end": 154,
+    "kind": "narration",
+    "voice": "In the dome model, a single layer curves down and outward. Cut across several layers together, and their exposed edges become nested bands.",
+    "visual": "Outdoor dome section with a single continuous contrasting bed followed into outer layers.",
+    "mode": "model"
+  },
+  {
+    "id": 24,
+    "section": 2,
+    "start": 154,
+    "end": 157,
+    "kind": "scene",
+    "voice": "Imagine standing on that cut surface. The roof is gone.",
+    "visual": "Eye-level camera at the flattened upper surface of a miniature eroded-dome teaching model.",
+    "mode": "model"
+  },
+  {
+    "id": 25,
+    "section": 2,
+    "start": 157,
+    "end": 166,
+    "kind": "narration",
+    "voice": "Under your feet, the same layer continues sideways into the ridge. Cross the next hollow, and you meet a different part of the ancient stack.",
+    "visual": "Illustrative outdoor sandstone outcrop crossing a shallow valley toward a second contrasting rock bed.",
+    "mode": "field"
+  },
+  {
+    "id": 26,
+    "section": 2,
+    "start": 166,
+    "end": 169,
+    "kind": "narration",
+    "voice": "Erosion has opened a geological window.",
+    "visual": "Close view through an eroded notch in a stable layered desert ridge.",
+    "mode": "field"
+  },
+  {
+    "id": 27,
+    "section": 2,
+    "start": 169,
+    "end": 177,
+    "kind": "narration",
+    "voice": "This is why geologists measure the direction in which beds tilt. Around a dome, the layers generally dip away from the central uplift.",
+    "visual": "Mature adult field observer examines an inclined bedding plane without visible instrument readings.",
+    "mode": "field"
+  },
+  {
+    "id": 28,
+    "section": 2,
+    "start": 177,
+    "end": 180,
+    "kind": "narration",
+    "voice": "The slope carries part of the story.",
+    "visual": "Low close side view showing a bedding plane leaning outward relative to a separate dome model.",
+    "mode": "model"
+  },
+  {
+    "id": 29,
+    "section": 2,
+    "start": 180,
+    "end": 188,
+    "kind": "narration",
+    "voice": "Different rock types weather at different rates. A more resistant band can remain as a ridge while neighboring weaker material is removed more readily.",
+    "visual": "Resistant sandstone ridge above lower softer sedimentary beds, naturally weathered desert textures.",
+    "mode": "field"
+  },
+  {
+    "id": 30,
+    "section": 2,
+    "start": 188,
+    "end": 195,
+    "kind": "narration",
+    "voice": "The ridge marks survival. The hollow marks material that has already been carried away from that part of the stack.",
+    "visual": "Oblique close-to-wide view of an intact ledge and adjacent eroded hollow.",
+    "mode": "field"
+  },
+  {
+    "id": 31,
+    "section": 2,
+    "start": 195,
+    "end": 203,
+    "kind": "rehook",
+    "voice": "A ridge with a steep front and a gentler slope following the beds is called a cuesta. Richat's rings include these distinctive landforms.",
+    "visual": "Outdoor simplified cuesta model showing a steep scarp and gentle dip slope, no arrows or labels.",
+    "mode": "model"
+  },
+  {
+    "id": 32,
+    "section": 2,
+    "start": 203,
+    "end": 206,
+    "kind": "narration",
+    "voice": "One ridge. Two very different slopes.",
+    "visual": "Side view of a low desert cuesta profile, steep edge and broad gentle back slope.",
+    "mode": "field"
+  },
+  {
+    "id": 33,
+    "section": 2,
+    "start": 206,
+    "end": 216,
+    "kind": "narration",
+    "voice": "Climb the gentle side in your imagination. At the crest, the ground drops more sharply across the layered rock. The same tilted bed helps organize both sides of the ridge.",
+    "visual": "Mature adult walker approaches a safe broad crest from a gently inclined rocky slope, no cliff-edge danger.",
+    "mode": "field"
+  },
+  {
+    "id": 34,
+    "section": 2,
+    "start": 216,
+    "end": 219,
+    "kind": "scene",
+    "voice": "From above, that ridge joins the larger curved pattern.",
+    "visual": "Reference-image crop following an irregular resistant ridge around part of Richat, no invented connections.",
+    "mode": "satellite"
+  },
+  {
+    "id": 35,
+    "section": 2,
+    "start": 219,
+    "end": 228,
+    "kind": "narration",
+    "voice": "The great eye is therefore three-dimensional, even when a photograph flattens it. Its visible bands belong to surfaces that continue below ground and around the uplift.",
+    "visual": "Open-air cutaway terrain model with curved beds visible below a flat upper erosion surface.",
+    "mode": "model"
+  },
+  {
+    "id": 36,
+    "section": 2,
+    "start": 228,
+    "end": 231,
+    "kind": "narration",
+    "voice": "The picture has depth beneath it.",
+    "visual": "Low oblique view underneath the exposed edge of a fixed layered geological model.",
+    "mode": "model"
+  },
+  {
+    "id": 37,
+    "section": 2,
+    "start": 231,
+    "end": 239,
+    "kind": "narration",
+    "voice": "Erosion does not need to carve every curve separately. It removes material across a structure whose layers already carry the curved geometry.",
+    "visual": "Outdoor fixed dome model paired with an eroded upper model, clearly separate explanatory stages.",
+    "mode": "model"
+  },
+  {
+    "id": 38,
+    "section": 2,
+    "start": 239,
+    "end": 246,
+    "kind": "narration",
+    "voice": "That is a powerful shortcut: build the shape below, then expose its edges at the surface. The rings emerge together.",
+    "visual": "Top-down view across an already truncated concentric physical dome model, no instant erosion magic.",
+    "mode": "model"
+  },
+  {
+    "id": 39,
+    "section": 2,
+    "start": 246,
+    "end": 252,
+    "kind": "caveat",
+    "voice": "This model explains the geometry, not Richat's exact original height or every detail of its buried structure.",
+    "visual": "Outdoor abstract dome model beside real desert rock, visibly simplified and not a measured reconstruction.",
+    "mode": "model"
+  },
+  {
+    "id": 40,
+    "section": 2,
+    "start": 252,
+    "end": 260,
+    "kind": "turn",
+    "voice": "Something still had to bend the layers in the first place. Before looking for that force, examine what the layers were made from.",
+    "visual": "Broad illustrative sedimentary outcrop showing distinct beds across a dry plateau, no magma exposed.",
+    "mode": "field"
+  },
+  {
+    "id": 41,
+    "section": 3,
+    "start": 260,
+    "end": 269,
+    "kind": "rehook",
+    "voice": "A pale carbonate bed lies beside a harder sandstone ridge. These rocks began as sediments, long before they became parts of the same giant eye-shaped landform.",
+    "visual": "Pale carbonate-like illustrative bed next to resistant sandstone in an open desert outcrop.",
+    "mode": "field"
+  },
+  {
+    "id": 42,
+    "section": 3,
+    "start": 269,
+    "end": 275,
+    "kind": "narration",
+    "voice": "Their grains and layers preserve an older world, beneath the younger events that later changed their position.",
+    "visual": "Macro detail of natural sedimentary grains and bedding boundaries in a stable rock face.",
+    "mode": "macro"
+  },
+  {
+    "id": 43,
+    "section": 3,
+    "start": 275,
+    "end": 283,
+    "kind": "narration",
+    "voice": "Richat sits in the Taoudenni Basin, a vast sedimentary setting in West Africa. The basin's layered history reaches far back into geological time.",
+    "visual": "Blank relief map teaching model locating northwest Africa and a large inland basin, no political labels or measured boundary claim.",
+    "mode": "model"
+  },
+  {
+    "id": 44,
+    "section": 3,
+    "start": 283,
+    "end": 286,
+    "kind": "scene",
+    "voice": "Run a hand beside the layers, without disturbing the rock.",
+    "visual": "Mature adult hand held beside an exposed bedding boundary, no hammering, collecting or scraping.",
+    "mode": "macro"
+  },
+  {
+    "id": 45,
+    "section": 3,
+    "start": 286,
+    "end": 295,
+    "kind": "narration",
+    "voice": "Each bed represents material deposited before the next layer covered it. Sand, finer sediment, and carbonate-rich deposits eventually became different kinds of stone in this long succession.",
+    "visual": "Deep-time illustrative shallow sedimentary setting with sand and fine sediment in an open landscape, no people or dinosaurs.",
+    "mode": "deep_time"
+  },
+  {
+    "id": 46,
+    "section": 3,
+    "start": 295,
+    "end": 298,
+    "kind": "narration",
+    "voice": "The circle came much later afterward.",
+    "visual": "Stable outdoor comparison of flat sedimentary beds and a separate domed version of the same teaching model.",
+    "mode": "model"
+  },
+  {
+    "id": 47,
+    "section": 3,
+    "start": 298,
+    "end": 306,
+    "kind": "narration",
+    "voice": "The rocks exposed at Richat include sequences from the late Proterozoic into the early Paleozoic. They were already ancient before the main Cretaceous uplift.",
+    "visual": "Weathered desert rock section with several distinct sedimentary units, no numerical age markings.",
+    "mode": "field"
+  },
+  {
+    "id": 48,
+    "section": 3,
+    "start": 306,
+    "end": 309,
+    "kind": "narration",
+    "voice": "An old layer can acquire a new position.",
+    "visual": "Close tilted bed beside a separate flat-layer replica, clearly an illustrative comparison.",
+    "mode": "model"
+  },
+  {
+    "id": 49,
+    "section": 3,
+    "start": 309,
+    "end": 317,
+    "kind": "narration",
+    "voice": "That distinction gives us two questions instead of one. When did the rock form? And when was it tilted into the structure we see today?",
+    "visual": "Two separate unmarked physical time markers beside a sedimentary slab and a dome model outdoors.",
+    "mode": "model"
+  },
+  {
+    "id": 50,
+    "section": 3,
+    "start": 317,
+    "end": 324,
+    "kind": "narration",
+    "voice": "Think of a book written long ago, then folded later. The writing and the fold belong to different moments in its history.",
+    "visual": "Outdoor plain layered wooden-sheet model bent into an arch, no books or readable writing.",
+    "mode": "model"
+  },
+  {
+    "id": 51,
+    "section": 3,
+    "start": 324,
+    "end": 333,
+    "kind": "rehook",
+    "voice": "Now pick out a darker rock cutting through the sedimentary sequence. Its interlocking crystals tell a different story: molten material cooled and solidified within the crust.",
+    "visual": "Dark coarse-crystalline igneous rock replica adjacent to a pale layered rock replica outdoors.",
+    "mode": "macro"
+  },
+  {
+    "id": 52,
+    "section": 3,
+    "start": 333,
+    "end": 336,
+    "kind": "narration",
+    "voice": "The ingredients have suddenly changed underneath.",
+    "visual": "Macro focus pull between pale sedimentary grains and a dark crystalline comparison sample.",
+    "mode": "macro"
+  },
+  {
+    "id": 53,
+    "section": 3,
+    "start": 336,
+    "end": 345,
+    "kind": "narration",
+    "voice": "The sedimentary beds are the setting. Igneous rocks record magma entering that setting. Mapping the relationship between them begins to separate the stages of the eye's construction.",
+    "visual": "Outdoor geological contact model showing a dark intrusion crossing pale sedimentary layers.",
+    "mode": "model"
+  },
+  {
+    "id": 54,
+    "section": 3,
+    "start": 345,
+    "end": 348,
+    "kind": "scene",
+    "voice": "A contact can preserve the order of events.",
+    "visual": "Close view of a sharp dark intrusive contact in a clearly artificial rock-section teaching model.",
+    "mode": "macro"
+  },
+  {
+    "id": 55,
+    "section": 3,
+    "start": 348,
+    "end": 357,
+    "kind": "narration",
+    "voice": "Where one body cuts another, it must be younger than the material it cuts. Where magma follows a layer, a different geometry appears in the rock record.",
+    "visual": "Two separate outdoor intrusion models, one crosscutting and one parallel to bedding.",
+    "mode": "model"
+  },
+  {
+    "id": 56,
+    "section": 3,
+    "start": 357,
+    "end": 360,
+    "kind": "narration",
+    "voice": "Follow the contact, not the color alone.",
+    "visual": "Low close tracking view along a clear model contact between dark and pale rock units.",
+    "mode": "model"
+  },
+  {
+    "id": 57,
+    "section": 3,
+    "start": 360,
+    "end": 369,
+    "kind": "narration",
+    "voice": "At Richat, the dark igneous rocks do more than add another color to a satellite image. Their arrangement has become central to reconstructing the formation's history.",
+    "visual": "Reference-image crop around inner Richat rings, preserving actual band continuity and colors.",
+    "mode": "satellite"
+  },
+  {
+    "id": 58,
+    "section": 3,
+    "start": 369,
+    "end": 376,
+    "kind": "narration",
+    "voice": "Some bodies appear ring-like at the surface. The question is how they continue below it, where the photograph cannot reach.",
+    "visual": "Outdoor section model showing two alternative subsurface continuations beneath the same curved surface trace.",
+    "mode": "model"
+  },
+  {
+    "id": 59,
+    "section": 3,
+    "start": 376,
+    "end": 382,
+    "kind": "caveat",
+    "voice": "Different beds formed in different settings; this simplified stack does not reproduce every environment in the basin's long history.",
+    "visual": "Outdoor simplified sedimentary stack model beside a varied natural outcrop, no exact paleoenvironment claim.",
+    "mode": "model"
+  },
+  {
+    "id": 60,
+    "section": 3,
+    "start": 382,
+    "end": 390,
+    "kind": "turn",
+    "voice": "The next clue is a dark sheet of magma frozen in place. Did it cut upward through the layers, or spread between them?",
+    "visual": "Dark sheet intrusion in an outdoor cutaway sedimentary teaching model, junctions clearly visible.",
+    "mode": "model"
+  },
+  {
+    "id": 61,
+    "section": 4,
+    "start": 390,
+    "end": 399,
+    "kind": "rehook",
+    "voice": "A dark sheet lies between pale sedimentary beds. Molten rock once entered the crust, spread through available space, and cooled into a solid body with a preserved contact.",
+    "visual": "Outdoor cutaway model of a dark intrusive sheet parallel to pale sedimentary beds.",
+    "mode": "model"
+  },
+  {
+    "id": 62,
+    "section": 4,
+    "start": 399,
+    "end": 405,
+    "kind": "narration",
+    "voice": "A sheet that follows the bedding is called a sill. One that cuts across it is a dyke.",
+    "visual": "Two separate stable intrusion teaching models outdoors, one parallel to beds and one crossing them.",
+    "mode": "model"
+  },
+  {
+    "id": 63,
+    "section": 4,
+    "start": 405,
+    "end": 413,
+    "kind": "narration",
+    "voice": "Both can carry magma underground. Their shapes record different pathways, and those pathways become important when we try to reconstruct what happened beneath Richat.",
+    "visual": "Open-air crustal section model with separate horizontal and vertical dark pathways, no glowing lava.",
+    "mode": "model"
+  },
+  {
+    "id": 64,
+    "section": 4,
+    "start": 413,
+    "end": 416,
+    "kind": "scene",
+    "voice": "Imagine tracing the edge of a dark rock sheet.",
+    "visual": "Mature adult field observer follows a dark contact along an illustrative pale rock exposure.",
+    "mode": "field"
+  },
+  {
+    "id": 65,
+    "section": 4,
+    "start": 416,
+    "end": 425,
+    "kind": "narration",
+    "voice": "If the neighboring beds turn with it, the relationship may continue around the uplift. A curved trace at the surface can belong to a sheet bent later.",
+    "visual": "Outdoor pre-curved layered model with a dark sheet remaining parallel to its enclosing beds.",
+    "mode": "model"
+  },
+  {
+    "id": 66,
+    "section": 4,
+    "start": 425,
+    "end": 428,
+    "kind": "narration",
+    "voice": "A ring can be a slice through a sheet.",
+    "visual": "Top view of a flat erosion surface intersecting a domed dark sheet within lighter layers.",
+    "mode": "model"
+  },
+  {
+    "id": 67,
+    "section": 4,
+    "start": 428,
+    "end": 436,
+    "kind": "narration",
+    "voice": "Richat contains two prominent ring-like gabbroic bodies. Gabbro is an igneous rock whose coarse crystals formed as magma cooled within the crust over time.",
+    "visual": "Two dark igneous sample replicas beside an open-air model of two nested surface traces.",
+    "mode": "model"
+  },
+  {
+    "id": 68,
+    "section": 4,
+    "start": 436,
+    "end": 439,
+    "kind": "narration",
+    "voice": "The crystals preserve a cooling history underground.",
+    "visual": "Macro oblique view of coarse interlocking crystals in an igneous comparison sample outdoors.",
+    "mode": "macro"
+  },
+  {
+    "id": 69,
+    "section": 4,
+    "start": 439,
+    "end": 448,
+    "kind": "narration",
+    "voice": "Earlier interpretations treated the bodies as ring dykes related to a central intrusion. Later work tested another possibility: older sills, uplifted together with the surrounding sedimentary stack.",
+    "visual": "Outdoor pair of distinct alternative geological models, ring-dyke geometry and uplifted-sill geometry separated.",
+    "mode": "model"
+  },
+  {
+    "id": 70,
+    "section": 4,
+    "start": 448,
+    "end": 454,
+    "kind": "narration",
+    "voice": "The difference changes the order of events. The same outline can conceal a much longer and more complicated geological sequence.",
+    "visual": "High oblique view of separate stage models arranged along an unmarked outdoor sequence.",
+    "mode": "model"
+  },
+  {
+    "id": 71,
+    "section": 4,
+    "start": 454,
+    "end": 463,
+    "kind": "rehook",
+    "voice": "In twenty twenty-four, researchers brought new chemical analyses and argon-based dating work to these gabbros. The results reopened the question of how old the dark bodies were.",
+    "visual": "Mature adult field observer studies a dark crystalline exposure in open desert, no laboratory instruments.",
+    "mode": "field"
+  },
+  {
+    "id": 72,
+    "section": 4,
+    "start": 463,
+    "end": 466,
+    "kind": "narration",
+    "voice": "The older rock might predate the dome.",
+    "visual": "Outdoor dark-sheet teaching model remaining flat beside a separate later-domed stage.",
+    "mode": "model"
+  },
+  {
+    "id": 73,
+    "section": 4,
+    "start": 466,
+    "end": 476,
+    "kind": "narration",
+    "voice": "The chemical compositions resemble groups associated with the Central Atlantic Magmatic Province. That enormous episode of magmatism affected regions around the Atlantic's developing geological setting about two hundred million years ago.",
+    "visual": "Blank deep-time geographic teaching globe with adjacent continental blocks and fixed intrusive sheets, no precise reconstruction claim.",
+    "mode": "model"
+  },
+  {
+    "id": 74,
+    "section": 4,
+    "start": 476,
+    "end": 479,
+    "kind": "scene",
+    "voice": "A local outcrop suddenly opens onto a wider story.",
+    "visual": "Wide illustrative dark intrusive rock exposure amid pale desert strata, no map labels.",
+    "mode": "field"
+  },
+  {
+    "id": 75,
+    "section": 4,
+    "start": 479,
+    "end": 488,
+    "kind": "narration",
+    "voice": "The authors argued that the Richat gabbros were originally sills. A younger intrusion could then raise the older sheets and their host rocks into a dome.",
+    "visual": "Deep-time cutaway model showing old dark sheets arched over a separate younger central intrusive body.",
+    "mode": "model"
+  },
+  {
+    "id": 76,
+    "section": 4,
+    "start": 488,
+    "end": 491,
+    "kind": "narration",
+    "voice": "Old stone. New movement from below.",
+    "visual": "Close fixed model junction showing older layered rocks bent above a younger intrusive body.",
+    "mode": "model"
+  },
+  {
+    "id": 77,
+    "section": 4,
+    "start": 491,
+    "end": 499,
+    "kind": "narration",
+    "voice": "This gives us a geological surprise hidden inside a familiar shape: the rings may preserve rocks that entered the crust long before the main uplift.",
+    "visual": "Reference-based Richat overview with inner rocky traces retained exactly, no colored invented overlays.",
+    "mode": "satellite"
+  },
+  {
+    "id": 78,
+    "section": 4,
+    "start": 499,
+    "end": 506,
+    "kind": "narration",
+    "voice": "The picture is becoming a sequence, rather than a single event. And another kind of rock waits near the center.",
+    "visual": "Ground-level illustrative view approaching a broken-rock exposure within a low central desert landscape.",
+    "mode": "field"
+  },
+  {
+    "id": 79,
+    "section": 4,
+    "start": 506,
+    "end": 512,
+    "kind": "caveat",
+    "voice": "The exact buried shapes remain debated; the sill interpretation is a tested proposal, not a complete underground photograph.",
+    "visual": "Two clearly artificial alternative subsurface models remain side by side outdoors, neither presented as measured fact.",
+    "mode": "model"
+  },
+  {
+    "id": 80,
+    "section": 4,
+    "start": 512,
+    "end": 520,
+    "kind": "turn",
+    "voice": "Near the middle of the eye, fragments of different rocks are cemented together. What broke them, and what filled the spaces between them afterward?",
+    "visual": "Macro illustrative breccia replica with angular fragments and pale mineral-rich matrix on an outdoor support.",
+    "mode": "macro"
+  },
+  {
+    "id": 81,
+    "section": 5,
+    "start": 520,
+    "end": 529,
+    "kind": "rehook",
+    "voice": "A broken piece sits inside another rock. Around it, pale material fills the gaps. This is breccia: fragments brought together and bound into a new, complicated geological fabric.",
+    "visual": "Close breccia comparison replica outdoors, distinct angular fragments in stable pale matrix.",
+    "mode": "macro"
+  },
+  {
+    "id": 82,
+    "section": 5,
+    "start": 529,
+    "end": 534,
+    "kind": "narration",
+    "voice": "At Richat, a large central breccia body became one of the most revealing parts of the investigation.",
+    "visual": "Broad illustrative central broken-rock outcrop in a dry low landscape, no quarry machinery.",
+    "mode": "field"
+  },
+  {
+    "id": 83,
+    "section": 5,
+    "start": 534,
+    "end": 542,
+    "kind": "narration",
+    "voice": "In two thousand five, a detailed study examined its fragments, cavities, mineral fillings, and chemical character. The question was how these features fitted together.",
+    "visual": "Outdoor study tray with separate breccia replicas showing cavities and mineral-filled spaces, no labels.",
+    "mode": "macro"
+  },
+  {
+    "id": 84,
+    "section": 5,
+    "start": 542,
+    "end": 545,
+    "kind": "scene",
+    "voice": "Imagine looking into a cavity inside the rock.",
+    "visual": "Macro push toward a small empty opening within a breccia teaching replica outdoors.",
+    "mode": "macro"
+  },
+  {
+    "id": 85,
+    "section": 5,
+    "start": 545,
+    "end": 554,
+    "kind": "narration",
+    "voice": "Some spaces contain material introduced after the cavity formed. Other surfaces show evidence of chemical attack. The broken rock preserves stages of alteration, not just the moment of fracture.",
+    "visual": "Separate outdoor replicas showing a corroded fragment boundary and later pale cavity fill.",
+    "mode": "macro"
+  },
+  {
+    "id": 86,
+    "section": 5,
+    "start": 554,
+    "end": 557,
+    "kind": "narration",
+    "voice": "Water can remove rock from within it.",
+    "visual": "Outdoor clear-water teaching model with pre-made cavities inside a carbonate-like block, no chemicals.",
+    "mode": "model"
+  },
+  {
+    "id": 87,
+    "section": 5,
+    "start": 557,
+    "end": 565,
+    "kind": "narration",
+    "voice": "When reactive fluids dissolve susceptible carbonate rock, underground spaces can enlarge. If the supporting material weakens enough, pieces can fall into those spaces and accumulate together.",
+    "visual": "Clear-sided outdoor dissolution-collapse teaching model with pre-existing voids and already settled fragment blocks, no sudden real-site collapse.",
+    "mode": "model"
+  },
+  {
+    "id": 88,
+    "section": 5,
+    "start": 565,
+    "end": 568,
+    "kind": "narration",
+    "voice": "The fragments become part of the evidence.",
+    "visual": "Macro side view of settled angular replica fragments within a fixed explanatory cavity model.",
+    "mode": "macro"
+  },
+  {
+    "id": 89,
+    "section": 5,
+    "start": 568,
+    "end": 577,
+    "kind": "narration",
+    "voice": "At Richat, researchers linked this dissolution and collapse to circulating hot fluids associated with magmatism. The same underground heat system could drive both alteration and mineral deposition.",
+    "visual": "Deep-time illustrative cutaway with a buried intrusive body and separate fixed fluid pathways above it, no labels.",
+    "mode": "deep_time"
+  },
+  {
+    "id": 90,
+    "section": 5,
+    "start": 577,
+    "end": 585,
+    "kind": "narration",
+    "voice": "The fluids could remove some material while leaving new minerals in other places. Empty space and mineral filling record different parts of that activity.",
+    "visual": "Outdoor paired teaching blocks, one with an open cavity and the other with a pale mineral-filled cavity.",
+    "mode": "model"
+  },
+  {
+    "id": 91,
+    "section": 5,
+    "start": 585,
+    "end": 592,
+    "kind": "rehook",
+    "voice": "One mineral supplied a clock. Newly formed potassium feldspar in the central material gave a Cretaceous age, close to one hundred million years.",
+    "visual": "Macro pale mineral-grain teaching replica beside a separate unmarked physical chronology model outdoors.",
+    "mode": "macro"
+  },
+  {
+    "id": 92,
+    "section": 5,
+    "start": 592,
+    "end": 595,
+    "kind": "narration",
+    "voice": "A cavity had acquired a time marker.",
+    "visual": "Close outdoor cavity replica with pale filling clearly distinct from its darker host fragments.",
+    "mode": "macro"
+  },
+  {
+    "id": 93,
+    "section": 5,
+    "start": 595,
+    "end": 604,
+    "kind": "narration",
+    "voice": "The chemical changes, fragment boundaries, and mineral age supported a hydrothermal explanation: hot fluid moving through a fractured, uplifted structure, dissolving rock and depositing new material as conditions changed.",
+    "visual": "Outdoor fixed integrated model showing fractured beds, voids and separate pale fills above a buried intrusion.",
+    "mode": "model"
+  },
+  {
+    "id": 94,
+    "section": 5,
+    "start": 604,
+    "end": 607,
+    "kind": "scene",
+    "voice": "Heat, water, fractures, and gravity worked together.",
+    "visual": "Four separate plain physical model elements beside a stable geological section outdoors, no symbols or writing.",
+    "mode": "model"
+  },
+  {
+    "id": 95,
+    "section": 5,
+    "start": 607,
+    "end": 616,
+    "kind": "narration",
+    "voice": "The center therefore adds something the giant outline cannot supply. It records processes that operated inside the rocks, where a satellite photograph sees only the exposed surface.",
+    "visual": "Reference-image crop centered on Richat's inner depression, geometry unchanged.",
+    "mode": "satellite"
+  },
+  {
+    "id": 96,
+    "section": 5,
+    "start": 616,
+    "end": 619,
+    "kind": "narration",
+    "voice": "Small details can reorder a very large story.",
+    "visual": "Macro breccia replica in foreground with distant broad rocky desert ridges softly visible.",
+    "mode": "macro"
+  },
+  {
+    "id": 97,
+    "section": 5,
+    "start": 619,
+    "end": 627,
+    "kind": "narration",
+    "voice": "A photograph gives us the eye's shape. The breccia gives us chemical alteration, collapse, and mineral growth: a much more specific history to investigate.",
+    "visual": "Outdoor breccia sample replica beside a separate fixed whole-Richat terrain model.",
+    "mode": "model"
+  },
+  {
+    "id": 98,
+    "section": 5,
+    "start": 627,
+    "end": 636,
+    "kind": "narration",
+    "voice": "The young mineral filling records hot-fluid activity. Beside it, a dark igneous body holds an older chapter, pointing toward two different geological clocks inside the same formation.",
+    "visual": "Unmarked separate chronology markers beside a breccia replica and dark igneous sample outdoors.",
+    "mode": "model"
+  },
+  {
+    "id": 99,
+    "section": 5,
+    "start": 636,
+    "end": 642,
+    "kind": "caveat",
+    "voice": "The hydrothermal model explains a package of evidence; its details still require geological testing against the rocks themselves.",
+    "visual": "Stable explanatory hydrothermal section model beside a natural layered desert outcrop, visibly separate.",
+    "mode": "model"
+  },
+  {
+    "id": 100,
+    "section": 5,
+    "start": 642,
+    "end": 650,
+    "kind": "turn",
+    "voice": "Now two clocks seem to be ticking inside one formation. Could the dark rings be much older than the hot fluids recorded near its center?",
+    "visual": "Two separate unmarked time markers beside distinct dark igneous and pale cavity-fill replicas outdoors.",
+    "mode": "model"
+  },
+  {
+    "id": 101,
+    "section": 6,
+    "start": 650,
+    "end": 659,
+    "kind": "rehook",
+    "voice": "A dark igneous sample and a pale mineral filling can look like pieces of one structure, yet record different chapters. That possibility changes the question: how old is the eye?",
+    "visual": "Dark coarse-crystalline replica and pale cavity-fill replica separated on a shaded outdoor tray.",
+    "mode": "macro"
+  },
+  {
+    "id": 102,
+    "section": 6,
+    "start": 659,
+    "end": 665,
+    "kind": "narration",
+    "voice": "The answer depends on which part of its history we mean: deposition, magma emplacement, alteration, uplift, or erosion.",
+    "visual": "Five separated unmarked stages represented by simple physical geological models outdoors.",
+    "mode": "model"
+  },
+  {
+    "id": 103,
+    "section": 6,
+    "start": 665,
+    "end": 673,
+    "kind": "narration",
+    "voice": "Argon-based dating uses information preserved in minerals. Heating and alteration can modify that record, so the interpretation must account for the rock's later history as well.",
+    "visual": "Outdoor mineral-grain replica beside separate plain layered time-marker pieces, no invented analytical graph.",
+    "mode": "model"
+  },
+  {
+    "id": 104,
+    "section": 6,
+    "start": 673,
+    "end": 676,
+    "kind": "scene",
+    "voice": "Imagine a clock that was warmed after it started.",
+    "visual": "Mature adult hands hold a closed mineral sample replica beside a fixed explanatory thermal-history model outdoors.",
+    "mode": "model"
+  },
+  {
+    "id": 105,
+    "section": 6,
+    "start": 676,
+    "end": 685,
+    "kind": "narration",
+    "voice": "A later thermal event can disturb part of a mineral's earlier record. Different portions may retain different information, producing results that require comparison among several plausible geological histories.",
+    "visual": "Separate stable mineral-history teaching models outdoors, old and later overprint stages physically separated.",
+    "mode": "model"
+  },
+  {
+    "id": 106,
+    "section": 6,
+    "start": 685,
+    "end": 688,
+    "kind": "narration",
+    "voice": "The rock remembers more than one event.",
+    "visual": "Macro textured dark crystalline replica with distinct pale alteration seams, no glowing clocks.",
+    "mode": "macro"
+  },
+  {
+    "id": 107,
+    "section": 6,
+    "start": 688,
+    "end": 697,
+    "kind": "narration",
+    "voice": "The twenty twenty-four study compared its argon results with numerical models. The authors proposed that the gabbros formed roughly two hundred to two hundred thirty million years ago.",
+    "visual": "Outdoor dark-sheet geological stage model beneath older flat sedimentary cover, no numerical text.",
+    "mode": "model"
+  },
+  {
+    "id": 108,
+    "section": 6,
+    "start": 697,
+    "end": 700,
+    "kind": "narration",
+    "voice": "That would put an older chapter underneath.",
+    "visual": "Low oblique close view of an old dark sheet within a fixed layered teaching model.",
+    "mode": "model"
+  },
+  {
+    "id": 109,
+    "section": 6,
+    "start": 700,
+    "end": 709,
+    "kind": "narration",
+    "voice": "Their chemistry also resembles rocks of the Central Atlantic Magmatic Province. Together, the age modeling and composition supported a connection with that earlier phase of widespread igneous activity.",
+    "visual": "Outdoor paired dark igneous comparison replicas beside a blank regional geological relief model.",
+    "mode": "model"
+  },
+  {
+    "id": 110,
+    "section": 6,
+    "start": 709,
+    "end": 716,
+    "kind": "narration",
+    "voice": "The younger alkaline activity is represented by carbonatite, a carbonate-rich igneous rock. It belongs broadly around one hundred million years ago.",
+    "visual": "Deep-time illustrative section of a younger intrusive body lifting pre-existing dark sheets and pale layers.",
+    "mode": "deep_time"
+  },
+  {
+    "id": 111,
+    "section": 6,
+    "start": 716,
+    "end": 724,
+    "kind": "rehook",
+    "voice": "The proposed gap is enormous: about one hundred million years between the two main igneous chapters. A single view from space compresses that interval into one pattern.",
+    "visual": "Two widely separated unmarked event markers beside a reference-based Richat terrain image outdoors.",
+    "mode": "model"
+  },
+  {
+    "id": 112,
+    "section": 6,
+    "start": 724,
+    "end": 727,
+    "kind": "narration",
+    "voice": "One eye. More than one geological beginning.",
+    "visual": "Fixed wide reference-image composition of Richat, no motion of rocks or changing geometry.",
+    "mode": "satellite"
+  },
+  {
+    "id": 113,
+    "section": 6,
+    "start": 727,
+    "end": 736,
+    "kind": "narration",
+    "voice": "An event around one hundred million years ago can date the younger intrusion and alteration. The dark bodies may preserve an earlier chapter, joined to the younger one by uplift.",
+    "visual": "Outdoor sequence of distinct old-sheet, uplifted and eroded teaching models, no dates or writing.",
+    "mode": "model"
+  },
+  {
+    "id": 114,
+    "section": 6,
+    "start": 736,
+    "end": 739,
+    "kind": "scene",
+    "voice": "Different questions require different geological clocks and observations.",
+    "visual": "Close track across separate sedimentary, igneous and cavity-fill sample replicas outdoors.",
+    "mode": "macro"
+  },
+  {
+    "id": 115,
+    "section": 6,
+    "start": 739,
+    "end": 748,
+    "kind": "narration",
+    "voice": "The layered host rocks came first. Older magma may then have entered as sheets. Younger magma, hot fluids, and uplift added new chapters before erosion exposed the present outline.",
+    "visual": "Deep-time fixed multi-stage section models arranged outdoors in a coherent relative sequence.",
+    "mode": "deep_time"
+  },
+  {
+    "id": 116,
+    "section": 6,
+    "start": 748,
+    "end": 751,
+    "kind": "narration",
+    "voice": "The rocks were reused by the landscape.",
+    "visual": "Weathered tilted sandstone bed beside a dark intrusive contact under natural desert light.",
+    "mode": "field"
+  },
+  {
+    "id": 117,
+    "section": 6,
+    "start": 751,
+    "end": 759,
+    "kind": "narration",
+    "voice": "Our circle now contains a much longer sequence than its neat outline suggests. The visible symmetry is a late arrangement of materials with different histories.",
+    "visual": "Reference-based slightly elliptical Richat overview, broad plateau and irregular ring continuity preserved.",
+    "mode": "satellite"
+  },
+  {
+    "id": 118,
+    "section": 6,
+    "start": 759,
+    "end": 766,
+    "kind": "narration",
+    "voice": "The next transformation required taking material away. To reveal the eye, the landscape had to lose part of its raised upper stack.",
+    "visual": "Outdoor truncated dome model with its separate removed upper cover beside the base.",
+    "mode": "model"
+  },
+  {
+    "id": 119,
+    "section": 6,
+    "start": 766,
+    "end": 772,
+    "kind": "caveat",
+    "voice": "The older gabbro ages remain model-dependent; the study did not obtain a single robust crystallization age for them.",
+    "visual": "Two alternative unmarked old-age model pieces remain separate beside a dark sample replica outdoors.",
+    "mode": "model"
+  },
+  {
+    "id": 120,
+    "section": 6,
+    "start": 772,
+    "end": 780,
+    "kind": "turn",
+    "voice": "So where did the missing roof go? Look beyond the rings, toward the dry channels cut across the surrounding plateau and the sand moving between them.",
+    "visual": "Reference-image crop including actual branching drainage patterns and adjacent dunes outside Richat.",
+    "mode": "satellite"
+  },
+  {
+    "id": 121,
+    "section": 7,
+    "start": 780,
+    "end": 789,
+    "kind": "rehook",
+    "voice": "A dry channel crosses the plateau. Today it holds little or no flowing water, but its carved form records a landscape shaped by movement and removal over time.",
+    "visual": "Illustrative dry branching channel cut into a dark desert plateau, no active flood.",
+    "mode": "field"
+  },
+  {
+    "id": 122,
+    "section": 7,
+    "start": 789,
+    "end": 795,
+    "kind": "narration",
+    "voice": "Richat's story depends on that removal. Uplift arranged the layers; erosion exposed their curved edges and sharpened contrasts between them.",
+    "visual": "Outdoor layered dome model with a flattened eroded surface and alternating raised bands.",
+    "mode": "model"
+  },
+  {
+    "id": 123,
+    "section": 7,
+    "start": 795,
+    "end": 803,
+    "kind": "narration",
+    "voice": "Wind moves sand and scours exposed surfaces. Water can cut channels, weather rock, and carry loosened material away. Across geological time, those agents reshape an uplifted landscape.",
+    "visual": "Outdoor dry-channel teaching model with loose sand beside rock-like ridges, no global catastrophe.",
+    "mode": "model"
+  },
+  {
+    "id": 124,
+    "section": 7,
+    "start": 803,
+    "end": 806,
+    "kind": "scene",
+    "voice": "Stand at the base of a surviving ridge.",
+    "visual": "Mature adult observer stands on level ground below a low resistant desert ridge, safe position.",
+    "mode": "field"
+  },
+  {
+    "id": 125,
+    "section": 7,
+    "start": 806,
+    "end": 815,
+    "kind": "narration",
+    "voice": "The harder bed still projects above its surroundings. Beside it, weaker material occupies a lower strip. You are looking at a contrast produced by unequal survival through erosion.",
+    "visual": "Close resistant sandstone ledge above a lower finer-grained weathered band.",
+    "mode": "field"
+  },
+  {
+    "id": 126,
+    "section": 7,
+    "start": 815,
+    "end": 818,
+    "kind": "narration",
+    "voice": "The hollow is part of the pattern too.",
+    "visual": "Low moving view across an eroded hollow between two fixed desert ridges.",
+    "mode": "field"
+  },
+  {
+    "id": 127,
+    "section": 7,
+    "start": 818,
+    "end": 826,
+    "kind": "narration",
+    "voice": "Sand can occupy the low ground between rocky ridges, adding color and texture. But the larger geometry follows the exposed rock structure beneath the loose surface material.",
+    "visual": "Ground-level sand drifts between solid curved ridges, bedrock remains visible beneath loose grains.",
+    "mode": "field"
+  },
+  {
+    "id": 128,
+    "section": 7,
+    "start": 826,
+    "end": 829,
+    "kind": "narration",
+    "voice": "The sand did not draw the whole eye.",
+    "visual": "Macro sand grains moving gently across a stable layered bedrock edge, no morphing circle.",
+    "mode": "macro"
+  },
+  {
+    "id": 129,
+    "section": 7,
+    "start": 829,
+    "end": 838,
+    "kind": "narration",
+    "voice": "Look at the outer landscape in the satellite reference. Dark plateau surfaces, branching channels, and bright dune fields sit around the exposed concentric structure, each with its own texture.",
+    "visual": "Actual reference-image pan across dark plateau, drainage networks and bright surrounding dune fields.",
+    "mode": "satellite"
+  },
+  {
+    "id": 130,
+    "section": 7,
+    "start": 838,
+    "end": 845,
+    "kind": "narration",
+    "voice": "The rings and the dunes meet in one image, yet they record different parts of how this terrain was made and modified.",
+    "visual": "Reference-based close framing of the boundary between outer Richat rock ridges and dune sand.",
+    "mode": "satellite"
+  },
+  {
+    "id": 131,
+    "section": 7,
+    "start": 845,
+    "end": 854,
+    "kind": "rehook",
+    "voice": "A missing layer leaves no pile neatly labeled roof. Material can be broken down, transported, dissolved, and scattered. The present shape is what remains after that long redistribution.",
+    "visual": "Outdoor erosion teaching model with detached inert grains in several separate shallow collection areas, no labels.",
+    "mode": "model"
+  },
+  {
+    "id": 132,
+    "section": 7,
+    "start": 854,
+    "end": 857,
+    "kind": "narration",
+    "voice": "The landscape keeps the survivors, not every step.",
+    "visual": "Weathered broken ledge and fine sediment in a dry desert gully.",
+    "mode": "field"
+  },
+  {
+    "id": 133,
+    "section": 7,
+    "start": 857,
+    "end": 866,
+    "kind": "narration",
+    "voice": "That is why a dome can become a broad, low, ringed exposure. The structure persists in the arrangement of its layers even after much of its upper material has disappeared.",
+    "visual": "Low oblique outdoor dome section model with shallow present relief above deeper curved layers.",
+    "mode": "model"
+  },
+  {
+    "id": 134,
+    "section": 7,
+    "start": 866,
+    "end": 869,
+    "kind": "scene",
+    "voice": "Its geological architecture outlives its earlier surface shape.",
+    "visual": "Close side view of curved subsurface layers beneath a flattened explanatory model top.",
+    "mode": "model"
+  },
+  {
+    "id": 135,
+    "section": 7,
+    "start": 869,
+    "end": 878,
+    "kind": "narration",
+    "voice": "A single aerial view tempts us to treat the rings as something added to the desert. The geological story also requires recognizing what erosion has removed from the structure.",
+    "visual": "Actual Richat reference image with intact irregular rings and no added structures or overlays.",
+    "mode": "satellite"
+  },
+  {
+    "id": 136,
+    "section": 7,
+    "start": 878,
+    "end": 881,
+    "kind": "narration",
+    "voice": "The eye is an exposure, a window downward.",
+    "visual": "Slow illustrative field view through a natural notch revealing deeper sedimentary beds.",
+    "mode": "field"
+  },
+  {
+    "id": 137,
+    "section": 7,
+    "start": 881,
+    "end": 890,
+    "kind": "narration",
+    "voice": "Once you see the missing material, the central question changes. We are reading the remains of an uplifted stack, not simply searching for something that drew circles on a flat plain.",
+    "visual": "Outdoor flat-layer and eroded-dome teaching models separated clearly under natural light.",
+    "mode": "model"
+  },
+  {
+    "id": 138,
+    "section": 7,
+    "start": 890,
+    "end": 897,
+    "kind": "narration",
+    "voice": "Yet a circle also resembles an impact crater. To test that idea properly, we need evidence created by the process of impact itself.",
+    "visual": "Separate neutral impact-basin and domed-layer teaching models outdoors, neither representing a confirmed Richat impact.",
+    "mode": "model"
+  },
+  {
+    "id": 139,
+    "section": 7,
+    "start": 897,
+    "end": 902,
+    "kind": "caveat",
+    "voice": "The exact height and erosion schedule cannot be recovered from this photograph alone; they need additional geological constraints.",
+    "visual": "Reference image beside a separate abstract elevation model, no measured profile or numerical labels.",
+    "mode": "model"
+  },
+  {
+    "id": 140,
+    "section": 7,
+    "start": 902,
+    "end": 910,
+    "kind": "turn",
+    "voice": "What would a violent collision leave inside the minerals? The next clue is smaller than any ring in the satellite view, but potentially much more decisive.",
+    "visual": "Outdoor protected mineral-grain teaching replicas beside a dark rock sample, no laboratory.",
+    "mode": "macro"
+  },
+  {
+    "id": 141,
+    "section": 8,
+    "start": 910,
+    "end": 919,
+    "kind": "rehook",
+    "voice": "A shattered rock can come from more than one process. A meteorite impact can produce breccia, but so can collapse, faulting, and fluid-related alteration within the Earth's crust.",
+    "visual": "Four separate breccia comparison replicas in an outdoor tray, no labels and no claim all are Richat samples.",
+    "mode": "macro"
+  },
+  {
+    "id": 142,
+    "section": 8,
+    "start": 919,
+    "end": 925,
+    "kind": "narration",
+    "voice": "That is why an impact investigation searches for diagnostic evidence, including particular effects of intense shock within rocks and minerals.",
+    "visual": "Separate mineral-deformation teaching replicas outdoors, clearly illustrative and not measured microscope images.",
+    "mode": "model"
+  },
+  {
+    "id": 143,
+    "section": 8,
+    "start": 925,
+    "end": 934,
+    "kind": "narration",
+    "voice": "Some shock features form under the extreme conditions of high-speed collisions. Their recognition requires careful examination of suitable material, rather than judging the shape of the landscape alone.",
+    "visual": "Outdoor fixed grain-scale explanatory model with deformed and undeformed crystal-like blocks separated.",
+    "mode": "model"
+  },
+  {
+    "id": 144,
+    "section": 8,
+    "start": 934,
+    "end": 937,
+    "kind": "scene",
+    "voice": "Imagine holding a sample beneath that great circular skyline.",
+    "visual": "Mature adult holds a closed rock replica container with broad desert ridges beyond, no collecting.",
+    "mode": "field"
+  },
+  {
+    "id": 145,
+    "section": 8,
+    "start": 937,
+    "end": 945,
+    "kind": "narration",
+    "voice": "Its internal history may answer a question the skyline cannot. Geological evidence can distinguish processes whose large outlines happen to look similar from far above the ground.",
+    "visual": "Close dark rock comparison sample in foreground with a reference-based terrain model behind.",
+    "mode": "macro"
+  },
+  {
+    "id": 146,
+    "section": 8,
+    "start": 945,
+    "end": 948,
+    "kind": "narration",
+    "voice": "A matching outline is only a starting clue.",
+    "visual": "Outdoor pair of different unmarked geological models with similar curved surface outlines.",
+    "mode": "model"
+  },
+  {
+    "id": 147,
+    "section": 8,
+    "start": 948,
+    "end": 957,
+    "kind": "narration",
+    "voice": "At Richat, studies instead build a connected account from intrusive rocks, tilted sedimentary layers, chemical alteration, and erosion. These observations support a geological dome with a complex magmatic history.",
+    "visual": "Outdoor combined section model showing pale tilted beds, dark intrusions and a separate altered central zone.",
+    "mode": "model"
+  },
+  {
+    "id": 148,
+    "section": 8,
+    "start": 957,
+    "end": 960,
+    "kind": "narration",
+    "voice": "The explanation must connect all those observations together.",
+    "visual": "Slow oblique outdoor track across the contact between three stable geological model materials.",
+    "mode": "model"
+  },
+  {
+    "id": 149,
+    "section": 8,
+    "start": 960,
+    "end": 969,
+    "kind": "narration",
+    "voice": "Complex impact structures can also develop central uplifts. Comparing the layers, minerals, and rock relationships helps distinguish those collision processes from other ways of bending and exposing the ground.",
+    "visual": "Two distinct explanatory section models outdoors, geological dome and generic complex impact uplift, separated by clear space.",
+    "mode": "model"
+  },
+  {
+    "id": 150,
+    "section": 8,
+    "start": 969,
+    "end": 976,
+    "kind": "narration",
+    "voice": "The stronger question is which process accounts for the rocks, their arrangement, their ages, and the transformations recorded within them most convincingly.",
+    "visual": "Outdoor tray of distinct rock replicas beside separate relative-sequence models, no scores or labels.",
+    "mode": "model"
+  },
+  {
+    "id": 151,
+    "section": 8,
+    "start": 976,
+    "end": 984,
+    "kind": "rehook",
+    "voice": "Now consider another familiar claim: concentric walls of a lost city. The first test is wonderfully concrete. Follow one supposed wall down into its bedding.",
+    "visual": "Inclined natural sedimentary ridge close-up, continuous bedding visible, no human-built city, wall blocks or ruins.",
+    "mode": "field"
+  },
+  {
+    "id": 152,
+    "section": 8,
+    "start": 984,
+    "end": 987,
+    "kind": "narration",
+    "voice": "Its layers continue through the natural rock itself.",
+    "visual": "Macro tracing of continuous bedding across a weathered natural ridge face, no masonry joints.",
+    "mode": "macro"
+  },
+  {
+    "id": 153,
+    "section": 8,
+    "start": 987,
+    "end": 996,
+    "kind": "narration",
+    "voice": "Buildings leave worked materials, assembled structures, and a human context. Here, the continuity of natural beds reveals a rock ridge whose curved trace belongs to the layered geological structure.",
+    "visual": "Natural fractured rock exposure with no constructed courses or invented archaeological finds.",
+    "mode": "field"
+  },
+  {
+    "id": 154,
+    "section": 8,
+    "start": 996,
+    "end": 999,
+    "kind": "scene",
+    "voice": "Human history is real, but it is another investigation.",
+    "visual": "Broad open Mauritanian desert landscape with distant mature adult walkers, no ancient-city reconstruction.",
+    "mode": "field"
+  },
+  {
+    "id": 155,
+    "section": 8,
+    "start": 999,
+    "end": 1008,
+    "kind": "narration",
+    "voice": "The Adrar region preserves stone tools, rock art, and historic settlements. They open a later human story within a landscape whose sedimentary and igneous history began far earlier.",
+    "visual": "Mature adult field observer records an already documented-looking generic outdoor archaeological context without exposing finds or asserting a Richat city.",
+    "mode": "field"
+  },
+  {
+    "id": 156,
+    "section": 8,
+    "start": 1008,
+    "end": 1011,
+    "kind": "narration",
+    "voice": "The rock pattern has a far older history.",
+    "visual": "Macro coarse igneous sample replica beside layered sedimentary rock, dry desert background.",
+    "mode": "macro"
+  },
+  {
+    "id": 157,
+    "section": 8,
+    "start": 1011,
+    "end": 1019,
+    "kind": "narration",
+    "voice": "Separating those questions makes both histories clearer. Geological processes explain the giant structure, while genuine archaeological evidence can investigate the people who later encountered its surrounding landscape.",
+    "visual": "Separate outdoor terrain model and plain closed archaeological record box, no artifacts invented or readable text.",
+    "mode": "model"
+  },
+  {
+    "id": 158,
+    "section": 8,
+    "start": 1019,
+    "end": 1026,
+    "kind": "narration",
+    "voice": "The eye remains astonishing after the dramatic shortcuts fall away. Now return to the real satellite image and see how its details change.",
+    "visual": "Actual reference-image view holding the complete Richat feature, no speculative city overlays.",
+    "mode": "satellite"
+  },
+  {
+    "id": 159,
+    "section": 8,
+    "start": 1026,
+    "end": 1032,
+    "kind": "caveat",
+    "voice": "Neither circularity nor broken rock alone proves an impact or a city; those claims require their own diagnostic evidence.",
+    "visual": "Natural rock ridge remains in view beside two separate unmarked comparison teaching models outdoors.",
+    "mode": "model"
+  },
+  {
+    "id": 160,
+    "section": 8,
+    "start": 1032,
+    "end": 1040,
+    "kind": "turn",
+    "voice": "The next view comes from two modern satellites on two neighboring days. Why can their combined image reveal so much while leaving the deepest question hidden?",
+    "visual": "Actual Landsat reference mosaic of Richat, preserved complete geometry, no invented spacecraft or data graphics.",
+    "mode": "satellite"
+  },
+  {
+    "id": 161,
+    "section": 9,
+    "start": 1040,
+    "end": 1049,
+    "kind": "rehook",
+    "voice": "On two days in March, two satellites recorded the land around Richat. A published mosaic combines those observations into the detailed view now guiding our journey across the desert.",
+    "visual": "Actual NASA Earth Observatory Landsat reference image, static registered geography with gentle digital framing only.",
+    "mode": "satellite"
+  },
+  {
+    "id": 162,
+    "section": 9,
+    "start": 1049,
+    "end": 1054,
+    "kind": "narration",
+    "voice": "The observations came from Landsat Eight and Landsat Nine, on March fifth and sixth, twenty twenty-six.",
+    "visual": "Same registered reference mosaic with unchanged ring geometry and rock textures, no dates rendered.",
+    "mode": "satellite"
+  },
+  {
+    "id": 163,
+    "section": 9,
+    "start": 1054,
+    "end": 1062,
+    "kind": "narration",
+    "voice": "The image preserves the context: the dark plateau, branching drainage, bright dune fields, and the exposed eye. Keep all four in mind as we move closer.",
+    "visual": "Reference-image pan moving from plateau drainage across Richat toward bright eastern dune fields.",
+    "mode": "satellite"
+  },
+  {
+    "id": 164,
+    "section": 9,
+    "start": 1062,
+    "end": 1065,
+    "kind": "scene",
+    "voice": "Imagine trying to see that whole arrangement from one ridge.",
+    "visual": "Mature adult field observer below a broad ridge, distant view partly blocked by terrain.",
+    "mode": "field"
+  },
+  {
+    "id": 165,
+    "section": 9,
+    "start": 1065,
+    "end": 1074,
+    "kind": "narration",
+    "voice": "At ground level, nearby relief hides much of the wider pattern. A satellite gives us continuity across many kilometers, letting separate-looking ridges become parts of a larger structure.",
+    "visual": "Reference-image slow zoom outward revealing continuity between irregular curved ridges.",
+    "mode": "satellite"
+  },
+  {
+    "id": 166,
+    "section": 9,
+    "start": 1074,
+    "end": 1077,
+    "kind": "narration",
+    "voice": "Scale turns fragments into a recognizable whole.",
+    "visual": "Actual reference mosaic holding full Richat within surrounding plateau, no artificial scale graphic.",
+    "mode": "satellite"
+  },
+  {
+    "id": 167,
+    "section": 9,
+    "start": 1077,
+    "end": 1086,
+    "kind": "narration",
+    "voice": "The image is also a processed product. Its presentation combines observations and choices about display. The colors and shadows help us inspect the surface, alongside information collected in the field.",
+    "visual": "Original reference mosaic shown without added color recoloring, stable exposure and no measurement overlays.",
+    "mode": "satellite"
+  },
+  {
+    "id": 168,
+    "section": 9,
+    "start": 1086,
+    "end": 1089,
+    "kind": "narration",
+    "voice": "Each color invites a closer look at the rocks.",
+    "visual": "Reference-image close framing of contrasting pale, dark and orange surface bands, no labels.",
+    "mode": "satellite"
+  },
+  {
+    "id": 169,
+    "section": 9,
+    "start": 1089,
+    "end": 1098,
+    "kind": "narration",
+    "voice": "To understand a bed's tilt, a contact, or the minerals inside a rock, we return to observations at closer scales. Each viewpoint contributes a different part of the reconstruction.",
+    "visual": "Modern mature field observer examining a visible rock contact in an open desert outcrop.",
+    "mode": "field"
+  },
+  {
+    "id": 170,
+    "section": 9,
+    "start": 1098,
+    "end": 1105,
+    "kind": "narration",
+    "voice": "The strongest story keeps moving between them: a whole structure, a ridge, a tilted layer, a mineral, then back to the landscape.",
+    "visual": "Outdoor sequence of separate whole-terrain, outcrop and grain-scale explanatory models under natural light.",
+    "mode": "model"
+  },
+  {
+    "id": 171,
+    "section": 9,
+    "start": 1105,
+    "end": 1113,
+    "kind": "rehook",
+    "voice": "Below that surface, magnetic and gravity measurements add another kind of view. Models compare physical signals with plausible arrangements of different rock bodies beneath the ground.",
+    "visual": "Outdoor subsurface teaching model beneath a fixed surface relief, no invented measured traces or numerical graphs.",
+    "mode": "model"
+  },
+  {
+    "id": 172,
+    "section": 9,
+    "start": 1113,
+    "end": 1116,
+    "kind": "narration",
+    "voice": "The buried structure becomes a testable question.",
+    "visual": "Close low view into the open side of a geological section teaching model outdoors.",
+    "mode": "model"
+  },
+  {
+    "id": 173,
+    "section": 9,
+    "start": 1116,
+    "end": 1125,
+    "kind": "narration",
+    "voice": "Work presented in twenty twenty-two used magnetic and gravity information to investigate the buried Richat complex. Later geological interpretations ask how those modeled bodies relate to older sheets and younger uplift.",
+    "visual": "Two separate outdoor subsurface model alternatives below matching surface outlines, no claim of exact tomography.",
+    "mode": "model"
+  },
+  {
+    "id": 174,
+    "section": 9,
+    "start": 1125,
+    "end": 1128,
+    "kind": "scene",
+    "voice": "The useful disagreement is about sequence and geometry.",
+    "visual": "Outdoor unmarked relative-sequence pieces alongside two alternative buried-intrusion models.",
+    "mode": "model"
+  },
+  {
+    "id": 175,
+    "section": 9,
+    "start": 1128,
+    "end": 1138,
+    "kind": "narration",
+    "voice": "That is a different kind of mystery from asking whether the eye is artificial. It asks how particular rocks and deep bodies fit into a geological history that can be tested.",
+    "visual": "Mature adult observer follows a natural intrusive contact across an open rocky slope, no ruins.",
+    "mode": "field"
+  },
+  {
+    "id": 176,
+    "section": 9,
+    "start": 1138,
+    "end": 1141,
+    "kind": "narration",
+    "voice": "The ground still has evidence to offer us.",
+    "visual": "Macro weathered bedding and a dark contact under low desert sunlight.",
+    "mode": "macro"
+  },
+  {
+    "id": 177,
+    "section": 9,
+    "start": 1141,
+    "end": 1149,
+    "kind": "narration",
+    "voice": "The buried arrangement takes shape through rock relationships, physical properties, and mineral histories. Each can contribute to models of the material beneath the visible surface pattern.",
+    "visual": "Reference-based terrain surface above a visibly separate schematic cutaway model, no measured data overlay.",
+    "mode": "model"
+  },
+  {
+    "id": 178,
+    "section": 9,
+    "start": 1149,
+    "end": 1156,
+    "kind": "narration",
+    "voice": "The next useful discovery might begin at an ordinary-looking contact in an outcrop, rather than with a more dramatic picture of the circle.",
+    "visual": "Close unobtrusive natural contact in an illustrative desert outcrop, no dramatic lighting or treasure.",
+    "mode": "field"
+  },
+  {
+    "id": 179,
+    "section": 9,
+    "start": 1156,
+    "end": 1162,
+    "kind": "caveat",
+    "voice": "A geophysical model is not a direct photograph underground; different plausible bodies can produce similar signals and need geological checks.",
+    "visual": "Two distinct subsurface teaching models side by side outdoors beneath similar unmarked surface profiles.",
+    "mode": "model"
+  },
+  {
+    "id": 180,
+    "section": 9,
+    "start": 1162,
+    "end": 1170,
+    "kind": "turn",
+    "voice": "We can finally return to our opening layer. Its tilt, its age, and the missing material around it now belong to a much longer chain of events.",
+    "visual": "Same distinctive tilted sandstone outcrop and lighting direction as opening, stable geometry and no new objects.",
+    "mode": "field"
+  },
+  {
+    "id": 181,
+    "section": 10,
+    "start": 1170,
+    "end": 1179,
+    "kind": "rehook",
+    "voice": "Look again at the tilted layer. At the beginning, its curve was a puzzle. Now it is a surviving edge of a stack lifted and opened by geological processes.",
+    "visual": "Exact same illustrative tilted sandstone bed from opening, continuous curved ridge preserved.",
+    "mode": "field"
+  },
+  {
+    "id": 182,
+    "section": 10,
+    "start": 1179,
+    "end": 1186,
+    "kind": "narration",
+    "voice": "The sedimentary rocks preserve older environments. Their deposition belongs to a time before the later magmas changed the structure beneath this landscape.",
+    "visual": "Close old sedimentary bedding in an illustrative desert outcrop, no numerical dates.",
+    "mode": "macro"
+  },
+  {
+    "id": 183,
+    "section": 10,
+    "start": 1186,
+    "end": 1194,
+    "kind": "narration",
+    "voice": "Dark igneous bodies preserve another chapter. The two-stage proposal gives some of those rocks an older history, followed much later by renewed intrusion and uplift.",
+    "visual": "Outdoor multi-stage model with older dark sheets and a separate younger intrusive body.",
+    "mode": "model"
+  },
+  {
+    "id": 184,
+    "section": 10,
+    "start": 1194,
+    "end": 1197,
+    "kind": "scene",
+    "voice": "Stand at the edge of the eye once more.",
+    "visual": "Mature adult observer stands safely below a low curved ridge in open desert.",
+    "mode": "field"
+  },
+  {
+    "id": 185,
+    "section": 10,
+    "start": 1197,
+    "end": 1206,
+    "kind": "narration",
+    "voice": "The ridges run beyond your view. Their continuity becomes obvious only when the viewpoint rises, but their geological meaning begins in the stone beside your feet and the layers below.",
+    "visual": "Ground-level curved ridge opening into a wider reference-guided desert landscape, no measured flyover claim.",
+    "mode": "field"
+  },
+  {
+    "id": 186,
+    "section": 10,
+    "start": 1206,
+    "end": 1209,
+    "kind": "narration",
+    "voice": "The close view and the distant view meet.",
+    "visual": "Outdoor rock slab in foreground beside a separate real-reference terrain display, no readable text.",
+    "mode": "model"
+  },
+  {
+    "id": 187,
+    "section": 10,
+    "start": 1209,
+    "end": 1217,
+    "kind": "narration",
+    "voice": "Here is the central answer: Richat is an eroded geological dome, shaped by a complex igneous history and the unequal removal of its exposed rock layers.",
+    "visual": "Reference-based complete Richat geometry above a separate schematic layered-dome model outdoors.",
+    "mode": "model"
+  },
+  {
+    "id": 188,
+    "section": 10,
+    "start": 1217,
+    "end": 1220,
+    "kind": "narration",
+    "voice": "The rings are the exposed edges of that architecture.",
+    "visual": "Close model surface where curved layers intersect a flattened erosion plane.",
+    "mode": "model"
+  },
+  {
+    "id": 189,
+    "section": 10,
+    "start": 1220,
+    "end": 1229,
+    "kind": "narration",
+    "voice": "Magma supplied underground bodies and a mechanism for uplift. Hot fluids altered the central rocks. Dissolution, collapse, mineral deposition, and erosion left different traces in the same evolving structure.",
+    "visual": "Fixed deep-time explanatory section with distinct intrusion, altered zone, cavities and erosion surface, no labels.",
+    "mode": "deep_time"
+  },
+  {
+    "id": 190,
+    "section": 10,
+    "start": 1229,
+    "end": 1237,
+    "kind": "narration",
+    "voice": "The history becomes richer when its stages are separated. We can ask what each rock records, rather than giving the whole eye one oversimplified birthday.",
+    "visual": "Outdoor distinct rock replicas placed beside separate unmarked physical time markers.",
+    "mode": "macro"
+  },
+  {
+    "id": 191,
+    "section": 10,
+    "start": 1237,
+    "end": 1246,
+    "kind": "rehook",
+    "voice": "The twenty twenty-four proposal makes the surprise especially clear: materials separated by an enormous interval can end up arranged in one striking surface pattern through later uplift and erosion.",
+    "visual": "Outdoor old-sheet and younger-dome teaching stages beside one final eroded concentric model.",
+    "mode": "model"
+  },
+  {
+    "id": 192,
+    "section": 10,
+    "start": 1246,
+    "end": 1249,
+    "kind": "narration",
+    "voice": "One shape can contain many different geological ages.",
+    "visual": "Actual Richat reference mosaic with unchanged textures, colors and irregular outline.",
+    "mode": "satellite"
+  },
+  {
+    "id": 193,
+    "section": 10,
+    "start": 1249,
+    "end": 1259,
+    "kind": "narration",
+    "voice": "And the removal matters. The vanished upper layers were part of the structure too. What survives is a cross-section opened by time, rather than the whole original form of the uplift.",
+    "visual": "Outdoor eroded-dome cross-section model with removed upper cover resting separately at its side.",
+    "mode": "model"
+  },
+  {
+    "id": 194,
+    "section": 10,
+    "start": 1259,
+    "end": 1262,
+    "kind": "scene",
+    "voice": "The missing stone helps explain the visible rings.",
+    "visual": "Low close view along a surviving resistant band beside an eroded hollow in an illustrative outcrop.",
+    "mode": "field"
+  },
+  {
+    "id": 195,
+    "section": 10,
+    "start": 1262,
+    "end": 1271,
+    "kind": "narration",
+    "voice": "That answers why the Sahara has an eye without requiring a circular city or a confirmed meteorite scar. The explanation connects the shape to layers, rock types, contacts, and transformations.",
+    "visual": "Reference-image whole Richat composition without city, impact, alien or catastrophe additions.",
+    "mode": "satellite"
+  },
+  {
+    "id": 196,
+    "section": 10,
+    "start": 1271,
+    "end": 1274,
+    "kind": "narration",
+    "voice": "The evidence lives across several different scales together.",
+    "visual": "Outdoor rock grain, layered outcrop replica and reference terrain image separated clearly in one frame.",
+    "mode": "model"
+  },
+  {
+    "id": 197,
+    "section": 10,
+    "start": 1274,
+    "end": 1283,
+    "kind": "narration",
+    "voice": "A field contact tests a model. A mineral record tests a proposed sequence. A satellite image reconnects the small observations with the immense pattern stretching across the plateau in Mauritania.",
+    "visual": "Mature adult field observer beside the opening outcrop, distant curved ridges beyond under natural light.",
+    "mode": "field"
+  },
+  {
+    "id": 198,
+    "section": 10,
+    "start": 1283,
+    "end": 1291,
+    "kind": "narration",
+    "voice": "Richat's wonder survives the explanation. A familiar-looking circle has become a window into ancient sediment, buried magma, moving fluids, and the patient removal of stone.",
+    "visual": "Actual reference-image slow widening composition retaining full ring system and surrounding channels and dunes.",
+    "mode": "satellite"
+  },
+  {
+    "id": 199,
+    "section": 10,
+    "start": 1291,
+    "end": 1298,
+    "kind": "caveat",
+    "voice": "The broad geological explanation is well supported; exact ages of some igneous rocks and the detailed buried geometry remain active questions for further testing.",
+    "visual": "Two alternative unmarked subsurface models remain separate beneath a fixed surface outline outdoors, no winner label.",
+    "mode": "model"
+  },
+  {
+    "id": 200,
+    "section": 10,
+    "start": 1298,
+    "end": 1302,
+    "kind": "turn",
+    "voice": "What lies beneath the Eye's oldest rings?",
+    "visual": "Opening tilted rock bed in foreground, curving ridge disappears beyond view under a calm desert horizon.",
+    "mode": "field"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "filename": "richat_landsat_2026.jpg",
+  "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/iotd/2026/eyeing-the-richat-structure/richatstructure_oli_20260306.jpg",
+  "sha256": "cb50057f8272185c8ea904ad46f07ef5555f4669390ade1faa646e81de87fd0d",
+  "bytes": 1387434,
+  "credit": "NASA Earth Observatory image by Lauren Dauphin, using Landsat data from the U.S. Geological Survey.",
+  "source_page": "https://science.nasa.gov/earth/earth-observatory/eyeing-the-richat-structure/",
+  "acquisition_dates": [
+    "2026-03-05",
+    "2026-03-06"
+  ],
+  "publication_date": "2026-04-16",
+  "usage": "Factual editorial/educational use with acknowledgment; no endorsement; NASA media guidelines; no third-party logo/personality rights conveyed.",
+  "policy": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+  "clip_framing": "Crop video framing to avoid bottom-left scale legend and compass; retain original ring geometry and no added labels. Source JPEG remains byte-identical.",
+  "image_inspected": true
+}

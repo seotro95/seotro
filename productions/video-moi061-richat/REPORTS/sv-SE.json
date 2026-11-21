@@ -1,0 +1,116 @@
+{
+  "status": "passed",
+  "locale": "sv-SE",
+  "voice_id": "sv-SE-MattiasNeural",
+  "gender": "Male",
+  "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "target_seconds": 1302,
+  "decoded_frames_48000": 62496000,
+  "decoded_seconds": 1302.0,
+  "filename": "RICHAT_MOI061_Thuy_Dien.mp3",
+  "bytes": 15624620,
+  "sha256": "5add0cb94d46ac3bfa6602e0acd32557fdafe964beafd303dce986c7311d7870",
+  "script_sha256": "d84623f81f17d96da8474c9f91d4f7a552c824650c6db5d26853a4010f4a9d89",
+  "cues": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 130,
+      "raw_seconds": 137.928,
+      "tempo": 1.0619648906683092,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 2,
+      "start": 130,
+      "end": 260,
+      "raw_seconds": 139.776,
+      "tempo": 1.0761934093008934,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 3,
+      "start": 260,
+      "end": 390,
+      "raw_seconds": 137.712,
+      "tempo": 1.0603018170619032,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 4,
+      "start": 390,
+      "end": 520,
+      "raw_seconds": 128.448,
+      "tempo": 0.9889744379427164,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 5,
+      "start": 520,
+      "end": 650,
+      "raw_seconds": 136.176,
+      "tempo": 1.0484755158607946,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 6,
+      "start": 650,
+      "end": 780,
+      "raw_seconds": 135.648,
+      "tempo": 1.0444102248229135,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 7,
+      "start": 780,
+      "end": 910,
+      "raw_seconds": 135.864,
+      "tempo": 1.0460732984293195,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 8,
+      "start": 910,
+      "end": 1040,
+      "raw_seconds": 146.568,
+      "tempo": 1.128487834924546,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 9,
+      "start": 1040,
+      "end": 1170,
+      "raw_seconds": 143.376,
+      "tempo": 1.1039113027409917,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 10,
+      "start": 1170,
+      "end": 1302,
+      "raw_seconds": 152.304,
+      "tempo": 1.1548680618744314,
+      "trailing_pause_target": 0.12,
+      "parts": 4
+    }
+  ],
+  "pitch_shift_applied": false,
+  "voice_identity_preserved": true,
+  "narration_style_id": "science-documentary-retention-v5-Richat-NamMinh",
+  "prosody_method": "Native phrase rate and question/reflective pacing plus at most two 1.2dB word accents per English cue or per localized request",
+  "word_metadata_pieces": 31,
+  "minimum_word_coverage_ratio": 1.0,
+  "word_accents": 57,
+  "independent_native_listening_review": false,
+  "timing_alignment": "10 shared section boundaries"
+}

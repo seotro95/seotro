@@ -1,0 +1,151 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-061",
+  "voices": 16,
+  "male_voices": 16,
+  "all_decoded_seconds": 1302,
+  "all_decoded_frames_48000": 62496000,
+  "all_current_episode_ids_locked": true,
+  "previous_voice_ids_retained": 16,
+  "voice_changes": [],
+  "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+  "unique_audio_hashes": 16,
+  "english_cue_count": 200,
+  "other_language_chapter_count": 10,
+  "word_metadata_checked": true,
+  "english_word_boundary_split_checked": true,
+  "pitch_shift_applied": false,
+  "independent_native_editorial_review": false,
+  "independent_native_listening_review": false,
+  "translated_voice_alignment": "Ten shared section boundaries; localized retellings, not word-by-word synchronization",
+  "reports": {
+    "fr-FR": {
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "RICHAT_MOI061_Phap.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.7764705882352941,
+      "max_tempo": 0.907114259316292,
+      "word_accents": 59
+    },
+    "pt-PT": {
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "RICHAT_MOI061_Bo_Dao_Nha.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.7668617185093932,
+      "max_tempo": 0.874037573144441,
+      "word_accents": 58
+    },
+    "cs-CZ": {
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "RICHAT_MOI061_Sec.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.8108407761010163,
+      "max_tempo": 0.9348498635122839,
+      "word_accents": 38
+    },
+    "nl-NL": {
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "RICHAT_MOI061_Ha_Lan.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.8598090545118571,
+      "max_tempo": 0.9895287958115184,
+      "word_accents": 50
+    },
+    "ko-KR": {
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "RICHAT_MOI061_Han_Quoc.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.9533107483831229,
+      "max_tempo": 1.0533212010919017,
+      "word_accents": 32
+    },
+    "de-DE": {
+      "voice_id": "de-DE-ChristophNeural",
+      "filename": "RICHAT_MOI061_Duc.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.9097012627040345,
+      "max_tempo": 1.0744313011828936,
+      "word_accents": 63
+    },
+    "ja-JP": {
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "RICHAT_MOI061_Nhat_Ban.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.8932553125962428,
+      "max_tempo": 1.0061874431301183,
+      "word_accents": 20
+    },
+    "it-IT": {
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "RICHAT_MOI061_Y.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.9387126578380044,
+      "max_tempo": 1.0658780709736124,
+      "word_accents": 46
+    },
+    "fi-FI": {
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "RICHAT_MOI061_Phan_Lan.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.9263319987680937,
+      "max_tempo": 1.0363967242948136,
+      "word_accents": 53
+    },
+    "sv-SE": {
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "RICHAT_MOI061_Thuy_Dien.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.9889744379427164,
+      "max_tempo": 1.1548680618744314,
+      "word_accents": 57
+    },
+    "nb-NO": {
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "RICHAT_MOI061_Na_Uy.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.8326455189405606,
+      "max_tempo": 0.9650591446769792,
+      "word_accents": 56
+    },
+    "pl-PL": {
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "RICHAT_MOI061_Ba_Lan.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.8280258700338774,
+      "max_tempo": 0.943221110100091,
+      "word_accents": 33
+    },
+    "es-ES": {
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "RICHAT_MOI061_Tay_Ban_Nha.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.849461040960887,
+      "max_tempo": 0.9994540491355778,
+      "word_accents": 60
+    },
+    "da-DK": {
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "RICHAT_MOI061_Dan_Mach.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.8418848167539267,
+      "max_tempo": 0.9670609645131939,
+      "word_accents": 56
+    },
+    "en-US": {
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "RICHAT_MOI061_My_Tieng_Anh.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.6086082175925926,
+      "max_tempo": 1.6251744923857867,
+      "word_accents": 156
+    },
+    "vi-VN": {
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "RICHAT_MOI061_Viet_Nam_Nam_Minh.mp3",
+      "decoded_seconds": 1302.0,
+      "min_tempo": 0.9198644902987373,
+      "max_tempo": 0.9930397289805974,
+      "word_accents": 60
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-061",
+  "verified_at_utc": "2026-11-21T02:25:41.772417+00:00",
+  "target_seconds": 1302,
+  "voices": 16,
+  "all_decoded_frames_48000": 62496000,
+  "all_16_ids_retained": true,
+  "public_mp3_urls_checked": 16,
+  "zip_crc_and_public_github_sha_verified": true,
+  "english_script_words": 3930,
+  "prompt_txt_files": 14,
+  "unique_prompts": 140,
+  "timeline_shots": 134,
+  "outdoor_scenes": 140,
+  "laboratory_scenes": 0,
+  "backup_prompt_ids": [
+    135,
+    136,
+    137,
+    138,
+    139,
+    140
+  ],
+  "retention_qa_status": "passed",
+  "source_image_sha256": "cb50057f8272185c8ea904ad46f07ef5555f4669390ade1faa646e81de87fd0d",
+  "audio_zip_sha256": "ebd00a601d9380a24ec27cb1658a91f8391f4fb71f4c4ee47d28d7b6cf1f4c08",
+  "documents_zip_sha256": "0cac1f0d58400e05604c0dfe69c70c70ad85b5fd3e6d988b41614b606f8219c7",
+  "prompts_zip_sha256": "ec038c434a0f8b319a9c849b270252ab9031a27a2d04efb8bcf128f95fa8ced6",
+  "independent_native_listening_review": false,
+  "footage_generated": false,
+  "thumbnail_generated": false,
+  "video_edited": false,
+  "reports": [
+    {
+      "locale": "en-US",
+      "filename": "RICHAT_MOI061_My_Tieng_Anh.mp3",
+      "voice_id": "en-US-AndrewNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "5773714690bfe31e5856a723b022bb1f8329b129ceede7e9c54e544d0190872a",
+      "public_url_status": 200
+    },
+    {
+      "locale": "vi-VN",
+      "filename": "RICHAT_MOI061_Viet_Nam_Nam_Minh.mp3",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "898b3a0d933a356dba51db2ce31b4fbc72bfc51616cf9da1ceb6269c0c0be1d4",
+      "public_url_status": 200
+    },
+    {
+      "locale": "es-ES",
+      "filename": "RICHAT_MOI061_Tay_Ban_Nha.mp3",
+      "voice_id": "es-ES-AlvaroNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "aad9fbb6808bd24346d9d2377bd97498e53250447e6089aebceb2262c607b63b",
+      "public_url_status": 200
+    },
+    {
+      "locale": "fr-FR",
+      "filename": "RICHAT_MOI061_Phap.mp3",
+      "voice_id": "fr-FR-HenriNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "23a83033c767ac92252561221da3a4efb4729bbce0359d4b0ec943cc58174268",
+      "public_url_status": 200
+    },
+    {
+      "locale": "ja-JP",
+      "filename": "RICHAT_MOI061_Nhat_Ban.mp3",
+      "voice_id": "ja-JP-KeitaNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "4c148b35dde6f5d49f55bccce147778609c9ccde4882eae7042c236ead60bfe0",
+      "public_url_status": 200
+    },
+    {
+      "locale": "ko-KR",
+      "filename": "RICHAT_MOI061_Han_Quoc.mp3",
+      "voice_id": "ko-KR-InJoonNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "f17890d7c6df175b3819729cf4a6be3ae5d14e027b78da579da0e33d3a94c520",
+      "public_url_status": 200
+    },
+    {
+      "locale": "de-DE",
+      "filename": "RICHAT_MOI061_Duc.mp3",
+      "voice_id": "de-DE-ChristophNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "aad81a664ca18793f16dae522ec099a64d11a79fb3123dec15d78c6e234fddaf",
+      "public_url_status": 200
+    },
+    {
+      "locale": "it-IT",
+      "filename": "RICHAT_MOI061_Y.mp3",
+      "voice_id": "it-IT-DiegoNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "57126281aac830e2cbf17975562f57fd452254f674408510ff127f91fe5a85a0",
+      "public_url_status": 200
+    },
+    {
+      "locale": "pt-PT",
+      "filename": "RICHAT_MOI061_Bo_Dao_Nha.mp3",
+      "voice_id": "pt-PT-DuarteNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "93df463b2d8efb2bdde23982bce43cdd0020f1284fcd13d89a8d92b49b9237d3",
+      "public_url_status": 200
+    },
+    {
+      "locale": "nl-NL",
+      "filename": "RICHAT_MOI061_Ha_Lan.mp3",
+      "voice_id": "nl-NL-MaartenNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "1702b9f1e9904de65b2bfb36e1604d82ed21f3a8e8930251f66040a23d29fdb5",
+      "public_url_status": 200
+    },
+    {
+      "locale": "pl-PL",
+      "filename": "RICHAT_MOI061_Ba_Lan.mp3",
+      "voice_id": "pl-PL-MarekNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "d3266e0c82a71b7f018cb2949be659928e29451a1e38af420ca7d2debff3bcd0",
+      "public_url_status": 200
+    },
+    {
+      "locale": "sv-SE",
+      "filename": "RICHAT_MOI061_Thuy_Dien.mp3",
+      "voice_id": "sv-SE-MattiasNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "5add0cb94d46ac3bfa6602e0acd32557fdafe964beafd303dce986c7311d7870",
+      "public_url_status": 200
+    },
+    {
+      "locale": "da-DK",
+      "filename": "RICHAT_MOI061_Dan_Mach.mp3",
+      "voice_id": "da-DK-JeppeNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "dfea8ac3e453138bed5251cf394a7cf034368d561990197f0cae08ef79a47287",
+      "public_url_status": 200
+    },
+    {
+      "locale": "fi-FI",
+      "filename": "RICHAT_MOI061_Phan_Lan.mp3",
+      "voice_id": "fi-FI-HarriNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "2a50e26c817b80ce664c4d88170bfb6f3c8d3092bc3b505b038d1b9744499972",
+      "public_url_status": 200
+    },
+    {
+      "locale": "nb-NO",
+      "filename": "RICHAT_MOI061_Na_Uy.mp3",
+      "voice_id": "nb-NO-FinnNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "afe4d827e41ab17ea5848883c1af1e3868e501a58d9525cb19627e3f3b18f7ec",
+      "public_url_status": 200
+    },
+    {
+      "locale": "cs-CZ",
+      "filename": "RICHAT_MOI061_Sec.mp3",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "decoded_frames_48000": 62496000,
+      "seconds": 1302,
+      "sha256": "2808f40c5dcf414e78271019914569925732e12eaada2f824b7e011ff70cf355",
+      "public_url_status": 200
+    }
+  ]
+}
