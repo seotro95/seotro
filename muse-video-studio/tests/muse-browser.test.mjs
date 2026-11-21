@@ -354,7 +354,10 @@ test('owned browser bridge against local Muse-shaped pages (not live Muse)', asy
         await waitFor(() => state.pending.size === 10);
         assert.equal(state.peak, 10);
         assert.equal(driver.workers.size, 10);
-        await assert.rejects(driver.generateVideo(data, new AbortController().signal), /MUSE_CONCURRENCY_LIMIT/);
+        // Forty queued scenes are valid under the 400-scene capacity. Capacity
+        // rejection is covered by account-pool tests; do not enqueue a 41st
+        // request and await it while deliberately withholding every result.
+        assert.equal(driver.reserved,40);
       } finally { releaseAll(); state.hold = false; }
       const results = await Promise.all(tasks);
       assert.equal(new Set(results.map(result => result.base64)).size, 40);

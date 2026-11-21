@@ -12,6 +12,7 @@ import{readPageAttachment}from'./muse-attachment.mjs';
 import{ChatBatches}from'./chat-batches.mjs';
 import{inspectBatchDOM}from'./muse-batch-dom.mjs';
 import{findSavedBatch}from'./muse-batch-history.mjs';
+import{OwnedDrafts,legacyToolDraft,batchMessageHeader,videoGenerationPrompt,imageGenerationPrompt}from'./muse-drafts.mjs';
 
 // Public UI selectors observed in community Muse clients, not an official SDK.
 // Muse retains a prehydration textarea before its hydrated rich editor. It may
@@ -47,7 +48,7 @@ const pause = (ms, signal) => new Promise((resolve, reject) => {
 
 export class MuseBrowser {
   constructor({ profileRoot, accountProfile, serviceURL = 'https://muse.ai/', launchOptions, sessionFactory, onVerified, timeoutMs = RENDER_TIMEOUT_MS, pollMs = 500, quietMs = 1500, composerTimeoutMs = 45000, submitTimeoutMs = 15000, replyQuietMs = 1500, maxConcurrency = 1 } = {}) {
-    this.nativeFileQueue=new MediaQueue(1);
+    this.nativeFileQueue=new MediaQueue(1);this.ownedDrafts=new OwnedDrafts();
     this.profileRoot = profileRoot;
     this.serviceURL = serviceURL;
     this.launchOptions = launchOptions;
@@ -272,7 +273,8 @@ export class MuseBrowser {
   async activateComposerPlaceholder(page, timeout) {
     const placeholder = await this.initialComposer(page);
     if (!placeholder) return false;
-    if ((await placeholder.inputValue()).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Ô Message ban đầu đang có bản nháp. Tool giữ nguyên nội dung và chưa gửi prompt.', 409);
+    const recovered=await this.emptyOwnedComposer(placeholder);
+    if(recovered.cleared&&await this.findComposer(page))return true;
     try {
       await placeholder.focus({ timeout: Math.min(1500, timeout) });
       if (await placeholder.isVisible() && !await placeholder.evaluate(el => el === el.ownerDocument.activeElement)) await placeholder.click({ timeout: Math.min(1500, timeout) });
@@ -305,7 +307,7 @@ export class MuseBrowser {
     try{
       do{
         signal.throwIfAborted();
-        if(await this.findComposer(page)||await this.initialComposer(page)){Object.assign(account,{composerReady:true,state:'ready'});return {ready:true};}
+        const readyEditor=await this.findComposer(page)||await this.initialComposer(page);if(readyEditor){await this.emptyOwnedComposer(readyEditor);Object.assign(account,{composerReady:true,state:'ready'});return {ready:true};}
         let draft=false;for(const frame of await this.composerFrames(page))if(await frame.evaluate(()=>[...document.querySelectorAll('textarea,[contenteditable="true"],[contenteditable="plaintext-only"]')].some(node=>!node.closest('[data-message-item]')&&String(node.value||node.innerText||'').trim())).catch(()=>true)){draft=true;break;}
         if(!draft&&!opened){
           const entry=await this.newChatControl(page);
@@ -328,7 +330,10 @@ export class MuseBrowser {
   workerURL() {
     // Use the user's verified app route, rather than sending every worker back
     // to a marketing/landing page. OAuth query parameters are never copied.
-    return this.conversationURL(this.active.page)||this.serviceURL;
+    const verified=this.conversationURL(this.active.page);if(!verified)return this.serviceURL;
+    const target=new URL(verified);target.search='';
+    if(!/^#\/(?:app|studio|workspace|chats?)(?:\/|$)/i.test(target.hash))target.hash='';
+    return target.href;
   }
   async createWorkerPage(){
     const owned=this.active;
@@ -448,6 +453,7 @@ export class MuseBrowser {
   }
   async prepareConversation(page, { reuse = false } = {}) {
     const editor = await this.waitForComposer(page, { openConversation: true });
+    await this.emptyOwnedComposer(editor);
     const frame=this.composerOwners.get(editor);
     if(!frame)throw fail('MUSE_COMPOSER_NOT_READY','Chưa xác định được khung chứa ô Message. Chưa gửi prompt.',409);
     const users = frame.locator(`${MESSAGES}[data-message-role="user"]`);
@@ -567,7 +573,11 @@ export class MuseBrowser {
         this.pendingCaptions.delete(conversationKey);
       }
       progress.phase='waiting-editor';
-      const conversation = await this.prepareConversation(page, { reuse: Boolean(lease) || singleLane });
+      // Readiness may activate a retained placeholder. Serialize it with the
+      // writer so another card cannot clear text while its batch is composing.
+      const prepareRelease=sharedConversation?await this.acquireComposer(signal):null;
+      let conversation;
+      try{conversation=await this.prepareConversation(page,{reuse:Boolean(lease)||singleLane})}finally{prepareRelease?.();}
       signal.throwIfAborted();
       if (!sharedConversation&&await conversation.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
       if (checkOnly) return { ready: true, message: 'Đã mở được ô Message trong trang luồng riêng. Chưa gửi prompt hoặc yêu cầu tạo nội dung.', details: await this.composerDiagnostics(page) };
@@ -601,31 +611,56 @@ export class MuseBrowser {
   async editorText(editor) {
     return comparableText(await editor.evaluate(el => el.tagName === 'TEXTAREA' ? el.value : el.innerText || el.textContent || ''));
   }
+  async emptyOwnedComposer(editor){
+    const result=await this.ownedDrafts.clear(editor);
+    if(!result.ok)throw fail(result.reason==='uncertain'?'MUSE_DRAFT_UNCERTAIN':'MUSE_DRAFT_EXISTS',result.reason==='uncertain'?'Lượt trước đã thử gửi nhưng chưa xác nhận được. Tool không tự gửi lại; kiểm tra Muse và dùng Nhận lại từ Muse.':'Ô Message còn nội dung chưa xác minh được. Tool giữ nguyên; nếu là prompt từ bản cũ, dùng Dọn bản nháp tool ở đúng ô.',409);
+    return result;
+  }
   async writeMessage(page, message, signal) {
-    let editor = await this.findComposer(page) || await this.initialComposer(page) || await this.waitForComposer(page);
-    if ((await this.editorText(editor)).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Ô Message đang có bản nháp. Tool chưa ghi đè hoặc gửi prompt.', 409);
-    let ownedText = '';
-    const prefix = Array.from(message)[0];
-    const expectedText = comparableText(message);
-    if (await editor.getAttribute('data-hatch-composer-prehydration-input') === 'true') {
-      // Enter the first character through the input element. It may replace the
-      // textarea and transfer only this prefix into a hydrated editor.
-      await editor.fill(prefix);
-      ownedText = comparableText(prefix);
-      await pause(100, signal);
-    }
-    for (let attempt = 0; attempt < 3; attempt++) {
+    let editor=await this.findComposer(page)||await this.initialComposer(page)||await this.waitForComposer(page);
+    await this.emptyOwnedComposer(editor);
+    const token=this.ownedDrafts.token(),prefix=Array.from(message)[0],expectedText=comparableText(message);let ownedText='';
+    const claim=async target=>{const value=await this.ownedDrafts.claim(target,token,message,prefix);if(!value.ok)throw fail('MUSE_DRAFT_CHANGED','Nội dung ô Message đã được chỉnh sửa trong lúc nhập. Tool giữ nguyên và chưa gửi.',409)};
+    try{
       signal.throwIfAborted();
-      editor = await this.findComposer(page) || await this.initialComposer(page) || await this.waitForComposer(page);
-      const text = await this.editorText(editor);
-      if (text && text !== ownedText && text !== expectedText && text !== comparableText(prefix)) throw fail('MUSE_DRAFT_CHANGED', 'Nội dung ô Message đã thay đổi trong lúc nhập. Chưa nhấn gửi để tránh ghi đè bản nháp.', 409);
-      if (text !== expectedText) await editor.fill(message);
-      ownedText = expectedText;
-      await pause(100, signal);
-      const current = await this.findComposer(page) || await this.initialComposer(page) || await this.waitForComposer(page);
-      if (await this.editorText(current) === expectedText) return current;
-    }
-    throw fail('MUSE_EDITOR_CHANGED', 'Muse đổi ô nhập nhưng chưa giữ đủ prompt. Chưa nhấn gửi. Kiểm tra cuộc trò chuyện rồi thử lại.', 409);
+      if(await editor.getAttribute('data-hatch-composer-prehydration-input')==='true'){
+        await claim(editor);await editor.fill(prefix);await this.ownedDrafts.markFrame(page,'ready',token);ownedText=comparableText(prefix);await pause(100,signal);
+      }
+      for(let attempt=0;attempt<3;attempt++){
+        signal.throwIfAborted();editor=await this.findComposer(page)||await this.initialComposer(page)||await this.waitForComposer(page);
+        const text=await this.editorText(editor);
+        if(text&&text!==ownedText&&text!==expectedText&&text!==comparableText(prefix))throw fail('MUSE_DRAFT_CHANGED','Nội dung ô Message đã thay đổi trong lúc nhập. Chưa nhấn gửi để tránh ghi đè bản nháp.',409);
+        await claim(editor);if(text!==expectedText)await editor.fill(message);await this.ownedDrafts.markFrame(page,'ready',token);ownedText=expectedText;await pause(100,signal);
+        const current=await this.findComposer(page)||await this.initialComposer(page)||await this.waitForComposer(page);
+        if(await this.editorText(current)===expectedText){await claim(current);return current;}
+      }
+      throw fail('MUSE_EDITOR_CHANGED','Muse đổi ô nhập nhưng chưa giữ đủ prompt. Chưa nhấn gửi. Kiểm tra cuộc trò chuyện rồi thử lại.',409);
+    }finally{await this.ownedDrafts.markFrame(page,'ready',token).catch(()=>{});}
+  }
+  async clearToolDraft(data,signal){
+    signal.throwIfAborted();await this.open(1);await this.refreshActive({includeDetails:false});
+    if(!this.account(1).authenticated)throw fail('MUSE_LOGIN_REQUIRED','Đăng nhập đúng tài khoản Muse trước khi dọn bản nháp.',401);
+    const release=await this.acquireComposer(signal);
+    try{
+      const page=this.active.page,editor=await this.findComposer(page)||await this.initialComposer(page);
+      if(!editor)throw fail('MUSE_COMPOSER_NOT_READY','Chưa tìm thấy ô Message. Mở đúng cuộc trò chuyện rồi dọn bản nháp.',409);
+      const frame=this.composerOwners.get(editor)||page;
+      const values=await editor.evaluate(node=>node.tagName==='TEXTAREA'?[{text:node.value,source:'value'}]:[{text:node.innerText||'',source:'innerText'},{text:node.textContent||'',source:'textContent'}]);
+      if(values.every(value=>!value.text.trim())){Object.assign(this.account(1),{composerReady:true,state:'ready',connectionMessage:''});return {cleared:false,acknowledged:false,message:'Ô Message đã trống. Bạn có thể thử lại cảnh này.'};}
+      let matched;
+      for(const value of values){
+        const info=legacyToolDraft(value.text,data.prompt,data.output,{allowPrevious:true});if(!info)continue;
+        const proof=await frame.evaluate(({marker,text})=>{const layout=value=>String(value||'').replace(/\r\n?/g,'\n').replace(/\u00a0/g,' ').replace(/\n+/g,'\n').trim();const rows=[...document.querySelectorAll('[data-message-item][data-message-role="user"]')];return{marker:rows.some(node=>node.textContent.includes(marker)),complete:rows.some(node=>layout(node.textContent).includes(layout(text))||layout(node.innerText).includes(layout(text)))}},{marker:info.marker,text:value.text});
+        if(info.matchesScene||proof.complete){matched={...value,info,proof};break;}
+      }
+      if(!matched)throw fail('MUSE_DRAFT_NOT_OWNED','Nội dung không khớp đầy đủ prompt và dấu theo dõi của tool, hoặc chưa xác nhận được nguyên vẹn lượt cũ. Tool giữ nguyên bản nháp; kiểm tra trực tiếp ô Message.',409);
+      const {text,source,info,proof}=matched;
+      const acknowledged=Boolean(info.matchesScene&&proof.marker),previousAcknowledged=Boolean(!info.matchesScene&&proof.complete);
+      signal.throwIfAborted();const result=await this.ownedDrafts.clearLegacy(editor,text,source);
+      if(!result.ok)throw fail('MUSE_DRAFT_CHANGED','Bản nháp đã thay đổi hoặc còn ảnh đính kèm. Tool giữ nguyên và chưa gửi prompt.',409);
+      Object.assign(this.account(1),{composerReady:true,state:'ready',connectionMessage:''});
+      return {cleared:true,acknowledged,previousAcknowledged,message:previousAcknowledged?'Đã dọn prompt của lượt cũ đã được Muse nhận. Cảnh hiện tại chưa được gửi; bấm Tạo lại cảnh khi muốn tạo lượt mới.':acknowledged?'Đã dọn phần prompt còn lại; Muse đã nhận lượt cũ. Dùng Nhận lại từ Muse để lấy kết quả, không cần tạo lại.':'Đã dọn bản nháp tool. Prompt trong ô Studio vẫn giữ; bấm Tạo lại cảnh khi muốn gửi yêu cầu mới.'};
+    }finally{release();}
   }
   async sendSharedBatch(input,group){
     let rows=input.filter(row=>!row.done);let release;let sent=false;let overlapped=false;const downloads=new Set(),attempts=new Map(),unsupportedSince=new Map(),failedSources=new Map(),candidatesFor=new Map(),bindings={};
@@ -638,19 +673,20 @@ export class MuseBrowser {
       const page=rows[0].page,output=rows[0].output;const marker=`studio-batch-${randomUUID()}`;
       const budget=Math.min(...rows.map(row=>row.createdAt+this.timeoutMs));const snapshot=await page.evaluate(inspectBatchDOM,{captureOnly:true,output});const baseline=snapshot.keys;
       let editor=await this.findComposer(page)||await this.initialComposer(page)||await this.waitForComposer(page);
-      if((await this.editorText(editor)).trim())throw fail('MUSE_DRAFT_EXISTS','Muse đang có bản nháp. Chưa gửi lượt gộp.',409);
+      await this.emptyOwnedComposer(editor);
       if(await editor.locator('xpath=ancestor::*[@data-hatch-composer-root or self::form][1]').locator('img[src^="blob:"]:not([data-message-item] *)').count())throw fail('MUSE_DRAFT_EXISTS','Muse đang có ảnh trong bản nháp. Tool chưa gửi lượt gộp.',409);
       rows.forEach((row,index)=>row.label=`CLIP_${String(row.sceneId||index+1).padStart(3,'0')}_${marker.slice('studio-batch-'.length, 'studio-batch-'.length+8)}`);
       const prefixes=rows.map(row=>{const at=row.prompt.indexOf('\nScene:\n');return at<0?null:{head:row.prompt.slice(0,at),scene:row.prompt.slice(at+8)}});
       const common=prefixes.every(value=>value&&value.head===prefixes[0]?.head)?prefixes[0].head:'';
       rows.forEach((row,index)=>{row.sourceClip=Number((prefixes[index]?.scene||row.prompt).trim().match(/^CLIP[ _-]*(\d{1,4})\b/i)?.[1])||undefined});
       const tasks=rows.map((row,index)=>`[BEGIN_CLIP ${row.label} ${row.fileToken}]\n${common?prefixes[index].scene:row.prompt}\n[END_CLIP ${row.fileToken}]`).join('\n\n');
-      const message=`[${marker}]\nCreate ${rows.length} independent ${output==='video'?'video':'image'} file${rows.length===1?'':'s'} now in this ONE request. Each task below is a separate output; use the available generation tool for every task. ${output==='video'?'Keep the requested duration for EACH video; do not stitch the tasks into one long film.':''} Do not just write a plan or ask whether to start.\nFor each result, put its CLIP label in the same list item or heading as its native attachment or real download link. Preserve the real working URL; never invent file paths or rename files just for tracking. If a task cannot be generated, give its label and concrete reason.\n\n${common?'Apply these instructions to EACH task:\n'+common+'\n\n':''}${tasks}`;
+      const message=batchMessageHeader({marker,count:rows.length,output,common})+tasks;
       const maxLength=Number(await editor.getAttribute('maxlength'));if(maxLength>0&&message.length>maxLength)throw fail('MUSE_BATCH_TOO_LONG','Yêu cầu gộp vượt độ dài Muse cho phép. Chưa gửi prompt; chuyển sang từng ô và giữ đủ nội dung.',409);
       if(rows[0].image)await this.attach(page,rows[0].image);
       editor=await this.writeMessage(page,message,group.control.signal);group.control.signal.throwIfAborted();
+      const ownedSubmission=await this.ownedDrafts.enter(editor);if(!ownedSubmission.ok)throw fail('MUSE_DRAFT_CHANGED','Ô Message đã thay đổi trước khi gửi. Chưa gửi lượt gộp.',409);
       for(const row of rows){row.onSubmit();this.sharedSignals.set(row.fileToken,row.signal)}sent=true;
-      await editor.press('Enter');
+      try{await editor.press('Enter')}finally{await this.ownedDrafts.markFrame(page,'possible',ownedSubmission.token).catch(()=>{})}
       let acknowledged=false,lastSignature='',stableSince=Date.now();const ackDeadline=Date.now()+Math.min(this.submitTimeoutMs,this.timeoutMs);
       while(Date.now()<budget&&!group.cancelled){
         if(this.sharedSignals.size>rows.length)overlapped=true;
@@ -660,7 +696,7 @@ export class MuseBrowser {
           await this.sharedStopPromise;for(const row of rows)if(!row.done)row.reject(row.signal.reason||fail('ABORTED','Đã dừng lượt tạo.'));return;
         }
         const state=await page.evaluate(inspectBatchDOM,{marker,rows:rows.map(row=>({fileToken:row.fileToken,label:row.label,sourceClip:row.sourceClip})),baseline,baselineTexts:snapshot.texts,acknowledged,bindings,output,allowScopedLabels:!overlapped,allowSingle:!overlapped&&rows.length===1&&this.sharedSignals.size===1});
-        if(state.anchored&&!acknowledged){acknowledged=true;for(const row of rows)if(!row.done)row.onStage('submitted')}
+        if(state.anchored&&!acknowledged){acknowledged=true;await this.ownedDrafts.markFrame(page,'acknowledged',ownedSubmission.token);for(const row of rows)if(!row.done)row.onStage('submitted')}
         if(!acknowledged&&Date.now()>=ackDeadline)throw fail('MUSE_SUBMIT_NOT_ACKNOWLEDGED','Muse chưa xác nhận đã nhận yêu cầu gộp. Tool không tự gửi trùng.',504);
         const signature=JSON.stringify([state.text,state.media.map(item=>item.key)]);if(signature!==lastSignature){lastSignature=signature;stableSince=Date.now()}
         const unique=new Set(state.media.filter(item=>!item.uncertain).map(item=>item.owner||item.key)).size;
@@ -735,7 +771,7 @@ export class MuseBrowser {
     try{
     if(sharedConversation&&this.parallelStrategy!=='shared-conversation')throw fail('MUSE_PARALLEL_UNVERIFIED','Đã chuyển về tuần tự trước khi gửi ô này.',409);
     let editor = await this.findComposer(page) || await this.initialComposer(page) || await this.waitForComposer(page);
-    if ((await editor.innerText().catch(() => '')).trim() || (await editor.inputValue().catch(() => '')).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có nội dung chưa gửi. Gửi hoặc xóa bản nháp đó trước; tool không ghi đè.', 409);
+    await this.emptyOwnedComposer(editor);
     if (await editor.locator('xpath=ancestor::*[@data-hatch-composer-root or self::form][1]').locator('img[src^="blob:"]:not([data-message-item] *)').count()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có ảnh chưa gửi. Xử lý bản nháp đó trước; tool không gửi kèm ảnh cũ.', 409);
     if (image) await this.attach(page, image);
     signal.throwIfAborted();
@@ -748,6 +784,7 @@ export class MuseBrowser {
     editor = await this.writeMessage(page, message, signal);
     signal.throwIfAborted();
     if(beforeSubmit){onStage('waiting-cohort');await beforeSubmit();signal.throwIfAborted();}
+    const ownedSubmission=await this.ownedDrafts.enter(editor);if(!ownedSubmission.ok)throw fail('MUSE_DRAFT_CHANGED','Ô Message đã thay đổi trước khi gửi. Chưa gửi prompt.',409);
     onSubmit();
     this.inFlightMarkers.add(marker);if(sharedConversation)this.sharedSignals.set(marker,signal);
     const deadline = Date.now() + this.timeoutMs;
@@ -756,7 +793,7 @@ export class MuseBrowser {
     let stableSince = Date.now();
     let acknowledged = false;
     try {
-      await editor.press('Enter');
+      try{await editor.press('Enter')}finally{await this.ownedDrafts.markFrame(page,'possible',ownedSubmission.token).catch(()=>{})}
       while (Date.now() < deadline) {
         await pause(this.pollMs, signal);
         if (this.unsafeMarkers.has(marker)) throw fail('MUSE_SHARED_CONVERSATION', 'Các luồng Muse đang dùng chung hội thoại. Đã dừng nhận kết quả để tránh ghép nhầm; không tự gửi lại.', 409);
@@ -802,7 +839,7 @@ export class MuseBrowser {
           throw fail('MUSE_SHARED_CONVERSATION', 'Một hội thoại nhận nhiều yêu cầu xen kẽ. Tool dừng để tránh lấy nhầm ảnh; hãy chuẩn bị lại các ô trước khi chạy tiếp. Không tự gửi lại.', 409);
         }
         if(result.error){const capacity=/concurren|at (?:the same|a) time|already (?:generating|processing)|too many (?:active|parallel|simultaneous)|tác vụ.{0,40}đồng thời/i.test(result.error);const error=fail(capacity?'MUSE_PARALLEL_LIMIT':'MUSE_GENERATION_ERROR',result.error);if(capacity)error.safeSerialRetry=true;throw error;}
-        if ((result.anchored||(sharedConversation&&result.namedMedia)) && !acknowledged) { acknowledged = true; onStage('submitted');releaseComposer?.();releaseComposer=null; }
+        if ((result.anchored||(sharedConversation&&result.namedMedia)) && !acknowledged) { acknowledged = true; await this.ownedDrafts.markFrame(page,'acknowledged',ownedSubmission.token);onStage('submitted');releaseComposer?.();releaseComposer=null; }
         if (!result.anchored && !acknowledged && Date.now() >= acknowledgementDeadline) throw fail('MUSE_SUBMIT_NOT_ACKNOWLEDGED', 'Muse chưa xác nhận đã nhận prompt sau thao tác gửi. Tool không tự gửi lại. Mở cuộc trò chuyện kiểm tra trước khi thử lại để tránh tạo trùng.', 504);
         onObservation({checkedAt:new Date().toISOString(),messageAcknowledged:acknowledged,assistantReplies:result.replyCount,visibleVideos:result.videos.length,visibleImages:result.images.length,matchedMedia:sharedConversation?Boolean(result.namedMedia):output==='video'?result.videos.length>0:output==='image'?result.images.length>0:false,streaming:result.streaming,replyScope:result.ownedText?'scene':'conversation',reply:replyPreview(result.ownedText||result.contextText)});
         if(acknowledged&&result.contextText&&!result.namedMedia)onStage('reply-received');
@@ -930,15 +967,11 @@ export class MuseBrowser {
           }finally{signal.removeEventListener('abort',abortDownload);void page.evaluate(key=>{delete globalThis[key]},downloadKey).catch(()=>{})}
   }
   async generateVideo(data, signal) {
-    const referenceInstruction = data.sourceMode === 'image' ? 'Animate the attached image as the starting frame.' : data.referenceImage ? 'Use the attached image as a character reference, not as an unrelated example.' : 'Create the video from the text prompt.';
-    const prompt = `Use your video-generation tool to create exactly one new video, not a link to an existing example. Requested model: ${data.modelDisplayName}. Requested duration: ${data.durationSeconds} seconds, aspect ratio: ${data.aspectRatio}, resolution: ${data.resolution}. Start the available video-generation tool now. These are target settings: if an exact model name or parameter is unavailable, use supported generation settings and report the actual settings instead of stopping at a text-only explanation. Do not invent model options, return only a written plan, or ask for confirmation to start this requested generation. If no video generation is available, state the concrete reason. ${referenceInstruction} ${data.characterLock !== false ? 'Preserve the referenced character identity and appearance across scenes.' : 'Follow this scene prompt independently; character consistency is not requested.'}\nScene:\n${data.prompt}`;
+    const prompt=videoGenerationPrompt(data);
     return this.turn({ accountId: data.accountId, prompt, image: data.referenceImage, video: true, signal, batchId: data.batchId, sceneId: data.sceneId, submissionGroup:data.submissionGroup, singleLane: data.singleLane });
   }
   async generateImage(data, signal) {
-    const longEdge = data.resolution === '4k' ? 3840 : 2560;
-    const dimensions = data.aspectRatio === '9:16' ? `${Math.round(longEdge * 9 / 16)}x${longEdge}` : `${longEdge}x${Math.round(longEdge * 9 / 16)}`;
-    const useReference = data.characterLock !== false && data.referenceImage;
-    const prompt = `Use your image-generation tool to create exactly one new image for this scene. Requested native output: ${data.resolution.toUpperCase()} (${dimensions} pixels), aspect ratio ${data.aspectRatio}. Return the generated image, not a stock image or an old response. Do not claim a higher resolution than the image actually has. ${useReference ? 'Use the attached portrait as a character reference; preserve identity, face and appearance consistently.' : data.characterLock !== false ? 'Follow the character description in this prompt. No portrait is attached; cross-scene identity is not guaranteed without a reference.' : 'Follow this prompt independently. Do not reuse characters or appearance from earlier scenes unless the prompt explicitly requests them.'}\nScene:\n${data.prompt}`;
+    const useReference=data.characterLock!==false&&data.referenceImage;const prompt=imageGenerationPrompt(data);
     return this.turn({ accountId: data.accountId, prompt, image: useReference || undefined, output: 'image', signal, batchId: data.batchId, sceneId: data.sceneId, submissionGroup:data.submissionGroup, singleLane: data.singleLane });
   }
   async generateText(data, signal) { return this.turn({ accountId: data.accountId, prompt: data.prompt, video: false, signal, batchId: data.batchId, sceneId: data.sceneId, submissionGroup:data.submissionGroup, singleLane: data.singleLane }); }

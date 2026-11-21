@@ -1,0 +1,34 @@
+import{test}from'node:test';import assert from'node:assert/strict';import{createRequire}from'node:module';import{readFile,mkdtemp,rm}from'node:fs/promises';import{fileURLToPath}from'node:url';import path from'node:path';import os from'node:os';import{_electron}from'playwright-core';import{createMuseFixture}from'./fixtures/muse.mjs';
+import{legacyToolDraft}from'../muse-drafts.mjs';
+const require=createRequire(import.meta.url),root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const image=await readFile(path.join(root,'public/demo-image.png')),clip=await readFile(path.join(root,'public/demo.mp4'));
+async function until(fn){const end=Date.now()+30000;while(!await fn()){if(Date.now()>end)throw Error('Native draft recovery state timed out');await new Promise(resolve=>setTimeout(resolve,30))}}
+test('Three native accounts each complete three six-video waves despite retained prompts; scene 58 account 2 legacy cleanup never sends Enter',{timeout:150000},async()=>{
+ const profile=await mkdtemp(path.join(os.tmpdir(),'muse-native-drafts-')),fixture=createMuseFixture({image,clip});
+ Object.assign(fixture.state,{newChat:false,behavior:'video',hold:true,uniqueVideos:true,lazyVideo:true,videoSourceToken:true,prehydrationInput:true,richComposer:true,initialMode:'input',resetComposerAfterTurn:true,stalePrehydration:'full',retainDraftAfterSubmit:true,labelReplies:true});
+ await new Promise(resolve=>fixture.server.listen(0,'127.0.0.1',resolve));const service=`http://127.0.0.1:${fixture.server.address().port}/`;let desktop,studio;const pages=new Map();
+ const post=(endpoint,data)=>studio.evaluate(async({endpoint,data})=>{const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});return{ok:response.ok,body:await response.json()}},{endpoint,data});
+ try{
+  const portable=process.env.MUSE_PORTABLE_EXECUTABLE;desktop=await _electron.launch({executablePath:portable||require('electron'),args:[...(process.env.MUSE_ELECTRON_HEADLESS==='1'?['--ozone-platform=headless','--disable-gpu']:[]),...(process.env.MUSE_ELECTRON_TEST_NO_SANDBOX==='1'?['--no-sandbox']:[]),...(portable?[]:[path.join(root,'desktop/main.mjs')])],env:{...process.env,MUSE_DESKTOP_TEST:'1',MUSE_FIXTURE_URL:service,MUSE_DESKTOP_DATA:profile,MUSE_TRANSPORT:'browser',PORT:'0'},timeout:30000});await desktop.firstWindow();
+  await until(()=>{studio=desktop.context().pages().find(page=>page.url().startsWith('http://127.0.0.1:')&&!page.url().startsWith(service));return studio});
+  await desktop.evaluate(async({session},url)=>{for(const id of[1,2,3]){const partition=id===1?'persist:muse':`persist:muse-${String(id).padStart(2,'0')}`;for(const[name,value]of[['fixture_session','connected'],['fixture_identity',String(id)]])await session.fromPartition(partition).cookies.set({url,name,value});}},service);
+  for(const id of[1,2,3]){
+   const connected=await post('/api/account/connect',{accountId:id});assert.equal(connected.ok,true,JSON.stringify(connected));
+   for(const page of desktop.context().pages())if(page.url().startsWith(service)&&await page.evaluate(()=>document.cookie).then(text=>new RegExp('fixture_identity='+id+'(?:;|$)').test(text)))pages.set(id,page);
+   assert.ok(pages.has(id));const prepared=await post('/api/account/prepare',{accountId:id,concurrency:6});assert.equal(prepared.ok,true,JSON.stringify(prepared));assert.equal(prepared.body.executionConcurrency,6);
+  }
+  let target;
+  for(const wave of[0,1,2]){
+   const batchId=crypto.randomUUID(),requests=[1,2,3].flatMap(accountId=>{const group={id:crypto.randomUUID(),size:6};return Array.from({length:6},(_,i)=>{const sceneId=(accountId===2?58:accountId===3?100:1)+i;return{accountId,accountMode:'single',batchId,sceneId,submissionGroup:group,model:'Omni 1.1 Flash',duration:10,resolution:'1080p',aspectRatio:'16:9',characterLock:false,prompt:`CLIP ${String(sceneId+wave*6).padStart(3,'0')} — 10 seconds. MAIN TIMELINE SCENE ${sceneId+wave*6}. Wave ${wave+1}, account ${accountId}.\nVISUAL: A distinct conceptual landscape teaching model.\nAUDIO: Video không có âm thanh, không có lời nói.\nEXCLUSIONS: Không có hình trẻ em.`}})});
+   target=requests.find(row=>row.accountId===2&&row.sceneId===58);
+   const results=studio.evaluate(async requests=>Promise.all(requests.map(async data=>({data,...await window.museTransport.request(crypto.randomUUID(),'/api/video',data)}))),requests).then(value=>({value}),error=>({error}));
+   await until(()=>fixture.state.pending.size===18);assert.equal(fixture.state.chatMessages.length,(wave+1)*3);assert.equal(fixture.state.submitted.length,(wave+1)*18);fixture.releaseAll();
+   const delivered=await results;if(delivered.error)throw delivered.error;for(const result of delivered.value){assert.equal(result.ok,true,JSON.stringify(result.body));const original=fixture.state.submitted.find(row=>row.prompt.includes(result.data.prompt));assert.equal(original.identity,String(result.data.accountId));const bytes=Buffer.from(result.body.base64,'base64');assert.equal(bytes.readUInt32BE(bytes.length-4),original.id);}
+  }
+  assert.equal(fixture.state.submitted.length,54);assert.deepEqual(fixture.state.submitted.reduce((counts,row)=>({...counts,[row.identity]:(counts[row.identity]||0)+1}),{}),{'1':18,'2':18,'3':18});
+  const page=pages.get(2),editor=page.locator('[data-hatch-composer-prehydration-input]'),legacy=fixture.state.chatMessages.find(row=>row.prompt.includes(target.prompt)).prompt;
+  assert.ok(legacyToolDraft(legacy,target.prompt,'video'),'Retained contenteditable batch must preserve a complete canonical tool envelope');await editor.fill(legacy);const before=fixture.state.submitted.length;const cleaned=await post('/api/account/clear-tool-draft',{accountId:2,prompt:target.prompt,output:'video'});
+  assert.equal(cleaned.ok,true,JSON.stringify(cleaned));assert.equal(cleaned.body.cleared,true);assert.equal(cleaned.body.acknowledged,true);assert.equal(await editor.inputValue(),'');assert.equal(fixture.state.submitted.length,before);assert.equal(fixture.state.chatMessages.length,9);
+  const actualEditor=page.locator('[data-hatch-composer-root] textarea:visible,[data-hatch-composer-root] [contenteditable="true"]:visible');await actualEditor.fill('My actual personal draft, keep this exactly.');const refused=await post('/api/account/clear-tool-draft',{accountId:2,prompt:target.prompt,output:'video'});assert.equal(refused.ok,false);assert.match(refused.body.error,/MUSE_DRAFT_NOT_OWNED/);assert.equal(await actualEditor.evaluate(node=>node.value||node.innerText),'My actual personal draft, keep this exactly.');assert.equal(fixture.state.submitted.length,54);
+ }finally{fixture.releaseAll();await desktop?.close();fixture.server.closeAllConnections();await new Promise(resolve=>fixture.server.close(resolve));await rm(profile,{recursive:true,force:true})}
+});

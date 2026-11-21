@@ -1,6 +1,8 @@
-# Muse AI Studio 1.13.13
+# Muse AI Studio 1.13.14
 
-Ứng dụng Windows tạo ảnh/video qua các tài khoản Muse riêng, nhập TXT/SRT và lưu kết quả trên máy. Xem [cách dùng bản mới](CAP-NHAT-1.13.13.md).
+Ứng dụng Windows tạo ảnh/video qua các tài khoản Muse riêng, nhập TXT/SRT và lưu kết quả trên máy. Xem [cách dùng bản mới](CAP-NHAT-1.13.14.md).
+
+Khi gặp MUSE_DRAFT_EXISTS từ bản cũ, nút **Dọn bản nháp tool** chỉ đối chiếu và dọn prompt nội bộ khớp đúng cảnh/tài khoản; không tự gửi lại. Bản mới tự nhận biết nội dung do tool nhập trong cùng trang và giữ bản nháp người dùng.
 
 Trong thanh **Đồng bộ thao tác**, nút **Xoá tất cả video đã tạo** xoá mọi bản video trong thư viện tool sau xác nhận; giữ ảnh, prompt, tên tệp và tệp đã tải ra máy.
 

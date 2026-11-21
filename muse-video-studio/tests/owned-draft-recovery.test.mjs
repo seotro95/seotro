@@ -19,11 +19,11 @@ async function setup(flags,driverOptions={}){
 const request=(sceneId,sourceClip,batchId,submissionGroup)=>({accountId:1,sceneId,batchId,submissionGroup,prompt:`CLIP ${String(sourceClip).padStart(3,'0')} — 10 seconds. MAIN TIMELINE SCENE ${String(sourceClip).padStart(3,'0')}.\nVISUAL: Distinct conceptual terrain model ${sourceClip}, no lettering.\nAUDIO: Video không có âm thanh, không có lời nói.\nEXCLUSIONS: Không có hình trẻ em.`,modelDisplayName:'Omni 1.1 Flash',durationSeconds:10,resolution:'1080p',aspectRatio:'16:9'});
 async function draftSnapshot(page){return page.evaluate(()=>({fields:[...document.querySelectorAll('textarea,[contenteditable="true"]')].map(node=>({id:node.id,text:node.tagName==='TEXTAREA'?node.value:node.innerText,display:node.style.display})),files:[...document.querySelector('input[type=file]').files].map(file=>({name:file.name,size:file.size,type:file.type})),attachments:[...document.querySelectorAll('#attachments img')].map(node=>node.src),userTurns:document.querySelectorAll('[data-message-role="user"]').length}))}
 
-for(const stale of ['prefix','full'])test(`Two six-video waves reuse the same hydrated conversation when a ${stale} tool draft returns in its placeholder`,{timeout:35000},async()=>{
+for(const stale of ['prefix','full'])test(`Three six-video waves reuse the same hydrated conversation when a ${stale} tool draft returns in its placeholder`,{timeout:50000},async()=>{
  const s=await setup({resetComposerAfterTurn:true,stalePrehydration:stale,retainDraftAfterSubmit:stale==='full',sourceClipLabels:true,omitAttribution:true,separateCaptions:true,labelOnly:true,lazyVideo:true});
  try{
   await s.pool.prepareSingle(s.control.signal,6,1);const before=s.loads(),batchId=crypto.randomUUID();
-  for(const wave of [0,1]){
+  for(const wave of [0,1,2]){
    const group={id:crypto.randomUUID(),size:6},tasks=Array.from({length:6},(_,index)=>request(index+1,56+wave*6+index,batchId,group));
    const results=await Promise.allSettled(tasks.map(data=>s.pool.generateVideo(data,s.control.signal)));
    for(let index=0;index<6;index++){
@@ -32,9 +32,10 @@ for(const stale of ['prefix','full'])test(`Two six-video waves reuse the same hy
     const bytes=Buffer.from(results[index].value.base64,'base64');assert.equal(bytes.readUInt32BE(bytes.length-4),original.id,'Every original CLIP must receive its own generated file');
    }
    assert.equal(s.fixture.state.chatMessages.length,wave+1);assert.equal(s.fixture.state.submitted.length,(wave+1)*6);
+   if(wave===0)await s.page.evaluate(()=>window.history.pushState(null,'','/chat/accepted-tool-turn'));
   }
   const resets=await s.page.evaluate(()=>window.fixtureComposerResets);
-  assert.equal(resets.length,2);assert.equal(resets[0].prehydrationValue,stale==='full'?s.fixture.state.chatMessages[0].prompt:'[');
+  assert.equal(resets.length,3);assert.equal(resets[0].prehydrationValue,stale==='full'?s.fixture.state.chatMessages[0].prompt:'[');
   assert.equal(s.loads(),before,'Recovering an owned draft must not reload the Muse page');
   assert.equal(s.page.context().pages().length,1);assert.equal(s.driver.maxConcurrency,6);assert.equal(s.fixture.state.stops,0);
  }finally{await s.close()}
