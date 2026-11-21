@@ -32,6 +32,10 @@ jobs:
       - run: npm run build
       - run: npm test
       - run: npx playwright install chromium
+      - name: Native file downloads, one refused image and default single lane
+        id: attachments
+        timeout-minutes: 4
+        run: node tests/native-image-files.test.mjs && node tests/native-attachment-desktop.test.mjs
       - name: Verify names, sixty slots, selected accounts, proxies and recovery UI
         id: ui
         continue-on-error: true
@@ -81,11 +85,6 @@ jobs:
         continue-on-error: true
         timeout-minutes: 4
         run: node tests/batch-caption-dom.test.mjs && node tests/interleaved-caption-dom.test.mjs && node tests/saved-batch-recovery.test.mjs && node tests/composer-readiness.test.mjs && node tests/label-before-media.test.mjs && node tests/leading-label-browser.test.mjs
-      - name: Native file downloads, one refused image and default single lane
-        id: attachments
-        continue-on-error: true
-        timeout-minutes: 4
-        run: node tests/native-image-files.test.mjs && node tests/native-attachment-desktop.test.mjs
       - name: Three native accounts, independent one-lane videos and workspace restore
         id: threeaccounts
         continue-on-error: true

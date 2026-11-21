@@ -89,6 +89,7 @@ function App() {
   const [importText, setImportText] = useState('');
   const [scriptFiles,setScriptFiles]=useState<QueueFile[]>([]);
   const scriptFilesRef=useRef<QueueFile[]>([]),scriptWrites=useRef(Promise.resolve());
+  const [scriptImportSaving,setScriptImportSaving]=useState(false);
   const [scriptQueueLoading,setScriptQueueLoading]=useState(true);
   const [scriptQueueActive,setScriptQueueActive]=useState(false);
   const scriptRun=useRef<{ids:string[];settings:Settings}|null>(null),scriptFeeding=useRef(false);
@@ -489,11 +490,11 @@ function App() {
     finally { setImageBusy(false); }
   }
   useEffect(()=>{let disposed=false;void loadScriptQueue().then(files=>{if(!disposed){scriptFilesRef.current=files;setScriptFiles(files);}}).catch(error=>setNotice(errorInfo(error).raw)).finally(()=>{if(!disposed)setScriptQueueLoading(false)});return()=>{disposed=true}},[]);
-  function changeScriptQueue(change:(files:QueueFile[])=>QueueFile[]){
-    const previous=scriptFilesRef.current,next=change(previous);scriptFilesRef.current=next;setScriptFiles(next);
+  function changeScriptQueue(change:(files:QueueFile[])=>QueueFile[],publishAfterSave=false){
+    const previous=scriptFilesRef.current,next=change(previous);scriptFilesRef.current=next;if(!publishAfterSave)setScriptFiles(next);
     const saved=scriptWrites.current.then(async()=>{await saveScriptQueue(next,queueNeedsFullWrite.current?[]:previous);queueNeedsFullWrite.current=false;});
     scriptWrites.current=saved.catch(error=>{queueNeedsFullWrite.current=true;scriptRun.current=null;setScriptQueueActive(false);setNotice('Không lưu được hàng chờ; đã ngừng nạp thêm prompt. '+errorInfo(error).raw);});
-    return saved;
+    return publishAfterSave?saved.then(()=>setScriptFiles(scriptFilesRef.current)):saved;
   }
   function editQueueEntry(id:string,patch:Partial<QueueFile['entries'][number]>){return changeScriptQueue(files=>files.map(file=>({...file,entries:file.entries.map(entry=>entry.id===id?{...entry,...patch}:entry)})));}
   async function finishQueueEntry(job:RenderJob,state:'done'|'error'|'cancelled',error?:string,savedId?:string){
@@ -517,9 +518,10 @@ function App() {
   }
   function pauseScriptQueue(){scriptRun.current=null;setScriptQueueActive(false);setNotice('Đã ngừng nạp thêm prompt. Các ô đã nhận vẫn tiếp tục; prompt chưa chạy được giữ trong hàng chờ.');}
   async function addScriptQueue(andRun=false){
-    if(importReading||scriptQueueLoading||!parsed.length)return;
+    if(importReading||scriptImportSaving||scriptQueueLoading||!parsed.length)return;
     const files=queueFiles(importSources.length?importSources:[{name:'Kịch bản dán vào.txt',text:importText}]);
-    try{await changeScriptQueue(old=>[...old,...files]);setModal(null);setNotice(`Đã lưu đủ ${parsed.length} prompt trong ${files.length} tệp. Giữ nguyên ${slotCount} ô; chọn tệp hoặc prompt cần chạy.`);if(andRun)startScriptQueue(files.map(file=>file.id));}catch{}
+    const before=scriptFilesRef.current;setScriptImportSaving(true);
+    try{await changeScriptQueue(old=>[...old,...files],true);setModal(null);setNotice(`Đã lưu đủ ${parsed.length} prompt trong ${files.length} tệp. Giữ nguyên ${slotCount} ô; chọn tệp hoặc prompt cần chạy.`);if(andRun)startScriptQueue(files.map(file=>file.id));}catch{scriptFilesRef.current=before;setScriptFiles(before);}finally{setScriptImportSaving(false)}
   }
   function startScriptQueue(fileIds?:string[]){
     if(renderLocked||scriptQueueLoading||!requireProvider())return;
@@ -921,7 +923,7 @@ function App() {
         <textarea className="import-text" aria-label="Nội dung TXT / SRT" disabled={importReading} value={importSources[importSourceIndex]?.text??importText} onChange={e => editImport(e.target.value)} placeholder={'Dán kịch bản hoặc phụ đề vào đây…\n\n1\n00:00:00,000 --> 00:00:04,000\nMột người thám hiểm bước vào ngôi đền cổ.'}/>
         <p className="small muted">Tự nhận tên từ mục lớn [1], [2]… hoặc Tên tệp/Name trong TXT/SRT. Không có tên: đánh số tăng tiếp khi tải.</p>{parsed.some(entry=>entry.outputName)&&<details className="import-name-preview"><summary>Tên tệp nhận được ({parsed.filter(entry=>entry.outputName).length})</summary><ol>{parsed.slice(0,40).map((entry,index)=><li key={index}>{entry.outputName||'Tự đánh số khi tải'}</li>)}</ol></details>}<div className="import-count"><b className={!canImport&&parsed.length ? 'red' : 'mint'}>{parsed.length}/{importCapacity} cảnh</b><span>{parsed.length>MAX_SLOTS?'Có hơn 400 cảnh. Chọn ít tệp hơn trước khi nạp; tool giữ nguyên đầy đủ nội dung.':expandFileQueue?`Nạp đủ ${parsed.length} prompt sẽ mở thêm ô xếp hàng; số tài khoản và số luồng mỗi tài khoản được giữ nguyên.`:multipleAccounts?`Đã chọn ${slotCount} ô (${activeSlotIds.join(', ')}). ${parsed.length>slotCount?'Kịch bản vượt số ô đã chọn. Chọn thêm ô hoặc rút gọn; không tự bỏ cảnh.':'Chỉ các ô này nhận nội dung, các ô ẩn được giữ nguyên.'}`:parsed.length > MAX_SLOTS ? 'Có hơn 400 cảnh. Rút gọn trước khi nạp, không tự cắt bỏ nội dung.' : parsed.length < slotCount ? 'Các ô còn lại sẽ được để trống.' : `Nạp sẽ mở ${Math.max(slotCount,parsed.length)} ô.`}</span></div>
         <div className="script-preview">{parsed.slice(0, MAX_SLOTS).map((text, i) => <div key={i}><span>#{String(importIds[i]??'—').padStart(2, '0')}</span><p>{text.outputName&&<strong className="script-entry-name">{text.outputName}</strong>}{text.prompt}</p></div>)}</div><p className="small muted">Nạp kịch bản sẽ thay prompt và xóa kết quả ảnh/video đang chọn; lịch sử đã lưu được giữ. Giữ ảnh tham chiếu và tài khoản.</p>
-      </div><footer className="modal-footer"><button className="button" onClick={() => setModal(null)}>Đóng</button><button className="button" disabled={importReading||scriptQueueLoading||!parsed.length} onClick={()=>void addScriptQueue(false)}>Lưu tất cả vào hàng chờ</button><button className="button primary" disabled={importReading||scriptQueueLoading||!parsed.length||renderLocked||renderBlocked} onClick={()=>void addScriptQueue(true)}>Chạy theo số ô hiện có</button><button className="button" disabled={!canImport || locked} onClick={() => importScenes(false)}>Nạp vào Studio</button><button className="button primary" disabled={!canImport || locked || renderBlocked} onClick={() => importScenes(true)}><Play size={15}/>Nạp & Chạy các cảnh</button></footer>
+      </div><footer className="modal-footer"><button className="button" onClick={() => setModal(null)}>Đóng</button><button className="button" disabled={importReading||scriptImportSaving||scriptQueueLoading||!parsed.length} onClick={()=>void addScriptQueue(false)}>Lưu tất cả vào hàng chờ</button><button className="button primary" disabled={importReading||scriptImportSaving||scriptQueueLoading||!parsed.length||renderLocked||renderBlocked} onClick={()=>void addScriptQueue(true)}>Chạy theo số ô hiện có</button><button className="button" disabled={!canImport || locked} onClick={() => importScenes(false)}>Nạp vào Studio</button><button className="button primary" disabled={!canImport || locked || renderBlocked} onClick={() => importScenes(true)}><Play size={15}/>Nạp & Chạy các cảnh</button></footer>
     </Modal>}
 
     {viewer && <Modal title={`Xem ảnh cảnh ${viewer.id}`} eyebrow="ẢNH KẾT QUẢ" wide close={() => setViewer(null)}>

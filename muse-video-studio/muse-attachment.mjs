@@ -18,7 +18,9 @@ export async function clickNativeAttachment(frame,media,signal){
   },{src:media.src,nativeId:media.nativeId});
   if(!id)throw Error('MEDIA_ATTACHMENT_LINK_CHANGED: Chưa xác định được đúng liên kết tệp Muse.');
   const link=frame.locator(`a[data-muse-studio-file-id="${id}"]`);
-  await link.click({timeout:5000,noWaitAfter:true});
+  // Activate the exact matched element without focus or scrolling dependencies
+  // between hidden Electron views and the native Studio surface.
+  await link.evaluate(node=>node.click(),undefined,{timeout:5000});
 }
 export async function readPageAttachment(frame,media,signal,{timeoutMs=15000}={}){
   const page=frame.page?frame.page():frame;let captured,success=false;
