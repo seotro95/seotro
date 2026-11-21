@@ -1,0 +1,53 @@
+{
+  "topic": "060-Tunguska",
+  "languages": 16,
+  "english": "OriginalspokenEnglish;allnumberswrittenaswords;206variedcues",
+  "contextual_adaptations": [
+    "vi-VN",
+    "ja-JP",
+    "ko-KR"
+  ],
+  "machine_drafts_reviewed": [
+    "es-ES",
+    "fr-FR",
+    "de-DE",
+    "it-IT",
+    "pt-PT",
+    "nl-NL",
+    "pl-PL",
+    "sv-SE",
+    "da-DK",
+    "fi-FI",
+    "nb-NO",
+    "cs-CZ"
+  ],
+  "calendar_context_corrected_before_final_synthesis": true,
+  "years_verified": [
+    1908,
+    1927,
+    2013,
+    2019,
+    2024
+  ],
+  "conditional_diameter_and_radius_distinguished": true,
+  "numbers_in_final_voice_fields_are_words": true,
+  "independent_native_editorial_or_listening_review": false,
+  "targeted_nordic_semantic_repairs": {
+    "fi-FI": [
+      6,
+      10
+    ],
+    "sv-SE": [
+      6,
+      8,
+      10
+    ],
+    "da-DK": [
+      10
+    ],
+    "nb-NO": [
+      10
+    ]
+  },
+  "korean_light_trail_phrase_clarified": true
+}

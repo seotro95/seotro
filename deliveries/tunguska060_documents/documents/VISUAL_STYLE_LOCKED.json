@@ -1,0 +1,24 @@
+{
+  "style_id": "tunguska-outdoor-history-atmospheric-models-v7",
+  "topic": "060-Tunguska",
+  "historical_reconstruction_years": [
+    1908,
+    1927
+  ],
+  "modern_comparison": "Chelyabinsk2013,winter,separatefromsummerTunguska",
+  "current_landscape": "greenrecovery;notfreshdestruction",
+  "laboratory_scene_count": 0,
+  "modern_scientists_excluded": true,
+  "period_adult_travelers_permitted": true,
+  "minimum_human_age": 25,
+  "no_children_including_artwork_and_reflections": true,
+  "silent_no_speech_every_prompt": true,
+  "main_scenes": 125,
+  "optional_scenes": 5,
+  "last_main_clip_source_seconds": [
+    8,
+    10
+  ],
+  "no_confirmed_giant_crater_or_meteorite": true,
+  "all_AI_imagery_illustrative": true
+}

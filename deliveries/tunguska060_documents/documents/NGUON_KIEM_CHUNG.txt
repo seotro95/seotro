@@ -1,0 +1,63 @@
+NGUỒN KIỂM CHỨNG — TUNGUSKA 060
+
+Rà nguồn cho tập này đến ngày 21/11/2026. Bằng chứng quan sát, mô hình và ứng viên vật chất là các cấp khác nhau. Một tài liệu tải được không có nghĩa mọi trang đã được đọc; phạm vi dùng và giới hạn truy cập ghi dưới đây.
+
+1. NASA Earth Observatory, A Cosmic Explosion Over Siberia, 2025
+https://science.nasa.gov/earth/earth-observatory/a-cosmic-explosion-over-siberia-154488/
+Dùng cho: Ảnh vùng rừng được Landsat chụp tháng bảy năm 2024; phục hồi cảnh quan; ảnh rừng lịch sử và tình trạng tranh luận về vật chất, hồ Cheko.
+Giới hạn: Đọc thân bài và tài liệu liên quan. Một ảnh rừng xanh không chứng minh mọi dấu vết hoặc ảnh hưởng sinh thái đã biến mất. Quỹ đạo và kích thước công bố khác nhau.
+
+2. NASA History, 115 Years Ago: The Tunguska Asteroid Impact Event, 2023
+https://www.nasa.gov/history/115-years-ago-the-tunguska-asteroid-impact-event/
+Dùng cho: Ngày xảy ra sự kiện, hành trình Kulik năm 1927, trải nghiệm Evenki, cây tuốt cành còn đứng, khảo sát mặt đất và trên không.
+Giới hạn: Đọc phần lịch sử chính. Không dùng số tử vong chính xác hoặc khẳng định tám mươi triệu cây. Ảnh những năm hai mươi không phải ghi hình trực tiếp năm 1908.
+
+3. David Morrison, NASA/TM-2018-220174, Tunguska Workshop
+https://ntrs.nasa.gov/citations/20190002302
+Dùng cho: Tổng hợp workshop, tải lên cây, địa hình, giả định đầu vào và khoảng đường kính đá khoảng năm mươi tới tám mươi mét.
+Giới hạn: Tải báo cáo NASA, đọc các phần mô hình và kết luận liên quan. Đây là khoảng có điều kiện; không suy thành thiên thể đã thu hồi hoặc lịch tái diễn cố định.
+
+4. Lorien F. Wheeler and Donovan L. Mathias, Probabilistic assessment of Tunguska-scale asteroid impacts, Icarus, 2019
+https://doi.org/10.1016/j.icarus.2018.12.017
+Dùng cho: Năm mươi triệu trường hợp giả định, biến thiên đặc tính và nhiều tổ hợp có thể tạo tác động gần nhau.
+Giới hạn: Đọc abstract, metadata và poster tác giả NASA. Toàn bài ở nhà xuất bản bị 403; không tuyên bố đọc toàn bài. Poster: https://ntrs.nasa.gov/citations/20190002844 . Số mô phỏng không phải số sự kiện thật.
+
+5. Darrel Robertson and Donovan Mathias, Hydrocode simulations of asteroid airbursts and constraints for Tunguska, Icarus, 2019
+https://doi.org/10.1016/j.icarus.2018.10.017
+Dùng cho: Mô phỏng khí động, vật thể tiếp tục chuyển động, địa hình và sức chống chịu của cây.
+Giới hạn: Tham khảo abstract và phần thảo luận workshop NASA; nhà xuất bản chặn toàn văn. Không coi một mô hình là lời giải duy nhất về thành phần, góc, độ cao hay năng lượng.
+
+6. S. McMullan and G. S. Collins, Uncertainty quantification in continuous fragmentation airburst models, Icarus, 2019
+https://doi.org/10.1016/j.icarus.2019.02.013
+Dùng cho: So sánh các cách mô tả phân mảnh, độ bền suy ra và khác biệt khi phóng quy mô từ Chelyabinsk.
+Giới hạn: Tải bản tác giả từ Imperial; đọc abstract, phần đầu và các đoạn liên quan. Khoảng hai mươi lăm tới bảy mươi lăm mét trong nghiên cứu này là bán kính, không được chép nhầm thành đường kính hoặc đánh đồng với khoảng năm mươi tới tám mươi mét.
+
+7. Christopher O. Johnston and Eric C. Stern, A model for thermal radiation from the Tunguska airburst, Icarus, 2019
+https://doi.org/10.1016/j.icarus.2019.01.028
+Dùng cho: Bức xạ nhiệt và vùng cháy được ghi nhận như ràng buộc bổ sung cho hướng cây đổ.
+Giới hạn: Đọc abstract, metadata và thảo luận nhiệt trong báo cáo NASA, chưa đọc toàn văn bài nhà xuất bản. Không suy một nhiệt độ chính xác từ ảnh gỗ cháy hoặc buộc cầu lửa chạm đất.
+
+8. Don Yeomans and Paul Chodas, JPL/CNEOS, Additional Details on the Large Fireball Event over Russia, 2013
+https://cneos.jpl.nasa.gov/news/fireball_130301.html
+Dùng cho: Chelyabinsk ngày mười lăm tháng hai năm hai nghìn mười ba; thiên thể khoảng hai mươi mét; video, hạ âm, cảm biến, thiên thạch; nén khí và phân mảnh.
+Giới hạn: Đọc thân bài đầy đủ. Các giá trị cảm biến công bố sớm là gần đúng, có thể khác nghiệm về sau. Không áp một độ cao hoặc năng lượng chính xác vào lời; không dùng ảnh mùa đông như Tunguska.
+
+9. Luca Gasperini and colleagues, A possible impact crater for the 1908 Tunguska Event, Terra Nova, 2007
+https://doi.org/10.1111/j.1365-3121.2007.00742.x
+Dùng cho: Đề xuất hồ Cheko có nguồn gốc va chạm, dẫn tới các câu hỏi kiểm tra lòng hồ và trầm tích.
+Giới hạn: Tham khảo abstract, metadata và bản tổng hợp NASA năm 2025; không tuyên bố duyệt toàn bài. Trình bày như đề xuất bị tranh luận, không dựng mảnh thiên thạch đã xác nhận dưới hồ.
+
+10. Gareth S. Collins and colleagues, Evidence that Lake Cheko is not an impact crater, Terra Nova, 2008
+https://doi.org/10.1111/j.1365-3121.2008.00791.x
+Dùng cho: Các lập luận phản biện nguồn gốc va chạm của hồ Cheko.
+Giới hạn: Tham khảo abstract và đoạn được lập chỉ mục; truy cập toàn trang bị hạn chế. Không dùng hình dạng hồ đơn lẻ để khẳng định hay bác bỏ tuyệt đối một nguồn gốc.
+
+11. Mark Boslough and Andy Bruno, Misunderstandings about the Tunguska event, shock wave physics, and airbursts..., Scientific Reports, 2025
+https://doi.org/10.1038/s41598-025-98362-9
+Dùng cho: Rà độ tin cậy của các con số cây, kích thước cây và nhiệt độ thường được truyền lại.
+Giới hạn: Chỉ tham khảo metadata và đoạn được lập chỉ mục. Nature hạn chế truy cập, PMC yêu cầu kiểm tra trình duyệt; chưa duyệt toàn văn. Không đưa nội dung Tall el-Hammam vào tập Tunguska.
+
+12. NASA, A History of Near-Earth Objects Research
+https://www.nasa.gov/wp-content/uploads/2025/07/a-history-of-near-earth-object-research-sp-4235.pdf
+Dùng cho: Lịch sử hành trình Kulik, kỳ vọng tìm thiên thạch và cách quan sát khu rừng thay đổi câu hỏi.
+Giới hạn: Tải PDF, đọc các đoạn chương Tunguska. Một số số liệu phổ biến trong lịch sử mâu thuẫn với phê bình về sau; lời dùng diện tích gần đúng, không số cây chính xác hoặc hội thoại nhân chứng bịa đặt.

@@ -1,0 +1,7 @@
+quantity,value,unit,context,source_ids,limit
+Historical damaged forest area,about 2000,square kilometers,"Approximate extent, not an exact survey total","1,2,3",Not a count of trees or a precise generated boundary
+Candidate rocky-body diameter,about 50–80,meters,A commonly discussed model family under assumed entry conditions,"3,4","Diameter, not radius; not a recovered body or the only plausible model"
+Modeled encounters,50000000,hypothetical cases,"Wheeler and Mathias probabilistic study,2019",4,Not observed events or a census of real incoming asteroids
+Chelyabinsk diameter,about 20,meters,February2013; JPL early estimate about17–20m,8,Approximate; do not apply this diameter to Tunguska
+Speed scaling,2 -> 4,speed factor -> kinetic-energy factor,Same mass; kinetic energy = one half × mass × speed squared,General mechanics,"Explanatory relation, not a measured Tunguska speed"
+Diameter scaling,2 -> 8,diameter factor -> mass factor,Same density and shape; volume scales with diameter cubed,General geometry,"Explanatory relation, not a measurement of the lost body"

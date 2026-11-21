@@ -1,0 +1,26 @@
+16 GIỌNG NAM — TUNGUSKA 060
+
+1. Mỹ — tiếng Anh: en-US-GuyNeural
+2. Việt Nam: vi-VN-NamMinhNeural
+3. Tây Ban Nha: es-ES-AlvaroNeural
+4. Pháp: fr-FR-HenriNeural
+5. Nhật Bản: ja-JP-KeitaNeural
+6. Hàn Quốc: ko-KR-InJoonNeural
+7. Đức: de-DE-ChristophNeural
+8. Ý: it-IT-DiegoNeural
+9. Bồ Đào Nha: pt-PT-DuarteNeural
+10. Hà Lan: nl-NL-MaartenNeural
+11. Ba Lan: pl-PL-MarekNeural
+12. Thụy Điển: sv-SE-MattiasNeural
+13. Đan Mạch: da-DK-JeppeNeural
+14. Phần Lan: fi-FI-HarriNeural
+15. Na Uy: nb-NO-FinnNeural
+16. Séc: cs-CZ-AntoninNeural
+
+Giữ nguyên VoiceID từ Maya 055, gồm Việt Nam Minh, Anh Guy, Đức Christoph. Dùng backend online Melo-Viet-Studio 1.3.1, commit 4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043. Mã được kiểm SHA256; giọng được đối chiếu danh mục nam. Chạy backend trên Linux, không tuyên bố chạy giao diện Windows.
+
+Giữ cao độ gốc, thay nhịp câu và nhấn nhẹ theo hồ sơ. Anh khoảng 182,75 từ/phút, căn theo 206 đoạn 3–8 giây. Các bản địa hóa căn theo 10 phần: chín phần 120 giây và một phần 162 giây. Mỗi bản đúng 20:42 khi giải mã, tương đương 59.616.000 mẫu ở 48 kHz. Tổng và phần khớp nhau, từng câu không tự trùng từng clip 10 giây.
+
+Bản Việt, Nhật, Hàn do trợ lý chuyển ngữ theo ngữ cảnh. Mười hai bản khác có bản dịch máy rồi rà thuật ngữ, từ ngữ quốc gia và mốc năm. Nguồn dịch dùng năm dạng số để tránh dịch sai cách đọc tiếng Anh; bản lời cuối chuyển thành chữ. Chưa có nghe duyệt bản ngữ độc lập.
+
+Hồ sơ giữ VoiceID, nguồn mã, phong cách, tham chiếu và link tải. Dịch vụ có thể cập nhật mô hình nên cùng VoiceID không bảo đảm dạng sóng bất biến. Khi hoàn tất, lưu bản tham chiếu Anh và Việt trong workspace, đủ 16 link tải cùng SHA256 trong chỉ mục. Bản giao bền vững là GitHub Release; bộ đệm âm thanh làm việc dùng RAM.

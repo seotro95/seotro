@@ -1,0 +1,21 @@
+name: Publish requested tunguska060 documents
+on:
+  push:
+    branches: [codex/tunguska060-20m42s]
+    paths: ['deliveries/tunguska060_documents/READY.json']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: /deliveries/tunguska060_documents/
+      - name: Verify and upload requested text deliverables
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python deliveries/tunguska060_documents/publish_documents.py

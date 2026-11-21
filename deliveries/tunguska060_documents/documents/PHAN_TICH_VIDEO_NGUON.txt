@@ -1,0 +1,18 @@
+CÁCH KỂ VÀ DỰNG ÁP DỤNG CHO TUNGUSKA
+
+Nguồn: https://github.com/seotro95/seotro/releases/tag/video
+Đã đối chiếu release cho tập này: video.c.a.toi.mp4, 340.611.128 byte, SHA256 f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c. Metadata từng kiểm tra: 1.262,933333 giây, 1280 × 720, 60 fps. Đã xem lại contact sheet trong tập này. Không tuyên bố xem/nghe liên tục toàn bộ video hoặc đo nhịp cắt chính xác từ ảnh mẫu.
+
+Ảnh mẫu cho thấy luân phiên cảnh quan, tái hiện, cận thao tác, vật liệu và mô hình. Tập Tunguska chủ yếu theo bộ quy tắc retention mới mà người dùng cho phép thay thế: lời gốc, hình mới, không sao chép lời hay footage nguồn. Các cảnh phòng nghiên cứu trong mẫu được bỏ.
+
+Cấu trúc có 10 phần. Chín phần đầu dài 120 giây, phần cuối dài 162 giây. Mở bằng một thân cây trơ cành còn đứng. Câu hỏi chính xuất hiện ở giây 15. Tới giây 55, kiểu phá hủy được nối với một vụ nổ trên không. Lời giải ban đầu đến sớm; phần sau thử nó bằng hướng cây đổ, tải lên gỗ, dấu nhiệt, Chelyabinsk và các mô hình.
+
+Các nhịp mới bắt đầu ở đầu và giữa phần: cách nhau 55 hoặc 65 giây, riêng phần cuối 75 giây. Mỗi nhịp có vật, nơi, ngày hoặc một phép thử cụ thể. Có 62 câu ngắn từ 3–6 từ xen câu dài. Tổng 206 đoạn lời, thực tế dài 3–8 giây. Các mốc đã được điều chỉnh trong cùng nửa phần bằng thời lượng âm thanh thực, giữ nguyên lời, điểm neo và tổng phim.
+
+Mười nhịp giới hạn đặt gần cuối phần: mỗi nhịp 5 giây, bắt đầu cách nhau ít nhất 120 giây. Phân biệt quan sát với cách diễn giải ngay trong cách gọi: ảnh, dấu gỗ, mô hình, giả định, ứng viên. Không lặp dài việc chưa biết ở hai đoạn liên tiếp. Mỗi phần có khoảnh khắc hiện tại cụ thể và kết bằng một câu kéo sang phần sau.
+
+Đường hình chuyển từ thân cây tới mặt rừng, bản đồ hướng đổ, thiên thể trong khí quyển, phản ứng của cây và dấu nhiệt. Sau đó dùng Chelyabinsk làm đối chiếu có dữ liệu, chuyển sang mảnh thất lạc và hồ Cheko còn tranh luận, rồi trở lại rừng hiện nay. Kết giải thích vì sao không cần hố lớn và giữ lại một câu hỏi về vật chất của thiên thể.
+
+Camera ưu tiên một chuyển động có mục đích: tilt theo thân cây, track gốc tới ngọn, aerial rộng để đọc địa hình, macro gỗ/đá, hoặc side view để thấy thiên thể và khí quyển tách khỏi mặt đất. Mỗi prompt nêu góc riêng, một hành động chính, điểm vào và điểm thoát. Clip hình 10 giây độc lập với nhịp lời; riêng cảnh cuối lấy 2 giây.
+
+Không phòng thí nghiệm, nhà khoa học hiện đại, trẻ em, lời nói hoặc âm thanh trong video sinh. Phân biệt tái hiện 1908, thám hiểm 1927, Chelyabinsk 2013, mô hình và cảnh hiện nay. Không dựng số đo hoặc đồ thị từ AI như dữ liệu thật. Chưa tạo footage/MP4.

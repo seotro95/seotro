@@ -1,0 +1,13 @@
+DỰNG TUNGUSKA 20:42
+
+1. Dùng EDL_125_CANH.csv cho hình và LOI_DAN_EN_206_CUES.srt cho lời. Hai lớp có nhịp khác nhau: clip sinh 10 giây, còn lời Anh thay đổi 3–8 giây. Không ép mỗi câu thành một clip.
+2. Có 124 cảnh đủ 10 giây, rồi cảnh 125 dùng giây 8–10 của clip. Không cộng intro hoặc cảnh dự phòng vào tổng 20:42. Hòa cảnh phải bù phần chồng.
+3. Mười ba TXT có 10 prompt mỗi tệp. Tệp 13 gồm cảnh chính 121–125 và dự phòng 126–130. BROLL_DU_PHONG_126_130.csv chỉ rõ cảnh có thể thay.
+4. Giữ 10 giây đầu tập trung một thân cây. Không logo, tên kênh hoặc lịch sử mở đầu trước câu hỏi. Câu hỏi chính ở giây 15; phát hiện cụ thể về nổ trên không ở giây 55.
+5. Không âm thanh hoặc lời nói trong clip sinh. Xóa track nếu công cụ vẫn sinh tiếng; dùng MP3 voice riêng. Không hình trẻ em ở nền, ảnh, mô hình, bóng hoặc phản chiếu; mọi người rõ từ 25 tuổi.
+6. Tái hiện sau vụ nổ năm 1908 khác với gỗ đã phong hóa và cây mọc lại năm 1927. Chelyabinsk năm 2013 là mùa đông gần đô thị hiện đại. Rừng hiện nay có màu xanh. Không trộn chúng thành một thời điểm.
+7. Phục dựng, mô hình và cảnh hiện đại cần nhãn riêng trong editor. Hình AI không được ghi là ảnh lưu trữ hoặc dữ liệu quan trắc. Muốn dùng ảnh gốc, thay placeholder bằng nguồn có xuất xứ rõ và kiểm tra quyền sử dụng.
+8. Không dựng hố khổng lồ chắc chắn tại Tunguska, không xác nhận hồ Cheko là hố va chạm, không tạo viên đá phát sáng rồi coi là thiên thạch đã tìm thấy. Không người ngoài hành tinh, bom hoặc đám mây nấm.
+9. Mô hình cần phân biệt khí quyển truyền năng lượng với vật thể đâm xuống đất. Không yêu cầu quả cầu lửa chạm đất. Các đường, số liệu, quỹ đạo và vùng bất định phải lấy từ nguồn, thêm trong editor.
+10. Giữ đường kính và bán kính riêng. Khoảng 50–80 mét trong nội dung là một nhóm ước tính đường kính có điều kiện; không phải vật thể đã thu hồi. Năm mươi triệu là số kịch bản giả định, không phải số sự kiện thật.
+11. Các bản dịch đồng bộ theo 10 phần và tổng thời lượng. Editor có thể đổi hình trong từng phần cho khớp câu địa hóa; không kéo tổng MP3. Chưa có nghe duyệt bản ngữ độc lập.

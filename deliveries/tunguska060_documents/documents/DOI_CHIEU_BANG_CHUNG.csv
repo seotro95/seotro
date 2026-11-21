@@ -1,0 +1,11 @@
+section,seconds,subject,source_ids,limit
+1,0–120,"Standingtrees,airburst,damagearea","1,2,3","Forestdamageconstrainsphysics,notuniquematerial"
+2,120–240,"Kulik1927,Evenki,treefallmapping","2,3,12",1927arrivaldoesnoteraseearlierlocalexperience
+3,240–360,"Entry,compression,ablation,fragmentation,energy","3,5,8",Generalphysics;Tunguskasequencereconstructed
+4,360–480,"Treeloading,terrain,trajectorygeometry","2,3,5",Nonidenticaltreesandterrain;notoneperfectradialcircle
+5,480–600,"Thermalradiation,burnevidence","3,7",Heatingandlaterfireseparate;notnuclearbomborrequiredgroundfireball
+6,600–720,Chelyabinsk2013comparison,8,"WintercityeventnotTunguskafootage,notsimpleuniqueupscaling"
+7,720–840,"Candidatefragments,LakeChekodebate","1,2,9,10",NoagreedconfirmedbodyorChekoimpactsolution
+8,840–960,"50millionmodels,conditionalsize,modeldivergence","3,4,5,6",50–80diameterconditional;25–75radiusfromotherstudyisnotthesamerange
+9,960–1080,"2024forestregrowth,records,surveys","1,8",Modernimageisnotlive1908evidence
+10,1080–1242,"Mainanswer,remainingmaterialquestion","1,2,3,4,5,8",Strongairburstmechanismnotexactuniquecomposition

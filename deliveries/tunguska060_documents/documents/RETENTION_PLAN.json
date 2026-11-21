@@ -1,0 +1,215 @@
+{
+  "english_words": 3783,
+  "duration_seconds": 1242,
+  "narration_cue_count": 206,
+  "cue_duration_counts": {
+    "7": 60,
+    "3": 2,
+    "5": 52,
+    "6": 88,
+    "8": 3,
+    "4": 1
+  },
+  "sections": 10,
+  "section_seconds": [
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    162
+  ],
+  "central_question_before_30_seconds": 15,
+  "early_payoff_seconds": 55,
+  "rehook_anchors": [
+    {
+      "time": 0,
+      "section": 1,
+      "part": "A",
+      "detail": "A bare trunk stands upright among fallen trees. Its branches are gone, yet the wood still points into the sky."
+    },
+    {
+      "time": 55,
+      "section": 1,
+      "part": "B",
+      "detail": "Here is the first discovery: the main destruction fits an explosion in the atmosphere, with the forest struck from above."
+    },
+    {
+      "time": 120,
+      "section": 2,
+      "part": "A",
+      "detail": "In nineteen twenty seven, Leonid Kulik reaches the damaged region. Nineteen years have passed since the fireball crossed the sky."
+    },
+    {
+      "time": 175,
+      "section": 2,
+      "part": "B",
+      "detail": "Now place a compass beside a trunk. Mark the direction from its roots toward its crown, then repeat the observation farther away."
+    },
+    {
+      "time": 240,
+      "section": 3,
+      "part": "A",
+      "detail": "Imagine a rocky body approaching Earth. It carries energy because it is moving, long before a flame becomes visible around it."
+    },
+    {
+      "time": 295,
+      "section": 3,
+      "part": "B",
+      "detail": "Take two equal masses. Double the speed of one, and it carries four times the kinetic energy."
+    },
+    {
+      "time": 360,
+      "section": 4,
+      "part": "A",
+      "detail": "Return to the forest floor. A root plate rises beside a fallen tree, carrying soil that once anchored a heavy trunk."
+    },
+    {
+      "time": 415,
+      "section": 4,
+      "part": "B",
+      "detail": "Look again at the butterfly shape. An incoming body follows a slanting path, carrying momentum while releasing energy into the atmosphere."
+    },
+    {
+      "time": 480,
+      "section": 5,
+      "part": "A",
+      "detail": "Imagine turning a darkened branch toward the daylight. Its surface carries a different question from the direction in which it fell."
+    },
+    {
+      "time": 535,
+      "section": 5,
+      "part": "B",
+      "detail": "Consider a different ordinary object: a tree crown partly hidden behind other trees. Exposure changes which surfaces receive the strongest heating."
+    },
+    {
+      "time": 600,
+      "section": 6,
+      "part": "A",
+      "detail": "It is February the fifteenth, twenty thirteen. A brilliant streak crosses the morning sky near Chelyabinsk, beyond the southern Ural Mountains."
+    },
+    {
+      "time": 655,
+      "section": 6,
+      "part": "B",
+      "detail": "Now place a recovered Chelyabinsk stone beside an image of its recorded trail. One gives material; the other gives a path through time."
+    },
+    {
+      "time": 720,
+      "section": 7,
+      "part": "A",
+      "detail": "A quiet lake offers an appealing possibility. If a surviving fragment struck the ground, perhaps water now covers its cavity."
+    },
+    {
+      "time": 775,
+      "section": 7,
+      "part": "B",
+      "detail": "Imagine a small stone lying among river pebbles. Finding it today supplies a location, but the river has a history."
+    },
+    {
+      "time": 840,
+      "section": 8,
+      "part": "A",
+      "detail": "Fifty million hypothetical encounters. That is the scale explored in one probabilistic study of Tunguska sized impacts published in twenty nineteen."
+    },
+    {
+      "time": 895,
+      "section": 8,
+      "part": "B",
+      "detail": "Strength brings another difference. Two bodies with the same size and speed can fragment differently because their internal structures resist loading differently."
+    },
+    {
+      "time": 960,
+      "section": 9,
+      "part": "A",
+      "detail": "In July twenty twenty four, a Landsat image shows the region covered by forest, marshes, and winding rivers."
+    },
+    {
+      "time": 1015,
+      "section": 9,
+      "part": "B",
+      "detail": "Now look upward from the recovering taiga. The atmosphere still receives small bodies from space, most producing little damage below."
+    },
+    {
+      "time": 1080,
+      "section": 10,
+      "part": "A",
+      "detail": "Stand once more beside the bare trunk, in a reconstruction of the forest after the event. It has become a pointer."
+    },
+    {
+      "time": 1155,
+      "section": 10,
+      "part": "B",
+      "detail": "Lay three images together: an early forest photograph, an atmospheric model, and a camera view of Chelyabinsk."
+    }
+  ],
+  "caveat_beats": [
+    {
+      "time": 110,
+      "end": 115,
+      "section": 1,
+      "text": "The forest records the blast; its pattern alone cannot identify the incoming material."
+    },
+    {
+      "time": 230,
+      "end": 235,
+      "section": 2,
+      "text": "Surveys document damage well, but witnesses and delayed observations leave gaps in detail."
+    },
+    {
+      "time": 350,
+      "end": 355,
+      "section": 3,
+      "text": "The broad mechanism is established; Tunguska's exact breakup sequence remains a reconstruction."
+    },
+    {
+      "time": 470,
+      "end": 475,
+      "section": 4,
+      "text": "Terrain and tree condition matter; the map does not determine one exact trajectory."
+    },
+    {
+      "time": 590,
+      "end": 595,
+      "section": 5,
+      "text": "Burn records constrain the event, but later fires complicate its thermal history."
+    },
+    {
+      "time": 710,
+      "end": 715,
+      "section": 6,
+      "text": "Chelyabinsk validates key physics, but scaling it up does not uniquely reconstruct Tunguska."
+    },
+    {
+      "time": 830,
+      "end": 835,
+      "section": 7,
+      "text": "Candidate finds and the Cheko proposal remain disputed; none supplies an agreed identification."
+    },
+    {
+      "time": 950,
+      "end": 955,
+      "section": 8,
+      "text": "Size and energy remain model dependent; one favored fit is not a recovered body."
+    },
+    {
+      "time": 1070,
+      "end": 1075,
+      "section": 9,
+      "text": "A recovered landscape cannot reproduce every original measurement; old records keep their own limits."
+    },
+    {
+      "time": 1230,
+      "end": 1235,
+      "section": 10,
+      "text": "The airburst explanation is strong; the body's exact identity remains less securely known."
+    }
+  ],
+  "short_sentences_3_to_6_words": 62,
+  "all_spoken_numbers_words": true,
+  "measured_timing_repair": "research/EN_MEASURED_TIMING_REPAIR.json"
+}
