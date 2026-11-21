@@ -1,0 +1,61 @@
+{
+  "status": "windows_tests_and_uploaded_asset_sha256_verified",
+  "version": "1.13.10",
+  "source_commit": "f5deff5a58850b244701e5ae3a1efa49bbc794b5",
+  "source_branch": "codex/muse-11310-native-image-files",
+  "workflow_run_id": 44883367887,
+  "workflow_job_id": 136783290132,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/44883367887",
+  "workflow_conclusion": "success",
+  "release_id": 453541415,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/untagged-b6a3a2324f80cacd755a",
+  "draft": true,
+  "zip": {
+    "file": "Muse-AI-Studio-1.13.10-Windows-x64.zip",
+    "bytes": 160815848,
+    "sha256": "e8c89ea9954c626e9ec45b66dba89d598a967d30b49b9ac2bf7fbb6a2791cade",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-b6a3a2324f80cacd755a/Muse-AI-Studio-1.13.10-Windows-x64.zip"
+  },
+  "checksum_file": {
+    "file": "Muse-AI-Studio-1.13.10-Windows-x64.zip.sha256",
+    "bytes": 106,
+    "sha256": "bbc9f54253878a1c3e93a65d872ab1316595e4ad8897723181a928be56beffc7",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-b6a3a2324f80cacd755a/Muse-AI-Studio-1.13.10-Windows-x64.zip.sha256"
+  },
+  "validation": {
+    "windows_ui_checks": 42,
+    "electron_desktop_checks": 8,
+    "throughput_fixture": {
+      "accounts": 12,
+      "lanesPerAccount": 6,
+      "submittedBeforeAnyResult": 72,
+      "chatMessages": 12,
+      "pages": 12,
+      "extraWorkerPages": 0,
+      "preparationMs": 3198,
+      "submissionMs": 1298,
+      "downloadConcurrency": 6
+    },
+    "wait_limits_ms": {
+      "ui": 250000,
+      "server": 240000,
+      "local_transport": 245000
+    },
+    "first_wave_budget": "A virtual-clock check spends 60 seconds in preparation, verifies only 190 seconds remain, ends loading at 250 seconds, preserves the complete prompt and never replays the request.",
+    "independent_scene_actions": "Other cards can be created, re-created or recovered while a card is preparing or running. Synchronous reservation prevents duplicate clicks. Account preparation is shared per batch, capped at three, and unrelated account preparation does not block rendering. A one-lane account queues later cards; six lanes admit overlapping requests.",
+    "native_files": "Four distinct service-native sandbox attachment links deliver exact decoded PNG bytes to their own scene labels; a labelled fourth-scene refusal is isolated. Read-only recovery changes no prompts or generations, lazy data-src files work, and the default single lane still retrieves native files. Native Windows requests are deliberately launched out of scene order; expected files are derived from exact fixture prompt identity, not arrival position.",
+    "native_queue_export": "The actual Electron application processes five named image prompts through two cards, exports all five names including older windows, and preserves the queue after renderer reload without generating again.",
+    "persistent_script_queue": "Mixed TXT/SRT imports are saved independently from the active card count. Users select files or individual prompts, process them in ordered windows, keep previous results and filenames, and stop without submitting later windows. A 402-prompt queue persists without expanding a two-card workspace. New imports become visible only after their IndexedDB transaction commits; result updates persist changed entries rather than serializing every prompt.",
+    "three_native_accounts": "Three authenticated Electron partitions submit three independent videos before any result, each with one lane, and return exact files to the correct prompts. After restart each account restores its own observed encrypted workspace URL and cookie identity, rather than being sent to a root landing page without a composer.",
+    "account_lane_race": "Concurrent preparations with lane counts 1, 6 and 2 return each owning driver's count, not the last selected global account.",
+    "packaged_executable": "Startup recovery; ten concurrent images and exact named exports; persistence after restart; ten shared-chat videos with six active tasks; read-only recovery; safe serial fallback; account-session media recovery; native files and five-entry/two-card export; three-account video isolation and workspace restoration are all rerun against the packaged Windows EXE.",
+    "preserved_user_modes": {
+      "standard": "One lane per account; ten accounts equal ten lanes.",
+      "expanded_ui": "Một tài khoản",
+      "expanded_example": "Ten accounts × six lanes = sixty requested concurrent slots."
+    },
+    "live_muse_account_render_tested": false,
+    "limitation": "Automated checks use a fixture service, not live Muse credits. The user's historical image/video files were not accessed. A service saying ready does not prove downloadable bytes exist; unavailable files fail explicitly per matched scene without automatically creating replacements. The 250-second cap bounds tool waiting, not Muse rendering completion."
+  },
+  "verified_at_utc": "2026-11-21T08:17:43.858Z"
+}
