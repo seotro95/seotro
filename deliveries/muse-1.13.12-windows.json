@@ -1,0 +1,80 @@
+{
+  "status": "windows_tests_and_uploaded_asset_sha256_verified",
+  "version": "1.13.12",
+  "source_commit": "408ece06760f3fb2e0a3f046f68b06cb870bbb9d",
+  "source_branch": "codex/muse-11311-virtual-file-links",
+  "workflow_run_id": 44888318307,
+  "workflow_job_id": 136798393615,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/44888318307",
+  "workflow_conclusion": "success",
+  "release_id": 453575059,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/untagged-9724260a039f45130439",
+  "draft": true,
+  "zip": {
+    "file": "Muse-AI-Studio-1.13.12-Windows-x64.zip",
+    "bytes": 160822126,
+    "sha256": "494e7ac19efbf8f96af824400a703445da048935481f5bda9106d04fb490c046",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-9724260a039f45130439/Muse-AI-Studio-1.13.12-Windows-x64.zip"
+  },
+  "checksum_file": {
+    "file": "Muse-AI-Studio-1.13.12-Windows-x64.zip.sha256",
+    "bytes": 106,
+    "sha256": "9c014ef1b30c3092459a5f256385c0b68dc062abc928fbbc7dabd458eb61fe3b",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-9724260a039f45130439/Muse-AI-Studio-1.13.12-Windows-x64.zip.sha256"
+  },
+  "validation": {
+    "windows_ui_checks": 42,
+    "download_control_browser_cases": 13,
+    "source_clip_browser_checks": 2,
+    "throughput_fixture": {
+      "accounts": 12,
+      "lanesPerAccount": 6,
+      "submittedBeforeAnyResult": 72,
+      "chatMessages": 12,
+      "pages": 12,
+      "extraWorkerPages": 0,
+      "preparationMs": 3435,
+      "submissionMs": 1396,
+      "downloadConcurrency": 6
+    },
+    "reported_image_case": {
+      "version": "1.13.10",
+      "accountId": 1,
+      "requestedConcurrency": 2,
+      "executionConcurrency": 2,
+      "batchSizes": [
+        1,
+        2
+      ],
+      "visibleImages": 0,
+      "error": "MUSE_MEDIA_UNREADABLE: MEDIA_URL_UNSUPPORTED",
+      "reportedActualSize": "1920×1280",
+      "user_confirmed_manual_download": true,
+      "actual_service_uri_not_provided": true
+    },
+    "reported_video_case": {
+      "accounts_visible_in_screenshot": [
+        1,
+        2,
+        4
+      ],
+      "other_accounts_detected_two_new_video_sources": true,
+      "video_diagnostic_json_not_received": true,
+      "original_script_codes_received": [
+        14,
+        20
+      ]
+    },
+    "native_downloads": "Existing, explicitly matched service download actions deliver real decoded files even when their URI cannot be fetched. Tests cover different sandbox paths and authorities, file-style references without host path reads, opaque URI links, HTTP viewer responses, default blob downloads when page fetch fails, trusted download buttons, delayed HTTP 404 routes, placeholder/same-document links with explicit labels, and owned/unbound blocked links while another scene continues. Executable and unsafe URL schemes are not activated.",
+    "matching": "Short CLIP labels are accepted only in a single bounded turn with a unique mapping to an assigned slot or original leading CLIP number. Conflicting aliases, foreign full nonces and overlapping turns cannot use this fallback. Historical recovery is bounded to its original request and full prompt and adds no generation/chat message.",
+    "three_native_accounts": "Three separate Electron partitions each submit two videos before any result. Original script IDs include 014 and 020 while tool slots are numbered 1–6. Six unique fixture files return to their correct slots and account identities, and each account restores its own workspace after restart.",
+    "native_queue_and_images": "Four exact image files are received independently of request arrival order, one refusal remains isolated, a button-only image is retrieved with a trusted browser click, and five queued images pass through two visible slots with all five names exported and retained after reload.",
+    "packaged_executable": "Mandatory Windows checks pass first; the packaged EXE is then tested for startup recovery, ordinary full portable flows, session media recovery, native file capture, default three-account isolation, virtual download controls/queued exports, and three-account/two-video original-CLIP matching.",
+    "waiting_limit_ms": 250000,
+    "preserved_modes": "Default remains one account/one lane and ten accounts/ten lanes; expanded account/lane selection, sixty slots, proxy/IP, naming, multi-file TXT/SRT queues and existing results are retained.",
+    "diagnostics": "Running scenes offer one-click status copying. Reports include protocol/action kinds and original clip aliases without full file URLs or signed query parameters.",
+    "live_muse_account_render_tested": false,
+    "limitation": "Windows/Chromium/Electron checks use a fixture service, not live Muse credits. Manual download availability was confirmed by the user; their actual URI and video status JSON were not obtained. Real Muse compatibility is not established by fixture tests alone, and the deadline bounds tool waiting rather than remote rendering completion."
+  },
+  "verified_at_utc": "2026-11-21T09:23:22.865Z"
+}
