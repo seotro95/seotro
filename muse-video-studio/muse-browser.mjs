@@ -779,7 +779,7 @@ export class MuseBrowser {
           const players=replies.flatMap(node=>Array.from(node.querySelectorAll('video'))).map(el=>({src:el.currentSrc||el.getAttribute('src')||el.querySelector('source[src]')?.src,duration:Number.isFinite(el.duration)?el.duration:undefined,width:el.videoWidth,height:el.videoHeight})).filter(el=>el.src);
           const videos=[...links,...players];
           const images = replies.flatMap(node => Array.from(node.querySelectorAll('img'))).filter(el => !el.closest('video') && (el.getAttribute('data-src')||el.getAttribute('data-original')||!el.complete||!el.naturalWidth||(el.naturalWidth>=128&&el.naturalHeight>=128))).map(el => ({ src: el.getAttribute('data-src')||el.getAttribute('data-original')||el.currentSrc||el.getAttribute('src'), width: el.naturalWidth, height: el.naturalHeight })).filter(el=>el.src&&!/^(?:data:image\/svg|.*\.svg(?:[?#]|$))/i.test(el.src));
-          if(output==='image')images.push(...replies.flatMap(node=>Array.from(node.querySelectorAll('a[href]'))).filter(el=>/\.(png|jpe?g|webp|avif|gif)(?:$|[?#])/i.test(el.href)||/^image\//i.test(el.type||'')).map(linkSource));
+          if(output==='image')images.push(...replies.flatMap(node=>Array.from(node.querySelectorAll('a[href]'))).filter(el=>/\.(png|jpe?g|webp|avif|gif)(?:$|[?#])/i.test(el.href)||/\.(png|jpe?g|webp|avif|gif)$/i.test(el.download||'')||/^image\//i.test(el.type||'')||nativeURL(el.href)||/\b(?:view|open|download|save)\s+(?:(?:the|generated|original|full[ -]?size|this|your)\s+)*(?:image|photo|picture)\b|(?:xem|mở|tải|lưu)\s+(?:hình\s+)?ảnh/i.test([el.textContent,el.getAttribute('aria-label'),el.getAttribute('title')].join(' '))).map(linkSource));
           const mediaURL=(value)=>{try{const url=new URL(value,location.href);return ['https:','blob:','data:'].includes(url.protocol)||(url.protocol==='http:'&&url.hostname==='127.0.0.1')}catch{return false}};
           const attributedLinks=sharedConversation?replies.flatMap(node=>Array.from(node.querySelectorAll('a[href]'))).filter(el=>[el.textContent,el.getAttribute('download'),el.href].some(value=>value?.includes(fileToken))):[];
           const namedLinks=attributedLinks.filter(el=>clickSafe(el.href));
@@ -849,6 +849,7 @@ export class MuseBrowser {
     }
   }
   async downloadMedia(page,media,output,signal){
+    if(output==='image'&&media.kind!=='image')media={...media,kind:'image'};
     const work=value=>mediaQueue.run(()=>this.downloadMediaNow(page,value,output,signal),signal);
     if(media.nativeDownload)return this.nativeFileQueue.run(()=>work(media),signal);
     try{return await work(media)}catch(error){
