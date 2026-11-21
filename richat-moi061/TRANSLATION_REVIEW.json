@@ -1,0 +1,931 @@
+{
+  "topic_id": "MOI-061",
+  "independent_native_review": false,
+  "independent_native_listening_review": false,
+  "source_adaptation": "Ten contextual sections preserve the narrative, core facts, and uncertainty. Vietnamese, Japanese, and Korean rewritten by assistant. Other languages are localized retellings from the English adaptation with selected assistant corrections, not verbatim translations of every English cue.",
+  "assistant_review_scope": "Full Vietnamese, Japanese and Korean narration rewrites. Complete sill/dyke/gabbro chapter rewritten in all fourteen automated draft locales. Targeted cross-script checks and corrections for geological bedding versus bed linen, igneous sheets versus household sheets, carbonatite versus carbonate, rock bodies versus people or organizations, uplift versus emotional uplift, two thousand twenty-four versus year two hundred forty-four, and mineral/geophysical age uncertainty. Full-script five-word English leak scan. No independent native editorial or listening review.",
+  "locales": {
+    "vi-VN": {
+      "chapters": 10,
+      "assistant_full_rewrite": true,
+      "targeted_edits": [],
+      "independent_native_review": false
+    },
+    "es-ES": {
+      "chapters": 10,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 1,
+          "old": "años treinta",
+          "new": "años treinta del siglo veinte"
+        },
+        {
+          "chapter": 2,
+          "old": "las camas",
+          "new": "las capas"
+        },
+        {
+          "chapter": 2,
+          "old": "Una misma cama inclinada",
+          "new": "Una misma capa inclinada"
+        },
+        {
+          "chapter": 2,
+          "old": "Los diferentes tipos de rocas se erosionan y erosionan a diferentes velocidades.",
+          "new": "Los distintos tipos de roca se meteorizan y se erosionan a velocidades diferentes."
+        },
+        {
+          "chapter": 2,
+          "old": "Camina por el lado más amable de tu imaginación.",
+          "new": "Imagina que subes por la ladera más suave."
+        },
+        {
+          "chapter": 3,
+          "old": "las camas",
+          "new": "las capas"
+        },
+        {
+          "chapter": 3,
+          "old": "como una sábana",
+          "new": "como una lámina de roca"
+        },
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 5,
+          "old": "empastes minerales",
+          "new": "rellenos minerales"
+        },
+        {
+          "chapter": 8,
+          "old": "Estas funciones pueden registrar",
+          "new": "Estas características pueden registrar"
+        },
+        {
+          "chapter": 9,
+          "old": "sábanas más viejas",
+          "new": "intrusiones laminares más antiguas"
+        },
+        {
+          "chapter": 10,
+          "old": "algunos organismos conservan",
+          "new": "algunos cuerpos de roca conservan"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "fr-FR": {
+      "chapters": 10,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 1,
+          "old": "années trente",
+          "new": "années trente du vingtième siècle"
+        },
+        {
+          "chapter": 3,
+          "old": "sous la forme d'un drap",
+          "new": "sous la forme d'une lame de roche"
+        },
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 8,
+          "old": "Suivez un supposé mur jusque dans sa literie.",
+          "new": "Suivez ce qui semble être un mur jusque dans les couches de la roche."
+        },
+        {
+          "chapter": 8,
+          "old": "Ces fonctionnalités peuvent enregistrer",
+          "new": "Ces caractéristiques peuvent enregistrer"
+        },
+        {
+          "chapter": 9,
+          "old": "aux feuilles plus anciennes",
+          "new": "aux intrusions lamellaires plus anciennes"
+        },
+        {
+          "chapter": 9,
+          "old": "Landsat Eight et Landsat Nine",
+          "new": "Landsat huit et Landsat neuf"
+        },
+        {
+          "chapter": 9,
+          "old": "Il montre le plateau sombre",
+          "new": "Elle montre le plateau sombre"
+        },
+        {
+          "chapter": 10,
+          "old": "Regardez à nouveau le calque incliné.",
+          "new": "Regardez à nouveau la couche inclinée."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "ja-JP": {
+      "chapters": 10,
+      "assistant_full_rewrite": true,
+      "targeted_edits": [
+        {
+          "chapter": 1,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 2,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 3,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 5,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 6,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 7,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 8,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 9,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 10,
+          "action": "Assistant contextual chapter rewrite"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "ko-KR": {
+      "chapters": 10,
+      "assistant_full_rewrite": true,
+      "targeted_edits": [
+        {
+          "chapter": 1,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 2,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 3,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 5,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 6,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 7,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 8,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 9,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 10,
+          "action": "Assistant contextual chapter rewrite"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "de-DE": {
+      "chapters": 10,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 1,
+          "old": "in den dreißiger Jahren",
+          "new": "in den neunzehnhundertdreißiger Jahren"
+        },
+        {
+          "chapter": 1,
+          "old": "beschrieben die Entstehung",
+          "new": "beschrieben die Formation"
+        },
+        {
+          "chapter": 2,
+          "old": "Die Messung der Neigungsrichtung der Betten",
+          "new": "Die Messung der Neigungsrichtung der Gesteinsschichten"
+        },
+        {
+          "chapter": 2,
+          "old": "neigen sich die Betten",
+          "new": "neigen sich die Gesteinsschichten"
+        },
+        {
+          "chapter": 2,
+          "old": "Das gleiche Schrägbett",
+          "new": "Dieselbe geneigte Gesteinsschicht"
+        },
+        {
+          "chapter": 3,
+          "old": "ein helles Karbonatbett",
+          "new": "eine helle Karbonatgesteinsschicht"
+        },
+        {
+          "chapter": 3,
+          "old": "Sie würden ein Bett neben dem anderen nachzeichnen",
+          "new": "Sie würden eine Gesteinsschicht neben der anderen verfolgen"
+        },
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 7,
+          "old": "Das widerstandsfähige Bett",
+          "new": "Die widerstandsfähige Gesteinsschicht"
+        },
+        {
+          "chapter": 8,
+          "old": "Auswirkungsstudien",
+          "new": "Studien über Meteoriteneinschläge"
+        },
+        {
+          "chapter": 9,
+          "old": "Schrägbetten, Kontakte",
+          "new": "Geneigte Gesteinsschichten, Kontakte"
+        },
+        {
+          "chapter": 9,
+          "old": "mit älteren Blättern",
+          "new": "mit älteren plattenförmigen Intrusionen"
+        },
+        {
+          "chapter": 9,
+          "old": "müssen geologische Untersuchungen durchführen",
+          "new": "müssen anhand geologischer Beobachtungen überprüft werden"
+        },
+        {
+          "chapter": 10,
+          "old": "Bei dem zweistufigen Vorschlag bewahren einige Leute eine ältere Episode, gefolgt von einem erneuten Eindringen und Aufschwung.",
+          "new": "In dem zweistufigen Modell bewahren manche Gesteinskörper eine ältere Episode, auf die viel später eine neue Intrusion und Hebung folgte."
+        },
+        {
+          "chapter": 10,
+          "old": "Ein Außendienstmitarbeiter testet ein Modell.",
+          "new": "Eine im Gelände beobachtete Kontaktfläche prüft ein Modell."
+        },
+        {
+          "chapter": 10,
+          "old": "die geneigte Ebene",
+          "new": "die geneigte Gesteinsschicht"
+        },
+        {
+          "chapter": 10,
+          "old": "Seine Kurve begann",
+          "new": "Ihre Krümmung begann"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "it-IT": {
+      "chapters": 10,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 2,
+          "old": "i letti",
+          "new": "gli strati"
+        },
+        {
+          "chapter": 2,
+          "old": "Lo stesso letto inclinato",
+          "new": "Lo stesso strato inclinato"
+        },
+        {
+          "chapter": 3,
+          "old": "i letti",
+          "new": "gli strati"
+        },
+        {
+          "chapter": 3,
+          "old": "Un letto di carbonato chiaro",
+          "new": "Uno strato di roccia carbonatica chiara"
+        },
+        {
+          "chapter": 3,
+          "old": "un letto accanto all'altro",
+          "new": "uno strato accanto all'altro"
+        },
+        {
+          "chapter": 3,
+          "old": "come un lenzuolo",
+          "new": "come un corpo roccioso appiattito"
+        },
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 6,
+          "old": "l'intrusione dei giovani",
+          "new": "l'intrusione magmatica più recente"
+        },
+        {
+          "chapter": 7,
+          "old": "Il letto resistente",
+          "new": "Lo strato resistente"
+        },
+        {
+          "chapter": 7,
+          "old": "Uplift ha organizzato",
+          "new": "Il sollevamento ha disposto"
+        },
+        {
+          "chapter": 9,
+          "old": "I letti inclinati",
+          "new": "Gli strati inclinati"
+        },
+        {
+          "chapter": 9,
+          "old": "nostro livello di apertura",
+          "new": "nostro strato iniziale"
+        },
+        {
+          "chapter": 10,
+          "old": "un faraglione sollevato",
+          "new": "un insieme di strati sollevato"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "pt-PT": {
+      "chapters": 10,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 2,
+          "old": "as camas se inclinam",
+          "new": "as camadas se inclinam"
+        },
+        {
+          "chapter": 2,
+          "old": "A mesma cama inclinada",
+          "new": "A mesma camada inclinada"
+        },
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 7,
+          "old": "Uplift organizou",
+          "new": "O levantamento organizou"
+        },
+        {
+          "chapter": 8,
+          "old": "até à sua cama",
+          "new": "até à sua estratificação"
+        },
+        {
+          "chapter": 9,
+          "old": "lençóis mais antigos",
+          "new": "intrusões laminares mais antigas"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "nl-NL": {
+      "chapters": 10,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 2,
+          "old": "de richting waarin bedden kantelen",
+          "new": "de richting waarin gesteentelagen hellen"
+        },
+        {
+          "chapter": 2,
+          "old": "zakken de bedden doorgaans",
+          "new": "hellen de gesteentelagen doorgaans"
+        },
+        {
+          "chapter": 2,
+          "old": "die de bedden volgt",
+          "new": "die de gesteentelagen volgt"
+        },
+        {
+          "chapter": 2,
+          "old": "Hetzelfde schuine bed",
+          "new": "Dezelfde schuine gesteentelaag"
+        },
+        {
+          "chapter": 3,
+          "old": "over de bedden",
+          "new": "door de gesteentelagen"
+        },
+        {
+          "chapter": 3,
+          "old": "als een laken",
+          "new": "als een plaatvormig gesteentelichaam"
+        },
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 6,
+          "old": "heeft mogelijk vellen gevormd",
+          "new": "heeft mogelijk plaatvormige intrusies gevormd"
+        },
+        {
+          "chapter": 6,
+          "old": "door carbonaat, een carbonaatrijk stollingsgesteente",
+          "new": "door carbonatiet, een carbonaatrijk stollingsgesteente"
+        },
+        {
+          "chapter": 6,
+          "old": "jongere indringing",
+          "new": "jongere magmatische intrusie"
+        },
+        {
+          "chapter": 8,
+          "old": "tot in het beddengoed",
+          "new": "tot in de gelaagdheid van het gesteente"
+        },
+        {
+          "chapter": 9,
+          "old": "Gekantelde bedden",
+          "new": "Hellende gesteentelagen"
+        },
+        {
+          "chapter": 9,
+          "old": "oudere vellen",
+          "new": "oudere plaatvormige intrusies"
+        },
+        {
+          "chapter": 9,
+          "old": "op 5 en 6 maart",
+          "new": "op vijf en zes maart"
+        },
+        {
+          "chapter": 10,
+          "old": "behouden sommige instanties",
+          "new": "bewaren sommige gesteentelichamen"
+        },
+        {
+          "chapter": 10,
+          "old": "hernieuwde inbreuk en verheffing",
+          "new": "een nieuwe magmatische intrusie en opheffing"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "pl-PL": {
+      "chapters": 10,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 8,
+          "old": "Podążaj za rzekomą ścianą w jej pościel.",
+          "new": "Podążaj za domniemaną ścianą wzdłuż uwarstwienia skały."
+        },
+        {
+          "chapter": 10,
+          "old": "ponowne wtargnięcie i podniesienie na duchu",
+          "new": "ponowna intruzja magmowa i wypiętrzenie"
+        },
+        {
+          "chapter": 10,
+          "old": "Kontakt terenowy testuje model.",
+          "new": "Kontakt skał zaobserwowany w terenie pozwala sprawdzić model."
+        },
+        {
+          "chapter": 10,
+          "old": "Jego krzywa zaczęła",
+          "new": "Jej krzywizna zaczęła"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "sv-SE": {
+      "chapters": 10,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 1,
+          "old": "Den första upptäckten är betong",
+          "new": "Den första upptäckten är konkret"
+        },
+        {
+          "chapter": 1,
+          "old": "på 1930-talet",
+          "new": "på nittonhundratrettiotalet"
+        },
+        {
+          "chapter": 2,
+          "old": "sängarna",
+          "new": "bergslagrens ytor"
+        },
+        {
+          "chapter": 2,
+          "old": "sängar i allmänhet",
+          "new": "berglager i allmänhet"
+        },
+        {
+          "chapter": 2,
+          "old": "Samma lutande säng",
+          "new": "Samma lutande berglager"
+        },
+        {
+          "chapter": 3,
+          "old": "sängarna",
+          "new": "bergslagrens ytor"
+        },
+        {
+          "chapter": 3,
+          "old": "en säng bredvid en annan",
+          "new": "ett berglager bredvid ett annat"
+        },
+        {
+          "chapter": 3,
+          "old": "som ett lakan",
+          "new": "som en skivformad intrusion"
+        },
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 6,
+          "old": "bildat ark",
+          "new": "bildat lagergångar"
+        },
+        {
+          "chapter": 8,
+          "old": "in i dess sängkläder",
+          "new": "längs bergartens lagring"
+        },
+        {
+          "chapter": 8,
+          "old": "skapar varken en inverkan eller en stad",
+          "new": "bevisar varken ett meteoritnedslag eller en stad"
+        },
+        {
+          "chapter": 9,
+          "old": "Tiltade sängar",
+          "new": "Lutande berglager"
+        },
+        {
+          "chapter": 9,
+          "old": "äldre lakan",
+          "new": "äldre lagergångar"
+        },
+        {
+          "chapter": 10,
+          "old": "bevarar några organ",
+          "new": "bevarar vissa bergartskroppar"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "da-DK": {
+      "chapters": 10,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 1,
+          "old": "i 1930'erne",
+          "new": "i nittenhundredetrediverne"
+        },
+        {
+          "chapter": 2,
+          "old": "som senge vipper i",
+          "new": "som bjergartslagene hælder i"
+        },
+        {
+          "chapter": 2,
+          "old": "dykker senge generelt",
+          "new": "hælder bjergartslagene generelt"
+        },
+        {
+          "chapter": 2,
+          "old": "Den samme skrå seng",
+          "new": "Det samme skrå bjergartslag"
+        },
+        {
+          "chapter": 3,
+          "old": "over sengene",
+          "new": "gennem bjergartslagene"
+        },
+        {
+          "chapter": 3,
+          "old": "som et lagen",
+          "new": "som et pladeformet magmatisk legeme"
+        },
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 6,
+          "old": "dannet ark",
+          "new": "dannet laggange"
+        },
+        {
+          "chapter": 6,
+          "old": "i år 244",
+          "new": "i år to tusind og fireogtyve"
+        },
+        {
+          "chapter": 8,
+          "old": "ind i dens sengetøj",
+          "new": "langs bjergartens lagdeling"
+        },
+        {
+          "chapter": 8,
+          "old": "Komplekse påvirkningsstrukturer",
+          "new": "Komplekse nedslagsstrukturer"
+        },
+        {
+          "chapter": 9,
+          "old": "Vippede senge",
+          "new": "Hældende bjergartslag"
+        },
+        {
+          "chapter": 9,
+          "old": "ældre ark",
+          "new": "ældre laggange"
+        },
+        {
+          "chapter": 10,
+          "old": "bevarer nogle organer",
+          "new": "bevarer nogle bjergartslegemer"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "fi-FI": {
+      "chapters": 10,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 2,
+          "old": "Sängyn kallistussuunnan",
+          "new": "Kivikerroksen kallistussuunnan"
+        },
+        {
+          "chapter": 2,
+          "old": "sängyt painuvat",
+          "new": "kivikerrokset viettävät"
+        },
+        {
+          "chapter": 3,
+          "old": "levisikö niiden väliin lakana",
+          "new": "levisikö se niiden väliin laattamaisena intruusiona"
+        },
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 6,
+          "old": "kaksituhatta24",
+          "new": "kaksituhattakaksikymmentäneljä"
+        },
+        {
+          "chapter": 9,
+          "old": "Kallistuneet sängyt",
+          "new": "Kallistuneet kivikerrokset"
+        },
+        {
+          "chapter": 9,
+          "old": "vanhempiin lakanoihin",
+          "new": "vanhempiin kerrosmyötäisiin intruusioihin"
+        },
+        {
+          "chapter": 9,
+          "old": "kaksituhatta22",
+          "new": "kaksituhattakaksikymmentäkaksi"
+        },
+        {
+          "chapter": 10,
+          "old": "jotkut ruumiit",
+          "new": "jotkin kivikappaleet"
+        },
+        {
+          "chapter": 10,
+          "old": "vulkaaniset aikakaudet",
+          "new": "magmakivien iät"
+        },
+        {
+          "chapter": 10,
+          "old": "haudattu geometria",
+          "new": "maanalainen geometria"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "nb-NO": {
+      "chapters": 10,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 1,
+          "old": "Den første oppdagelsen er betong",
+          "new": "Den første oppdagelsen er konkret"
+        },
+        {
+          "chapter": 1,
+          "old": "på 1930-tallet",
+          "new": "på nittenhundreogtrettitallet"
+        },
+        {
+          "chapter": 2,
+          "old": "sengene vipper",
+          "new": "bergartslagene heller"
+        },
+        {
+          "chapter": 2,
+          "old": "dykker senger vanligvis",
+          "new": "heller bergartslagene vanligvis"
+        },
+        {
+          "chapter": 2,
+          "old": "etter sengene",
+          "new": "langs bergartslagene"
+        },
+        {
+          "chapter": 2,
+          "old": "Den samme skrå sengen",
+          "new": "Det samme skrå bergartslaget"
+        },
+        {
+          "chapter": 3,
+          "old": "over sengene",
+          "new": "gjennom bergartslagene"
+        },
+        {
+          "chapter": 3,
+          "old": "som et laken",
+          "new": "som et plateformet magmatisk legeme"
+        },
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 6,
+          "old": "dannet ark",
+          "new": "dannet lagganger"
+        },
+        {
+          "chapter": 7,
+          "old": "Den motstandsdyktige sengen",
+          "new": "Det motstandsdyktige bergartslaget"
+        },
+        {
+          "chapter": 8,
+          "old": "inn i sengetøyet",
+          "new": "langs bergartens lagdeling"
+        },
+        {
+          "chapter": 9,
+          "old": "Vippede senger",
+          "new": "Hellende bergartslag"
+        },
+        {
+          "chapter": 9,
+          "old": "eldre ark",
+          "new": "eldre lagganger"
+        },
+        {
+          "chapter": 10,
+          "old": "bevarer noen organer",
+          "new": "bevarer noen bergartslegemer"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "cs-CZ": {
+      "chapters": 10,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 2,
+          "old": "Stejná nakloněná postel",
+          "new": "Stejná nakloněná horninová vrstva"
+        },
+        {
+          "chapter": 2,
+          "old": "Měření směru náklonu postelí pomáhá rekonstruovat uspořádání.",
+          "new": "Měření směru sklonu horninových vrstev pomáhá rekonstruovat jejich uspořádání."
+        },
+        {
+          "chapter": 2,
+          "old": "Kolem kopule se postele obecně ponořují směrem ven.",
+          "new": "Kolem klenby se vrstvy obvykle uklánějí směrem ven."
+        },
+        {
+          "chapter": 2,
+          "old": "sledujícím postele",
+          "new": "sledujícím horninové vrstvy"
+        },
+        {
+          "chapter": 3,
+          "old": "přes lůžka",
+          "new": "napříč vrstvami"
+        },
+        {
+          "chapter": 3,
+          "old": "jako list",
+          "new": "jako deskovité magmatické těleso"
+        },
+        {
+          "chapter": 3,
+          "old": "jednu postel vedle druhé",
+          "new": "jednu horninovou vrstvu vedle druhé"
+        },
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 6,
+          "old": "při nahrávání různých kapitol",
+          "new": "a přitom zaznamenávat různé etapy"
+        },
+        {
+          "chapter": 8,
+          "old": "do její podestýlky",
+          "new": "podél vrstevnatosti horniny"
+        },
+        {
+          "chapter": 9,
+          "old": "Nakloněná lůžka",
+          "new": "Nakloněné horninové vrstvy"
+        },
+        {
+          "chapter": 9,
+          "old": "ke starším plechům",
+          "new": "ke starším ložním žilám"
+        },
+        {
+          "chapter": 10,
+          "old": "Polní kontakt testuje model.",
+          "new": "Kontakt hornin pozorovaný v terénu umožňuje ověřit model."
+        },
+        {
+          "chapter": 10,
+          "old": "Jeho křivka začala",
+          "new": "Její křivka začala"
+        }
+      ],
+      "independent_native_review": false
+    }
+  },
+  "vietnamese_scene_expansion": {
+    "scope": "Concrete present-tense comparison scenes added before the one caveat beat in each section; no new unverified dates or source identification claims",
+    "section_word_counts": [
+      446,
+      440,
+      435,
+      436,
+      438,
+      438,
+      423,
+      442,
+      450,
+      433
+    ]
+  }
+}
