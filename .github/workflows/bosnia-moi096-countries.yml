@@ -1,0 +1,125 @@
+name: Bosnia MOI096 fifteen saved male country voices
+permissions:
+  contents: read
+  actions: read
+jobs:
+  validate_inputs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: bosnia-moi096
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: 'python bosnia-moi096/extract_content.py
+
+        python bosnia-moi096/extract_voice_inputs.py
+
+        python bosnia-moi096/build_documents.py
+
+        python bosnia-moi096/voice_gate.py
+
+        python -m compileall -q bosnia-moi096
+
+        '
+  wait_english:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: bosnia-moi096
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: python -u bosnia-moi096/wait_for_english.py
+      env:
+        GH_TOKEN: ${{ github.token }}
+  countries:
+    needs: [validate_inputs, wait_english]
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        locale:
+        - vi-VN
+        - es-ES
+        - fr-FR
+        - ja-JP
+        - ko-KR
+        - de-DE
+        - it-IT
+        - pt-PT
+        - nl-NL
+        - pl-PL
+        - sv-SE
+        - da-DK
+        - fi-FI
+        - nb-NO
+        - cs-CZ
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: bosnia-moi096
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: 'python bosnia-moi096/extract_content.py
+
+        python bosnia-moi096/extract_voice_inputs.py
+
+        python bosnia-moi096/build_documents.py
+
+        python bosnia-moi096/voice_gate.py
+
+        python bosnia-moi096/english_gate.py
+
+        python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+
+        python bosnia-moi096/ensure_ffmpeg.py
+
+        python bosnia-moi096/bootstrap_tool.py online
+
+        '
+    - uses: actions/download-artifact@v4
+      continue-on-error: true
+      with:
+        name: bosnia-moi096-checkpoint-${{ matrix.locale }}
+        path: bosnia-moi096/voice/audio/${{ matrix.locale }}
+    - name: Render saved male voice retaining successful speech
+      run: "set +e\npython -u bosnia-moi096/render_online.py \"${{ matrix.locale }}\"\ncode=$?\nif [ \"$code\" = 75 ]; then\n\
+        \  sleep 15\n  python -u bosnia-moi096/render_online.py \"${{ matrix.locale }}\"\n  code=$?\nfi\nexit \"$code\"\n"
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: bosnia-moi096-checkpoint-${{ matrix.locale }}
+        path: 'bosnia-moi096/voice/audio/${{ matrix.locale }}/raw-*
+
+          bosnia-moi096/voice/audio/${{ matrix.locale }}/pending_*.json
+
+          '
+        if-no-files-found: ignore
+        retention-days: 30
+        overwrite: true
+    - uses: actions/upload-artifact@v4
+      with:
+        name: bosnia-moi096-voice-${{ matrix.locale }}
+        path: 'bosnia-moi096/voice/audio/${{ matrix.locale }}/*.mp3
+
+          bosnia-moi096/voice/audio/${{ matrix.locale }}/render_report.json
+
+          '
+        if-no-files-found: error
+        retention-days: 30
+        overwrite: true
+'on':
+  push:
+    branches:
+    - codex/bosnia-moi096-production-20261121
+    paths:
+    - .github/workflows/bosnia-moi096-countries.yml
+  workflow_dispatch: null

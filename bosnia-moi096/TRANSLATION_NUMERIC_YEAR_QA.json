@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "locales": 12,
+  "allowed_arabic_years": [
+    2004,
+    2005,
+    2006,
+    2017,
+    2025
+  ],
+  "assistant_corrected": [
+    "de-DE chapter9:2001 to2017",
+    "it-IT chapter8:2606 to2006",
+    "fi-FI chapter1 mixed numeric2005 normalized"
+  ],
+  "independent_native_review": false
+}

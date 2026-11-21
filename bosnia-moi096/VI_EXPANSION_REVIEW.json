@@ -1,0 +1,26 @@
+{
+  "method": "Full assistant Vietnamese narration rewrite, no mechanical padding",
+  "sections": 10,
+  "whitespace_word_counts": [
+    394,
+    394,
+    391,
+    401,
+    409,
+    425,
+    415,
+    448,
+    455,
+    431
+  ],
+  "independent_native_editorial_review": false,
+  "independent_native_listening_review": false,
+  "reviewed_terms": [
+    "cuội kết",
+    "khoáng gắn kết tự nhiên",
+    "khe nứt địa chất",
+    "trình tự xây dựng",
+    "vật liệu hữu cơ",
+    "bối cảnh định tuổi"
+  ]
+}

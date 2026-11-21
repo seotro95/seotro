@@ -1,8 +1,8 @@
-name: Bosnia MOI061 documents and English 20m42s
+name: Bosnia MOI096 documents and English 20m42s
 on:
   push:
     branches: [codex/bosnia-moi096-production-20261121]
-    paths: [.github/workflows/bosnia-moi096-documents-english.yml]
+    paths: [bosnia-moi096/TRIGGER_DOCUMENTS_ENGLISH]
   workflow_dispatch:
 permissions:
   contents: read
