@@ -1,4 +1,4 @@
-name: Muse 1.13.11 virtual file controls and source clip labels
+name: Muse 1.13.12 virtual file controls and source clip labels
 on:
   workflow_dispatch:
   push:
@@ -141,7 +141,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - uses: actions/upload-artifact@v4
         with:
-          name: Muse-AI-Studio-1.13.11-Windows-x64
+          name: Muse-AI-Studio-1.13.12-Windows-x64
           path: ${{ runner.temp }}/muse-artifacts/*.zip
           if-no-files-found: error
       - name: Save the verified Windows ZIP as a draft release
@@ -157,6 +157,6 @@ jobs:
           $hash = (Get-FileHash $zip.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
           "$hash  $($zip.Name)" | Set-Content -Encoding utf8 "${{ runner.temp }}/Muse-AI-Studio-$version-Windows-x64.zip.sha256"
           $checksum = "${{ runner.temp }}/Muse-AI-Studio-$version-Windows-x64.zip.sha256"
-          Copy-Item CAP-NHAT-1.13.11.md "${{ runner.temp }}/muse-release-notes.txt"
+          Copy-Item CAP-NHAT-1.13.12.md "${{ runner.temp }}/muse-release-notes.txt"
           gh release create $tag $zip.FullName $checksum --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Muse AI Studio $version - Independent scene actions and native file downloads - Windows x64" --notes-file "${{ runner.temp }}/muse-release-notes.txt" --draft --latest=false
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

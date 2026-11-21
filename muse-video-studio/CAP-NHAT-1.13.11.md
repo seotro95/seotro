@@ -6,7 +6,6 @@ Bản Windows đầy đủ; không cần thư mục bản cũ. Đóng tool cũ, 
 
 - Nhận các liên kết tệp nội bộ có dạng đường dẫn hoặc giao thức khác dạng sandbox:/mnt/data/. Với liên kết không dùng fetch trực tiếp được, tool kích hoạt đúng nút/liên kết tải hiện có trên trang Muse và nhận tệp qua phiên tài khoản đó.
 - Nhận nút Download ảnh/video ngay cả khi trang chưa có thẻ img/video hoặc URL tải trực tiếp. Giữ thao tác click của trình duyệt cho các trình tải cần cử chỉ người dùng.
-- Liên kết trả 404 hoặc tệp rỗng được thử lại có giới hạn để chờ tệp sẵn sàng; nếu còn lỗi, dùng thao tác Download có sẵn. Giữ việc nhận tệp đang chuẩn bị và không gửi lại yêu cầu tạo.
 - Khi một đường dẫn HTTP mở trang xem tệp thay vì trả dữ liệu ảnh, thử thao tác tải gốc của chính liên kết đã đối chiếu. Không đoán API, không đọc đường dẫn file nội bộ trên máy và không gửi lại lệnh tạo.
 - Chỉ lưu khi đã nhận và giải mã được tệp thật; kích thước lấy từ tệp. Lời “ready” hoặc dòng thông số không được coi là kết quả ảnh.
 - Nếu một ô có liên kết lỗi, chỉ ô đó báo lỗi; các ô còn tạo tiếp tục nhận kết quả. Có chẩn đoán giao thức và loại nút/liên kết, không đưa URL đầy đủ hoặc tham số đăng nhập vào chẩn đoán.
