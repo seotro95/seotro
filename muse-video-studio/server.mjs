@@ -19,6 +19,7 @@ if (!['browser', 'adapter'].includes(transport)) throw new Error('MUSE_TRANSPORT
 const muse = transport === 'browser' ? museDriver || await new MuseAccounts({ accountProfile: process.env.MUSE_ACCOUNT_PROFILE, profileRoot: path.resolve(process.env.MUSE_PROFILE_ROOT || path.join(ROOT, '.data', 'muse-accounts')) }).load() : null;
 const MAX_BODY = 12 * 1024 * 1024;
 let activeRequests = 0;
+const activeAccountRequests=new Map();
 let accountBusy = false;
 const preparingAccounts=new Set();
 const maxConcurrency = MAX_SLOTS;
@@ -99,6 +100,7 @@ async function api(req, res, pathname) {
   const legacyAccountRoute = pathname.match(/^\/api\/accounts\/(\d+)\/(connect|check|close)$/);
   if (!['/api/video', '/api/image', '/api/text','/api/media/recover'].includes(pathname) && !accountRoute && !legacyAccountRoute) return json(res, 404, { error: 'API không tồn tại.' });
   let acquired = false;
+  let renderingAccountId=null;
   let accountAcquired = false;
   let preparingAccountId=null;
   const abort = new AbortController();
@@ -115,7 +117,7 @@ async function api(req, res, pathname) {
       if (!muse) return json(res, 409, { error: 'Tài khoản đang do adapter riêng quản lý. Chọn MUSE_TRANSPORT=browser để đăng nhập bằng Chrome/Edge.' });
       if(action==='save'){if(!muse.saveSessions)return json(res,409,{error:'Lưu tất cả phiên có trong bản desktop.'});return json(res,200,await muse.saveSessions());}
       const preparing=action==='prepare';
-      if(activeRequests||accountBusy||muse.restoring||(!preparing&&preparingAccounts.size)||preparingAccounts.has(accountId))return json(res,409,{error:'Đang có tác vụ hoặc chuẩn bị phiên. Đợi hoàn tất trước khi thay đổi tài khoản.'});
+      if((preparing?(activeAccountRequests.get(accountId)||0)>0:activeRequests>0)||accountBusy||muse.restoring||(!preparing&&preparingAccounts.size)||preparingAccounts.has(accountId))return json(res,409,{error:'Đang có tác vụ hoặc chuẩn bị phiên. Đợi hoàn tất trước khi thay đổi tài khoản.'});
       if(preparing&&preparingAccounts.size>=3)return json(res,429,{error:'ACCOUNT_PREPARE_BUSY: Đang chuẩn bị ba tài khoản. Đợi một phiên hoàn tất.'});
       muse.account(accountId);
       if(preparing){preparingAccounts.add(accountId);preparingAccountId=accountId}else accountBusy=accountAcquired=true;
@@ -137,9 +139,9 @@ async function api(req, res, pathname) {
     if(recovering&&!data.sceneId)return json(res,400,{error:'MUSE_RECOVER_INVALID: Cần đúng số cảnh và prompt để đối chiếu tệp đã tạo.'});
     const endpoint = `/${kind}`;
     if (!muse) adapterURL(endpoint);
-    if (accountBusy||preparingAccounts.size) return json(res, 409, { error: 'Đang kiểm tra tài khoản Muse. Vui lòng đợi.' });
+    if (accountBusy||preparingAccounts.has(data.accountId??1)) return json(res, 409, { error: 'Đang kiểm tra tài khoản Muse. Vui lòng đợi.' });
     if (activeRequests >= maxConcurrency) return json(res, 429, { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 400 ô AI đang chạy. Đợi một luồng hoàn tất.' });
-    activeRequests++; acquired = true;
+    activeRequests++; acquired = true;renderingAccountId=data.accountId??1;activeAccountRequests.set(renderingAccountId,(activeAccountRequests.get(renderingAccountId)||0)+1);
     const useImage = data.image && (data.characterLock !== false || (kind === 'video' && data.sourceMode === 'image'));
     const payload = { accountId: data.accountId, ...(muse ? {accountMode: data.accountMode || 'single'} : {}), prompt: data.prompt, ...(muse && data.batchId ? { batchId: data.batchId, sceneId: data.sceneId,submissionGroup:data.submissionGroup } : {}),
       ...(kind !== 'text' ? { aspectRatio: data.aspectRatio, resolution: data.resolution, characterLock: data.characterLock !== false,
@@ -153,7 +155,7 @@ async function api(req, res, pathname) {
     const metadata = result.metadata && Number.isFinite(result.metadata.width) && Number.isFinite(result.metadata.height) ? result.metadata : undefined;
     return json(res, 200, kind !== 'text' ? { base64: result.base64, mimeType: result.mimeType, ...(metadata ? { metadata } : {}) } : { text: result.text });
   } catch (error) { json(res, Number.isInteger(error.status) && error.status >= 400 && error.status <= 599 ? error.status : 502, { error: safeError(error) }); }
-  finally { clearTimeout(timeout); if (acquired) activeRequests--; if (accountAcquired) accountBusy = false;if(preparingAccountId!==null)preparingAccounts.delete(preparingAccountId); }
+  finally { clearTimeout(timeout); if (acquired){activeRequests--;const count=activeAccountRequests.get(renderingAccountId)||0;if(count>1)activeAccountRequests.set(renderingAccountId,count-1);else activeAccountRequests.delete(renderingAccountId);} if (accountAcquired) accountBusy = false;if(preparingAccountId!==null)preparingAccounts.delete(preparingAccountId); }
 }
 const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.mp4': 'video/mp4', '.png': 'image/png', '.ico': 'image/x-icon' };
 const server = http.createServer(async (req, res) => {

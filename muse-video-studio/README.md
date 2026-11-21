@@ -1,10 +1,18 @@
-# Muse AI Studio 1.13.9
+# Muse AI Studio 1.13.10
 
-Ứng dụng Windows tạo ảnh/video qua các tài khoản Muse riêng, nhập TXT/SRT và lưu kết quả trên máy. Xem [cách dùng bản mới](CAP-NHAT-1.13.9.md).
+Ứng dụng Windows tạo ảnh/video qua các tài khoản Muse riêng, nhập TXT/SRT và lưu kết quả trên máy. Xem [cách dùng bản mới](CAP-NHAT-1.13.10.md).
+
+## Tạo lại từng ô và nhận tệp Muse
+
+Có thể bấm Tạo lại, Tạo mới hoặc Nhận lại ở ô khác khi một ô đang chạy hoặc đang chuẩn bị phiên. Mỗi ô giữ tác vụ riêng; một luồng thì xếp hàng, sáu luồng thì dùng số luồng trống. Không gửi trùng ô đang chạy. Nhận tệp qua liên kết tải gốc của Muse khi dịch vụ cung cấp tệp thật; báo riêng ô bị từ chối tạo và kiểm tra kích thước ảnh thực tế.
 
 ## Sửa kết nối nội bộ và báo lỗi
 
 Lệnh tạo ảnh/video của bản desktop dùng kết nối HTTP riêng tới Studio trên máy, không đi qua global fetch/proxy hoặc thời hạn chờ header mặc định của fetch. Mã lỗi phân biệt mất kết nối, hết thời gian và phản hồi không hợp lệ. Mỗi ô có **Sao chép lỗi** và **Tải lỗi TXT**. Bản sửa cũng nhận được xác nhận gửi khi tin nhắn bị thu gọn và tiếp tục nhận kết quả khi Muse ẩn dòng người dùng cũ.
+
+## Hàng chờ theo tệp
+
+Nhập nhiều TXT/SRT rồi chọn **Lưu tất cả vào hàng chờ** để chọn tệp hoặc từng prompt sau. **Chạy theo số ô hiện có** nạp lần lượt đủ prompt qua các ô đang mở, kể cả khi tổng prompt lớn hơn 400. Chọn **Tải kết quả đã chọn** trong bảng hàng chờ để lưu cả các nhóm trước đúng tên gốc. Trạng thái lưu trên máy; mở lại không tự gửi prompt.
 
 ## Tên ảnh/video theo TXT/SRT
 

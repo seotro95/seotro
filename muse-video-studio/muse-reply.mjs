@@ -1,8 +1,10 @@
+export const replyStarted=text=>/\b(?:started|begun) (?:generation|generating|creating|(?:both|all|the|\d+|two|three|four|five|six)(?: [a-z]+){0,3} (?:images?|videos?|clips?))|\bgeneration (?:has started|is (?:now )?in progress)|đã bắt đầu tạo (?:ảnh|video)/i.test(String(text||''));
 // Only classify completed assistant replies, never the submitted scene prompt.
 // A visible user message acknowledges delivery; it is not a render/job receipt.
 export function replyProblem(text) {
   const value=String(text||'').replace(/\bMUSE_[a-f0-9]{32}\b/g,'').trim();
   if(!value)return null;
+  if(/(?:could not|couldn[’']t|was not|wasn[’']t) (?:be )?(?:generated|created|rendered)|no (?:image |video |output )?file was created|(?:tạo|kết xuất) (?:ảnh|video)[\s\S]{0,30}không thành công/i.test(value))return 'MUSE_GENERATION_REFUSED';
   const started=/\bI(?:'ve| have)? (?:already )?(?:started|begun) (?:generating|creating)|\bgeneration (?:has started|is (?:now )?in progress)|(?:tôi )?đã bắt đầu tạo (?:video|ảnh)|đang tạo (?:video|ảnh)/i.test(value);
   if(started&&!/failed|error|quota|insufficient|bị lỗi|không thành công/i.test(value))return null;
   if(/too many (?:active|parallel|simultaneous)|only one (?:generation|request|video)[\s\S]{0,35}at (?:a|one) time|already (?:generating|processing)[\s\S]{0,50}(?:wait|finish)|chỉ (?:được|có thể)[\s\S]{0,35}một[\s\S]{0,35}(?:mỗi lần|tại một thời điểm)/i.test(value))return 'MUSE_PARALLEL_LIMIT';

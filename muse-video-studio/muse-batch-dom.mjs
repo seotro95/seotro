@@ -4,6 +4,7 @@ export function inspectBatchDOM({marker,rows=[],baseline=[],baselineTexts=[],cap
   const compact=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/[^a-z0-9]/g,'');
   const hash=value=>{let n=2166136261;for(let i=0;i<value.length;i++)n=Math.imul(n^value.charCodeAt(i),16777619);return (n>>>0).toString(16)+':'+value.length};
   const key=value=>{try{const url=new URL(value,location.href);if(url.protocol==='data:')return 'data:'+hash(url.href);url.hash='';for(const name of [...url.searchParams.keys()])if(/^(?:x-amz-.+|signature|expires|key-pair-id|policy|width|height|dpr|quality)$/i.test(name))url.searchParams.delete(name);url.searchParams.sort();return url.href}catch{return value}};
+  const native=value=>{try{const url=new URL(value,location.href);return !url.username&&!url.password&&(['attachment:','artifact:'].includes(url.protocol)||(url.protocol==='sandbox:'&&url.pathname.startsWith('/mnt/data/')))}catch{return false}};
   const valid=value=>{try{const url=new URL(value,location.href);return ['https:','data:','blob:'].includes(url.protocol)||(url.protocol==='http:'&&url.hostname==='127.0.0.1')}catch{return false}};
   const all=[...document.querySelectorAll('[data-message-item]')];const users=all.filter(node=>node.getAttribute('data-message-role')==='user');
   const exactAnchor=all.findLastIndex(node=>node.getAttribute('data-message-role')==='user'&&node.textContent.includes(marker||'__missing_marker__'));
@@ -32,10 +33,15 @@ export function inspectBatchDOM({marker,rows=[],baseline=[],baselineTexts=[],cap
     return null;
   };
   const foreign=element=>{let node=element;while(node&&node.hasAttribute){const value=evidence(node);if(owners(value).length)return false;if(/MUSE_[a-f0-9]{32}|CLIP[ _-]*[0-9]{3}[ _-]*[a-f0-9]{8}/i.test(value))return true;if(node.hasAttribute('data-message-item'))break;node=node.parentElement;}return false;};
-  const add=(element,src,kind,rank=1,uncertain=false)=>{if(!src||(!captureOnly&&foreign(element)))return;const id=key(src);if(!valid(src)){unsupported.push({owner:elementOwner(element),kind});return;}if(!captureOnly&&seen.has(id))return;sources.push({key:id,kind,reply:element.closest('[data-message-item]')});const prior=assets.get(id);const value={key:id,src:new URL(src,location.href).href,kind,rank,uncertain,owner:elementOwner(element)};if(prior?.ambiguous)return;if(prior?.owner&&value.owner&&prior.owner!==value.owner){assets.set(id,{...prior,owner:null,ambiguous:true});return;}if(!prior||rank<prior.rank){value.owner||=prior?.owner||null;assets.set(id,value)}else if(!prior.owner&&value.owner)prior.owner=value.owner};
+  const add=(element,src,kind,rank=1,uncertain=false)=>{if(!src||(!captureOnly&&foreign(element)))return;const id=key(src);const nativeDownload=element.matches('a[href]')&&native(src);if(!valid(src)&&!nativeDownload){unsupported.push({owner:elementOwner(element),kind});return;}if(!captureOnly&&seen.has(id))return;sources.push({key:id,kind,reply:element.closest('[data-message-item]')});const prior=assets.get(id);if(nativeDownload)rank=10;if(nativeDownload)element.dataset.museStudioFileId||=crypto.randomUUID();const value={nativeDownload,nativeId:nativeDownload?element.dataset.museStudioFileId:undefined,key:id,src:new URL(src,location.href).href,kind,rank,uncertain,owner:elementOwner(element)};if(prior?.ambiguous)return;if(prior?.owner&&value.owner&&prior.owner!==value.owner){assets.set(id,{...prior,owner:null,ambiguous:true});return;}if(!prior||rank<prior.rank){value.owner||=prior?.owner||null;assets.set(id,value)}else if(!prior.owner&&value.owner)prior.owner=value.owner};
   for(const reply of replies){
     for(const player of reply.querySelectorAll('video'))add(player,player.currentSrc||player.getAttribute('src')||player.querySelector('source[src]')?.src,'video',2);
-    if(output==='image'||captureOnly)for(const image of reply.querySelectorAll('img'))if(captureOnly||(image.complete&&image.naturalWidth>=128&&image.naturalHeight>=128))add(image,image.currentSrc||image.src,'image',2);
+    if(output==='image'||captureOnly)for(const image of reply.querySelectorAll('img')){
+      const lazy=image.getAttribute('data-src')||image.getAttribute('data-original');
+      const loaded=image.complete&&image.naturalWidth>=128&&image.naturalHeight>=128;
+      const pending=!image.complete||!image.naturalWidth;
+      if(captureOnly||loaded||lazy||pending){const src=lazy||image.currentSrc||image.getAttribute('src');if(src&&!/^(?:data:image\/svg|.*\.svg(?:[?#]|$))/i.test(src))add(image,src,'image',lazy?1:2);}
+    }
     for(const link of reply.querySelectorAll('a[href]')){
       const name=[link.href,link.download||'',link.type||''].join(' ');let kind=/\.(mp4|webm|mov)(?:$|[?#\s])|video\//i.test(name)?'video':/\.(png|jpe?g|webp|avif|gif)(?:$|[?#\s])|image\//i.test(name)?'image':null;
       const uncertain=!kind;const direct=owners([link.textContent,link.download,link.href].join(' ')).length===1;const downloadable=Boolean(link.getAttribute('download'))||/download|tải(?:\s+(?:về|video|ảnh|file|tệp))?/i.test(link.textContent||'');
@@ -110,7 +116,7 @@ export function inspectBatchDOM({marker,rows=[],baseline=[],baselineTexts=[],cap
   const freshReplies=replies.filter(node=>!previousTexts.has(hash(node.textContent||''))&&(!foreign(node)||captions.get(node)?.declared.size));
   const text=freshReplies.map(node=>node.innerText).join('\n\n').trim();
   const rowTexts={},general=[];
-  for(const reply of freshReplies){const blocks=[...reply.querySelectorAll('p,li,h1,h2,h3,h4,h5,h6,div')].filter(node=>!node.querySelector('p,li,h1,h2,h3,h4,h5,h6,div'));for(const block of blocks.length?blocks:[reply]){const value=block.innerText?.trim();if(!value)continue;const owner=elementOwner(block);if(owner)rowTexts[owner]=value;else general.push(value)}}
+  for(const reply of freshReplies){const blocks=[...reply.querySelectorAll('p,li,h1,h2,h3,h4,h5,h6,div')].filter(node=>!node.querySelector('p,li,h1,h2,h3,h4,h5,h6,div'));for(const block of blocks.length?blocks:[reply]){const value=block.innerText?.trim();if(!value)continue;const owner=elementOwner(block);if(owner)rowTexts[owner]=[rowTexts[owner],value].filter(Boolean).join('\n\n');else general.push(value)}}
   const rowErrors={};for(const reply of freshReplies)for(const notice of reply.querySelectorAll('[data-testid="assistant-response-error-notice"]')){const owner=elementOwner(notice);if(owner)rowErrors[owner]=notice.innerText}
   const completedRows=new Set([...freshReplies.flatMap(node=>[...(captions.get(node)?.completed||[])]),...media.map(item=>item.owner).filter(Boolean)]).size;
   const sceneId=token=>Number(rows.find(row=>row.fileToken===token)?.label?.match(/CLIP[ _-]*(\d{3})/i)?.[1])||null;

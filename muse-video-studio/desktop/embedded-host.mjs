@@ -4,6 +4,8 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import {readSessionMedia} from './media-download.mjs';
+import{captureSessionAttachment}from'./attachment-download.mjs';
+import{clickNativeAttachment}from'../muse-attachment.mjs';
 
 export const remotePreferences = { partition: 'persist:muse', sandbox: true, contextIsolation: true, nodeIntegration: false, webSecurity: true, backgroundThrottling: false };
 
@@ -116,6 +118,7 @@ export class EmbeddedMuseHost {
       context: login.page.context(), page: login.page,
       showLogin: () => this.showLogin(),
       isLoginVisible: () => this.loginVisible,
+      readAttachment:(frame,media,signal)=>captureSessionAttachment((this.views.get(frame.page?frame.page():frame)||login.view).webContents,()=>clickNativeAttachment(frame,media,signal),signal),
       readMedia: (src,signal) => readSessionMedia(login.view.webContents.session,src,{signal,serviceURL:this.serviceURL}),
       createWorkerPage: async () => (await this.createView({ worker: true })).page,
       destroyWorkerPage: page => this.removePage(page),

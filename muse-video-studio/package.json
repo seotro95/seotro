@@ -1,6 +1,6 @@
 {
   "name": "muse-video-studio",
-  "version": "1.13.9",
+  "version": "1.13.10",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,7 +13,7 @@
     "start:web": "node --use-env-proxy server.mjs",
     "test:desktop": "node tests/desktop.test.mjs",
     "test:startup": "node tests/startup-desktop.test.mjs",
-    "test:parallel-six": "node tests/account-parallel-video.test.mjs && node tests/warm-parallel.test.mjs && node tests/muse-parallel.test.mjs && node tests/auto-fallback-browser.test.mjs && node tests/shared-conversation.test.mjs && node tests/result-acknowledgement.test.mjs && node tests/reply-recovery.test.mjs && node tests/multi-account-throughput.test.mjs && node tests/batched-chat.test.mjs && node tests/batch-caption-dom.test.mjs && node tests/saved-batch-recovery.test.mjs && node tests/interleaved-caption-dom.test.mjs && node tests/composer-readiness.test.mjs && node tests/label-before-media.test.mjs && node tests/leading-label-browser.test.mjs",
+    "test:parallel-six": "node tests/account-parallel-video.test.mjs && node tests/warm-parallel.test.mjs && node tests/muse-parallel.test.mjs && node tests/auto-fallback-browser.test.mjs && node tests/shared-conversation.test.mjs && node tests/result-acknowledgement.test.mjs && node tests/reply-recovery.test.mjs && node tests/multi-account-throughput.test.mjs && node tests/batched-chat.test.mjs && node tests/batch-caption-dom.test.mjs && node tests/saved-batch-recovery.test.mjs && node tests/interleaved-caption-dom.test.mjs && node tests/composer-readiness.test.mjs && node tests/label-before-media.test.mjs && node tests/leading-label-browser.test.mjs && node tests/native-image-files.test.mjs",
     "test:proxy-desktop": "node tests/proxy-ip-desktop.test.mjs"
   },
   "engines": {
