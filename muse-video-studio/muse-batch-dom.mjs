@@ -26,7 +26,11 @@ export function inspectBatchDOM({marker,rows=[],baseline=[],baselineTexts=[],cap
     return [...new Set(ids.map(id=>[...shortTokens.get(id)][0]))];
   };
   const evidence=node=>[node.textContent,...[...node.attributes].map(item=>item.value),...['aria-labelledby','aria-describedby'].flatMap(name=>(node.getAttribute(name)||'').split(/\s+/).filter(Boolean).map(id=>document.getElementById(id)?.textContent||''))].join(' ');
-  const mediaLink=node=>node.matches('a[href]')&&(/\.(?:mp4|webm|mov|png|jpe?g|webp|avif|gif)(?:$|[?#])/i.test(node.href)||Boolean(node.getAttribute('download'))||/^(?:video|image)\//i.test(node.type||'')||/download|tải về/i.test(node.textContent||''));
+  // Some generated images are exposed only as an extensionless file action.
+  // Keep those candidates for the same unique-label attribution used by native
+  // image cards; an ordinary citation or an unbound control is never a result.
+  const imageLinkIntent=node=>output==='image'&&(native(node.href)||/\b(?:view|open|download|save)\s+(?:(?:the|generated|original|full[ -]?size|this|your)\s+)*(?:image|photo|picture)\b|(?:xem|mở|tải|lưu)\s+(?:hình\s+)?ảnh/i.test([node.textContent,node.getAttribute('aria-label'),node.getAttribute('title')].filter(Boolean).join(' ')));
+  const mediaLink=node=>node.matches('a[href]')&&(/\.(?:mp4|webm|mov|png|jpe?g|webp|avif|gif)(?:$|[?#])/i.test(node.href)||Boolean(node.getAttribute('download'))||/^(?:video|image)\//i.test(node.type||'')||/download|tải về/i.test(node.textContent||'')||imageLinkIntent(node));
   const smallScope=node=>node.querySelectorAll(output==='video'?'video':'img').length<=1&&[...node.querySelectorAll('a[href]')].filter(mediaLink).length<=1;
   const elementOwner=element=>{
     let node=element;let own=owners(evidence(element));
@@ -78,11 +82,14 @@ export function inspectBatchDOM({marker,rows=[],baseline=[],baselineTexts=[],cap
     for(const link of reply.querySelectorAll('a[href]')){
       const name=[link.href,link.download||'',link.type||''].join(' ');let kind=/\.(mp4|webm|mov)(?:$|[?#\s])|video\//i.test(name)?'video':/\.(png|jpe?g|webp|avif|gif)(?:$|[?#\s])|image\//i.test(name)?'image':null;
       const uncertain=!kind;const direct=owners([link.textContent,link.download,link.href].join(' ')).length===1;const downloadable=Boolean(link.getAttribute('download'))||/download|tải(?:\s+(?:về|video|ảnh|file|tệp))?/i.test(link.textContent||'');
-      if(!kind&&(captureOnly||direct||(downloadable&&elementOwner(link))))kind=output;if(kind)add(link,link.href,kind,uncertain?3:0,uncertain);
+      if(!kind&&(captureOnly||direct||(downloadable&&elementOwner(link))||imageLinkIntent(link)))kind=output;if(kind)add(link,link.href,kind,uncertain?3:0,uncertain);
     }
     for(const button of reply.querySelectorAll('button,[role="button"]'))if(downloadControl(button)&&(!foreign(button)||captureOnly)){
       button.dataset.museStudioFileId||=crypto.randomUUID();const id='muse-file-control:'+button.dataset.museStudioFileId;
-      if(!captureOnly&&(seen.has(id)||!elementOwner(button)))continue;
+      // An image download button can be in its own native card, with the CLIP
+      // caption in a neighbouring assistant message. Collect it without an
+      // owner and let the bounded one-to-one graph below establish ownership.
+      if(!captureOnly&&(seen.has(id)||(output!=='image'&&!elementOwner(button))))continue;
       const name=[button.getAttribute('aria-label'),button.getAttribute('title'),button.innerText].join(' ');
       const kind=/\bvideo\b|video/i.test(name)?'video':/\bimage\b|ảnh/i.test(name)?'image':output;
       assets.set(id,{key:id,src:id,kind,rank:20,uncertain:true,nativeDownload:true,nativeControl:true,nativeButton:true,nativeId:button.dataset.museStudioFileId,owner:elementOwner(button)});
@@ -120,7 +127,7 @@ export function inspectBatchDOM({marker,rows=[],baseline=[],baselineTexts=[],cap
   // the two neighbouring sections, bounded by another label or a user turn.
   // Only a one-to-one assignment forced in every maximum matching is accepted.
   const candidates=new Map();
-  const rawForeignMedia=node=>[...node.querySelectorAll('video,img,a[href]')].some(element=>foreign(element));
+  const rawForeignMedia=node=>[...node.querySelectorAll(output==='image'?'video,img,a[href],button,[role="button"]':'video,img,a[href]')].some(element=>foreign(element));
   if(!captureOnly)for(const reply of replies){
     if(previousTexts.has(hash(reply.textContent||'')))continue;
     const info=captions.get(reply),labels=[...(info?.declared||[]),...(info?.foreignDeclared||[])];
