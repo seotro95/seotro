@@ -41,36 +41,62 @@ export function inspectBatchDOM({marker,rows=[],baseline=[],baselineTexts=[],cap
     }
   }
   const previousTexts=new Set(baselineTexts);
-  const completion=node=>/\b(?:done|completed|finished|here (?:is|are))\b|đã (?:xong|tạo|hoàn thành)|hoàn tất/i.test(node?.innerText||'');
-  const cardKeys=node=>[...new Set(sources.filter(item=>item.kind===output&&item.reply===node).map(item=>item.key))];
-  const unlabelledCard=node=>node?.getAttribute('data-message-role')==='assistant'&&!owners(node.textContent).length&&cardKeys(node).length>0;
-  let captionLinked=0;
-  // Muse emits a native media card and then a separate assistant completion
-  // message. Treat that local card/caption pair as one result. Never zip two
-  // lists by scene number or assume generation finishes in submission order.
+  const completedText=value=>/(?:^|\n)\s*(?:done|completed|finished|here (?:is|are)|đã (?:xong|tạo|hoàn thành)|hoàn tất)(?:\s*[-—–:.]|\s*$)|\bdone\s*[—–:]/i.test(value);
+  const tagAtStart=/^[\s*#\[({]*?(?:CLIP[ _-]*[0-9]{3}[ _-]*[a-f0-9]{8}|MUSE_[a-f0-9]{32})/i;
+  const captionInfo=node=>{
+    const lines=String(node?.innerText||node?.textContent||'').split(/\n/).map(line=>line.trim());
+    const heads=lines.flatMap((line,index)=>tagAtStart.test(line)?[index]:[]);
+    const completed=new Set();let foreignCompleted=false;
+    for(let n=0;n<heads.length;n++){
+      const at=heads[n],segment=lines.slice(at,heads[n+1]??lines.length).join('\n');
+      if(!completedText(segment))continue;
+      const header=lines[at].split(/\bdone\s*[—–:]/i)[0],labels=owners(header);
+      if(labels.length===1)completed.add(labels[0]);
+      else if(!labels.length&&/MUSE_[a-f0-9]{32}|CLIP[ _-]*[0-9]{3}[ _-]*[a-f0-9]{8}/i.test(header))foreignCompleted=true;
+    }
+    return {completed,foreignCompleted,boundary:completed.size>0||foreignCompleted};
+  };
+  const captions=new Map(all.filter(node=>node.getAttribute('data-message-role')==='assistant').map(node=>[node,captionInfo(node)]));
+  const messageKeys=new Map();for(const source of sources)if(source.kind===output){if(!messageKeys.has(source.reply))messageKeys.set(source.reply,new Set());messageKeys.get(source.reply).add(source.key);}
+  const cardKeys=node=>[...(messageKeys.get(node)||[])];
+  const linked=new Set();
+  // One result can span several native messages: media, progress notices, then
+  // its labelled completion. Search the whole segment between completed tasks
+  // and user turns. A segment with multiple unlabelled files stays ambiguous.
   if(!captureOnly)for(const reply of replies){
-    if(previousTexts.has(hash(reply.textContent||''))||!completion(reply))continue;
-    const isForeign=foreign(reply),labels=owners(reply.textContent);if(!isForeign&&labels.length!==1)continue;
-    const index=all.indexOf(reply),card=all[index-1];
-    if(!unlabelledCard(card)||unlabelledCard(all[index-2]))continue;
-    const ids=cardKeys(card);if(ids.length!==1)continue;
-    if(isForeign){const asset=assets.get(ids[0]);if(asset&&!asset.owner)assets.delete(ids[0]);continue;}
-    const next=all[index+1],nextLabels=next?.getAttribute('data-message-role')==='assistant'&&completion(next)?owners(next.textContent):[];
-    if(nextLabels.length===1&&nextLabels[0]!==labels[0]&&!cardKeys(next).length)continue;
-    const ownMedia=cardKeys(reply);if(ownMedia.some(id=>!ids.includes(id)))continue;
-    const asset=assets.get(ids[0]);if(!asset||asset.ambiguous)continue;
-    if(asset.owner&&asset.owner!==labels[0]){asset.owner=null;asset.ambiguous=true;continue;}
-    asset.owner=labels[0];asset.attribution='separate-caption';captionLinked++;
+    if(previousTexts.has(hash(reply.textContent||'')))continue;
+    const info=captions.get(reply);if(!info?.boundary||info.completed.size>1)continue;
+    if(cardKeys(reply).length)continue; // In-message attribution already handled.
+    const index=all.indexOf(reply),ids=new Set();
+    for(let i=index-1;i>anchor;i--){
+      const node=all[i];if(node.getAttribute('data-message-role')==='user'||captions.get(node)?.boundary)break;
+      for(const id of cardKeys(node))ids.add(id);
+    }
+    if(ids.size!==1)continue;
+    const id=[...ids][0],asset=assets.get(id);if(!asset||asset.ambiguous)continue;
+    if(info.foreignCompleted&&!info.completed.size){if(!asset.owner)assets.delete(id);continue;}
+    const owner=[...info.completed][0];if(!owner)continue;
+    let conflictingCaption=false;
+    for(let i=index+1;i<all.length;i++){
+      const node=all[i];if(node.getAttribute('data-message-role')==='user'||cardKeys(node).length)break;
+      const next=captions.get(node);if(next?.boundary){conflictingCaption=next.foreignCompleted||next.completed.size!==1||!next.completed.has(owner);break;}
+    }
+    if(conflictingCaption)continue;
+    if(asset.owner&&asset.owner!==owner){asset.owner=null;asset.ambiguous=true;continue;}
+    asset.owner=owner;asset.attribution='caption-segment';linked.add(id);
   }
+  const captionLinked=linked.size;
   const media=[...assets.values()];if(captureOnly)return {keys:media.map(item=>item.key),texts:replies.map(node=>hash(node.textContent||''))};
   const matches={};for(const row of rows){const owned=media.filter(item=>item.kind===output&&item.owner===row.fileToken).sort((a,b)=>a.rank-b.rank);if(owned[0])matches[row.fileToken]=owned[0]}
   const unclaimed=media.filter(item=>item.kind===output&&!item.owner);
   if(allowSingle&&rows.length===1&&!matches[rows[0].fileToken]&&unclaimed.length===1)matches[rows[0].fileToken]=unclaimed[0];
-  const freshReplies=replies.filter(node=>!previousTexts.has(hash(node.textContent||''))&&!foreign(node));
+  const freshReplies=replies.filter(node=>!previousTexts.has(hash(node.textContent||''))&&(!foreign(node)||captions.get(node)?.completed.size));
   const text=freshReplies.map(node=>node.innerText).join('\n\n').trim();
   const rowTexts={},general=[];
   for(const reply of freshReplies){const blocks=[...reply.querySelectorAll('p,li,h1,h2,h3,h4,h5,h6,div')].filter(node=>!node.querySelector('p,li,h1,h2,h3,h4,h5,h6,div'));for(const block of blocks.length?blocks:[reply]){const value=block.innerText?.trim();if(!value)continue;const owner=elementOwner(block);if(owner)rowTexts[owner]=value;else general.push(value)}}
   const rowErrors={};for(const reply of freshReplies)for(const notice of reply.querySelectorAll('[data-testid="assistant-response-error-notice"]')){const owner=elementOwner(notice);if(owner)rowErrors[owner]=notice.innerText}
-  const completedRows=new Set(freshReplies.filter(completion).flatMap(node=>owners(node.textContent))).size;
-  return {anchored:anchor>=0,text,rowTexts,rowErrors,generalText:general.join('\n\n'),replyCount:freshReplies.length,streaming:Boolean(document.querySelector('[data-testid="hatch-composer-stop-button"]')?.getClientRects().length),matches,media:media.filter(item=>item.kind===output),unclaimed:unclaimed.length,captionLinked,completedRows,unsupported:unsupported.filter(item=>item.kind===output),otherUserAfterAnchor:anchor>=0&&all.slice(anchor+1).some(node=>node.getAttribute('data-message-role')==='user')};
+  const completedRows=new Set(freshReplies.flatMap(node=>[...(captions.get(node)?.completed||[])])).size;
+  const sceneId=token=>Number(rows.find(row=>row.fileToken===token)?.label?.match(/CLIP[ _-]*(\d{3})/i)?.[1])||null;
+  const replyLayout=all.slice(Math.max(anchor+1,all.length-24)).map((node,index)=>({index:Math.max(anchor+1,all.length-24)+index,role:node.getAttribute('data-message-role')||'unknown',mediaSources:cardKeys(node).length,completedScenes:[...(captions.get(node)?.completed||[])].map(sceneId).filter(Boolean),foreignCompletion:Boolean(captions.get(node)?.foreignCompleted),progress:/still (?:running|processing)|as (?:soon as|it finishes)|I[’']ll send|đang (?:tạo|chạy)|còn .*đang/i.test(node.innerText||'')}));
+  return {anchored:anchor>=0,text,rowTexts,rowErrors,generalText:general.join('\n\n'),replyCount:freshReplies.length,streaming:Boolean(document.querySelector('[data-testid="hatch-composer-stop-button"]')?.getClientRects().length),matches,media:media.filter(item=>item.kind===output),unclaimed:unclaimed.length,captionLinked,completedRows,replyLayout,unsupported:unsupported.filter(item=>item.kind===output),otherUserAfterAnchor:anchor>=0&&all.slice(anchor+1).some(node=>node.getAttribute('data-message-role')==='user')};
 }

@@ -26,3 +26,14 @@ test('a mapping error offers recovery as the main scene action instead of silent
  const card=page.getByTestId('scene-1');await expect(card.locator('.scene-error')).toContainText('chưa ghép được');await card.locator('.card-footer').getByRole('button',{name:'Nhận lại từ Muse',exact:true}).click();
  await expect(card.locator('.status-badge.done')).toHaveCount(1);expect(generated).toBe(1);expect(prepared).toBe(1);expect(recovered).toBe(1);
 });
+
+test('three saved videos survive a reload; receive only missing scenes two and three without regenerating any scene',async({page})=>{
+ let generated=0;const recovered:number[]=[];const accounts=[{id:1,label:'Muse 01',authenticated:true,sessionAuthenticated:true,state:'ready',executionConcurrency:5}];
+ await page.route('**/api/status',route=>route.fulfill({json:{canRecoverMedia:true,museConfigured:true,transport:'browser',multiAccount:true,accounts,maxConcurrency:400,executionConcurrency:5}}));
+ await page.route('**/api/account/prepare',route=>route.fulfill({json:{executionConcurrency:5,accounts}}));
+ await page.route('**/api/video',route=>{generated++;const id=route.request().postDataJSON().sceneId;return route.fulfill([2,3].includes(id)?{status:409,json:{error:'MUSE_BATCH_UNMATCHED: Two native captions need recovery'}}:{json:{base64:video,mimeType:'video/mp4'}})});
+ await page.route('**/api/media/recover',route=>{recovered.push(route.request().postDataJSON().sceneId);return route.fulfill({json:{base64:video,mimeType:'video/mp4'}})});
+ await page.goto('/');await page.getByLabel('Số ô',{exact:true}).selectOption('5');for(let i=1;i<=5;i++)await page.getByLabel(`Kịch bản cảnh ${i}`,{exact:true}).fill('Original landscape '+i);await page.getByRole('button',{name:'TẠO 5 VIDEO',exact:true}).click();
+ await expect(page.locator('.status-badge.done')).toHaveCount(3);await expect(page.locator('.status-badge.error')).toHaveCount(2);expect(generated).toBe(5);
+ await page.reload();await expect(page.locator('.scene-card video')).toHaveCount(3);await page.getByRole('button',{name:'Nhận lại từ Muse',exact:true}).click();await expect(page.locator('.status-badge.done')).toHaveCount(5);expect(recovered.sort()).toEqual([2,3]);expect(generated).toBe(5);await expect(page.locator('.scene-card video')).toHaveCount(5);
+});

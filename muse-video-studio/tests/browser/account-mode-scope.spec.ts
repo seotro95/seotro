@@ -1,0 +1,17 @@
+import{test,expect}from'@playwright/test';import{readFile}from'node:fs/promises';
+const video=(await readFile(new URL('../../public/demo.mp4',import.meta.url))).toString('base64');
+test('standard mode stays one lane per account; sixty slots and larger account choices belong to the One account section and survive switching',async({page})=>{
+ const accounts=Array.from({length:40},(_,i)=>({id:i+1,label:`Muse ${i+1}`,authenticated:true,sessionAuthenticated:true,state:'ready',executionConcurrency:6}));
+ await page.route('**/api/status',route=>route.fulfill({json:{canRecoverMedia:true,museConfigured:true,transport:'browser',multiAccount:true,accounts,maxConcurrency:400}}));
+ const prepares:{accountId:number;concurrency:number}[]=[],calls:{accountId:number;sceneId:number}[]=[];
+ await page.route('**/api/account/prepare',route=>{const value=route.request().postDataJSON();prepares.push(value);return route.fulfill({json:{executionConcurrency:value.concurrency,accounts}})});
+ await page.route('**/api/video',route=>{calls.push(route.request().postDataJSON());return route.fulfill({json:{base64:video,mimeType:'video/mp4'}})});
+ await page.goto('/');await expect(page.getByLabel('Chế độ tài khoản',{exact:true})).toHaveValue('single');await expect(page.getByLabel('Ô chạy mỗi tài khoản',{exact:true})).toHaveValue('1');
+ await page.getByLabel('Chế độ tài khoản',{exact:true}).selectOption('multiple');await expect(page.locator('.scene-card')).toHaveCount(10);await expect(page.getByLabel('Ô chạy mỗi tài khoản',{exact:true}).locator('option')).toHaveCount(1);await expect(page.getByRole('button',{name:'10 tài khoản × 6 ô',exact:true})).toHaveCount(0);
+ for(let i=1;i<=10;i++)await page.getByLabel(`Kịch bản cảnh ${i}`,{exact:true}).fill('Keep standard scene '+i);
+ await page.getByRole('button',{name:'TẠO 10 VIDEO',exact:true}).click();await expect(page.locator('.status-badge.done')).toHaveCount(10);expect(calls.map(x=>x.accountId).sort((a,b)=>a-b)).toEqual([1,2,3,4,5,6,7,8,9,10]);expect(prepares).toHaveLength(10);expect(prepares.every(x=>x.concurrency===1)).toBe(true);
+ await page.getByLabel('Chế độ tài khoản',{exact:true}).selectOption('single');await page.getByRole('button',{name:'10 tài khoản × 6 ô',exact:true}).click();await expect(page.getByLabel('Chế độ tài khoản',{exact:true})).toHaveValue('single');await expect(page.locator('.scene-card')).toHaveCount(60);await expect(page.getByLabel('Ô chạy mỗi tài khoản',{exact:true})).toHaveValue('6');await expect(page.getByLabel('Kịch bản cảnh 1',{exact:true})).toHaveValue('Keep standard scene 1');await expect(page.locator('.scene-card video')).toHaveCount(10);
+ await page.getByLabel('Chế độ tài khoản',{exact:true}).selectOption('multiple');await expect(page.locator('.scene-card')).toHaveCount(10);await expect(page.getByLabel('Ô chạy mỗi tài khoản',{exact:true})).toHaveValue('1');
+ await page.getByLabel('Chế độ tài khoản',{exact:true}).selectOption('single');await expect(page.locator('.scene-card')).toHaveCount(60);await expect(page.getByLabel('Ô chạy mỗi tài khoản',{exact:true})).toHaveValue('6');await page.reload();await expect(page.getByLabel('Chế độ tài khoản',{exact:true})).toHaveValue('single');await expect(page.locator('.scene-card')).toHaveCount(60);await expect(page.locator('.scene-card video')).toHaveCount(10);
+ await page.getByLabel('Số tài khoản chạy',{exact:true}).fill('12');await expect(page.locator('.scene-card')).toHaveCount(72);await expect(page.getByLabel('Chế độ tài khoản',{exact:true})).toHaveValue('single');
+});

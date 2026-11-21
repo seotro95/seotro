@@ -57,6 +57,7 @@ export class MuseAccounts {
   async prepareSingle(signal,count=this.preferredConcurrency,id=1,retryParallel=false) {
     this.validateId(id);this.singleId=id;
     if(!isLaneCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 10 ô mỗi tài khoản.',400);
+    await this.driver(id).ensureComposerReady?.(signal);
     if(!retryParallel&&this.driver(id).parallelStrategy==='shared-conversation'&&this.driver(id).concurrencyProbe?.requested===count)return {executionConcurrency:this.driver(id).maxConcurrency,preferredConcurrency:count,parallelStrategy:'shared-conversation',concurrencyWarning:this.concurrencyWarning};
     if(!retryParallel&&count>1&&this.fallbacks.has(id)&&this.fallbackRequested.get(id)===count)return {executionConcurrency:1,preferredConcurrency:count,concurrencyWarning:this.fallbacks.get(id),serialFallback:true};
     if(this.driver(id).maxConcurrency===count&&this.driver(id).parallelReady!==false){this.concurrencyWarning='';this.fallbacks.delete(id);this.fallbackRequested.delete(id);if(this.preferredConcurrency!==count)await this.requestConcurrency(count);return {executionConcurrency:this.maxConcurrency,preferredConcurrency:count,concurrencyWarning:''};}

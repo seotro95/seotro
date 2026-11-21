@@ -219,8 +219,9 @@ export class MuseBrowser {
     account.sessionAuthenticated = probe.authenticated;
     account.composerReady = composerReady;
     account.authenticated = probe.authenticated;
-    account.state = probe.authenticated ? 'ready' : probe.state;
-    account.connectionMessage = probe.authenticated ? 'Phiên Muse đã được xác minh. Tool mở ô soạn riêng khi bạn bấm tạo từng cảnh hoặc cả bộ.' : probe.message;
+    const workspaceMissing=probe.authenticated&&!composerReady&&account.state==='workspace_unavailable';
+    account.state = workspaceMissing?'workspace_unavailable':probe.authenticated ? 'ready' : probe.state;
+    account.connectionMessage = workspaceMissing?account.connectionMessage:probe.authenticated ? 'Phiên Muse đã được xác minh. Tool mở ô soạn riêng khi bạn bấm tạo từng cảnh hoặc cả bộ.' : probe.message;
     if(includeDetails)account.balance = account.authenticated ? await readMuseBalance(active.page) : null;
     if(account.authenticated){const saved=this.onVerified?.();if(includeDetails)await saved;else void saved?.catch(()=>{})}
   }
@@ -294,6 +295,34 @@ export class MuseBrowser {
     }
     return null;
   }
+  async ensureComposerReady(signal){
+    signal.throwIfAborted();await this.open(1);await this.refreshActive({includeDetails:false});
+    const account=this.account(1),page=this.active.page;
+    if(!account.authenticated)throw fail('MUSE_LOGIN_REQUIRED',account.connectionMessage||'Hoàn tất đăng nhập Muse trước khi chạy.',401);
+    const started=Date.now(),budget=Math.min(this.composerTimeoutMs,15000);let reloaded=false,opened=false;
+    try{
+      do{
+        signal.throwIfAborted();
+        if(await this.findComposer(page)||await this.initialComposer(page)){Object.assign(account,{composerReady:true,state:'ready'});return {ready:true};}
+        let draft=false;for(const frame of await this.composerFrames(page))if(await frame.evaluate(()=>[...document.querySelectorAll('textarea,[contenteditable="true"],[contenteditable="plaintext-only"]')].some(node=>!node.closest('[data-message-item]')&&String(node.value||node.innerText||'').trim())).catch(()=>true)){draft=true;break;}
+        if(!draft&&!opened){
+          const entry=await this.newChatControl(page);
+          if(entry){await entry.click({timeout:Math.max(1,Math.min(3000,started+budget-Date.now()))});opened=true;continue;}
+          const launch=page.getByRole('link',{name:/^(?:(?:open|launch|enter|go to)(?: the| your)? (?:muse|studio|workspace|app)|mở studio|vào studio|mở ứng dụng|vào ứng dụng)$/i}).filter({visible:true}).first();
+          if(await launch.count()){
+            const href=await launch.getAttribute('href'),target=new URL(href||'',page.url());
+            if(target.origin===new URL(this.serviceURL).origin&&!target.username&&!target.password&&!target.search&&(/^\/(?:app|studio|workspace|chats?)(?:\/new)?\/?$/.test(target.pathname)||(target.pathname==='/'&&/^#\/(?:app|studio|workspace|chats?)(?:\/new)?\/?$/.test(target.hash)))){await page.goto(target.href,{waitUntil:'domcontentloaded',timeout:Math.max(1,started+budget-Date.now())});opened=true;continue;}
+          }
+        }
+        if(!draft&&!reloaded&&this.conversationURL(page)&&Date.now()-started>=Math.min(1000,budget/3)&&!await page.locator(STOP).first().isVisible().catch(()=>false)){
+          reloaded=true;await page.reload({waitUntil:'domcontentloaded',timeout:Math.max(1,started+budget-Date.now())});continue;
+        }
+        await pause(Math.min(100,Math.max(1,started+budget-Date.now())),signal);
+      }while(Date.now()-started<budget);
+      const details=await this.composerDiagnostics(page);
+      throw fail('MUSE_COMPOSER_NOT_READY',`Phiên đã xác thực nhưng chưa có ô Message, chưa gửi prompt. Mở đúng workspace trong Đăng nhập Muse trong tool rồi kiểm tra lại. Đã mở lối vào đang hiển thị: ${opened}; tải lại: ${reloaded}. Chẩn đoán: ${JSON.stringify(details)}`,409);
+    }catch(error){Object.assign(account,{composerReady:false,state:'workspace_unavailable',connectionMessage:error.message});throw error;}
+  }
   workerURL() {
     // Use the user's verified app route, rather than sending every worker back
     // to a marketing/landing page. OAuth query parameters are never copied.
@@ -334,7 +363,7 @@ export class MuseBrowser {
     if(!isLaneCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 10 ô mỗi tài khoản.',400);
     if(this.reserved||this.workers.size)throw fail('MUSE_CHAT_BUSY','Đợi các cảnh hoàn tất trước khi đổi số luồng.',409);
     await this.closePreparedPages();this.parallelStrategy='workers';this.maxConcurrency=1;this.concurrencyProbe={requested:count,checked:0,state:'checking'};
-    if(count===1){this.concurrencyProbe.state='ready';return {executionConcurrency:1,message:'Đã chọn một ô chạy lần lượt.'}}
+    if(count===1){await this.ensureComposerReady(signal);this.concurrencyProbe.state='ready';return {executionConcurrency:1,message:'Đã xác minh ô Message; sẵn sàng chạy lần lượt.'}}
     await this.open();await this.refreshActive();
     if(!this.account(1).authenticated)throw fail('MUSE_LOGIN_REQUIRED','Đăng nhập Muse và kiểm tra phiên trước khi bật song song.',401);
     // A verified single-chat page without New chat cannot provide independent
@@ -633,7 +662,7 @@ export class MuseBrowser {
         const unique=new Set(state.media.filter(item=>!item.uncertain).map(item=>item.owner||item.key)).size;
         for(const row of rows){
           if(row.done)continue;
-          row.onObservation?.({checkedAt:new Date().toISOString(),messageAcknowledged:acknowledged,assistantReplies:state.replyCount,visibleVideos:output==='video'?unique:0,visibleImages:output==='image'?unique:0,matchedMedia:Boolean(state.matches[row.fileToken]),matchedCount:Object.keys(state.matches).length,unmatchedCount:state.unclaimed,captionLinked:state.captionLinked,streaming:state.streaming,replyScope:'batch',reply:replyPreview(state.text),batchSize:rows.length,messagesSent:1,waitLimitSeconds:200});
+          row.onObservation?.({checkedAt:new Date().toISOString(),messageAcknowledged:acknowledged,assistantReplies:state.replyCount,visibleVideos:output==='video'?unique:0,visibleImages:output==='image'?unique:0,matchedMedia:Boolean(state.matches[row.fileToken]),matchedCount:Object.keys(state.matches).length,unmatchedCount:state.unclaimed,captionLinked:state.captionLinked,replyLayout:state.replyLayout,streaming:state.streaming,replyScope:'batch',reply:replyPreview(state.text),batchSize:rows.length,messagesSent:1,waitLimitSeconds:200});
           if(row.signal.aborted)row.onStage('cancelled-provider');else if(state.text&&!state.matches[row.fileToken])row.onStage('reply-received');
           const media=state.matches[row.fileToken];
           if(!media&&state.rowErrors[row.fileToken]){const message=state.rowErrors[row.fileToken];const code=replyProblem(message)||'MUSE_GENERATION_ERROR';const error=fail(code,`Muse báo lỗi của ${row.label}: ${replyPreview(message)}`,502);if(code==='MUSE_PARALLEL_LIMIT')error.safeSerialRetry=true;row.reject(error);this.sharedSignals.delete(row.fileToken);continue;}
@@ -681,7 +710,7 @@ export class MuseBrowser {
       do{
         signal.throwIfAborted();
         state=await frame.evaluate(inspectBatchDOM,{marker:saved.marker,rows:saved.rows,baseline:baseline.keys,baselineTexts:baseline.texts,acknowledged:true,output:data.output});
-        progress.observation={checkedAt:new Date().toISOString(),messageAcknowledged:true,assistantReplies:state.replyCount,visibleVideos:data.output==='video'?state.media.length:0,visibleImages:data.output==='image'?state.media.length:0,matchedMedia:Boolean(state.matches[saved.fileToken]),matchedCount:Object.keys(state.matches).length,unmatchedCount:state.unclaimed,captionLinked:state.captionLinked,streaming:state.streaming,replyScope:'saved-batch',reply:replyPreview(state.text),batchSize:saved.rows.length,messagesSent:0,recoveryOnly:true,waitLimitSeconds:200};
+        progress.observation={checkedAt:new Date().toISOString(),messageAcknowledged:true,assistantReplies:state.replyCount,visibleVideos:data.output==='video'?state.media.length:0,visibleImages:data.output==='image'?state.media.length:0,matchedMedia:Boolean(state.matches[saved.fileToken]),matchedCount:Object.keys(state.matches).length,unmatchedCount:state.unclaimed,captionLinked:state.captionLinked,replyLayout:state.replyLayout,streaming:state.streaming,replyScope:'saved-batch',reply:replyPreview(state.text),batchSize:saved.rows.length,messagesSent:0,recoveryOnly:true,waitLimitSeconds:200};
         const media=state.matches[saved.fileToken];
         if(media){progress.phase='downloading';const result=await this.downloadMedia(frame,media,data.output,signal);progress.phase='done';return result;}
         await pause(Math.min(300,this.pollMs),signal);

@@ -7,7 +7,7 @@ export type Mode = 'muse' | 'demo';
 export type Output = 'video' | 'image';
 export type Status = 'ready' | 'queued' | 'running' | 'done' | 'error' | 'cancelled';
 export type Reference = { id: string; name: string; url: string; base64?: string; mimeType?: string };
-export type Settings = { accountLaneOverrides?: Record<string,number>; selectedAccountIds?: number[]; slotCount: number; singleAccountId?: number; multipleSlotIds?: number[]; requestedConcurrency?: number; syncOperations: boolean; accountMode: 'single' | 'multiple'; model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
+export type Settings = { accountPlanMode?:'standard'|'expanded'; standardAccountIds?:number[]; expandedPlan?:{accountIds:number[];lanes:number;overrides?:Record<string,number>}; accountLaneOverrides?: Record<string,number>; selectedAccountIds?: number[]; slotCount: number; singleAccountId?: number; multipleSlotIds?: number[]; requestedConcurrency?: number; syncOperations: boolean; accountMode: 'single' | 'multiple'; model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
 export const RENDER_KEYS = ['model','aspectRatio','duration','resolution','imageResolution','videoInput','r2v','modifier'] as const;
 export type SceneSettings = Pick<Settings,typeof RENDER_KEYS[number]>;
 export function renderingSettings(settings:Settings):SceneSettings{return Object.fromEntries(RENDER_KEYS.map(key=>[key,settings[key]])) as SceneSettings}
@@ -40,7 +40,7 @@ export const RUNWAY = [
   'Người mẫu ngoái nhìn qua vai với nụ cười nhẹ, camera chân dung 85mm.',
   'Người mẫu đứng giữa sân khấu trong ánh đèn cuối buổi, toàn cảnh runway sang trọng.'
 ];
-export const DEFAULT_SETTINGS: Settings = { slotCount: DEFAULT_SLOTS, requestedConcurrency:6, syncOperations:true, accountMode: 'single', model: 'Omni 1.1 Flash', aspectRatio: '16:9', duration: 4, resolution: '720p', imageResolution: '2k', output: 'video', videoInput: 'text', autoSync: true, r2v: true, modifier: '', mode: 'muse' };
+export const DEFAULT_SETTINGS: Settings = { slotCount: DEFAULT_SLOTS, requestedConcurrency:1, accountPlanMode:'expanded', syncOperations:true, accountMode: 'single', model: 'Omni 1.1 Flash', aspectRatio: '16:9', duration: 4, resolution: '720p', imageResolution: '2k', output: 'video', videoInput: 'text', autoSync: true, r2v: true, modifier: '', mode: 'muse' };
 export const createScenes = (count: number = DEFAULT_SLOTS): Scene[] => Array.from({length:isSlotCount(count)?count:DEFAULT_SLOTS},(_,i)=>({id:i+1,enabled:true,prompt:ADVENTURE[i]||'',reference:null,status:'ready'}));
 
 export { parseScriptEntries, extractScriptEntry } from './script-import.ts';
@@ -111,6 +111,9 @@ export function restoreWorkspace(raw: string | null): { scenes: Scene[]; setting
       singleAccountId:validAccountId(s.singleAccountId) ?? 1,
       multipleSlotIds:normalizeSlotIds(s.multipleSlotIds), selectedAccountIds:normalizeAccountIds(s.selectedAccountIds), accountLaneOverrides:normalizeLaneOverrides(s.accountLaneOverrides),
       accountMode: s.accountMode === 'multiple' ? 'multiple' : 'single',
+      accountPlanMode:s.accountPlanMode==='standard'?'standard':s.accountPlanMode==='expanded'||s.accountMode!=='multiple'||Number(s.requestedConcurrency)>1||Object.values(normalizeLaneOverrides(s.accountLaneOverrides)||{}).some(value=>value>1)?'expanded':'standard',
+      standardAccountIds:normalizeAccountIds(s.standardAccountIds),
+      expandedPlan:s.expandedPlan&&normalizeAccountIds(s.expandedPlan.accountIds)?.length&&isLaneCount(s.expandedPlan.lanes)?{accountIds:normalizeAccountIds(s.expandedPlan.accountIds)!,lanes:s.expandedPlan.lanes,overrides:normalizeLaneOverrides(s.expandedPlan.overrides)}:undefined,
       model: MUSE_MODELS.includes(s.model) ? s.model : DEFAULT_SETTINGS.model,
       aspectRatio: s.aspectRatio === '9:16' ? '9:16' : '16:9',
       duration: [4, 6, 8, 10].includes(s.duration) ? s.duration : 4,
@@ -164,6 +167,7 @@ export function normalizeLaneOverrides(value:unknown):Record<string,number>|unde
  return Object.fromEntries(Object.entries(value).filter(([id,count])=>/^[1-9]\d*$/.test(id)&&isAccountId(Number(id))&&isLaneCount(count)));
 }
 export function lanesForAccount(settings:Settings,id:number):number{
+ if(settings.accountPlanMode==='standard')return 1;
  const override=settings.accountMode==='multiple'?settings.accountLaneOverrides?.[id]:undefined;
- return isLaneCount(override)?override!:isLaneCount(settings.requestedConcurrency)?settings.requestedConcurrency!:6;
+ return isLaneCount(override)?override!:isLaneCount(settings.requestedConcurrency)?settings.requestedConcurrency!:1;
 }

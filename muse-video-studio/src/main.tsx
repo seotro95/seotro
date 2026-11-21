@@ -23,7 +23,7 @@ type ProviderStatus = {canRecoverMedia?:boolean;version?:string;executionAccount
 type RenderJob = { submissionGroup?:{id:string;size:number}; accountId: number; scene: Scene; settings: Settings; action: 'render' | 'enhance' | 'recover'; control: AbortController; started: boolean };
 type RenderBatch = { control: AbortController; batchId: string; completed: number; failed: number; cancelled: number; loginRequired: boolean };
 const hasVerifiedSession = (account?: AccountSession) => Boolean(account?.sessionAuthenticated ?? account?.authenticated);
-const accountStateName = (account?: AccountSession) => !account ? 'Chưa kết nối' : hasVerifiedSession(account) ? account.active ? 'Đã xác minh' : 'Phiên đã lưu' : account.state === 'awaiting_code' ? 'Đang chờ mã xác nhận' : account.state === 'check_failed' ? 'Chưa xác minh được phiên' : account.state === 'login_open' ? 'Chờ đăng nhập' : account.state === 'saved' || account.state === 'session_saved' ? 'Cần kiểm tra phiên' : 'Chưa kết nối';
+const accountStateName = (account?: AccountSession) => !account ? 'Chưa kết nối' : account.state==='workspace_unavailable'?'Đã xác minh · chưa mở được Message':hasVerifiedSession(account) ? account.active ? 'Đã xác minh' : 'Phiên đã lưu' : account.state === 'awaiting_code' ? 'Đang chờ mã xác nhận' : account.state === 'check_failed' ? 'Chưa xác minh được phiên' : account.state === 'login_open' ? 'Chờ đăng nhập' : account.state === 'saved' || account.state === 'session_saved' ? 'Cần kiểm tra phiên' : 'Chưa kết nối';
 function load() { try { return restoreWorkspace(localStorage.getItem(STORAGE)); } catch { return restoreWorkspace(null); } }
 const recoveryMode = new URLSearchParams(location.search).get('recovery') === '1';
 window.museTransport?.rendererStage?.('workspace');
@@ -117,7 +117,9 @@ function App() {
   const editingScene=visibleScenes.find(scene=>scene.id===focusedScene)||visibleScenes[0]||scenes[0];
   const editingSettings=sceneSettings(settings,editingScene);
   const syncIds=visibleScenes.filter(scene=>scene.syncSelected!==false).map(scene=>scene.id);
-  const requestedLanes=Math.min(MAX_ACCOUNT_LANES,settings.requestedConcurrency??status?.preferredConcurrency??6);
+  const standardMode=settings.accountPlanMode==='standard';
+  const expandedMode=!standardMode;
+  const requestedLanes=standardMode?1:Math.min(MAX_ACCOUNT_LANES,settings.requestedConcurrency??1);
   const selectedAccountIds=accountPool(settings);
   const accountPlanTotal=selectedAccountIds.reduce((sum,id)=>sum+lanesForAccount(settings,id),0);
   const done = visibleScenes.filter(s => s[settings.output]).length;
@@ -233,22 +235,30 @@ function App() {
     commitSettings({...settingsRef.current,requestedConcurrency:10});
     await run(undefined,undefined,false,10);
   }
-  function applyAccountPlan(ids:number[],lanes=requestedLanes,overrides=settingsRef.current.accountLaneOverrides){
+  function applyAccountPlan(ids:number[],lanes=requestedLanes,overrides=settingsRef.current.accountLaneOverrides,planMode:'standard'|'expanded'='expanded'){
     if(connectionLocked||busy)return;
     const selected=normalizeAccountIds(ids)||[];
     if(!selected.length){setNotice('Cần chọn ít nhất một tài khoản.');return;}
+    const previous=settingsRef.current,standard=planMode==='standard';
+    if(standard){lanes=1;overrides={};}
     const layout=accountLayout(selected,lanes,overrides);const assignments=new Map(layout.map(item=>[item.id,item.accountId]));
     updateScenes(all=>all.map(scene=>assignments.has(scene.id)?{...scene,accountId:assignments.get(scene.id)}:scene));
-    commitSettings({...settingsRef.current,accountMode:'multiple',selectedAccountIds:selected,accountLaneOverrides:normalizeLaneOverrides(overrides),requestedConcurrency:lanes,slotCount:layout.length,multipleSlotIds:layout.map(item=>item.id)});
-    setNotice(`Đã bố trí ${selected.length} tài khoản · ${layout.length} ô. Prompt và kết quả đang có được giữ.`);
+    const expandedPlan=standard?(previous.accountPlanMode==='standard'?previous.expandedPlan:{accountIds:accountPool(previous),lanes:previous.requestedConcurrency??1,overrides:previous.accountLaneOverrides}):{accountIds:selected,lanes,overrides:normalizeLaneOverrides(overrides)};
+    commitSettings({...previous,accountMode:'multiple',accountPlanMode:planMode,expandedPlan,standardAccountIds:standard?selected:previous.standardAccountIds,selectedAccountIds:selected,accountLaneOverrides:normalizeLaneOverrides(overrides),requestedConcurrency:lanes,slotCount:layout.length,multipleSlotIds:layout.map(item=>item.id)});
+    setNotice(standard?`Chế độ mặc định: ${selected.length} tài khoản × 1 luồng = ${layout.length} ô.`:`Mục Một tài khoản: ${selected.length} tài khoản × ${lanes} ô, tổng ${layout.length} ô. Giữ prompt và kết quả đã có.`);
   }
+
   function changeAccountMode(mode:Settings['accountMode']){
-    if(mode==='multiple')applyAccountPlan(settingsRef.current.selectedAccountIds||Array.from({length:10},(_,i)=>i+1));
-    else{changeSettings({accountMode:'single'},false);void selectAccount(settings.singleAccountId??1)}
+    const current=settingsRef.current;
+    if(mode==='multiple'){applyAccountPlan(current.standardAccountIds||Array.from({length:10},(_,i)=>i+1),1,{},'standard');return;}
+    if(current.expandedPlan){applyAccountPlan(current.expandedPlan.accountIds,current.expandedPlan.lanes,current.expandedPlan.overrides,'expanded');return;}
+    changeSettings({accountMode:'single',accountPlanMode:'expanded',requestedConcurrency:1},false);void selectAccount(current.singleAccountId??1);
   }
+
   async function changeConcurrency(count: number) {
     if(connectionLocked||busy||!isLaneCount(count))return;
-    if(multipleAccounts){applyAccountPlan(selectedAccountIds,count,{});return;}
+    if(standardMode){applyAccountPlan(selectedAccountIds,1,{},'standard');return;}
+    if(multipleAccounts){applyAccountPlan(selectedAccountIds,count,{},'expanded');return;}
     resizeSlots(count,true);
     if(settings.mode==='demo'||!usingBrowser||!hasVerifiedSession(primaryAccount))return;
     setConnectingId(settings.singleAccountId??1);
@@ -530,31 +540,41 @@ function App() {
     if (renderLocked || (controller.current && !renderBatch.current) || renderBatch.current?.control.signal.aborted || !requireProvider()) return;
     const config = { ...settingsRef.current };
     const source = visibleWorkspace(override || scenesRef.current,config);
-    const targets = source.filter(scene => !renderJobs.current.has(scene.id) && scene.enabled && scene.prompt.trim() && sourceReady(scene) && accountReady(scene) && (ids ? ids.includes(scene.id) : !scene[config.output] || !matchesRequest(libraryRef.current.find(entry => entry.id === scene[config.output]?.savedId), scene, config)));
+    let targets = source.filter(scene => !renderJobs.current.has(scene.id) && scene.enabled && scene.prompt.trim() && sourceReady(scene) && accountReady(scene) && (ids ? ids.includes(scene.id) : !scene[config.output] || !matchesRequest(libraryRef.current.find(entry => entry.id === scene[config.output]?.savedId), scene, config)));
     if (!targets.length) return setNotice('Không có ô trống cần tạo; các ô đang chạy được giữ nguyên.');
-    const desired=requiredConcurrency??config.requestedConcurrency??6;
+    let preparationFailures=0;
+    const desired=config.accountPlanMode==='standard'?1:requiredConcurrency??config.requestedConcurrency??1;
     if(config.mode==='muse'&&usingBrowser&&!renderJobs.current.size){
       const accountIds=[...new Set(targets.map(scene=>accountForScene(scene,config)))];
       try{
         let preparedCount=0;setConnectingId(accountIds[0]);
         const ready=await withinDeadline(prepareSignal=>prepareAccounts(accountIds,async(accountId)=>{
           prepareSignal.throwIfAborted();
-          const wanted=requiredConcurrency??lanesForAccount(config,accountId);
+          const wanted=config.accountPlanMode==='standard'?1:requiredConcurrency??lanesForAccount(config,accountId);
           setNotice(`Đang chuẩn bị tài khoản Muse · ${preparedCount}/${accountIds.length} đã sẵn sàng · tối đa 3 tài khoản cùng lúc…`);
-          const prepared=await accountAction('prepare',{accountId,concurrency:wanted},prepareSignal);
+          let prepared;
+          try{prepared=await accountAction('prepare',{accountId,concurrency:wanted},prepareSignal);}catch(error){if(prepareSignal.aborted)throw error;const info=logError(error,`Chuẩn bị Muse ${accountId}`);return {accountId,lanes:0,error:info.raw};}
           preparedCount++;accountLanes.current.set(accountId,prepared.executionConcurrency);
           if(config.accountMode==='single')museLanes.current=prepared.executionConcurrency;
           setStatus(current=>current?{...current,...(prepared.accounts?{accounts:prepared.accounts}:{}),...(config.accountMode==='single'?{executionConcurrency:prepared.executionConcurrency,executionAccountId:accountId}:{}),concurrencyWarning:prepared.concurrencyWarning}:current);
           if(prepared.executionConcurrency<wanted)setNotice(prepared.executionConcurrency===1?`Muse ${accountId}: tự chuyển sang từng luồng một; giữ đủ ${targets.length} ô trong hàng chờ.`:`Muse ${accountId}: chạy đồng thời ${prepared.executionConcurrency} ô; các ô còn lại chờ, giữ đủ ${targets.length} ô.`);
           if(prepared.concurrencyWarning)setComposerCheck({message:`Muse ${accountId}: sẵn sàng ${prepared.executionConcurrency}/${wanted} ô; các ô khác chờ.`,error:prepared.concurrencyWarning});
-          return {accountId,lanes:prepared.executionConcurrency};
+          return {accountId,lanes:prepared.executionConcurrency,error:undefined};
         }),undefined,UI_WAIT_LIMIT_MS);
         // Seed the dispatch budget from completed prepare responses, not an
         // older status poll that may have run while another account prepared.
-        for(const result of ready)accountLanes.current.set(result.accountId,result.lanes);
+        for(const result of ready)if(result.lanes>0)accountLanes.current.set(result.accountId,result.lanes);
+        const failed=new Map(ready.filter(result=>result.error).map(result=>[result.accountId,result.error!]));
+        if(failed.size){
+          void refreshStatus(false);
+          const failedScenes=targets.filter(scene=>failed.has(accountForScene(scene,config)));preparationFailures=failedScenes.length;
+          updateScenes(all=>all.map(scene=>failedScenes.some(target=>target.id===scene.id)?{...scene,status:'error',error:failed.get(accountForScene(scene,config))}:scene));
+          targets=targets.filter(scene=>!failed.has(accountForScene(scene,config)));
+          if(!targets.length){const message=`Chưa có tài khoản sẵn sàng mở Message. Giữ prompt; kiểm tra workspace của ${[...failed.keys()].map(id=>'Muse '+id).join(', ')}.`;setNotice(message);if(external)throw apiError(409,message);return;}
+        }
       }catch(error){const info=logError(error,'Chuẩn bị luồng Muse');setNotice(info.raw);if(external)throw apiError(409,info.raw);return;}finally{setConnectingId(null)}
     }
-    const startedBatch=beginBatch();
+    const startedBatch=beginBatch();startedBatch.failed+=preparationFailures;
     for (const scene of targets) renderJobs.current.set(scene.id, { accountId: accountForScene(scene,config), scene, settings: sceneSettings(config,scene), action: 'render', control: new AbortController(), started: false });
     if(config.mode==='muse'&&usingBrowser){
       for(const accountId of new Set(targets.map(scene=>accountForScene(scene,config)))){
@@ -703,19 +723,19 @@ function App() {
       {usingBrowser && settings.mode === 'muse' && <p className="transport-note">Muse nhận mô hình, thời lượng và tỉ lệ dưới dạng yêu cầu trong prompt. Ảnh/video hiển thị kích thước thật; nếu Muse trả thấp hơn 2K/4K, tool sẽ ghi Chưa đạt yêu cầu.</p>}
       {settings.mode === 'demo' && <div className="demo-banner"><FlaskConical size={16}/>CHẾ ĐỘ KIỂM THỬ · Dùng tệp mẫu 640×360 có nhãn. Không tạo nội dung AI từ prompt hoặc ảnh.</div>}
       <section className="account-mode-bar" aria-label="Lựa chọn chế độ tài khoản">
-        <label>Chế độ tài khoản <select aria-label="Chế độ tài khoản" disabled={connectionLocked||busy} value={settings.accountMode} onChange={e=>changeAccountMode(e.target.value as Settings['accountMode'])}><option value="single">Một tài khoản</option><option value="multiple" disabled={!status?.multiAccount}>Nhiều tài khoản</option></select></label>
-        {multipleAccounts&&<label>Số tài khoản <input type="number" aria-label="Số tài khoản chạy" min={1} max={MAX_ACCOUNTS} value={selectedAccountIds.length} disabled={connectionLocked||busy} onChange={e=>{const count=Number(e.target.value);if(count>=1&&count<=MAX_ACCOUNTS&&Number.isInteger(count))applyAccountPlan(Array.from({length:count},(_,i)=>i+1))}}/></label>}
-        <label>Ô chạy / tài khoản <select aria-label="Ô chạy mỗi tài khoản" disabled={connectionLocked||busy} value={requestedLanes} onChange={e=>void changeConcurrency(Number(e.target.value))}>{Array.from({length:MAX_ACCOUNT_LANES},(_,i)=><option key={i+1} value={i+1}>{i+1} ô</option>)}</select></label>
+        <label>Chế độ tài khoản <select aria-label="Chế độ tài khoản" disabled={connectionLocked||busy} value={expandedMode?'single':'multiple'} onChange={e=>changeAccountMode(e.target.value as Settings['accountMode'])}><option value="single">Một tài khoản</option><option value="multiple" disabled={!status?.multiAccount}>Nhiều tài khoản · mỗi tài khoản 1 luồng</option></select></label>
+        {status?.multiAccount&&<label>Số tài khoản <input type="number" aria-label="Số tài khoản chạy" min={1} max={MAX_ACCOUNTS} value={selectedAccountIds.length} disabled={connectionLocked||busy} onChange={e=>{const count=Number(e.target.value);if(count>=1&&count<=MAX_ACCOUNTS&&Number.isInteger(count))applyAccountPlan(Array.from({length:count},(_,i)=>i+1),requestedLanes,standardMode?{}:settingsRef.current.accountLaneOverrides,standardMode?'standard':'expanded')}}/></label>}
+        <label>Ô chạy / tài khoản <select aria-label="Ô chạy mỗi tài khoản" disabled={connectionLocked||busy} value={requestedLanes} onChange={e=>void changeConcurrency(Number(e.target.value))}>{(standardMode?[1]:Array.from({length:MAX_ACCOUNT_LANES},(_,i)=>i+1)).map(n=><option key={n} value={n}>{n} ô</option>)}</select></label>
         <label>Số ô <select aria-label="Số ô" disabled={locked||busy} value={slotCount} onChange={e=>resizeSlots(Number(e.target.value))}>{[...new Set([...STREAM_OPTIONS,slotCount])].sort((a,b)=>a-b).map(count=><option key={count} value={count}>{count} ô</option>)}</select></label>
         <button className="button" onClick={()=>setModal('accounts')}><Users size={17}/>Quản lý tài khoản</button>
-        {!multipleAccounts&&status?.multiAccount&&<label>Tài khoản chạy mọi ô <select aria-label="Tài khoản chạy mọi ô" disabled={connectionLocked} value={settings.singleAccountId??1} onChange={e=>{const id=Number(e.target.value);changeSettings({singleAccountId:id},false);void selectAccount(id)}}>{status.accounts?.map(account=><option key={account.id} value={account.id}>{String(account.id).padStart(2,'0')} · {account.label}</option>)}</select></label>}
+        {expandedMode&&selectedAccountIds.length===1&&status?.multiAccount&&<label>Tài khoản chạy mọi ô <select aria-label="Tài khoản chạy mọi ô" disabled={connectionLocked} value={selectedAccountIds[0]} onChange={e=>{const id=Number(e.target.value);if(multipleAccounts)applyAccountPlan([id],requestedLanes,{},'expanded');else changeSettings({singleAccountId:id,expandedPlan:{accountIds:[id],lanes:requestedLanes}},false);void selectAccount(id)}}>{status.accounts?.map(account=><option key={account.id} value={account.id}>{String(account.id).padStart(2,'0')} · {account.label}</option>)}</select></label>}
       </section>
-      {multipleAccounts&&<section className="account-pool-picker" aria-label="Chọn tài khoản tham gia"><strong>{selectedAccountIds.length} tài khoản · {accountPlanTotal} ô song song yêu cầu</strong><p className="small muted">Mặc định {requestedLanes} ô mỗi tài khoản. Có thể chọn riêng 1–10 ô ở từng tài khoản bên dưới.</p><div className="preset-row"><button className="micro-button" disabled={connectionLocked||busy} onClick={()=>applyAccountPlan(Array.from({length:10},(_,i)=>i+1),6,{})}>10 tài khoản × 6 ô</button><button className="micro-button" disabled={connectionLocked||busy} onClick={()=>applyAccountPlan(selectedAccountIds,requestedLanes,{})}>Đồng bộ số ô cả nhóm</button></div><div className="visible-slot-options">{Array.from({length:MAX_ACCOUNTS},(_,i)=>i+1).map(id=><div className="account-plan-item" key={id}><label><input type="checkbox" aria-label={`Chọn tài khoản chạy ${id}`} checked={selectedAccountIds.includes(id)} disabled={connectionLocked||busy} onChange={e=>applyAccountPlan(e.target.checked?[...selectedAccountIds,id]:selectedAccountIds.filter(value=>value!==id))}/>{status?.accounts?.find(account=>account.id===id)?.label||`Muse ${id}`}</label>{selectedAccountIds.includes(id)&&<select aria-label={`Ô chạy tài khoản ${id}`} disabled={connectionLocked||busy} value={lanesForAccount(settings,id)} onChange={e=>applyAccountPlan(selectedAccountIds,requestedLanes,{...settingsRef.current.accountLaneOverrides,[id]:Number(e.target.value)})}>{Array.from({length:10},(_,i)=><option key={i+1} value={i+1}>{i+1} ô</option>)}</select>}</div>)}</div></section>}
+      {expandedMode&&status?.multiAccount&&<section className="account-pool-picker" aria-label="Chọn tài khoản tham gia"><strong>{selectedAccountIds.length} tài khoản · {accountPlanTotal} ô song song yêu cầu</strong><p className="small muted">Trong mục Một tài khoản, đang yêu cầu {requestedLanes} ô mỗi tài khoản. Có thể chọn riêng 1–10 ô ở từng tài khoản bên dưới.</p><div className="preset-row"><button className="micro-button" disabled={connectionLocked||busy} onClick={()=>applyAccountPlan(Array.from({length:10},(_,i)=>i+1),6,{})}>10 tài khoản × 6 ô</button><button className="micro-button" disabled={connectionLocked||busy} onClick={()=>applyAccountPlan(selectedAccountIds,requestedLanes,{})}>Đồng bộ số ô cả nhóm</button></div><div className="visible-slot-options">{Array.from({length:MAX_ACCOUNTS},(_,i)=>i+1).map(id=><div className="account-plan-item" key={id}><label><input type="checkbox" aria-label={`Chọn tài khoản chạy ${id}`} checked={selectedAccountIds.includes(id)} disabled={connectionLocked||busy} onChange={e=>applyAccountPlan(e.target.checked?[...selectedAccountIds,id]:selectedAccountIds.filter(value=>value!==id))}/>{status?.accounts?.find(account=>account.id===id)?.label||`Muse ${id}`}</label>{selectedAccountIds.includes(id)&&<select aria-label={`Ô chạy tài khoản ${id}`} disabled={connectionLocked||busy} value={lanesForAccount(settings,id)} onChange={e=>applyAccountPlan(selectedAccountIds,requestedLanes,{...settingsRef.current.accountLaneOverrides,[id]:Number(e.target.value)})}>{Array.from({length:10},(_,i)=><option key={i+1} value={i+1}>{i+1} ô</option>)}</select>}</div>)}</div></section>}
 
       {multipleAccounts&&<section className="visible-slot-picker" aria-label="Chọn ô tài khoản hiển thị"><strong>Chọn ô tài khoản cần chạy</strong><p>Chỉ các ô được tích mới hiện và nhận TXT/SRT, theo thứ tự số ô. Bỏ tích giữ nguyên prompt, kết quả và tài khoản của ô.</p><div className="preset-row"><button className="micro-button" disabled={connectionLocked||busy} onClick={()=>setVisibleSlots(Array.from({length:settings.slotCount},(_,i)=>i+1))}>Hiện tất cả {settings.slotCount} ô</button><button className="micro-button" disabled={connectionLocked||busy} onClick={()=>setVisibleSlots([])}>Ẩn tất cả ô</button></div><div className="visible-slot-options">{scenes.slice(0,Math.max(40,settings.slotCount)).map(scene=><label key={scene.id}><input type="checkbox" aria-label={`Hiện ô ${scene.id}`} checked={activeSlotIds.includes(scene.id)} disabled={connectionLocked||busy} onChange={e=>setVisibleSlots(e.target.checked?[...activeSlotIds,scene.id]:activeSlotIds.filter(id=>id!==scene.id))}/><span>Ô {String(scene.id).padStart(2,'0')} · {status?.accounts?.find(account=>account.id===accountFor(scene.id))?.label??`Muse ${accountFor(scene.id)}`}</span></label>)}</div><small>Đang chọn {slotCount} ô: {activeSlotIds.join(', ')||'chưa chọn ô nào'}.</small></section>}
 
       <section className="single-account-panel" aria-label="Một tài khoản Muse và số dư">
-        <div><span className="eyebrow">{multipleAccounts?'NHIỀU TÀI KHOẢN · NHIỀU Ô MỖI TÀI KHOẢN':'MỘT TÀI KHOẢN'}</span><h2>{multipleAccounts?`${selectedAccountIds.length} tài khoản · ${slotCount} ô`:`Một tài khoản · ${slotCount} cảnh`}</h2><p>Mặc định {requestedLanes} ô mỗi tài khoản; các lựa chọn riêng được áp dụng theo từng hồ sơ. Hiện đã xác minh {executionLanes} ô sẵn sàng; các ô còn lại chờ đến lượt. Tool chuẩn bị hội thoại riêng trước khi gửi prompt.</p><div className="concurrency-controls"><label htmlFor="muse-concurrency">Số luồng mỗi tài khoản:</label><select id="muse-concurrency" disabled={connectionLocked||busy} value={requestedLanes} onChange={e=>void changeConcurrency(Number(e.target.value))}>{Array.from({length:10},(_,i)=><option key={i+1} value={i+1}>{i+1} · Yêu cầu song song</option>)}</select>{usingBrowser&&!multipleAccounts&&<button className="micro-button" disabled={connectionLocked||!hasVerifiedSession(primaryAccount)} onClick={()=>void changeConcurrency(requestedLanes)}>Kiểm tra luồng</button>}<small>Chọn 1–10 ô mỗi tài khoản. Ví dụ 10 tài khoản × 6 ô = 60 ô.</small></div></div>
+        <div><span className="eyebrow">{standardMode?'MẶC ĐỊNH · MỖI TÀI KHOẢN MỘT LUỒNG':'MỘT TÀI KHOẢN · MỞ RỘNG CHẠY SONG SONG'}</span><h2>{multipleAccounts?`${selectedAccountIds.length} tài khoản · ${slotCount} ô`:`Một tài khoản · ${slotCount} cảnh`}</h2><p>{standardMode?'Mỗi tài khoản giữ cố định một luồng.':`Mục Một tài khoản: yêu cầu ${requestedLanes} ô mỗi tài khoản; các lựa chọn riêng được áp dụng theo từng hồ sơ.`} Hiện đã xác minh {executionLanes} ô sẵn sàng; các ô còn lại chờ đến lượt. Tool chuẩn bị hội thoại riêng trước khi gửi prompt.</p><div className="concurrency-controls"><label htmlFor="muse-concurrency">Số luồng mỗi tài khoản:</label><select id="muse-concurrency" disabled={connectionLocked||busy} value={requestedLanes} onChange={e=>void changeConcurrency(Number(e.target.value))}>{(standardMode?[1]:Array.from({length:10},(_,i)=>i+1)).map(n=><option key={n} value={n}>{n} · Yêu cầu song song</option>)}</select>{usingBrowser&&!multipleAccounts&&<button className="micro-button" disabled={connectionLocked||!hasVerifiedSession(primaryAccount)} onClick={()=>void changeConcurrency(requestedLanes)}>Kiểm tra luồng</button>}<small>{standardMode?'Giữ cố định 1 tài khoản = 1 luồng; 10 tài khoản = 10 luồng.':'Chọn số tài khoản và số ô trong mục Một tài khoản. Ví dụ 10 tài khoản × 6 ô = 60 ô.'}</small></div></div>
         <div className="single-account-controls">{status?.multiAccount && <label>Tài khoản đang chọn <select aria-label="Tài khoản đang chọn" disabled={connectionLocked} value={selectedAccount} onChange={e=>void selectAccount(Number(e.target.value))}>{status.accounts?.map(account=><option key={account.id} value={account.id}>{String(account.id).padStart(2,'0')} · {account.label}</option>)}</select></label>}<strong className={providerReady ? 'mint' : 'muted'}>{usingBrowser ? accountStateName(museAccount) : connection}</strong><button className="button" disabled={connectionLocked || !usingBrowser} onClick={() => void connectAccount()}><Link2 size={15}/>{connectingId !== null ? 'Đang kết nối…' : embeddedLogin ? 'Đăng nhập Muse trong tool' : 'Kết nối Muse'}</button><button className="micro-button" disabled={connectionLocked || !usingBrowser} onClick={() => void connectAccount(true)}>Kiểm tra phiên</button><button className="micro-button" disabled={connectionLocked || !usingBrowser || !sessionVerified} onClick={() => void checkComposer()}>Kiểm tra ô Message</button><p className="connection-feedback" role="status">{connectingId !== null ? 'Đang kiểm tra phiên Muse…' : connectionError || museAccount?.connectionMessage || (hasVerifiedSession(museAccount) ? 'Phiên Muse đã được xác minh.' : 'Hoàn tất đăng nhập trong tab Muse rồi quay về Studio để tự kết nối.')}</p>{composerFeedback}</div>
         <div className="balance-card" data-testid="account-balance"><span>SỐ DƯ TÀI KHOẢN MUSE</span><strong>{settings.mode === 'demo' ? 'Chế độ kiểm thử' : balanceAccount?.balance ? `${balanceAccount.balance.valueText} ${balanceAccount.balance.unit}` : 'Chưa đọc được'}</strong><small>{balanceAccount?.balance ? `Đọc lúc ${new Date(balanceAccount.balance.observedAt).toLocaleTimeString('vi-VN')}` : 'Không tự suy đoán token hoặc credit'}</small><button className="micro-button" disabled={connectionLocked || !usingBrowser || !hasVerifiedSession(museAccount)} onClick={() => void connectAccount(true)}><RefreshCw size={12}/>Cập nhật số dư</button></div>
       </section>
