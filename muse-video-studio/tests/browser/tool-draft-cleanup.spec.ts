@@ -12,18 +12,19 @@ async function setup(page:Page,options:{modifier?:string;sceneModifier?:string}=
 }
 
 test('Explicit cleanup targets scene58 account2, preserves names/prompts and never auto-retries; another account can still generate',async({page})=>{
- const generated:any[]=[],cleaned:any[]=[];let release!:()=>void;const held=new Promise<void>(resolve=>release=resolve);
+ const generated:any[]=[],cleaned:any[]=[];let release!:()=>void,releaseOther!:()=>void;const held=new Promise<void>(resolve=>release=resolve),otherHeld=new Promise<void>(resolve=>releaseOther=resolve);
  const modifier='   Keep the camera steady.\nAll visible people are mature adults.   ',fullPrompt=[prompt,modifier.trim()].join('\n\n');
- await page.route('**/api/video',route=>{const data=route.request().postDataJSON();generated.push(data);return route.fulfill(data.accountId===2&&generated.filter(row=>row.accountId===2).length===1?{status:409,json:{error:'MUSE_DRAFT_EXISTS: Ô Message ban đầu đang có bản nháp. Tool giữ nguyên nội dung và chưa gửi prompt.'}}:{json:{base64:video,mimeType:'video/mp4'}})});
+ await page.route('**/api/video',async route=>{const data=route.request().postDataJSON();generated.push(data);if(data.accountId===1)await otherHeld;return route.fulfill(data.accountId===2&&generated.filter(row=>row.accountId===2).length===1?{status:409,json:{error:'MUSE_DRAFT_EXISTS: Ô Message ban đầu đang có bản nháp. Tool giữ nguyên nội dung và chưa gửi prompt.'}}:{json:{base64:video,mimeType:'video/mp4'}})});
  await page.route('**/api/account/clear-tool-draft',async route=>{cleaned.push(route.request().postDataJSON());await held;await route.fulfill({json:{cleared:true,acknowledged:false,message:'Đã dọn đúng bản nháp tool. Chưa nhấn Enter.',accounts}})});
  await setup(page,{modifier:'An unrelated default for other scenes.',sceneModifier:modifier});const card=page.getByTestId('scene-58');await card.getByRole('button',{name:'Tạo cảnh này',exact:true}).click();await expect(card.locator('.scene-error')).toContainText('Dọn bản nháp tool');expect(generated[0].prompt).toBe(fullPrompt);
  try{
-  await page.getByRole('button',{name:'Dọn bản nháp tool cảnh 58',exact:true}).click();await expect.poll(()=>cleaned.length).toBe(1);expect(cleaned[0]).toEqual({accountId:2,prompt:fullPrompt,output:'video'});expect(cleaned[0].prompt).toBe(generated[0].prompt);expect(generated).toHaveLength(1);await expect(card.locator('.card-footer button').first()).toBeDisabled();
-  const other=page.getByTestId('scene-1');await expect(other.getByRole('button',{name:'Tạo cảnh này',exact:true})).toBeEnabled();await other.getByRole('button',{name:'Tạo cảnh này',exact:true}).click();await expect(other.locator('.status-badge.done')).toHaveCount(1);expect(generated.map(row=>row.accountId)).toEqual([2,1]);
+  const other=page.getByTestId('scene-1');await other.getByRole('button',{name:'Tạo cảnh này',exact:true}).click();await expect(other.locator('.status-badge.running')).toHaveCount(1);await expect.poll(()=>generated.length).toBe(2);await expect(page.getByRole('button',{name:'Dọn bản nháp tool cảnh 58',exact:true})).toBeEnabled();
+  await page.getByRole('button',{name:'Dọn bản nháp tool cảnh 58',exact:true}).click();await expect.poll(()=>cleaned.length).toBe(1);expect(cleaned[0]).toEqual({accountId:2,prompt:fullPrompt,output:'video'});expect(cleaned[0].prompt).toBe(generated[0].prompt);expect(generated).toHaveLength(2);await expect(card.locator('.card-footer button').first()).toBeDisabled();await expect(other.locator('.status-badge.running')).toHaveCount(1);
   release();await expect(page.getByRole('button',{name:'Dọn bản nháp tool cảnh 58',exact:true})).toHaveCount(0);await expect(card.getByRole('button',{name:'Tạo cảnh này',exact:true})).toBeEnabled();expect(generated).toHaveLength(2);
   await expect(page.getByLabel('Kịch bản cảnh 58',{exact:true})).toHaveValue(prompt);await expect(page.getByLabel('Tên tệp cảnh 58',{exact:true})).toHaveValue('Tên Nam 058');await expect(page.locator('.toast')).toContainText('Chưa tự gửi prompt hoặc tạo tệp');
+  await expect(other.locator('.status-badge.running')).toHaveCount(1);releaseOther();await expect(other.locator('.status-badge.done')).toHaveCount(1);
   await card.getByRole('button',{name:'Tạo cảnh này',exact:true}).click();await expect(card.locator('.status-badge.done')).toHaveCount(1);expect(generated.map(row=>row.accountId)).toEqual([2,1,2]);expect(generated[2].prompt).toBe(fullPrompt);expect(generated[2].outputName).toBe('Tên Nam 058');
- }finally{release()}
+ }finally{release();releaseOther()}
 });
 
 test('Acknowledged cleanup offers receive-existing as the main action and does not regenerate a previously received request',async({page})=>{
