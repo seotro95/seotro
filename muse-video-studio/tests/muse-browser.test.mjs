@@ -5,10 +5,10 @@ import { existsSync } from 'node:fs';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
+import { chromium } from 'playwright-core';
 import { MuseBrowser } from '../muse-browser.mjs';
 
-const executablePath = process.env.CHROMIUM_PATH;
-if (!executablePath) throw new Error('Set CHROMIUM_PATH to a local Chromium/Chrome executable to run the browser bridge fixture checks.');
+const executablePath = process.env.CHROMIUM_PATH || chromium.executablePath();
 const image = await readFile(new URL('../public/demo-image.png', import.meta.url));
 const clip = await readFile(new URL('../public/demo.mp4', import.meta.url));
 const png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aO1sAAAAASUVORK5CYII=';
