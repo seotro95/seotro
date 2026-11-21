@@ -6,7 +6,7 @@ import { Play, Download, FileText, Users, ShieldPlus, ImagePlus, ScanFace, WandS
 import { ADVENTURE, RUNWAY, MUSE_MODELS, visibleSlotIds, visibleWorkspace, normalizeSlotIds, accountForScene, normalizeSettings, restoreWorkspace, createScenes, parseScriptEntries, accountLayout, accountPool, normalizeAccountIds, normalizeLaneOverrides, lanesForAccount, errorInfo, meetsResolution, RENDER_KEYS,renderingSettings,sceneSettings } from './core.ts';
 import type { Scene, Settings, Reference, Status, Mode, Output, MediaResult } from './core.ts';
 import { generateVideo, generateImage, recoverGeneratedMedia, enhancePrompt, readImage, downloadVideo, downloadMediaBatch, chooseExportDirectory, releaseVideo, providerStatus, accountAction } from './provider.ts';
-import { loadMedia, saveMedia, deleteMedia, clearMedia } from './media-library.ts';
+import { loadMedia, saveMedia, deleteMedia, clearMedia, deleteVideoMedia } from './media-library.ts';
 import type { SavedMedia } from './media-library.ts';
 import {parseAutomationBatch,apiError} from './automation.ts';
 import{MediaQueue}from'../media-queue.mjs';
@@ -20,7 +20,7 @@ import './styles.css';
 const STORAGE = 'muse-workstation-v1';
 const statusNames: Record<Status, string> = { ready: 'Sẵn sàng', queued: 'Đang chờ', running: 'Đang tạo', done: 'Hoàn tất', error: 'Lỗi', cancelled: 'Đã dừng' };
 type Log = { time: string; scene: string; raw: string; hint: string };
-type ModalName = 'import' | 'accounts' | 'diagnostics' | 'api' | 'clear-media' | null;
+type ModalName = 'import' | 'accounts' | 'diagnostics' | 'api' | 'clear-media' | 'clear-videos' | null;
 type Balance = { valueText: string; unit: 'token' | 'credit'; label: string; observedAt: string; source: string };
 type AccountSession = {concurrencyWarning?:string;queued?:number; persistence?:{savedAt:number|null;hasSession:boolean}; executionConcurrency?:number; proxy?:{exitIP?:string;ipState?:string;ipError?:string;ipCheckedAt?:string;supported:boolean;enabled:boolean;server:string;hasUsername:boolean;hasPassword:boolean};persistenceMessage?:string;label?: string; running?: number; balance?: Balance | null; id: number; state: string; authenticated: boolean; sessionAuthenticated?: boolean; composerReady?: boolean; connectionMessage?: string; checkedAt: string | null; active: boolean };
 type ProviderStatus = {canRecoverMedia?:boolean;version?:string;executionAccountId?:number;restoringSessions?:boolean; preferredConcurrency?: number; multiAccount?: boolean; museConfigured: boolean; busy: boolean; transport?: 'browser' | 'adapter'; accounts?: AccountSession[]; embeddedLogin?: boolean; activeRequests?: number; maxConcurrency?: number; executionConcurrency?: number; concurrencyWarning?: string; concurrencyProbe?: {requested:number;checked:number;state:string}; workerProgress?: { accountId?:number; batchId: string | null; sceneId: number | null; output: string; phase: string; submitted: boolean; active: boolean; startedAt?:number; observation?:{checkedAt:string;messageAcknowledged:boolean;assistantReplies:number;visibleVideos:number;visibleImages:number;matchedMedia:boolean;matchedCount?:number;unmatchedCount?:number;captionLinked?:number;recoveryOnly?:boolean;streaming:boolean;replyScope:string;reply:string;batchSize?:number;messagesSent?:number;waitLimitSeconds?:number} }[] };
@@ -67,6 +67,7 @@ function App() {
   const [library, setLibrary] = useState<SavedMedia[]>([]);
   const libraryRef = useRef(library);
   const [libraryLoading, setLibraryLoading] = useState(true);
+  const [libraryReady,setLibraryReady]=useState(false);
   const [deletingMedia, setDeletingMedia] = useState<string | null>(null);
   const [modal, setModal] = useState<ModalName>(null);
   const [apiConfig,setApiConfig] = useState<{enabled:boolean;listening:boolean;port:number;key:string;address:string;error:string}|null>(null);
@@ -83,6 +84,8 @@ function App() {
   const [batch, setBatch] = useState(false);
   const [cancelling, setCancelling] = useState(false);
   const [downloading, setDownloading] = useState(false);
+  const [singleDownloads,setSingleDownloads]=useState(0);
+  const singleDownloadsRef=useRef(0);
   const [imageBusy, setImageBusy] = useState(false);
   const [logs, setLogs] = useState<Log[]>([]);
   const [notice, setNotice] = useState('');
@@ -154,6 +157,11 @@ function App() {
   const embeddedLogin = Boolean(status?.embeddedLogin);
   const loginPlace = embeddedLogin ? 'tab Muse ngay trong tool' : 'cửa sổ Chrome/Edge của chế độ web';
   const runningCount = scenes.filter(scene => scene.status === 'running').length;
+  const videoResultCount=new Set([...library.filter(entry=>entry.media.kind==='video').map(entry=>entry.id),...scenes.flatMap(scene=>scene.video?[scene.video.savedId||scene.video.url]:[])]).size;
+  const savedResultIds=new Set(library.map(entry=>entry.id));
+  const queueResultsReady=libraryReady&&!scriptQueueLoading&&!recoveryMode;
+  const queueResultAvailable=(entry:QueueFile['entries'][number])=>entry.state==='done'&&(!queueResultsReady||Boolean(entry.savedId&&savedResultIds.has(entry.savedId)));
+  const clearVideosLocked=recoveryMode||!libraryReady||locked||busy||batch||cancelling||downloading||singleDownloads>0||scriptQueueLoading||scriptImportSaving||importReading||scriptQueueActive||scriptFeeding.current||Boolean(scriptRun.current)||Boolean(controller.current)||renderJobs.current.size>0||Boolean(status?.activeRequests)||Boolean(status?.workerProgress?.some(stage=>stage.active))||clearingAll.current;
   const multipleAccounts = settings.accountMode === 'multiple';
   const accountFor = (id: number) => accountForScene(scenesRef.current.find(scene=>scene.id===id)??{id},settingsRef.current);
   const primaryExecution=status?.accounts?.find(account=>account.id===(settings.singleAccountId??1))?.executionConcurrency||((status?.executionAccountId??1)===(settings.singleAccountId??1)?status?.executionConcurrency||1:1);
@@ -332,6 +340,30 @@ function App() {
     try {const entries=[...libraryRef.current];await clearMedia();setViewer(null);updateLibrary(()=>[]);updateScenes(all=>all.map(scene=>({...scene,image:undefined,video:undefined,status:'ready',error:undefined})));for(const entry of entries)URL.revokeObjectURL(entry.media.url);setNotice(`Đã xóa ${entries.length} ảnh/video trong thư viện tool.`);return {deleted:entries.length};}
     finally{clearingAll.current=false;setDeletingMedia(null)}
   }
+  async function clearAllVideoResults(){
+    if(clearVideosLocked||singleDownloadsRef.current||renderJobs.current.size||controller.current||scriptRun.current||scriptFeeding.current||clearingAll.current)throw apiError(409,'Đợi tác vụ, hàng chờ và lượt tải hoàn tất trước khi xoá video đã tạo.');
+    clearingAll.current=true;setDeletingMedia('all-videos');
+    try{
+      await scriptWrites.current;
+      const videos=libraryRef.current.filter(entry=>entry.media.kind==='video');
+      const cached=scenesRef.current.flatMap(scene=>scene.video?[scene.video]:[]);
+      const deletedIds=await deleteVideoMedia();
+      const count=new Set([...deletedIds,...videos.map(entry=>entry.id),...cached.map(media=>media.savedId||media.url)]).size;
+      setViewer(current=>current?.media.kind==='video'?null:current);
+      updateLibrary(all=>all.filter(entry=>entry.media.kind!=='video'));
+      updateScenes(all=>all.map(scene=>scene.video?{...scene,video:undefined,...(settingsRef.current.output==='video'?{status:'ready' as Status,error:undefined,stopping:false,activeOutput:undefined}: {})}:scene));
+      // Stored rows are gone before any video object URL is released. Images,
+      // reference images and historical queue entries keep their own data.
+      for(const url of new Set([...videos.map(entry=>entry.media.url),...cached.map(media=>media.url)]))if(url.startsWith('blob:'))URL.revokeObjectURL(url);
+      setNotice(`Đã xoá ${count} video đã tạo trong toàn bộ thư viện tool. Các mục hàng chờ đã chạy không tự tạo lại.`);
+      return {deleted:count};
+    }finally{clearingAll.current=false;setDeletingMedia(null)}
+  }
+  async function downloadOneResult(media:MediaResult,id:number,label:string){
+    if(clearingAll.current||deletingMedia!==null)return;
+    singleDownloadsRef.current++;setSingleDownloads(singleDownloadsRef.current);
+    try{await downloadVideo(media,id)}catch(error){setNotice(logError(error,label).raw)}finally{singleDownloadsRef.current--;setSingleDownloads(singleDownloadsRef.current)}
+  }
   async function openAutomation() {
     setModal('api');setApiErrorText('');setApiShowKey(false);
     if(!window.museTransport?.automationControl)return;
@@ -450,6 +482,7 @@ function App() {
         const video = entries.find(entry => entry.sceneId === scene.id && entry.media.kind === 'video' && matchesRequest(entry, { ...scene, image }, { ...settings, output: 'video' }))?.media;
         return { ...scene, image, video, status: (settings.output === 'image' ? image : video) ? 'done' : 'ready' };
       }));
+      setLibraryReady(true);
     }).catch(e => { if (mounted) setNotice(`Chưa đọc được kho kết quả: ${errorInfo(e).raw}`); }).finally(() => { if (mounted) {setLibraryLoading(false);window.museTransport?.rendererStage?.('ready');} });
     return () => { mounted = false; libraryRef.current.forEach(entry => URL.revokeObjectURL(entry.media.url)); };
   }, []);
@@ -491,6 +524,7 @@ function App() {
   }
   useEffect(()=>{let disposed=false;void loadScriptQueue().then(files=>{if(!disposed){scriptFilesRef.current=files;setScriptFiles(files);}}).catch(error=>setNotice(errorInfo(error).raw)).finally(()=>{if(!disposed)setScriptQueueLoading(false)});return()=>{disposed=true}},[]);
   function changeScriptQueue(change:(files:QueueFile[])=>QueueFile[],publishAfterSave=false){
+    if(clearingAll.current)return Promise.resolve();
     const previous=scriptFilesRef.current,next=change(previous);scriptFilesRef.current=next;if(!publishAfterSave)setScriptFiles(next);
     const saved=scriptWrites.current.then(async()=>{await saveScriptQueue(next,queueNeedsFullWrite.current?[]:previous);queueNeedsFullWrite.current=false;});
     scriptWrites.current=saved.catch(error=>{queueNeedsFullWrite.current=true;scriptRun.current=null;setScriptQueueActive(false);setNotice('Không lưu được hàng chờ; đã ngừng nạp thêm prompt. '+errorInfo(error).raw);});
@@ -502,36 +536,37 @@ function App() {
     await editQueueEntry(job.scriptEntryId,{state,error,savedId}).catch(()=>{});
   }
   async function downloadQueueResults(fileIds?:string[]){
-    if(downloading||libraryLoading)return;setDownloading(true);
+    if(downloading||libraryLoading||clearingAll.current||deletingMedia!==null)return;setDownloading(true);
     try{
-      const entries=scriptFilesRef.current.filter(file=>fileIds?fileIds.includes(file.id):file.selected).flatMap(file=>file.entries.filter(entry=>entry.selected&&entry.state==='done'));
+      const completed=scriptFilesRef.current.filter(file=>fileIds?fileIds.includes(file.id):file.selected).flatMap(file=>file.entries.filter(entry=>entry.selected&&entry.state==='done'));
       const saved=new Map(libraryRef.current.map(item=>[item.id,item]));
-      if(!entries.length)throw Error('Chưa có kết quả hoàn tất trong mục đã chọn.');
-      if(entries.some(entry=>!entry.savedId||!saved.has(entry.savedId)))throw Error('Một số kết quả đã bị xóa hoặc chưa được lưu trên máy. Kiểm tra thư viện trước khi tải nhóm này.');
+      const entries=completed.filter(entry=>entry.savedId&&saved.has(entry.savedId));
+      const missing=completed.length-entries.length;
+      if(!entries.length)throw Error(missing?'Các kết quả đã chọn đã xoá hoặc không còn trong thư viện tool. Prompt được giữ và không tự chạy lại.':'Chưa có kết quả hoàn tất trong mục đã chọn.');
       let total=0;
       for(const kind of ['image','video'] as const){const matching=entries.filter(entry=>saved.get(entry.savedId!)!.media.kind===kind);for(let offset=0;offset<matching.length;offset+=20){
         const items=matching.slice(offset,offset+20).map((entry,index)=>({id:offset+index+1,media:{...saved.get(entry.savedId!)!.media,outputName:entry.outputName}}));
         const result=await downloadMediaBatch(items,kind);if(result.cancelled)return;total+=items.length;
       }}
-      setNotice(`Đã tải đủ ${total} kết quả đã chọn, gồm cả các nhóm trước. Tệp giữ tên theo TXT/SRT; nhóm lớn chia thư mục để tải ổn định.`);
+      setNotice(`Đã tải ${total} kết quả đã chọn, gồm cả các nhóm trước.${missing?` Bỏ qua ${missing} kết quả đã xoá hoặc không còn trong thư viện.`:''} Tệp giữ tên theo TXT/SRT; nhóm lớn chia thư mục để tải ổn định.`);
     }catch(error){setNotice(errorInfo(error).raw);}finally{setDownloading(false)}
   }
   function pauseScriptQueue(){scriptRun.current=null;setScriptQueueActive(false);setNotice('Đã ngừng nạp thêm prompt. Các ô đã nhận vẫn tiếp tục; prompt chưa chạy được giữ trong hàng chờ.');}
   async function addScriptQueue(andRun=false){
-    if(importReading||scriptImportSaving||scriptQueueLoading||!parsed.length)return;
+    if(clearingAll.current||importReading||scriptImportSaving||scriptQueueLoading||!parsed.length)return;
     const files=queueFiles(importSources.length?importSources:[{name:'Kịch bản dán vào.txt',text:importText}]);
     const before=scriptFilesRef.current;setScriptImportSaving(true);
     try{await changeScriptQueue(old=>[...old,...files],true);setModal(null);setNotice(`Đã lưu đủ ${parsed.length} prompt trong ${files.length} tệp. Giữ nguyên ${slotCount} ô; chọn tệp hoặc prompt cần chạy.`);if(andRun)startScriptQueue(files.map(file=>file.id));}catch{scriptFilesRef.current=before;setScriptFiles(before);}finally{setScriptImportSaving(false)}
   }
   function startScriptQueue(fileIds?:string[]){
-    if(renderLocked||scriptQueueLoading||!requireProvider())return;
+    if(clearingAll.current||renderLocked||scriptQueueLoading||!requireProvider())return;
     const chosen=scriptFilesRef.current.filter(file=>fileIds?fileIds.includes(file.id):file.selected).flatMap(file=>file.entries.filter(entry=>entry.selected&&entry.state==='pending').map(entry=>entry.id));
     if(!chosen.length){setNotice('Chọn tệp và prompt chưa chạy trong hàng chờ.');return;}
     if(scriptRun.current){scriptRun.current.ids=[...new Set([...scriptRun.current.ids,...chosen])];setNotice('Đã thêm các prompt đã chọn vào lượt hàng chờ đang chạy.');return;}
     scriptRun.current={ids:chosen,settings:{...settingsRef.current}};setScriptQueueActive(true);void feedScriptQueue();
   }
   async function feedScriptQueue(){
-    if(scriptFeeding.current||!scriptRun.current)return;
+    if(clearingAll.current||scriptFeeding.current||!scriptRun.current)return;
     const plan=scriptRun.current;
     // Refill a window only after its jobs finish. Never replace a running card.
     if(renderJobs.current.size)return;
@@ -629,7 +664,7 @@ function App() {
     }
   }
   async function run(ids?: number[], override?: Scene[], external=false,requiredConcurrency?:number,queueConfig?:Settings) {
-    if (renderLocked || (controller.current && !renderBatch.current) || renderBatch.current?.control.signal.aborted || !requireProvider()) return;
+    if (clearingAll.current||renderLocked || (controller.current && !renderBatch.current) || renderBatch.current?.control.signal.aborted || !requireProvider()) return;
     const initialDeadline=renderJobs.current.size?undefined:performance.now()+UI_WAIT_LIMIT_MS;
     const config = { ...(queueConfig||settingsRef.current) };
     const source = visibleWorkspace(override || scenesRef.current,config);
@@ -687,7 +722,7 @@ function App() {
     return {batchId:startedBatch.batchId,sceneIds:targets.map(scene=>scene.id),executionConcurrency:config.mode==='demo'||!usingBrowser?targets.length:[...new Set(targets.map(scene=>accountForScene(scene,config)))].reduce((sum,id)=>sum+Math.min(requiredConcurrency??lanesForAccount(config,id),accountLanes.current.get(id)??1),0),requestedConcurrency:desired??museLanes.current};
   }
   function recoverExisting(ids?:number[]){
-    if(renderLocked||!usingBrowser||!status?.canRecoverMedia||settingsRef.current.mode!=='muse')return;
+    if(clearingAll.current||renderLocked||!usingBrowser||!status?.canRecoverMedia||settingsRef.current.mode!=='muse')return;
     const config={...settingsRef.current};
     const targets=visibleWorkspace(scenesRef.current,config).filter(scene=>!renderJobs.current.has(scene.id)&&scene.enabled&&scene.prompt.trim()&&accountReady(scene)&&(ids?ids.includes(scene.id):!scene[config.output]));
     if(!targets.length){setNotice('Chọn đúng tài khoản và các ô có prompt cần nhận lại.');return;}
@@ -708,7 +743,7 @@ function App() {
     }
   }
   async function enhance(scene: Scene) {
-    if (renderLocked || renderJobs.current.has(scene.id) || !scene.prompt.trim() || !accountReady(scene) || settingsRef.current.mode === 'demo' || !requireProvider()) return;
+    if (clearingAll.current||renderLocked || renderJobs.current.has(scene.id) || !scene.prompt.trim() || !accountReady(scene) || settingsRef.current.mode === 'demo' || !requireProvider()) return;
     beginBatch();
     renderJobs.current.set(scene.id, { accountId: accountFor(scene.id), scene, settings: sceneSettings(settingsRef.current,scene), action: 'enhance', control: new AbortController(), started: false });
     setBatch(renderJobs.current.size > 1); updateScenes(all => all); pumpRenders();
@@ -719,7 +754,7 @@ function App() {
     for (const id of [...renderJobs.current.keys()]) cancelScene(id);
   }
   async function downloadAll(external=false,selection?:{batchId?:string;output?:Output;sceneIds?:number[]}) {
-    if(downloading||libraryLoading){if(external)throw apiError(409,'Đang lưu kết quả. Đợi lượt lưu hoàn tất.');return;}
+    if(downloading||libraryLoading||clearingAll.current||deletingMedia!==null){if(external)throw apiError(409,'Đang cập nhật hoặc lưu kết quả. Đợi tác vụ hoàn tất.');return;}
     const kind=selection?.output??settingsRef.current.output;
     if(!['image','video'].includes(kind))throw apiError(400,'output phải là image hoặc video.');
     if(selection?.batchId&&!/^[a-f0-9-]{36}$/i.test(selection.batchId))throw apiError(400,'batchId không hợp lệ.');
@@ -739,7 +774,7 @@ function App() {
     finally{setDownloading(false)}
   }
   function importScenes(andRun: boolean) {
-    if (!canImport || locked || (andRun && !requireProvider())) return;
+    if (clearingAll.current||!canImport || locked || (andRun && !requireProvider())) return;
     const config=settingsRef.current;
     const ids=importIds;
     const original=visibleSlotIds(config),pattern=original.map(id=>accountForScene(scenesRef.current.find(scene=>scene.id===id)??{id},config));
@@ -752,6 +787,7 @@ function App() {
   function standaloneImport(text:string){importReadId.current++;setImportReading(false);setImportSources([]);setImportSourceIndex(0);setImportText(text);}
   function editImport(text:string){if(importSources.length)setImportSources(all=>all.map((source,index)=>index===importSourceIndex?{...source,text}:source));else setImportText(text);}
   async function importFiles(files?:FileList|null){
+    if(clearingAll.current)return;
     if(!files?.length)return;
     const request=++importReadId.current;setImportReading(true);
     try{const sources=await readScriptFiles(Array.from(files));if(request!==importReadId.current)return;setImportSources(sources);setImportSourceIndex(0);setImportText('');setNotice(`Đã đọc ${sources.length} tệp. Kiểm tra thứ tự và toàn bộ prompt trước khi nạp.`);}
@@ -858,7 +894,7 @@ function App() {
         <div className="progress-box"><span>{busy ? `${runningCount}/${slotCount} luồng đang chạy` : 'Tiến độ tạo:'}</span><div className="progress-track" role="progressbar" aria-label="Tiến độ tạo" aria-valuemin={0} aria-valuemax={slotCount} aria-valuenow={done}><div style={{ width: `${done / Math.max(1,slotCount) * 100}%` }}/></div><b>{done}/{slotCount}</b></div>
       </section>
 
-      {scriptFiles.length>0&&<section className="script-file-queue" aria-label="Hàng chờ TXT SRT"><div className="preset-row"><strong>Hàng chờ TXT / SRT · {scriptFiles.reduce((sum,file)=>sum+file.entries.length,0)} prompt · dùng {slotCount} ô hiện có</strong><button className="button primary" disabled={renderLocked||renderBlocked} onClick={()=>startScriptQueue()}>Chạy mục đã chọn</button><button className="button" disabled={downloading||libraryLoading} onClick={()=>void downloadQueueResults()}>Tải kết quả đã chọn</button>{scriptQueueActive&&<button className="button" onClick={pauseScriptQueue}>Ngừng nạp thêm prompt</button>}<button className="micro-button" onClick={()=>void changeScriptQueue(files=>files.map(file=>({...file,selected:true})))}>Chọn tất cả tệp</button><button className="micro-button" onClick={()=>void changeScriptQueue(files=>files.map(file=>({...file,selected:false})))}>Bỏ chọn tệp</button></div><p className="small muted">Lần lượt nạp đủ prompt theo số ô đang mở. Kết quả cũ giữ trong thư viện. Lỗi hoặc tệp đã tạo không tự chạy lại. Chọn riêng từng prompt bên trong mỗi tệp.</p>{scriptFiles.map(file=>{const page=queuePages[file.id]||0,pending=file.entries.filter(entry=>entry.state==='pending').length,finished=file.entries.filter(entry=>entry.state==='done').length,failed=file.entries.filter(entry=>entry.state==='error'||entry.state==='cancelled').length;return <details className="queue-file" key={file.id} onToggle={event=>{if(event.target===event.currentTarget){const open=event.currentTarget.open;setOpenQueueFiles(value=>({...value,[file.id]:open}));}}}><summary><input type="checkbox" aria-label={`Chọn tệp ${file.name}`} checked={file.selected} onClick={event=>event.stopPropagation()} onChange={event=>void changeScriptQueue(files=>files.map(value=>value.id===file.id?{...value,selected:event.target.checked}:value))}/><strong>{file.name}</strong><span>{file.entries.length} prompt · {pending} chưa chạy · {finished} xong · {failed} lỗi/dừng</span></summary><div className="preset-row"><button className="button" aria-label={`Chạy tệp ${file.name}`} disabled={renderLocked||renderBlocked||!pending} onClick={()=>startScriptQueue([file.id])}>Chạy tệp này</button><button className="button" aria-label={`Tải kết quả tệp ${file.name}`} disabled={downloading||libraryLoading||!finished} onClick={()=>void downloadQueueResults([file.id])}>Tải kết quả tệp</button><button className="micro-button" onClick={()=>void changeScriptQueue(files=>files.map(value=>value.id===file.id?{...value,entries:value.entries.map(entry=>({...entry,selected:true}))}:value))}>Chọn cả tệp</button><button className="micro-button" onClick={()=>void changeScriptQueue(files=>files.map(value=>value.id===file.id?{...value,entries:value.entries.map(entry=>({...entry,selected:false}))}:value))}>Bỏ chọn prompt</button><button className="micro-button" disabled={!failed||scriptQueueActive||busy} title="Kiểm tra lịch sử Muse trước; thao tác này cho phép gửi lệnh tạo mới đối với mục lỗi đã chọn." onClick={()=>void changeScriptQueue(files=>files.map(value=>value.id===file.id?{...value,entries:value.entries.map(entry=>entry.selected&&['error','cancelled'].includes(entry.state)?{...entry,state:'pending',error:undefined}:entry)}:value))}>Đưa mục lỗi đã chọn về chờ</button></div>{openQueueFiles[file.id]&&file.entries.slice(page*50,(page+1)*50).map(entry=><div className="queue-entry" key={entry.id}><input type="checkbox" aria-label={`Chọn prompt ${entry.index} của ${file.name}`} checked={entry.selected} disabled={entry.state==='running'} onChange={event=>void editQueueEntry(entry.id,{selected:event.target.checked})}/><span><strong>[{entry.index}] {entry.outputName||'Tự đánh số khi tải'}</strong><small>{({pending:'Chưa chạy',running:'Đang xử lý',done:'Hoàn tất',error:'Lỗi · cần kiểm tra',cancelled:'Đã dừng'})[entry.state]}</small><details><summary>Xem prompt</summary><p>{entry.prompt}</p>{entry.error&&<pre>{entry.error}</pre>}</details></span></div>)}{file.entries.length>50&&<div className="preset-row"><button className="micro-button" disabled={!page} onClick={()=>setQueuePages(value=>({...value,[file.id]:page-1}))}>Trang trước</button><span>{page+1}/{Math.ceil(file.entries.length/50)}</span><button className="micro-button" disabled={(page+1)*50>=file.entries.length} onClick={()=>setQueuePages(value=>({...value,[file.id]:page+1}))}>Trang sau</button></div>}</details>})}</section>}
+      {scriptFiles.length>0&&<section className="script-file-queue" aria-label="Hàng chờ TXT SRT"><div className="preset-row"><strong>Hàng chờ TXT / SRT · {scriptFiles.reduce((sum,file)=>sum+file.entries.length,0)} prompt · dùng {slotCount} ô hiện có</strong><button className="button primary" disabled={renderLocked||renderBlocked} onClick={()=>startScriptQueue()}>Chạy mục đã chọn</button><button className="button" disabled={downloading||libraryLoading} onClick={()=>void downloadQueueResults()}>Tải kết quả đã chọn</button>{scriptQueueActive&&<button className="button" onClick={pauseScriptQueue}>Ngừng nạp thêm prompt</button>}<button className="micro-button" onClick={()=>void changeScriptQueue(files=>files.map(file=>({...file,selected:true})))}>Chọn tất cả tệp</button><button className="micro-button" onClick={()=>void changeScriptQueue(files=>files.map(file=>({...file,selected:false})))}>Bỏ chọn tệp</button></div><p className="small muted">Lần lượt nạp đủ prompt theo số ô đang mở. Kết quả cũ giữ trong thư viện. Lỗi hoặc tệp đã tạo không tự chạy lại. Chọn riêng từng prompt bên trong mỗi tệp.</p>{scriptFiles.map(file=>{const page=queuePages[file.id]||0,pending=file.entries.filter(entry=>entry.state==='pending').length,finished=file.entries.filter(queueResultAvailable).length,removed=queueResultsReady?file.entries.filter(entry=>entry.state==='done'&&!queueResultAvailable(entry)).length:0,failed=file.entries.filter(entry=>entry.state==='error'||entry.state==='cancelled').length;return <details className="queue-file" key={file.id} onToggle={event=>{if(event.target===event.currentTarget){const open=event.currentTarget.open;setOpenQueueFiles(value=>({...value,[file.id]:open}));}}}><summary><input type="checkbox" aria-label={`Chọn tệp ${file.name}`} checked={file.selected} onClick={event=>event.stopPropagation()} onChange={event=>void changeScriptQueue(files=>files.map(value=>value.id===file.id?{...value,selected:event.target.checked}:value))}/><strong>{file.name}</strong><span>{file.entries.length} prompt · {pending} chưa chạy · {finished} xong · {failed} lỗi/dừng{removed?` · ${removed} đã xoá/không còn kết quả`:''}</span></summary><div className="preset-row"><button className="button" aria-label={`Chạy tệp ${file.name}`} disabled={renderLocked||renderBlocked||!pending} onClick={()=>startScriptQueue([file.id])}>Chạy tệp này</button><button className="button" aria-label={`Tải kết quả tệp ${file.name}`} disabled={downloading||libraryLoading||!finished} onClick={()=>void downloadQueueResults([file.id])}>Tải kết quả tệp</button><button className="micro-button" onClick={()=>void changeScriptQueue(files=>files.map(value=>value.id===file.id?{...value,entries:value.entries.map(entry=>({...entry,selected:true}))}:value))}>Chọn cả tệp</button><button className="micro-button" onClick={()=>void changeScriptQueue(files=>files.map(value=>value.id===file.id?{...value,entries:value.entries.map(entry=>({...entry,selected:false}))}:value))}>Bỏ chọn prompt</button><button className="micro-button" disabled={!failed||scriptQueueActive||busy} title="Kiểm tra lịch sử Muse trước; thao tác này cho phép gửi lệnh tạo mới đối với mục lỗi đã chọn." onClick={()=>void changeScriptQueue(files=>files.map(value=>value.id===file.id?{...value,entries:value.entries.map(entry=>entry.selected&&['error','cancelled'].includes(entry.state)?{...entry,state:'pending',error:undefined}:entry)}:value))}>Đưa mục lỗi đã chọn về chờ</button></div>{openQueueFiles[file.id]&&file.entries.slice(page*50,(page+1)*50).map(entry=><div className="queue-entry" key={entry.id}><input type="checkbox" aria-label={`Chọn prompt ${entry.index} của ${file.name}`} checked={entry.selected} disabled={entry.state==='running'} onChange={event=>void editQueueEntry(entry.id,{selected:event.target.checked})}/><span><strong>[{entry.index}] {entry.outputName||'Tự đánh số khi tải'}</strong><small>{entry.state==='done'&&queueResultsReady&&!queueResultAvailable(entry)?'Đã xoá/không còn kết quả':({pending:'Chưa chạy',running:'Đang xử lý',done:'Hoàn tất',error:'Lỗi · cần kiểm tra',cancelled:'Đã dừng'})[entry.state]}</small><details><summary>Xem prompt</summary><p>{entry.prompt}</p>{entry.error&&<pre>{entry.error}</pre>}</details></span></div>)}{file.entries.length>50&&<div className="preset-row"><button className="micro-button" disabled={!page} onClick={()=>setQueuePages(value=>({...value,[file.id]:page-1}))}>Trang trước</button><span>{page+1}/{Math.ceil(file.entries.length/50)}</span><button className="micro-button" disabled={(page+1)*50>=file.entries.length} onClick={()=>setQueuePages(value=>({...value,[file.id]:page+1}))}>Trang sau</button></div>}</details>})}</section>}
       {busy && usingBrowser && <p className="transport-note" role="status">Tool: {actualProgress.filter(stage => stage.active && !stage.submitted).length} ô đang chuẩn bị/chờ · {actualProgress.filter(stage => stage.submitted).length} prompt đã hiển thị trên trang Muse. Các ô đang chạy: {runningCount}. Muse quyết định thời gian xử lý và trả kết quả.</p>}
       <section className="sync-controls" aria-label="Đồng bộ thao tác">
         <button className={`button ${settings.syncOperations?'primary':''}`} aria-pressed={settings.syncOperations} onClick={()=>changeSettings({syncOperations:!settings.syncOperations},false)} disabled={locked}>Đồng bộ thao tác: {settings.syncOperations?'BẬT':'TẮT'}</button>
@@ -867,6 +903,7 @@ function App() {
         <button className="micro-button" disabled={locked} onClick={()=>updateScenes(all=>all.map(scene=>activeSlotIds.includes(scene.id)?{...scene,syncSelected:true}:scene))}>Chọn tất cả</button><button className="micro-button" disabled={locked} onClick={()=>updateScenes(all=>all.map(scene=>activeSlotIds.includes(scene.id)?{...scene,syncSelected:false}:scene))}>Bỏ chọn</button>
         <button className="button" disabled={locked||!settings.syncOperations||!syncIds.length} onClick={synchronizeNow}>Đồng bộ ngay từ ô {editingScene.id}</button>
         <button className="button" disabled={renderLocked||!settings.syncOperations||!syncIds.length||renderBlocked} onClick={()=>void run(syncIds)}>Tạo ô đã chọn</button><button className="button danger" disabled={!settings.syncOperations||!syncIds.some(id=>renderJobs.current.has(id))} onClick={()=>syncIds.forEach(cancelScene)}>Dừng ô đã chọn</button>
+        <button className="button danger" disabled={clearVideosLocked||!videoResultCount} title="Xoá mọi bản video trong thư viện tool, gồm cả ô đang ẩn và các lượt tạo trước" onClick={()=>{if(!clearVideosLocked)setModal('clear-videos')}}><Trash2 size={16}/>Xoá tất cả video đã tạo</button>
         {usingBrowser&&status?.canRecoverMedia&&<button className="button" disabled={renderLocked} title="Chỉ lấy tệp đã tạo trong Muse, không gửi lệnh tạo mới" onClick={()=>recoverExisting()}>Nhận lại từ Muse</button>}
       </section>
       {settings.output === 'image' && visibleScenes.some(s => s.image) && <div className="image-batch-actions"><button className="button" disabled={locked} onClick={() => useImagesForVideo()}><Video size={16}/>Chuyển bộ ảnh đã tạo sang video</button><span>Giữ ảnh và prompt, dùng ảnh đã tạo làm khung hình đầu.</span></div>}
@@ -889,7 +926,7 @@ function App() {
             {history.length > 0 && <details className="media-history" open={history.length > 1}><summary>Kết quả đã lưu ({history.length})</summary><div className="history-grid">{history.map((entry, index) => <div className={`history-entry ${entry.id === media?.savedId ? 'selected' : ''}`} key={entry.id}>
               <button className="history-select" disabled={deletingMedia !== null} aria-label={`Xem bản ${history.length - index} cảnh ${scene.id}`} aria-pressed={entry.id === media?.savedId} title={entry.media.outputName||entry.prompt} onClick={() => selectResult(entry)}>{entry.media.kind === 'image' ? <img src={entry.media.url} alt={`Bản ${history.length - index} cảnh ${scene.id}`} loading="lazy"/> : <Film size={25}/>}<span>Bản {history.length - index}{entry.media.demo ? ' · Kiểm thử' : ''}</span></button>
               <small>{new Date(entry.createdAt).toLocaleString('vi-VN')}</small>{!entry.persisted && <small className="red">Chưa lưu trên ổ đĩa · hãy tải ngay</small>}<p title={entry.prompt}>{entry.prompt}</p>
-              <div className="history-actions"><button aria-label={`Tải bản ${history.length - index} cảnh ${scene.id}`} onClick={() => void downloadVideo(entry.media, scene.id).catch(e => setNotice(logError(e, 'Tải kết quả').raw))}><Download size={12}/>Tải</button><button disabled={downloading || deletingMedia !== null} aria-label={`Xóa bản ${history.length - index} cảnh ${scene.id}`} onClick={() => void removeResult(entry)}><Trash2 size={12}/>Xóa</button></div>
+              <div className="history-actions"><button aria-label={`Tải bản ${history.length - index} cảnh ${scene.id}`} disabled={deletingMedia!==null} onClick={() => void downloadOneResult(entry.media,scene.id,'Tải kết quả')}><Download size={12}/>Tải</button><button disabled={downloading || deletingMedia !== null} aria-label={`Xóa bản ${history.length - index} cảnh ${scene.id}`} onClick={() => void removeResult(entry)}><Trash2 size={12}/>Xóa</button></div>
             </div>)}</div></details>}
             {media?.metadata && <p className="video-metadata">Muse trả về: {media.metadata.width}×{media.metadata.height}{typeof media.metadata.duration === 'number' ? ` · ${media.metadata.duration.toFixed(1)} giây` : ''}</p>}
             {quality !== null && <p className={`quality-result ${quality ? 'mint' : 'red'}`}>{quality ? 'Kích thước đạt' : 'Chưa đạt yêu cầu'} {media?.requestedResolution?.toUpperCase()}</p>}
@@ -906,7 +943,7 @@ function App() {
             <textarea id={`prompt-${scene.id}`} aria-label={`Kịch bản cảnh ${scene.id}`} disabled={locked || scene.enhancing} maxLength={8000} value={scene.prompt} onChange={e => changeScene(scene.id, { prompt: e.target.value })} placeholder="Nhập mô tả phân cảnh…"/>
             {scene.error && <div className="scene-error"><span><CircleAlert size={13}/>{errorInfo(scene.error).hint}</span><details><summary>Mã lỗi gốc</summary><pre tabIndex={0}>{scene.error}</pre></details><div className="error-actions"><button className="micro-button" aria-label={`Sao chép lỗi cảnh ${scene.id}`} onClick={()=>void copySceneError(scene)}><Copy size={13}/>Sao chép lỗi</button><button className="micro-button" aria-label={`Tải lỗi TXT cảnh ${scene.id}`} onClick={()=>downloadSceneError(scene)}><Download size={13}/>Tải lỗi TXT</button>{usingBrowser&&status?.canRecoverMedia&&<button className="micro-button" disabled={renderLocked} aria-label={`Nhận lại cảnh ${scene.id} từ Muse`} onClick={()=>recoverExisting([scene.id])}>Nhận lại từ Muse · không tạo mới</button>}{usingBrowser&&status?.canRecoverMedia&&<button className="micro-button" disabled={renderLocked} aria-label={`Tạo mới cảnh ${scene.id}`} onClick={()=>void run([scene.id])}>Tạo mới cảnh này</button>}</div></div>}
           </div>
-          <footer className="card-footer">{scene.status === 'running' || scene.status === 'queued' ? <button className="scene-run scene-stop" disabled={scene.stopping || cancelling} aria-label={`Dừng cảnh ${scene.id}`} onClick={() => cancelScene(scene.id)}>{scene.stopping ? <LoaderCircle className="spin" size={15}/> : <Square size={15}/>} {scene.stopping ? 'Đang dừng…' : scene.status === 'queued' ? 'Hủy cảnh chờ' : 'Dừng cảnh này'}</button> : <button className={`scene-run ${media ? 'has-result' : ''}`} disabled={renderLocked || (scriptSlots.current.has(scene.id)&&!renderJobs.current.has(scene.id)) || !accountReady(scene) || !scene.enabled || !scene.prompt.trim() || needsSource} onClick={() => preferRecovery?recoverExisting([scene.id]):void run([scene.id])}>{media || scene.status === 'error' ? <RefreshCw size={15}/> : <Play size={15}/>} {preferRecovery ? 'Nhận lại từ Muse' : media ? 'Tạo lại cảnh' : scene.status === 'error' ? 'Thử lại cảnh này' : 'Tạo cảnh này'}</button>}{media && <button className="download-one" title={`Tải cảnh ${scene.id}`} aria-label={`Tải cảnh ${scene.id}`} onClick={() => void downloadVideo({...media,outputName:scene.outputName}, scene.id).catch(e => setNotice(logError(e, 'Tải tệp').raw))}><Download size={16}/></button>}</footer>
+          <footer className="card-footer">{scene.status === 'running' || scene.status === 'queued' ? <button className="scene-run scene-stop" disabled={scene.stopping || cancelling} aria-label={`Dừng cảnh ${scene.id}`} onClick={() => cancelScene(scene.id)}>{scene.stopping ? <LoaderCircle className="spin" size={15}/> : <Square size={15}/>} {scene.stopping ? 'Đang dừng…' : scene.status === 'queued' ? 'Hủy cảnh chờ' : 'Dừng cảnh này'}</button> : <button className={`scene-run ${media ? 'has-result' : ''}`} disabled={renderLocked || (scriptSlots.current.has(scene.id)&&!renderJobs.current.has(scene.id)) || !accountReady(scene) || !scene.enabled || !scene.prompt.trim() || needsSource} onClick={() => preferRecovery?recoverExisting([scene.id]):void run([scene.id])}>{media || scene.status === 'error' ? <RefreshCw size={15}/> : <Play size={15}/>} {preferRecovery ? 'Nhận lại từ Muse' : media ? 'Tạo lại cảnh' : scene.status === 'error' ? 'Thử lại cảnh này' : 'Tạo cảnh này'}</button>}{media && <button className="download-one" title={`Tải cảnh ${scene.id}`} aria-label={`Tải cảnh ${scene.id}`} disabled={deletingMedia!==null} onClick={() => void downloadOneResult({...media,outputName:scene.outputName},scene.id,'Tải tệp')}><Download size={16}/></button>}</footer>
         </article>;
       })}</section>
       <footer className="workspace-footer"><span><i/>Tự lưu kịch bản trên trình duyệt <span className="footer-divider">/</span> Ảnh & video lưu trên máy trong từng ô</span><div><label className={`footer-button ${locked ? 'muted' : ''}`}><Upload size={13}/>Mở dự án<input type="file" accept=".json" hidden disabled={locked} onChange={e => { void restoreProject(e.target.files?.[0]); e.target.value = ''; }}/></label><button onClick={exportProject}><Download size={13}/>Xuất dự án JSON</button></div></footer>
@@ -914,6 +951,7 @@ function App() {
     {notice && <div className="toast" role="status"><CircleAlert size={17}/><span>{notice}</span><button aria-label="Đóng thông báo" onClick={() => setNotice('')}><X size={15}/></button></div>}
 
     {modal==='clear-media'&&<Modal title="Xóa toàn bộ ảnh/video đã lưu?" eyebrow="THƯ VIỆN TRÊN MÁY" close={()=>setModal(null)}><div className="modal-body"><p>Sẽ xóa {library.length} kết quả ảnh/video và lịch sử trong thư viện tool. Kịch bản, ảnh tham chiếu và tài khoản được giữ.</p><p className="muted">Các tệp đã tải ra thư mục máy tính vẫn còn. Không thể khôi phục kết quả đã xóa trong tool.</p></div><footer className="modal-footer"><button className="button" disabled={locked} onClick={()=>setModal(null)}>Hủy</button><button className="button danger" disabled={busy||locked||downloading} onClick={()=>void clearAllResults().then(()=>setModal(null)).catch(error=>setNotice(errorInfo(error).raw))}>Xác nhận xóa toàn bộ</button></footer></Modal>}
+    {modal==='clear-videos'&&<Modal title="Xoá tất cả video đã tạo?" eyebrow="TOÀN BỘ THƯ VIỆN VIDEO TRONG TOOL" close={()=>{if(!clearingAll.current)setModal(null)}}><div className="modal-body"><p>Sẽ xoá {videoResultCount} kết quả video, gồm mọi bản lưu ở tất cả ô, tài khoản và lượt tạo, kể cả ô đang ẩn và kết quả trong hàng chờ TXT/SRT.</p><p>Prompt, tên tệp, ảnh đã tạo, ảnh tham chiếu và tài khoản được giữ. Các mục hàng chờ đã chạy không tự tạo lại.</p><p className="muted">Các tệp đã tải ra thư mục máy tính và lịch sử trên Muse vẫn còn. Không thể khôi phục video đã xoá trong thư viện tool.</p></div><footer className="modal-footer"><button className="button" disabled={deletingMedia!==null} onClick={()=>setModal(null)}>Hủy</button><button className="button danger" disabled={clearVideosLocked||!videoResultCount} onClick={()=>void clearAllVideoResults().then(()=>setModal(null)).catch(error=>setNotice(errorInfo(error).raw))}>Xác nhận xoá tất cả video</button></footer></Modal>}
     {modal==='api'&&<Modal title="Cổng API cho công cụ bên ngoài" eyebrow="CÙNG MÁY TÍNH" close={()=>{setModal(null);setApiShowKey(false)}}><div className="modal-body"><p>Công cụ trên cùng máy tính có thể gửi bộ prompt/TXT/SRT, đọc tiến độ, dừng và tải ảnh/video bằng HTTP. Studio phải đang mở và tài khoản Muse đã xác minh.</p>{!window.museTransport?.automationControl?<p className="muted">Mở bản desktop Muse AI Studio.exe để bật cổng điều khiển.</p>:<><label className="field-label">Cổng <input aria-label="Cổng API" type="number" min="1024" max="65535" value={apiPort} disabled={apiBusy} onChange={e=>setApiPort(e.target.value)}/></label><div className="preset-row"><button className="button primary" disabled={apiBusy} onClick={()=>void configureAutomation('configure',true)}>Bật / Áp dụng cổng</button><button className="button danger" disabled={apiBusy||!apiConfig?.listening} onClick={()=>void configureAutomation('configure',false)}>Tắt cổng API</button></div><p className={apiConfig?.listening?'mint':'muted'} role="status">{apiBusy?'Đang cập nhật…':apiConfig?.listening?'API đang mở':'API đang tắt'} · {apiConfig?.address??'http://127.0.0.1:8790'}</p><label className="field-label">Khóa truy cập <input aria-label="Khóa API" readOnly type={apiShowKey?'text':'password'} value={apiConfig?.key??''}/></label><div className="preset-row"><button className="button" disabled={!apiConfig||apiBusy} onClick={()=>setApiShowKey(value=>!value)}>{apiShowKey?'Ẩn khóa':'Hiện khóa'}</button><button className="button" disabled={!apiConfig||apiBusy} onClick={()=>void navigator.clipboard.writeText(apiConfig!.key).then(()=>setNotice('Đã sao chép khóa API.')).catch(()=>setApiErrorText('Không sao chép được. Bấm Hiện khóa để chép thủ công.'))}>Sao chép khóa</button><button className="button" disabled={apiBusy} onClick={()=>void configureAutomation('rotate')}>Đổi khóa API</button></div><div className="preset-row"><button className="button" disabled={!apiConfig||apiBusy} onClick={()=>void navigator.clipboard.writeText(`[mcp_servers.muse_studio]\nurl = "${apiConfig!.address}/mcp"\nbearer_token_env_var = "MUSE_STUDIO_KEY"\ntool_timeout_sec = 600\n`).then(()=>setNotice('Đã sao chép cấu hình MCP. Thêm vào config.toml của Codex và đặt biến MUSE_STUDIO_KEY trên máy.')).catch(()=>setApiErrorText('Không sao chép được cấu hình. Xem MCP-CODEX.md.'))}>Sao chép cấu hình Codex MCP</button></div><p className="small muted">MCP: {apiConfig?.address??'http://127.0.0.1:8790'}/mcp · Codex cùng máy có thể đọc/sửa ô, tạo/dừng và lưu kết quả. Chọn Thư mục lưu trước khi nhờ trợ lý tải bộ. Xem MCP-CODEX.md trong gói mã nguồn MIT.</p><p className="small muted">Dùng header Authorization: Bearer &lt;khóa&gt;. Khóa cho phép điều khiển Studio; giữ trong cấu hình của công cụ kết nối. Cổng chỉ lắng nghe 127.0.0.1.</p><pre className="api-example">{`GET /v1/status\nPOST /v1/batches\n{ "output": "image", "prompts": ["Một khu rừng lúc bình minh", "Ngôi làng trên núi"] }\n\nGET /v1/media\nGET /v1/media/<id>\nPOST /v1/stop`}</pre><p className="small muted">Hướng dẫn và ví dụ PowerShell/Python có trong API-AUTOMATION.md của gói đầy đủ. Dùng Idempotency-Key riêng cho mỗi bộ để tránh gửi trùng khi thử kết nối lại.</p></>}{(apiErrorText||apiConfig?.error)&&<p className="red" role="alert">{apiErrorText||apiConfig?.error}</p>}</div><footer className="modal-footer"><button className="button" onClick={()=>setModal(null)}>Đóng</button></footer></Modal>}
     {modal === 'import' && <Modal title="Nhập kịch bản thông minh" eyebrow="SCRIPT IMPORT / 40 SCENES" close={() => setModal(null)}>
       <div className="modal-body"><p className="small mint">Nhiều prompt hơn số ô: dùng Lưu tất cả vào hàng chờ hoặc Chạy theo số ô hiện có. Tool giữ đủ nội dung, không cần mở thêm ô. Có thể chọn riêng tệp hoặc prompt trong bảng hàng chờ.</p><p className="muted">TXT: mỗi dòng hoặc mỗi đoạn là một cảnh. SRT: mỗi khối phụ đề là một cảnh, tự bỏ số thứ tự và timestamp. Tối đa 400 cảnh.</p><div className="preset-row"><button className="button" disabled={importReading} onClick={() => standaloneImport(ADVENTURE.join('\n\n'))}><Film size={16}/>Điện ảnh phiêu lưu</button><button className="button" disabled={importReading} onClick={() => standaloneImport(RUNWAY.join('\n\n'))}><WandSparkles size={16}/>Thời trang Runway</button><button className="button" onClick={() => fileInput.current?.click()}><Upload size={16}/>Chọn TXT / SRT</button></div>
@@ -928,7 +966,7 @@ function App() {
 
     {viewer && <Modal title={`Xem ảnh cảnh ${viewer.id}`} eyebrow="ẢNH KẾT QUẢ" wide close={() => setViewer(null)}>
       <div className={`viewer-canvas ${viewerNatural ? 'natural' : ''}`}><img src={viewer.media.url} alt={`Ảnh lớn cảnh ${viewer.id}`}/></div>
-      <footer className="modal-footer"><span className="small muted">{viewer.media.metadata ? `${viewer.media.metadata.width}×${viewer.media.metadata.height}` : 'Ảnh đã tạo'}</span><button className="button" aria-pressed={viewerNatural} onClick={() => setViewerNatural(value => !value)}>{viewerNatural ? 'Vừa cửa sổ' : 'Kích thước gốc'}</button><button className="button primary" onClick={() => void downloadVideo(viewer.media, viewer.id).catch(error => setNotice(logError(error,'Tải ảnh đang xem').raw))}><Download size={15}/>Tải ảnh đang xem</button></footer>
+      <footer className="modal-footer"><span className="small muted">{viewer.media.metadata ? `${viewer.media.metadata.width}×${viewer.media.metadata.height}` : 'Ảnh đã tạo'}</span><button className="button" aria-pressed={viewerNatural} onClick={() => setViewerNatural(value => !value)}>{viewerNatural ? 'Vừa cửa sổ' : 'Kích thước gốc'}</button><button className="button primary" disabled={deletingMedia!==null} onClick={() => void downloadOneResult(viewer.media,viewer.id,'Tải ảnh đang xem')}><Download size={15}/>Tải ảnh đang xem</button></footer>
     </Modal>}
 
     {modal === 'accounts' && <Modal title="Quản lý tài khoản Muse" eyebrow="MUSE ACCOUNTS / 400 SCENES" close={() => {setModal(null);setProxyAccount(null);setProxyDraft({enabled:false,server:'',username:'',password:'',replaceCredentials:false})}}>
