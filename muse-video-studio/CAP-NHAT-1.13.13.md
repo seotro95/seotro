@@ -9,6 +9,8 @@ Bản Windows đầy đủ, không cần thư mục bản cũ. Đóng tool cũ, 
 - Nhận liên kết ảnh HTTP cùng miền qua thao tác tải của trình duyệt khi tải trực tiếp bị chặn, kể cả liên kết không có thuộc tính download. Giữ nguyên URL của Muse và giữ trang hội thoại.
 - Không nhận liên kết tham khảo thông thường thành ảnh, không kích hoạt liên kết thực thi mã và không gửi lại yêu cầu tạo khi đang nhận tệp đã hoàn thành.
 
+Nếu thao tác tải ảnh hết hạn trước khi nhận được tệp, tool ngừng các lần tải qua nút trên chính trang đó để tệp đến muộn không bị nhận sang ô khác. Bấm **Tải lại Muse** ở đúng tài khoản, mở đúng cuộc trò chuyện rồi **Nhận lại từ Muse**. Thao tác này không tạo thêm ảnh; tài khoản khác và đường tải tệp trực tiếp vẫn hoạt động.
+
 Mỗi ảnh vẫn phải được giải mã và đo kích thước thật trước khi lưu. Lời báo ready và thông số trong câu trả lời không thay thế được tệp ảnh.
 
 Giữ đường nhận video của bản 1.13.12, giới hạn chờ 250 giây, mặc định một tài khoản một luồng, các lựa chọn nhiều tài khoản/nhiều ô, tên tệp, nhập nhiều TXT/SRT và hàng chờ đã lưu.

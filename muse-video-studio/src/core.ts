@@ -67,6 +67,7 @@ export function errorInfo(error: unknown): { raw: string; hint: string } {
   else if (/MUSE_RECOVER_HISTORY_MISSING/i.test(raw)) hint = 'Mở đúng cuộc trò chuyện trong Đăng nhập Muse trong tool và mở rộng tin nhắn prompt rồi bấm Nhận lại. Tool chưa gửi lệnh tạo mới.';
   else if (/MUSE_RECOVER_/i.test(raw)) hint = 'Chưa lấy lại được tệp đúng với số ô và prompt. Xem chi tiết bên dưới; thao tác này không tạo video hoặc ảnh mới.';
   else if (/MUSE_LOCAL_CONNECTION|MUSE_LOCAL_TIMEOUT|MUSE_LOCAL_RESPONSE/i.test(raw)) hint = 'Kết nối giữa giao diện và máy chủ trong tool bị lỗi. Giữ tool mở và dùng Sao chép lỗi để xem mã kết nối; kiểm tra lịch sử Muse trước khi tạo lại.';
+  else if (/MEDIA_ATTACHMENT_UNCERTAIN/i.test(raw)) hint = 'Lượt tải ảnh trước chưa xác định được kết quả. Bấm Tải lại Muse ở đúng tài khoản, mở đúng cuộc trò chuyện rồi Nhận lại từ Muse; chưa cần tạo ảnh hoặc video mới.';
   else if (/MUSE_MEDIA_UNREADABLE/i.test(raw)) hint = 'Tool chưa tải hoặc giải mã được tệp trả về. Xem chi tiết lỗi gốc và lịch sử Muse; không cần tạo lại nếu media đã hoàn thành ở Muse.';
   else if (/MUSE_ACTION_REQUIRED/i.test(raw)) hint = 'Muse đang yêu cầu xác nhận thay vì tạo nội dung. Xem câu trả lời Muse trong mã lỗi; tool không tự xác nhận hoặc gửi lại yêu cầu đã nhận.';
   else if (/MUSE_GENERATION_REFUSED/i.test(raw)) hint = 'Muse đã trả lời rằng chưa thể tạo nội dung theo yêu cầu. Xem lý do gốc về mô hình, quyền hoặc số dư, rồi điều chỉnh trước khi tạo lại.';
