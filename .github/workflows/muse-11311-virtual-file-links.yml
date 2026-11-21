@@ -151,12 +151,24 @@ jobs:
         run: |
           $version = (Get-Content package.json | ConvertFrom-Json).version
           $tag = "muse-v$version"
-          gh release view $tag --repo "${{ github.repository }}" *> $null
-          if ($LASTEXITCODE -eq 0) { Write-Output "Release tag already exists; preserving it and keeping this workflow artifact."; exit 0 }
+          $existingJson = gh release view $tag --repo "${{ github.repository }}" --json isDraft,targetCommitish 2>$null
+          $replaceDraft = $LASTEXITCODE -eq 0
+          if ($replaceDraft) {
+            $existing = $existingJson | ConvertFrom-Json
+            if (-not $existing.isDraft) { throw "The release is published; preserving its existing files." }
+            $relation = gh api "repos/${{ github.repository }}/compare/$($existing.targetCommitish)...${{ github.sha }}" --jq .status
+            if ($LASTEXITCODE -ne 0 -or $relation -notin @('ahead','identical')) { throw "The existing draft is not an ancestor of this verified build; preserving it." }
+          }
           $zip = Get-ChildItem "${{ runner.temp }}/muse-artifacts/*.zip"
           $hash = (Get-FileHash $zip.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
           "$hash  $($zip.Name)" | Set-Content -Encoding utf8 "${{ runner.temp }}/Muse-AI-Studio-$version-Windows-x64.zip.sha256"
           $checksum = "${{ runner.temp }}/Muse-AI-Studio-$version-Windows-x64.zip.sha256"
           Copy-Item CAP-NHAT-1.13.12.md "${{ runner.temp }}/muse-release-notes.txt"
-          gh release create $tag $zip.FullName $checksum --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Muse AI Studio $version - Independent scene actions and native file downloads - Windows x64" --notes-file "${{ runner.temp }}/muse-release-notes.txt" --draft --latest=false
+          if ($replaceDraft) {
+            gh release upload $tag $zip.FullName $checksum --repo "${{ github.repository }}" --clobber
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+            gh release edit $tag --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Muse AI Studio $version - Image downloads and original CLIP labels - Windows x64" --notes-file "${{ runner.temp }}/muse-release-notes.txt" --draft --latest=false
+          } else {
+            gh release create $tag $zip.FullName $checksum --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Muse AI Studio $version - Image downloads and original CLIP labels - Windows x64" --notes-file "${{ runner.temp }}/muse-release-notes.txt" --draft --latest=false
+          }
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

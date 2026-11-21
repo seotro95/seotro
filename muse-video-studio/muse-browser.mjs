@@ -691,7 +691,6 @@ export class MuseBrowser {
           const problem=replyProblem(state.generalText);if(problem){const error=fail(problem,`Muse chưa tạo ${output==='video'?'video':'ảnh'} cho lượt gộp: ${replyPreview(state.generalText)}`,422);if(problem==='MUSE_PARALLEL_LIMIT'&&/no (?:videos?|images?|generations?) (?:were|was|have been|has been) (?:created|started)|did not start any|chưa tạo.*(?:video|ảnh) nào|không tạo được.*(?:video|ảnh) nào/i.test(state.generalText))error.safeSerialRetry=true;throw error;}
         }
         if(!state.streaming&&state.unclaimed&&state.completedRows>=rows.length&&this.sharedSignals.size<=rows.filter(row=>!row.done).length&&Date.now()-stableSince>=Math.max(8000,this.replyQuietMs))throw fail('MUSE_BATCH_UNMATCHED',`Đã thấy ${unique} nguồn media và nhãn hoàn thành nhưng chỉ ghép được ${Object.keys(state.matches).length}/${rows.length} ô. Dùng Nhận lại từ Muse để chỉ lấy tệp đã tạo, không gửi lại prompt.`,409);
-        if(!state.streaming&&!state.media.length&&state.unsupported.length&&state.unsupported.every(item=>!item.owner)&&Date.now()-stableSince>=5000)throw fail('MUSE_MEDIA_UNREADABLE',`MEDIA_URL_UNSUPPORTED: Liên kết chưa gắn được với đúng ô. Loại liên kết: ${[...new Set(state.unsupported.map(item=>item.scheme+' ('+item.locationClass+', '+item.element+')'))].join(', ')}. Không tự tạo lại yêu cầu.`,502);
         await pause(this.pollMs);
       }
       throw fail('MUSE_TIMEOUT','Đã hết thời gian của lượt tạo, trước giới hạn 250 giây. Tool không tự tạo lại yêu cầu đã gửi.',504);
