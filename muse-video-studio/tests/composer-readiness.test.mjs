@@ -6,15 +6,26 @@ async function setup(options={}){
  const page=driver.active.page,original=page.reload.bind(page);let reloads=0;page.reload=(...args)=>{reloads++;return original(...args)};
  return{fixture,driver,pool,page,reloads:()=>reloads,close:async()=>{await pool.close();fixture.server.closeAllConnections();await new Promise(r=>fixture.server.close(r));await rm(root,{recursive:true,force:true})}};
 }
-test('authenticated account with zero composers must fail preparation, not report a ready sequential fallback',{timeout:10000},async()=>{
+test('authenticated account with zero composers must fail preparation, not report a ready sequential fallback',{timeout:30000},async()=>{
  const s=await setup({missingComposer:true});try{await assert.rejects(s.pool.prepareSingle(new AbortController().signal,2,3),/MUSE_COMPOSER_NOT_READY/);assert.equal(s.driver.account(1).composerReady,false);assert.equal(s.driver.account(1).state,'workspace_unavailable');await s.driver.refreshActive({includeDetails:false});assert.equal(s.driver.account(1).state,'workspace_unavailable','A status refresh must not turn an authenticated but unusable page back into a ready account');assert.equal(s.pool.fallbacks.has(3),false);assert.equal(s.fixture.state.submitted.length,0);assert.equal(s.reloads(),1)}finally{await s.close()}
 });
-test('one reload restores a missing composer with its authenticated session, without submitting or opening redundant worker pages',{timeout:10000},async()=>{
+test('one reload restores a missing composer with its authenticated session, without submitting or opening redundant worker pages',{timeout:30000},async()=>{
  const s=await setup();try{await s.page.locator('#fixture-composer').evaluate(node=>node.remove());const prepared=await s.pool.prepareSingle(new AbortController().signal,2,3);assert.equal(prepared.executionConcurrency,2);assert.equal(s.driver.account(1).composerReady,true);assert.equal(s.reloads(),1);assert.equal(s.fixture.state.submitted.length,0);assert.equal(s.page.context().pages().length,1)}finally{await s.close()}
 });
-test('an observed same-origin Open Studio link is used to reach the composer, without guessing a route or generating',{timeout:10000},async()=>{
+test('an observed same-origin Open Studio link is used to reach the composer, without guessing a route or generating',{timeout:30000},async()=>{
  const s=await setup();try{await s.page.locator('#fixture-composer').evaluate(node=>node.remove());await s.page.evaluate(()=>{const link=document.createElement('a');link.href='/app';link.textContent='Open Studio';document.body.appendChild(link)});const prepared=await s.pool.prepareSingle(new AbortController().signal,1,3);assert.equal(prepared.executionConcurrency,1);assert.equal(new URL(s.page.url()).pathname,'/app');assert.equal(s.reloads(),0);assert.equal(s.fixture.state.submitted.length,0)}finally{await s.close()}
 });
-test('a hidden unsent draft prevents workspace navigation and reload',{timeout:10000},async()=>{
- const s=await setup();try{await s.page.locator('#fixture-editor').fill('Do not lose this unsent draft');await s.page.locator('#fixture-composer').evaluate(node=>node.style.display='none');await assert.rejects(s.pool.prepareSingle(new AbortController().signal,2,3),/MUSE_COMPOSER_NOT_READY/);assert.equal(s.reloads(),0);assert.equal(await s.page.locator('#fixture-editor').inputValue(),'Do not lose this unsent draft');assert.equal(s.fixture.state.submitted.length,0)}finally{await s.close()}
+// The test budget includes launching and closing Chromium on Windows. The
+// application probe remains 800 ms; give the test lifecycle its own budget.
+test('a hidden unsent draft prevents workspace navigation and reload',{timeout:30000},async t=>{
+ const started=Date.now();const mark=stage=>t.diagnostic(`draft-preservation ${stage}: ${Date.now()-started}ms`);
+ const s=await setup();mark('browser ready');
+ try{
+  await s.page.locator('#fixture-editor').fill('Do not lose this unsent draft');
+  await s.page.locator('#fixture-composer').evaluate(node=>node.style.display='none');mark('draft hidden');
+  await assert.rejects(s.pool.prepareSingle(new AbortController().signal,2,3),/MUSE_COMPOSER_NOT_READY/);mark('preparation rejected');
+  assert.equal(s.reloads(),0);
+  assert.equal(await s.page.locator('#fixture-editor').inputValue(),'Do not lose this unsent draft');
+  assert.equal(s.fixture.state.submitted.length,0);
+ }finally{await s.close();mark('browser closed')}
 });
