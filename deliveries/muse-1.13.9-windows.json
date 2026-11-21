@@ -1,0 +1,68 @@
+{
+  "status": "windows_tests_and_uploaded_asset_sha256_verified",
+  "version": "1.13.9",
+  "source_commit": "75a7eece99f12040c604b2109779bbd9d396aa55",
+  "source_branch": "codex/muse-1139-labels-multi-import",
+  "workflow_run_id": 44865400972,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/44865400972",
+  "workflow_conclusion": "success",
+  "release_id": 453436121,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/untagged-1b3606a8d0c43fade0a4",
+  "draft": true,
+  "zip": {
+    "file": "Muse-AI-Studio-1.13.9-Windows-x64.zip",
+    "bytes": 160804270,
+    "sha256": "38f0d0ffdf3568e4ef080c9c93c9e9cf0b850783633bf1be8eb9ee6f949b623b",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-1b3606a8d0c43fade0a4/Muse-AI-Studio-1.13.9-Windows-x64.zip"
+  },
+  "checksum_file": {
+    "file": "Muse-AI-Studio-1.13.9-Windows-x64.zip.sha256",
+    "bytes": 105,
+    "sha256": "53dcd029f00cbddc4523e9b13cd53cee4be2ac29c766ef05e5c7965f31ba4dda",
+    "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-1b3606a8d0c43fade0a4/Muse-AI-Studio-1.13.9-Windows-x64.zip.sha256"
+  },
+  "validation": {
+    "windows_ui_checks": 34,
+    "electron_desktop_checks": 8,
+    "throughput_fixture": {
+      "accounts": 12,
+      "lanesPerAccount": 6,
+      "submittedBeforeAnyResult": 72,
+      "chatMessages": 12,
+      "pages": 12,
+      "extraWorkerPages": 0,
+      "preparationMs": 1842,
+      "submissionMs": 738,
+      "downloadConcurrency": 6
+    },
+    "reported_case": {
+      "version": "1.13.8",
+      "accountId": 1,
+      "sceneId": 2,
+      "requestedConcurrency": 5,
+      "executionConcurrency": 5,
+      "visibleVideos": 5,
+      "matchedCount": 0,
+      "captionLinked": 0,
+      "shape": "Full CLIP labels (including a bullet and colon) precede separate native media cards; no Done keyword. Model/specification disclaimer and progress messages separate the groups."
+    },
+    "label_attribution": "The old parser fails the reported label-before-media fixture. Both leading and trailing bare labels now resolve only when a one-to-one relationship is forced across maximum matchings of neighbouring label sections. Ambiguous groups, pending labels, user turns, foreign results and old baseline media are not assigned by scene order.",
+    "validated_bindings": "Successfully downloaded files retain their original scene binding when earlier labels disappear from the native DOM. Direct filename/title/attribute and ARIA label references are considered without exposing their contents in reports.",
+    "native_leading_fixture": "Five opaque uniquely encoded MP4 files, bullet headings before media, no Done words or UUID filenames, delayed labels and progress interleaving complete in one chat message. Read-only retrieval compares the exact five byte sequences and adds no new messages/generations.",
+    "multi_file_import": "One file picker selection accepts mixed TXT/SRT, sorts filenames naturally, parses each file independently, preserves original names and multiline TXT prompts, and supports editing each source. Invalid/read failures reject the selection atomically.",
+    "import_capacity": "A 70-prompt import extends a contiguous 10-account/six-lane workspace from 60 to 70 queued slots without changing the ten accounts or six-lane setting; added slots repeat the existing account pattern. Custom hidden/nonconsecutive selections are not expanded automatically. All 401 cues remain visible as an over-capacity error, with loading disabled instead of silent truncation.",
+    "first_wave_budget": "Preparation, reference processing, generation, download/decoding and library save share the first-wave deadline from Create. A virtual-clock test spends 60 seconds preparing, verifies only 140 seconds remain in the API request, and ends loading at 200 seconds with one request and the full prompt preserved.",
+    "backend_budget": "The remaining integer waitBudgetMs is validated and bounded by the server's 190-second cap, subtracting body-read time. A short-budget integration test verifies abort and released capacity without generation replay. Newly admitted queued waves receive their own active-job budget.",
+    "performance": "Label extraction avoids compacting large URL/base64 strings; parsed file groups are memoized between status renders. Existing six-transfer/decoder queue remains independent of remote generation concurrency.",
+    "preserved_user_modes": {
+      "standard": "One lane per account; ten accounts = ten lanes.",
+      "expanded_ui": "Một tài khoản",
+      "expanded_example": "Ten accounts × six lanes = sixty concurrent requested slots."
+    },
+    "packaged_executable": "Standalone EXE startup, ten concurrent images, exact named exports, restart persistence, ten shared-chat videos with six concurrent tasks, read-only native recovery with no new generation/chat message, explicit serial fallback and account-session media recovery.",
+    "preserved_features": "Full ordinary TXT/SRT prompts and names, automatic numbering, selected accounts and overrides, proxy/IP, session persistence, cancellation, composer preflight/isolation, renderer recovery and 200-second waiting limits.",
+    "live_muse_account_render_tested": false,
+    "limitation": "Automated checks use a fixture service and no live Muse credits. The user's actual five files were not accessed in this session. The deadline bounds tool waiting, not Muse's remote rendering time; later queued work starts when capacity becomes available."
+  },
+  "verified_at_utc": "2026-11-21T04:26:56Z"
+}
