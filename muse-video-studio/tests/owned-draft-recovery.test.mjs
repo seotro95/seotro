@@ -114,3 +114,21 @@ test('An Enter attempt without an acknowledged user turn cannot clear its draft 
   assert.deepEqual(await draftSnapshot(s.page),before);assert.equal(s.loads(),loads);assert.equal(s.fixture.state.initialEnterEvents,1);assert.equal(s.fixture.state.submitted.length,0);
  }finally{await s.close()}
 });
+
+test('Trusted user clearing the field during the prefix pause stops the tool without refilling or Enter',{timeout:20000},async()=>{
+ const s=await setup({initialMode:'functional'});
+ try{
+  await s.pool.prepareSingle(s.control.signal,6,1);
+  const text='[studio-request-'+crypto.randomUUID()+'] Do not overwrite a user clearing this field.';
+  const writing=s.driver.writeMessage(s.page,text,s.control.signal).then(()=>({error:null}),error=>({error:error.message}));
+  await s.page.waitForFunction(()=>document.querySelector('[data-hatch-composer-prehydration-input]').value==='[',null,{polling:1});
+  const editor=s.page.locator('[data-hatch-composer-prehydration-input]');
+  await editor.evaluate(node=>node.addEventListener('input',event=>{window.fixtureUserClearTrusted=event.isTrusted},{once:true}));
+  await editor.fill('');
+  const result=await writing;
+  assert.match(result.error||'',/MUSE_DRAFT_CHANGED|MUSE_DRAFT_EXISTS/);
+  assert.equal(await s.page.evaluate(()=>window.fixtureUserClearTrusted),true);
+  assert.equal(await editor.inputValue(),'','The tool must preserve the user-cleared empty field');
+  assert.equal(s.fixture.state.submitted.length,0);assert.equal(s.fixture.state.chatMessages?.length||0,0);assert.equal(s.fixture.state.initialEnterEvents||0,0);
+ }finally{await s.close()}
+});
