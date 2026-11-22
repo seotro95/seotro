@@ -1,0 +1,116 @@
+{
+  "status": "passed",
+  "locale": "pl-PL",
+  "voice_id": "pl-PL-MarekNeural",
+  "gender": "Male",
+  "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "target_seconds": 1242,
+  "decoded_frames_48000": 59616000,
+  "decoded_seconds": 1242.0,
+  "filename": "BOSNIA_MOI096_Ba_Lan.mp3",
+  "bytes": 14904620,
+  "sha256": "61936e227bc0d188e40fdfcaa4184e1be2b37a8d366b51574133988c631d982f",
+  "script_sha256": "01691c5db295220b29e0cfc5b9684d1e9832ddb95dabce2f38427c01203f063d",
+  "cues": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 124,
+      "raw_seconds": 107.184,
+      "tempo": 0.8652244107200516,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 2,
+      "start": 124,
+      "end": 248,
+      "raw_seconds": 114.792,
+      "tempo": 0.9266386825960607,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 3,
+      "start": 248,
+      "end": 372,
+      "raw_seconds": 124.32,
+      "tempo": 1.0035518243461414,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 4,
+      "start": 372,
+      "end": 496,
+      "raw_seconds": 116.352,
+      "tempo": 0.939231514368744,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 5,
+      "start": 496,
+      "end": 620,
+      "raw_seconds": 109.248,
+      "tempo": 0.8818856958346788,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 6,
+      "start": 620,
+      "end": 744,
+      "raw_seconds": 113.592,
+      "tempo": 0.916951888924766,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 7,
+      "start": 744,
+      "end": 868,
+      "raw_seconds": 113.76,
+      "tempo": 0.9183080400387472,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 8,
+      "start": 868,
+      "end": 992,
+      "raw_seconds": 117.792,
+      "tempo": 0.9508556667742978,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    },
+    {
+      "id": 9,
+      "start": 992,
+      "end": 1116,
+      "raw_seconds": 116.352,
+      "tempo": 0.939231514368744,
+      "trailing_pause_target": 0.12,
+      "parts": 4
+    },
+    {
+      "id": 10,
+      "start": 1116,
+      "end": 1242,
+      "raw_seconds": 114.552,
+      "tempo": 0.9100095328884653,
+      "trailing_pause_target": 0.12,
+      "parts": 3
+    }
+  ],
+  "pitch_shift_applied": false,
+  "voice_identity_preserved": true,
+  "narration_style_id": "science-documentary-retention-v5-Bosnia-NamMinh",
+  "prosody_method": "Native phrase rate and question/reflective pacing plus at most two 1.2dB word accents per English cue or per localized request",
+  "word_metadata_pieces": 31,
+  "minimum_word_coverage_ratio": 1.0,
+  "word_accents": 14,
+  "independent_native_listening_review": false,
+  "timing_alignment": "10 shared section boundaries"
+}

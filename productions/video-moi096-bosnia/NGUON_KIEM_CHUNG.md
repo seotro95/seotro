@@ -1,0 +1,41 @@
+# MỚI-096 — Nguồn và phạm vi kiểm chứng
+
+Chủ đề: Những ngọn đồi Bosnia: làm sao kiểm tra một tuyên bố kim tự tháp? Tra cứu ngày 21-11-2026. Đây là kịch bản mới theo công thức chín quy tắc người dùng cung cấp. Đã kiểm metadata video tham khảo, chưa xem lại toàn bộ clip trong lượt này; không gán nhận xét quan sát chi tiết về edit của clip chưa xem.
+
+Video tham khảo: https://github.com/seotro95/seotro/releases/tag/video — `video.c.a.toi.mp4`, 340611128 byte, SHA-256 `f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c`.
+
+## Kết luận biên tập
+
+Các nguồn địa chất và khảo cổ được đọc ủng hộ cách hiểu các đồi là địa hình tự nhiên. Việc con người từng xây, ở, đào hoặc sửa một phần của cảnh quan phải được kiểm tra ở đúng quy mô của dấu tích đó. Thành Visoki và các phát hiện khảo cổ có thật không biến toàn bộ đồi thành một kim tự tháp. Hình tam giác, đá góc cạnh, khoáng chất gắn kết, số đo độ bền, một ngày công bố, một giấy phép hoặc lượng khách không tự chứng minh lịch sử xây dựng của một công trình khổng lồ.
+
+Không tuyên bố đã tự khảo sát hiện trường, lấy mẫu, kiểm lại số đo, kiểm toàn bộ phòng thí nghiệm, tái dựng địa hình thật hoặc giải quyết mọi tuyên bố phụ của dự án. Không lập luận chỉ bằng tên tuổi tổ chức hay việc tác giả thuộc bên quảng bá. Không quy động cơ gian lận, cáo buộc làm giả hiện vật hoặc lặp các thuyết năng lượng như kết luận có thật.
+
+## Nguồn đã đọc
+
+1. Robert M. Schoch, *The Bosnian Pyramid Phenomenon*, bản tác giả sửa nhẹ từ The New Archaeology Review, tháng chín năm2006: https://robertschoch.com/bosnia.html . Đã đọc toàn bộ phần khảo sát của tác giả và chú giải ảnh, đặc biệt các đoạn về chuyến đi tháng bảy–tám2006, loại đá, biến dạng, đứt vỡ và quan hệ lớp. Đây là tường thuật hiện trường của tác giả, không phải bộ mẫu được chúng tôi tái phân tích hoặc bản đồ đo hiện hành. Không dùng ảnh có bản quyền trong gói này; không lặp các suy đoán về văn tự, động cơ hoặc mốc Roman bên dưới thành như sự thật đã xác lập.
+
+2. Colin Woodard, Smithsonian Magazine, *The Mystery of Bosnia’s Ancient Pyramids*, tháng mười hai2009: https://www.smithsonianmag.com/history/the-mystery-of-bosnias-ancient-pyramids-148990462/ . Đọc phần lịch sử tuyên bố, thành trên đỉnh và tổng hợp địa chất/Tuzla; dùng như nguồn báo chí thứ cấp. Không gọi đây là báo cáo gốc của Đại học Tuzla, không nói đã đọc lại đầy đủ báo cáo mẫu lõi gốc. Không đưa các diễn giải chính trị–tâm lý, số khách hoặc số tiền từ bài vào lời kể. Không sao chép cách mở bài hay hình ảnh của bài.
+
+3. Mark Rose, Archaeology Magazine / Archaeological Institute of America, cập nhật ngày14và27-06-2006: https://archive.archaeology.org/online/features/osmanagic/update.html . Đọc bài cập nhật và phân biệt ý kiến một cá nhân với sự cử phái hoặc công nhận chính thức. Đây là lịch sử phản ứng chuyên môn năm2006, không phải chứng cứ thay thế kiểm địa chất hoặc kết luận về mọi công trình trong vùng.
+
+4. Tuyên bố chuyên gia khảo cổ châu Âu ngày11-12-2006, bản một trang được tác giả Schoch lưu: https://www.robertschoch.com/articles/schoch_eaa_statement.pdf . Đọc toàn văn một trang và chữ ký. Bản lưu này ghi sự phản đối dự án và lo ngại tài nguyên/di sản; không phải chứng nhận địa chất mới. Kịch bản nhắc quan ngại bảo tồn bằng lời trung tính; không lặp ngôn ngữ miệt thị trong tuyên bố.
+
+5. Grad Visoko, *Zaštita nacionalnog blaga*, mục3 về Srednjovjekovni bosanski kraljevski grad Visoki: https://www.visoko.gov.ba/posjetite-grad/zastita-nacionalnog-blaga . Đọc mục di tích Visoki: vị trí trên Visočica, quyết định di tích quốc gia năm2004, lịch sử nghiên cứu. Chỉ dùng nhận diện di tích trung đại và mốc2004; không dùng số cao độ/chiều cao để suy ra kích thước “kim tự tháp”. Đây là di tích quốc gia, không tuyên bố UNESCO công nhận kim tự tháp. Trang thành phố có thể đồng thời quảng bá du lịch; điều đó không thay nghĩa phạm vi một quyết định di tích.
+
+6. Adnan Kaljanac và Tarik Silajdžić, *Results of the preliminary archaeological excavations of the Plateau of Visočica near the National Monument of the Old Town Visoki in Visoko*: https://godisnjak.anubih.ba/index.php/godisnjak/en/article/view/58 ; DOI https://doi.org/10.5644/Godisnjak.CBI.ANUBiH-46.88 . Chỉ đọc abstract/metadata tiếng Anh trên trang tạp chí, không nhận đã đọc toàn văn PDF Bosnian; trình xem PDF chỉ trả wrapper. Abstract ghi khảo sát sơ bộ tháng hai2017 và vật liệu từ tiền sử tới trung đại. Tập tạp chí ghi46(2017), nền tảng ghi ngày đăng2022; lời chỉ nói năm thực địa2017, tránh nhập hai mốc. Không bịa mặt bằng, danh mục hiện vật, lớp cụ thể hay niên đại riêng từ abstract.
+
+7. Sam Osmanagich, *Multidisciplinary Evaluation of the Pyramid-Shaped Formation near Visoko, Bosnia-Herzegovina: A Case for Anthropogenic Construction*, J Biomed Res Environ Sci,19-05-2025; DOI10.37871/jbres2106. Bản tác giả công khai, CC-BY4.0: https://www.drsamosmanagich.com/files/publications/multidisciplinary-evaluation-of-the-pyramid-shaped-formation-near-visoko-bosnia-herzegovina-a-case-for-anthropogenic-construction.pdf . Trang nhà xuất bản trả403 nên không tiếp tục truy cập trang bị chặn; bản tác giả được công bố công khai và tìm thấy qua chỉ mục. Đã đọc metadata, abstract, phần hình học/định hướng đầu bài, các phần kết luận liên quan, công bố tác giả và data availability; không nói đã tái phân tích dữ liệu gốc. Bài do người đề xướng, thuộc quỹ BPS, biên soạn; phần data availability dẫn dữ liệu về nguồn trích. Ghi nhận bài tồn tại, không nói “không có bài nào”, không coi xuất bản này tự tạo đồng thuận. Các con số góc, độ bền và năng lượng vẫn là tuyên bố cần kiểm. Lời kể không lặp tia năng lượng, tỷ lệ vàng hoặc tuổi kỳ lạ như sự thật. Không bác bài chỉ vì tên tạp chí, tác giả hoặc thời gian duyệt; kiểm điều mà bằng chứng thực sự chứng minh.
+
+8. National Park Service, *Sedimentary Rocks*: https://www.nps.gov/subjects/geology/sedimentary.htm . Đọc phần định nghĩa, compaction/lithification, natural cementation và clastic sediment. Dùng kiến thức phổ thông để giải thích cuội kết, cát kết và chất gắn kết khoáng; không biến chữ “cement” thành bê tông nhân tạo. Không dùng ảnh bên thứ ba trên trang.
+
+9. National Park Service, *How do Archeologists know how old a site is?*: https://home.nps.gov/articles/000/how-do-archeologists-know-how-old-a-site-is.htm . Đọc absolute/relative dating, radiocarbon, stratigraphy và context. Giải thích mốc vật liệu hữu cơ, tuổi đá và giai đoạn xây dựng như những sự kiện khác nhau; không gán tuổi một mẫu giả định cho Visoko. Không lặp các ví dụ coin/đảo tuổi giản lược thành quy tắc tuyệt đối. Mẫu có thể tái lắng đọng hoặc bị xáo trộn.
+
+10. University of Wisconsin–La Crosse, Mississippi Valley Archaeology Center, *FAQ — Process of Archaeology*: https://www.uwlax.edu/mvac/process-of-archaeology/faq/ . Chỉ đọc mục tuổi, bối cảnh, tìm vị trí và ghi hồ sơ trước khi lấy hiện vật. Không dùng thông tin cũ về thời tuyệt chủng khủng long, các mốc tiến hóa hoặc luật địa phương Hoa Kỳ làm hướng dẫn pháp lý ở Bosnia.
+
+11. Penn State, *Radiocarbon Sampling Pocket Guide2024*, phần defining context và old-wood: https://iee.psu.edu/sites/default/files/document/Radiocarbon%20Sampling%20Pocket%20Guide%202024.pdf . Nguồn khởi đầu từ kết quả chỉ mục, chưa đọc toàn văn trong lượt này; dùng làm tài liệu đọc thêm, không làm nền cho khẳng định riêng về Visoko.
+
+## Phạm vi hình ảnh và phép thử
+
+Không kèm ảnh hiện trường, ảnh công trình, PDF học thuật hoặc ảnh tác giả có bản quyền để làm footage. Mô hình, mẫu vật, người làm nghề trung đại và cảnh đồi trong prompt đều là minh họa; không phải hồ sơ khai quật thật, dữ liệu radar, đồ thị độ bền, DEM, mẫu đã định tuổi hoặc phục dựng được xác nhận. Không tạo chính xác mặt bằng Visoki khi chưa có hồ sơ phù hợp. Hình người chỉ là diễn viên vô danh trưởng thành35–65, không chân dung người được nhắc tên. Không trẻ em, hình trẻ em trong phản chiếu/màn hình hoặc hài cốt người. Không phòng thí nghiệm. Khi xuất bản, ghi cảnh tái hiện/mô hình trong mô tả hoặc chú thích biên tập phù hợp.
+
+Các phép thử nguồn gốc đá, trình tự xây dựng, niên đại và radar là giải thích phương pháp, không báo cáo thí nghiệm mới của chúng tôi. Không yêu cầu đào bới, bẻ đá hoặc lấy mẫu thật ở di tích. Những cảnh làm việc với mẫu dùng replica và mô hình giáo dục.

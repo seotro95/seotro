@@ -1,0 +1,20 @@
+{
+  "version": "retention-v5",
+  "first_ten_seconds_one_object": true,
+  "promise_before_seconds": 30,
+  "first_payoff_before_seconds": 120,
+  "rehook_every_seconds": [
+    60,
+    90
+  ],
+  "minimum_gap_caveat_beats_seconds": 120,
+  "voice_blocks_seconds": [
+    3,
+    10
+  ],
+  "present_tense_scene_each_section": true,
+  "each_section_ends_on_turn": true,
+  "english_numbers_as_words": true,
+  "ending_answers_then_one_mystery": true,
+  "no_auto_start_next_topic": true
+}

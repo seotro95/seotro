@@ -1,0 +1,599 @@
+001 | 00:00:00,000 → 00:00:10,000 | PHẦN 1 | rehook
+A stone slab has a sharp corner. It looks almost cut to fit. What would prove that a builder ever placed it here?
+
+002 | 00:00:10,000 → 00:00:16,000 | PHẦN 1 | narration
+Look past that corner. The same stone continues beneath soil, while trees cover a steep, triangular hillside above it.
+
+003 | 00:00:16,000 → 00:00:22,000 | PHẦN 1 | narration
+Our question is simple: what evidence would distinguish a giant constructed pyramid from a natural hill that people later used?
+
+004 | 00:00:22,000 → 00:00:31,000 | PHẦN 1 | scene
+Imagine standing beside the exposed layer, close enough to see grains in its surface. Follow that edge into the ground before deciding what the distant outline above you resembles.
+
+005 | 00:00:31,000 → 00:00:34,000 | PHẦN 1 | narration
+The first clue is continuity. The regular edge belongs to a layer.
+
+006 | 00:00:34,000 → 00:00:40,000 | PHẦN 1 | narration
+This landscape surrounds Visoko, a town in central Bosnia and Herzegovina, northwest of Sarajevo, where wooded hills rise above the valley.
+
+007 | 00:00:40,000 → 00:00:46,000 | PHẦN 1 | narration
+One hill is called Visočica. On its summit stand remains of Visoki, a genuine medieval stronghold with a documented human history.
+
+008 | 00:00:46,000 → 00:00:50,000 | PHẦN 1 | narration
+One hill. Two histories. The summit building and the hill need separate explanations.
+
+009 | 00:00:50,000 → 00:00:56,000 | PHẦN 1 | narration
+The medieval site was declared a national monument in two thousand four. That recognition concerns the historic site, not a giant pyramid.
+
+010 | 00:00:56,000 → 00:01:02,000 | PHẦN 1 | narration
+In two thousand five, Semir Osmanagić promoted the idea that local hills concealed enormous ancient pyramids. Their shapes attracted international attention.
+
+011 | 00:01:02,000 → 00:01:07,000 | PHẦN 1 | rehook
+Two stones, similar corners: one naturally fractured, the other laid in a wall.
+
+012 | 00:01:07,000 → 00:01:12,000 | PHẦN 1 | narration
+The photograph shows their resemblance. Their surroundings reveal how each stone got there.
+
+013 | 00:01:12,000 → 00:01:21,000 | PHẦN 1 | narration
+We will follow three tests. First, examine the shape. Then read the rock layers. Finally, search for a connected construction history.
+
+014 | 00:01:21,000 → 00:01:29,000 | PHẦN 1 | scene
+Each test asks for something concrete: a mapped slope, a contact between materials, a foundation, or an object recovered in context.
+
+015 | 00:01:29,000 → 00:01:34,000 | PHẦN 1 | narration
+Trace the thin band. Does it continue into the neighboring rock?
+
+016 | 00:01:34,000 → 00:01:43,000 | PHẦN 1 | narration
+If the band carries on through surrounding rock, its continuity becomes evidence for a geological layer. The sharp corner gains a setting.
+
+017 | 00:01:43,000 → 00:01:48,000 | PHẦN 1 | narration
+An assembled structure has another history. Follow its supports, contacts, and construction sequence.
+
+018 | 00:01:48,000 → 00:01:52,000 | PHẦN 1 | narration
+The alternatives make different predictions. The ground can test them.
+
+019 | 00:01:52,000 → 00:01:59,000 | PHẦN 1 | caveat
+Individual finds can record human activity on a hill. Their presence alone does not turn the entire landform into a built monument.
+
+020 | 00:01:59,000 → 00:02:04,000 | PHẦN 1 | turn
+Start with the most persuasive view of all: the triangular hillside. What happens when we walk around it?
+
+021 | 00:02:04,000 → 00:02:11,000 | PHẦN 2 | rehook
+From one position, two slopes appear to meet at a clean point. Move sideways, and a different ridge enters the outline.
+
+022 | 00:02:11,000 → 00:02:18,000 | PHẦN 2 | narration
+Perspective selects a face for us. Trees soften small irregularities, while shadow can make separate surfaces appear to form one plane.
+
+023 | 00:02:18,000 → 00:02:25,000 | PHẦN 2 | narration
+Imagine walking along the valley, stopping at several viewpoints. The hill stays in place, but its apparent symmetry changes with your position.
+
+024 | 00:02:25,000 → 00:02:35,000 | PHẦN 2 | scene
+Stand on a path below the hill and turn toward its less familiar side. A proper survey includes those awkward slopes, rather than preserving only the face that looks most convincing.
+
+025 | 00:02:35,000 → 00:02:38,000 | PHẦN 2 | narration
+Choose the measurement first. Then see what answer the measurements support.
+
+026 | 00:02:38,000 → 00:02:45,000 | PHẦN 2 | narration
+A compass adds a direction. A survey adds positions and uncertainty. Neither observation, by itself, identifies the process that shaped the ground.
+
+027 | 00:02:45,000 → 00:02:49,000 | PHẦN 2 | narration
+North is not a signature. A natural slope can face north.
+
+028 | 00:02:49,000 → 00:02:55,000 | PHẦN 2 | narration
+The useful question is whether one construction model explains the complete geometry better than the geological structure beneath that geometry.
+
+029 | 00:02:55,000 → 00:03:02,000 | PHẦN 2 | narration
+To explore that, picture resistant layers tilted within a hillside. Softer material around them wears away more readily, leaving sharper ridges.
+
+030 | 00:03:02,000 → 00:03:06,000 | PHẦN 2 | narration
+A resistant ridge survives. Softer surroundings retreat, making the profile sharper.
+
+031 | 00:03:06,000 → 00:03:10,000 | PHẦN 2 | rehook
+Look between the hills. The valley belongs to the explanation too.
+
+032 | 00:03:10,000 → 00:03:18,000 | PHẦN 2 | narration
+A stream cuts and carries material. Rain moves soil downslope. Where stronger rock remains, a steep face can survive beside lower ground.
+
+033 | 00:03:18,000 → 00:03:27,000 | PHẦN 2 | narration
+Follow one resistant layer across a small outdoor model. Its exposed edge narrows toward a crest, creating a triangular shape from one direction.
+
+034 | 00:03:27,000 → 00:03:35,000 | PHẦN 2 | scene
+Turn the model slowly. The same layer now produces a different outline. Nothing has been assembled, yet the geometry looks organized.
+
+035 | 00:03:35,000 → 00:03:39,000 | PHẦN 2 | narration
+The triangle catches your eye. Its materials must explain its shape.
+
+036 | 00:03:39,000 → 00:03:47,000 | PHẦN 2 | narration
+Maps, measured sections, and nearby outcrops bring those two scales together. The landform becomes part of a landscape with a geological history.
+
+037 | 00:03:47,000 → 00:03:51,000 | PHẦN 2 | narration
+Neighboring hills provide comparisons. Measure them with the same methods.
+
+038 | 00:03:51,000 → 00:03:56,000 | PHẦN 2 | narration
+The strongest photograph still has to fit the rest of the terrain.
+
+039 | 00:03:56,000 → 00:04:03,000 | PHẦN 2 | caveat
+A simplified erosion model explains how angular hills can form. It does not reproduce every slope or establish the exact history of this hill.
+
+040 | 00:04:03,000 → 00:04:08,000 | PHẦN 2 | turn
+The shape has given us a question. The stone itself can now give us a much closer test.
+
+041 | 00:04:08,000 → 00:04:15,000 | PHẦN 3 | rehook
+A rounded pebble is trapped inside the rock. Beside it sits another, held in a finer material that fills the spaces between them.
+
+042 | 00:04:15,000 → 00:04:21,000 | PHẦN 3 | narration
+This texture points toward conglomerate, a sedimentary rock made from pebbles bound within a finer matrix and natural mineral cement.
+
+043 | 00:04:21,000 → 00:04:27,000 | PHẦN 3 | narration
+Sandstone begins with smaller grains. Mud-rich layers begin finer still. Their different textures preserve different ways that sediment accumulated.
+
+044 | 00:04:27,000 → 00:04:37,000 | PHẦN 3 | scene
+Imagine gravel moving down a river into a basin, with pebbles settling as the current weakens and finer particles collecting elsewhere. Different deposits begin different chapters in the same rock sequence.
+
+045 | 00:04:37,000 → 00:04:41,000 | PHẦN 3 | narration
+Burial compacts the sediment. Natural minerals can bind its grains together.
+
+046 | 00:04:41,000 → 00:04:48,000 | PHẦN 3 | narration
+Here the word cement needs care. Geologists use it for minerals that hold grains together, including minerals deposited by natural fluids.
+
+047 | 00:04:48,000 → 00:04:52,000 | PHẦN 3 | narration
+A natural binding mineral establishes no mixing crew or ancient recipe.
+
+048 | 00:04:52,000 → 00:04:59,000 | PHẦN 3 | narration
+Around Visoko, geological observations describe sedimentary sequences containing conglomerate, sandstone, and finer layers. Those relationships connect the hills to their surroundings.
+
+049 | 00:04:59,000 → 00:05:06,000 | PHẦN 3 | narration
+The investigation therefore follows the texture beyond one attractive block. Does the same material appear as part of an extended rock sequence?
+
+050 | 00:05:06,000 → 00:05:10,000 | PHẦN 3 | narration
+Follow the enclosing layers. A sample belongs to a wider pattern.
+
+051 | 00:05:10,000 → 00:05:15,000 | PHẦN 3 | rehook
+Two comparison blocks sit outside: natural conglomerate and a deliberately cast specimen.
+
+052 | 00:05:15,000 → 00:05:23,000 | PHẦN 3 | narration
+Their resemblance starts the investigation. Their fabrics, boundaries, binding materials, and histories must carry the explanation further than appearance alone.
+
+053 | 00:05:23,000 → 00:05:31,000 | PHẦN 3 | narration
+Imagine tracing the edge of a pebble into the surrounding matrix. Then follow the matrix toward a boundary between two sedimentary layers.
+
+054 | 00:05:31,000 → 00:05:39,000 | PHẦN 3 | scene
+That boundary records deposition and later change. A photograph cropped around one rectangular fragment could hide the sequence that gives it meaning.
+
+055 | 00:05:39,000 → 00:05:43,000 | PHẦN 3 | narration
+A strength test measures behavior under specified conditions. Check those conditions.
+
+056 | 00:05:43,000 → 00:05:51,000 | PHẦN 3 | narration
+A strong specimen can be naturally formed. A weak specimen can be human-made. Mechanical strength and manufacturing history answer different questions.
+
+057 | 00:05:51,000 → 00:05:55,000 | PHẦN 3 | narration
+Document the collection point. Compare the specimen with suitable reference material.
+
+058 | 00:05:55,000 → 00:06:00,000 | PHẦN 3 | narration
+The pebble becomes a witness. Its surrounding matrix gives it a setting.
+
+059 | 00:06:00,000 → 00:06:07,000 | PHẦN 3 | caveat
+Texture alone may not settle every altered sample. Its interpretation becomes stronger when mineral evidence and the original field relationships agree.
+
+060 | 00:06:07,000 → 00:06:12,000 | PHẦN 3 | turn
+But even natural rock can break into blocks. What makes those breaks look so deliberately placed?
+
+061 | 00:06:12,000 → 00:06:20,000 | PHẦN 4 | rehook
+A straight fracture crosses a slab, then meets another fracture. The rock between them forms an angular piece with remarkably regular edges.
+
+062 | 00:06:20,000 → 00:06:28,000 | PHẦN 4 | narration
+Geologists call many fractures joints when there has been little movement along them. Joint systems can divide a continuous rock layer into blocks.
+
+063 | 00:06:28,000 → 00:06:32,000 | PHẦN 4 | narration
+The layer formed first. Its fractures came later. That order matters.
+
+064 | 00:06:32,000 → 00:06:42,000 | PHẦN 4 | scene
+Imagine following a narrow sediment band toward the fracture, then finding matching features on the other side. The apparent blocks may be pieces of a rock body that was once continuous.
+
+065 | 00:06:42,000 → 00:06:46,000 | PHẦN 4 | narration
+Follow the fractures outward. Do they continue into nearby natural outcrops?
+
+066 | 00:06:46,000 → 00:06:53,000 | PHẦN 4 | narration
+A natural break can cut through a previously continuous rock body. Its geometry can be regular without recording a mason's plan.
+
+067 | 00:06:53,000 → 00:06:57,000 | PHẦN 4 | narration
+Remove the soil, and tilted layers can resemble paving or steps.
+
+068 | 00:06:57,000 → 00:07:04,000 | PHẦN 4 | narration
+Follow the surface into a section through the ground. The relationship between the exposed top and the buried continuation becomes especially important.
+
+069 | 00:07:04,000 → 00:07:11,000 | PHẦN 4 | narration
+An actual pavement is an arranged surface within a human context. A sedimentary bed is part of a deposited rock sequence.
+
+070 | 00:07:11,000 → 00:07:14,000 | PHẦN 4 | narration
+Both surfaces can be flat. Their relationships reveal different histories.
+
+071 | 00:07:14,000 → 00:07:18,000 | PHẦN 4 | rehook
+Inspect the gap: natural fracture filling, soil, or a construction contact?
+
+072 | 00:07:18,000 → 00:07:26,000 | PHẦN 4 | narration
+Inspect its connection to the layer above and below. Does the same boundary extend through the hillside, or belong to a separately assembled structure?
+
+073 | 00:07:26,000 → 00:07:34,000 | PHẦN 4 | narration
+Imagine examining the clean side of an educational section model. Thin beds continue behind the visible ledges, making the apparent staircase easier to explain.
+
+074 | 00:07:34,000 → 00:07:41,000 | PHẦN 4 | scene
+The model also shows why excavation records matter. Removing material changes the surface presented to the next visitor and the next camera.
+
+075 | 00:07:41,000 → 00:07:45,000 | PHẦN 4 | narration
+Keep the earlier record. The final dramatic view needs its context.
+
+076 | 00:07:45,000 → 00:07:52,000 | PHẦN 4 | narration
+Tool marks can support a construction interpretation when their pattern and setting fit working practices. Natural fractures deserve an equally careful comparison.
+
+077 | 00:07:52,000 → 00:08:00,000 | PHẦN 4 | narration
+Some real masonry uses rough stones and little or no mortar. The test therefore combines several relationships instead of requiring one perfect signature.
+
+078 | 00:08:00,000 → 00:08:04,000 | PHẦN 4 | narration
+The corner becomes one clue among supports, contacts, and working surfaces.
+
+079 | 00:08:04,000 → 00:08:11,000 | PHẦN 4 | caveat
+An isolated photograph rarely preserves all those relationships. A confident identification needs the original context, suitable comparisons, and independently checkable records.
+
+080 | 00:08:11,000 → 00:08:16,000 | PHẦN 4 | turn
+Let us place a genuine wall beside that natural layer. What changes when people really start building?
+
+081 | 00:08:16,000 → 00:08:23,000 | PHẦN 5 | rehook
+A mason selects a stone, turns it, and sets it against another. The weight above will pass through these contacts into the ground.
+
+082 | 00:08:23,000 → 00:08:29,000 | PHẦN 5 | narration
+This imagined scene illustrates ordinary building practice. It gives us a sequence to investigate, rather than a pyramid to assume.
+
+083 | 00:08:29,000 → 00:08:36,000 | PHẦN 5 | narration
+A foundation may cut older deposits. Courses may repeat a laying pattern. Packing stones, working surfaces, or discarded material may preserve further stages.
+
+084 | 00:08:36,000 → 00:08:40,000 | PHẦN 5 | scene
+Construction leaves a sequence. Preparation comes before placement, use, and later change.
+
+085 | 00:08:40,000 → 00:08:50,000 | PHẦN 5 | narration
+Stand beside a small wall section and follow it downward. Find what supports the stones, where their arrangement begins, and how the deposits beside them meet the base of the structure.
+
+086 | 00:08:50,000 → 00:08:57,000 | PHẦN 5 | narration
+Its construction can create a boundary that differs from the surrounding natural layers. That difference can be recorded in a section.
+
+087 | 00:08:57,000 → 00:09:00,000 | PHẦN 5 | narration
+A natural ledge continues into rock. Follow that continuation behind it.
+
+088 | 00:09:00,000 → 00:09:07,000 | PHẦN 5 | narration
+Human builders can also use a natural ledge as a foundation. That produces a mixed history, with a natural landform and a later structure.
+
+089 | 00:09:07,000 → 00:09:14,000 | PHẦN 5 | narration
+This possibility matters at Visoko. Real human use of a hill is entirely compatible with the hill itself having a geological origin.
+
+090 | 00:09:14,000 → 00:09:18,000 | PHẦN 5 | narration
+Visoki gives us the distinction: a medieval stronghold on an older hill.
+
+091 | 00:09:18,000 → 00:09:23,000 | PHẦN 5 | rehook
+A small wall demonstrates a small wall. Scale up the evidence carefully.
+
+092 | 00:09:23,000 → 00:09:30,000 | PHẦN 5 | narration
+That connection could involve an organized construction sequence, meaningful boundaries, material movement, and associated activity distributed in a coherent pattern.
+
+093 | 00:09:30,000 → 00:09:39,000 | PHẦN 5 | narration
+Imagine marking the position of each feature on a blank field plan. The argument grows from their relationships, not from enlarging one striking detail.
+
+094 | 00:09:39,000 → 00:09:47,000 | PHẦN 5 | scene
+This approach also tests alternatives. A later terrace, a field boundary, or an excavation edge may explain a feature at a smaller scale.
+
+095 | 00:09:47,000 → 00:09:51,000 | PHẦN 5 | narration
+Test the smaller explanation before making the feature a giant monument.
+
+096 | 00:09:51,000 → 00:09:59,000 | PHẦN 5 | narration
+Ancient builders worked in many ways. Their practices should be investigated through regional evidence, rather than a single checklist borrowed from another civilization.
+
+097 | 00:09:59,000 → 00:10:04,000 | PHẦN 5 | narration
+Link what was built, where it stood, and when people used it.
+
+098 | 00:10:04,000 → 00:10:08,000 | PHẦN 5 | narration
+The sequence now needs time attached to the right events.
+
+099 | 00:10:08,000 → 00:10:15,000 | PHẦN 5 | caveat
+No single construction feature is mandatory in every culture. The interpretation depends on the combined context, not a universal masonry fingerprint.
+
+100 | 00:10:15,000 → 00:10:20,000 | PHẦN 5 | turn
+Before assigning an ancient birthday, pick up something much smaller than a building: one fragment of charcoal.
+
+101 | 00:10:20,000 → 00:10:28,000 | PHẦN 6 | rehook
+Imagine a dark fragment of charcoal in soil between stones. A date from that fragment would concern organic material with its own history.
+
+102 | 00:10:28,000 → 00:10:35,000 | PHẦN 6 | narration
+The stone beside it carries another history. Its sediment may have accumulated millions of years before anyone walked across the hillside.
+
+103 | 00:10:35,000 → 00:10:42,000 | PHẦN 6 | narration
+The wall, if there is a wall, introduces a third event: the time when people placed or modified material at that location.
+
+104 | 00:10:42,000 → 00:10:46,000 | PHẦN 6 | scene
+Three clocks. Three events. Connect the sample to the activity being proposed.
+
+105 | 00:10:46,000 → 00:10:50,000 | PHẦN 6 | narration
+Radiocarbon measures once-living material. That material has a history before burial.
+
+106 | 00:10:50,000 → 00:10:58,000 | PHẦN 6 | narration
+A tree can grow for many years. Its wood can be stored or reused, then burned, and its charcoal can later be moved.
+
+107 | 00:10:58,000 → 00:11:01,000 | PHẦN 6 | narration
+Growth, burning, burial: different events. Secure context helps connect them.
+
+108 | 00:11:01,000 → 00:11:11,000 | PHẦN 6 | narration
+Imagine finding charcoal inside a clearly bounded deposit beside stones. Record the deposit and its contacts before removing the sample, so its eventual date remains connected to the event under investigation.
+
+109 | 00:11:11,000 → 00:11:18,000 | PHẦN 6 | narration
+A sample from beneath a structure can constrain a sequence differently from a sample washed into an open crack above it.
+
+110 | 00:11:18,000 → 00:11:22,000 | PHẦN 6 | narration
+Location gives the number meaning. Keep that relationship in the record.
+
+111 | 00:11:22,000 → 00:11:26,000 | PHẦN 6 | rehook
+A cut crosses a soil boundary. The cut must have come later.
+
+112 | 00:11:26,000 → 00:11:33,000 | PHẦN 6 | narration
+An undisturbed sequence may preserve earlier and later deposits. Roots, burrowing, erosion, and human digging can also rearrange material, leaving their own traces.
+
+113 | 00:11:33,000 → 00:11:41,000 | PHẦN 6 | narration
+Imagine tracing those boundaries with your eyes in an outdoor section model. A later cut crosses an older layer and receives a younger filling.
+
+114 | 00:11:41,000 → 00:11:49,000 | PHẦN 6 | scene
+The pattern gives a relative order before a numerical date is added. Different dating methods can then test relevant parts of that order.
+
+115 | 00:11:49,000 → 00:11:53,000 | PHẦN 6 | narration
+Rock formation, organic history, construction: identify which event the date describes.
+
+116 | 00:11:53,000 → 00:12:01,000 | PHẦN 6 | narration
+Keeping those categories distinct prevents an old object from lending an unsupported birthday to everything around it. The argument stays tied to an event.
+
+117 | 00:12:01,000 → 00:12:04,000 | PHẦN 6 | narration
+Several connected dates can reveal occupation, rebuilding, abandonment, and return.
+
+118 | 00:12:04,000 → 00:12:12,000 | PHẦN 6 | narration
+The hillside can contain a long human history while remaining a natural hill. Time adds chapters without changing every chapter into pyramid construction.
+
+119 | 00:12:12,000 → 00:12:19,000 | PHẦN 6 | caveat
+A loose sample lacks the same chronological force as a securely recorded one. Every proposed date must retain its uncertainty and context.
+
+120 | 00:12:19,000 → 00:12:24,000 | PHẦN 6 | turn
+Now follow a route that disappears underground. Does a passage connect those clocks, or open another separate history?
+
+121 | 00:12:24,000 → 00:12:32,000 | PHẦN 7 | rehook
+A tunnel entrance creates an immediate promise: the landscape seems to open. What lies inside feels as though it must explain the hill above.
+
+122 | 00:12:32,000 → 00:12:39,000 | PHẦN 7 | narration
+Slow the inference down. A passage has its own shape, material, cutting history, fills, supports, and possible episodes of repair or reuse.
+
+123 | 00:12:39,000 → 00:12:46,000 | PHẦN 7 | narration
+Human excavation can be real without demonstrating that the entire surrounding hill was built. The connection between those claims needs its own evidence.
+
+124 | 00:12:46,000 → 00:12:56,000 | PHẦN 7 | scene
+Imagine standing at a passage entrance while its position is mapped against the hillside. Follow the boundary between the cut and the rock, then compare the deposits that fill its route.
+
+125 | 00:12:56,000 → 00:12:59,000 | PHẦN 7 | narration
+Follow the materials, worked surfaces, fills, and supports. Separate their events.
+
+126 | 00:12:59,000 → 00:13:06,000 | PHẦN 7 | narration
+A passage cut through an existing rock layer must be younger than the rock it cuts. Its later filling records another stage again.
+
+127 | 00:13:06,000 → 00:13:13,000 | PHẦN 7 | narration
+Suppose a wall closes part of that passage. The wall adds a construction event, while its relationship to the cut establishes an order.
+
+128 | 00:13:13,000 → 00:13:16,000 | PHẦN 7 | narration
+Rock first. Passage later. Filling or repair adds another chapter.
+
+129 | 00:13:16,000 → 00:13:23,000 | PHẦN 7 | narration
+The next task is to test the connection to a proposed monument. A route nearby and a hill nearby are a starting relationship.
+
+130 | 00:13:23,000 → 00:13:26,000 | PHẦN 7 | narration
+A shared history needs recorded connections, compatible sequences, and relevant dates.
+
+131 | 00:13:26,000 → 00:13:31,000 | PHẦN 7 | rehook
+A radar anomaly is a changed response. Start with its physical cause.
+
+132 | 00:13:31,000 → 00:13:39,000 | PHẦN 7 | narration
+Different materials, moisture, boundaries, and voids can affect a signal. A proposed chamber is an interpretation to compare with independent observations.
+
+133 | 00:13:39,000 → 00:13:48,000 | PHẦN 7 | narration
+Imagine a field team following a measured line across open ground. The equipment travels above a landscape whose layers already supply a geological model.
+
+134 | 00:13:48,000 → 00:13:57,000 | PHẦN 7 | scene
+The useful result links the measurement to that model and tests alternative explanations. A striking color on an image still needs a physical meaning.
+
+135 | 00:13:57,000 → 00:14:01,000 | PHẦN 7 | narration
+Follow the signal back to its location and the ground being tested.
+
+136 | 00:14:01,000 → 00:14:08,000 | PHẦN 7 | narration
+The same discipline applies to a tunnel photograph. Camera position, recent work, and the surrounding material belong in its record.
+
+137 | 00:14:08,000 → 00:14:12,000 | PHẦN 7 | narration
+One feature cannot automatically supply an age, a function, and a civilization.
+
+138 | 00:14:12,000 → 00:14:16,000 | PHẦN 7 | narration
+The passage gives us connections to test, rather than connections to imagine.
+
+139 | 00:14:16,000 → 00:14:23,000 | PHẦN 7 | caveat
+This comparison does not assign an age to every Visoko tunnel. Each passage requires its own documented sequence and evidence of any wider connection.
+
+140 | 00:14:23,000 → 00:14:28,000 | PHẦN 7 | turn
+What happens when the pyramid argument appears in a published paper? Turn from the title to the test.
+
+141 | 00:14:28,000 → 00:14:35,000 | PHẦN 8 | rehook
+In two thousand twenty-five, Osmanagić published a paper arguing for artificial modification or construction at Visočica. Its existence belongs in an honest review.
+
+142 | 00:14:35,000 → 00:14:42,000 | PHẦN 8 | narration
+The paper discusses geometry, orientation, materials, and other reported measurements. Each claim should be examined at the level of its original evidence.
+
+143 | 00:14:42,000 → 00:14:49,000 | PHẦN 8 | narration
+Start with a reported alignment. Which surface was measured, how was it selected, what uncertainty accompanies it, and how do neighboring slopes compare?
+
+144 | 00:14:49,000 → 00:14:59,000 | PHẦN 8 | scene
+Imagine carrying the collection record back to the outcrop, then matching the named specimen to its original position. The material claim should connect a testable sample, a location, and a method.
+
+145 | 00:14:59,000 → 00:15:06,000 | PHẦN 8 | narration
+Imagine returning to the exact collection position with the original records. The sample, the outcrop, and the description should fit one another.
+
+146 | 00:15:06,000 → 00:15:13,000 | PHẦN 8 | narration
+A reproducible result lets another team inspect that chain and test the interpretation. Independence concerns the observations and methods, not simply another photograph.
+
+147 | 00:15:13,000 → 00:15:16,000 | PHẦN 8 | narration
+Ten photographs of one block still record the same block.
+
+148 | 00:15:16,000 → 00:15:23,000 | PHẦN 8 | narration
+Authorship matters because it helps us understand the route a claim took. It neither proves the interpretation nor automatically makes it false.
+
+149 | 00:15:23,000 → 00:15:27,000 | PHẦN 8 | narration
+The argument still needs a connected material sequence and a construction history.
+
+150 | 00:15:27,000 → 00:15:30,000 | PHẦN 8 | narration
+Publication, permission, visitor numbers: each records a different kind of fact.
+
+151 | 00:15:30,000 → 00:15:38,000 | PHẦN 8 | rehook
+Now place an old professional declaration beside a new claim. In December two thousand six, European archaeologists publicly opposed the pyramid project.
+
+152 | 00:15:38,000 → 00:15:46,000 | PHẦN 8 | narration
+Their concern included the protection of genuine archaeological heritage. That statement documents a professional response, while the physical argument still rests on evidence.
+
+153 | 00:15:46,000 → 00:15:50,000 | PHẦN 8 | narration
+Three comparison models stand outdoors: a hill, a rock section, a wall.
+
+154 | 00:15:50,000 → 00:15:58,000 | PHẦN 8 | scene
+Each represents a different kind of explanation. Ask the same question of all three: which observations would make this interpretation the better fit?
+
+155 | 00:15:58,000 → 00:16:02,000 | PHẦN 8 | narration
+Natural layers, fractures, and erosion connect the shape to geological processes.
+
+156 | 00:16:02,000 → 00:16:10,000 | PHẦN 8 | narration
+For human construction, recorded boundaries, arranged material, associated activity, and a coherent chronology would need to establish the proposed engineered structure.
+
+157 | 00:16:10,000 → 00:16:15,000 | PHẦN 8 | narration
+The tests stay useful whatever the headline. New evidence can change an explanation.
+
+158 | 00:16:15,000 → 00:16:20,000 | PHẦN 8 | narration
+Move from the name to predictions, then compare those predictions with the ground.
+
+159 | 00:16:20,000 → 00:16:27,000 | PHẦN 8 | caveat
+The reviewed evidence supports natural hills rather than established giant pyramids. A new construction proposal needs independently checkable evidence that explains the full context.
+
+160 | 00:16:27,000 → 00:16:32,000 | PHẦN 8 | turn
+There is already a real archaeological story here. What happens when we give that story the same attention?
+
+161 | 00:16:32,000 → 00:16:39,000 | PHẦN 9 | rehook
+At the summit, low remains belong to Visoki, the medieval stronghold. Here the human past has a named place and recorded archaeological work.
+
+162 | 00:16:39,000 → 00:16:46,000 | PHẦN 9 | narration
+The official heritage designation identifies that historic site. It should be read as recognition of that site, with its own location and significance.
+
+163 | 00:16:46,000 → 00:16:55,000 | PHẦN 9 | narration
+Imagine approaching the low surviving masonry and following its base where it meets the summit. Without moving a stone, ask which part belongs to the structure and which belongs to the hill.
+
+164 | 00:16:55,000 → 00:17:01,000 | PHẦN 9 | scene
+Which wall belongs to which phase? Where was an entrance? How did people adapt this elevated place to work, movement, and defense?
+
+165 | 00:17:01,000 → 00:17:05,000 | PHẦN 9 | narration
+The questions lead to plans, associated objects, and recorded phases of use.
+
+166 | 00:17:05,000 → 00:17:11,000 | PHẦN 9 | narration
+The plateau also has published archaeological investigation. Preliminary work in February two thousand seventeen examined its archaeological potential near the protected monument.
+
+167 | 00:17:11,000 → 00:17:18,000 | PHẦN 9 | narration
+The reported material spans prehistoric times to the Middle Ages. That is evidence for human activity across different periods, not one single construction event.
+
+168 | 00:17:18,000 → 00:17:26,000 | PHẦN 9 | narration
+Picture a pottery fragment in a recorded layer. Its form and setting help build a history of use, rather than enlarge the whole hill into a monument.
+
+169 | 00:17:26,000 → 00:17:30,000 | PHẦN 9 | narration
+The fragment asks what people did here. Its context connects the answer.
+
+170 | 00:17:30,000 → 00:17:34,000 | PHẦN 9 | narration
+Separate the object from its deposit, and part of that history disappears.
+
+171 | 00:17:34,000 → 00:17:38,000 | PHẦN 9 | rehook
+A layer can be removed only once. Preserve its record.
+
+172 | 00:17:38,000 → 00:17:46,000 | PHẦN 9 | narration
+Imagine pausing at an undisturbed patch of ground. Leaving it intact can be a positive research decision, protecting questions for a better-designed investigation.
+
+173 | 00:17:46,000 → 00:17:54,000 | PHẦN 9 | narration
+Good archaeology includes conservation, publication, and the survival of records. The value of an object includes the connections that make its history readable.
+
+174 | 00:17:54,000 → 00:17:58,000 | PHẦN 9 | scene
+The valley already offers genuine sites and reasons to be curious.
+
+175 | 00:17:58,000 → 00:18:06,000 | PHẦN 9 | narration
+Its real past gains depth from specific people and places. A medieval wall and a prehistoric find deserve their own careful stories.
+
+176 | 00:18:06,000 → 00:18:10,000 | PHẦN 9 | narration
+Respect the community by investigating its heritage carefully and specifically.
+
+177 | 00:18:10,000 → 00:18:15,000 | PHẦN 9 | narration
+From the summit, the human chapter rests on an older geological foundation.
+
+178 | 00:18:15,000 → 00:18:24,000 | PHẦN 9 | narration
+We can hold both histories together without merging their dates or turning every natural layer into architecture. Their differences make the landscape more interesting.
+
+179 | 00:18:24,000 → 00:18:31,000 | PHẦN 9 | caveat
+The preliminary work does not describe every buried feature. Its findings support specific human histories whose extent and sequence require further responsible study.
+
+180 | 00:18:31,000 → 00:18:36,000 | PHẦN 9 | turn
+Now return to the sharp corner from the opening. What should that little edge mean to us after this journey?
+
+181 | 00:18:36,000 → 00:18:42,000 | PHẦN 10 | rehook
+The stone still has its sharp corner. What has changed is the amount of evidence we ask that corner to carry.
+
+182 | 00:18:42,000 → 00:18:48,000 | PHẦN 10 | narration
+At first, it invited an instant picture of builders and a giant monument. Now it sits inside a sequence we can investigate.
+
+183 | 00:18:48,000 → 00:18:55,000 | PHẦN 10 | narration
+Begin with its texture. Follow the grains, the natural binding material, and the relationship to adjoining layers. Then examine the fractures and contacts.
+
+184 | 00:18:55,000 → 00:19:04,000 | PHẦN 10 | scene
+Imagine returning to the slab, then stepping back toward the valley view. Test the explanation at each scale, from the grains inside one stone to the layers running through the whole hillside.
+
+185 | 00:19:04,000 → 00:19:07,000 | PHẦN 10 | narration
+Shape offers a lead. Context carries the argument. Follow the physical history.
+
+186 | 00:19:07,000 → 00:19:14,000 | PHẦN 10 | narration
+The geological explanation fits natural sedimentary rocks, their deformation, fractures, and erosion. These processes account for angular forms without requiring a constructed pyramid.
+
+187 | 00:19:14,000 → 00:19:20,000 | PHẦN 10 | narration
+The archaeological explanation belongs where human actions are demonstrated: walls, cuts, working surfaces, objects in context, and recorded episodes of use.
+
+188 | 00:19:20,000 → 00:19:26,000 | PHẦN 10 | narration
+At Visoko, genuine medieval heritage and earlier human activity deserve attention in their own right. They occupy a landscape with an older origin.
+
+189 | 00:19:26,000 → 00:19:33,000 | PHẦN 10 | narration
+Here is the answer to our central question: distinguish the claims by testing the complete material sequence, rather than treating resemblance as construction evidence.
+
+190 | 00:19:33,000 → 00:19:39,000 | PHẦN 10 | narration
+The evidence reviewed here supports natural hills with human histories, not the established discovery of giant ancient pyramids. Those conclusions concern different scales.
+
+191 | 00:19:39,000 → 00:19:44,000 | PHẦN 10 | rehook
+The three comparison models return: terrain, layered rock, and assembled wall.
+
+192 | 00:19:44,000 → 00:19:50,000 | PHẦN 10 | narration
+Seek building relationships for a building. Follow geological processes for a hill.
+
+193 | 00:19:50,000 → 00:19:56,000 | PHẦN 10 | narration
+Identify the dated event. Rock, organic material, and construction keep different clocks.
+
+194 | 00:19:56,000 → 00:20:01,000 | PHẦN 10 | scene
+Preserve observations, compare alternatives, and let another investigator test the reasoning.
+
+195 | 00:20:01,000 → 00:20:11,000 | PHẦN 10 | narration
+The strongest surprise may be how much a familiar-looking stone can reveal once we stop asking its outline to tell the whole story.
+
+196 | 00:20:11,000 → 00:20:16,000 | PHẦN 10 | narration
+Examine the corner. Map the hill. Investigate the particular human lives.
+
+197 | 00:20:16,000 → 00:20:21,000 | PHẦN 10 | narration
+Curiosity survives the test. The next question now points toward evidence.
+
+198 | 00:20:21,000 → 00:20:31,000 | PHẦN 10 | narration
+Leave the opening slab in place. Beyond it, the valley contains a real past, with layers and records still worth protecting.
+
+199 | 00:20:31,000 → 00:20:38,000 | PHẦN 10 | caveat
+These conclusions concern the giant-pyramid claim. They leave room for new, properly documented discoveries about human activity within this older landscape.
+
+200 | 00:20:38,000 → 00:20:42,000 | PHẦN 10 | turn
+Whose story still waits in the undisturbed ground?

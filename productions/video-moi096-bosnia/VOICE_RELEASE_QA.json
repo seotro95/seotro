@@ -1,0 +1,151 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-096",
+  "voices": 16,
+  "male_voices": 16,
+  "all_decoded_seconds": 1242,
+  "all_decoded_frames_48000": 59616000,
+  "all_current_episode_ids_locked": true,
+  "previous_voice_ids_retained": 16,
+  "voice_changes": [],
+  "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+  "unique_audio_hashes": 16,
+  "english_cue_count": 200,
+  "other_language_chapter_count": 10,
+  "word_metadata_checked": true,
+  "english_word_boundary_split_checked": true,
+  "pitch_shift_applied": false,
+  "independent_native_editorial_review": false,
+  "independent_native_listening_review": false,
+  "translated_voice_alignment": "Ten shared section boundaries; localized retellings, not word-by-word synchronization",
+  "reports": {
+    "fi-FI": {
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "BOSNIA_MOI096_Phan_Lan.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.974491443332257,
+      "max_tempo": 1.1190184049079754,
+      "word_accents": 33
+    },
+    "it-IT": {
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "BOSNIA_MOI096_Y.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.9810784630287376,
+      "max_tempo": 1.1711333548595417,
+      "word_accents": 33
+    },
+    "cs-CZ": {
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "BOSNIA_MOI096_Sec.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.8450758798837585,
+      "max_tempo": 0.9928963513077171,
+      "word_accents": 25
+    },
+    "ja-JP": {
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "BOSNIA_MOI096_Nhat_Ban.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.9663545366483695,
+      "max_tempo": 1.0711656441717792,
+      "word_accents": 21
+    },
+    "nb-NO": {
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "BOSNIA_MOI096_Na_Uy.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.8694865999354214,
+      "max_tempo": 1.013432353890862,
+      "word_accents": 47
+    },
+    "vi-VN": {
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "BOSNIA_MOI096_Viet_Nam_Nam_Minh.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.920632870519858,
+      "max_tempo": 1.0370681304488216,
+      "word_accents": 51
+    },
+    "pl-PL": {
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "BOSNIA_MOI096_Ba_Lan.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.8652244107200516,
+      "max_tempo": 1.0035518243461414,
+      "word_accents": 14
+    },
+    "ko-KR": {
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "BOSNIA_MOI096_Han_Quoc.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.0124636745237328,
+      "max_tempo": 1.1340324118207818,
+      "word_accents": 30
+    },
+    "da-DK": {
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "BOSNIA_MOI096_Dan_Mach.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.8824669034549564,
+      "max_tempo": 1.0368743945753955,
+      "word_accents": 45
+    },
+    "es-ES": {
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "BOSNIA_MOI096_Tay_Ban_Nha.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.92431385211495,
+      "max_tempo": 1.099257345818534,
+      "word_accents": 42
+    },
+    "pt-PT": {
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "BOSNIA_MOI096_Bo_Dao_Nha.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.8063287051985794,
+      "max_tempo": 0.9400064578624475,
+      "word_accents": 46
+    },
+    "nl-NL": {
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "BOSNIA_MOI096_Ha_Lan.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.9099773974814336,
+      "max_tempo": 1.0498546980949308,
+      "word_accents": 42
+    },
+    "en-US": {
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "BOSNIA_MOI096_My_Tieng_Anh.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.6282599527665317,
+      "max_tempo": 1.6444090136054421,
+      "word_accents": 91
+    },
+    "fr-FR": {
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "BOSNIA_MOI096_Phap.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.8567000322893122,
+      "max_tempo": 1.0089764288020666,
+      "word_accents": 50
+    },
+    "de-DE": {
+      "voice_id": "de-DE-ChristophNeural",
+      "filename": "BOSNIA_MOI096_Duc.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.0328059412334518,
+      "max_tempo": 1.1531159186309332,
+      "word_accents": 39
+    },
+    "sv-SE": {
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "BOSNIA_MOI096_Thuy_Dien.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.0512108492089118,
+      "max_tempo": 1.217048756861479,
+      "word_accents": 44
+    }
+  }
+}

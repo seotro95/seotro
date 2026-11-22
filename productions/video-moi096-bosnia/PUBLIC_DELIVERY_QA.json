@@ -1,0 +1,176 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-096",
+  "verified_at_utc": "2026-11-22T01:20:11.459244+00:00",
+  "target_seconds": 1242,
+  "voices": 16,
+  "all_decoded_frames_48000": 59616000,
+  "all_16_ids_retained": true,
+  "public_mp3_urls_checked": 16,
+  "zip_crc_and_public_github_sha_verified": true,
+  "english_script_words": 3715,
+  "prompt_txt_files": 13,
+  "unique_prompts": 130,
+  "timeline_shots": 128,
+  "outdoor_scenes": 130,
+  "laboratory_scenes": 0,
+  "backup_prompt_ids": [
+    129,
+    130
+  ],
+  "retention_qa_status": "passed",
+  "authentic_site_imagery_included": false,
+  "audio_zip_sha256": "e0443c666b9af6028513b551823fda3c2c5c575f9dff7e9983a80cfd14773253",
+  "documents_zip_sha256": "519c3db294d925d843b45a962831080cde29ece852a250372d49b927552e8386",
+  "prompts_zip_sha256": "1389e1a5ac9911d74bfcdff5bfca76cf206f14eb46c0e9cdc74006cab462aa61",
+  "independent_native_listening_review": false,
+  "footage_generated": false,
+  "thumbnail_generated": false,
+  "video_edited": false,
+  "reports": [
+    {
+      "locale": "en-US",
+      "filename": "BOSNIA_MOI096_My_Tieng_Anh.mp3",
+      "voice_id": "en-US-AndrewNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "77569762c55232c846b0054f01b6e5e7e9396a349a3f6a0de892bb1b2cbdb734",
+      "public_url_status": 200
+    },
+    {
+      "locale": "vi-VN",
+      "filename": "BOSNIA_MOI096_Viet_Nam_Nam_Minh.mp3",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "97236a56352a64dd44813500ae9aab9eb642d1d6aec60d3d8679c87bc2c2365a",
+      "public_url_status": 200
+    },
+    {
+      "locale": "es-ES",
+      "filename": "BOSNIA_MOI096_Tay_Ban_Nha.mp3",
+      "voice_id": "es-ES-AlvaroNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "f9e0fe7786d7c4657c5fb417d29f3d96021d7ea8aee14240204b303ae3fb8e49",
+      "public_url_status": 200
+    },
+    {
+      "locale": "fr-FR",
+      "filename": "BOSNIA_MOI096_Phap.mp3",
+      "voice_id": "fr-FR-HenriNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "3b871d8f4f60553453080011d35f6f51090c56e7916fe6a74b026cfa01e2a6b5",
+      "public_url_status": 200
+    },
+    {
+      "locale": "ja-JP",
+      "filename": "BOSNIA_MOI096_Nhat_Ban.mp3",
+      "voice_id": "ja-JP-KeitaNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "ba8179bcfc7a56b2f617cf09598cec07a3856d905c0148248372b1abb0512871",
+      "public_url_status": 200
+    },
+    {
+      "locale": "ko-KR",
+      "filename": "BOSNIA_MOI096_Han_Quoc.mp3",
+      "voice_id": "ko-KR-InJoonNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "6714dd76139f70de9a5d01c661c40f2e9e15ce0b2ac2afd950a1fc5b2a07ad6a",
+      "public_url_status": 200
+    },
+    {
+      "locale": "de-DE",
+      "filename": "BOSNIA_MOI096_Duc.mp3",
+      "voice_id": "de-DE-ChristophNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "7ef3b786cab820d43827b75df6cfe1a04573bb10e771f9d2b549f0b562c60fc5",
+      "public_url_status": 200
+    },
+    {
+      "locale": "it-IT",
+      "filename": "BOSNIA_MOI096_Y.mp3",
+      "voice_id": "it-IT-DiegoNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "40fdf0f79176f560a902ef30ab951f48df3b04257d5f10ee1ec7e0143586a0d1",
+      "public_url_status": 200
+    },
+    {
+      "locale": "pt-PT",
+      "filename": "BOSNIA_MOI096_Bo_Dao_Nha.mp3",
+      "voice_id": "pt-PT-DuarteNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "8be18dc285750d0854eea211f44a746552a4bb5a924c9b92975e38d8445d1476",
+      "public_url_status": 200
+    },
+    {
+      "locale": "nl-NL",
+      "filename": "BOSNIA_MOI096_Ha_Lan.mp3",
+      "voice_id": "nl-NL-MaartenNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "a93ab7204ce07453488073703195eebece5b134675b61ba0558b50c90d08b4c9",
+      "public_url_status": 200
+    },
+    {
+      "locale": "pl-PL",
+      "filename": "BOSNIA_MOI096_Ba_Lan.mp3",
+      "voice_id": "pl-PL-MarekNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "61936e227bc0d188e40fdfcaa4184e1be2b37a8d366b51574133988c631d982f",
+      "public_url_status": 200
+    },
+    {
+      "locale": "sv-SE",
+      "filename": "BOSNIA_MOI096_Thuy_Dien.mp3",
+      "voice_id": "sv-SE-MattiasNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "016d576bbc9775a1f5bb4f8e6064cfe074132065b3297c59893a5612b269b683",
+      "public_url_status": 200
+    },
+    {
+      "locale": "da-DK",
+      "filename": "BOSNIA_MOI096_Dan_Mach.mp3",
+      "voice_id": "da-DK-JeppeNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "976a11b6ad5ce6f06e64da04a9a001e51a058dbd9ea1c49037f5015b15af89f2",
+      "public_url_status": 200
+    },
+    {
+      "locale": "fi-FI",
+      "filename": "BOSNIA_MOI096_Phan_Lan.mp3",
+      "voice_id": "fi-FI-HarriNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "ad69164683254537147639d1d640f99606728b8b1d7f58d92430502b8380e285",
+      "public_url_status": 200
+    },
+    {
+      "locale": "nb-NO",
+      "filename": "BOSNIA_MOI096_Na_Uy.mp3",
+      "voice_id": "nb-NO-FinnNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "1183a5d60e8c8e14ebee10a29700b623081964ad153c2539e208670138dd4b11",
+      "public_url_status": 200
+    },
+    {
+      "locale": "cs-CZ",
+      "filename": "BOSNIA_MOI096_Sec.mp3",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "decoded_frames_48000": 59616000,
+      "seconds": 1242,
+      "sha256": "959224cdb32c04a5cb8fb36cceeda9c3cecf9116d7df7a14a886df4e07467b48",
+      "public_url_status": 200
+    }
+  ]
+}

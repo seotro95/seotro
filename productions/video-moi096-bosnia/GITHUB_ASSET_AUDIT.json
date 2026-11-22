@@ -1,0 +1,367 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-096",
+  "checked_at_utc": "2026-11-22T01:20:11.459244+00:00",
+  "assets": [
+    {
+      "name": "5_TIEU_DE_VA_THUMBNAIL.txt",
+      "bytes": 7280,
+      "digest": "sha256:ed0a8969f573ebd0a3efd9ad55d7ccf6a4cf4675267c7fb4b3e2e91917fb392e",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/5_TIEU_DE_VA_THUMBNAIL.txt"
+    },
+    {
+      "name": "AUDIO_MANIFEST.json",
+      "bytes": 7524,
+      "digest": "sha256:cbf3818b1937b7ad42db2a9768d6fec086aff30d4f2bd01c2b5f747a6077b80e",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/AUDIO_MANIFEST.json"
+    },
+    {
+      "name": "BACKUP_129_130.json",
+      "bytes": 4991,
+      "digest": "sha256:d9d584cfd56935c5a59b2fe700801cb6d07b1df2af0ef2b45dbbf4e278a07217",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BACKUP_129_130.json"
+    },
+    {
+      "name": "BOSNIA_MOI096_16_VOICES_20m42s.zip",
+      "bytes": 238499130,
+      "digest": "sha256:e0443c666b9af6028513b551823fda3c2c5c575f9dff7e9983a80cfd14773253",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_16_VOICES_20m42s.zip"
+    },
+    {
+      "name": "BOSNIA_MOI096_Ba_Lan.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:61936e227bc0d188e40fdfcaa4184e1be2b37a8d366b51574133988c631d982f",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Ba_Lan.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_Bo_Dao_Nha.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:8be18dc285750d0854eea211f44a746552a4bb5a924c9b92975e38d8445d1476",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Bo_Dao_Nha.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_Dan_Mach.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:976a11b6ad5ce6f06e64da04a9a001e51a058dbd9ea1c49037f5015b15af89f2",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Dan_Mach.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_Duc.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:7ef3b786cab820d43827b75df6cfe1a04573bb10e771f9d2b549f0b562c60fc5",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Duc.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_Han_Quoc.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:6714dd76139f70de9a5d01c661c40f2e9e15ce0b2ac2afd950a1fc5b2a07ad6a",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Han_Quoc.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_Ha_Lan.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:a93ab7204ce07453488073703195eebece5b134675b61ba0558b50c90d08b4c9",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Ha_Lan.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_My_Tieng_Anh.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:77569762c55232c846b0054f01b6e5e7e9396a349a3f6a0de892bb1b2cbdb734",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_My_Tieng_Anh.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_Na_Uy.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:1183a5d60e8c8e14ebee10a29700b623081964ad153c2539e208670138dd4b11",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Na_Uy.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_Nhat_Ban.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:ba8179bcfc7a56b2f617cf09598cec07a3856d905c0148248372b1abb0512871",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Nhat_Ban.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_Phan_Lan.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:ad69164683254537147639d1d640f99606728b8b1d7f58d92430502b8380e285",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Phan_Lan.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_Phap.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:3b871d8f4f60553453080011d35f6f51090c56e7916fe6a74b026cfa01e2a6b5",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Phap.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_PROMPT_13_TXT.zip",
+      "bytes": 26769,
+      "digest": "sha256:1389e1a5ac9911d74bfcdff5bfca76cf206f14eb46c0e9cdc74006cab462aa61",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_PROMPT_13_TXT.zip"
+    },
+    {
+      "name": "BOSNIA_MOI096_Sec.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:959224cdb32c04a5cb8fb36cceeda9c3cecf9116d7df7a14a886df4e07467b48",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Sec.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_TAI_LIEU_20m42s.zip",
+      "bytes": 501634,
+      "digest": "sha256:519c3db294d925d843b45a962831080cde29ece852a250372d49b927552e8386",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_TAI_LIEU_20m42s.zip"
+    },
+    {
+      "name": "BOSNIA_MOI096_Tay_Ban_Nha.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:f9e0fe7786d7c4657c5fb417d29f3d96021d7ea8aee14240204b303ae3fb8e49",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Tay_Ban_Nha.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_Thuy_Dien.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:016d576bbc9775a1f5bb4f8e6064cfe074132065b3297c59893a5612b269b683",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Thuy_Dien.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_Viet_Nam_Nam_Minh.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:97236a56352a64dd44813500ae9aab9eb642d1d6aec60d3d8679c87bc2c2365a",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Viet_Nam_Nam_Minh.mp3"
+    },
+    {
+      "name": "BOSNIA_MOI096_Y.mp3",
+      "bytes": 14904620,
+      "digest": "sha256:40fdf0f79176f560a902ef30ab951f48df3b04257d5f10ee1ec7e0143586a0d1",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/BOSNIA_MOI096_Y.mp3"
+    },
+    {
+      "name": "DOCUMENT_ASSET_MANIFEST.json",
+      "bytes": 9401,
+      "digest": "sha256:8197c7ef1a8f6157812c7f6fb8caa5a85c17ffff670079e69ac39420bc7e426e",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/DOCUMENT_ASSET_MANIFEST.json"
+    },
+    {
+      "name": "DOCUMENT_DELIVERY_STATE.json",
+      "bytes": 145,
+      "digest": "sha256:dc536a62041c4e5cbca18a2609a4f9d7b657914c5597a778443aca331b57b4bc",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/DOCUMENT_DELIVERY_STATE.json"
+    },
+    {
+      "name": "DOCUMENT_QA.json",
+      "bytes": 1611,
+      "digest": "sha256:426dafc95b01bb15542ab239387a2d7f572e5e033452a2a65b1ce8f0c457e0c7",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/DOCUMENT_QA.json"
+    },
+    {
+      "name": "DOWNLOAD_LINKS.md",
+      "bytes": 5132,
+      "digest": "sha256:a97ebb5b2e6cd19994dfae1ca05b94ef72f6b64e5a01119c667dcb80b3788063",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/DOWNLOAD_LINKS.md"
+    },
+    {
+      "name": "en-US.srt",
+      "bytes": 31284,
+      "digest": "sha256:dee9d7f0cb8576f20236bc0a4ae79eedb43023922a0bb359d17a2344ac0d6f87",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/en-US.srt"
+    },
+    {
+      "name": "HUONG_DAN_SU_DUNG.txt",
+      "bytes": 2902,
+      "digest": "sha256:789238d32d8812203206f0d088b6b810ecae7a8a041adfae8c60cfa32ddc41db",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/HUONG_DAN_SU_DUNG.txt"
+    },
+    {
+      "name": "KICH_BAN_EN_20m42s.txt",
+      "bytes": 24592,
+      "digest": "sha256:b97d14a9647bba98928b74adb2dd0909246e7f187ebe456803ef3ab6cba5bbd1",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/KICH_BAN_EN_20m42s.txt"
+    },
+    {
+      "name": "KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 36192,
+      "digest": "sha256:4d02ffb01421c966eed98ccf2f656b7d14f73113ba852a9bf542d4db1deb877a",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/KICH_BAN_EN_CO_MOC.txt"
+    },
+    {
+      "name": "LINK_TAI_VOICE.txt",
+      "bytes": 1863,
+      "digest": "sha256:f6bf34ea725433f8e3a4343bd7668804846717c4569e4df39e08a5c7dff7c6be",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/LINK_TAI_VOICE.txt"
+    },
+    {
+      "name": "NARRATION_STYLE_LOCKED.json",
+      "bytes": 834,
+      "digest": "sha256:9964b3d28e467b6c1a9b1b216da48f858ea1074dcfe83ca169a5645d1486f32d",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/NARRATION_STYLE_LOCKED.json"
+    },
+    {
+      "name": "NGUON_KIEM_CHUNG.md",
+      "bytes": 10123,
+      "digest": "sha256:77d0b596c9bd3e9b23178790a12bf0242fe8a11ec7c4c21c270333c6d6ef8dc6",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/NGUON_KIEM_CHUNG.md"
+    },
+    {
+      "name": "OPENING_6_SHOTS_30s.json",
+      "bytes": 16212,
+      "digest": "sha256:4e1ea4e243d212d900a904434eeff3fba858ffda6392676f33011294a667ca76",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/OPENING_6_SHOTS_30s.json"
+    },
+    {
+      "name": "PHAN_TICH_VA_KE_HOACH_DUNG.md",
+      "bytes": 5208,
+      "digest": "sha256:7828957eec3947df85bb5607bc5b3c63241f7953f87cccf90dc0d659a62aa77a",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PHAN_TICH_VA_KE_HOACH_DUNG.md"
+    },
+    {
+      "name": "PROMPT_01_001-010.txt",
+      "bytes": 19117,
+      "digest": "sha256:052ff4cc5bd3ad62273e3f36ef87916d46e813b59f6763273bc35c17a81e0440",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PROMPT_01_001-010.txt"
+    },
+    {
+      "name": "PROMPT_02_011-020.txt",
+      "bytes": 18780,
+      "digest": "sha256:5deec3a60323256924039782171aec30531aa5256462b4fc026b179e1ecf017f",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PROMPT_02_011-020.txt"
+    },
+    {
+      "name": "PROMPT_03_021-030.txt",
+      "bytes": 18758,
+      "digest": "sha256:9fe0c944afefd31ae7594b249c03906a632dfeed12a0d8af509a4f987493a314",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PROMPT_03_021-030.txt"
+    },
+    {
+      "name": "PROMPT_04_031-040.txt",
+      "bytes": 18948,
+      "digest": "sha256:33fa25666e9bf3727cbbcd34ea0bb4c09298121321a9c7da3758a15c5bebc74e",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PROMPT_04_031-040.txt"
+    },
+    {
+      "name": "PROMPT_05_041-050.txt",
+      "bytes": 18787,
+      "digest": "sha256:c53aee151d1f90abb29a84f7a3d1a3a4299e167541064901580d6717789aad6b",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PROMPT_05_041-050.txt"
+    },
+    {
+      "name": "PROMPT_06_051-060.txt",
+      "bytes": 19000,
+      "digest": "sha256:c31cb2aa126a15bce519cafbfd63c1ef9a12c2ccc64bc7e7b11fd4b001847cfa",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PROMPT_06_051-060.txt"
+    },
+    {
+      "name": "PROMPT_07_061-070.txt",
+      "bytes": 19307,
+      "digest": "sha256:dacc0aefb435c54343e6fad896a8d0509dbf2c7b7410655c79644d34176b32f5",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PROMPT_07_061-070.txt"
+    },
+    {
+      "name": "PROMPT_08_071-080.txt",
+      "bytes": 18696,
+      "digest": "sha256:5fa855790b1b626f45e755b5cbea3054b9acb3a4f2455539c9bf240af32d3748",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PROMPT_08_071-080.txt"
+    },
+    {
+      "name": "PROMPT_09_081-090.txt",
+      "bytes": 18785,
+      "digest": "sha256:45a88ec46e900c657944d39ff876cf86c99e4f7760e7e907af520f957b781ef4",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PROMPT_09_081-090.txt"
+    },
+    {
+      "name": "PROMPT_10_091-100.txt",
+      "bytes": 18842,
+      "digest": "sha256:effced87c4e14cad79fe7ab1db626e776c0dd45f8372a97836897546fa287d6e",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PROMPT_10_091-100.txt"
+    },
+    {
+      "name": "PROMPT_11_101-110.txt",
+      "bytes": 18794,
+      "digest": "sha256:0fe2e84d4ac759c91b7aac5d4031b9c50e2b6d516022fd2eb9595f5b736fadc8",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PROMPT_11_101-110.txt"
+    },
+    {
+      "name": "PROMPT_12_111-120.txt",
+      "bytes": 18987,
+      "digest": "sha256:4201c4ca3d183c75facb5f8e25434d498959896dea587da6aab3e874c0390b7b",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PROMPT_12_111-120.txt"
+    },
+    {
+      "name": "PROMPT_13_121-130.txt",
+      "bytes": 18794,
+      "digest": "sha256:49b4109d8cd5f7045733a05647800d68f602656a572cb630ebc21dab3b0fd1d8",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PROMPT_13_121-130.txt"
+    },
+    {
+      "name": "PUBLIC_DELIVERY_QA.json",
+      "bytes": 5872,
+      "digest": "sha256:50f97d354d4c1e7471922ccd1ad8fe9ec1b6dab3e22b2150bf3cd8357884111d",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/PUBLIC_DELIVERY_QA.json"
+    },
+    {
+      "name": "README.md",
+      "bytes": 5132,
+      "digest": "sha256:a97ebb5b2e6cd19994dfae1ca05b94ef72f6b64e5a01119c667dcb80b3788063",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/README.md"
+    },
+    {
+      "name": "RETENTION_QA.json",
+      "bytes": 1506,
+      "digest": "sha256:4f01642dbf43dbd642ab310f05801a2098e848fc4cf3c34d16c0f2fd2135a721",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/RETENTION_QA.json"
+    },
+    {
+      "name": "RETENTION_RULES_LOCKED.json",
+      "bytes": 476,
+      "digest": "sha256:46f16229d1e0a760113af4b13cd9fc6478014d8100fb8646456b78e1642efc53",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/RETENTION_RULES_LOCKED.json"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 5324,
+      "digest": "sha256:6c1046a2831737a6c7f5d6c401a2085ba6564aa987968f4fb695271d3cb58bba",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/SHA256SUMS.txt"
+    },
+    {
+      "name": "SOURCES_REGISTER.json",
+      "bytes": 3474,
+      "digest": "sha256:b36f883597376a436163a46022fad88afee78bf7ca6543b4740ec850d5716681",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/SOURCES_REGISTER.json"
+    },
+    {
+      "name": "SOURCE_ASSET_MANIFEST.json",
+      "bytes": 668,
+      "digest": "sha256:83afee1ca846e7e146078875feef2663390e30cfbd64d662210f87f3bb60697f",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/SOURCE_ASSET_MANIFEST.json"
+    },
+    {
+      "name": "TIMELINE_128_CANH.csv",
+      "bytes": 314588,
+      "digest": "sha256:875c1e666477ceeae4ecd5a4675262145b008a8c2b647a943880526719094227",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/TIMELINE_128_CANH.csv"
+    },
+    {
+      "name": "TRANSLATION_REVIEW.json",
+      "bytes": 24022,
+      "digest": "sha256:a597cca735a7ec12c4838405ba5536cabcb2fa573331ee8624690ace7e8622f9",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/TRANSLATION_REVIEW.json"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED.json",
+      "bytes": 10604,
+      "digest": "sha256:3adcb4e313f4bdcd3b0acc3902fc592a5b9e0b88930a4ef26940e4265753d1e5",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/VOICE_PROFILES_LOCKED.json"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED_BASELINE.json",
+      "bytes": 5482,
+      "digest": "sha256:2e8d485ec90dec67cef62b1adb287fb85aa59d52bd4252b0540fedbea6a8300e",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/VOICE_PROFILES_LOCKED_BASELINE.json"
+    },
+    {
+      "name": "VOICE_RELEASE_QA.json",
+      "bytes": 4670,
+      "digest": "sha256:89607bad3b344a9fa810129061a40fb06671520855c972391f5386b2ca089d0a",
+      "url": "https://github.com/seotro95/seotro/releases/download/bosnia-moi-096-20m42s/VOICE_RELEASE_QA.json"
+    }
+  ]
+}

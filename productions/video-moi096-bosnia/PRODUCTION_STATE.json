@@ -1,0 +1,119 @@
+{
+  "topic_id": "MOI-096",
+  "catalogue_id": "new-100-topics-20261116",
+  "title": "Những ngọn đồi Bosnia: làm sao kiểm tra một tuyên bố kim tự tháp?",
+  "phase": "completed_documents_and_16_voices_publicly_verified",
+  "completed_at_utc": "2026-11-22T01:20:11.459244+00:00",
+  "target_seconds": 1242,
+  "english_words": 3715,
+  "english_wpm": 179.469,
+  "narration_style_id": "science-documentary-retention-v5-Bosnia-NamMinh",
+  "english_cues": 200,
+  "prompts": 130,
+  "prompt_txt_files": 13,
+  "prompts_per_txt": 10,
+  "timeline_shots": 128,
+  "backup_prompt_ids": [
+    129,
+    130
+  ],
+  "opening_shots": 6,
+  "opening_seconds": 30,
+  "first_shot_seconds": 10,
+  "visual_revision": "bosnia-outdoor-evidence-v5",
+  "outdoor_scenes": 130,
+  "laboratory_scenes": 0,
+  "voice_count": 16,
+  "male_voices": 16,
+  "main_voice_locale": "en-US",
+  "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+  "profile_set_id": "science-documentary-16-male-upano-moi011-v2-christoph",
+  "previous_voice_ids_retained": 16,
+  "voice_changes": [],
+  "seconds_each": 1242,
+  "decoded_frames_48000_each": 59616000,
+  "translated_alignment": "Ten shared sections: nine at 124 seconds and final 126 seconds; localized retellings, not word synchronization",
+  "independent_native_editorial_review": false,
+  "independent_native_listening_review": false,
+  "branch": "codex/bosnia-moi096-production-20261121",
+  "canonical_branch": "codex/beringia-video-01",
+  "release_tag": "bosnia-moi-096-20m42s",
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/bosnia-moi-096-20m42s",
+  "document_directory": "productions/video-moi096-bosnia",
+  "public_delivery_qa": "productions/video-moi096-bosnia/PUBLIC_DELIVERY_QA.json",
+  "voice_profile": "research/channel-analysis-20261116/VOICE_PROFILES_LOCKED.json",
+  "workflow_runs": {
+    "documents_and_english": 44929379914,
+    "country_voice_generation": 44969807966,
+    "final_voice_delivery_and_archive": 44969860195
+  },
+  "source_backend": "Pinned Melo-Viet-Studio 1.3.1 online backend / Microsoft Edge via edge-tts; not Windows UI or native multilingual Melo model",
+  "source_backend_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "public_delivery_qa_status": "passed",
+  "audio_zip_sha256": "e0443c666b9af6028513b551823fda3c2c5c575f9dff7e9983a80cfd14773253",
+  "documents_zip_sha256": "519c3db294d925d843b45a962831080cde29ece852a250372d49b927552e8386",
+  "footage_generated": false,
+  "thumbnail_generated": false,
+  "video_edited": false,
+  "old_series_topics_and_state_unchanged": true,
+  "no_auto_start_next_topic": true,
+  "next_topic_id": null,
+  "completed_topics": [
+    {
+      "topic_id": "MOI-011",
+      "title": "Upano: mạng lưới đô thị hiện ra dưới tán rừng Amazon",
+      "directory": "productions/video-moi011-upano",
+      "release_url": "https://github.com/seotro95/seotro/releases/tag/upano-moi-011-20m22s",
+      "target_seconds": 1222
+    },
+    {
+      "topic_id": "MOI-022",
+      "title": "Bê tông La Mã: vết nứt nào có thể tự khép lại?",
+      "directory": "productions/video-moi022-roman-concrete",
+      "release_url": "https://github.com/seotro95/seotro/releases/tag/roman-concrete-moi-022-21m22s",
+      "target_seconds": 1282
+    },
+    {
+      "topic_id": "MOI-027",
+      "title": "Stonehenge: lần theo hành trình của những khối đá lớn",
+      "directory": "productions/video-moi027-stonehenge",
+      "release_url": "https://github.com/seotro95/seotro/releases/tag/stonehenge-moi-027-21m32s",
+      "target_seconds": 1292
+    },
+    {
+      "topic_id": "MOI-030",
+      "title": "Qanat: đưa nước qua sa mạc mà không cần máy bơm",
+      "directory": "productions/video-moi030-qanat",
+      "release_url": "https://github.com/seotro95/seotro/releases/tag/qanat-moi-030-22m42s",
+      "target_seconds": 1362
+    },
+    {
+      "topic_id": "MOI-048",
+      "title": "Mary Rose: đồ dùng trên tàu kể đời sống thủy thủ ra sao?",
+      "directory": "productions/video-moi048-maryrose",
+      "release_url": "https://github.com/seotro95/seotro/releases/tag/maryrose-moi-048-21m42s",
+      "target_seconds": 1302
+    },
+    {
+      "topic_id": "MOI-053",
+      "title": "Năm 536: lần theo dấu vết một bầu trời mờ tối",
+      "directory": "productions/video-moi053-sky536",
+      "release_url": "https://github.com/seotro95/seotro/releases/tag/sky536-moi-053-22m12s",
+      "target_seconds": 1332
+    },
+    {
+      "topic_id": "MOI-061",
+      "title": "Mắt Sahara: những vòng tròn khổng lồ được tạo ra thế nào?",
+      "directory": "productions/video-moi061-richat",
+      "release_url": "https://github.com/seotro95/seotro/releases/tag/richat-moi-061-21m42s",
+      "target_seconds": 1302
+    },
+    {
+      "topic_id": "MOI-096",
+      "title": "Những ngọn đồi Bosnia: làm sao kiểm tra một tuyên bố kim tự tháp?",
+      "directory": "productions/video-moi096-bosnia",
+      "release_url": "https://github.com/seotro95/seotro/releases/tag/bosnia-moi-096-20m42s",
+      "target_seconds": 1242
+    }
+  ]
+}

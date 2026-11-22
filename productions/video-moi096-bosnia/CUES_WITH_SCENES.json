@@ -1,0 +1,2002 @@
+[
+  {
+    "id": 1,
+    "section": 1,
+    "start": 0,
+    "end": 10,
+    "kind": "rehook",
+    "voice": "A stone slab has a sharp corner. It looks almost cut to fit. What would prove that a builder ever placed it here?",
+    "visual": "One pale sandstone slab with an existing angular fracture, tiny sediment bands visible; the illustrative opening object remains fixed.",
+    "mode": "macro"
+  },
+  {
+    "id": 2,
+    "section": 1,
+    "start": 10,
+    "end": 16,
+    "kind": "narration",
+    "voice": "Look past that corner. The same stone continues beneath soil, while trees cover a steep, triangular hillside above it.",
+    "visual": "A low exposed rock layer in the foreground and a wooded angular hill beyond in a plausible central Bosnian valley.",
+    "mode": "field"
+  },
+  {
+    "id": 3,
+    "section": 1,
+    "start": 16,
+    "end": 22,
+    "kind": "narration",
+    "voice": "Our question is simple: what evidence would distinguish a giant constructed pyramid from a natural hill that people later used?",
+    "visual": "Separate outdoor comparison models of a continuous natural hill and a small assembled wall, no giant built pyramid.",
+    "mode": "model"
+  },
+  {
+    "id": 4,
+    "section": 1,
+    "start": 22,
+    "end": 31,
+    "kind": "scene",
+    "voice": "Imagine standing beside the exposed layer, close enough to see grains in its surface. Follow that edge into the ground before deciding what the distant outline above you resembles.",
+    "visual": "Anonymous adult observer follows the continuous edge of a rock layer without touching or removing material.",
+    "mode": "field"
+  },
+  {
+    "id": 5,
+    "section": 1,
+    "start": 31,
+    "end": 34,
+    "kind": "narration",
+    "voice": "The first clue is continuity. The regular edge belongs to a layer.",
+    "visual": "Thin natural sediment band crosses the slab and continues into adjoining solid rock beyond the fracture.",
+    "mode": "macro"
+  },
+  {
+    "id": 6,
+    "section": 1,
+    "start": 34,
+    "end": 40,
+    "kind": "narration",
+    "voice": "This landscape surrounds Visoko, a town in central Bosnia and Herzegovina, northwest of Sarajevo, where wooded hills rise above the valley.",
+    "visual": "Wide green central Bosnian valley with a town in the middle distance, forested slopes and a river corridor.",
+    "mode": "landscape"
+  },
+  {
+    "id": 7,
+    "section": 1,
+    "start": 40,
+    "end": 46,
+    "kind": "narration",
+    "voice": "One hill is called Visočica. On its summit stand remains of Visoki, a genuine medieval stronghold with a documented human history.",
+    "visual": "Modest weathered medieval wall remains on a wooded summit, an illustrative regional heritage setting without invented exact Visoki floor plan.",
+    "mode": "heritage"
+  },
+  {
+    "id": 8,
+    "section": 1,
+    "start": 46,
+    "end": 50,
+    "kind": "narration",
+    "voice": "One hill. Two histories. The summit building and the hill need separate explanations.",
+    "visual": "A tiny medieval wall comparison sits on the surface of a much larger natural layered hill model, clearly different scales.",
+    "mode": "model"
+  },
+  {
+    "id": 9,
+    "section": 1,
+    "start": 50,
+    "end": 56,
+    "kind": "narration",
+    "voice": "The medieval site was declared a national monument in two thousand four. That recognition concerns the historic site, not a giant pyramid.",
+    "visual": "Close-to-wide view of low masonry remains standing on natural bedrock, no pyramid beneath the historic wall.",
+    "mode": "heritage"
+  },
+  {
+    "id": 10,
+    "section": 1,
+    "start": 56,
+    "end": 62,
+    "kind": "narration",
+    "voice": "In two thousand five, Semir Osmanagić promoted the idea that local hills concealed enormous ancient pyramids. Their shapes attracted international attention.",
+    "visual": "An angular wooded hill seen across the valley from a plausible visitor viewpoint, ordinary irregular natural slopes.",
+    "mode": "landscape"
+  },
+  {
+    "id": 11,
+    "section": 1,
+    "start": 62,
+    "end": 67,
+    "kind": "rehook",
+    "voice": "Two stones, similar corners: one naturally fractured, the other laid in a wall.",
+    "visual": "Two separate comparison replicas on an outdoor support: naturally fractured stone and deliberately laid masonry stone, no text.",
+    "mode": "macro"
+  },
+  {
+    "id": 12,
+    "section": 1,
+    "start": 67,
+    "end": 72,
+    "kind": "narration",
+    "voice": "The photograph shows their resemblance. Their surroundings reveal how each stone got there.",
+    "visual": "The camera reveals the surrounding rock attached behind the natural slab replica while the separate wall stone has visible placement contacts.",
+    "mode": "macro"
+  },
+  {
+    "id": 13,
+    "section": 1,
+    "start": 72,
+    "end": 81,
+    "kind": "narration",
+    "voice": "We will follow three tests. First, examine the shape. Then read the rock layers. Finally, search for a connected construction history.",
+    "visual": "Three outdoor teaching objects: an irregular hill relief, a layered rock section, and a small assembled wall, all unlabelled.",
+    "mode": "model"
+  },
+  {
+    "id": 14,
+    "section": 1,
+    "start": 81,
+    "end": 89,
+    "kind": "scene",
+    "voice": "Each test asks for something concrete: a mapped slope, a contact between materials, a foundation, or an object recovered in context.",
+    "visual": "An adult observer compares the hill profile with a nearby undisturbed outcrop from an established path.",
+    "mode": "field"
+  },
+  {
+    "id": 15,
+    "section": 1,
+    "start": 89,
+    "end": 94,
+    "kind": "narration",
+    "voice": "Trace the thin band. Does it continue into the neighboring rock?",
+    "visual": "The same thin sediment band continues smoothly from the opening slab into its neighboring rock.",
+    "mode": "macro"
+  },
+  {
+    "id": 16,
+    "section": 1,
+    "start": 94,
+    "end": 103,
+    "kind": "narration",
+    "voice": "If the band carries on through surrounding rock, its continuity becomes evidence for a geological layer. The sharp corner gains a setting.",
+    "visual": "A low tracking view follows the continuous band along the outcrop into the ground.",
+    "mode": "field"
+  },
+  {
+    "id": 17,
+    "section": 1,
+    "start": 103,
+    "end": 108,
+    "kind": "narration",
+    "voice": "An assembled structure has another history. Follow its supports, contacts, and construction sequence.",
+    "visual": "Close on the support and contacts of a deliberately assembled small wall comparison model.",
+    "mode": "model"
+  },
+  {
+    "id": 18,
+    "section": 1,
+    "start": 108,
+    "end": 112,
+    "kind": "narration",
+    "voice": "The alternatives make different predictions. The ground can test them.",
+    "visual": "Natural layer and assembled wall remain separate while the camera changes angle to reveal their different boundaries.",
+    "mode": "model"
+  },
+  {
+    "id": 19,
+    "section": 1,
+    "start": 112,
+    "end": 119,
+    "kind": "caveat",
+    "voice": "Individual finds can record human activity on a hill. Their presence alone does not turn the entire landform into a built monument.",
+    "visual": "A small old wall sits on an older natural ledge in a clearly illustrative outdoor comparison.",
+    "mode": "heritage"
+  },
+  {
+    "id": 20,
+    "section": 1,
+    "start": 119,
+    "end": 124,
+    "kind": "turn",
+    "voice": "Start with the most persuasive view of all: the triangular hillside. What happens when we walk around it?",
+    "visual": "The wooded triangular hillside from a valley path, with a second ordinary ridge visible beyond.",
+    "mode": "landscape"
+  },
+  {
+    "id": 21,
+    "section": 2,
+    "start": 124,
+    "end": 131,
+    "kind": "rehook",
+    "voice": "From one position, two slopes appear to meet at a clean point. Move sideways, and a different ridge enters the outline.",
+    "visual": "A wooded angular hill framed from one low viewpoint, two slopes converging in perspective without perfect geometric symmetry.",
+    "mode": "landscape"
+  },
+  {
+    "id": 22,
+    "section": 2,
+    "start": 131,
+    "end": 138,
+    "kind": "narration",
+    "voice": "Perspective selects a face for us. Trees soften small irregularities, while shadow can make separate surfaces appear to form one plane.",
+    "visual": "Slow lateral movement lets a second ridge enter the hill silhouette, maintaining physically plausible parallax.",
+    "mode": "landscape"
+  },
+  {
+    "id": 23,
+    "section": 2,
+    "start": 138,
+    "end": 145,
+    "kind": "narration",
+    "voice": "Imagine walking along the valley, stopping at several viewpoints. The hill stays in place, but its apparent symmetry changes with your position.",
+    "visual": "An adult walker pauses on a valley path and turns toward another viewpoint of the same illustrative hill.",
+    "mode": "field"
+  },
+  {
+    "id": 24,
+    "section": 2,
+    "start": 145,
+    "end": 155,
+    "kind": "scene",
+    "voice": "Stand on a path below the hill and turn toward its less familiar side. A proper survey includes those awkward slopes, rather than preserving only the face that looks most convincing.",
+    "visual": "The less familiar side of the hill reveals gullies, uneven ridges, and irregular vegetation across the slopes.",
+    "mode": "landscape"
+  },
+  {
+    "id": 25,
+    "section": 2,
+    "start": 155,
+    "end": 158,
+    "kind": "narration",
+    "voice": "Choose the measurement first. Then see what answer the measurements support.",
+    "visual": "Anonymous adult sets an unbranded surveying instrument on an established path; its display faces away and shows no data.",
+    "mode": "field"
+  },
+  {
+    "id": 26,
+    "section": 2,
+    "start": 158,
+    "end": 165,
+    "kind": "narration",
+    "voice": "A compass adds a direction. A survey adds positions and uncertainty. Neither observation, by itself, identifies the process that shaped the ground.",
+    "visual": "A survey prism and distant hill share the frame, equipment physically plausible and all scales unreadable.",
+    "mode": "field"
+  },
+  {
+    "id": 27,
+    "section": 2,
+    "start": 165,
+    "end": 169,
+    "kind": "narration",
+    "voice": "North is not a signature. A natural slope can face north.",
+    "visual": "A naturally north-facing-looking forested slope under neutral light, with no compass graphic or claimed measured alignment.",
+    "mode": "landscape"
+  },
+  {
+    "id": 28,
+    "section": 2,
+    "start": 169,
+    "end": 175,
+    "kind": "narration",
+    "voice": "The useful question is whether one construction model explains the complete geometry better than the geological structure beneath that geometry.",
+    "visual": "A simple layered hillside relief beside a separate small masonry model, no ideal pyramid template.",
+    "mode": "model"
+  },
+  {
+    "id": 29,
+    "section": 2,
+    "start": 175,
+    "end": 182,
+    "kind": "narration",
+    "voice": "To explore that, picture resistant layers tilted within a hillside. Softer material around them wears away more readily, leaving sharper ridges.",
+    "visual": "Tilted resistant layers project through a hillside teaching model while adjacent weaker bands sit lower.",
+    "mode": "model"
+  },
+  {
+    "id": 30,
+    "section": 2,
+    "start": 182,
+    "end": 186,
+    "kind": "narration",
+    "voice": "A resistant ridge survives. Softer surroundings retreat, making the profile sharper.",
+    "visual": "A steep rocky ridge rises above a lower vegetated strip in an outdoor erosion comparison landscape.",
+    "mode": "landscape"
+  },
+  {
+    "id": 31,
+    "section": 2,
+    "start": 186,
+    "end": 190,
+    "kind": "rehook",
+    "voice": "Look between the hills. The valley belongs to the explanation too.",
+    "visual": "A small river corridor runs between two wooded hills in a green valley.",
+    "mode": "landscape"
+  },
+  {
+    "id": 32,
+    "section": 2,
+    "start": 190,
+    "end": 198,
+    "kind": "narration",
+    "voice": "A stream cuts and carries material. Rain moves soil downslope. Where stronger rock remains, a steep face can survive beside lower ground.",
+    "visual": "Shallow rainwater travels along an existing soil channel below a resistant rock ledge; no instant catastrophic erosion.",
+    "mode": "field"
+  },
+  {
+    "id": 33,
+    "section": 2,
+    "start": 198,
+    "end": 207,
+    "kind": "narration",
+    "voice": "Follow one resistant layer across a small outdoor model. Its exposed edge narrows toward a crest, creating a triangular shape from one direction.",
+    "visual": "A triangular exposed edge narrows along a resistant tilted layer in a simplified outdoor hillside model.",
+    "mode": "model"
+  },
+  {
+    "id": 34,
+    "section": 2,
+    "start": 207,
+    "end": 215,
+    "kind": "scene",
+    "voice": "Turn the model slowly. The same layer now produces a different outline. Nothing has been assembled, yet the geometry looks organized.",
+    "visual": "A continuous camera arc reveals the same model's outline changing from triangular to irregular.",
+    "mode": "model"
+  },
+  {
+    "id": 35,
+    "section": 2,
+    "start": 215,
+    "end": 219,
+    "kind": "narration",
+    "voice": "The triangle catches your eye. Its materials must explain its shape.",
+    "visual": "An adult observer stands below the slope on a path, looking between the rock underfoot and the hill above.",
+    "mode": "field"
+  },
+  {
+    "id": 36,
+    "section": 2,
+    "start": 219,
+    "end": 227,
+    "kind": "narration",
+    "voice": "Maps, measured sections, and nearby outcrops bring those two scales together. The landform becomes part of a landscape with a geological history.",
+    "visual": "An unlabelled terrain relief and an open rock section occupy the same outdoor table, no measured digital elevation data.",
+    "mode": "model"
+  },
+  {
+    "id": 37,
+    "section": 2,
+    "start": 227,
+    "end": 231,
+    "kind": "narration",
+    "voice": "Neighboring hills provide comparisons. Measure them with the same methods.",
+    "visual": "Three neighboring irregular wooded hills seen in one wide frame, each with distinct slopes and gullies.",
+    "mode": "landscape"
+  },
+  {
+    "id": 38,
+    "section": 2,
+    "start": 231,
+    "end": 236,
+    "kind": "narration",
+    "voice": "The strongest photograph still has to fit the rest of the terrain.",
+    "visual": "A lateral reveal shows the less symmetrical side of the main illustrative hill and its connection to a ridge.",
+    "mode": "landscape"
+  },
+  {
+    "id": 39,
+    "section": 2,
+    "start": 236,
+    "end": 243,
+    "kind": "caveat",
+    "voice": "A simplified erosion model explains how angular hills can form. It does not reproduce every slope or establish the exact history of this hill.",
+    "visual": "The small outdoor erosion model stays visibly a teaching object, separate from the real surrounding landscape.",
+    "mode": "model"
+  },
+  {
+    "id": 40,
+    "section": 2,
+    "start": 243,
+    "end": 248,
+    "kind": "turn",
+    "voice": "The shape has given us a question. The stone itself can now give us a much closer test.",
+    "visual": "The lens approaches a gravel-rich stone surface with rounded pebbles embedded in a fine matrix.",
+    "mode": "macro"
+  },
+  {
+    "id": 41,
+    "section": 3,
+    "start": 248,
+    "end": 255,
+    "kind": "rehook",
+    "voice": "A rounded pebble is trapped inside the rock. Beside it sits another, held in a finer material that fills the spaces between them.",
+    "visual": "Rounded pebbles remain embedded in a pale fine matrix within a stable conglomerate comparison specimen.",
+    "mode": "macro"
+  },
+  {
+    "id": 42,
+    "section": 3,
+    "start": 255,
+    "end": 261,
+    "kind": "narration",
+    "voice": "This texture points toward conglomerate, a sedimentary rock made from pebbles bound within a finer matrix and natural mineral cement.",
+    "visual": "Oblique close-up shows many pebble sizes and natural mineral binding within the same conglomerate replica.",
+    "mode": "macro"
+  },
+  {
+    "id": 43,
+    "section": 3,
+    "start": 261,
+    "end": 267,
+    "kind": "narration",
+    "voice": "Sandstone begins with smaller grains. Mud-rich layers begin finer still. Their different textures preserve different ways that sediment accumulated.",
+    "visual": "Three separate comparison replicas show coarse conglomerate, granular sandstone, and fine mud-rich rock outdoors.",
+    "mode": "macro"
+  },
+  {
+    "id": 44,
+    "section": 3,
+    "start": 267,
+    "end": 277,
+    "kind": "scene",
+    "voice": "Imagine gravel moving down a river into a basin, with pebbles settling as the current weakens and finer particles collecting elsewhere. Different deposits begin different chapters in the same rock sequence.",
+    "visual": "Illustrative ancient river carries gravel into a shallow sedimentary basin, no people, structures, or animals.",
+    "mode": "deep_time"
+  },
+  {
+    "id": 45,
+    "section": 3,
+    "start": 277,
+    "end": 281,
+    "kind": "narration",
+    "voice": "Burial compacts the sediment. Natural minerals can bind its grains together.",
+    "visual": "A separate outdoor depositional model displays loose sediment beside its compacted and mineral-bound comparison stage.",
+    "mode": "model"
+  },
+  {
+    "id": 46,
+    "section": 3,
+    "start": 281,
+    "end": 288,
+    "kind": "narration",
+    "voice": "Here the word cement needs care. Geologists use it for minerals that hold grains together, including minerals deposited by natural fluids.",
+    "visual": "Natural pale mineral material fills spaces among grains in a rock replica, credible non-glowing texture.",
+    "mode": "macro"
+  },
+  {
+    "id": 47,
+    "section": 3,
+    "start": 288,
+    "end": 292,
+    "kind": "narration",
+    "voice": "A natural binding mineral establishes no mixing crew or ancient recipe.",
+    "visual": "The natural conglomerate replica remains fixed as daylight reveals the binding matrix around its pebbles.",
+    "mode": "macro"
+  },
+  {
+    "id": 48,
+    "section": 3,
+    "start": 292,
+    "end": 299,
+    "kind": "narration",
+    "voice": "Around Visoko, geological observations describe sedimentary sequences containing conglomerate, sandstone, and finer layers. Those relationships connect the hills to their surroundings.",
+    "visual": "An extended outcrop alternates conglomerate-like coarse layers with sandstone and fine sediment bands.",
+    "mode": "field"
+  },
+  {
+    "id": 49,
+    "section": 3,
+    "start": 299,
+    "end": 306,
+    "kind": "narration",
+    "voice": "The investigation therefore follows the texture beyond one attractive block. Does the same material appear as part of an extended rock sequence?",
+    "visual": "A measured camera move follows the same coarse material from a small surface into the adjoining continuous layer.",
+    "mode": "field"
+  },
+  {
+    "id": 50,
+    "section": 3,
+    "start": 306,
+    "end": 310,
+    "kind": "narration",
+    "voice": "Follow the enclosing layers. A sample belongs to a wider pattern.",
+    "visual": "Wide-to-close view preserves the layer above, the sample-like patch, and the layer below in one outcrop.",
+    "mode": "field"
+  },
+  {
+    "id": 51,
+    "section": 3,
+    "start": 310,
+    "end": 315,
+    "kind": "rehook",
+    "voice": "Two comparison blocks sit outside: natural conglomerate and a deliberately cast specimen.",
+    "visual": "A natural conglomerate replica and a deliberately cast comparison block remain separate on an outdoor bench.",
+    "mode": "macro"
+  },
+  {
+    "id": 52,
+    "section": 3,
+    "start": 315,
+    "end": 323,
+    "kind": "narration",
+    "voice": "Their resemblance starts the investigation. Their fabrics, boundaries, binding materials, and histories must carry the explanation further than appearance alone.",
+    "visual": "Focus shifts between the two comparison textures without morphing either specimen or asserting a scientific identification.",
+    "mode": "macro"
+  },
+  {
+    "id": 53,
+    "section": 3,
+    "start": 323,
+    "end": 331,
+    "kind": "narration",
+    "voice": "Imagine tracing the edge of a pebble into the surrounding matrix. Then follow the matrix toward a boundary between two sedimentary layers.",
+    "visual": "Close view follows one embedded pebble into its surrounding fine matrix on the natural comparison specimen.",
+    "mode": "macro"
+  },
+  {
+    "id": 54,
+    "section": 3,
+    "start": 331,
+    "end": 339,
+    "kind": "scene",
+    "voice": "That boundary records deposition and later change. A photograph cropped around one rectangular fragment could hide the sequence that gives it meaning.",
+    "visual": "A sharp camera angle reveals the sediment boundary around the coarse layer instead of isolating one rectangular fragment.",
+    "mode": "field"
+  },
+  {
+    "id": 55,
+    "section": 3,
+    "start": 339,
+    "end": 343,
+    "kind": "narration",
+    "voice": "A strength test measures behavior under specified conditions. Check those conditions.",
+    "visual": "Two inert comparison specimens of different shapes rest beside an unbranded outdoor loading-frame teaching prop, no operating test or numeric result.",
+    "mode": "model"
+  },
+  {
+    "id": 56,
+    "section": 3,
+    "start": 343,
+    "end": 351,
+    "kind": "narration",
+    "voice": "A strong specimen can be naturally formed. A weak specimen can be human-made. Mechanical strength and manufacturing history answer different questions.",
+    "visual": "Strong-looking natural rock and visibly artificial cast material are compared visually without strength numbers or graphs.",
+    "mode": "macro"
+  },
+  {
+    "id": 57,
+    "section": 3,
+    "start": 351,
+    "end": 355,
+    "kind": "narration",
+    "voice": "Document the collection point. Compare the specimen with suitable reference material.",
+    "visual": "Adult hands position sealed unlabelled comparison containers near a nondestructive outcrop observation station.",
+    "mode": "field"
+  },
+  {
+    "id": 58,
+    "section": 3,
+    "start": 355,
+    "end": 360,
+    "kind": "narration",
+    "voice": "The pebble becomes a witness. Its surrounding matrix gives it a setting.",
+    "visual": "A single embedded pebble and the matrix surrounding it fill the frame in raking outdoor daylight.",
+    "mode": "macro"
+  },
+  {
+    "id": 59,
+    "section": 3,
+    "start": 360,
+    "end": 367,
+    "kind": "caveat",
+    "voice": "Texture alone may not settle every altered sample. Its interpretation becomes stronger when mineral evidence and the original field relationships agree.",
+    "visual": "The specimen's texture and its enclosing boundary remain in the same focus plane, no claimed original sampled artifact.",
+    "mode": "macro"
+  },
+  {
+    "id": 60,
+    "section": 3,
+    "start": 367,
+    "end": 372,
+    "kind": "turn",
+    "voice": "But even natural rock can break into blocks. What makes those breaks look so deliberately placed?",
+    "visual": "Existing intersecting fractures divide a sandstone comparison slab into angular pieces without new breakage.",
+    "mode": "macro"
+  },
+  {
+    "id": 61,
+    "section": 4,
+    "start": 372,
+    "end": 380,
+    "kind": "rehook",
+    "voice": "A straight fracture crosses a slab, then meets another fracture. The rock between them forms an angular piece with remarkably regular edges.",
+    "visual": "Two existing straight fractures intersect in a pale sandstone layer, defining a sharply angular natural block.",
+    "mode": "macro"
+  },
+  {
+    "id": 62,
+    "section": 4,
+    "start": 380,
+    "end": 388,
+    "kind": "narration",
+    "voice": "Geologists call many fractures joints when there has been little movement along them. Joint systems can divide a continuous rock layer into blocks.",
+    "visual": "A stable natural joint plane continues through a continuous rock layer, no mortar, tool, or new cracking action.",
+    "mode": "macro"
+  },
+  {
+    "id": 63,
+    "section": 4,
+    "start": 388,
+    "end": 392,
+    "kind": "narration",
+    "voice": "The layer formed first. Its fractures came later. That order matters.",
+    "visual": "Separate outdoor stages show a continuous sediment layer and its later fractured counterpart, no morphing or real-time tectonic event.",
+    "mode": "model"
+  },
+  {
+    "id": 64,
+    "section": 4,
+    "start": 392,
+    "end": 402,
+    "kind": "scene",
+    "voice": "Imagine following a narrow sediment band toward the fracture, then finding matching features on the other side. The apparent blocks may be pieces of a rock body that was once continuous.",
+    "visual": "Matching sediment bands remain aligned across a narrow existing fracture in an illustrative rock comparison.",
+    "mode": "macro"
+  },
+  {
+    "id": 65,
+    "section": 4,
+    "start": 402,
+    "end": 406,
+    "kind": "narration",
+    "voice": "Follow the fractures outward. Do they continue into nearby natural outcrops?",
+    "visual": "A camera track follows related fractures from the foreground slab into the same surrounding outcrop.",
+    "mode": "field"
+  },
+  {
+    "id": 66,
+    "section": 4,
+    "start": 406,
+    "end": 413,
+    "kind": "narration",
+    "voice": "A natural break can cut through a previously continuous rock body. Its geometry can be regular without recording a mason's plan.",
+    "visual": "Angular fracture edges show plausible mineral grains and weathering, no fabricated chisel marks.",
+    "mode": "macro"
+  },
+  {
+    "id": 67,
+    "section": 4,
+    "start": 413,
+    "end": 417,
+    "kind": "narration",
+    "voice": "Remove the soil, and tilted layers can resemble paving or steps.",
+    "visual": "Soil above tilted natural ledges creates a step-like exposed profile on an illustrative hillside.",
+    "mode": "field"
+  },
+  {
+    "id": 68,
+    "section": 4,
+    "start": 417,
+    "end": 424,
+    "kind": "narration",
+    "voice": "Follow the surface into a section through the ground. The relationship between the exposed top and the buried continuation becomes especially important.",
+    "visual": "A cutaway through the hillside teaching model reveals continuous tilted layers behind apparent surface paving.",
+    "mode": "model"
+  },
+  {
+    "id": 69,
+    "section": 4,
+    "start": 424,
+    "end": 431,
+    "kind": "narration",
+    "voice": "An actual pavement is an arranged surface within a human context. A sedimentary bed is part of a deposited rock sequence.",
+    "visual": "A separately laid stone pavement model sits beside a continuous sedimentary layer model, both outdoors.",
+    "mode": "model"
+  },
+  {
+    "id": 70,
+    "section": 4,
+    "start": 431,
+    "end": 434,
+    "kind": "narration",
+    "voice": "Both surfaces can be flat. Their relationships reveal different histories.",
+    "visual": "Camera glides from the flat top to the edge of each separate comparison surface, retaining their different internal structures.",
+    "mode": "macro"
+  },
+  {
+    "id": 71,
+    "section": 4,
+    "start": 434,
+    "end": 438,
+    "kind": "rehook",
+    "voice": "Inspect the gap: natural fracture filling, soil, or a construction contact?",
+    "visual": "Three separate replica gaps show mineral filling, loose soil, and a masonry contact without labels or analytical claims.",
+    "mode": "macro"
+  },
+  {
+    "id": 72,
+    "section": 4,
+    "start": 438,
+    "end": 446,
+    "kind": "narration",
+    "voice": "Inspect its connection to the layer above and below. Does the same boundary extend through the hillside, or belong to a separately assembled structure?",
+    "visual": "A low view keeps boundaries above and below a fracture visible in one undisturbed outcrop.",
+    "mode": "field"
+  },
+  {
+    "id": 73,
+    "section": 4,
+    "start": 446,
+    "end": 454,
+    "kind": "narration",
+    "voice": "Imagine examining the clean side of an educational section model. Thin beds continue behind the visible ledges, making the apparent staircase easier to explain.",
+    "visual": "Side view of an outdoor section model shows thin layers continuing behind step-like ledges.",
+    "mode": "model"
+  },
+  {
+    "id": 74,
+    "section": 4,
+    "start": 454,
+    "end": 461,
+    "kind": "scene",
+    "voice": "The model also shows why excavation records matter. Removing material changes the surface presented to the next visitor and the next camera.",
+    "visual": "A documented-looking educational excavation replica has exposed ledges and an undisturbed margin; adult observer stands outside it.",
+    "mode": "field"
+  },
+  {
+    "id": 75,
+    "section": 4,
+    "start": 461,
+    "end": 465,
+    "kind": "narration",
+    "voice": "Keep the earlier record. The final dramatic view needs its context.",
+    "visual": "Two separate before-and-after teaching models show how removal changes a visible surface, not actual site damage.",
+    "mode": "model"
+  },
+  {
+    "id": 76,
+    "section": 4,
+    "start": 465,
+    "end": 472,
+    "kind": "narration",
+    "voice": "Tool marks can support a construction interpretation when their pattern and setting fit working practices. Natural fractures deserve an equally careful comparison.",
+    "visual": "Two inert comparison surfaces show a plausible worked stone face and a natural fracture, no assertion either was recovered at Visoko.",
+    "mode": "macro"
+  },
+  {
+    "id": 77,
+    "section": 4,
+    "start": 472,
+    "end": 480,
+    "kind": "narration",
+    "voice": "Some real masonry uses rough stones and little or no mortar. The test therefore combines several relationships instead of requiring one perfect signature.",
+    "visual": "An illustrative rough-stone dry wall has credible support contacts and irregular unworked pieces, no mortar required.",
+    "mode": "heritage"
+  },
+  {
+    "id": 78,
+    "section": 4,
+    "start": 480,
+    "end": 484,
+    "kind": "narration",
+    "voice": "The corner becomes one clue among supports, contacts, and working surfaces.",
+    "visual": "Close view follows the corner of a laid wall stone to its bearing contact and supporting stones.",
+    "mode": "macro"
+  },
+  {
+    "id": 79,
+    "section": 4,
+    "start": 484,
+    "end": 491,
+    "kind": "caveat",
+    "voice": "An isolated photograph rarely preserves all those relationships. A confident identification needs the original context, suitable comparisons, and independently checkable records.",
+    "visual": "The camera widens from one attractive fracture to the full outcrop and the adjacent ground.",
+    "mode": "field"
+  },
+  {
+    "id": 80,
+    "section": 4,
+    "start": 491,
+    "end": 496,
+    "kind": "turn",
+    "voice": "Let us place a genuine wall beside that natural layer. What changes when people really start building?",
+    "visual": "A small deliberately assembled wall comparison and a continuous natural rock layer occupy distinct outdoor supports.",
+    "mode": "heritage"
+  },
+  {
+    "id": 81,
+    "section": 5,
+    "start": 496,
+    "end": 503,
+    "kind": "rehook",
+    "voice": "A mason selects a stone, turns it, and sets it against another. The weight above will pass through these contacts into the ground.",
+    "visual": "Clearly adult medieval regional mason sets a modest stone into a small ordinary wall, no pyramid project or exact Visoki reconstruction.",
+    "mode": "history"
+  },
+  {
+    "id": 82,
+    "section": 5,
+    "start": 503,
+    "end": 509,
+    "kind": "narration",
+    "voice": "This imagined scene illustrates ordinary building practice. It gives us a sequence to investigate, rather than a pyramid to assume.",
+    "visual": "The same adult mason checks the contact between two rough stones in a modest regional medieval building illustration.",
+    "mode": "history"
+  },
+  {
+    "id": 83,
+    "section": 5,
+    "start": 509,
+    "end": 516,
+    "kind": "narration",
+    "voice": "A foundation may cut older deposits. Courses may repeat a laying pattern. Packing stones, working surfaces, or discarded material may preserve further stages.",
+    "visual": "An outdoor section model shows a foundation cut, laid stones, and a later deposit meeting the wall.",
+    "mode": "model"
+  },
+  {
+    "id": 84,
+    "section": 5,
+    "start": 516,
+    "end": 520,
+    "kind": "scene",
+    "voice": "Construction leaves a sequence. Preparation comes before placement, use, and later change.",
+    "visual": "Four separate physical teaching stages show prepared ground, laid wall, occupied surface, and later partial burial.",
+    "mode": "model"
+  },
+  {
+    "id": 85,
+    "section": 5,
+    "start": 520,
+    "end": 530,
+    "kind": "narration",
+    "voice": "Stand beside a small wall section and follow it downward. Find what supports the stones, where their arrangement begins, and how the deposits beside them meet the base of the structure.",
+    "visual": "An adult observer follows the base of a small illustrative wall without moving stones or entering fragile ruins.",
+    "mode": "heritage"
+  },
+  {
+    "id": 86,
+    "section": 5,
+    "start": 530,
+    "end": 537,
+    "kind": "narration",
+    "voice": "Its construction can create a boundary that differs from the surrounding natural layers. That difference can be recorded in a section.",
+    "visual": "The wall base truncates a replica soil boundary in a separate educational section model.",
+    "mode": "model"
+  },
+  {
+    "id": 87,
+    "section": 5,
+    "start": 537,
+    "end": 540,
+    "kind": "narration",
+    "voice": "A natural ledge continues into rock. Follow that continuation behind it.",
+    "visual": "A natural rock ledge continues behind its exposed edge into a coherent outcrop.",
+    "mode": "field"
+  },
+  {
+    "id": 88,
+    "section": 5,
+    "start": 540,
+    "end": 547,
+    "kind": "narration",
+    "voice": "Human builders can also use a natural ledge as a foundation. That produces a mixed history, with a natural landform and a later structure.",
+    "visual": "A small illustrative wall rests directly on an existing natural ledge, with both masonry and rock clearly visible.",
+    "mode": "heritage"
+  },
+  {
+    "id": 89,
+    "section": 5,
+    "start": 547,
+    "end": 554,
+    "kind": "narration",
+    "voice": "This possibility matters at Visoko. Real human use of a hill is entirely compatible with the hill itself having a geological origin.",
+    "visual": "A simple natural hill model supports a tiny later wall on its summit, retaining the difference in scale.",
+    "mode": "model"
+  },
+  {
+    "id": 90,
+    "section": 5,
+    "start": 554,
+    "end": 558,
+    "kind": "narration",
+    "voice": "Visoki gives us the distinction: a medieval stronghold on an older hill.",
+    "visual": "Modest medieval wall remains on natural summit bedrock, plausible Bosnia regional setting and no invented monument plan.",
+    "mode": "heritage"
+  },
+  {
+    "id": 91,
+    "section": 5,
+    "start": 558,
+    "end": 563,
+    "kind": "rehook",
+    "voice": "A small wall demonstrates a small wall. Scale up the evidence carefully.",
+    "visual": "The camera reveals that a small wall comparison occupies only a small part of the full hillside relief.",
+    "mode": "model"
+  },
+  {
+    "id": 92,
+    "section": 5,
+    "start": 563,
+    "end": 570,
+    "kind": "narration",
+    "voice": "That connection could involve an organized construction sequence, meaningful boundaries, material movement, and associated activity distributed in a coherent pattern.",
+    "visual": "A larger outdoor construction-sequence teaching object displays connected foundation boundaries, arranged stone, and a working surface.",
+    "mode": "model"
+  },
+  {
+    "id": 93,
+    "section": 5,
+    "start": 570,
+    "end": 579,
+    "kind": "narration",
+    "voice": "Imagine marking the position of each feature on a blank field plan. The argument grows from their relationships, not from enlarging one striking detail.",
+    "visual": "Adult hands compare physical model positions over a completely blank field-board surface with no drawn lettering or measurements.",
+    "mode": "field"
+  },
+  {
+    "id": 94,
+    "section": 5,
+    "start": 579,
+    "end": 587,
+    "kind": "scene",
+    "voice": "This approach also tests alternatives. A later terrace, a field boundary, or an excavation edge may explain a feature at a smaller scale.",
+    "visual": "A modest later terrace and field boundary on an illustrative hillside, clearly smaller than the whole natural landform.",
+    "mode": "heritage"
+  },
+  {
+    "id": 95,
+    "section": 5,
+    "start": 587,
+    "end": 591,
+    "kind": "narration",
+    "voice": "Test the smaller explanation before making the feature a giant monument.",
+    "visual": "An ordinary shallow field edge lies beside a bedrock outcrop, no grand architectural implication.",
+    "mode": "field"
+  },
+  {
+    "id": 96,
+    "section": 5,
+    "start": 591,
+    "end": 599,
+    "kind": "narration",
+    "voice": "Ancient builders worked in many ways. Their practices should be investigated through regional evidence, rather than a single checklist borrowed from another civilization.",
+    "visual": "Adult regional medieval workers build a modest rough-stone wall using ordinary baskets and hand tools, no exact historical reconstruction claim.",
+    "mode": "history"
+  },
+  {
+    "id": 97,
+    "section": 5,
+    "start": 599,
+    "end": 604,
+    "kind": "narration",
+    "voice": "Link what was built, where it stood, and when people used it.",
+    "visual": "A wall base, adjacent occupation-surface replica, and small inert pottery replica form a coherent outdoor teaching scene.",
+    "mode": "heritage"
+  },
+  {
+    "id": 98,
+    "section": 5,
+    "start": 604,
+    "end": 608,
+    "kind": "narration",
+    "voice": "The sequence now needs time attached to the right events.",
+    "visual": "Three separate teaching stages show wall placement, use, and later burial with no dates or clocks.",
+    "mode": "model"
+  },
+  {
+    "id": 99,
+    "section": 5,
+    "start": 608,
+    "end": 615,
+    "kind": "caveat",
+    "voice": "No single construction feature is mandatory in every culture. The interpretation depends on the combined context, not a universal masonry fingerprint.",
+    "visual": "Rough dry-stone masonry rests on credible supports in natural daylight, no universal construction pattern implied.",
+    "mode": "heritage"
+  },
+  {
+    "id": 100,
+    "section": 5,
+    "start": 615,
+    "end": 620,
+    "kind": "turn",
+    "voice": "Before assigning an ancient birthday, pick up something much smaller than a building: one fragment of charcoal.",
+    "visual": "One small charcoal comparison fragment rests within an inert soil section replica between two stones.",
+    "mode": "macro"
+  },
+  {
+    "id": 101,
+    "section": 6,
+    "start": 620,
+    "end": 628,
+    "kind": "rehook",
+    "voice": "Imagine a dark fragment of charcoal in soil between stones. A date from that fragment would concern organic material with its own history.",
+    "visual": "A charcoal comparison fragment remains within a clearly illustrative intact soil section beside stones.",
+    "mode": "macro"
+  },
+  {
+    "id": 102,
+    "section": 6,
+    "start": 628,
+    "end": 635,
+    "kind": "narration",
+    "voice": "The stone beside it carries another history. Its sediment may have accumulated millions of years before anyone walked across the hillside.",
+    "visual": "Separate sandstone comparison specimen and charcoal replica remain distinct on an outdoor support.",
+    "mode": "macro"
+  },
+  {
+    "id": 103,
+    "section": 6,
+    "start": 635,
+    "end": 642,
+    "kind": "narration",
+    "voice": "The wall, if there is a wall, introduces a third event: the time when people placed or modified material at that location.",
+    "visual": "Three unlabelled physical stages depict sedimentary rock, organic material, and a later stone wall, no numbered timeline.",
+    "mode": "model"
+  },
+  {
+    "id": 104,
+    "section": 6,
+    "start": 642,
+    "end": 646,
+    "kind": "scene",
+    "voice": "Three clocks. Three events. Connect the sample to the activity being proposed.",
+    "visual": "The camera moves across those three separate stages while each retains its own boundaries and material identity.",
+    "mode": "model"
+  },
+  {
+    "id": 105,
+    "section": 6,
+    "start": 646,
+    "end": 650,
+    "kind": "narration",
+    "voice": "Radiocarbon measures once-living material. That material has a history before burial.",
+    "visual": "A small charcoal comparison fragment beside a separate dry twig, no laboratory equipment or false analytical result.",
+    "mode": "macro"
+  },
+  {
+    "id": 106,
+    "section": 6,
+    "start": 650,
+    "end": 658,
+    "kind": "narration",
+    "voice": "A tree can grow for many years. Its wood can be stored or reused, then burned, and its charcoal can later be moved.",
+    "visual": "Clearly adult generic premodern craft worker handles stored wood beside an ordinary outdoor hearth, no dated Visoko event claim.",
+    "mode": "history"
+  },
+  {
+    "id": 107,
+    "section": 6,
+    "start": 658,
+    "end": 661,
+    "kind": "narration",
+    "voice": "Growth, burning, burial: different events. Secure context helps connect them.",
+    "visual": "Separate tree-growth, dry-wood, charcoal, and soil-context teaching props remain inert outdoors, no animated numeric ages.",
+    "mode": "model"
+  },
+  {
+    "id": 108,
+    "section": 6,
+    "start": 661,
+    "end": 671,
+    "kind": "narration",
+    "voice": "Imagine finding charcoal inside a clearly bounded deposit beside stones. Record the deposit and its contacts before removing the sample, so its eventual date remains connected to the event under investigation.",
+    "visual": "Adult observer studies a replica bounded deposit beside a laid stone comparison wall, without collecting real material.",
+    "mode": "field"
+  },
+  {
+    "id": 109,
+    "section": 6,
+    "start": 671,
+    "end": 678,
+    "kind": "narration",
+    "voice": "A sample from beneath a structure can constrain a sequence differently from a sample washed into an open crack above it.",
+    "visual": "A sealed layer beneath a small wall is compared with loose material in an open crack above it, visibly separate model compartments.",
+    "mode": "model"
+  },
+  {
+    "id": 110,
+    "section": 6,
+    "start": 678,
+    "end": 682,
+    "kind": "narration",
+    "voice": "Location gives the number meaning. Keep that relationship in the record.",
+    "visual": "The charcoal replica stays in its original teaching-model pocket while camera reveals all surrounding boundaries.",
+    "mode": "macro"
+  },
+  {
+    "id": 111,
+    "section": 6,
+    "start": 682,
+    "end": 686,
+    "kind": "rehook",
+    "voice": "A cut crosses a soil boundary. The cut must have come later.",
+    "visual": "A later cut crosses an earlier soil-layer replica, contact physically legible without text.",
+    "mode": "model"
+  },
+  {
+    "id": 112,
+    "section": 6,
+    "start": 686,
+    "end": 693,
+    "kind": "narration",
+    "voice": "An undisturbed sequence may preserve earlier and later deposits. Roots, burrowing, erosion, and human digging can also rearrange material, leaving their own traces.",
+    "visual": "A prepared educational section shows a root channel and a separate later cut crossing earlier layers, no automatic real-site interpretation.",
+    "mode": "model"
+  },
+  {
+    "id": 113,
+    "section": 6,
+    "start": 693,
+    "end": 701,
+    "kind": "narration",
+    "voice": "Imagine tracing those boundaries with your eyes in an outdoor section model. A later cut crosses an older layer and receives a younger filling.",
+    "visual": "Camera follows the edges of a later filled cut through an older model layer on an outdoor table.",
+    "mode": "model"
+  },
+  {
+    "id": 114,
+    "section": 6,
+    "start": 701,
+    "end": 709,
+    "kind": "scene",
+    "voice": "The pattern gives a relative order before a numerical date is added. Different dating methods can then test relevant parts of that order.",
+    "visual": "Three separate layer sequence models show relative earlier and later events without calendar graphics.",
+    "mode": "model"
+  },
+  {
+    "id": 115,
+    "section": 6,
+    "start": 709,
+    "end": 713,
+    "kind": "narration",
+    "voice": "Rock formation, organic history, construction: identify which event the date describes.",
+    "visual": "Rock specimen, charcoal replica, and masonry contact remain distinct objects with no implied shared birthday.",
+    "mode": "macro"
+  },
+  {
+    "id": 116,
+    "section": 6,
+    "start": 713,
+    "end": 721,
+    "kind": "narration",
+    "voice": "Keeping those categories distinct prevents an old object from lending an unsupported birthday to everything around it. The argument stays tied to an event.",
+    "visual": "A small comparison fragment placed near a wall is visibly separated from the actual foundation-context model.",
+    "mode": "model"
+  },
+  {
+    "id": 117,
+    "section": 6,
+    "start": 721,
+    "end": 724,
+    "kind": "narration",
+    "voice": "Several connected dates can reveal occupation, rebuilding, abandonment, and return.",
+    "visual": "A modest regional dwelling illustration shows repair to an ordinary wall by clearly adult workers, no claimed specific phase at Visoko.",
+    "mode": "history"
+  },
+  {
+    "id": 118,
+    "section": 6,
+    "start": 724,
+    "end": 732,
+    "kind": "narration",
+    "voice": "The hillside can contain a long human history while remaining a natural hill. Time adds chapters without changing every chapter into pyramid construction.",
+    "visual": "An illustrative small wall occupies an older natural hillside with multiple visible geological layers beneath it.",
+    "mode": "heritage"
+  },
+  {
+    "id": 119,
+    "section": 6,
+    "start": 732,
+    "end": 739,
+    "kind": "caveat",
+    "voice": "A loose sample lacks the same chronological force as a securely recorded one. Every proposed date must retain its uncertainty and context.",
+    "visual": "An inert soil-context replica remains undisturbed, adult observer keeps hands away from the fragile contact.",
+    "mode": "field"
+  },
+  {
+    "id": 120,
+    "section": 6,
+    "start": 739,
+    "end": 744,
+    "kind": "turn",
+    "voice": "Now follow a route that disappears underground. Does a passage connect those clocks, or open another separate history?",
+    "visual": "A modest passage entrance in a wooded hillside, generic illustrative setting with no claim to reproduce a real Ravne portal.",
+    "mode": "field"
+  },
+  {
+    "id": 121,
+    "section": 7,
+    "start": 744,
+    "end": 752,
+    "kind": "rehook",
+    "voice": "A tunnel entrance creates an immediate promise: the landscape seems to open. What lies inside feels as though it must explain the hill above.",
+    "visual": "From an established path, a modest generic passage entrance appears in a wooded natural slope, no grand gateway.",
+    "mode": "field"
+  },
+  {
+    "id": 122,
+    "section": 7,
+    "start": 752,
+    "end": 759,
+    "kind": "narration",
+    "voice": "Slow the inference down. A passage has its own shape, material, cutting history, fills, supports, and possible episodes of repair or reuse.",
+    "visual": "An outdoor passage cutaway model shows rock, passage boundary, fill, and a small later support separately.",
+    "mode": "model"
+  },
+  {
+    "id": 123,
+    "section": 7,
+    "start": 759,
+    "end": 766,
+    "kind": "narration",
+    "voice": "Human excavation can be real without demonstrating that the entire surrounding hill was built. The connection between those claims needs its own evidence.",
+    "visual": "A narrow passage is cut through a much larger natural hill teaching model, without converting the hill into architecture.",
+    "mode": "model"
+  },
+  {
+    "id": 124,
+    "section": 7,
+    "start": 766,
+    "end": 776,
+    "kind": "scene",
+    "voice": "Imagine standing at a passage entrance while its position is mapped against the hillside. Follow the boundary between the cut and the rock, then compare the deposits that fill its route.",
+    "visual": "Adult observer maps a generic illustrative passage entrance using an unbranded instrument, display and notes face away.",
+    "mode": "field"
+  },
+  {
+    "id": 125,
+    "section": 7,
+    "start": 776,
+    "end": 779,
+    "kind": "narration",
+    "voice": "Follow the materials, worked surfaces, fills, and supports. Separate their events.",
+    "visual": "A cutaway replica shows the contact between the passage boundary and the natural rock layers it crosses.",
+    "mode": "macro"
+  },
+  {
+    "id": 126,
+    "section": 7,
+    "start": 779,
+    "end": 786,
+    "kind": "narration",
+    "voice": "A passage cut through an existing rock layer must be younger than the rock it cuts. Its later filling records another stage again.",
+    "visual": "A clear outdoor model shows a passage truncating a continuous pre-existing layer.",
+    "mode": "model"
+  },
+  {
+    "id": 127,
+    "section": 7,
+    "start": 786,
+    "end": 793,
+    "kind": "narration",
+    "voice": "Suppose a wall closes part of that passage. The wall adds a construction event, while its relationship to the cut establishes an order.",
+    "visual": "A later small wall partly closes a passage within a separate outdoor teaching model.",
+    "mode": "model"
+  },
+  {
+    "id": 128,
+    "section": 7,
+    "start": 793,
+    "end": 796,
+    "kind": "narration",
+    "voice": "Rock first. Passage later. Filling or repair adds another chapter.",
+    "visual": "Three separate physical stages depict natural rock, cut passage, and subsequent infill, no exact real tunnel chronology.",
+    "mode": "model"
+  },
+  {
+    "id": 129,
+    "section": 7,
+    "start": 796,
+    "end": 803,
+    "kind": "narration",
+    "voice": "The next task is to test the connection to a proposed monument. A route nearby and a hill nearby are a starting relationship.",
+    "visual": "A natural hill and a separate modest passage entrance occupy different parts of a wooded landscape, no connecting graphic.",
+    "mode": "landscape"
+  },
+  {
+    "id": 130,
+    "section": 7,
+    "start": 803,
+    "end": 806,
+    "kind": "narration",
+    "voice": "A shared history needs recorded connections, compatible sequences, and relevant dates.",
+    "visual": "Two unlabelled proposed routes are separate removable model pieces rather than a revealed actual underground network.",
+    "mode": "model"
+  },
+  {
+    "id": 131,
+    "section": 7,
+    "start": 806,
+    "end": 811,
+    "kind": "rehook",
+    "voice": "A radar anomaly is a changed response. Start with its physical cause.",
+    "visual": "Unbranded ground-penetrating-radar cart travels slowly on an open field path, screen turned away and no invented trace.",
+    "mode": "field"
+  },
+  {
+    "id": 132,
+    "section": 7,
+    "start": 811,
+    "end": 819,
+    "kind": "narration",
+    "voice": "Different materials, moisture, boundaries, and voids can affect a signal. A proposed chamber is an interpretation to compare with independent observations.",
+    "visual": "A simple outdoor section model includes contrasting sediment, damp soil, and a small void, no fake radar color plot.",
+    "mode": "model"
+  },
+  {
+    "id": 133,
+    "section": 7,
+    "start": 819,
+    "end": 828,
+    "kind": "narration",
+    "voice": "Imagine a field team following a measured line across open ground. The equipment travels above a landscape whose layers already supply a geological model.",
+    "visual": "Clearly adult field operator follows a measured-looking straight path with an unbranded instrument, no visible scale values.",
+    "mode": "field"
+  },
+  {
+    "id": 134,
+    "section": 7,
+    "start": 828,
+    "end": 837,
+    "kind": "scene",
+    "voice": "The useful result links the measurement to that model and tests alternative explanations. A striking color on an image still needs a physical meaning.",
+    "visual": "The camera follows a section's material boundaries, with no glowing chamber, treasure, or invented analytical data.",
+    "mode": "model"
+  },
+  {
+    "id": 135,
+    "section": 7,
+    "start": 837,
+    "end": 841,
+    "kind": "narration",
+    "voice": "Follow the signal back to its location and the ground being tested.",
+    "visual": "An adult observer compares the surface location with an inert outdoor ground-section model, no drilling or excavation.",
+    "mode": "field"
+  },
+  {
+    "id": 136,
+    "section": 7,
+    "start": 841,
+    "end": 848,
+    "kind": "narration",
+    "voice": "The same discipline applies to a tunnel photograph. Camera position, recent work, and the surrounding material belong in its record.",
+    "visual": "A plain generic passage threshold shows surrounding soil and rock plus a modest modern maintenance support, no age attribution.",
+    "mode": "field"
+  },
+  {
+    "id": 137,
+    "section": 7,
+    "start": 848,
+    "end": 852,
+    "kind": "narration",
+    "voice": "One feature cannot automatically supply an age, a function, and a civilization.",
+    "visual": "The passage model's cut surface, later fill, and separate support remain legible in close-up.",
+    "mode": "macro"
+  },
+  {
+    "id": 138,
+    "section": 7,
+    "start": 852,
+    "end": 856,
+    "kind": "narration",
+    "voice": "The passage gives us connections to test, rather than connections to imagine.",
+    "visual": "The hill and passage models remain separate while the camera reveals the missing physical connection between them.",
+    "mode": "model"
+  },
+  {
+    "id": 139,
+    "section": 7,
+    "start": 856,
+    "end": 863,
+    "kind": "caveat",
+    "voice": "This comparison does not assign an age to every Visoko tunnel. Each passage requires its own documented sequence and evidence of any wider connection.",
+    "visual": "The generic passage entrance remains modest, still, and physically separate from any claimed monument.",
+    "mode": "field"
+  },
+  {
+    "id": 140,
+    "section": 7,
+    "start": 863,
+    "end": 868,
+    "kind": "turn",
+    "voice": "What happens when the pyramid argument appears in a published paper? Turn from the title to the test.",
+    "visual": "An outdoor table holds a closed plain folder beside rock and wall models, no readable page, seal, journal cover, or fake document.",
+    "mode": "field"
+  },
+  {
+    "id": 141,
+    "section": 8,
+    "start": 868,
+    "end": 875,
+    "kind": "rehook",
+    "voice": "In two thousand twenty-five, Osmanagić published a paper arguing for artificial modification or construction at Visočica. Its existence belongs in an honest review.",
+    "visual": "A closed plain research folder rests outdoors beside a natural outcrop comparison, no readable author name or simulated paper.",
+    "mode": "field"
+  },
+  {
+    "id": 142,
+    "section": 8,
+    "start": 875,
+    "end": 882,
+    "kind": "narration",
+    "voice": "The paper discusses geometry, orientation, materials, and other reported measurements. Each claim should be examined at the level of its original evidence.",
+    "visual": "Physical hill relief, orientation rod, and rock comparison are separate props on a field table, no graphs or numbers.",
+    "mode": "model"
+  },
+  {
+    "id": 143,
+    "section": 8,
+    "start": 882,
+    "end": 889,
+    "kind": "narration",
+    "voice": "Start with a reported alignment. Which surface was measured, how was it selected, what uncertainty accompanies it, and how do neighboring slopes compare?",
+    "visual": "Unbranded survey equipment faces an irregular wooded slope, all screens and scales unreadable.",
+    "mode": "field"
+  },
+  {
+    "id": 144,
+    "section": 8,
+    "start": 889,
+    "end": 899,
+    "kind": "scene",
+    "voice": "Imagine carrying the collection record back to the outcrop, then matching the named specimen to its original position. The material claim should connect a testable sample, a location, and a method.",
+    "visual": "A natural rock comparison specimen rests beside a sealed unlabelled sample container at an outdoor observation station.",
+    "mode": "macro"
+  },
+  {
+    "id": 145,
+    "section": 8,
+    "start": 899,
+    "end": 906,
+    "kind": "narration",
+    "voice": "Imagine returning to the exact collection position with the original records. The sample, the outcrop, and the description should fit one another.",
+    "visual": "Clearly adult observer matches the physical specimen-like patch to a nearby undisturbed layer without removing material.",
+    "mode": "field"
+  },
+  {
+    "id": 146,
+    "section": 8,
+    "start": 906,
+    "end": 913,
+    "kind": "narration",
+    "voice": "A reproducible result lets another team inspect that chain and test the interpretation. Independence concerns the observations and methods, not simply another photograph.",
+    "visual": "Two anonymous adult observers separately inspect the same inert comparison model from established positions, no named expert portrayal.",
+    "mode": "field"
+  },
+  {
+    "id": 147,
+    "section": 8,
+    "start": 913,
+    "end": 916,
+    "kind": "narration",
+    "voice": "Ten photographs of one block still record the same block.",
+    "visual": "One unchanged angular block remains in view as the camera reveals its full context rather than duplicating it into many specimens.",
+    "mode": "macro"
+  },
+  {
+    "id": 148,
+    "section": 8,
+    "start": 916,
+    "end": 923,
+    "kind": "narration",
+    "voice": "Authorship matters because it helps us understand the route a claim took. It neither proves the interpretation nor automatically makes it false.",
+    "visual": "Plain closed folders remain beside physical comparison models, no portraits, academic logos, or readable publication text.",
+    "mode": "field"
+  },
+  {
+    "id": 149,
+    "section": 8,
+    "start": 923,
+    "end": 927,
+    "kind": "narration",
+    "voice": "The argument still needs a connected material sequence and a construction history.",
+    "visual": "A physical construction-sequence model exposes foundation, placed stones, and later deposits in one coherent outdoor frame.",
+    "mode": "model"
+  },
+  {
+    "id": 150,
+    "section": 8,
+    "start": 927,
+    "end": 930,
+    "kind": "narration",
+    "voice": "Publication, permission, visitor numbers: each records a different kind of fact.",
+    "visual": "A quiet path and irregular wooded hill provide an ordinary visitor setting, all visible people absent or clearly adult.",
+    "mode": "landscape"
+  },
+  {
+    "id": 151,
+    "section": 8,
+    "start": 930,
+    "end": 938,
+    "kind": "rehook",
+    "voice": "Now place an old professional declaration beside a new claim. In December two thousand six, European archaeologists publicly opposed the pyramid project.",
+    "visual": "Modest regional medieval ruins under careful conservation, no readable heritage plaque or invented institutional certification.",
+    "mode": "heritage"
+  },
+  {
+    "id": 152,
+    "section": 8,
+    "start": 938,
+    "end": 946,
+    "kind": "narration",
+    "voice": "Their concern included the protection of genuine archaeological heritage. That statement documents a professional response, while the physical argument still rests on evidence.",
+    "visual": "Adult observer studies an intact margin beside a teaching excavation replica; no damage to a genuine archaeological site.",
+    "mode": "field"
+  },
+  {
+    "id": 153,
+    "section": 8,
+    "start": 946,
+    "end": 950,
+    "kind": "narration",
+    "voice": "Three comparison models stand outdoors: a hill, a rock section, a wall.",
+    "visual": "Three separate outdoor comparison objects depict terrain, a layered rock section, and a deliberately assembled wall.",
+    "mode": "model"
+  },
+  {
+    "id": 154,
+    "section": 8,
+    "start": 950,
+    "end": 958,
+    "kind": "scene",
+    "voice": "Each represents a different kind of explanation. Ask the same question of all three: which observations would make this interpretation the better fit?",
+    "visual": "Camera glides around the three models so their different material relationships remain physically visible.",
+    "mode": "model"
+  },
+  {
+    "id": 155,
+    "section": 8,
+    "start": 958,
+    "end": 962,
+    "kind": "narration",
+    "voice": "Natural layers, fractures, and erosion connect the shape to geological processes.",
+    "visual": "Continuous layers, natural fractures, and a small erosion gully coexist in an illustrative natural outcrop.",
+    "mode": "field"
+  },
+  {
+    "id": 156,
+    "section": 8,
+    "start": 962,
+    "end": 970,
+    "kind": "narration",
+    "voice": "For human construction, recorded boundaries, arranged material, associated activity, and a coherent chronology would need to establish the proposed engineered structure.",
+    "visual": "A separate small wall comparison shows arranged stones, a meaningful base, and an adjoining occupation-surface replica.",
+    "mode": "heritage"
+  },
+  {
+    "id": 157,
+    "section": 8,
+    "start": 970,
+    "end": 975,
+    "kind": "narration",
+    "voice": "The tests stay useful whatever the headline. New evidence can change an explanation.",
+    "visual": "An adult observer revisits the same rock layer in changed natural light, no changed sample or newly revealed treasure.",
+    "mode": "field"
+  },
+  {
+    "id": 158,
+    "section": 8,
+    "start": 975,
+    "end": 980,
+    "kind": "narration",
+    "voice": "Move from the name to predictions, then compare those predictions with the ground.",
+    "visual": "The camera returns from a hill silhouette model to the physical boundaries in its open section.",
+    "mode": "model"
+  },
+  {
+    "id": 159,
+    "section": 8,
+    "start": 980,
+    "end": 987,
+    "kind": "caveat",
+    "voice": "The reviewed evidence supports natural hills rather than established giant pyramids. A new construction proposal needs independently checkable evidence that explains the full context.",
+    "visual": "An irregular wooded natural hill rises above a valley, without exposed giant pyramid faces or artificial casing.",
+    "mode": "landscape"
+  },
+  {
+    "id": 160,
+    "section": 8,
+    "start": 987,
+    "end": 992,
+    "kind": "turn",
+    "voice": "There is already a real archaeological story here. What happens when we give that story the same attention?",
+    "visual": "A low medieval wall ruin occupies a natural summit, inviting a closer archaeological view.",
+    "mode": "heritage"
+  },
+  {
+    "id": 161,
+    "section": 9,
+    "start": 992,
+    "end": 999,
+    "kind": "rehook",
+    "voice": "At the summit, low remains belong to Visoki, the medieval stronghold. Here the human past has a named place and recorded archaeological work.",
+    "visual": "Low weathered regional medieval masonry on a wooded summit, not a surveyed reconstruction of the full Visoki stronghold.",
+    "mode": "heritage"
+  },
+  {
+    "id": 162,
+    "section": 9,
+    "start": 999,
+    "end": 1006,
+    "kind": "narration",
+    "voice": "The official heritage designation identifies that historic site. It should be read as recognition of that site, with its own location and significance.",
+    "visual": "The camera keeps the modest historic wall and the much larger natural hill separate in scale, no UNESCO logo or sign.",
+    "mode": "heritage"
+  },
+  {
+    "id": 163,
+    "section": 9,
+    "start": 1006,
+    "end": 1015,
+    "kind": "narration",
+    "voice": "Imagine approaching the low surviving masonry and following its base where it meets the summit. Without moving a stone, ask which part belongs to the structure and which belongs to the hill.",
+    "visual": "Adult observer follows a visible wall base from a safe path without touching or moving stones.",
+    "mode": "heritage"
+  },
+  {
+    "id": 164,
+    "section": 9,
+    "start": 1015,
+    "end": 1021,
+    "kind": "scene",
+    "voice": "Which wall belongs to which phase? Where was an entrance? How did people adapt this elevated place to work, movement, and defense?",
+    "visual": "A small medieval wall comparison model includes an ordinary entrance gap and successive wall contacts, not an exact site plan.",
+    "mode": "model"
+  },
+  {
+    "id": 165,
+    "section": 9,
+    "start": 1021,
+    "end": 1025,
+    "kind": "narration",
+    "voice": "The questions lead to plans, associated objects, and recorded phases of use.",
+    "visual": "Outdoor teaching station with a blank plan board, inert pottery replica, and section model, no text or invented records.",
+    "mode": "field"
+  },
+  {
+    "id": 166,
+    "section": 9,
+    "start": 1025,
+    "end": 1031,
+    "kind": "narration",
+    "voice": "The plateau also has published archaeological investigation. Preliminary work in February two thousand seventeen examined its archaeological potential near the protected monument.",
+    "visual": "A careful-looking educational trench replica on a plateau has intact margins; clearly adult observers stand outside it.",
+    "mode": "field"
+  },
+  {
+    "id": 167,
+    "section": 9,
+    "start": 1031,
+    "end": 1038,
+    "kind": "narration",
+    "voice": "The reported material spans prehistoric times to the Middle Ages. That is evidence for human activity across different periods, not one single construction event.",
+    "visual": "Several separately arranged inert pottery comparison replicas represent different periods without labels or claimed site attribution.",
+    "mode": "macro"
+  },
+  {
+    "id": 168,
+    "section": 9,
+    "start": 1038,
+    "end": 1046,
+    "kind": "narration",
+    "voice": "Picture a pottery fragment in a recorded layer. Its form and setting help build a history of use, rather than enlarge the whole hill into a monument.",
+    "visual": "One undecorated pottery replica remains in a clearly illustrative bounded soil layer.",
+    "mode": "macro"
+  },
+  {
+    "id": 169,
+    "section": 9,
+    "start": 1046,
+    "end": 1050,
+    "kind": "narration",
+    "voice": "The fragment asks what people did here. Its context connects the answer.",
+    "visual": "Slow focus shift keeps the pottery replica and the boundary of its deposit visible together.",
+    "mode": "macro"
+  },
+  {
+    "id": 170,
+    "section": 9,
+    "start": 1050,
+    "end": 1054,
+    "kind": "narration",
+    "voice": "Separate the object from its deposit, and part of that history disappears.",
+    "visual": "Two separate teaching scenes compare the fragment in context and a loose comparison fragment, no movement of real finds.",
+    "mode": "model"
+  },
+  {
+    "id": 171,
+    "section": 9,
+    "start": 1054,
+    "end": 1058,
+    "kind": "rehook",
+    "voice": "A layer can be removed only once. Preserve its record.",
+    "visual": "An intact margin in an educational section replica remains preserved beside the observed portion.",
+    "mode": "field"
+  },
+  {
+    "id": 172,
+    "section": 9,
+    "start": 1058,
+    "end": 1066,
+    "kind": "narration",
+    "voice": "Imagine pausing at an undisturbed patch of ground. Leaving it intact can be a positive research decision, protecting questions for a better-designed investigation.",
+    "visual": "An undisturbed grassy patch beside a wooded plateau path, adult observer pauses at a respectful distance.",
+    "mode": "landscape"
+  },
+  {
+    "id": 173,
+    "section": 9,
+    "start": 1066,
+    "end": 1074,
+    "kind": "narration",
+    "voice": "Good archaeology includes conservation, publication, and the survival of records. The value of an object includes the connections that make its history readable.",
+    "visual": "Quiet conserved low ruins blend with the surrounding landscape, no display case or laboratory.",
+    "mode": "heritage"
+  },
+  {
+    "id": 174,
+    "section": 9,
+    "start": 1074,
+    "end": 1078,
+    "kind": "scene",
+    "voice": "The valley already offers genuine sites and reasons to be curious.",
+    "visual": "Wide Bosnian valley with wooded hills and modest distant settlement, no crowds or fantasy monuments.",
+    "mode": "landscape"
+  },
+  {
+    "id": 175,
+    "section": 9,
+    "start": 1078,
+    "end": 1086,
+    "kind": "narration",
+    "voice": "Its real past gains depth from specific people and places. A medieval wall and a prehistoric find deserve their own careful stories.",
+    "visual": "Clearly adult regional medieval potter works beside a modest dwelling in an illustrative outdoor scene, not a reconstructed documented individual.",
+    "mode": "history"
+  },
+  {
+    "id": 176,
+    "section": 9,
+    "start": 1086,
+    "end": 1090,
+    "kind": "narration",
+    "voice": "Respect the community by investigating its heritage carefully and specifically.",
+    "visual": "An established path allows a safe view toward low historic masonry and the valley beyond.",
+    "mode": "heritage"
+  },
+  {
+    "id": 177,
+    "section": 9,
+    "start": 1090,
+    "end": 1095,
+    "kind": "narration",
+    "voice": "From the summit, the human chapter rests on an older geological foundation.",
+    "visual": "Summit view connects a modest masonry foreground to the wider valley on an older natural hillside.",
+    "mode": "landscape"
+  },
+  {
+    "id": 178,
+    "section": 9,
+    "start": 1095,
+    "end": 1104,
+    "kind": "narration",
+    "voice": "We can hold both histories together without merging their dates or turning every natural layer into architecture. Their differences make the landscape more interesting.",
+    "visual": "A layered natural hill teaching model supports a very small later wall, both histories visible without merging them.",
+    "mode": "model"
+  },
+  {
+    "id": 179,
+    "section": 9,
+    "start": 1104,
+    "end": 1111,
+    "kind": "caveat",
+    "voice": "The preliminary work does not describe every buried feature. Its findings support specific human histories whose extent and sequence require further responsible study.",
+    "visual": "Undisturbed ground beside the replica excavation remains intact, no promised undiscovered chamber or artifact.",
+    "mode": "field"
+  },
+  {
+    "id": 180,
+    "section": 9,
+    "start": 1111,
+    "end": 1116,
+    "kind": "turn",
+    "voice": "Now return to the sharp corner from the opening. What should that little edge mean to us after this journey?",
+    "visual": "Return to the exact same illustrative opening sandstone slab and its stable angular corner.",
+    "mode": "macro"
+  },
+  {
+    "id": 181,
+    "section": 10,
+    "start": 1116,
+    "end": 1122,
+    "kind": "rehook",
+    "voice": "The stone still has its sharp corner. What has changed is the amount of evidence we ask that corner to carry.",
+    "visual": "The opening slab retains the same angular fracture, grains, and thin sediment band in matching natural daylight.",
+    "mode": "macro"
+  },
+  {
+    "id": 182,
+    "section": 10,
+    "start": 1122,
+    "end": 1128,
+    "kind": "narration",
+    "voice": "At first, it invited an instant picture of builders and a giant monument. Now it sits inside a sequence we can investigate.",
+    "visual": "Camera widens slightly to reveal the slab's continuous surrounding layer rather than an isolated cut-looking block.",
+    "mode": "macro"
+  },
+  {
+    "id": 183,
+    "section": 10,
+    "start": 1128,
+    "end": 1135,
+    "kind": "narration",
+    "voice": "Begin with its texture. Follow the grains, the natural binding material, and the relationship to adjoining layers. Then examine the fractures and contacts.",
+    "visual": "Raking light shows grains, natural binding matrix, and a pre-existing fracture in the same comparison slab.",
+    "mode": "macro"
+  },
+  {
+    "id": 184,
+    "section": 10,
+    "start": 1135,
+    "end": 1144,
+    "kind": "scene",
+    "voice": "Imagine returning to the slab, then stepping back toward the valley view. Test the explanation at each scale, from the grains inside one stone to the layers running through the whole hillside.",
+    "visual": "Camera pulls back from the opening outcrop to the wooded hill and valley, maintaining modest natural terrain scale.",
+    "mode": "field"
+  },
+  {
+    "id": 185,
+    "section": 10,
+    "start": 1144,
+    "end": 1147,
+    "kind": "narration",
+    "voice": "Shape offers a lead. Context carries the argument. Follow the physical history.",
+    "visual": "An irregular hill silhouette model connects to its open section with continuous natural rock layers.",
+    "mode": "model"
+  },
+  {
+    "id": 186,
+    "section": 10,
+    "start": 1147,
+    "end": 1154,
+    "kind": "narration",
+    "voice": "The geological explanation fits natural sedimentary rocks, their deformation, fractures, and erosion. These processes account for angular forms without requiring a constructed pyramid.",
+    "visual": "A natural outcrop combines sediment layers, existing fractures, and weathered slopes without engineered pyramid casing.",
+    "mode": "field"
+  },
+  {
+    "id": 187,
+    "section": 10,
+    "start": 1154,
+    "end": 1160,
+    "kind": "narration",
+    "voice": "The archaeological explanation belongs where human actions are demonstrated: walls, cuts, working surfaces, objects in context, and recorded episodes of use.",
+    "visual": "A separate small wall comparison reveals a construction base, placed stones, and an adjoining surface replica.",
+    "mode": "heritage"
+  },
+  {
+    "id": 188,
+    "section": 10,
+    "start": 1160,
+    "end": 1166,
+    "kind": "narration",
+    "voice": "At Visoko, genuine medieval heritage and earlier human activity deserve attention in their own right. They occupy a landscape with an older origin.",
+    "visual": "Modest medieval remains occupy natural summit bedrock, no invented ancient megastructure underneath.",
+    "mode": "heritage"
+  },
+  {
+    "id": 189,
+    "section": 10,
+    "start": 1166,
+    "end": 1173,
+    "kind": "narration",
+    "voice": "Here is the answer to our central question: distinguish the claims by testing the complete material sequence, rather than treating resemblance as construction evidence.",
+    "visual": "The camera follows the full sequence in separate natural-layer and assembled-wall comparison models.",
+    "mode": "model"
+  },
+  {
+    "id": 190,
+    "section": 10,
+    "start": 1173,
+    "end": 1179,
+    "kind": "narration",
+    "voice": "The evidence reviewed here supports natural hills with human histories, not the established discovery of giant ancient pyramids. Those conclusions concern different scales.",
+    "visual": "A natural wooded hill with an ordinary summit heritage setting, no false discovery reveal.",
+    "mode": "landscape"
+  },
+  {
+    "id": 191,
+    "section": 10,
+    "start": 1179,
+    "end": 1184,
+    "kind": "rehook",
+    "voice": "The three comparison models return: terrain, layered rock, and assembled wall.",
+    "visual": "The three comparison models return together: natural terrain, layered rock section, small assembled wall.",
+    "mode": "model"
+  },
+  {
+    "id": 192,
+    "section": 10,
+    "start": 1184,
+    "end": 1190,
+    "kind": "narration",
+    "voice": "Seek building relationships for a building. Follow geological processes for a hill.",
+    "visual": "Distinct boundaries show continuous natural layering beside separately laid masonry stones.",
+    "mode": "model"
+  },
+  {
+    "id": 193,
+    "section": 10,
+    "start": 1190,
+    "end": 1196,
+    "kind": "narration",
+    "voice": "Identify the dated event. Rock, organic material, and construction keep different clocks.",
+    "visual": "Separate rock, charcoal, and small masonry-contact teaching props remain distinct, no visible ages or clocks.",
+    "mode": "macro"
+  },
+  {
+    "id": 194,
+    "section": 10,
+    "start": 1196,
+    "end": 1201,
+    "kind": "scene",
+    "voice": "Preserve observations, compare alternatives, and let another investigator test the reasoning.",
+    "visual": "Two anonymous adult observers inspect an intact educational model from different sides, notes and displays unreadable.",
+    "mode": "field"
+  },
+  {
+    "id": 195,
+    "section": 10,
+    "start": 1201,
+    "end": 1211,
+    "kind": "narration",
+    "voice": "The strongest surprise may be how much a familiar-looking stone can reveal once we stop asking its outline to tell the whole story.",
+    "visual": "The opening stone's corner and thin sediment band remain stable, revealing tangible details without magical transformation.",
+    "mode": "macro"
+  },
+  {
+    "id": 196,
+    "section": 10,
+    "start": 1211,
+    "end": 1216,
+    "kind": "narration",
+    "voice": "Examine the corner. Map the hill. Investigate the particular human lives.",
+    "visual": "A close-to-wide camera move connects stone edge, outcrop, and natural hillside in one continuous motion.",
+    "mode": "field"
+  },
+  {
+    "id": 197,
+    "section": 10,
+    "start": 1216,
+    "end": 1221,
+    "kind": "narration",
+    "voice": "Curiosity survives the test. The next question now points toward evidence.",
+    "visual": "The wooded valley is seen under restrained warm side light, ordinary geological beauty without fantasy architecture.",
+    "mode": "landscape"
+  },
+  {
+    "id": 198,
+    "section": 10,
+    "start": 1221,
+    "end": 1231,
+    "kind": "narration",
+    "voice": "Leave the opening slab in place. Beyond it, the valley contains a real past, with layers and records still worth protecting.",
+    "visual": "The opening slab remains untouched as nearby grasses move gently in the breeze.",
+    "mode": "macro"
+  },
+  {
+    "id": 199,
+    "section": 10,
+    "start": 1231,
+    "end": 1238,
+    "kind": "caveat",
+    "voice": "These conclusions concern the giant-pyramid claim. They leave room for new, properly documented discoveries about human activity within this older landscape.",
+    "visual": "A modest archaeological heritage landscape and intact surrounding ground share a quiet final frame.",
+    "mode": "landscape"
+  },
+  {
+    "id": 200,
+    "section": 10,
+    "start": 1238,
+    "end": 1242,
+    "kind": "turn",
+    "voice": "Whose story still waits in the undisturbed ground?",
+    "visual": "An undisturbed grassy patch beside the original outcrop, no new object revealed and no promised buried treasure.",
+    "mode": "field"
+  }
+]

@@ -1,0 +1,76 @@
+{
+  "topic_id": "MOI-096",
+  "checked_date": "2026-11-21",
+  "sources": [
+    {
+      "id": "S01",
+      "title": "Schoch field account2006",
+      "url": "https://robertschoch.com/bosnia.html",
+      "read_scope": "Main field account and relevant geology paragraphs read; no images reused",
+      "interpretation_limit": "Primary observer account, not independently repeated sample analysis"
+    },
+    {
+      "id": "S02",
+      "title": "Smithsonian December2009",
+      "url": "https://www.smithsonianmag.com/history/the-mystery-of-bosnias-ancient-pyramids-148990462/",
+      "read_scope": "Claim history and geology passages read",
+      "interpretation_limit": "Secondary reporting; not original Tuzla report"
+    },
+    {
+      "id": "S03",
+      "title": "Archaeology / AIA June2006",
+      "url": "https://archive.archaeology.org/online/features/osmanagic/update.html",
+      "read_scope": "Updates read",
+      "interpretation_limit": "Professional response and institutional endorsement distinction"
+    },
+    {
+      "id": "S04",
+      "title": "European archaeological declaration2006",
+      "url": "https://www.robertschoch.com/articles/schoch_eaa_statement.pdf",
+      "read_scope": "Full single page read",
+      "interpretation_limit": "Author-hosted copy of declaration; history of response, not new geological data"
+    },
+    {
+      "id": "S05",
+      "title": "City of Visoko heritage",
+      "url": "https://www.visoko.gov.ba/posjetite-grad/zastita-nacionalnog-blaga",
+      "read_scope": "Old Town Visoki section read",
+      "interpretation_limit": "Official national-monument information; no UNESCO pyramid recognition"
+    },
+    {
+      "id": "S06",
+      "title": "Kaljanac and Silajdžić plateau research",
+      "url": "https://doi.org/10.5644/Godisnjak.CBI.ANUBiH-46.88",
+      "read_scope": "English abstract and metadata only",
+      "interpretation_limit": "FieldworkFebruary2017; journalissue2017/platformpublication2022 distinguished"
+    },
+    {
+      "id": "S07",
+      "title": "Osmanagich2025 anthropogenic proposal",
+      "url": "https://www.drsamosmanagich.com/files/publications/multidisciplinary-evaluation-of-the-pyramid-shaped-formation-near-visoko-bosnia-herzegovina-a-case-for-anthropogenic-construction.pdf",
+      "read_scope": "Metadata, abstract, selected geometry/orientation and conclusions, authorship/data availability read",
+      "interpretation_limit": "Proponent-authored proposal; reported measurements not independently verified; CC-BY4.0"
+    },
+    {
+      "id": "S08",
+      "title": "NPS sedimentary rocks",
+      "url": "https://www.nps.gov/subjects/geology/sedimentary.htm",
+      "read_scope": "Definitions, clastic rocks and natural cementation read",
+      "interpretation_limit": "General geology, not a Visoko sample test"
+    },
+    {
+      "id": "S09",
+      "title": "NPS archaeological dating",
+      "url": "https://home.nps.gov/articles/000/how-do-archeologists-know-how-old-a-site-is.htm",
+      "read_scope": "Dating, radiocarbon, stratigraphy and context read",
+      "interpretation_limit": "General method, no age assigned to invented sample"
+    },
+    {
+      "id": "S10",
+      "title": "UW-La Crosse archaeology process",
+      "url": "https://www.uwlax.edu/mvac/process-of-archaeology/faq/",
+      "read_scope": "Relevant context, dating and recording sections read",
+      "interpretation_limit": "General method; outdated unrelated facts and local law not adopted"
+    }
+  ]
+}

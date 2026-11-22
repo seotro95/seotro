@@ -1,0 +1,40 @@
+{
+  "topic_id": "MOI-096",
+  "title": "Những ngọn đồi Bosnia: làm sao kiểm tra một tuyên bố kim tự tháp?",
+  "slug": "bosnia-moi096",
+  "prefix": "BOSNIA_MOI096",
+  "release_tag": "bosnia-moi-096-20m42s",
+  "duration_label": "20m42s",
+  "display_duration": "20:42",
+  "target_seconds": 1242,
+  "frames": 59616000,
+  "english_cues": 200,
+  "translated_sections": 10,
+  "section_seconds": [
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    124,
+    126
+  ],
+  "prompt_count": 130,
+  "prompt_txt_files": 13,
+  "timeline_shots": 128,
+  "backup_ids": [
+    129,
+    130
+  ],
+  "opening_shots": 6,
+  "first_shot_seconds": 10,
+  "branch": "codex/bosnia-moi096-production-20261121",
+  "directory": "productions/video-moi096-bosnia",
+  "style_id": "science-documentary-retention-v5-Bosnia-NamMinh",
+  "canonical_branch": "codex/beringia-video-01",
+  "baseline_head": "3caa25457805da64c725be9d1997a168114f7fb8",
+  "baseline_tree": "c636310185a9616d8c8f186eeedb831d3ec892b0"
+}

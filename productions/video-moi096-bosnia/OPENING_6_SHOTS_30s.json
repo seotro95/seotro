@@ -1,0 +1,135 @@
+[
+  {
+    "id": 1,
+    "start": 0,
+    "end": 10,
+    "visual": "The exact same pale sandstone comparison slab, one pre-existing sharp angular corner and one narrow sediment band visible. One concrete object only; no person, hill reveal, cutaway, or other object enters during this first shot.",
+    "mode": "macro",
+    "kind": "opening",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 10,
+    "source_filename": "BOSNIA_001.mp4",
+    "voice_cue_ids": [
+      1
+    ],
+    "voice": "A stone slab has a sharp corner. It looks almost cut to fit. What would prove that a builder ever placed it here?",
+    "section_ids": [
+      1
+    ],
+    "setting": "outdoor",
+    "camera": "Macro 100 mm slow lateral slide along the material boundary, readable depth of field.",
+    "prompt": "One continuous 10-second shot, landscape 16:9, cinematic outdoor archaeology and geology documentary, natural light, restrained purposeful movement. The exact same pale sandstone comparison slab, one pre-existing sharp angular corner and one narrow sediment band visible. One concrete object only; no person, hill reveal, cutaway, or other object enters during this first shot. Camera: Macro 100 mm slow lateral slide along the material boundary, readable depth of field. Use a green central Bosnian valley palette, pale stone, forested irregular slopes and realistic modest relief. These scenes are illustrative reconstructions, comparison replicas, or separate teaching models, not authenticated Visoko excavation footage, a measured terrain survey, recovered dated specimens, or a verified site plan. Keep natural sediment layers and fractures distinct from deliberately assembled masonry. Models are visibly physical, separate from the landscape, simplified and not to scale. Do not generate a giant built pyramid, smooth artificial casing, precise symmetrical pyramid faces, Mayan steps, hidden palace, treasure, alien builders, energy beam, glowing stones, fake radar plot, or invented analytical results. No destructive collecting, digging into real ruins, sudden real-landscape deformation, magically moving layers, or material morphing. No laboratory, white coats, indoor scientist scene, microscope, or clinical room. Prioritize outdoor hills, outcrops, heritage context, and physical comparison models. No children, infants, adolescents, minors, or minors in backgrounds, shadows, screens, images, and reflections. Every visible person or hand must clearly belong to an adult age 35–65. No human remains or skulls. No readable words, writing, letters, dates, numbers, labels, captions, signs, logos, institutional seals, or watermark. Screens face away; no data overlays. Keep terrain, objects, contacts, and anatomy stable. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 2,
+    "start": 10,
+    "end": 14,
+    "visual": "The exposed natural layer in the foreground leads toward an irregular wooded triangular hill in a plausible central Bosnian valley.",
+    "mode": "landscape",
+    "kind": "opening",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 4,
+    "source_filename": "BOSNIA_002.mp4",
+    "voice_cue_ids": [
+      2
+    ],
+    "voice": "Look past that corner. The same stone continues beneath soil, while trees cover a steep, triangular hillside above it.",
+    "section_ids": [
+      1
+    ],
+    "setting": "outdoor",
+    "camera": "Long 85 mm slow side move from a valley viewpoint, preserve realistic ridge depth and parallax.",
+    "prompt": "One continuous 10-second shot, landscape 16:9, cinematic outdoor archaeology and geology documentary, natural light, restrained purposeful movement. The exposed natural layer in the foreground leads toward an irregular wooded triangular hill in a plausible central Bosnian valley. Camera: Long 85 mm slow side move from a valley viewpoint, preserve realistic ridge depth and parallax. Use a green central Bosnian valley palette, pale stone, forested irregular slopes and realistic modest relief. These scenes are illustrative reconstructions, comparison replicas, or separate teaching models, not authenticated Visoko excavation footage, a measured terrain survey, recovered dated specimens, or a verified site plan. Keep natural sediment layers and fractures distinct from deliberately assembled masonry. Models are visibly physical, separate from the landscape, simplified and not to scale. Do not generate a giant built pyramid, smooth artificial casing, precise symmetrical pyramid faces, Mayan steps, hidden palace, treasure, alien builders, energy beam, glowing stones, fake radar plot, or invented analytical results. No destructive collecting, digging into real ruins, sudden real-landscape deformation, magically moving layers, or material morphing. No laboratory, white coats, indoor scientist scene, microscope, or clinical room. Prioritize outdoor hills, outcrops, heritage context, and physical comparison models. No children, infants, adolescents, minors, or minors in backgrounds, shadows, screens, images, and reflections. Every visible person or hand must clearly belong to an adult age 35–65. No human remains or skulls. No readable words, writing, letters, dates, numbers, labels, captions, signs, logos, institutional seals, or watermark. Screens face away; no data overlays. Keep terrain, objects, contacts, and anatomy stable. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 3,
+    "start": 14,
+    "end": 18,
+    "visual": "A lateral view reveals the wooded hill connecting to less regular neighboring ridges, ordinary green terrain and no artificial pyramid casing.",
+    "mode": "landscape",
+    "kind": "opening",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 4,
+    "source_filename": "BOSNIA_003.mp4",
+    "voice_cue_ids": [
+      2,
+      3
+    ],
+    "voice": "Look past that corner. The same stone continues beneath soil, while trees cover a steep, triangular hillside above it. Our question is simple: what evidence would distinguish a giant constructed pyramid from a natural hill that people later used?",
+    "section_ids": [
+      1
+    ],
+    "setting": "outdoor",
+    "camera": "Wide 35 mm gentle forward reveal across green hills, no invented perfect geometry.",
+    "prompt": "One continuous 10-second shot, landscape 16:9, cinematic outdoor archaeology and geology documentary, natural light, restrained purposeful movement. A lateral view reveals the wooded hill connecting to less regular neighboring ridges, ordinary green terrain and no artificial pyramid casing. Camera: Wide 35 mm gentle forward reveal across green hills, no invented perfect geometry. Use a green central Bosnian valley palette, pale stone, forested irregular slopes and realistic modest relief. These scenes are illustrative reconstructions, comparison replicas, or separate teaching models, not authenticated Visoko excavation footage, a measured terrain survey, recovered dated specimens, or a verified site plan. Keep natural sediment layers and fractures distinct from deliberately assembled masonry. Models are visibly physical, separate from the landscape, simplified and not to scale. Do not generate a giant built pyramid, smooth artificial casing, precise symmetrical pyramid faces, Mayan steps, hidden palace, treasure, alien builders, energy beam, glowing stones, fake radar plot, or invented analytical results. No destructive collecting, digging into real ruins, sudden real-landscape deformation, magically moving layers, or material morphing. No laboratory, white coats, indoor scientist scene, microscope, or clinical room. Prioritize outdoor hills, outcrops, heritage context, and physical comparison models. No children, infants, adolescents, minors, or minors in backgrounds, shadows, screens, images, and reflections. Every visible person or hand must clearly belong to an adult age 35–65. No human remains or skulls. No readable words, writing, letters, dates, numbers, labels, captions, signs, logos, institutional seals, or watermark. Screens face away; no data overlays. Keep terrain, objects, contacts, and anatomy stable. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 4,
+    "start": 18,
+    "end": 22,
+    "visual": "The same slab and its adjoining continuous layer remain physically connected as the camera reveals the boundary, not an isolated cut block.",
+    "mode": "macro",
+    "kind": "opening",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 4,
+    "source_filename": "BOSNIA_004.mp4",
+    "voice_cue_ids": [
+      3
+    ],
+    "voice": "Our question is simple: what evidence would distinguish a giant constructed pyramid from a natural hill that people later used?",
+    "section_ids": [
+      1
+    ],
+    "setting": "outdoor",
+    "camera": "Macro 100 mm slow lateral slide along the material boundary, readable depth of field.",
+    "prompt": "One continuous 10-second shot, landscape 16:9, cinematic outdoor archaeology and geology documentary, natural light, restrained purposeful movement. The same slab and its adjoining continuous layer remain physically connected as the camera reveals the boundary, not an isolated cut block. Camera: Macro 100 mm slow lateral slide along the material boundary, readable depth of field. Use a green central Bosnian valley palette, pale stone, forested irregular slopes and realistic modest relief. These scenes are illustrative reconstructions, comparison replicas, or separate teaching models, not authenticated Visoko excavation footage, a measured terrain survey, recovered dated specimens, or a verified site plan. Keep natural sediment layers and fractures distinct from deliberately assembled masonry. Models are visibly physical, separate from the landscape, simplified and not to scale. Do not generate a giant built pyramid, smooth artificial casing, precise symmetrical pyramid faces, Mayan steps, hidden palace, treasure, alien builders, energy beam, glowing stones, fake radar plot, or invented analytical results. No destructive collecting, digging into real ruins, sudden real-landscape deformation, magically moving layers, or material morphing. No laboratory, white coats, indoor scientist scene, microscope, or clinical room. Prioritize outdoor hills, outcrops, heritage context, and physical comparison models. No children, infants, adolescents, minors, or minors in backgrounds, shadows, screens, images, and reflections. Every visible person or hand must clearly belong to an adult age 35–65. No human remains or skulls. No readable words, writing, letters, dates, numbers, labels, captions, signs, logos, institutional seals, or watermark. Screens face away; no data overlays. Keep terrain, objects, contacts, and anatomy stable. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 5,
+    "start": 22,
+    "end": 26,
+    "visual": "Clearly adult anonymous observer stands beside the same outcrop on a path and follows the sediment band without touching or removing stone.",
+    "mode": "field",
+    "kind": "opening",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 4,
+    "source_filename": "BOSNIA_005.mp4",
+    "voice_cue_ids": [
+      4
+    ],
+    "voice": "Imagine standing beside the exposed layer, close enough to see grains in its surface. Follow that edge into the ground before deciding what the distant outline above you resembles.",
+    "section_ids": [
+      1
+    ],
+    "setting": "outdoor",
+    "camera": "Low 35 mm gentle forward move revealing material continuity and surrounding context.",
+    "prompt": "One continuous 10-second shot, landscape 16:9, cinematic outdoor archaeology and geology documentary, natural light, restrained purposeful movement. Clearly adult anonymous observer stands beside the same outcrop on a path and follows the sediment band without touching or removing stone. Camera: Low 35 mm gentle forward move revealing material continuity and surrounding context. Use a green central Bosnian valley palette, pale stone, forested irregular slopes and realistic modest relief. These scenes are illustrative reconstructions, comparison replicas, or separate teaching models, not authenticated Visoko excavation footage, a measured terrain survey, recovered dated specimens, or a verified site plan. Keep natural sediment layers and fractures distinct from deliberately assembled masonry. Models are visibly physical, separate from the landscape, simplified and not to scale. Do not generate a giant built pyramid, smooth artificial casing, precise symmetrical pyramid faces, Mayan steps, hidden palace, treasure, alien builders, energy beam, glowing stones, fake radar plot, or invented analytical results. No destructive collecting, digging into real ruins, sudden real-landscape deformation, magically moving layers, or material morphing. No laboratory, white coats, indoor scientist scene, microscope, or clinical room. Prioritize outdoor hills, outcrops, heritage context, and physical comparison models. No children, infants, adolescents, minors, or minors in backgrounds, shadows, screens, images, and reflections. Every visible person or hand must clearly belong to an adult age 35–65. No human remains or skulls. No readable words, writing, letters, dates, numbers, labels, captions, signs, logos, institutional seals, or watermark. Screens face away; no data overlays. Keep terrain, objects, contacts, and anatomy stable. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 6,
+    "start": 26,
+    "end": 30,
+    "visual": "The thin sediment band continues from the slab across a pre-existing fracture into the neighboring solid rock, the first concrete continuity clue.",
+    "mode": "macro",
+    "kind": "opening",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 4,
+    "source_filename": "BOSNIA_006.mp4",
+    "voice_cue_ids": [
+      4
+    ],
+    "voice": "Imagine standing beside the exposed layer, close enough to see grains in its surface. Follow that edge into the ground before deciding what the distant outline above you resembles.",
+    "section_ids": [
+      1
+    ],
+    "setting": "outdoor",
+    "camera": "Macro 90 mm restrained focus pull from surface grains to the adjacent layer, no object morphing.",
+    "prompt": "One continuous 10-second shot, landscape 16:9, cinematic outdoor archaeology and geology documentary, natural light, restrained purposeful movement. The thin sediment band continues from the slab across a pre-existing fracture into the neighboring solid rock, the first concrete continuity clue. Camera: Macro 90 mm restrained focus pull from surface grains to the adjacent layer, no object morphing. Use a green central Bosnian valley palette, pale stone, forested irregular slopes and realistic modest relief. These scenes are illustrative reconstructions, comparison replicas, or separate teaching models, not authenticated Visoko excavation footage, a measured terrain survey, recovered dated specimens, or a verified site plan. Keep natural sediment layers and fractures distinct from deliberately assembled masonry. Models are visibly physical, separate from the landscape, simplified and not to scale. Do not generate a giant built pyramid, smooth artificial casing, precise symmetrical pyramid faces, Mayan steps, hidden palace, treasure, alien builders, energy beam, glowing stones, fake radar plot, or invented analytical results. No destructive collecting, digging into real ruins, sudden real-landscape deformation, magically moving layers, or material morphing. No laboratory, white coats, indoor scientist scene, microscope, or clinical room. Prioritize outdoor hills, outcrops, heritage context, and physical comparison models. No children, infants, adolescents, minors, or minors in backgrounds, shadows, screens, images, and reflections. Every visible person or hand must clearly belong to an adult age 35–65. No human remains or skulls. No readable words, writing, letters, dates, numbers, labels, captions, signs, logos, institutional seals, or watermark. Screens face away; no data overlays. Keep terrain, objects, contacts, and anatomy stable. Video không có âm thanh, không có lời nói."
+  }
+]
