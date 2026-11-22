@@ -1,0 +1,248 @@
+{
+  "topic": "052-Nemi-Ships",
+  "seconds": 1222,
+  "release_tag": "nemi-video-052-20m22s",
+  "scope": "Only16completedmalevoicesandNemi052requestedtextartifacts;no synthesis in workflow",
+  "assets": [
+    {
+      "filename": "NEMI_052_TAI_LIEU_20m22s.zip",
+      "bytes": 309865,
+      "sha256": "99d886072cd410221ae95506e620eccae1f3109a578b0638b80a86001fc8a29d"
+    },
+    {
+      "filename": "NEMI_052_16_VOICES_20m22s.zip",
+      "bytes": 156428818,
+      "sha256": "45639f44bab200fb46471df57c90008420507ddbfdb443fca25bf09e830300e8"
+    },
+    {
+      "filename": "NEMI_052_My_Tieng_Anh.mp3",
+      "bytes": 9776684,
+      "sha256": "9061f695852d27d6117784f5dfebfa98af364d622f33f0d2da4cf8538be6000c"
+    },
+    {
+      "filename": "NEMI_052_Viet_Nam.mp3",
+      "bytes": 9776684,
+      "sha256": "3b1761044fc3fa08c110c21442a4c9efc2e78b34bfb3a72d955d01ff1ff09359"
+    },
+    {
+      "filename": "NEMI_052_Tay_Ban_Nha.mp3",
+      "bytes": 9776684,
+      "sha256": "b9c940f162b92aa129ad216dcdf00787da358d2f1d3ab15decad1efb355389a6"
+    },
+    {
+      "filename": "NEMI_052_Phap.mp3",
+      "bytes": 9776684,
+      "sha256": "7aae194bf0f7106ff99ec169ecf602b548a9b34797552f3b8be5953757b81bd9"
+    },
+    {
+      "filename": "NEMI_052_Nhat_Ban.mp3",
+      "bytes": 9776684,
+      "sha256": "6c55f5f5e6317212094e1e586e701d39cd30c90dcba219606348966b85178045"
+    },
+    {
+      "filename": "NEMI_052_Han_Quoc.mp3",
+      "bytes": 9776684,
+      "sha256": "90f9c209c5a4b12d792c2088cae0162c68e0c5b0800340d5a06e3866791ddc8f"
+    },
+    {
+      "filename": "NEMI_052_Duc.mp3",
+      "bytes": 9776684,
+      "sha256": "3177e7744e98254bbd15ec9539f49b307746c5641e14fc17df2d76935f998aef"
+    },
+    {
+      "filename": "NEMI_052_Y.mp3",
+      "bytes": 9776684,
+      "sha256": "b3671dad73f68f50b05ed957e8763fc4e1d0027c84f7d48865deb6e3cb40e748"
+    },
+    {
+      "filename": "NEMI_052_Bo_Dao_Nha.mp3",
+      "bytes": 9776684,
+      "sha256": "03999436f71c530fac316695f8354e842cee9dce759c56defe513f5cfe3311a8"
+    },
+    {
+      "filename": "NEMI_052_Ha_Lan.mp3",
+      "bytes": 9776684,
+      "sha256": "bc31ac5921a95d8d958686f987d7ade6ca21ca1457c54ec1641dd886996fa35d"
+    },
+    {
+      "filename": "NEMI_052_Ba_Lan.mp3",
+      "bytes": 9776684,
+      "sha256": "074417667525769a99c5f481a577ae030ed5e988cb93e5eb2fb67f97d94b9199"
+    },
+    {
+      "filename": "NEMI_052_Thuy_Dien.mp3",
+      "bytes": 9776684,
+      "sha256": "c6525c2ce03a118af12f1b2c8d162a36fa1f63e4adfb12d22c4577e1fd3cfa28"
+    },
+    {
+      "filename": "NEMI_052_Dan_Mach.mp3",
+      "bytes": 9776684,
+      "sha256": "25b1ac291869c599f648654fde5ed704e3c73a7be9d72ec83a8fa738c83229c7"
+    },
+    {
+      "filename": "NEMI_052_Phan_Lan.mp3",
+      "bytes": 9776684,
+      "sha256": "1a6712eb9ec86c5ac462f40c5d9d7531b7ef4aaaadf6a05e59383aa05de343bf"
+    },
+    {
+      "filename": "NEMI_052_Na_Uy.mp3",
+      "bytes": 9776684,
+      "sha256": "9f005422878ecef8e5cab4348af8e50b7009abfdc4a1f11fdb725762223426ae"
+    },
+    {
+      "filename": "NEMI_052_Sec.mp3",
+      "bytes": 9776684,
+      "sha256": "19379741cc2129961b797a8a41a37d51f900945fc3b8efdbeaf0b63400ba5d8b"
+    },
+    {
+      "filename": "KICH_BAN_EN_20m22s.txt",
+      "bytes": 23886,
+      "sha256": "0c79a2fd92a94e4d48006d32b2ff5f601e6130d52bba70708d3262a45545888a"
+    },
+    {
+      "filename": "KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 30956,
+      "sha256": "9279b632a41c652afe71587e9c5478d42e286da9547df296ddfcf0641f01078f"
+    },
+    {
+      "filename": "TIMELINE_123_CANH.csv",
+      "bytes": 57697,
+      "sha256": "5a2ee08dc4aa916a9775545e1bed2c4b749098e10bc80fcae60ee85cc5370d6d"
+    },
+    {
+      "filename": "5_TIEU_DE_5_PROMPT_THUMBNAIL.txt",
+      "bytes": 6001,
+      "sha256": "aa650893db592541744501fbd2a36f0464573f06b749bb2eead7b2da9b4ca31d"
+    },
+    {
+      "filename": "VOICE_PROFILES_LOCKED.json",
+      "bytes": 13143,
+      "sha256": "98e9aae11cd827b1239e1194d90f14a24c04d8ec14206b866255db5c66554553"
+    },
+    {
+      "filename": "VOICE_FILE_NAMING.json",
+      "bytes": 3206,
+      "sha256": "07d4ef95cf799a86a579410bc301ba6ca0c9977e8a4fc0d28aa5849c6815a345"
+    },
+    {
+      "filename": "NARRATION_STYLE_LOCKED.json",
+      "bytes": 1441,
+      "sha256": "4a6a6caf746d868a3e6447c3578300a7ca4576907dce4e1e944d92a61c368430"
+    },
+    {
+      "filename": "NARRATION_DELIVERY_PROFILE.json",
+      "bytes": 23233,
+      "sha256": "8e15ac521a61fbeabf915328372b1b3f527cd67c7147aa7f359576bd62949f2b"
+    },
+    {
+      "filename": "AUDIO_MANIFEST.json",
+      "bytes": 8719,
+      "sha256": "6c6762d4d07b85333c7c9b598b4140e84e7162ca57e7472eded0c5d1ec36acf3"
+    },
+    {
+      "filename": "AUDIO_SIGNAL_CHECK.json",
+      "bytes": 6446,
+      "sha256": "8979681fb108ab42b3cc07131e4bd98aa4401b690221b562fdc464590b4dc579"
+    },
+    {
+      "filename": "PROVIDER_TEXT_METADATA_AUDIT.json",
+      "bytes": 78092,
+      "sha256": "b7f79fa1545a41d12ff1ee5e7147c47b21f1cbc9f9ebd48cfdbe6becd74fb357"
+    },
+    {
+      "filename": "NATIVE_ENGINE_INPUT_PROVENANCE.json",
+      "bytes": 7922,
+      "sha256": "e029128d83037f99648d081ceb41ab68d7fcbb09859ed9a296979cc33a0a5fd0"
+    },
+    {
+      "filename": "GIONG_DA_LUU.txt",
+      "bytes": 1489,
+      "sha256": "646016f3c0477589fe978f4000156e5fa6467e0c234103838a0baa7a3b273583"
+    },
+    {
+      "filename": "PHAN_TICH_VIDEO_NGUON.txt",
+      "bytes": 2243,
+      "sha256": "4c2854e5db87bd61f8b3c3a034fc7ff067c0fc57e63d5688a2e34d1bc32e8039"
+    },
+    {
+      "filename": "NGUON_KIEM_CHUNG.txt",
+      "bytes": 6047,
+      "sha256": "7b2f9b97bc773a2d590f3c3b21e623918c48dac62817530b6a71c8312c81f5f2"
+    },
+    {
+      "filename": "VISUAL_STYLE_LOCKED.json",
+      "bytes": 817,
+      "sha256": "d5da7bede69fa54833e0e1f0664ecd8a3ae6e8effdbefae856d072935b6763f2"
+    },
+    {
+      "filename": "LOI_DAN_EN_202_CUES.srt",
+      "bytes": 30646,
+      "sha256": "f38ff452c601a93970410bf7cfdc85149a51d5a2e7f86e58ea48fa290bf677f8"
+    },
+    {
+      "filename": "01_PROMPTS_001_010.txt",
+      "bytes": 30474,
+      "sha256": "ae6f526d32366c3ad1a30822ccd1708cf3252c65abffb7a6d1affe0bbed55da6"
+    },
+    {
+      "filename": "02_PROMPTS_011_020.txt",
+      "bytes": 30618,
+      "sha256": "f7b9bcad5b34aa7add1e58c2c3c1a8a73fc7b27c39ef1efe321511ce01834b20"
+    },
+    {
+      "filename": "03_PROMPTS_021_030.txt",
+      "bytes": 30578,
+      "sha256": "bba2651bbb79cfa3a8b05a38fca492f830ce6d90887eb076907c1754ac565879"
+    },
+    {
+      "filename": "04_PROMPTS_031_040.txt",
+      "bytes": 30531,
+      "sha256": "4a8fb6f0d5ff2bc1f287b34c2c9ac104f2e0b325bf0e27a389b294e8bf168c8f"
+    },
+    {
+      "filename": "05_PROMPTS_041_050.txt",
+      "bytes": 30640,
+      "sha256": "4d0d139c5ef96092569e631fc1e5bc75c5e4c417e63e626a443b4546608ce131"
+    },
+    {
+      "filename": "06_PROMPTS_051_060.txt",
+      "bytes": 30678,
+      "sha256": "238634520bba17ed06238b0a580a718f37cdbe45f9b40ab471e13a50d8d570a4"
+    },
+    {
+      "filename": "07_PROMPTS_061_070.txt",
+      "bytes": 30878,
+      "sha256": "0a0cf33dc1ae36817d3f2c0dafa0418c75a8df6739726f9c239d589d4d7a3f92"
+    },
+    {
+      "filename": "08_PROMPTS_071_080.txt",
+      "bytes": 30817,
+      "sha256": "a6f35fd17d7d535c432f6ff9fc2fe5bdabadde22e11d5d058d99e72cb12fe01e"
+    },
+    {
+      "filename": "09_PROMPTS_081_090.txt",
+      "bytes": 30719,
+      "sha256": "0a849b41adc80a8f1ee3c3895a2ae15b012b53cca43badad4dea3bbd0604242f"
+    },
+    {
+      "filename": "10_PROMPTS_091_100.txt",
+      "bytes": 31170,
+      "sha256": "f296473d9b7fe1385772c53a2ffc97d21264606e6367132b43c26e5383378e23"
+    },
+    {
+      "filename": "11_PROMPTS_101_110.txt",
+      "bytes": 30817,
+      "sha256": "80d212948724f89e2e99c36afd1bf42a91a9b0a44d20ef6c6ba3b2f7e3cd9814"
+    },
+    {
+      "filename": "12_PROMPTS_111_120.txt",
+      "bytes": 31212,
+      "sha256": "69bc4573a2e85eea79682fd8914533a20786bc717a03deed9bf3f7aa4da30efd"
+    },
+    {
+      "filename": "13_PROMPTS_121_130.txt",
+      "bytes": 29803,
+      "sha256": "8cd8f882c758e1c26a849f0490b77d15f73deefff32e0b87e9be988c75c3d504"
+    }
+  ]
+}

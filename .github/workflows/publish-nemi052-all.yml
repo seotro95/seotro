@@ -1,0 +1,23 @@
+name: Publish requested Nemi052 documents and sixteen completed voices
+on:
+  push:
+    branches: [codex/nemi052-20m22s]
+    paths: ['deliveries/nemi052_voices/VOICE_EXPORT_READY.json']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /deliveries/nemi052_documents/
+            /deliveries/nemi052_voices/
+      - name: Verify completed files and publish requested downloads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python deliveries/nemi052_voices/publish_all.py

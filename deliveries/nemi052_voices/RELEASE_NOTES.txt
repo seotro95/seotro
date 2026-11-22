@@ -1,0 +1,43 @@
+NEMI 052 — CÔNG TRÌNH NỔI CỦA NGƯỜI LA MÃ — 20:22
+
+Tài liệu: https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_TAI_LIEU_20m22s.zip
+Đủ mười sáu voice nam: https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_16_VOICES_20m22s.zip
+Anh: https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_My_Tieng_Anh.mp3
+Việt Nam Minh: https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Viet_Nam.mp3
+Tiêu đề và thumbnail: https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/5_TIEU_DE_5_PROMPT_THUMBNAIL.txt
+
+Kịch bản Anh gốc: 3.692 từ, khoảng 181,28 từ/phút. Có 202 đoạn lời, dài 3–8 giây; các đoạn ngắn xen đoạn dài. Thời lượng cuối 1.222 giây. Giữ chủ đề Nemi đang làm và lấy thời lượng 20:22 ở phần ngoài cùng của yêu cầu mới nhất; phần mẫu bị dán lặp có chủ đề trống và mốc khác.
+
+Có 123 cảnh chính: 122 × 10 giây và một cảnh kết 2 giây. Sinh từng clip 10 giây. Riêng clip 123 lấy nguồn giây 8–10. Thêm 7 prompt dự phòng để đủ 130 prompt trong 13 TXT, mỗi TXT đúng 10 prompt, số liên tục 1–130. Tệp 13 chứa ba cảnh chính và bảy dự phòng. Dự phòng chỉ thay hình, không kéo dài video.
+
+Mỗi prompt đều yêu cầu video không có âm thanh, không có lời nói, không có hình trẻ em. Người nếu xuất hiện phải rõ từ 25 tuổi. Ưu tiên hồ, ngoại cảnh lịch sử, khảo cổ và mô hình kỹ thuật; không có phòng thí nghiệm hoặc nhà khoa học hiện đại. Các ô tư liệu lưu trữ cần được editor thay bằng ảnh thật có nguồn, kiểm tra quyền dùng và loại mọi hình trẻ em. Không gọi hình AI là tư liệu thật.
+
+Mở bằng một đầu sư tử đồng gắn thanh gỗ. Câu hỏi chính trước giây ba mươi; phát hiện sàn và ống nước từ giây năm mươi lăm. Các điểm neo kể chuyện cách nhau tối đa sáu mươi lăm giây trong thân bài. Nhịp giới hạn bằng chứng ở cuối từng phần, cách nhau ít nhất hai phút. Câu kết giữ một câu hỏi duy nhất về công dụng của từng tàu.
+
+Giữ mười sáu VoiceID nam từ tập Tunguska đã hoàn tất, gồm Việt Nam Minh và Anh Guy. Mỗi file âm thanh giải mã đúng 20:22, tương ứng 58.656.000 mẫu ở 48 kHz. Anh căn 202 đoạn; mười lăm bản địa hóa căn mười phần, gồm chín phần 120 giây và phần cuối 142 giây. Khớp tổng và ranh giới phần không đồng nghĩa từng câu dịch trùng từng cảnh mười giây.
+
+Việt, Nhật, Hàn do trợ lý chuyển ngữ và biên tập theo ngữ cảnh. Mười hai bản còn lại dùng bản dịch máy có rà thuật ngữ, mốc năm, số viết thành chữ và một số cách dùng địa phương. Chưa có nghe duyệt hoặc biên tập bản ngữ độc lập. Các đối chiếu metadata không thay thế nghe duyệt. Giọng giữ nguyên nhận dạng, không đổi cao độ; tốc độ và nhấn nhẹ được ghi trong hồ sơ.
+
+Hai tàu không có cùng sơ đồ; không gộp trang bị tùy tiện. Suetonius mô tả tàu ngoài Campania, không phải chứng cứ trực tiếp cho từng căn phòng Nemi. Không tự xác định thủ phạm cháy năm 1944. Mốc trưng bày tấm sàn năm 2021 không phải mặc nhiên là năm hồi hương. Bảo tàng có thông báo đóng cửa hiện tại; không hứa quyền vào tham quan.
+
+Bộ giao gồm kịch bản, prompt, voice và hồ sơ nguồn; không có video MP4 đã dựng hoặc footage đã sinh. Link GitHub chỉ được đánh dấu hoàn tất sau khi tải kiểm tra tệp thật, CRC ZIP và SHA256. Hồ sơ giọng và chỉ mục tải dùng lại cho các tập sau.
+
+
+| Quốc gia/ngôn ngữ | Giọng đã lưu | Tải riêng |
+|---|---|---|
+| Mỹ — tiếng Anh | en-US-GuyNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_My_Tieng_Anh.mp3) |
+| Việt Nam | vi-VN-NamMinhNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Viet_Nam.mp3) |
+| Tây Ban Nha | es-ES-AlvaroNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Tay_Ban_Nha.mp3) |
+| Pháp | fr-FR-HenriNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Phap.mp3) |
+| Nhật Bản | ja-JP-KeitaNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Nhat_Ban.mp3) |
+| Hàn Quốc | ko-KR-InJoonNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Han_Quoc.mp3) |
+| Đức | de-DE-ChristophNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Duc.mp3) |
+| Ý | it-IT-DiegoNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Y.mp3) |
+| Bồ Đào Nha | pt-PT-DuarteNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Bo_Dao_Nha.mp3) |
+| Hà Lan | nl-NL-MaartenNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Ha_Lan.mp3) |
+| Ba Lan | pl-PL-MarekNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Ba_Lan.mp3) |
+| Thụy Điển | sv-SE-MattiasNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Thuy_Dien.mp3) |
+| Đan Mạch | da-DK-JeppeNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Dan_Mach.mp3) |
+| Phần Lan | fi-FI-HarriNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Phan_Lan.mp3) |
+| Na Uy | nb-NO-FinnNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Na_Uy.mp3) |
+| Séc | cs-CZ-AntoninNeural | [MP3](https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Sec.mp3) |
