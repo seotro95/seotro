@@ -1,4 +1,4 @@
-name: Bosnia MOI096 publish verify and archive sixteen voices after pacing repair
+name: Bosnia MOI096 publish verify and archive complete matched voices
 on:
   push:
     branches: [codex/bosnia-moi096-production-20261121]
@@ -33,13 +33,13 @@ jobs:
           pattern: bosnia-moi096-voice-*
           path: voice_artifacts
           merge-multiple: false
-          run-id: 44929051692
+          run-id: 44969807966
           github-token: ${{ github.token }}
       - uses: actions/download-artifact@v4
         with:
           name: bosnia-moi096-voice-en-US
           path: voice_artifacts/bosnia-moi096-voice-en-US
-          run-id: 44928921203
+          run-id: 44929379914
           github-token: ${{ github.token }}
       - name: Decode and publish all sixteen complete voices
         run: python -u bosnia-moi096/publish_voices.py
