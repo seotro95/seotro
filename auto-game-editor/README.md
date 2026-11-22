@@ -1,12 +1,11 @@
 # Tự dựng highlight gameplay
 
-Thả một video dài vào cửa sổ. Công cụ chọn các đoạn có chuyển động và âm thanh nổi bật, ghép theo thứ tự gốc, rồi xen cảnh gameplay toàn khung với các cú zoom vào người chơi. Tệp `*-highlight.mp4` (720p, H.264/AAC) xuất cạnh video gốc.
+Công cụ quét bản ghi dài, chọn các đoạn nổi bật và tự ghép theo thứ tự gameplay. Đầu ra là các tệp MP4 720p cùng bảng thời gian cắt và zoom.
 
-## Cài một lần
+## Cài và chạy
 
-1. Cài Python 3 có Tkinter và FFmpeg có `libx264`. Thêm `ffmpeg` và `ffprobe` vào PATH để chạy được từ terminal.
-2. Tải tệp `auto_edit.py` trong thư mục này.
-3. Mở terminal ở thư mục vừa tải và chạy:
+1. Cài Python 3 có Tkinter và FFmpeg có libx264. Thêm `ffmpeg` và `ffprobe` vào PATH. Cài thêm **Tesseract OCR** và thêm vào PATH nếu muốn dùng chế độ tự nhận diện tên game.
+2. Tải `auto_edit.py`, mở terminal ở thư mục tải xuống và chạy:
 
    ```bash
    python -m pip install tkinterdnd2
@@ -15,20 +14,21 @@ Thả một video dài vào cửa sổ. Công cụ chọn các đoạn có chuy�
 
    Dùng `py` trên Windows hoặc `python3` trên macOS/Linux nếu lệnh `python` không có.
 
-4. Thả video vào ô **Thả một video vào đây**. Nút **Chọn video** cũng cho kết quả tương tự.
+3. Nhập **Số video** và **Phút mỗi video**, chọn game hoặc thể loại, rồi thả một MP4, MOV, MKV hoặc WebM vào cửa sổ. Dùng ô **Zoom facecam bên trái** nếu bản ghi có webcam giống video mẫu.
+4. Mở thư mục `<tên video>-highlights` cạnh tệp gốc. Mỗi video dùng các đoạn nguồn riêng. `timeline.csv` ghi mốc nguồn, mốc đầu ra, mốc zoom vào/ra và tín hiệu nổi bật.
 
-Chạy trực tiếp từ terminal mà không cần cài `tkinterdnd2`:
+Có thể chạy bằng dòng lệnh mà không cần cài `tkinterdnd2`:
 
 ```bash
-python auto_edit.py "video-dai.mp4"
+python auto_edit.py "ban-ghi-5-gio.mp4" --count 3 --minutes 8 --game Minecraft
 ```
 
-## Cách chọn cảnh
+## Cách chọn đoạn và dựng
 
-- Công cụ chấm điểm chuyển động ở vùng webcam và vùng game, kết hợp mức âm lượng, rồi chọn tối đa 7 đoạn khoảng 8 giây.
-- Zoom mặc định nhắm về phía trái, nơi đặt webcam trong video tham chiếu. Xen các cú cắt zoom nhanh và cú zoom tăng dần, sau đó trở lại khung toàn cảnh.
-- Phù hợp với video ngang có webcam nằm bên trái ở vị trí tương tự mẫu. Dựng từ video gốc để tránh zoom chồng lên các đoạn đã zoom. Công cụ ước lượng điểm nổi bật bằng chuyển động và âm lượng. Tiếng lớn hoặc chuyển động nhanh có thể được chọn kể cả khi đó không phải khoảnh khắc bạn muốn giữ.
-- Công cụ xử lý video trên máy của bạn.
+- Quét tuần tự toàn bộ bản ghi, lấy 2 mẫu chuyển động mỗi giây và phân tích âm lượng. Chấm điểm theo thể loại. Mỗi đoạn ghi tín hiệu mạnh nhất trong số phản ứng facecam, chuyển động gameplay và cao trào âm thanh. Đây là phân loại tín hiệu, chưa nhận diện được các sự kiện như hạ gục hoặc thắng trận.
+- Chế độ **Tự nhận diện** dùng OCR để tìm tên game trong danh sách hỗ trợ ở tối đa sáu khung hình. Nếu thiếu bằng chứng hoặc chưa cài OCR, công cụ báo chưa nhận diện và dùng cấu hình Tổng hợp. Bạn có thể chọn game, nhập tên hoặc chọn thể loại trước khi thả tệp.
+- Dựng theo nhịp video tham chiếu. Giữ cảnh rộng, xen cú cắt hoặc zoom lên khoảng 1,85× hay 1,95× về phía facecam, dùng một số đoạn cận khoảng 4,23×, rồi trở về toàn cảnh. Cú cận kéo dài khoảng 1,4–1,7 giây. Dùng video gốc, camera nằm bên trái, để hiệu ứng gần mẫu nhất.
+- Công cụ xử lý trên máy, đọc bản ghi theo luồng và lưu các đặc trưng nhẹ để lập kế hoạch. Thời gian quét phụ thuộc vào codec, độ phân giải và CPU. Tổng thời lượng yêu cầu cần nằm trong thời lượng nguồn để các video đầu ra không dùng lại đoạn.
 
 ## Quét chuyển cảnh theo từng giây
 
