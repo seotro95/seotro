@@ -4,12 +4,12 @@ Công cụ quét bản ghi dài, chọn các đoạn nổi bật và tự ghép 
 
 ## Bản tải cho Windows
 
-[Tải tệp ZIP](auto-game-editor-windows.zip) và giải nén toàn bộ. Mở **Kiem-tra.cmd** để xem thành phần còn thiếu, hoặc **Cai-dat.cmd** để cài qua winget. Khi đã cài xong, mở **Khoi-dong.cmd** để chạy. Gói ZIP đã có sẵn thư viện kéo thả.
+[Tải tệp ZIP](auto-game-editor-windows.zip), giải nén toàn bộ rồi mở **Cai-dat.cmd**. Tệp này cài các phụ thuộc còn thiếu, tải bộ nhận diện âm thanh, tạo lối tắt **Auto Game Editor** trên Desktop và mở cửa sổ công cụ. Giữ thư mục giải nén để lối tắt tiếp tục hoạt động. Dùng **Kiem-tra.cmd** để kiểm tra hoặc **Khoi-dong.cmd** để mở lại.
 
 ## Cài và chạy
 
 1. Cài Python 3 có Tkinter và FFmpeg có libx264. Thêm `ffmpeg` và `ffprobe` vào PATH. Cài thêm **Tesseract OCR** và thêm vào PATH nếu muốn dùng chế độ tự nhận diện tên game.
-2. Tải `auto_edit.py`, mở terminal ở thư mục tải xuống và chạy:
+2. Tải và giải nén ZIP để có các tệp Python và ảnh hiệu ứng. Mở terminal trong thư mục giải nén và chạy:
 
    ```bash
    python -m pip install tkinterdnd2
@@ -18,20 +18,22 @@ Công cụ quét bản ghi dài, chọn các đoạn nổi bật và tự ghép 
 
    Dùng `py` trên Windows hoặc `python3` trên macOS/Linux nếu lệnh `python` không có.
 
-3. Nhập **Số video** và **Phút mỗi video**, chọn game hoặc thể loại, rồi thả một MP4, MOV, MKV hoặc WebM vào cửa sổ. Dùng ô **Zoom facecam bên trái** nếu bản ghi có webcam giống video mẫu.
-4. Mở thư mục `<tên video>-highlights` cạnh tệp gốc. Mỗi video dùng các đoạn nguồn riêng. `timeline.csv` ghi mốc nguồn, mốc đầu ra, mốc zoom vào/ra và tín hiệu nổi bật.
+3. Nhập **Số video** và **Phút mặc định**. Dùng **Chỉnh phút từng video…** để đặt thời lượng riêng và **Chọn thư mục lưu…** để chọn nơi xuất. Chọn game hoặc thể loại, rồi thả một tệp MP4, MOV, MKV hoặc WebM vào cửa sổ. Bật **Zoom facecam bên trái** nếu bản ghi có webcam giống video mẫu.
+4. Mở thư mục `<tên video>-highlights` tại nơi đã chọn. Nếu chưa chọn thư mục, kết quả nằm cạnh video gốc. `timeline.csv` ghi các đoạn nguồn và `effects.csv` ghi các mốc hiệu ứng.
 
 Có thể chạy bằng dòng lệnh mà không cần cài `tkinterdnd2`:
 
 ```bash
-python auto_edit.py "ban-ghi-5-gio.mp4" --count 3 --minutes 8 --game Minecraft
+python auto_edit.py "ban-ghi-5-gio.mp4" --durations 3 5 8 --game Minecraft --output "D:/Video/Highlight"
 ```
 
 ## Cách chọn đoạn và dựng
 
 - Quét tuần tự toàn bộ bản ghi, lấy 2 mẫu chuyển động mỗi giây và phân tích âm lượng. Chấm điểm theo thể loại. Mỗi đoạn ghi tín hiệu mạnh nhất trong số phản ứng facecam, chuyển động gameplay và cao trào âm thanh. Đây là phân loại tín hiệu, chưa nhận diện được các sự kiện như hạ gục hoặc thắng trận.
 - Chế độ **Tự nhận diện** dùng OCR để tìm tên game trong danh sách hỗ trợ ở tối đa sáu khung hình. Nếu thiếu bằng chứng hoặc chưa cài OCR, công cụ báo chưa nhận diện và dùng cấu hình Tổng hợp. Bạn có thể chọn game, nhập tên hoặc chọn thể loại trước khi thả tệp.
-- Dựng theo nhịp video tham chiếu. Giữ cảnh rộng, xen cú cắt hoặc zoom lên khoảng 1,85× hay 1,95× về phía facecam, dùng một số đoạn cận khoảng 4,23×, rồi trở về toàn cảnh. Cú cận kéo dài khoảng 1,4–1,7 giây. Dùng video gốc, camera nằm bên trái, để hiệu ứng gần mẫu nhất.
+- Chọn 5–6 đoạn mỗi video (video dưới 25 giây có thể dùng ít hơn). Giữ thứ tự nguồn và ưu tiên nhóm có cao trào, độ sáng qua điểm nối phù hợp và khoảng bỏ 3–60 giây khi nguồn đủ dài.
+- Trước điểm cắt, công cụ ưu tiên cận facecam 3 giây, rồi về rộng 2 giây. Khi phát hiện lời nói kéo dài khoảng 6 giây, công cụ dùng cú cận riêng 2 giây. Với webcam chiếm 20% chiều ngang ảnh gốc, độ phóng khoảng 3,5× tương ứng gần 70% chiều ngang ảnh đầu ra. Tại phút 1, 2, 3… của mỗi video, khung hình dịch xuống mép dưới khoảng 3 giây rồi trở lại. Khi các hiệu ứng cùng mốc, công cụ ưu tiên góc mép dưới và đoạn nói dài rồi dời cặp cận/rộng vào phần trống.
+- YAMNet nhận diện tiếng cười hoặc tiếng khóc và hiện mặt tương ứng đúng 1 giây. Mô hình phân loại âm thanh, nên có thể nhầm tiếng trong game hoặc bỏ sót câu đùa không phát ra tiếng cười. Nếu bộ nhận diện chưa cài, công cụ vẫn dựng video với hiệu ứng theo nhịp thông thường. Cài thủ công ngoài Windows bằng `python -m pip install "ai-edge-litert>=2.1,<3"` rồi `python audio_events.py --setup` (Python 3.10 trở lên).
 - Công cụ xử lý trên máy, đọc bản ghi theo luồng và lưu các đặc trưng nhẹ để lập kế hoạch. Thời gian quét phụ thuộc vào codec, độ phân giải và CPU. Tổng thời lượng yêu cầu cần nằm trong thời lượng nguồn để các video đầu ra không dùng lại đoạn.
 
 ## Quét chuyển cảnh theo từng giây

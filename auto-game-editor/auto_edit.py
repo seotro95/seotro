@@ -4,6 +4,9 @@ from array import array
 from collections import defaultdict
 import csv
 from contextlib import closing
+
+from audio_events import AudioEvents
+from editing import events_for_shot, framing_filter, select_shots, time_test
 import json
 import math
 from pathlib import Path
@@ -41,6 +44,7 @@ GAMES = {
     "Forza Horizon": "Đua xe / Thể thao",
     "EA Sports FC": "Đua xe / Thể thao",
 }
+ASSETS = Path(__file__).resolve().parent / "editor-assets"
 AUTO = "Tự nhận diện"
 FACE = [y * WIDTH + x for y in range(7, 20, 2) for x in range(1, 17, 2)]
 GAME = [y * WIDTH + x for y in range(5, 40, 3) for x in range(22, 76, 3)]
@@ -112,7 +116,7 @@ def scan(source, index, audio_index, duration, report):
         if previous is not None:
             face = sum(abs(frame[j] - previous[j]) for j in FACE) / len(FACE)
             game = sum(abs(frame[j] - previous[j]) for j in GAME) / len(GAME)
-        features.append([face, game, 0.0])
+        features.append([face, game, 0.0, sum(frame[::32]) / len(frame[::32])])
         previous = frame
         if i and i % 600 == 0:
             report(f"Đang đọc hình ảnh · {min(100, int(i/RATE/duration*100))}%")
@@ -138,77 +142,63 @@ def scan(source, index, audio_index, duration, report):
     return features
 
 
-def plan(features, duration, count, seconds, profile, has_facecam):
+def plan(features, duration, lengths, profile, has_facecam):
     weights = PROFILES[profile]
     baselines = []
     for column, floor in enumerate((1.5, 2.0, 120.0)):
         values = sorted(row[column] for row in features)
         baselines.append(max(floor, values[len(values)*3//4]))
-    scores = []
-    for face, game, volume in features:
+    scores, light, labels = [], [], []
+    for second in range(min(math.floor(duration), len(features) // RATE)):
+        section = features[second*RATE:(second+1)*RATE]
+        face, game, volume, brightness = [sum(series)/RATE for series in zip(*section)]
         signals = (face if has_facecam else 0, game, volume)
         parts = [weight * min(4.0, value/base)
                  for value, base, weight in zip(signals, baselines, weights)]
-        scores.append((sum(parts), max(range(3), key=parts.__getitem__)))
-    length_count = max(1, math.ceil(seconds / 18))
-    short, extras = divmod(seconds, length_count)
-    lengths = [short+1] * extras + [short] * (length_count-extras)
-    pool = defaultdict(list)
-    for cycle_start in range(0, math.floor(duration)-seconds+1, seconds):
-        start = cycle_start
-        for length in lengths:
-            first = start * RATE
-            last = min(len(scores), (start + length) * RATE)
-            if first < last:
-                eligible = range(min(last-1, first+RATE), max(min(last-1, first+RATE)+1, last-RATE))
-                peak = max(eligible, key=lambda i: sum(s[0] for s in scores[max(first,i-1):min(last,i+2)]))
-                score = sum(s[0] for s in scores[max(first,peak-1):min(last,peak+2)]) / 3
-                pool[length].append((score, start, length, peak/RATE-start, LABELS[scores[peak][1]]))
-            start += length
-    for length in pool:
-        pool[length].sort(reverse=True)
-    if any(len(pool[length]) < count * lengths.count(length) for length in set(lengths)):
-        raise ValueError("Không đủ khung hình cho số lượng và thời lượng đã yêu cầu.")
-    outputs = [[] for _ in range(count)]
-    for length in set(lengths):
-        for i, clip in enumerate(pool[length][:count * lengths.count(length)]):
-            outputs[i % count].append(clip)
-    return [sorted(clips, key=lambda clip: clip[1]) for clips in outputs]
+        scores.append(sum(parts))
+        light.append(brightness)
+        labels.append(LABELS[max(range(3), key=parts.__getitem__)])
+    return select_shots(scores, light, labels, lengths)
 
 
-def render_clip(source, path, index, audio_index, clip, serial, facecam):
-    _, start, length, peak, label = clip
-    onset = max(.10, min(peak - .40, length-1.8))
-    hold = min(1.7 if serial % 4 == 2 else 1.43, length-onset)
-    zoom = facecam and length >= 2
-    factor = 4.23 if serial % 4 == 2 else (1.95 if serial % 4 == 1 else 1.85)
-    ramp = .22 if serial % 4 == 1 else .001
+def render_clip(source, path, index, audio_index, shot, effects):
+    start, length = shot.start, shot.length
     filters = ("fps=30,scale=1280:720:force_original_aspect_ratio=decrease:"
                "force_divisible_by=2,pad=1280:720:(ow-iw)/2:(oh-ih)/2,setsar=1")
-    if zoom:
-        progress = f"clip((on/30-{onset:.3f})/{ramp},0,1)"
-        curve = f"if(between(on/30,{onset:.3f},{onset+hold:.3f}),1+{factor-1}*(1-cos(PI*{progress}))/2,1)"
-        filters += (f",zoompan=z='{curve}':x='clip(iw*.10-iw/zoom*.44,0,iw-iw/zoom)':"
-                    "y='clip(ih*.31-ih/zoom*.49,0,ih-ih/zoom)':d=1:s=1280x720:fps=30")
+    filters += framing_filter(effects) + ",tpad=stop_mode=clone:stop_duration=1"
     command = FF + ["-ss", str(start), "-i", str(source)]
     if audio_index is None:
         command += ["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo"]
-    command += ["-map", f"0:{index}", "-map", f"0:{audio_index}" if audio_index is not None else "1:a:0",
-                "-vf", filters + ",tpad=stop_mode=clone:stop_duration=1",
-                "-af", f"apad,afade=t=in:d=0.025,afade=t=out:st={max(0,length-.04)}:d=0.04",
-                "-t", str(length), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
-                "-pix_fmt", "yuv420p", "-threads", "4", "-c:a", "aac", "-ar", "48000",
-                "-ac", "2", str(path)]
-    subprocess.run(command, check=True)
-    return (round(onset, 3), round(onset+hold, 3), factor) if zoom else ("", "", "")
+    graph = [f"[0:{index}]{filters}[frame0]"]
+    layers = 0
+    for name in ("laugh", "cry"):
+        times = "+".join(time_test(e.start, e.end, "t") for e in effects if e.name == name)
+        if not times:
+            continue
+        input_index = layers + (1 if audio_index is not None else 2)
+        command += ["-i", str(ASSETS / (name + ".png"))]
+        graph.append(f"[frame{layers}][{input_index}:v]overlay=W-w-30:30:enable='{times}'[frame{layers+1}]")
+        layers += 1
+    with tempfile.TemporaryDirectory(dir=path.parent) as folder:
+        # Một số video dài có nhiều hiệu ứng, lưu filter vào tệp để tránh giới hạn lệnh Windows.
+        script = Path(folder) / "filters.txt"
+        script.write_text(";".join(graph), encoding="ascii")
+        command += ["-filter_complex_threads", "1", "-filter_complex_script", str(script),
+                    "-map", f"[frame{layers}]",
+                    "-map", f"0:{audio_index}" if audio_index is not None else "1:a:0",
+                    "-af", f"apad,afade=t=in:d=0.025,afade=t=out:st={max(0,length-.04)}:d=0.04",
+                    "-t", str(length), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+                    "-pix_fmt", "yuv420p", "-threads", "4", "-c:a", "aac", "-ar", "48000",
+                    "-ac", "2", str(path)]
+        subprocess.run(command, check=True)
 
 
-def edit(source, destination, count, minutes, game, facecam=True, report=print):
-    if count < 1 or not math.isfinite(minutes) or minutes <= 0:
-        raise ValueError("Số video và số phút phải lớn hơn 0.")
-    seconds = round(minutes * 60)
-    if not seconds:
-        raise ValueError("Thời lượng tối thiểu là một giây.")
+def edit(source, destination, count, minutes, game, facecam=True, report=print, durations=None):
+    minutes_by_video = list(durations) if durations is not None else [minutes] * count
+    if not minutes_by_video or any(not math.isfinite(m) or m < 1/60 for m in minutes_by_video):
+        raise ValueError("Mỗi video cần ít nhất một giây.")
+    lengths = [round(m * 60) for m in minutes_by_video]
+    count = len(lengths)
     info = json.loads(subprocess.check_output([
         "ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(source)
     ]))
@@ -221,52 +211,64 @@ def edit(source, destination, count, minutes, game, facecam=True, report=print):
     duration = float(next((value for value in durations if value and value != "N/A"), 0))
     if not math.isfinite(duration) or duration <= 0:
         raise ValueError("Không đọc được thời lượng nguồn.")
-    if count * seconds > math.floor(duration):
-        raise ValueError(f"Cần ít nhất {count*seconds/60:.2f} phút nguồn để không dùng lại đoạn.")
+    if sum(lengths) > math.floor(duration):
+        raise ValueError(f"Cần ít nhất {sum(lengths)/60:.2f} phút nguồn để không dùng lại đoạn.")
     title, profile = game_profile(source, duration, video["index"], game, report)
     features = scan(source, video["index"], audio_index, duration, report)
-    timeline = plan(features, duration, count, seconds, profile, facecam)
+    timeline = plan(features, duration, lengths, profile, facecam)
     if destination.exists():
         raise FileExistsError(f"Đích đã tồn tại: {destination}")
+
+    audio_events = None
+    if audio_index is not None:
+        try:
+            audio_events = AudioEvents()
+        except (ImportError, OSError, RuntimeError, ValueError) as error:
+            report(f"Chưa có nhận diện giọng/cảm xúc. Chạy Cai-dat.cmd ({error}).")
 
     with tempfile.TemporaryDirectory(prefix=".highlight-", dir=destination.parent) as staging:
         stage = Path(staging)
         publish = stage / "result"
         publish.mkdir()
         rows = []
+        effect_rows = []
         for n, clips in enumerate(timeline, 1):
             with tempfile.TemporaryDirectory(dir=stage) as parts:
                 folder = Path(parts)
                 offset = 0
                 for i, clip in enumerate(clips):
                     report(f"{title} · Đang dựng video {n}/{count}, đoạn {i+1}/{len(clips)}")
-                    a, b, scale = render_clip(source, folder/f"{i}.mp4", video["index"],
-                                              audio_index, clip, i, facecam)
-                    _, start, length, _, label = clip
-                    rows.append([n, offset, offset+length, start, start+length,
-                                 "" if a == "" else round(offset+a, 3),
-                                 "" if b == "" else round(offset+b, 3), scale, label, title, profile])
-                    offset += length
+                    speech, stickers = audio_events.read(source, audio_index, clip.start, clip.length) if audio_events else ([], [])
+                    effects = events_for_shot(clip.length, offset, lengths[n-1], facecam, speech, stickers)
+                    render_clip(source, folder/f"{i}.mp4", video["index"], audio_index, clip, effects)
+                    rows.append([n, offset, offset+clip.length, clip.start, clip.start+clip.length,
+                                 clip.label, title, profile])
+                    effect_rows.extend([n, e.name, offset+e.start, offset+e.end, e.zoom] for e in effects)
+                    offset += clip.length
                 listing = folder/"clips.txt"
-                listing.write_text("".join(f"file '{i}.mp4'\nduration {clip[2]}\n"
+                listing.write_text("".join(f"file '{i}.mp4'\nduration {clip.length}\n"
                                            for i, clip in enumerate(clips)), encoding="utf-8")
                 subprocess.run(FF + ["-f", "concat", "-safe", "1", "-i", str(listing),
                     "-c", "copy", "-movflags", "+faststart", str(publish/f"highlight-{n:02}.mp4")], check=True)
         with (publish/"timeline.csv").open("w", encoding="utf-8-sig", newline="") as output:
             writer = csv.writer(output)
             writer.writerow(["Video", "Đầu ra bắt đầu (s)", "Đầu ra kết thúc (s)",
-                "Nguồn bắt đầu (s)", "Nguồn kết thúc (s)", "Vào zoom (s)", "Về toàn cảnh (s)",
-                "Mức zoom", "Tín hiệu nổi bật", "Game", "Thể loại"])
+                "Nguồn bắt đầu (s)", "Nguồn kết thúc (s)", "Tín hiệu nổi bật", "Game", "Thể loại"])
             writer.writerows(rows)
+        with (publish/"effects.csv").open("w", encoding="utf-8-sig", newline="") as output:
+            writer = csv.writer(output)
+            writer.writerow(["Video", "Hiệu ứng", "Bắt đầu (s)", "Kết thúc (s)", "Mức zoom"])
+            writer.writerows(effect_rows)
         publish.rename(destination)
     report(f"Xong {count} video · {title} · {destination}")
 
 
-def destination_for(source):
-    folder = source.with_name(f"{source.stem}-highlights")
+def destination_for(source, parent=None):
+    parent = parent or source.parent
+    folder = parent / f"{source.stem}-highlights"
     number = 2
     while folder.exists():
-        folder = source.with_name(f"{source.stem}-highlights-{number}")
+        folder = parent / f"{source.stem}-highlights-{number}"
         number += 1
     return folder
 
@@ -280,7 +282,7 @@ def gui():
 
     root = TkinterDnD.Tk()
     root.title("Tự dựng highlight gameplay")
-    root.minsize(580, 390)
+    root.minsize(620, 465)
     root.configure(bg="#111827")
     messages = Queue()
     busy = False
@@ -289,13 +291,17 @@ def gui():
     game = tk.StringVar(value=AUTO)
     facecam = tk.BooleanVar(value=True)
     status = tk.StringVar(value="MP4, MOV, MKV hoặc WebM")
+    output_dir = tk.StringVar(value="")
+    output_label = tk.StringVar(value="Cạnh video gốc")
+    duration_label = tk.StringVar(value="Đang dùng số phút mặc định")
+    overrides = []
     tk.Label(root, text="Tự dựng highlight gameplay", bg="#111827", fg="#f9fafb",
              font=("Arial", 22, "bold")).pack(pady=(23, 14))
     settings = ttk.Frame(root, padding=12)
     settings.pack(fill="x", padx=28, pady=(0, 12))
     ttk.Label(settings, text="Số video").grid(row=0, column=0, sticky="w", padx=(0, 10))
     ttk.Spinbox(settings, from_=1, to=1000, textvariable=count, width=8).grid(row=0, column=1, sticky="w")
-    ttk.Label(settings, text="Phút mỗi video").grid(row=0, column=2, sticky="w", padx=(14, 8))
+    ttk.Label(settings, text="Phút mặc định").grid(row=0, column=2, sticky="w", padx=(14, 8))
     ttk.Entry(settings, textvariable=minutes, width=9).grid(row=0, column=3, sticky="w")
     ttk.Label(settings, text="Game / thể loại").grid(row=1, column=0, sticky="w", pady=8)
     ttk.Combobox(settings, values=(AUTO, *GAMES, *PROFILES), textvariable=game, width=28).grid(
@@ -304,6 +310,77 @@ def gui():
     ttk.Checkbutton(settings, text="Zoom facecam bên trái", variable=facecam).grid(
         row=2, column=0, columnspan=4, sticky="w"
     )
+    def choose_output():
+        current = output_dir.get()
+        path = filedialog.askdirectory(parent=root, initialdir=current or str(Path.home()), mustexist=True)
+        if path:
+            output_dir.set(path)
+            output_label.set(path)
+
+    def edit_durations():
+        try:
+            amount = int(count.get())
+            if not 1 <= amount <= 1000:
+                raise ValueError
+        except ValueError:
+            status.set("Nhập số video từ 1 đến 1000.")
+            return
+        dialog = tk.Toplevel(root)
+        dialog.title("Thời lượng từng video")
+        dialog.transient(root)
+        dialog.grab_set()
+        body = ttk.Frame(dialog, padding=14)
+        body.pack(fill="both", expand=True)
+        canvas = tk.Canvas(body, width=295, height=min(310, 38*amount), highlightthickness=0)
+        scrollbar = ttk.Scrollbar(body, orient="vertical", command=canvas.yview)
+        canvas.configure(yscrollcommand=scrollbar.set)
+        canvas.grid(row=0, column=0, sticky="nsew")
+        scrollbar.grid(row=0, column=1, sticky="ns")
+        fields = ttk.Frame(canvas, padding=(8, 4))
+        canvas.create_window((0, 0), window=fields, anchor="nw")
+        fields.bind("<Configure>", lambda _event: canvas.configure(scrollregion=canvas.bbox("all")))
+        variables = []
+        for i in range(amount):
+            value = overrides[i] if i < len(overrides) else ""
+            var = tk.StringVar(master=dialog, value=value)
+            variables.append(var)
+            ttk.Label(fields, text=f"Video {i+1}").grid(row=i, column=0, padx=(0, 20), pady=5)
+            ttk.Entry(fields, textvariable=var, width=12).grid(row=i, column=1, pady=5)
+            ttk.Label(fields, text="phút").grid(row=i, column=2, padx=8)
+        message = tk.StringVar(master=dialog, value="Để trống để dùng số phút mặc định.")
+        ttk.Label(body, textvariable=message).grid(row=1, column=0, columnspan=2, pady=(8, 2))
+
+        def save():
+            values = [var.get().strip() for var in variables]
+            try:
+                for value in values:
+                    if value:
+                        read_minutes(value)
+            except ValueError:
+                message.set("Mỗi thời lượng phải từ một giây trở lên.")
+                return
+            overrides[:] = values
+            duration_label.set(f"{sum(bool(value) for value in values)} video có thời lượng riêng")
+            dialog.destroy()
+
+        ttk.Button(body, text="Lưu thời lượng", command=save).grid(row=2, column=0, pady=(8, 0))
+        dialog.bind("<Escape>", lambda _event: dialog.destroy())
+
+    def read_minutes(value):
+        result = float(value.replace(",", "."))
+        if not math.isfinite(result) or result < 1/60:
+            raise ValueError
+        return result
+
+    ttk.Button(settings, text="Chỉnh phút từng video…", command=edit_durations).grid(
+        row=3, column=0, columnspan=2, sticky="w", pady=(8, 0))
+    ttk.Label(settings, textvariable=duration_label).grid(
+        row=3, column=2, columnspan=2, sticky="w", padx=(14, 0), pady=(8, 0))
+    ttk.Button(settings, text="Chọn thư mục lưu…", command=choose_output).grid(
+        row=4, column=0, columnspan=2, sticky="w", pady=(8, 0))
+    ttk.Label(settings, textvariable=output_label, wraplength=310).grid(
+        row=4, column=2, columnspan=2, sticky="w", padx=(14, 0), pady=(8, 0))
+
     zone = tk.Label(root, text="Thả một video vào đây", bg="#26354d", fg="#ffffff",
                     font=("Arial", 16), pady=21)
     zone.pack(fill="x", padx=28)
@@ -315,22 +392,24 @@ def gui():
             return
         try:
             amount = int(count.get())
-            length = float(minutes.get().replace(",", "."))
+            if not 1 <= amount <= 1000:
+                raise ValueError
+            values = (overrides + [""]*amount)[:amount]
+            lengths = [read_minutes(value or minutes.get()) for value in values]
             title = game.get().strip() or AUTO
             with_facecam = facecam.get()
-            if amount < 1 or not math.isfinite(length) or length <= 0:
-                raise ValueError()
         except ValueError:
-            status.set("Nhập số video nguyên dương và số phút lớn hơn 0.")
+            status.set("Nhập số video hợp lệ và thời lượng từ một giây trở lên.")
             return
         source = Path(path)
-        target = destination_for(source)
+        parent = Path(output_dir.get()) if output_dir.get() else None
+        target = destination_for(source, parent)
         busy = True
         status.set("Đang mở video…")
 
         def run():
             try:
-                edit(source, target, amount, length, title, with_facecam, messages.put)
+                edit(source, target, amount, lengths[0], title, with_facecam, messages.put, durations=lengths)
             except Exception as error:
                 status_detail = str(error)
                 if isinstance(error, subprocess.CalledProcessError):
@@ -364,6 +443,7 @@ def gui():
     zone.drop_target_register(DND_FILES)
     zone.dnd_bind("<<Drop>>", drop)
     ttk.Button(root, text="Chọn video", command=lambda: start(filedialog.askopenfilename())).pack()
+    root.after_idle(root.lift)
     poll()
     root.mainloop()
 
@@ -374,6 +454,7 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, help="Thư mục kết quả")
     parser.add_argument("--count", type=int, default=1)
     parser.add_argument("--minutes", type=float, default=1)
+    parser.add_argument("--durations", type=float, nargs="+", help="Số phút riêng của từng video")
     parser.add_argument("--game", default=AUTO, help="Tên game hoặc thể loại")
     parser.add_argument("--no-facecam", action="store_true")
     args = parser.parse_args()
@@ -383,7 +464,7 @@ if __name__ == "__main__":
         try:
             source = args.video.resolve()
             destination = (args.output or destination_for(source)).resolve()
-            edit(source, destination, args.count, args.minutes, args.game, not args.no_facecam)
+            edit(source, destination, args.count, args.minutes, args.game, not args.no_facecam, durations=args.durations)
         except (ValueError, OSError, RuntimeError, subprocess.CalledProcessError) as error:
             parser.exit(1, f"{error}\n")
     else:
