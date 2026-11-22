@@ -1,0 +1,30 @@
+{
+  "style_id": "science-documentary-expressive-v1",
+  "applies_to": "Topic 3 and subsequent topics unless changed by user",
+  "user_request": "Giữ16giọngnam,NamMinhViệt;voiceđọcnhanhhơnmộtchút",
+  "identity": "16 saved male online voices including Vietnamese Nam Minh",
+  "delivery": "Friendly clear documentary narration;approximately180–185Englishwords/minute;keep all16savedvoiceIDs,pitch and gentle emphasis.",
+  "online": {
+    "pitch": "+0Hz",
+    "segment_rate_percent_range": [
+      6,
+      13
+    ],
+    "word_accents_db": 1.2,
+    "max_accents_per_piece": 2,
+    "pause_seconds_range": [
+      0.07,
+      0.16
+    ],
+    "method": "Original Melo backend with documented Edge prosody/word-boundary adapter; pitch-preserving cue timing afterwards"
+  },
+  "timing": "1222seconds;English202variable3–10secondcues;15localized10sections9x120+142",
+  "limits": "Engine controls preserve saved voice identity and pitch. Independent native-language listening and proper-name review remain pending.",
+  "english_cue_strategy": "Complete immutable English cue per request using Guy;faithful smaller fallback only forprovider text/noaudio failures;pitch-preserving exact cue timing",
+  "episode": "052-Nemi-Ships",
+  "english_cues": 202,
+  "localized_chapters": 10,
+  "source": "16savedvoicesfromTunguska060;newNemi052narration",
+  "english_words_per_minute": 181.28,
+  "retain_slightly_faster_delivery_preference": true
+}

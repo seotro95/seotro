@@ -1,0 +1,167 @@
+{
+  "target_seconds": 1222,
+  "all_decoded_frames": 58656000,
+  "voices": [
+    {
+      "locale": "en-US",
+      "voice_id": "en-US-GuyNeural",
+      "min_post_tempo": 0.724,
+      "max_post_tempo": 1.5644,
+      "max_padding_seconds": 0.03625,
+      "mp3_sha256": "9061f695852d27d6117784f5dfebfa98af364d622f33f0d2da4cf8538be6000c",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "vi-VN",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "min_post_tempo": 0.9128450704225353,
+      "max_post_tempo": 1.0011,
+      "max_padding_seconds": 0.024875,
+      "mp3_sha256": "3b1761044fc3fa08c110c21442a4c9efc2e78b34bfb3a72d955d01ff1ff09359",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "es-ES",
+      "voice_id": "es-ES-AlvaroNeural",
+      "min_post_tempo": 1.20905,
+      "max_post_tempo": 1.3404833333333332,
+      "max_padding_seconds": 0.016875,
+      "mp3_sha256": "b9c940f162b92aa129ad216dcdf00787da358d2f1d3ab15decad1efb355389a6",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "fr-FR",
+      "voice_id": "fr-FR-HenriNeural",
+      "min_post_tempo": 1.07245,
+      "max_post_tempo": 1.2064833333333334,
+      "max_padding_seconds": 0.019791666666666666,
+      "mp3_sha256": "7aae194bf0f7106ff99ec169ecf602b548a9b34797552f3b8be5953757b81bd9",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "ja-JP",
+      "voice_id": "ja-JP-KeitaNeural",
+      "min_post_tempo": 0.9639833333333333,
+      "max_post_tempo": 1.0815833333333333,
+      "max_padding_seconds": 0.022875,
+      "mp3_sha256": "6c55f5f5e6317212094e1e586e701d39cd30c90dcba219606348966b85178045",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "ko-KR",
+      "voice_id": "ko-KR-InJoonNeural",
+      "min_post_tempo": 1.0585352112676056,
+      "max_post_tempo": 1.1605333333333334,
+      "max_padding_seconds": 0.0199375,
+      "mp3_sha256": "90f9c209c5a4b12d792c2088cae0162c68e0c5b0800340d5a06e3866791ddc8f",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "de-DE",
+      "voice_id": "de-DE-ChristophNeural",
+      "min_post_tempo": 1.23445,
+      "max_post_tempo": 1.3864833333333333,
+      "max_padding_seconds": 0.01633333333333333,
+      "mp3_sha256": "3177e7744e98254bbd15ec9539f49b307746c5641e14fc17df2d76935f998aef",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "it-IT",
+      "voice_id": "it-IT-DiegoNeural",
+      "min_post_tempo": 1.29145,
+      "max_post_tempo": 1.4632833333333333,
+      "max_padding_seconds": 0.015125,
+      "mp3_sha256": "b3671dad73f68f50b05ed957e8763fc4e1d0027c84f7d48865deb6e3cb40e748",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "pt-PT",
+      "voice_id": "pt-PT-DuarteNeural",
+      "min_post_tempo": 1.05965,
+      "max_post_tempo": 1.1502833333333333,
+      "max_padding_seconds": 0.0200625,
+      "mp3_sha256": "03999436f71c530fac316695f8354e842cee9dce759c56defe513f5cfe3311a8",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "nl-NL",
+      "voice_id": "nl-NL-MaartenNeural",
+      "min_post_tempo": 1.15305,
+      "max_post_tempo": 1.2696833333333333,
+      "max_padding_seconds": 0.0180625,
+      "mp3_sha256": "bc31ac5921a95d8d958686f987d7ade6ca21ca1457c54ec1641dd886996fa35d",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "pl-PL",
+      "voice_id": "pl-PL-MarekNeural",
+      "min_post_tempo": 1.13305,
+      "max_post_tempo": 1.2601,
+      "max_padding_seconds": 0.0185,
+      "mp3_sha256": "074417667525769a99c5f481a577ae030ed5e988cb93e5eb2fb67f97d94b9199",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "sv-SE",
+      "voice_id": "sv-SE-MattiasNeural",
+      "min_post_tempo": 1.33785,
+      "max_post_tempo": 1.4781,
+      "max_padding_seconds": 0.014125,
+      "mp3_sha256": "c6525c2ce03a118af12f1b2c8d162a36fa1f63e4adfb12d22c4577e1fd3cfa28",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "da-DK",
+      "voice_id": "da-DK-JeppeNeural",
+      "min_post_tempo": 1.10865,
+      "max_post_tempo": 1.2229,
+      "max_padding_seconds": 0.019020833333333334,
+      "mp3_sha256": "25b1ac291869c599f648654fde5ed704e3c73a7be9d72ec83a8fa738c83229c7",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "fi-FI",
+      "voice_id": "fi-FI-HarriNeural",
+      "min_post_tempo": 1.1983098591549295,
+      "max_post_tempo": 1.3333,
+      "max_padding_seconds": 0.016979166666666667,
+      "mp3_sha256": "1a6712eb9ec86c5ac462f40c5d9d7531b7ef4aaaadf6a05e59383aa05de343bf",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "nb-NO",
+      "voice_id": "nb-NO-FinnNeural",
+      "min_post_tempo": 1.13225,
+      "max_post_tempo": 1.2471,
+      "max_padding_seconds": 0.018520833333333334,
+      "mp3_sha256": "9f005422878ecef8e5cab4348af8e50b7009abfdc4a1f11fdb725762223426ae",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "cs-CZ",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "min_post_tempo": 1.07105,
+      "max_post_tempo": 1.2003,
+      "max_padding_seconds": 0.0198125,
+      "mp3_sha256": "19379741cc2129961b797a8a41a37d51f900945fc3b8efdbeaf0b63400ba5d8b",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    }
+  ],
+  "independent_listening_review": false
+}

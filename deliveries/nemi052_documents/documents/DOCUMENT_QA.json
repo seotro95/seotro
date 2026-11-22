@@ -1,0 +1,20 @@
+{
+  "topic": "052-Nemi-Ships",
+  "target_seconds": 1222,
+  "english_words": 3692,
+  "english_cues": 202,
+  "main_scenes": 123,
+  "optional_scenes": 7,
+  "prompts": 130,
+  "prompt_txt_files": 13,
+  "narration_text_languages": 16,
+  "all_voice_ids_match_previous_episode": true,
+  "all_spoken_numbers_words": true,
+  "clip_silence_and_no_children_clauses_verified": true,
+  "last_clip_source_range": [
+    8,
+    10
+  ],
+  "lab_scenes": 0,
+  "independent_native_listening_review": false
+}

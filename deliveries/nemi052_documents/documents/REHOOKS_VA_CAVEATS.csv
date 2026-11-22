@@ -1,0 +1,31 @@
+type,start,end,section,text
+rehook,0,,1,A bronze lion stares from the end of a beam. It once decorated a Roman ship.
+rehook,55,,1,"The first discovery is concrete: the recovered material included elaborate flooring and water pipes, not merely a story about a luxurious emperor."
+rehook,120,,2,"Look down from the rim of Lake Nemi. Wooded slopes surround the water, with ancient places of worship nearby."
+rehook,175,,2,"Take one stone from an imagined paved deck. Held in a hand, it feels quite unlike a light wooden board."
+rehook,240,,3,"Two plank edges face each other. A slot is cut into each edge, and a flat wooden connector fits between them."
+rehook,295,,3,Look along a row of plank seams. A surface that appears continuous from a distance contains many individual decisions.
+rehook,360,,4,A thin sheet of lead lies over the wooden surface. Small metal fasteners hold it against material beneath.
+rehook,415,,4,Look closely at the meeting edges of the metal sheets. Beneath the visible covering remain seams in the wooden shell.
+rehook,480,,5,"Set a small wooden hull in water. Add a weight, and watch it settle a little deeper into the surface."
+rehook,535,,5,"Move a weight toward one side of the model. The hull tilts, and the immersed shape changes with it."
+rehook,600,,6,"An anchor appears in the mud with part of its rope still preserved. Here, a familiar object answers a specific engineering problem."
+rehook,655,,6,Return to the surface and look beside the hull. Large steering oars provide another way to influence a vessel's movement.
+rehook,720,,7,A lead pipe is a small object with a large implication: water was being managed within an elaborately equipped vessel.
+rehook,775,,7,"Now open a Roman text. Suetonius describes extravagant ships associated with Caligula, including architectural luxuries aboard."
+rehook,840,,8,"In fourteen forty six, an attempt associated with Leon Battista Alberti tried to recover one of the submerged ships."
+rehook,895,,8,"The new obstacle lay around the ships. As the level dropped, parts of the lake's banks became unstable."
+rehook,960,,9,"In nineteen forty four, fire destroyed the two ancient wooden hulls in the museum built to house them."
+rehook,1015,,9,There is another history inside the images. The recovery became a public spectacle under Italy's Fascist regime.
+rehook,1080,,10,Return to the lion at the end of its beam. The ornament is now the beginning of a path through the structure.
+rehook,1145,,10,"Now imagine looking from the bank across a broad deck. The hills frame the water, and the vessel changes how the setting is experienced."
+caveat,110,115,1,The fittings are real; the complete appearance above the decks remains partly reconstructed.
+caveat,230,235,2,"The lakeside setting suggests possibilities, but it does not establish each vessel's exact purpose."
+caveat,350,355,3,Recorded joints show construction principles; they do not preserve every step of the building sequence.
+caveat,470,475,4,"The covering is documented, but its exact performance cannot be read from appearance alone."
+caveat,590,595,5,"These physical principles explain support, not a precise loading limit for either ancient ship."
+caveat,710,715,6,Equipment constrains possible handling; it does not reveal every maneuver or operating procedure.
+caveat,830,835,7,The fittings establish luxury; exact activities and the use of individual spaces remain interpretations.
+caveat,950,955,8,"Recovery records document exposed remains, not an untouched vessel preserved exactly as originally built."
+caveat,1070,1075,9,The surviving record leaves gaps; it does not justify inventing an exact cause of the fire.
+caveat,1210,1216,10,The engineering is increasingly readable; the precise role of each vessel is less certain.

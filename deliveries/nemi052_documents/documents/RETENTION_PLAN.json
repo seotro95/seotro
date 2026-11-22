@@ -1,0 +1,213 @@
+{
+  "english_words": 3692,
+  "duration_seconds": 1222,
+  "narration_cue_count": 202,
+  "cue_duration_counts": {
+    "5": 44,
+    "3": 3,
+    "6": 98,
+    "7": 51,
+    "8": 6
+  },
+  "sections": 10,
+  "section_seconds": [
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    142
+  ],
+  "central_question_before_30_seconds": 14,
+  "early_payoff_seconds": 55,
+  "rehook_anchors": [
+    {
+      "time": 0,
+      "section": 1,
+      "part": "A",
+      "detail": "A bronze lion stares from the end of a beam. It once decorated a Roman ship."
+    },
+    {
+      "time": 55,
+      "section": 1,
+      "part": "B",
+      "detail": "The first discovery is concrete: the recovered material included elaborate flooring and water pipes, not merely a story about a luxurious emperor."
+    },
+    {
+      "time": 120,
+      "section": 2,
+      "part": "A",
+      "detail": "Look down from the rim of Lake Nemi. Wooded slopes surround the water, with ancient places of worship nearby."
+    },
+    {
+      "time": 175,
+      "section": 2,
+      "part": "B",
+      "detail": "Take one stone from an imagined paved deck. Held in a hand, it feels quite unlike a light wooden board."
+    },
+    {
+      "time": 240,
+      "section": 3,
+      "part": "A",
+      "detail": "Two plank edges face each other. A slot is cut into each edge, and a flat wooden connector fits between them."
+    },
+    {
+      "time": 295,
+      "section": 3,
+      "part": "B",
+      "detail": "Look along a row of plank seams. A surface that appears continuous from a distance contains many individual decisions."
+    },
+    {
+      "time": 360,
+      "section": 4,
+      "part": "A",
+      "detail": "A thin sheet of lead lies over the wooden surface. Small metal fasteners hold it against material beneath."
+    },
+    {
+      "time": 415,
+      "section": 4,
+      "part": "B",
+      "detail": "Look closely at the meeting edges of the metal sheets. Beneath the visible covering remain seams in the wooden shell."
+    },
+    {
+      "time": 480,
+      "section": 5,
+      "part": "A",
+      "detail": "Set a small wooden hull in water. Add a weight, and watch it settle a little deeper into the surface."
+    },
+    {
+      "time": 535,
+      "section": 5,
+      "part": "B",
+      "detail": "Move a weight toward one side of the model. The hull tilts, and the immersed shape changes with it."
+    },
+    {
+      "time": 600,
+      "section": 6,
+      "part": "A",
+      "detail": "An anchor appears in the mud with part of its rope still preserved. Here, a familiar object answers a specific engineering problem."
+    },
+    {
+      "time": 655,
+      "section": 6,
+      "part": "B",
+      "detail": "Return to the surface and look beside the hull. Large steering oars provide another way to influence a vessel's movement."
+    },
+    {
+      "time": 720,
+      "section": 7,
+      "part": "A",
+      "detail": "A lead pipe is a small object with a large implication: water was being managed within an elaborately equipped vessel."
+    },
+    {
+      "time": 775,
+      "section": 7,
+      "part": "B",
+      "detail": "Now open a Roman text. Suetonius describes extravagant ships associated with Caligula, including architectural luxuries aboard."
+    },
+    {
+      "time": 840,
+      "section": 8,
+      "part": "A",
+      "detail": "In fourteen forty six, an attempt associated with Leon Battista Alberti tried to recover one of the submerged ships."
+    },
+    {
+      "time": 895,
+      "section": 8,
+      "part": "B",
+      "detail": "The new obstacle lay around the ships. As the level dropped, parts of the lake's banks became unstable."
+    },
+    {
+      "time": 960,
+      "section": 9,
+      "part": "A",
+      "detail": "In nineteen forty four, fire destroyed the two ancient wooden hulls in the museum built to house them."
+    },
+    {
+      "time": 1015,
+      "section": 9,
+      "part": "B",
+      "detail": "There is another history inside the images. The recovery became a public spectacle under Italy's Fascist regime."
+    },
+    {
+      "time": 1080,
+      "section": 10,
+      "part": "A",
+      "detail": "Return to the lion at the end of its beam. The ornament is now the beginning of a path through the structure."
+    },
+    {
+      "time": 1145,
+      "section": 10,
+      "part": "B",
+      "detail": "Now imagine looking from the bank across a broad deck. The hills frame the water, and the vessel changes how the setting is experienced."
+    }
+  ],
+  "caveat_beats": [
+    {
+      "time": 110,
+      "end": 115,
+      "section": 1,
+      "text": "The fittings are real; the complete appearance above the decks remains partly reconstructed."
+    },
+    {
+      "time": 230,
+      "end": 235,
+      "section": 2,
+      "text": "The lakeside setting suggests possibilities, but it does not establish each vessel's exact purpose."
+    },
+    {
+      "time": 350,
+      "end": 355,
+      "section": 3,
+      "text": "Recorded joints show construction principles; they do not preserve every step of the building sequence."
+    },
+    {
+      "time": 470,
+      "end": 475,
+      "section": 4,
+      "text": "The covering is documented, but its exact performance cannot be read from appearance alone."
+    },
+    {
+      "time": 590,
+      "end": 595,
+      "section": 5,
+      "text": "These physical principles explain support, not a precise loading limit for either ancient ship."
+    },
+    {
+      "time": 710,
+      "end": 715,
+      "section": 6,
+      "text": "Equipment constrains possible handling; it does not reveal every maneuver or operating procedure."
+    },
+    {
+      "time": 830,
+      "end": 835,
+      "section": 7,
+      "text": "The fittings establish luxury; exact activities and the use of individual spaces remain interpretations."
+    },
+    {
+      "time": 950,
+      "end": 955,
+      "section": 8,
+      "text": "Recovery records document exposed remains, not an untouched vessel preserved exactly as originally built."
+    },
+    {
+      "time": 1070,
+      "end": 1075,
+      "section": 9,
+      "text": "The surviving record leaves gaps; it does not justify inventing an exact cause of the fire."
+    },
+    {
+      "time": 1210,
+      "end": 1216,
+      "section": 10,
+      "text": "The engineering is increasingly readable; the precise role of each vessel is less certain."
+    }
+  ],
+  "short_sentences_3_to_6_words": 54,
+  "measured_timing_repair": "research/EN_MEASURED_TIMING_REPAIR.json"
+}

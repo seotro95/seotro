@@ -1,0 +1,8 @@
+optional_clip,may_replace_scene,source_in,source_out,rule
+124,1,0,10,"Picture replacement only;keep original voice,section boundaries and total20:22"
+125,27,0,10,"Picture replacement only;keep original voice,section boundaries and total20:22"
+126,39,0,10,"Picture replacement only;keep original voice,section boundaries and total20:22"
+127,49,0,10,"Picture replacement only;keep original voice,section boundaries and total20:22"
+128,61,0,10,"Picture replacement only;keep original voice,section boundaries and total20:22"
+129,92,0,10,"Picture replacement only;keep original voice,section boundaries and total20:22"
+130,123,8,10,"Picture replacement only;keep original voice,section boundaries and total20:22"

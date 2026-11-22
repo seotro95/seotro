@@ -1,0 +1,568 @@
+{
+  "topic": "052-Nemi-Ships",
+  "duration_seconds": 1222,
+  "expected_samples_48000": 58656000,
+  "voice_ids_unchanged_from": "060-Tunguska",
+  "profile_set_id": "science-history-16-v4-namminh",
+  "vietnamese_voice": "vi-VN-NamMinhNeural",
+  "english_voice": "en-US-GuyNeural",
+  "voices": [
+    {
+      "locale": "en-US",
+      "voice_id": "en-US-GuyNeural",
+      "min_post_tempo": 0.724,
+      "max_post_tempo": 1.5644,
+      "max_padding_seconds": 0.03625,
+      "mp3_sha256": "9061f695852d27d6117784f5dfebfa98af364d622f33f0d2da4cf8538be6000c",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "vi-VN",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "min_post_tempo": 0.9128450704225353,
+      "max_post_tempo": 1.0011,
+      "max_padding_seconds": 0.024875,
+      "mp3_sha256": "3b1761044fc3fa08c110c21442a4c9efc2e78b34bfb3a72d955d01ff1ff09359",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "es-ES",
+      "voice_id": "es-ES-AlvaroNeural",
+      "min_post_tempo": 1.20905,
+      "max_post_tempo": 1.3404833333333332,
+      "max_padding_seconds": 0.016875,
+      "mp3_sha256": "b9c940f162b92aa129ad216dcdf00787da358d2f1d3ab15decad1efb355389a6",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "fr-FR",
+      "voice_id": "fr-FR-HenriNeural",
+      "min_post_tempo": 1.07245,
+      "max_post_tempo": 1.2064833333333334,
+      "max_padding_seconds": 0.019791666666666666,
+      "mp3_sha256": "7aae194bf0f7106ff99ec169ecf602b548a9b34797552f3b8be5953757b81bd9",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "ja-JP",
+      "voice_id": "ja-JP-KeitaNeural",
+      "min_post_tempo": 0.9639833333333333,
+      "max_post_tempo": 1.0815833333333333,
+      "max_padding_seconds": 0.022875,
+      "mp3_sha256": "6c55f5f5e6317212094e1e586e701d39cd30c90dcba219606348966b85178045",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "ko-KR",
+      "voice_id": "ko-KR-InJoonNeural",
+      "min_post_tempo": 1.0585352112676056,
+      "max_post_tempo": 1.1605333333333334,
+      "max_padding_seconds": 0.0199375,
+      "mp3_sha256": "90f9c209c5a4b12d792c2088cae0162c68e0c5b0800340d5a06e3866791ddc8f",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "de-DE",
+      "voice_id": "de-DE-ChristophNeural",
+      "min_post_tempo": 1.23445,
+      "max_post_tempo": 1.3864833333333333,
+      "max_padding_seconds": 0.01633333333333333,
+      "mp3_sha256": "3177e7744e98254bbd15ec9539f49b307746c5641e14fc17df2d76935f998aef",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "it-IT",
+      "voice_id": "it-IT-DiegoNeural",
+      "min_post_tempo": 1.29145,
+      "max_post_tempo": 1.4632833333333333,
+      "max_padding_seconds": 0.015125,
+      "mp3_sha256": "b3671dad73f68f50b05ed957e8763fc4e1d0027c84f7d48865deb6e3cb40e748",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "pt-PT",
+      "voice_id": "pt-PT-DuarteNeural",
+      "min_post_tempo": 1.05965,
+      "max_post_tempo": 1.1502833333333333,
+      "max_padding_seconds": 0.0200625,
+      "mp3_sha256": "03999436f71c530fac316695f8354e842cee9dce759c56defe513f5cfe3311a8",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "nl-NL",
+      "voice_id": "nl-NL-MaartenNeural",
+      "min_post_tempo": 1.15305,
+      "max_post_tempo": 1.2696833333333333,
+      "max_padding_seconds": 0.0180625,
+      "mp3_sha256": "bc31ac5921a95d8d958686f987d7ade6ca21ca1457c54ec1641dd886996fa35d",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "pl-PL",
+      "voice_id": "pl-PL-MarekNeural",
+      "min_post_tempo": 1.13305,
+      "max_post_tempo": 1.2601,
+      "max_padding_seconds": 0.0185,
+      "mp3_sha256": "074417667525769a99c5f481a577ae030ed5e988cb93e5eb2fb67f97d94b9199",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "sv-SE",
+      "voice_id": "sv-SE-MattiasNeural",
+      "min_post_tempo": 1.33785,
+      "max_post_tempo": 1.4781,
+      "max_padding_seconds": 0.014125,
+      "mp3_sha256": "c6525c2ce03a118af12f1b2c8d162a36fa1f63e4adfb12d22c4577e1fd3cfa28",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "da-DK",
+      "voice_id": "da-DK-JeppeNeural",
+      "min_post_tempo": 1.10865,
+      "max_post_tempo": 1.2229,
+      "max_padding_seconds": 0.019020833333333334,
+      "mp3_sha256": "25b1ac291869c599f648654fde5ed704e3c73a7be9d72ec83a8fa738c83229c7",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "fi-FI",
+      "voice_id": "fi-FI-HarriNeural",
+      "min_post_tempo": 1.1983098591549295,
+      "max_post_tempo": 1.3333,
+      "max_padding_seconds": 0.016979166666666667,
+      "mp3_sha256": "1a6712eb9ec86c5ac462f40c5d9d7531b7ef4aaaadf6a05e59383aa05de343bf",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "nb-NO",
+      "voice_id": "nb-NO-FinnNeural",
+      "min_post_tempo": 1.13225,
+      "max_post_tempo": 1.2471,
+      "max_padding_seconds": 0.018520833333333334,
+      "mp3_sha256": "9f005422878ecef8e5cab4348af8e50b7009abfdc4a1f11fdb725762223426ae",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    },
+    {
+      "locale": "cs-CZ",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "min_post_tempo": 1.07105,
+      "max_post_tempo": 1.2003,
+      "max_padding_seconds": 0.0198125,
+      "mp3_sha256": "19379741cc2129961b797a8a41a37d51f900945fc3b8efdbeaf0b63400ba5d8b",
+      "pitch_shift": false,
+      "independent_native_listening_review": false
+    }
+  ],
+  "alignment": "202variedEnglishcues;15localized10sections9x120+142;notword-for-wordor10secondcrosslanguagealignment",
+  "tool": "Melo-Viet-Studio1.3.1 online_backend pinned source,executed in Linux;not Windows GUI",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "localization": "OriginalEnglish;Vietnamese,Japanese,Korean contextualassistantadaptations;12MTdraftswithterminology,calendar,spoken-numberandregionalcontextreview;independentnativeeditorialandlisteningreviewpending",
+  "independent_native_listening_review": false,
+  "provider_metadata_check": "Allnormalizedinputtextmatched;notindependenttranscription",
+  "working_audio_storage": "RAM until verified public upload;then EN/VI durable local references",
+  "public_audio_reference_index": [
+    {
+      "locale": "en-US",
+      "country": "Mỹ — tiếng Anh",
+      "filename": "NEMI_052_My_Tieng_Anh.mp3",
+      "voice_id": "en-US-GuyNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "9061f695852d27d6117784f5dfebfa98af364d622f33f0d2da4cf8538be6000c",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "f790030edebe36d229c2df97d6256a134f1c5e5d4a5c9bd9a0da337df29e0c8a",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_My_Tieng_Anh.mp3"
+    },
+    {
+      "locale": "vi-VN",
+      "country": "Việt Nam",
+      "filename": "NEMI_052_Viet_Nam.mp3",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "3b1761044fc3fa08c110c21442a4c9efc2e78b34bfb3a72d955d01ff1ff09359",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "53f01f6ac7fa9885383f2368cd11b68bdbc02dc41fb6367a6b7e99514b9623e3",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Viet_Nam.mp3"
+    },
+    {
+      "locale": "es-ES",
+      "country": "Tây Ban Nha",
+      "filename": "NEMI_052_Tay_Ban_Nha.mp3",
+      "voice_id": "es-ES-AlvaroNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "b9c940f162b92aa129ad216dcdf00787da358d2f1d3ab15decad1efb355389a6",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "6b2b798bf2a529d23e797c8b4f31102fa6438edb76498a9a32d624e457eb5fcc",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Tay_Ban_Nha.mp3"
+    },
+    {
+      "locale": "fr-FR",
+      "country": "Pháp",
+      "filename": "NEMI_052_Phap.mp3",
+      "voice_id": "fr-FR-HenriNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "7aae194bf0f7106ff99ec169ecf602b548a9b34797552f3b8be5953757b81bd9",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "909dcf4f9513ed83b97271be47a61cc1a39683e098a6441cb90c84cbd127ebe3",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Phap.mp3"
+    },
+    {
+      "locale": "ja-JP",
+      "country": "Nhật Bản",
+      "filename": "NEMI_052_Nhat_Ban.mp3",
+      "voice_id": "ja-JP-KeitaNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "6c55f5f5e6317212094e1e586e701d39cd30c90dcba219606348966b85178045",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "ecafe1544c2a6f98cce47ad3a7b7292091804cbe5139eda58f1ae1eb32ddad3e",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Nhat_Ban.mp3"
+    },
+    {
+      "locale": "ko-KR",
+      "country": "Hàn Quốc",
+      "filename": "NEMI_052_Han_Quoc.mp3",
+      "voice_id": "ko-KR-InJoonNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "90f9c209c5a4b12d792c2088cae0162c68e0c5b0800340d5a06e3866791ddc8f",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "6759c0c7ceb9cff14fa4864a72fe9d54b41950013f159c240a1be9c8a0edf89e",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Han_Quoc.mp3"
+    },
+    {
+      "locale": "de-DE",
+      "country": "Đức",
+      "filename": "NEMI_052_Duc.mp3",
+      "voice_id": "de-DE-ChristophNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "3177e7744e98254bbd15ec9539f49b307746c5641e14fc17df2d76935f998aef",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "89482ecd858d15142700c13b2bcb9978c853a41e61428d6e6db4015e6a7473e2",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Duc.mp3"
+    },
+    {
+      "locale": "it-IT",
+      "country": "Ý",
+      "filename": "NEMI_052_Y.mp3",
+      "voice_id": "it-IT-DiegoNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "b3671dad73f68f50b05ed957e8763fc4e1d0027c84f7d48865deb6e3cb40e748",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "df209ac3585823684ee898230ae822a92ee469bf7da99c2f8bcb9b9109354256",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Y.mp3"
+    },
+    {
+      "locale": "pt-PT",
+      "country": "Bồ Đào Nha",
+      "filename": "NEMI_052_Bo_Dao_Nha.mp3",
+      "voice_id": "pt-PT-DuarteNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "03999436f71c530fac316695f8354e842cee9dce759c56defe513f5cfe3311a8",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "12ccb280282181e480476975a50abc1708cb3a2827d1157eda64b5c9bc0bfbef",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Bo_Dao_Nha.mp3"
+    },
+    {
+      "locale": "nl-NL",
+      "country": "Hà Lan",
+      "filename": "NEMI_052_Ha_Lan.mp3",
+      "voice_id": "nl-NL-MaartenNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "bc31ac5921a95d8d958686f987d7ade6ca21ca1457c54ec1641dd886996fa35d",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "9f5237a0ce3ed3187638785267d9901ba0caafc7b70b9a76a516d92967556959",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Ha_Lan.mp3"
+    },
+    {
+      "locale": "pl-PL",
+      "country": "Ba Lan",
+      "filename": "NEMI_052_Ba_Lan.mp3",
+      "voice_id": "pl-PL-MarekNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "074417667525769a99c5f481a577ae030ed5e988cb93e5eb2fb67f97d94b9199",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "695a06339244fea7be1440cdc9f290c0e7c4d72913a9daa4256bc59b1412447a",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Ba_Lan.mp3"
+    },
+    {
+      "locale": "sv-SE",
+      "country": "Thụy Điển",
+      "filename": "NEMI_052_Thuy_Dien.mp3",
+      "voice_id": "sv-SE-MattiasNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "c6525c2ce03a118af12f1b2c8d162a36fa1f63e4adfb12d22c4577e1fd3cfa28",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "76a289cd6b5d2ddd1137d55dbc81a925df298b21e419e9190e88bc264d627416",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Thuy_Dien.mp3"
+    },
+    {
+      "locale": "da-DK",
+      "country": "Đan Mạch",
+      "filename": "NEMI_052_Dan_Mach.mp3",
+      "voice_id": "da-DK-JeppeNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "25b1ac291869c599f648654fde5ed704e3c73a7be9d72ec83a8fa738c83229c7",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "6f7d8baaae552fa0e722934ea848507af481bf1f7b68bbe6b8d2ef272e1f3767",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Dan_Mach.mp3"
+    },
+    {
+      "locale": "fi-FI",
+      "country": "Phần Lan",
+      "filename": "NEMI_052_Phan_Lan.mp3",
+      "voice_id": "fi-FI-HarriNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "1a6712eb9ec86c5ac462f40c5d9d7531b7ef4aaaadf6a05e59383aa05de343bf",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "0bf168f1b3bc1b7e5efcdf29df2b6cd4feeb6cdbeefdf1a750e44351a9b2b2cb",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Phan_Lan.mp3"
+    },
+    {
+      "locale": "nb-NO",
+      "country": "Na Uy",
+      "filename": "NEMI_052_Na_Uy.mp3",
+      "voice_id": "nb-NO-FinnNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "9f005422878ecef8e5cab4348af8e50b7009abfdc4a1f11fdb725762223426ae",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "1a4a70372599d46226907a1efb9acd45b878ca5762a0725d372b86149c62aee5",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Na_Uy.mp3"
+    },
+    {
+      "locale": "cs-CZ",
+      "country": "Séc",
+      "filename": "NEMI_052_Sec.mp3",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "gender": "Male",
+      "bytes": 9776684,
+      "sha256": "19379741cc2129961b797a8a41a37d51f900945fc3b8efdbeaf0b63400ba5d8b",
+      "decoded_seconds": 1222,
+      "decoded_samples_48000": 58656000,
+      "narration_text_timing_sha256": "47c4569e7a83b1b4daa4827839ecb09a32092d5570afb43a1133ad63eef1c0c1",
+      "url": "https://github.com/seotro95/seotro/releases/download/nemi-video-052-20m22s/NEMI_052_Sec.mp3"
+    }
+  ],
+  "context_repairs": [
+    {
+      "locale": "cs-CZ",
+      "changed_chapters": [
+        2
+      ],
+      "reason": "Bank means lakeshore;scale means large size;light means low mass;remove German CE abbreviation fragment;Polish calendar case",
+      "unchanged_lossless_pcm_retained": true,
+      "voice_id_unchanged": true,
+      "source_before_sha256": "8490e7480870e52f538f0a685e0db872f438e465e759657196314e68df3d50df",
+      "source_after_sha256": "46f43cba3b38e98eb31919564a8b4ffc713a0cf7f5919f8fc3ffb8532d2e388a"
+    },
+    {
+      "locale": "da-DK",
+      "changed_chapters": [
+        2
+      ],
+      "reason": "Bank means lakeshore;scale means large size;light means low mass;remove German CE abbreviation fragment;Polish calendar case",
+      "unchanged_lossless_pcm_retained": true,
+      "voice_id_unchanged": true,
+      "source_before_sha256": "7141ed10e73f4d715aa4db058b6b71b1465693637e78f174e86dbae891bd0863",
+      "source_after_sha256": "fdb7af4af12fd29c1d851a640129e549c402b0582d428923e6590194f48fa3f6"
+    },
+    {
+      "locale": "de-DE",
+      "changed_chapters": [
+        1,
+        2
+      ],
+      "reason": "Bank means lakeshore;scale means large size;light means low mass;remove German CE abbreviation fragment;Polish calendar case",
+      "unchanged_lossless_pcm_retained": true,
+      "voice_id_unchanged": true,
+      "source_before_sha256": "b4481e0aebb47cb520135fbca4b3c37eaeee9d638aaabc9a084a986d7ef6e435",
+      "source_after_sha256": "b706cf43f26260cee5573ffcb615bbc4ee1e91caf72bed6d63d8421355042a92"
+    },
+    {
+      "locale": "es-ES",
+      "changed_chapters": [
+        2
+      ],
+      "reason": "Bank means lakeshore;scale means large size;light means low mass;remove German CE abbreviation fragment;Polish calendar case",
+      "unchanged_lossless_pcm_retained": true,
+      "voice_id_unchanged": true,
+      "source_before_sha256": "f7101cf38aaddc3441b7c872cc97b203b37a7da8606164da74b41de21e92aea7",
+      "source_after_sha256": "15b5b31fcc3f2375c34ddbd43964c9dc79531052f5b2e48b82168154150b46c2"
+    },
+    {
+      "locale": "fi-FI",
+      "changed_chapters": [
+        2
+      ],
+      "reason": "Bank means lakeshore;scale means large size;light means low mass;remove German CE abbreviation fragment;Polish calendar case",
+      "unchanged_lossless_pcm_retained": true,
+      "voice_id_unchanged": true,
+      "source_before_sha256": "90ebd180c7e5c87575ee0f150c77791667eb4a3792046addd768d300e851d46a",
+      "source_after_sha256": "bc02f95c5731a97f985c23430fef9ab4dd7536e645bd5fc7f143a82dcb564ab1"
+    },
+    {
+      "locale": "fr-FR",
+      "changed_chapters": [
+        2
+      ],
+      "reason": "Bank means lakeshore;scale means large size;light means low mass;remove German CE abbreviation fragment;Polish calendar case",
+      "unchanged_lossless_pcm_retained": true,
+      "voice_id_unchanged": true,
+      "source_before_sha256": "622f4d38b01e99d4bbf4bd6e92cbb092f95520424b021fac9a1ca2f630ed4d07",
+      "source_after_sha256": "7a79a924e1d997cde51b9e2bd504d6372702e1394eac51ab003a16762e42d73d"
+    },
+    {
+      "locale": "it-IT",
+      "changed_chapters": [
+        2
+      ],
+      "reason": "Bank means lakeshore;scale means large size;light means low mass;remove German CE abbreviation fragment;Polish calendar case",
+      "unchanged_lossless_pcm_retained": true,
+      "voice_id_unchanged": true,
+      "source_before_sha256": "d66c3df92ef9f2213c286d8d7e22c70aa23014adb115540fb1c87ccac0337692",
+      "source_after_sha256": "9087728885f4ee340e7912576e2c022c9d3957555f50ba95e66a2117b9dcc0e1"
+    },
+    {
+      "locale": "nb-NO",
+      "changed_chapters": [
+        2
+      ],
+      "reason": "Bank means lakeshore;scale means large size;light means low mass;remove German CE abbreviation fragment;Polish calendar case",
+      "unchanged_lossless_pcm_retained": true,
+      "voice_id_unchanged": true,
+      "source_before_sha256": "933d4b6bffc2d63fce71eaf56b3bcf18704ac83232cd9424a14839cb7e1d0c23",
+      "source_after_sha256": "a5674711a0dd66401d1f62aa1ea0296d69d7f13d081e9cb04a31c94d57d7be9d"
+    },
+    {
+      "locale": "nl-NL",
+      "changed_chapters": [
+        2
+      ],
+      "reason": "Bank means lakeshore;scale means large size;light means low mass;remove German CE abbreviation fragment;Polish calendar case",
+      "unchanged_lossless_pcm_retained": true,
+      "voice_id_unchanged": true,
+      "source_before_sha256": "520a668cef2767aab175f5da232fe1b086e568376b03345b5fc5d7e179ae79e7",
+      "source_after_sha256": "064fdae27705a737cd744dcaf4177364838400afc0d55cf7bbe7bee5a930aea9"
+    },
+    {
+      "locale": "pl-PL",
+      "changed_chapters": [
+        2,
+        8
+      ],
+      "reason": "Bank means lakeshore;scale means large size;light means low mass;remove German CE abbreviation fragment;Polish calendar case",
+      "unchanged_lossless_pcm_retained": true,
+      "voice_id_unchanged": true,
+      "source_before_sha256": "1a4449ca5f8c2598cf58c7e9247253225596da60edb5015536b377a8524fa71d",
+      "source_after_sha256": "607c9141277dcc14d1b03fe85a22a1b9771e1a40dc5296a94a890c4e93b8229b"
+    },
+    {
+      "locale": "pt-PT",
+      "changed_chapters": [
+        2
+      ],
+      "reason": "Bank means lakeshore;scale means large size;light means low mass;remove German CE abbreviation fragment;Polish calendar case",
+      "unchanged_lossless_pcm_retained": true,
+      "voice_id_unchanged": true,
+      "source_before_sha256": "db94cb9f4d399f54f9b83ab7c5060be87d32e6e6c1682e23f584114694f5cae1",
+      "source_after_sha256": "8a92f933feb1de8f470df9b553b635f5e8a552aafe6d1ea00218388d1c82a002"
+    },
+    {
+      "locale": "sv-SE",
+      "changed_chapters": [
+        2
+      ],
+      "reason": "Bank means lakeshore;scale means large size;light means low mass;remove German CE abbreviation fragment;Polish calendar case",
+      "unchanged_lossless_pcm_retained": true,
+      "voice_id_unchanged": true,
+      "source_before_sha256": "94e4f9dd41b947f8c0c3dae2e13a1b4215ed9e4ff42cae5d45abf15e904a75ca",
+      "source_after_sha256": "c7ca3f477d113fe1354c87563ccbda46b077b59fc8487f9c7fccfd6172e8b4c6"
+    }
+  ],
+  "english_measured_timing_repair": {
+    "reason": "Same immutable narration and raw synthesis;reallocate seconds within same half-section to preserve natural pauses and stay below1.6tempo cap",
+    "total_seconds": 1222,
+    "section_and_rehook_anchors_unchanged": true,
+    "changes": [
+      {
+        "cue": 16,
+        "old_seconds": 6,
+        "new_seconds": 7,
+        "styled_raw_seconds": 10.342
+      },
+      {
+        "cue": 18,
+        "old_seconds": 7,
+        "new_seconds": 6,
+        "styled_raw_seconds": 6.814
+      },
+      {
+        "cue": 48,
+        "old_seconds": 7,
+        "new_seconds": 6,
+        "styled_raw_seconds": 6.766
+      },
+      {
+        "cue": 49,
+        "old_seconds": 4,
+        "new_seconds": 5,
+        "styled_raw_seconds": 7.15
+      },
+      {
+        "cue": 171,
+        "old_seconds": 6,
+        "new_seconds": 7,
+        "styled_raw_seconds": 9.814
+      },
+      {
+        "cue": 176,
+        "old_seconds": 7,
+        "new_seconds": 6,
+        "styled_raw_seconds": 7.294
+      }
+    ]
+  },
+  "final_question_timing": "Finalquestion1216–1222;precedingcaveat1210–1216;identicalwordsandtotal"
+}

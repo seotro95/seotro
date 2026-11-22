@@ -1,0 +1,12 @@
+CƠ SỞ PHONG CÁCH VÀ GIỚI HẠN PHÂN TÍCH
+
+Nguồn do người dùng chỉ định: https://github.com/seotro95/seotro/releases/tag/video
+Tài sản được ghi nhận: video.c.a.toi.mp4, 340.611.128 byte; SHA256 f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c. Metadata tham chiếu: 1262,933333 giây, 1280×720, 60 fps. Contact sheet tham chiếu đã được xem; đây là đối chiếu mẫu hình, không phải lời khẳng định đã nghe và phân tích toàn bộ từng cú cắt của video.
+
+Yêu cầu cho phép dùng công thức kể thay thế. Bộ Nemi lấy chín quy tắc retention mới làm tiêu chuẩn chính: vật cụ thể mở đầu; câu hỏi trung tâm sớm; phát hiện trước phút hai; điểm neo mỗi sáu mươi đến chín mươi giây; nhịp giới hạn gộp cuối phần; lời nói đơn giản với số viết thành chữ; câu chuyển; kết trả lời rồi giữ một bí ẩn.
+
+Chuyển vào Nemi bằng ba lớp hình: đầu sư tử, mối nối và vật liệu ở cận cảnh; thân tàu, mặt nước và bờ hồ ở trung/toàn cảnh; mặt cắt và sơ đồ để giải thích cơ chế. Đổi tỉ lệ hình khi đổi câu hỏi. Từ trang trí sang gỗ, từ gỗ sang nước, từ công nghệ cổ sang hồi phục và mất mát hiện đại. Không sao chép nguyên lời, cảnh quay, giọng kể hoặc dựng lại toàn bộ video tham chiếu.
+
+Giữ bảng màu vật liệu tự nhiên: đồng xanh nâu, gỗ ấm, chì xám, hồ xanh và đồi cây. Dùng camera chậm có mục đích: macro trượt ngang cho tiếp giáp; góc thấp cho bề rộng; nhìn từ cao cho hồ kín; mặt cắt cố định cho lực nổi. Mỗi clip không tiếng. Các nhãn, số và chứng cứ thật do editor thêm, tránh hình AI tự viết chữ giả.
+
+Không có phòng thí nghiệm hay nhà khoa học hiện đại. Những người trong cảnh dựng là thợ trưởng thành hoặc đội thu hồi lịch sử; tất cả rõ trên hai mươi lăm tuổi. Tái hiện công trình là một công cụ giải thích, không chứng minh diện mạo hay chức năng chưa xác định.

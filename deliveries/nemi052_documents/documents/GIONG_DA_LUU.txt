@@ -1,0 +1,22 @@
+HỒ SƠ GIỌNG NEMI 052
+
+Giữ nguyên 16 VoiceID nam từ tập Tunguska. Tiếng Việt dùng Nam Minh. Không đổi cao độ để giả giọng. Công cụ sử dụng là backend online của Melo-Viet-Studio 1.3.1 được ghim commit, chạy trong Linux; không tuyên bố đã mở giao diện Windows.
+
+en-US | Anh (Mỹ) | en-US-GuyNeural | Male
+vi-VN | Việt Nam | vi-VN-NamMinhNeural | Male
+es-ES | Tây Ban Nha | es-ES-AlvaroNeural | Male
+fr-FR | Pháp | fr-FR-HenriNeural | Male
+ja-JP | Nhật Bản | ja-JP-KeitaNeural | Male
+ko-KR | Hàn Quốc | ko-KR-InJoonNeural | Male
+de-DE | Đức | de-DE-ChristophNeural | Male
+it-IT | Ý | it-IT-DiegoNeural | Male
+pt-PT | Bồ Đào Nha | pt-PT-DuarteNeural | Male
+nl-NL | Hà Lan | nl-NL-MaartenNeural | Male
+pl-PL | Ba Lan | pl-PL-MarekNeural | Male
+sv-SE | Thụy Điển | sv-SE-MattiasNeural | Male
+da-DK | Đan Mạch | da-DK-JeppeNeural | Male
+fi-FI | Phần Lan | fi-FI-HarriNeural | Male
+nb-NO | Na Uy (Bokmål) | nb-NO-FinnNeural | Male
+cs-CZ | Séc | cs-CZ-AntoninNeural | Male
+
+VOICE_PROFILES_LOCKED.json giữ ID và nguồn; NARRATION_STYLE_LOCKED.json giữ phong cách; VOICE_FILE_NAMING.json giữ tên tải. NARRATION_DELIVERY_PROFILE.json trong nhóm tài sản voice ghi thông số thực tế và tham chiếu công khai sau tổng hợp. Tập sau ưu tiên giữ toàn bộ ID này và dùng tham chiếu Anh/Việt đã lưu; nếu dịch vụ mất giọng cần báo thay vì lặng lẽ đổi.

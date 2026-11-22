@@ -1,0 +1,203 @@
+cue,start,end,section,kind,voice
+1,0,5,1,explain,A bronze lion stares from the end of a beam. It once decorated a Roman ship.
+2,5,8,1,question,Why put a lion here?
+3,8,14,1,explain,Behind that small object lies a larger puzzle: wooden vessels carrying the weight and fittings of monumental buildings.
+4,14,20,1,question,"How did Roman builders make architecture float on a small lake, far from any open sea?"
+5,20,27,1,explain,"The place is Lake Nemi, in the hills south of Rome. The vessels belong to the early imperial world."
+6,27,34,1,explain,"Their remains were connected with Caligula, whose reign lasted from thirty seven to forty one in the common era."
+7,34,41,1,explain,"Approach the water through the trees. The lake fills a volcanic basin, surrounded by slopes rather than an open harbor."
+8,41,48,1,explain,Two huge wooden hulls once rested beneath this surface. Their scale is difficult to grasp from a decorative fragment alone.
+9,48,55,1,explain,"Follow the lion backward to its supporting timber, then down toward the structure that carried the whole floating platform."
+10,55,62,1,explain,"The first discovery is concrete: the recovered material included elaborate flooring and water pipes, not merely a story about a luxurious emperor."
+11,62,68,1,explain,"These were substantial engineered vessels, roughly seventy meters long, with broad hulls beneath an extraordinary collection of fittings."
+12,68,74,1,explain,"The ancient wood was recovered, measured, photographed, and drawn before a later disaster destroyed the main hulls."
+13,74,80,1,explain,"That record lets us ask how they worked, even though the original vessels can no longer be examined intact."
+14,80,87,1,explain,Stand beside an imagined section of deck. Under a stone surface lie supporting timbers; beneath those timbers is the watertight hull.
+15,87,90,1,explain,The stone adds weight. The lake supplies support.
+16,90,97,1,explain,Connect the timber. Keep water outside. Distribute weight and control movement. The floating building depends on linked physical tasks.
+17,97,104,1,explain,"Each task leaves different evidence. A wooden connection tells one story; a lead covering, an anchor, and a pipe tell others."
+18,104,110,1,explain,"Start with the setting, because a vessel designed for this enclosed water answers a different problem from a ship crossing the sea."
+19,110,115,1,caveat,The fittings are real; the complete appearance above the decks remains partly reconstructed.
+20,115,120,1,turn,What did this small lake allow its builders to attempt at such a scale?
+21,120,126,2,explain,"Look down from the rim of Lake Nemi. Wooded slopes surround the water, with ancient places of worship nearby."
+22,126,132,2,explain,The sanctuary of Diana belongs to this landscape. Its presence connects the lake with more than transport or recreation.
+23,132,137,2,explain,"Imperial property, religious buildings, and carefully arranged views shaped the setting in which these vessels appeared."
+24,137,144,2,explain,Now move to the shoreline. A ship around seventy meters long would occupy a remarkable stretch of this enclosed water.
+25,144,150,2,explain,Scale can serve display and occupied space as well as navigation. A large vessel need not cross an ocean.
+26,150,156,2,explain,An ordinary cargo ship must carry weight efficiently. These vessels also carried materials associated with expensive architectural decoration.
+27,156,162,2,explain,"Watch from the bank. A broad deck turns slowly against the hills, joining land and water in one composition."
+28,162,169,2,explain,"The engineering still has practical limits: timber must carry forces, water must stay outside, and people must reach the vessel."
+29,169,175,2,explain,A small lake changes the surroundings. It does not switch off the laws governing a floating hull.
+30,175,182,2,explain,"Take one stone from an imagined paved deck. Held in a hand, it feels quite unlike a light wooden board."
+31,182,188,2,explain,"Multiply that weight across a larger surface, then add fittings, supporting timber, and whatever structures rose above it."
+32,188,194,2,explain,"The hull carries it all. Balance also depends on where those materials sit, especially when the vessel tilts."
+33,194,200,2,explain,"Broad dimensions provide room, but room alone is insufficient. Connections must transfer forces across a structure assembled from separate pieces."
+34,200,207,2,explain,The two Nemi vessels were not identical. Evidence of their arrangement and equipment should therefore remain attached to the particular ship concerned.
+35,207,213,2,explain,Each vessel needs its own drawing. Evidence from one should not quietly fill the gaps in the other.
+36,213,218,2,explain,A documented hull sets limits for the floating architecture placed above it in a modern reconstruction.
+37,218,224,2,explain,"Our reconstruction begins below the decorated surfaces, where a carpenter's decision can affect the behavior of the whole vessel."
+38,224,230,2,explain,Put two planks beside each other. Between them is a small connection carrying a surprisingly large part of the story.
+39,230,235,2,caveat,"The lakeside setting suggests possibilities, but it does not establish each vessel's exact purpose."
+40,235,240,2,turn,How can separate wooden planks become one large hull that holds together on water?
+41,240,247,3,explain,"Two plank edges face each other. A slot is cut into each edge, and a flat wooden connector fits between them."
+42,247,253,3,explain,"Bring the planks together. The connector disappears into both slots, linking the pieces across their meeting edges."
+43,253,259,3,explain,"Small wooden pegs secure the joint. This is mortise and tenon construction, a familiar part of ancient Mediterranean shipbuilding."
+44,259,265,3,explain,Descriptions and documentation of the Nemi material record this kind of pegged connection between adjacent hull planks.
+45,265,272,3,explain,The detail matters because a hull is more than a container. Its parts must share forces without opening uncontrolled gaps.
+46,272,278,3,explain,"An adult carpenter checks the edge, fits a connector, and drives a peg. Another plank waits nearby."
+47,278,284,3,explain,A small joint repeats many times. The repeating pattern helps turn individual boards into a coherent wooden shell.
+48,284,290,3,explain,This approach is associated with shell first construction: the joined outer planking plays a central role in establishing the hull.
+49,290,295,3,explain,Internal supports join that connected system. The outer planking already performs important structural work.
+50,295,302,3,explain,Look along a row of plank seams. A surface that appears continuous from a distance contains many individual decisions.
+51,302,308,3,explain,"Wood grain, shaping, fit, and the placement of connectors all affect how forces move through the assembled structure."
+52,308,314,3,explain,A beam under the deck carries weight toward its supports. The supports transfer that weight onward through the hull.
+53,314,320,3,explain,That is a path for force. Decoration sits at one end of it; the surrounding water supports the other.
+54,320,326,3,explain,These documented details let us examine Roman construction through physical connections that can be drawn and explained.
+55,326,332,3,explain,No single peg carries a palace. A network of connections and timbers distributes the work across the vessel.
+56,332,338,3,explain,"Follow a seam toward the waterline. Strong joints solve one problem, while the next requirement becomes immediate."
+57,338,345,3,explain,Water presses against the outside. Even a well connected structure needs a system that limits leakage through its surfaces and seams.
+58,345,350,3,explain,"The next clue usually sinks when dropped into a lake: lead, fastened to the wooden hull."
+59,350,355,3,caveat,Recorded joints show construction principles; they do not preserve every step of the building sequence.
+60,355,360,3,turn,Why cover a wooden vessel with heavy metal if the aim is to keep it afloat?
+61,360,366,4,explain,A thin sheet of lead lies over the wooden surface. Small metal fasteners hold it against material beneath.
+62,366,373,4,explain,"Recovered descriptions record textile and pitch beneath the lead covering, making a layered system rather than bare metal on bare wood."
+63,373,379,4,explain,"Imagine looking across a section: joined timber inside, a prepared layer against it, and the metal skin outside."
+64,379,385,4,explain,Each material contributes something different. The wood provides structure; the other layers help form a barrier against water.
+65,385,390,4,explain,Lead is soft enough to form thin sheets and follow the changing curves of a hull.
+66,390,396,4,explain,"Fasteners keep those sheets attached. Their material and placement become part of the system's behavior, not a decorative afterthought."
+67,396,402,4,explain,The metal adds weight. Its usefulness comes from the protective job it performs within the whole vessel.
+68,402,408,4,explain,"The materials work in combination. Wood, textile, pitch, metal, and fasteners each contribute to the assembled surface."
+69,408,415,4,explain,The question is no longer whether lead sinks. It is whether the completed vessel can support the weight of its own protective skin.
+70,415,422,4,explain,Look closely at the meeting edges of the metal sheets. Beneath the visible covering remain seams in the wooden shell.
+71,422,427,4,explain,The hull has many boundaries. Water needs only a continuing path through a weakness to enter.
+72,427,434,4,explain,The layered covering therefore belongs beside the joinery in our explanation. Strength and resistance to leakage solve connected but different tasks.
+73,434,441,4,explain,Now imagine the surface moving gently as the vessel responds to the lake. Materials and connections work as a system.
+74,441,447,4,explain,A floor above can appear solid and still rest on a structure that moves under changing forces.
+75,447,452,4,explain,"The builders had to accommodate that reality through timber, fittings, and the way those parts met."
+76,452,459,4,explain,"The recovered hulls exposed those relationships at an exceptional scale, giving observers access to details beneath the finished surfaces."
+77,459,464,4,explain,Photographs and measured drawings preserve details that a beautiful reconstruction might otherwise hide beneath finished surfaces.
+78,464,470,4,explain,"The planks are connected and covered. Now add weight to the deck, and watch what the lake must do."
+79,470,475,4,caveat,"The covering is documented, but its exact performance cannot be read from appearance alone."
+80,475,480,4,turn,"How can water support stone, metal, timber, and people together without the vessel sinking?"
+81,480,486,5,explain,"Set a small wooden hull in water. Add a weight, and watch it settle a little deeper into the surface."
+82,486,492,5,explain,"As it settles, the hull pushes aside more water. The upward support increases with the weight of water displaced."
+83,492,498,5,explain,"For a floating vessel in balance, that support matches its total weight, including the hull and everything carried aboard."
+84,498,504,5,explain,This is why a small piece of solid lead can sink while a vessel carrying lead remains afloat.
+85,504,510,5,explain,"The hull encloses volume and displaces water. Flotation depends on the complete system, including everything carried aboard."
+86,510,516,5,explain,Now widen the model. A broad hull can provide substantial displacement while also giving the deck a large footprint.
+87,516,522,5,explain,That broad footprint helps explain how Nemi combined architectural space with the physical requirements of a boat.
+88,522,529,5,explain,But adding weight still makes the vessel sit lower. The distance between the water surface and the deck edge matters.
+89,529,535,5,explain,A floating platform must keep enough of its vulnerable openings above the surrounding water as conditions change.
+90,535,541,5,explain,"Move a weight toward one side of the model. The hull tilts, and the immersed shape changes with it."
+91,541,547,5,explain,The supporting force changes its position as water is displaced differently. Where the weight sits now becomes part of the problem.
+92,547,553,5,explain,Raise the same weight higher above the deck. The system responds differently from one with that weight kept low.
+93,553,559,5,explain,Architecture afloat therefore needs more than carrying capacity. The arrangement of heavy materials influences how the vessel behaves when disturbed.
+94,559,565,5,explain,"Stone flooring, wooden supports, decorative fittings, and people all belong in that arrangement. Their positions are engineering decisions."
+95,565,572,5,explain,Imagine walking across a broad deck while the shore moves slowly behind you. The surface underfoot belongs to a floating structure.
+96,572,578,5,explain,"The Nemi hulls were broad. Wind, occupied conditions, and the distribution of weight also belonged to their behavior."
+97,578,583,5,explain,"Our model links weight, displaced water, shape, and placement. The historical drawings provide the particular vessel."
+98,583,590,5,explain,"A stable platform also has to remain where its users want it. The next evidence waits below the water, attached to a rope."
+99,590,595,5,caveat,"These physical principles explain support, not a precise loading limit for either ancient ship."
+100,595,600,5,turn,What did the anchors reveal about controlling vessels built on such an unusual scale?
+101,600,607,6,explain,"An anchor appears in the mud with part of its rope still preserved. Here, a familiar object answers a specific engineering problem."
+102,607,613,6,explain,One Nemi anchor combined substantial wooden parts with a heavy lead crosspiece and iron at the working tips.
+103,613,619,6,explain,The crosspiece helps orient the anchor so that a fluke can engage the bottom. Its weight belongs to that practical action.
+104,619,625,6,explain,"Imagine lowering the anchor from a vessel. It reaches the lakebed, the rope tightens, and its parts respond to the pull."
+105,625,632,6,explain,"The arrangement turns separate materials into a device for resisting movement, linking the floating hull with the ground beneath the lake."
+106,632,639,6,explain,Another recovered anchor used an iron structure with wooden covering. The two forms should not be collapsed into a single imaginary design.
+107,639,644,6,explain,"Their surviving features show what ancient equipment could combine: timber, metal, cordage, and carefully arranged geometry."
+108,644,650,6,explain,The anchor records practical geometry: how its parts could orient themselves and resist a pull across the bottom.
+109,650,655,6,explain,Follow the force from vessel to rope to anchor. The lakebed completes the physical connection.
+110,655,661,6,explain,Return to the surface and look beside the hull. Large steering oars provide another way to influence a vessel's movement.
+111,661,667,6,explain,Their supporting structures must receive forces too. A bronze fitting can decorate a beam that also belongs to practical equipment.
+112,667,672,6,explain,Keep the vessels distinct. Their steering arrangements should follow the record for each ship.
+113,672,679,6,explain,"Movement on this lake did not require the same journey as an ocean crossing, but a large hull still needed handling."
+114,679,686,6,explain,"Wind could act against exposed structures. People and equipment had to place the vessel, approach it, and keep its movement manageable."
+115,686,692,6,explain,Picture the anchor rope leading away beneath calm water while a large timber steering blade rests beside the ship.
+116,692,698,6,explain,"The image connects three scales: the small fastener, the long supporting beam, and the response of the whole hull."
+117,698,703,6,explain,"The fittings belong to a system. Supporting beams, fasteners, and timber connect their appearance with practical forces."
+118,703,710,6,explain,"Among the recovered objects, however, one material leads us beyond holding the ship in place and toward what happened aboard: a water pipe."
+119,710,715,6,caveat,Equipment constrains possible handling; it does not reveal every maneuver or operating procedure.
+120,715,720,6,turn,What can pipes and expensive flooring actually tell us about life on these decks?
+121,720,726,7,explain,A lead pipe is a small object with a large implication: water was being managed within an elaborately equipped vessel.
+122,726,731,7,explain,"Stamps on recovered pipes helped link the ships with Caligula, giving their imperial association physical evidence."
+123,731,738,7,explain,"The pipes belong beside fragments of costly flooring and other fittings. Together, these materials establish something beyond a bare working platform."
+124,738,745,7,explain,"Imagine water moving through a pipe while people occupy a deck above the lake. Supply, use, and support have to work together."
+125,745,750,7,explain,Facilities bring material and maintenance. Finished architecture still depends on a functioning vessel underneath.
+126,750,757,7,explain,"A stone floor gives a particularly direct connection between the two. Its appearance belongs to architecture, but its weight belongs to the hull."
+127,757,763,7,explain,The physical objects make Nemi extraordinary: the hull must carry both an architectural surface and its practical requirements.
+128,763,770,7,explain,The lake also belongs to a landscape of sanctuary buildings and imperial activity. Function has to be considered within that setting.
+129,770,775,7,explain,"The ships could have overlapping purposes without being identical, just as their equipment and arrangements differed."
+130,775,781,7,explain,"Now open a Roman text. Suetonius describes extravagant ships associated with Caligula, including architectural luxuries aboard."
+131,781,788,7,explain,The geographical detail matters: his account places their travel along the coast of Campania. That is not Lake Nemi.
+132,788,796,7,explain,Point to both places on a map. An ancient description of luxury shipping and an excavated lakeside vessel are different kinds of evidence.
+133,796,801,7,explain,The text describes imperial luxury shipping. The Nemi finds place particular materials in a particular lake.
+134,801,807,7,explain,Look at an explanatory drawing. The documented hull is clearly marked; suggested upper structures occupy a separate visual layer.
+135,807,813,7,explain,A surviving floor fragment belongs beside that drawing. It supplies material and workmanship at the scale of one surface.
+136,813,819,7,explain,"The sanctuary adds religious context. Pipes, flooring, anchors, and timbers add the practical details of vessels afloat nearby."
+137,819,824,7,explain,Bring the pieces together carefully. Their relationships matter more than the extravagance of a finished picture.
+138,824,830,7,explain,"To answer that, we must return to the moment when people tried to recover the evidence from the lakebed."
+139,830,835,7,caveat,The fittings establish luxury; exact activities and the use of individual spaces remain interpretations.
+140,835,840,7,turn,What happens when an attempt to raise a ship starts pulling its fabric apart?
+141,840,846,8,explain,"In fourteen forty six, an attempt associated with Leon Battista Alberti tried to recover one of the submerged ships."
+142,846,853,8,explain,"A floating structure above the wreck carried lifting equipment. Below it, ropes and hooks met an enormous timber hull held in mud."
+143,853,859,8,explain,Imagine the line becoming tight. The force does not lift everything together; a portion of the old structure tears away.
+144,859,865,8,explain,"A fragment rises, but the hull stays below. Recovering a piece and recovering a ship require different physical support."
+145,865,871,8,explain,Repeated attempts over the centuries brought objects up while also damaging the remains that later observers hoped to understand.
+146,871,877,8,explain,"Then the strategy changed. During the major operation between nineteen twenty eight and nineteen thirty two, the lake level was lowered."
+147,877,883,8,explain,"The water could be removed from around the hulls, instead of hanging weakened ancient structures from lifting ropes."
+148,883,889,8,explain,"The project used pumps and an ancient drainage route, exposing more of the lakebed as the water surface fell."
+149,889,895,8,explain,"A ship once hidden beneath the water became a structure that could be approached, excavated, recorded, and supported from below."
+150,895,901,8,explain,"The new obstacle lay around the ships. As the level dropped, parts of the lake's banks became unstable."
+151,901,908,8,explain,"Recorded landslides disturbed the operation. Lowering the water had changed a landscape, not merely cleared a view of the wrecks."
+152,908,915,8,explain,"Stand beside the exposed hull in a historical reconstruction. Wet timbers extend across the ground, still requiring support and careful handling."
+153,915,921,8,explain,"Removing mud reveals relationships between parts, while drying threatens material that has spent centuries in a waterlogged environment."
+154,921,928,8,explain,"A cradle and a prepared route ashore turn recovery into another task of distributing weight, this time outside the water."
+155,928,934,8,explain,The builders made timber float. The recovery crews had to support that same material after flotation ceased.
+156,934,939,8,explain,"Guido Ucelli's work and the associated records documented the operation through drawings, measurements, photographs, and films."
+157,939,944,8,explain,The documentation preserved construction details and object positions while the hulls could still be examined.
+158,944,950,8,explain,"The ships were recovered, but their survival would soon depend on something very different from ropes, pumps, or mud."
+159,950,955,8,caveat,"Recovery records document exposed remains, not an untouched vessel preserved exactly as originally built."
+160,955,960,8,turn,Why would those photographs soon become irreplaceable evidence rather than illustrations of a successful recovery?
+161,960,966,9,explain,"In nineteen forty four, fire destroyed the two ancient wooden hulls in the museum built to house them."
+162,966,969,9,explain,The great structures were gone. Some objects survived.
+163,969,976,9,explain,"Important decorative pieces had been moved to Rome for protection during the war, escaping the destruction that consumed the hulls."
+164,976,983,9,explain,Now imagine holding a prewar photograph beside a surviving bronze fitting. One records a lost arrangement; the other preserves actual material.
+165,983,988,9,explain,A measured drawing adds dimensions and connections that a photograph may show only from one angle.
+166,988,994,9,explain,Images and drawings now held information that could no longer be checked against intact ancient hulls.
+167,994,1000,9,explain,Recorded detail gained new importance. Later models would build upon a record left before the timber was lost.
+168,1000,1007,9,explain,"A model may show the overall hull, while a surviving object supplies a specific shape, material, or attachment detail."
+169,1007,1015,9,explain,"Following those connections brings us back to the opening lion, which belongs to a real history of recovery, survival, and renewed interpretation."
+170,1015,1021,9,explain,There is another history inside the images. The recovery became a public spectacle under Italy's Fascist regime.
+171,1021,1028,9,explain,"Film and photography served technical documentation, education, and political presentation. Those purposes could operate within the same body of images."
+172,1028,1034,9,explain,A camera recorded construction details. An edited sequence could also promote a public story about national achievement.
+173,1034,1040,9,explain,"Recent study of the film and photographic archives examines those different purposes, helping us read the surviving material more carefully."
+174,1040,1046,9,explain,"A modern reconstruction should keep the source image, its date, and its historical context visible alongside the interpretation."
+175,1046,1053,9,explain,The surviving collections include objects as well as models. A label should tell the viewer which kind of thing is being shown.
+176,1053,1059,9,explain,"A decorated floor panel was back on display at Nemi in twenty twenty one, giving the story another tangible connection with the ships."
+177,1059,1064,9,explain,"The hulls are lost, but recorded construction and surviving fittings still allow engineering questions to be tested."
+178,1064,1070,9,explain,"We can now bring the lion, the wooden connection, the metal covering, and the water back into one explanation."
+179,1070,1075,9,caveat,The surviving record leaves gaps; it does not justify inventing an exact cause of the fire.
+180,1075,1080,9,turn,How much of the floating building can we explain without filling those gaps with fantasy?
+181,1080,1087,10,explain,Return to the lion at the end of its beam. The ornament is now the beginning of a path through the structure.
+182,1087,1094,10,explain,Its support belongs to a larger assembly of timbers. Those timbers connect with a hull made from carefully joined planks.
+183,1094,1100,10,explain,Pegs and fitted connectors help the shell act together; internal supports carry weight through that connected structure.
+184,1100,1106,10,explain,"Outside, the documented covering adds another task: limiting the passage of water through a vessel assembled from many separate pieces."
+185,1106,1113,10,explain,"Stone, metal, timber, equipment, and occupants all add weight. The completed hull displaces enough water to provide matching support when afloat."
+186,1113,1121,10,explain,"Where the weight is placed influences balance. A broad hull provides space and displacement, while the arrangement above remains part of the engineering problem."
+187,1121,1127,10,explain,"Anchors connect the vessel with the lakebed. Steering equipment influences movement, with its own forces passing through supporting timbers."
+188,1127,1133,10,explain,"That is how architecture can float: not through one miraculous material, but through a coordinated structure working with water."
+189,1133,1140,10,explain,"The Nemi evidence makes that answer physical. Planks, connectors, coverings, ropes, anchors, pipes, and flooring turn an astonishing story into inspectable parts."
+190,1140,1145,10,explain,"The early records preserve many of those relationships, even after the original wooden hulls were destroyed."
+191,1145,1153,10,explain,"Now imagine looking from the bank across a broad deck. The hills frame the water, and the vessel changes how the setting is experienced."
+192,1153,1159,10,explain,"The picture can be explored as a reconstruction, with observed objects and proposed architecture kept visibly separate."
+193,1159,1167,10,explain,A real fitting does not supply every room above it. A Roman description from another coast does not become a photograph of this lake.
+194,1167,1173,10,explain,But neither does the loss of the hulls erase the information that was recorded before the fire.
+195,1173,1178,10,explain,"Keep substantial evidence and remaining gaps in view together, as separate parts of the same reconstruction."
+196,1178,1185,10,explain,Each scale contributes something. The small joint explains connection; the broad hull explains displacement; the anchor explains a controlled relationship with the bottom.
+197,1185,1191,10,explain,"A pipe and a stone floor bring occupied architecture into that system, adding practical requirements alongside their visual impact."
+198,1191,1199,10,explain,"The bronze lion survives as a small piece of a much larger achievement, one that joined human workmanship with the support of the lake."
+199,1199,1205,10,explain,We can follow how the structure worked without pretending that a finished image recovers every activity once carried out aboard.
+200,1205,1210,10,explain,One question remains especially difficult: the purpose that brought this engineering onto the water.
+201,1210,1216,10,caveat,The engineering is increasingly readable; the precise role of each vessel is less certain.
+202,1216,1222,10,turn,"What, exactly, was each of these floating buildings built to do?"

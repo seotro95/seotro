@@ -1,0 +1,11 @@
+DỰNG NEMI 20:22
+
+Đọc EDL và timeline: 123 ô hình. Clip đầu cận một đầu sư tử; giữ câu hỏi chứ không mở bằng logo. Ba mươi giây đầu chuyển từ vật nhỏ sang bài toán công trình nổi. Giây năm mươi lăm trả bằng chứng sàn và đường ống, không trì hoãn mọi phát hiện. Mỗi phần có cảnh cụ thể ở thì hiện tại, một vật hoặc câu hỏi mới giữa phần, rồi một nhịp giới hạn ngắn và câu chuyển.
+
+Các câu lời dài ngắn khác nhau, nhiều câu rất ngắn; không đọc một nhịp đều toàn bài. Một clip mười giây có thể chứa nhiều đoạn lời. Khi cắt hình giữa hai chi tiết, ưu tiên dựng tương ứng chủ thể vừa được nhắc thay vì áp một lịch chuyển cảnh máy móc. Camera trong prompt đã quy định một chuyển động chính, không quay vòng phức tạp hoặc cố nhét nhiều hành động trong mười giây.
+
+Mốc tư liệu: La Mã đầu Công nguyên; thử trục vớt 1446; chiến dịch hạ nước 1928–1932; mất thân tàu 1944; cảnh quan và mô hình minh họa hiện nay. Mọi tái hiện đều có nhãn editor. Hình phục dựng không mô phỏng vết phim rồi mang nhãn tư liệu thật. Các prompt archive tạo ô trống để chèn ảnh đã kiểm chứng. Chọn ảnh không trẻ em, kể cả khách tham quan xa, tranh trên đồ vật hay bản ảnh ghép.
+
+Clip 123 vẫn sinh đủ mười giây. Trong EDL lấy source 8–10, đặt timeline 20:20–20:22. Giữ tổng 1.222 giây. Prompt 124–130 là thay thế hình; không nối thêm. Xóa mọi âm thanh từ footage và chỉ đặt voice riêng. Nếu thêm nhạc ở hậu kỳ thì đó là quyết định dựng sau, không để công cụ sinh clip tự tạo nhạc.
+
+Bản địa hóa có thể điều chỉnh các điểm cắt phụ trong cùng phần. Không dịch chuyển ranh giới chín phần đầu hai phút và phần cuối hai phút hai mươi hai giây. Không cắt lời để ép mười giây. Không suy tải trọng, số người, công dụng tôn giáo chắc chắn hoặc bản vẽ kiến trúc hoàn chỉnh chỉ từ kích thước thân tàu.

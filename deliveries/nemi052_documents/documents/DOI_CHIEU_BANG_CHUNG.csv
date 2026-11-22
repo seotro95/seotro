@@ -1,0 +1,11 @@
+section,subject,source_ids,limit
+1,"Bronze lion, recovered fittings, imperial association","1,3,7",Lionbeam-endfixture;notprovedexactmooringfunction
+2,"Lake and sanctuary setting, two distinct ships","1,5,7",Settingdoesnotestablishprecisepurpose
+3,"Mortise,tenon,pins,shell-firstprinciple","7,8,9",Generalconstructionsequenceillustrative
+4,"Lead,textile,pitchcovering","7,9",Textiletypevariesinreports;donotchooseexactfiber
+5,"Buoyancy,displacement,stability","8,10",Generalphysics;noexactloadrating
+6,"Anchorvariants,steeringoars","1,8",Keepequipmentattachedtoitsdocumentedship
+7,"Pipes,floors,Caligula,Suetonius","1,7,8","SuetoniusdescribesCampania,notNemi"
+8,"1446salvage;1928–1932lowering,recovery,bankfailures","5,7,8",Operationdatesdifferfromhull-exposuredates;notwholelakeemptied
+9,"1944fire,bronzes,archives,floordisplay2021","1,3,4,6,11",Noassignedculprit;displaydateisnotrepatriationdate
+10,Linkedengineeringanswer;remainingfunctionquestion,"1,5,6,7,8,11",Partialsuperstructureandpurposeinterpretations

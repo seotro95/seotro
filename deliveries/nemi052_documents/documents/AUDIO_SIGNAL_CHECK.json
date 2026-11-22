@@ -1,0 +1,162 @@
+[
+  {
+    "locale": "cs-CZ",
+    "filename": "NEMI_052_Sec.mp3",
+    "sha256": "19379741cc2129961b797a8a41a37d51f900945fc3b8efdbeaf0b63400ba5d8b",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09376728361159113,
+    "peak": 0.5836471319198608,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "NEMI_052_Dan_Mach.mp3",
+    "sha256": "25b1ac291869c599f648654fde5ed704e3c73a7be9d72ec83a8fa738c83229c7",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08159076080318793,
+    "peak": 0.469928503036499,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "NEMI_052_Duc.mp3",
+    "sha256": "3177e7744e98254bbd15ec9539f49b307746c5641e14fc17df2d76935f998aef",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08780384610799867,
+    "peak": 0.6647020578384399,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "en-US",
+    "filename": "NEMI_052_My_Tieng_Anh.mp3",
+    "sha256": "9061f695852d27d6117784f5dfebfa98af364d622f33f0d2da4cf8538be6000c",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09072895121851744,
+    "peak": 0.6270625591278076,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "NEMI_052_Tay_Ban_Nha.mp3",
+    "sha256": "b9c940f162b92aa129ad216dcdf00787da358d2f1d3ab15decad1efb355389a6",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07294186897642234,
+    "peak": 0.3848821818828583,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "NEMI_052_Phan_Lan.mp3",
+    "sha256": "1a6712eb9ec86c5ac462f40c5d9d7531b7ef4aaaadf6a05e59383aa05de343bf",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.061218217918734594,
+    "peak": 0.4348624348640442,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "NEMI_052_Phap.mp3",
+    "sha256": "7aae194bf0f7106ff99ec169ecf602b548a9b34797552f3b8be5953757b81bd9",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07979279700401308,
+    "peak": 0.5726214647293091,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "NEMI_052_Y.mp3",
+    "sha256": "b3671dad73f68f50b05ed957e8763fc4e1d0027c84f7d48865deb6e3cb40e748",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08185567582550997,
+    "peak": 0.530841052532196,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "NEMI_052_Nhat_Ban.mp3",
+    "sha256": "6c55f5f5e6317212094e1e586e701d39cd30c90dcba219606348966b85178045",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08313389424558844,
+    "peak": 0.6385631561279297,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "NEMI_052_Han_Quoc.mp3",
+    "sha256": "90f9c209c5a4b12d792c2088cae0162c68e0c5b0800340d5a06e3866791ddc8f",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07863695479528175,
+    "peak": 0.4991852641105652,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "NEMI_052_Na_Uy.mp3",
+    "sha256": "9f005422878ecef8e5cab4348af8e50b7009abfdc4a1f11fdb725762223426ae",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06814247203446767,
+    "peak": 0.5265600085258484,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "NEMI_052_Ha_Lan.mp3",
+    "sha256": "bc31ac5921a95d8d958686f987d7ade6ca21ca1457c54ec1641dd886996fa35d",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09428847130290602,
+    "peak": 0.5786407589912415,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "NEMI_052_Ba_Lan.mp3",
+    "sha256": "074417667525769a99c5f481a577ae030ed5e988cb93e5eb2fb67f97d94b9199",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08958443725343258,
+    "peak": 0.5398381948471069,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "NEMI_052_Bo_Dao_Nha.mp3",
+    "sha256": "03999436f71c530fac316695f8354e842cee9dce759c56defe513f5cfe3311a8",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06658525259407558,
+    "peak": 0.408663809299469,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "NEMI_052_Thuy_Dien.mp3",
+    "sha256": "c6525c2ce03a118af12f1b2c8d162a36fa1f63e4adfb12d22c4577e1fd3cfa28",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07657284251612423,
+    "peak": 0.4648016691207886,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "NEMI_052_Viet_Nam.mp3",
+    "sha256": "3b1761044fc3fa08c110c21442a4c9efc2e78b34bfb3a72d955d01ff1ff09359",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.10666606166135535,
+    "peak": 0.5994260311126709,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  }
+]

@@ -1,0 +1,31 @@
+NEMI 052 — 5 TIÊU ĐỀ VÀ 5 PROMPT THUMBNAIL
+Ưu tiên tiêu đề một. Tiêu đề Anh dành cho video chính, nghĩa Việt để lựa chọn. Mỗi prompt khớp tiêu đề cùng số. Chữ do editor thêm; không để AI viết chữ.
+
+1. TITLE: Nemi Ships: How Did the Romans Make Buildings Float?
+NGHĨA TIẾNG VIỆT: Tàu Nemi: người La Mã làm công trình nổi bằng cách nào?
+TEXT FOR EDITOR: BUILDINGS THAT FLOAT
+THUMBNAIL PROMPT: 16:9,1280x720,cinematic historical engineering documentary thumbnail. One strong subject,clear visual hierarchy,readable contrast at small size. One broad timber Roman hull fills the lower foreground on enclosed Lake Nemi; a restrained partial stone-floored pavilion above it and a clean hull cutaway reveal the physical puzzle. Uncertain upper structure remains understated, not a fantasy palace. This is illustrative reconstruction,not an authentic archival photograph or measured archaeological plan. Keep room for editor-added text. No children,teenagers or minors anywhere,including art,reflections and distant people. Không có hình trẻ em. Every human clearly at least twenty-five years old;prefer no people except the explicit recovery scale figures. No laboratory,scientist,alien technology,giant lion statue,modern warship,propeller,orgy,fully emptied lake,fabricated readable Latin,evidence-like invented chart,logo,watermark or generated lettering.
+
+
+2. TITLE: The Bronze Lion That Leads to Rome’s Giant Lake Ships
+NGHĨA TIẾNG VIỆT: Đầu sư tử đồng dẫn tới những tàu hồ khổng lồ của La Mã
+TEXT FOR EDITOR: FOLLOW THE LION
+THUMBNAIL PROMPT: 16:9,1280x720,cinematic historical engineering documentary thumbnail. One strong subject,clear visual hierarchy,readable contrast at small size. One small bronze lion beam-end fitting dominates the foreground, while a broad partial Roman lake-ship reconstruction sits softly beyond; clear relative scale, the fitting is not a giant statue. This is illustrative reconstruction,not an authentic archival photograph or measured archaeological plan. Keep room for editor-added text. No children,teenagers or minors anywhere,including art,reflections and distant people. Không có hình trẻ em. Every human clearly at least twenty-five years old;prefer no people except the explicit recovery scale figures. No laboratory,scientist,alien technology,giant lion statue,modern warship,propeller,orgy,fully emptied lake,fabricated readable Latin,evidence-like invented chart,logo,watermark or generated lettering.
+
+
+3. TITLE: Stone Floors on Water: The Engineering of Nemi’s Ships
+NGHĨA TIẾNG VIỆT: Sàn đá trên mặt nước: kỹ thuật của tàu Nemi
+TEXT FOR EDITOR: STONE ABOVE WATER
+THUMBNAIL PROMPT: 16:9,1280x720,cinematic historical engineering documentary thumbnail. One strong subject,clear visual hierarchy,readable contrast at small size. One legible cutaway shows a stone floor, timber beams and a broad wooden hull displacing water in a calm enclosed lake; stable waterline and restrained plausible architecture, no impossible levitation. This is illustrative reconstruction,not an authentic archival photograph or measured archaeological plan. Keep room for editor-added text. No children,teenagers or minors anywhere,including art,reflections and distant people. Không có hình trẻ em. Every human clearly at least twenty-five years old;prefer no people except the explicit recovery scale figures. No laboratory,scientist,alien technology,giant lion statue,modern warship,propeller,orgy,fully emptied lake,fabricated readable Latin,evidence-like invented chart,logo,watermark or generated lettering.
+
+
+4. TITLE: They Lowered a Lake to Recover Two Roman Giants
+NGHĨA TIẾNG VIỆT: Họ hạ mực nước hồ để thu hồi hai con tàu La Mã khổng lồ
+TEXT FOR EDITOR: LOWER THE LAKE
+THUMBNAIL PROMPT: 16:9,1280x720,cinematic historical engineering documentary thumbnail. One strong subject,clear visual hierarchy,readable contrast at small size. Wide oblique reconstruction of a huge damp wooden hull exposed at the lake margin during the nineteen-twenties recovery, residual lake water visible beyond; mature adult workers give scale, no single-hook giant ship lift. This is illustrative reconstruction,not an authentic archival photograph or measured archaeological plan. Keep room for editor-added text. No children,teenagers or minors anywhere,including art,reflections and distant people. Không có hình trẻ em. Every human clearly at least twenty-five years old;prefer no people except the explicit recovery scale figures. No laboratory,scientist,alien technology,giant lion statue,modern warship,propeller,orgy,fully emptied lake,fabricated readable Latin,evidence-like invented chart,logo,watermark or generated lettering.
+
+
+5. TITLE: Nemi’s Lost Ships: What Were They Really Built For?
+NGHĨA TIẾNG VIỆT: Những con tàu đã mất ở Nemi: thực sự dùng để làm gì?
+TEXT FOR EDITOR: WHAT WERE THEY FOR?
+THUMBNAIL PROMPT: 16:9,1280x720,cinematic historical engineering documentary thumbnail. One strong subject,clear visual hierarchy,readable contrast at small size. Two distinct broad hull silhouettes on Lake Nemi, one foreground documented-looking hull form and restrained incomplete upper wireframe volumes; a single bronze lion detail anchors the mystery, no invented feast, temple ceremony or proved full palace. This is illustrative reconstruction,not an authentic archival photograph or measured archaeological plan. Keep room for editor-added text. No children,teenagers or minors anywhere,including art,reflections and distant people. Không có hình trẻ em. Every human clearly at least twenty-five years old;prefer no people except the explicit recovery scale figures. No laboratory,scientist,alien technology,giant lion statue,modern warship,propeller,orgy,fully emptied lake,fabricated readable Latin,evidence-like invented chart,logo,watermark or generated lettering.
