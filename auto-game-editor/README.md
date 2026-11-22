@@ -2,6 +2,10 @@
 
 Công cụ quét bản ghi dài, chọn các đoạn nổi bật và tự ghép theo thứ tự gameplay. Đầu ra là các tệp MP4 720p cùng bảng thời gian cắt và zoom.
 
+## Bản tải cho Windows
+
+[Tải tệp ZIP](auto-game-editor-windows.zip) và giải nén toàn bộ. Mở **Kiem-tra.cmd** để xem thành phần còn thiếu, hoặc **Cai-dat.cmd** để cài qua winget. Khi đã cài xong, mở **Khoi-dong.cmd** để chạy. Gói ZIP đã có sẵn thư viện kéo thả.
+
 ## Cài và chạy
 
 1. Cài Python 3 có Tkinter và FFmpeg có libx264. Thêm `ffmpeg` và `ffprobe` vào PATH. Cài thêm **Tesseract OCR** và thêm vào PATH nếu muốn dùng chế độ tự nhận diện tên game.
