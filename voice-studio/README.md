@@ -253,3 +253,16 @@ Chọn ngôn ngữ gốc / ngôn ngữ phụ đề đích, bấm **Tạo phụ �
 Voice văn bản mặc định Nano 4 bước, không thêm khoảng nghỉ và ghép câu ngắn để giảm lượt chạy mô hình; chọn 2 tiến trình khi có ít nhất 4 CPU logic và 3 GB RAM trống. Nút ưu tiên tốc độ giữ giọng cá nhân / Windows đã chọn. Chọn 8 hoặc 16 bước nếu muốn chất lượng cao hơn. Tốc độ thực tế tùy máy, ngôn ngữ và giọng; không bảo đảm 1 giờ audio trong 2 phút.
 
 TXT mặc định bỏ mốc đầu dòng như `[01:30]`, `01:30 lời` và dòng thời gian/chỉ số SRT; vẫn đọc số tiền, số lượng, giờ hẹn trong câu. Có thể bỏ chọn **Không đọc mốc phút–giây** nếu cần đọc nguyên văn. SRT nhập ở chế độ SRT vẫn giữ nguyên mốc để đồng bộ video. Đóng tool cũ và kiểm tra **3.6.0** khi mở bản mới.
+
+### 3.6.1 · TXT và SRT có cùng thời lượng
+
+- **SRT, chế độ bám mốc (mặc định):** giữ giờ bắt đầu/kết thúc từng câu, khoảng im lặng và kết thúc đúng mốc cuối SRT.
+- **TXT:** nhập **Thời lượng đích TXT**, ví dụ `10:00` hoặc `10` phút, ở mục Văn bản thành giọng nói, voice riêng hoặc phần lồng tiếng nâng cao. Nhập cùng mốc cuối SRT để các bản đọc có cùng thời lượng. Bỏ trống để giữ cách đọc tự nhiên cũ.
+- Khung **Tạo voice riêng từ văn bản** nhận cả TXT/SRT. Khi bấm **Đưa lời phụ đề vào khung voice**, tool đưa lời sang TXT và điền mốc cuối phụ đề làm thời lượng đích.
+- Căn bằng âm thanh thực tế, không dùng số từ hoặc ngôn ngữ để đoán thời gian. Điều chỉnh tốc độ giữ cao độ; TXT ngắn được giãn tối đa theo tốc độ 0,7× rồi thêm im lặng đến đích. Tổng thời gian bằng nhau không có nghĩa lời nói phủ kín mọi giây.
+- Tốc độ căn tối đa mặc định 1,5×. Nếu không thể đọc đủ lời trong đích/khoảng SRT, tool báo lỗi và không công bố tệp bị cắt. Thời lượng đích không được vượt giới hạn bản thu hoặc phần video còn lại.
+- WAV được đo theo số mẫu PCM của tệp xuất. MP3 được giải mã lại để đo số mẫu, có xử lý độ trễ/đệm của bộ mã hóa; thời lượng vỏ MP3 một số trình phát hiển thị có thể lệch một khung MP3. Kết quả chỉ hoàn tất sau khi số mẫu đúng đích; đổi WAV/MP3 khi tải cũng được đo lại.
+- SRT của TXT được đổi mốc theo tốc độ âm thanh sau khi căn. SRT gốc ở chế độ bám mốc giữ nguyên mốc. Chế độ nâng cao **dùng khoảng trống** vẫn cho phép kéo đuôi câu và không cam kết mốc cuối SRT gốc; chọn **bám mốc** khi cần đồng thời lượng.
+- Áp dụng cho giọng/ngôn ngữ mà engine đã hỗ trợ; không bổ sung khả năng phát âm ngôn ngữ mới cho model. Kiểm thử thời lượng dùng âm thanh PCM xác định và FFmpeg thật, thay phần model TTS; không thay thế nghe đánh giá phát âm/đủ lời của giọng thực tế.
+
+API: thêm trường tùy chọn `target_seconds` vào `POST /api/speech` cho TXT. Ví dụ SRT kết thúc `00:10:00,000` thì TXT gửi `"target_seconds": 600`. Với SRT, bỏ trường này để lấy mốc cuối tự động, hoặc gửi đúng mốc cuối trong chế độ `strict`. Kết quả có `duration_verified` và `duration_report` (số mẫu, thời lượng giải mã, đích, sai số mẫu).

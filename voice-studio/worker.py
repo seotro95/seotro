@@ -14,6 +14,7 @@ from pathlib import Path
 
 from state_io import write_json_atomic,write_progress
 from narration import PCMWriter, PROFILES, plan_segments
+from duration_sync import expected_duration, fit_target, pcm_frames, target_frames, verify_export
 
 DATA = Path(os.environ['VOICE_STUDIO_DATA_DIR'])
 LANGUAGES = {'en-US': 'English', 'en-GB': 'English', 'ja': 'Japanese', 'ko': 'Korean', 'zh': 'Chinese', 'fr': 'French', 'de': 'German', 'es': 'Spanish', 'it': 'Italian', 'pt': 'Portuguese', 'ru': 'Russian'}
@@ -181,9 +182,18 @@ def render(job, synthesize=None):
     segments = plan_segments(job)
     if not any(s.text for s in segments):
         raise ValueError('Không có nội dung đọc sau khi xử lý ký hiệu nhấn/nghỉ.')
+    from subtitles import parse_srt, export_srt
+    cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
+    expected = expected_duration(job, cues)
     maximum = job.get('max_minutes', 180) * 60
+    if expected is not None:
+        target_frames(expected)
+        if expected > maximum:
+            raise ValueError('Thời lượng đích vượt giới hạn bản thu đã chọn.')
+    # Keep every raw word for target fitting, including audio longer than the target.
+    raw_maximum = maximum * job.get('max_cue_tempo', 1.5) if expected is not None and not cues else maximum
     assembly = work / 'assembled.wav'
-    writer = PCMWriter(assembly, max_seconds=maximum)
+    writer = PCMWriter(assembly, max_seconds=raw_maximum, strict=expected is not None or bool(cues))
     started = time.monotonic()
     write_state(work / 'progress.json', {'completed': 0, 'total': len(segments), 'progress': 0, 'phase': 'Chuẩn bị mô hình; lần đầu có thể chậm hơn'})
     completed = 0
@@ -192,12 +202,11 @@ def render(job, synthesize=None):
     payload = {key: value for key, value in job.items() if key != 'text'}
     profile_speed, default_pause = PROFILES[job.get('delivery', 'natural')]
     gap = job.get('paragraph_pause', default_pause)
-    from subtitles import parse_srt, export_srt
-    cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
     timed = []
     alignment=[]
+    duration_report = None
     def save_alignment(sync_ok=False,failed=None):
-        write_state(work/'alignment.json',{'cues':alignment,'sync_ok':sync_ok,'failed_cue':failed,'mode':job.get('cue_fit','strict'),'max_tempo':job.get('max_cue_tempo',1.5)})
+        write_state(work/'alignment.json',{'cues':alignment,'sync_ok':sync_ok,'failed_cue':failed,'mode':job.get('cue_fit','strict'),'max_tempo':job.get('max_cue_tempo',1.5),'duration':duration_report})
     if cues:save_alignment()
     cue_writer = None
     cue_path = work / 'cue.wav'
@@ -215,7 +224,7 @@ def render(job, synthesize=None):
                         futures[ahead] = _nano_pool.submit(prepare_chunk, payload, candidate, ahead, str(work))
             segment_start = writer.frames / writer.rate
             if cues and (index == 0 or segment.cue != segments[index-1].cue):
-                cue_writer = PCMWriter(cue_path, max_seconds=10800)
+                cue_writer = PCMWriter(cue_path, max_seconds=21600, strict=True)
             target_writer = cue_writer if cues else writer
             if segment.text:
                 part = work / f'{index:06d}.wav'
@@ -276,7 +285,7 @@ def render(job, synthesize=None):
                 clipped = writer.append(cue_path) or clipped
                 actual_end=writer.frames/writer.rate
                 alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':cue['end'],'raw_seconds':round(actual,3),'spoken_start':round(actual_start,5),'spoken_end':round(actual_end,5),'tempo':round(applied_tempo,4),'status':'matched' if abs(actual_start-cue['start'])<=.001 and actual_end<=cue['end']+.001 and not clipped else 'overflow'})
-                if len(alignment)%16==0 or len(alignment)==len(cues):save_alignment(sync_ok=all(c['status']=='matched' for c in alignment) and len(alignment)==len(cues))
+                if len(alignment)%16==0 or len(alignment)==len(cues):save_alignment()
                 writer.silence(max(0, cue['end']-writer.frames/writer.rate))
             elif not cues and segment.text:
                 timed.append({'start': segment_start, 'end': spoken_end, 'text': segment.text})
@@ -295,6 +304,22 @@ def render(job, synthesize=None):
                 future.result()
     if (work / 'cancel.flag').exists():
         raise InterruptedError('Tác vụ đã dừng.')
+    fit_report = None
+    if expected is not None and not cues:
+        write_state(work / 'progress.json', {'progress': progress_limit, 'phase': 'Đang căn TXT theo thời lượng đích, giữ đủ lời'})
+        fitted = work / 'target.wav'
+        fit_report = fit_target(assembly, fitted, expected, job.get('max_cue_tempo', 1.5), normalize_audio, work)
+        fitted.replace(assembly)
+        for cue in timed:
+            cue['start'] *= fit_report['timing_scale']
+            cue['end'] *= fit_report['timing_scale']
+        # Keep the exported SRT's final clock equal to the TXT voice duration,
+        # including any deliberate trailing silence, so re-import stays in sync.
+        if timed:
+            timed[-1]['end'] = expected
+        writer.frames = pcm_frames(assembly)
+    if (work / 'cancel.flag').exists():
+        raise InterruptedError('Tác vụ đã dừng.')
     destination = DATA / 'audio' / f"{job['id']}.{job['format']}"
     pending = work / ('finished.' + job['format'])
     write_state(work / 'progress.json', {'completed': completed, 'total': len(segments), 'progress': progress_limit, 'phase': 'Đang xuất âm thanh'})
@@ -303,6 +328,11 @@ def render(job, synthesize=None):
     else:
         from dubbing import run_ffmpeg
         run_ffmpeg(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(assembly), '-codec:a', 'libmp3lame', '-b:a', '192k', '-y', str(pending)], work, writer.frames/writer.rate, progress_limit, 85 if job.get('video_id') else 99, 'Đang xuất MP3', timeout=3600)
+    duration_report = verify_export(pending, work, expected)
+    if (work / 'cancel.flag').exists():
+        raise InterruptedError('Tác vụ đã dừng.')
+    if cues:
+        save_alignment(sync_ok=all(c['status']=='matched' for c in alignment) and len(alignment)==len(cues))
     pending.replace(destination)
     assembly.unlink(missing_ok=True)
     subtitle_text = export_srt(cues if cues else timed, job.get('video_offset', 0) if job.get('video_id') else 0)
@@ -313,7 +343,7 @@ def render(job, synthesize=None):
         write_state(work / 'progress.json', {'completed': completed, 'total': len(segments), 'progress': 86, 'phase': 'Đang ghép giọng vào video, giữ nguyên hình ảnh'})
         from dubbing import mux_video
         mux_video(job, destination, work, DATA, writer.frames / writer.rate)
-    write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3)})
+    write_state(work / 'result.json', {'audio_seconds': duration_report['audio_seconds'], 'duration_verified': True, 'duration_report': duration_report, 'target_seconds': expected, 'duration_fit': fit_report, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3)})
 
 
 def voice_error(exc):

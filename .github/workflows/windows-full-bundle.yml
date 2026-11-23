@@ -1,0 +1,58 @@
+name: Build full Voice Studio Windows bundle
+on:
+  push:
+    branches: ['codex/voice-duration-sync-20261103']
+    paths:
+      - '.github/workflows/windows-full-bundle.yml'
+      - 'voice-studio/packaging/build_windows.py'
+      - 'voice-studio/packaging/smoke_portable.py'
+      - 'voice-studio/packaging/full-bundle-constraints.txt'
+      - 'voice-studio/prepare_models.py'
+permissions:
+  contents: read
+concurrency:
+  group: voice-studio-full-windows
+  cancel-in-progress: true
+jobs:
+  full-bundle:
+    runs-on: windows-2022
+    timeout-minutes: 180
+    env:
+      PYTHONUTF8: '1'
+      HF_HUB_DISABLE_XET: '1'
+      OMP_NUM_THREADS: '2'
+      HF_HUB_DISABLE_SYMLINKS_WARNING: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Install matching CPU PyTorch and audio runtime
+        run: python -m pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.11.0+cpu torchaudio==2.11.0+cpu
+      - name: Install all bundled voice and app dependencies
+        run: |
+          python -m pip install --no-cache-dir -c voice-studio/packaging/full-bundle-constraints.txt -r voice-studio/requirements-qwen.txt pytest
+          python -m pip check
+          python -c "import torch,torchaudio,qwen_tts,vieneu;print('CPU speech runtime imports passed')"
+      - name: Prepare verified FFmpeg for regression checks
+        shell: pwsh
+        run: |
+          python -c "import sys;sys.path.insert(0,'voice-studio/packaging');from build_windows import download_verified_ffmpeg;from pathlib import Path;download_verified_ffmpeg(Path(r'${{ runner.temp }}/tools/ffmpeg'),Path(r'${{ runner.temp }}/downloads'))"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Add-Content -Path $env:GITHUB_PATH -Value "${{ runner.temp }}/tools/ffmpeg/bin"
+      - name: Check the app with the complete runtime
+        working-directory: voice-studio
+        run: |
+          python -m pytest -q -ra
+          node --test tests/test_duration_ui.cjs
+      - name: Build and validate the complete relocated offline app
+        run: python voice-studio/packaging/build_windows.py --all-voices --directory-only --output "${{ runner.temp }}/full/Voice-Studio-3.6.1"
+      - name: Upload one complete downloadable ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: Voice-Studio-3.6.1-Windows-x64-FULL
+          path: ${{ runner.temp }}/full/Voice-Studio-3.6.1/
+          include-hidden-files: true
+          compression-level: 6
+          retention-days: 14

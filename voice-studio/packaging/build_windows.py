@@ -85,7 +85,7 @@ def verify_offline(root):
     env = dict(os.environ, PATH=str(root/'ffmpeg/bin')+os.pathsep+os.environ['PATH'], PYTHONNOUSERSITE='1', PYTHONUTF8='1', VOICE_STUDIO_DATA_DIR=str(app/'.data'), HF_HOME=str(app/'.data/models/cache'), HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1', VOICE_STUDIO_PORTABLE='1')
     env.pop('PYTHONHOME', None)
     env.pop('PYTHONPATH', None)
-    subprocess.run([str(runtime), str(SOURCE/'packaging/smoke_portable.py'), str(app)], check=True, env=env, cwd=app, timeout=600)
+    subprocess.run([str(runtime), str(SOURCE/'packaging/smoke_portable.py'), str(app)], check=True, env=env, cwd=app, timeout=2400)
 
 
 def run_preparation(command, **kwargs):
@@ -98,6 +98,8 @@ def run_preparation(command, **kwargs):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--output', required=True, type=Path)
+    parser.add_argument('--all-voices', action='store_true', help='Bundle international preset and cloning models too')
+    parser.add_argument('--directory-only', action='store_true', help='Validate a directory for a single ZIP64 Actions download')
     args = parser.parse_args()
     if os.name != 'nt' or sys.maxsize <= 2**32:
         raise RuntimeError('Build on native 64-bit Windows.')
@@ -110,12 +112,16 @@ def main():
     os.environ['PATH'] = str(root/'ffmpeg/bin')+os.pathsep+os.environ['PATH']
     data = root/'voice-studio/.data'
     env = dict(os.environ, VOICE_STUDIO_DATA_DIR=str(data), HF_HOME=str(data/'models/cache'), HF_HUB_DISABLE_XET='1')
-    for engine in ('vieneu_nano', 'vieneu'):
+    engines = ['vieneu_nano', 'vieneu'] + (['qwen', 'qwen_clone'] if args.all_voices else [])
+    for engine in engines:
         run_preparation([sys.executable, str(SOURCE/'prepare_models.py'), engine], env=env, timeout=1800)
     run_preparation([sys.executable,str(SOURCE/'prepare_subtitles.py')],env=env,timeout=1800)
     # Retain model cards/licenses alongside redistributed weights.
     from huggingface_hub import hf_hub_download
-    for repo in ('pnnbao-ump/VieNeu-TTS-v3-Nano', 'pnnbao-ump/VieNeu-TTS-v3-Turbo', 'OpenMOSS-Team/MOSS-Audio-Tokenizer-Nano-ONNX'):
+    repos = ['pnnbao-ump/VieNeu-TTS-v3-Nano', 'pnnbao-ump/VieNeu-TTS-v3-Turbo', 'OpenMOSS-Team/MOSS-Audio-Tokenizer-Nano-ONNX']
+    if args.all_voices:
+        repos += ['Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice', 'Qwen/Qwen3-TTS-12Hz-0.6B-Base', 'Qwen/Qwen3-TTS-Tokenizer-12Hz']
+    for repo in repos:
         hf_hub_download(repo, 'README.md', cache_dir=str(data/'models/cache/hub'))
     materialize_model_cache(data/'models/cache/hub')
     # New build directory contains only calibration clips and downloaded models.
@@ -124,18 +130,37 @@ def main():
     for name in ('MO_VOICE_STUDIO.bat', 'THEM_GIONG_QUOC_TE.bat'):
         shutil.copy2(SOURCE/'packaging'/name, root/name)
     notices = '''Voice Studio Windows x64 Portable\n\nExtract ALL files to a writable folder, then double-click MO_VOICE_STUDIO.bat.\nNo Python, FFmpeg, venv installation, model download or API key is needed for bundled Vietnamese voices.\nNano, Turbo and Whisper base subtitle recognition are included. International Qwen models are optional: THEM_GIONG_QUOC_TE.bat needs Internet and several GB.\nYour projects are saved in voice-studio/.data. Back up that folder before deleting this portable folder.\nOllama writing/translation is optional and requires a separate Ollama installation/model.\n\nTHIRD-PARTY NOTICES\nPython: runtime/LICENSE.txt; https://www.python.org/\nPython packages: licenses in runtime/Lib/site-packages/*.dist-info\nFFmpeg GPL build: ffmpeg/LICENSE*, docs and https://github.com/BtbN/FFmpeg-Builds\nMSVC app-local redistributable: https://learn.microsoft.com/cpp/windows/redistributing-visual-cpp-files\nModels: license/model cards in voice-studio/.data/models/cache/hub.\nNo personal recordings, keys, history or developer environment files are packaged.\n'''
+    if args.all_voices:
+        notices = notices.replace('for bundled Vietnamese voices.', 'for all bundled speech voices.').replace('International Qwen models are optional: THEM_GIONG_QUOC_TE.bat needs Internet and several GB.', 'Qwen international preset and voice-cloning models are included and work offline after extraction.')
+        vietnamese = ('VOICE STUDIO 3.6.1 - WINDOWS 64 BIT - GOI DAY DU\n\n'
+            '1. Giai nen TOAN BO tep ZIP vao mot thu muc moi co quyen ghi.\n'
+            '2. Nhan dup MO_VOICE_STUDIO.bat, giu cua so nay mo khi dung tool.\n'
+            '3. SRT: chon giu nguyen moc; TXT: nhap cung thoi luong dich, vi du 10:00.\n\n'
+            'Da kem Python, FFmpeg, Nano/Turbo Viet-Anh, Qwen quoc te va nhan ban giong, Whisper.\n'
+            'Khong can cai Python hay tai model giong rieng. Giong quoc te co the chay cham tren CPU.\n'
+            'Giong Windows chi hien neu goi giong tuong ung da duoc cai trong Windows.\n'
+            'Dich/AI viet dung ket noi OpenAI, Gemini hoac Ollama do ban chon; can key hoac dich vu rieng.\n'
+            'Qwen ho tro Anh, Nhat, Han, Trung, Phap, Duc, Tay Ban Nha, Y, Bo Dao Nha va Nga;\n'
+            'Nano/Turbo ho tro Viet/Anh. Danh sach ngon ngu phu de rong hon danh sach model giong.\n'
+            'Du lieu lam viec moi duoc luu trong voice-studio/.data.\n')
+        (root/'HUONG-DAN-MO-TOOL.txt').write_text(vietnamese, encoding='utf-8')
     (root/'READ-ME-FIRST.txt').write_text(notices, encoding='utf-8')
     from importlib.metadata import distribution
     license_path = next(f for f in distribution('vieneu').files if str(f).endswith('dist-info/licenses/LICENSE'))
     shutil.copy2(distribution('vieneu').locate_file(license_path), root/'MODEL-APACHE-2.0-LICENSE.txt')
     freeze = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'], text=True)
     (root/'BUILD-DEPENDENCIES.txt').write_text(freeze, encoding='utf-8')
-    (root/'BUILD.json').write_text(json.dumps({'commit': os.environ.get('GITHUB_SHA'), 'python': sys.version, 'engines': ['vieneu_nano','vieneu'], 'windows_x64': True}, indent=2), encoding='utf-8')
+    (root/'BUILD.json').write_text(json.dumps({'commit': os.environ.get('GITHUB_SHA'), 'python': sys.version, 'engines': engines, 'windows_x64': True}, indent=2), encoding='utf-8')
     try:
         verify_offline(root)
     except Exception as exc:
         print('::error title=Portable offline validation failed::'+str(exc).replace('%','%25').replace('\n','%0A'), flush=True)
         raise
+    if args.directory_only:
+        files = [p for p in root.rglob('*') if p.is_file()]
+        total = sum(p.stat().st_size for p in files)
+        print(f'BUILT AND VERIFIED DIRECTORY: {root} ({total/1024**3:.2f} GiB, {len(files)} files)', flush=True)
+        return
     archive = shutil.make_archive(str(root.parent/'Voice-Studio-Windows-x64'), 'zip', root.parent, root.name)
     size = Path(archive).stat().st_size
     if size >= 2*1024**3:
