@@ -106,6 +106,7 @@ class ServerTests(unittest.TestCase):
         code, body = self.json_request('/api/voices')
         self.assertEqual(code, 200)
         self.assertEqual([v['id'] for v in body['voices']], ['female', 'male'])
+        self.assertTrue(all(v['reference_ready'] for v in body['voices']))
         sample = body['voices'][0]['sample_url']
         code, headers, audio = self.request(sample, headers={'Range': 'bytes=0-63'})
         self.assertEqual(code, 206)
@@ -167,6 +168,10 @@ class ServerTests(unittest.TestCase):
         self.assertTrue((self.data / 'references' / 'female.json').is_file())
 
     def test_missing_reference_never_starts_inference(self):
+        # An unconfigured voice still needs a transcript; the bundled voices
+        # now ship with the owner's confirmed opening clips and exact words.
+        for record in self.server.manager.voices.metadata.values():
+            record.pop('reference', None)
         code, body = self.json_request('/api/jobs', {'text': 'Nyob zoo.'})
         self.assertEqual(code, 422)
         self.assertEqual(self.engine.calls, [])

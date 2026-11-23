@@ -1,20 +1,28 @@
-# Hmoob VoiceLab 1.0
+# Hmoob VoiceLab 1.1.1
 
-**Cảnh báo phát hành:** gói ZIP 1.0 đã bị Windows Defender trên máy người dùng chặn với tên `Trojan:Script/Ulthar.A!ml`. Tạm ngừng cung cấp gói này; chưa có kết luận cảnh báo nhầm hoặc an toàn. Không khôi phục/cho phép tệp bị chặn hoặc tắt bảo vệ. Xem [SECURITY-REVIEW.md](SECURITY-REVIEW.md).
+Gói ZIP 1.0 cũ vẫn được thu hồi do cảnh báo Defender trên máy người dùng; xem [SECURITY-REVIEW.md](SECURITY-REVIEW.md). Bản 1.1 bổ sung bộ khởi chạy tự chuẩn bị, hai giọng có sẵn lời tham chiếu và quy trình kiểm thử/quét riêng cho gói Windows mới.
 
 Tool mới, viết độc lập cho quy trình đọc Hmong Trắng cục bộ, không cần API key. Nhận tối đa **1.000.000 ký tự Unicode** qua trình soạn thảo hoặc TXT UTF-8 tối đa 4 MB.
 
-**Trạng thái hiện tại:** giao diện, hàng đợi, chia đoạn, lưu/tiếp tục và xuất WAV/ZIP đã được kiểm thử. F5-TTS/PyTorch đã cài và import được trên máy cloud. **Chưa có bản đọc Hmong thực tế được kiểm chứng**, vì proxy của máy cloud từ chối tải mô hình Hugging Face (CONNECT 403). Chưa đo được tốc độ tạo giọng, chất lượng Hmong Trắng hoặc độ giống mẫu. Không coi tốc độ chia văn bản là tốc độ tạo voice.
+**Trạng thái hiện tại (21/10/2026):** 59 kiểm thử đạt. Mô hình F5-Hmong/Vocos đã tải và xác minh checksum trên máy cloud; tác vụ thật chạy ngoại tuyến qua hàng đợi đã tạo WAV mono 24 kHz bằng mẫu Hmong công khai và hai mẫu nam/nữ của người dùng. Hai giọng mặc định đã có lời và mốc đoạn đầu do người dùng nghe xác nhận; bản đọc thử mới dài **4,128 giây (nữ)** và **3,819 giây (nam)**. **Chưa đánh giá phát âm Hmong Trắng hoặc độ giống giọng**, chưa thử đọc tài liệu dài bằng mô hình thật. Xem `VALIDATION.md` cho nguồn mẫu, phép đo và giới hạn.
 
 ## Mở tool
 
-Windows: cài **Python 3.12 64-bit** và Python Launcher từ python.org, giải nén toàn bộ gói rồi chạy `start.bat`. Giao diện mở được bằng thư viện có sẵn của Python, không cần cài thư viện AI trước. Linux/macOS: `bash start.sh`. Mở địa chỉ mà cửa sổ lệnh in ra bằng trình duyệt trên cùng máy. Giữ cửa sổ chạy; Ctrl+C để dừng. Chỉ cho phép máy chủ trên 127.0.0.1.
+**Windows Portable:** giải nén toàn bộ gói rồi mở **`MO_HMOOB_VOICELAB.bat`** ở thư mục ngoài cùng. Gói có sẵn Python 64-bit, thư viện AI, FFmpeg và ffprobe. Lần đầu cần Internet để tool tự tải và xác minh mô hình F5-Hmong/Vocos khoảng **1,4 GB**; không cần API key hoặc cài thêm công cụ. Các lần sau mở cùng tệp và dùng ngoại tuyến. Hai giọng đã có sẵn đoạn mẫu/lời, chỉ cần chọn giọng, nhập văn bản rồi tạo. Đọc `BAT-DAU.txt` trong gói.
+
+Khuyến nghị Windows 10/11 x64, RAM 16 GB và ít nhất khoảng 8 GB đĩa trống cho ứng dụng/mô hình, cộng dung lượng bản thu dài. Giữ cửa sổ lệnh trong lúc dùng; Ctrl+C để dừng. Chỉ cho phép máy chủ trên 127.0.0.1. Sao lưu `hmoob-voicelab/.data` khi chuyển hoặc cập nhật bản Portable.
+
+Bản 1.1.1 mở giao diện bằng kiểm tra gói cài đặt và SHA-256 mô hình, không nạp thư viện AI trong bước mở ứng dụng. Lần đầu chưa có mô hình, tool tự tải và báo tiến trình. Khi bấm Tạo giọng, giao diện và nhật ký hiện bước nạp PyTorch, lõi F5, Vocos, checkpoint và tạo âm thanh; thời gian xử lý vẫn tăng khi mô hình đang nạp. Bộ đọc dùng trực tiếp lõi F5/Vocos, không gọi phần nhận dạng giọng nói hoặc vẽ biểu đồ của F5 API.
+
+Nhật ký nằm tại `hmoob-voicelab/.data/.logs/launch.log`. Khi cần kiểm tra thư viện thật, chạy `CHAN_DOAN_HMOOB.bat`: từng thư viện được kiểm tra riêng, có thời gian và dấu vết ngăn xếp nếu chậm, kết quả ở `.data/.logs/diagnostic.log`. Bản mã nguồn có thể chạy `start.bat --deep-check` để xem kết quả trực tiếp trong cửa sổ lệnh. Kiểm tra gói đã cài không được ghi nhận là kiểm tra nạp thư viện native thành công.
+
+**Bản mã nguồn:** Windows cần Python 3.10–3.12 64-bit và FFmpeg/ffprobe, chạy `start.bat`. Linux/macOS chạy `bash start.sh`. Bộ khởi chạy tự tạo môi trường riêng và tải phần còn thiếu ở lần đầu, giữ nguyên dữ liệu và mô hình đã có. `install_voice.bat` hoặc `start.bat --setup` chỉ chuẩn bị rồi thoát; `start.bat --check` kiểm tra mà không tải/cài. Với Linux/macOS dùng các tham số tương tự sau `bash start.sh`.
 
 Muốn tạo lời mới cần thêm:
 
 1. Cài **FFmpeg và ffprobe** theo hướng dẫn ffmpeg.org, thêm thư mục chứa chúng vào PATH.
-2. Windows: chạy `install_voice.bat`. Bộ cài chọn Python 3.10–3.12 64-bit, tạo `.venv`, cài PyTorch CPU/F5-TTS và tải mô hình có kiểm tra checksum. Không tự xóa môi trường hoặc dữ liệu cũ nếu không tương thích.
-3. Nghe mẫu Nam/Nữ; chọn một đoạn rõ lời dài **3–8 giây**. Nhập đúng lời Hmong khớp đoạn đó và bấm **Lưu đoạn & lời mẫu**.
+2. Bản mã nguồn dùng `start.bat` hoặc `bash start.sh`; bộ khởi chạy tự chuẩn bị `.venv` khi cần, cài PyTorch CPU/F5-TTS và tải mô hình có kiểm tra checksum. Bản Portable đã có runtime/thư viện và chỉ tải mô hình lần đầu. Không tự xóa môi trường hoặc dữ liệu cũ nếu không tương thích.
+3. Chọn giọng Nam/Nữ. Hai mẫu đã có sẵn lời tham chiếu khớp đoạn đầu: **Nữ 0–5,30 giây**, **Nam 0–4,50 giây**, được người dùng nghe xác nhận. Có thể nghe đoạn chọn trong **Đoạn mẫu & lời tham chiếu**. Nếu đổi mốc, nhập đúng lời khớp đoạn mới dài **3–8 giây** rồi bấm **Lưu đoạn & lời mẫu**.
 4. Kiểm tra lại bộ tạo giọng, tạo một câu ngắn và nghe đánh giá trước khi gửi tài liệu dài.
 
 Linux/macOS, cài PyTorch/torchaudio phù hợp CPU hoặc GPU theo https://pytorch.org/get-started/locally/ trong một venv Python 3.10–3.12, sau đó:
@@ -25,7 +33,7 @@ python setup_voice.py
 python launch.py
 ```
 
-Máy cloud đã cài thư viện dùng `/workspace/.venvs/hmoob-voice/bin/python`. Chạy `setup_voice.py` bằng Python này sau khi truy cập Hugging Face được cho phép, rồi chạy `launch.py --no-browser` trong thư mục tool.
+Máy cloud hiện tại dùng `/workspace/venvs/hmong-f5/bin/python`, với F5-TTS 1.1.22 và PyTorch/torchaudio 2.6.0 CPU. Trong thư mục tool, chạy `setup_voice.py` bằng Python này để chuẩn bị mô hình, rồi mở bằng `/workspace/venvs/hmong-f5/bin/python launch.py --no-browser`.
 
 ## Tạo văn bản dài và tối ưu tốc độ
 
@@ -37,6 +45,7 @@ Máy cloud đã cài thư viện dùng `/workspace/.venvs/hmoob-voice/bin/python
 - Đầu ra thành các chương WAV liên tiếp, mỗi chương tối đa **30 phút**, tiếp tục đến hết lời. Không có giới hạn dừng âm thầm ở 3 giờ. Không ép toàn bộ tài liệu vào một WAV khổng lồ hoặc giữ toàn bộ âm thanh trong RAM. Tải từng chương hoặc ZIP chứa toàn bộ chương, kịch bản và manifest.
 - WAV mono PCM16 24 kHz chiếm khoảng **173 MB mỗi giờ**. Khi chưa hoàn tất cần thêm dung lượng cho checkpoint và chương đang ghép; tạo ZIP cần thêm khoảng bằng toàn bộ kết quả. Đĩa gần đầy sẽ báo lỗi và giữ tiến độ để tiếp tục sau khi giải phóng chỗ.
 - **Dừng** có hiệu lực sau đoạn suy luận hiện tại; tool không ngắt hỏng mô hình giữa chừng. Khi tiếp tục, dùng lại đoạn WAV đã ghi xong và bản chụp cố định của lời/mẫu/thiết lập tác vụ. Sau khi đóng máy chủ, tác vụ chưa xong xuất hiện ở trạng thái có thể tiếp tục.
+- Khi **Tiếp tục**, đoạn WAV bị hỏng, thiếu dữ liệu hoặc rỗng được tạo lại; các đoạn còn nguyên và lời/mẫu đã lưu vẫn được dùng lại. Nếu lần tạo lại thất bại, có thể tiếp tục lần nữa.
 
 Mô hình cộng đồng F5-Hmong là thử nghiệm, không bảo đảm mọi từ và văn bản dài được đọc chính xác. Nghe lại trước khi sử dụng kết quả. Tạo bản dài chỉ sau khi câu thử phù hợp mục đích của bạn.
 
@@ -44,7 +53,7 @@ Mô hình cộng đồng F5-Hmong là thử nghiệm, không bảo đảm mọi 
 
 Nguồn mô hình: https://github.com/YangNobody12/F5-TTS-Hmong và https://huggingface.co/Pakorn2112/F5TTS-Hmong ; Vocos: https://huggingface.co/charactr/vocos-mel-24khz . Kiểm tra giấy phép của từng bộ trọng số trước khi dùng cho mục đích của bạn.
 
-`setup_voice.py` lấy metadata từ HTTPS chính thức, cố định commit tải về, kiểm tra SHA-256 cho tệp LFS hoặc Git blob cho tệp nhỏ, rồi ghi `verified-models.json`. Có thể xác minh lại offline:
+`setup_voice.py` lấy metadata từ HTTPS chính thức tại các commit đã kiểm thử được cố định trong `MODEL_REVISIONS`, từ chối phản hồi khác phiên bản, kiểm tra SHA-256 cho tệp LFS hoặc Git blob cho tệp nhỏ, rồi ghi `verified-models.json`. Bản Portable không phân phối lại checkpoint Hmong chưa có giấy phép rõ ràng; tải trực tiếp từ nguồn mô hình cho máy người dùng khi chuẩn bị lần đầu. Có thể xác minh lại offline:
 
 ```sh
 python setup_voice.py --verify-only
@@ -52,7 +61,7 @@ python setup_voice.py --verify-only
 
 Không tự tải mô hình hoặc tự nhận dạng lời mẫu khi bấm Tạo giọng. Nếu thiếu tệp hoặc checksum sai, tool báo thiếu điều kiện thay vì dùng âm thanh giả. Không tắt TLS/checksum để vượt lỗi mạng. Trên cloud cần cho phép `huggingface.co`, các miền con Hugging Face và CDN `*.xethub.hf.co` trong Environment settings, lưu thay đổi rồi chạy lại bộ cài. Việc lưu bản nháp chưa áp dụng hoặc publish cấu hình.
 
-Hai tệp `assets/default-female.mp3` và `assets/default-male.mp3` được sao chép nguyên byte từ hai bản ghi có sẵn trong repository. SHA-256 và thời lượng nằm trong `assets/voices.json`. **Tệp TXT vừa gửi trong hội thoại không phải mẫu âm thanh mới**. Giọng nữ được chọn khi mở tool; lời tham chiếu ban đầu để trống, không tự đoán. Mẫu nghe gốc chưa chứng minh nhân bản lời mới hoạt động.
+Hai tệp `assets/default-female.mp3` và `assets/default-male.mp3` giữ nguyên byte và khớp SHA-256 với hai MP3 người dùng tải lên. `assets/voices.json` chứa thời lượng, checksum, lời và mốc đoạn đầu do người dùng xác nhận ngày 21/10/2026. Giọng nữ được chọn khi mở tool. Dữ liệu mới dùng các đoạn mặc định đã xác nhận; lời/mốc do người dùng lưu riêng trong `.data/references/` luôn được ưu tiên khi cập nhật tool. Không tự nhận dạng hoặc đoán lời mẫu.
 
 Mặc định dữ liệu ở `.data/`: lời tham chiếu, văn bản tác vụ, kế hoạch chia đoạn, mẫu WAV cố định, checkpoint và chương đầu ra. Giữ thư mục này khi cập nhật tool. `HMOOB_DATA_DIR` đổi thư mục dữ liệu, `HMOOB_MODEL_DIR` đổi thư mục mô hình (mặc định `.data/models`). Chỉ cho phép một phiên máy chủ dùng cùng thư mục dữ liệu.
 

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+from functools import lru_cache
 import json
 import math
 import os
@@ -46,17 +47,55 @@ def _sha256(path):
     return digest.hexdigest()
 
 
+@lru_cache(maxsize=1)
+def _windows_file_information():
+    import ctypes
+    from ctypes import wintypes
+
+    class FileBasicInfo(ctypes.Structure):
+        _fields_ = [(name, ctypes.c_longlong) for name in
+                    ("CreationTime", "LastAccessTime", "LastWriteTime", "ChangeTime")]
+        _fields_.append(("FileAttributes", wintypes.DWORD))
+
+    query = ctypes.WinDLL("kernel32", use_last_error=True).GetFileInformationByHandleEx
+    query.argtypes = (wintypes.HANDLE, ctypes.c_int, wintypes.LPVOID, wintypes.DWORD)
+    query.restype = wintypes.BOOL
+    return query, FileBasicInfo
+
+
+def _file_fingerprint(path, stat):
+    change_time = stat.st_ctime_ns
+    if os.name == "nt":
+        # Windows st_ctime is creation time, so it cannot invalidate a cache
+        # after an overwrite whose last-write time has been restored.
+        change_time = None
+        try:
+            import ctypes
+            import msvcrt
+            query, info_type = _windows_file_information()
+            info = info_type()
+            with path.open("rb") as handle:
+                if (query(msvcrt.get_osfhandle(handle.fileno()), 0, ctypes.byref(info), ctypes.sizeof(info))
+                        and info.ChangeTime > 0):
+                    change_time = info.ChangeTime
+        except (AttributeError, ImportError, OSError, ValueError):
+            pass
+    return stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, change_time
+
+
 def verify_models(root=None):
     """Verify all files once per filesystem identity; never trust size alone."""
     root = Path(root) if root is not None else model_directory()
     try:
         manifest_path = root / "verified-models.json"
-        if manifest_path.stat().st_size > 100_000:
+        manifest_stat = manifest_path.stat()
+        if manifest_stat.st_size > 100_000:
             raise ValueError("manifest too large")
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         records = manifest["files"]
-        fingerprint = [(str(root.resolve()), manifest_path.stat().st_mtime_ns,
-                        manifest_path.stat().st_ctime_ns, manifest_path.stat().st_size)]
+        manifest_identity = _file_fingerprint(manifest_path, manifest_stat)
+        fingerprint = [(str(root.resolve()), *manifest_identity)]
+        cacheable = manifest_identity[-1] is not None
         for relative in MODEL_FILES:
             path = root / relative
             record = records[relative]
@@ -67,16 +106,19 @@ def verify_models(root=None):
             stat = path.stat()
             if not path.is_file() or stat.st_size != record["size"] or stat.st_size <= 0:
                 raise ValueError("file size")
-            fingerprint.append((relative, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns, expected))
+            identity = _file_fingerprint(path, stat)
+            cacheable = cacheable and identity[-1] is not None
+            fingerprint.append((relative, *identity, expected))
         key = tuple(fingerprint)
         with _integrity_lock:
-            if key in _integrity_cache:
+            if cacheable and key in _integrity_cache:
                 return key
             for relative in MODEL_FILES:
                 if _sha256(root / relative) != records[relative]["sha256"]:
                     raise ValueError("checksum mismatch")
             _integrity_cache.clear()
-            _integrity_cache[key] = True
+            if cacheable:
+                _integrity_cache[key] = True
         return key
     except (OSError, ValueError, KeyError, TypeError):
         raise EngineError("Thiếu mô hình hoặc kiểm tra SHA-256 không đạt. Chạy install_voice.bat "
@@ -155,14 +197,27 @@ class SpeechEngine:
         self._model_key = None
         self._reference = None
         self._reference_key = None
+        self._progress_callback = None
         self.device = None
+
+    def set_progress_callback(self, callback_or_none):
+        if callback_or_none is not None and not callable(callback_or_none):
+            raise TypeError("Progress callback must be callable or None")
+        self._progress_callback = callback_or_none
+
+    def _notify(self, message):
+        if self._progress_callback is not None:
+            self._progress_callback(message)
 
     def _load(self):
         root = model_directory()
+        self._notify("Đang kiểm tra mô hình…")
         integrity = verify_models(root)
         requested = os.getenv("HMOOB_DEVICE", "auto").lower()
         if requested not in ("auto", "cpu", "cuda", "mps"):
             raise EngineError("HMOOB_DEVICE chỉ nhận auto, cpu, cuda hoặc mps.")
+        if self._model is None:
+            self._notify("Đang nạp PyTorch…")
         import torch
         if requested == "auto":
             device = ("cuda" if torch.cuda.is_available() else "mps"
@@ -183,15 +238,9 @@ class SpeechEngine:
                     target = cache / folder
                     target.mkdir(parents=True, exist_ok=True)
                     os.environ[name] = str(target)
-            from f5_tts.api import F5TTS
+            from hmong_f5 import load_local_model
             torch.set_num_threads(max(1, min(4, os.cpu_count() or 1)))
-            candidate = F5TTS(
-                model="F5TTS_Base",
-                ckpt_file=str(root / MODEL_FILES[0]),
-                vocab_file=str(root / MODEL_FILES[1]),
-                vocoder_local_path=str(root / "vocos"),
-                device=device,
-            )
+            candidate = load_local_model(root, device, progress=self._notify)
             self._model = candidate
             self._model_key = key
             self._reference = self._reference_key = None
@@ -230,8 +279,9 @@ class SpeechEngine:
         with self._lock:
             try:
                 model = self._load()
+                self._notify("Đang chuẩn bị đoạn giọng mẫu…")
                 reference, normalized_text = self._prepare_reference(reference_path, reference_text, reference_key)
-                from f5_tts.infer.utils_infer import infer_batch_process
+                from hmong_f5 import infer_batch
                 # One bounded batch: no whole-book array or unbounded inference
                 # fan-out, and no duplicate copy of a large model per process.
                 import numpy as np
@@ -246,13 +296,10 @@ class SpeechEngine:
                 pieces = []
                 frames = 0
                 expected_rate = None
+                self._notify("Đang tạo âm thanh…")
                 for batch in _bounded_batches(text.strip(), min(400, budget)):
-                    result = next(infer_batch_process(
-                        reference, normalized_text, [batch], model.ema_model, model.vocoder,
-                        mel_spec_type=model.mel_spec_type, progress=None,
-                        nfe_step=QUALITY_STEPS[quality], speed=float(speed), device=self.device,
-                        cross_fade_duration=0,
-                    ))
+                    result = infer_batch(reference, normalized_text, batch, model,
+                                         steps=QUALITY_STEPS[quality], speed=float(speed), device=self.device)
                     samples, rate = np.asarray(result[0]), result[1]
                     if (isinstance(rate, bool) or not isinstance(rate, int) or not 8000 <= rate <= 96000
                             or samples.ndim != 1 or not 0 < len(samples) <= rate * 120

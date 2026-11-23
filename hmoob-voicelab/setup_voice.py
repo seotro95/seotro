@@ -30,6 +30,10 @@ SOURCES = (
         "pytorch_model.bin": "vocos/pytorch_model.bin",
     }),
 )
+MODEL_REVISIONS = {
+    "Pakorn2112/F5TTS-Hmong": "c50fc0cc991bc0c4f22d86c7a6152730c667c0d5",
+    "charactr/vocos-mel-24khz": "0feb3fdd929bcd6649e0e7c5a688cf7dd012ef21",
+}
 
 
 class SetupError(RuntimeError):
@@ -37,8 +41,9 @@ class SetupError(RuntimeError):
 
 
 def _get_metadata(repository):
-    url = "https://huggingface.co/api/models/" + repository + "?blobs=true"
-    request = urllib.request.Request(url, headers={"User-Agent": "Hmoob-VoiceLab/1.0"})
+    expected_revision = MODEL_REVISIONS[repository]
+    url = "https://huggingface.co/api/models/" + repository + "/revision/" + expected_revision + "?blobs=true"
+    request = urllib.request.Request(url, headers={"User-Agent": "Hmoob-VoiceLab/1.1"})
     with urllib.request.urlopen(request, timeout=60) as response:
         raw = response.read(2 * 1024 * 1024 + 1)
     if len(raw) > 2 * 1024 * 1024:
@@ -47,6 +52,8 @@ def _get_metadata(repository):
     revision = metadata.get("sha", "")
     if not isinstance(revision, str) or len(revision) != 40 or any(ch not in "0123456789abcdef" for ch in revision):
         raise SetupError("Máy chủ không cung cấp commit mô hình hợp lệ; không dùng bản main chưa cố định.")
+    if revision != expected_revision:
+        raise SetupError("Máy chủ trả phiên bản mô hình khác bản đã kiểm thử; chưa tải hoặc thay tệp cục bộ.")
     return metadata
 
 
@@ -156,7 +163,7 @@ def install(root):
     finally:
         temporary.unlink(missing_ok=True)
     verify_models(root)
-    print("Đã xác minh toàn bộ mô hình. Cần nhập lời khớp đoạn mẫu và nghe thử trước khi đọc dài.", flush=True)
+    print("Đã xác minh toàn bộ mô hình. Mở tool, chọn giọng và nghe thử một câu trước khi đọc dài.", flush=True)
 
 
 def main(argv=None):
