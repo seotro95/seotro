@@ -6,6 +6,8 @@ Công cụ quét bản ghi dài, chọn các đoạn nổi bật và tự ghép 
 
 [Tải tệp ZIP](auto-game-editor-windows.zip), giải nén toàn bộ rồi mở **Cai-dat.cmd**. Tệp này cài các phụ thuộc còn thiếu, tải bộ nhận diện âm thanh, tạo lối tắt **Auto Game Editor** trên Desktop và mở cửa sổ công cụ. Giữ thư mục giải nén để lối tắt tiếp tục hoạt động. Dùng **Kiem-tra.cmd** để kiểm tra hoặc **Khoi-dong.cmd** để mở lại.
 
+Bản này hỗ trợ FFmpeg đã bỏ tùy chọn cũ `-filter_complex_script`. Nếu xử lý thất bại, bấm **Sao chép lỗi** trong cửa sổ để lấy thông báo chi tiết.
+
 ## Cài và chạy
 
 1. Cài Python 3 có Tkinter và FFmpeg có libx264. Thêm `ffmpeg` và `ffprobe` vào PATH. Cài thêm **Tesseract OCR** và thêm vào PATH nếu muốn dùng chế độ tự nhận diện tên game.

@@ -53,15 +53,29 @@ LABELS = ("Phản ứng facecam", "Chuyển động gameplay", "Cao trào âm th
 
 def fixed_blocks(command, size):
     # Giữ một khối trong RAM và để FFmpeg đọc tuần tự cả bản ghi.
-    with subprocess.Popen(command, stdout=subprocess.PIPE) as process:
+    with tempfile.TemporaryFile() as errors, subprocess.Popen(
+        command, stdout=subprocess.PIPE, stderr=errors
+    ) as process:
         try:
             while block := process.stdout.read(size):
                 yield block
             if process.wait():
-                raise RuntimeError("FFmpeg không đọc hết video. Hãy kiểm tra tệp nguồn.")
+                errors.seek(max(0, errors.tell() - 8192))
+                raise subprocess.CalledProcessError(process.returncode, command, stderr=errors.read())
         finally:
             if process.poll() is None:
                 process.kill()
+
+
+def error_message(error):
+    if not isinstance(error, subprocess.CalledProcessError):
+        return str(error), str(error)
+    program = Path(error.cmd[0]).stem
+    details = (error.stderr or b"").decode("utf-8", errors="replace").strip()
+    heading = f"{program} thất bại (mã {error.returncode})"
+    first = next((line.strip() for line in details.splitlines() if line.strip()), "")
+    return (f"{program}: {first[:180]}" if first else heading,
+            f"{heading}\n{details[-6000:]}" if details else heading)
 
 
 def normalize(text):
@@ -85,7 +99,7 @@ def game_profile(source, duration, video_index, game, report):
     for moment in sorted({0, min(5, duration/4), min(30, duration/2), duration*.25, duration*.5, duration*.75}):
         still = subprocess.check_output(FF + ["-ss", str(moment), "-i", str(source),
             "-map", f"0:{video_index}", "-frames:v", "1", "-vf", "scale=960:-2",
-            "-c:v", "png", "-f", "image2pipe", "-"])
+            "-c:v", "png", "-f", "image2pipe", "-"], stderr=subprocess.PIPE)
         if not still:
             continue
         ocr = subprocess.run(["tesseract", "stdin", "stdout", "--psm", "11"], input=still,
@@ -183,14 +197,21 @@ def render_clip(source, path, index, audio_index, shot, effects):
         # Một số video dài có nhiều hiệu ứng, lưu filter vào tệp để tránh giới hạn lệnh Windows.
         script = Path(folder) / "filters.txt"
         script.write_text(";".join(graph), encoding="ascii")
-        command += ["-filter_complex_threads", "1", "-filter_complex_script", str(script),
+        command += ["-filter_complex_threads", "1", "-/filter_complex", str(script),
                     "-map", f"[frame{layers}]",
                     "-map", f"0:{audio_index}" if audio_index is not None else "1:a:0",
                     "-af", f"apad,afade=t=in:d=0.025,afade=t=out:st={max(0,length-.04)}:d=0.04",
                     "-t", str(length), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
                     "-pix_fmt", "yuv420p", "-threads", "4", "-c:a", "aac", "-ar", "48000",
                     "-ac", "2", str(path)]
-        subprocess.run(command, check=True)
+        try:
+            subprocess.run(command, stderr=subprocess.PIPE, check=True)
+        except subprocess.CalledProcessError as error:
+            # Các bản FFmpeg trước khi có cú pháp đọc tùy chọn từ tệp vẫn dùng tên cũ.
+            if b"Unrecognized option '/filter_complex'" not in (error.stderr or b""):
+                raise
+            command[command.index("-/filter_complex")] = "-filter_complex_script"
+            subprocess.run(command, stderr=subprocess.PIPE, check=True)
 
 
 def edit(source, destination, count, minutes, game, facecam=True, report=print, durations=None):
@@ -201,7 +222,7 @@ def edit(source, destination, count, minutes, game, facecam=True, report=print, 
     count = len(lengths)
     info = json.loads(subprocess.check_output([
         "ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(source)
-    ]))
+    ], stderr=subprocess.PIPE))
     video = next((s for s in info["streams"] if s["codec_type"] == "video"
                   and not s.get("disposition", {}).get("attached_pic")), None)
     if video is None:
@@ -249,7 +270,7 @@ def edit(source, destination, count, minutes, game, facecam=True, report=print, 
                 listing.write_text("".join(f"file '{i}.mp4'\nduration {clip.length}\n"
                                            for i, clip in enumerate(clips)), encoding="utf-8")
                 subprocess.run(FF + ["-f", "concat", "-safe", "1", "-i", str(listing),
-                    "-c", "copy", "-movflags", "+faststart", str(publish/f"highlight-{n:02}.mp4")], check=True)
+                    "-c", "copy", "-movflags", "+faststart", str(publish/f"highlight-{n:02}.mp4")], stderr=subprocess.PIPE, check=True)
         with (publish/"timeline.csv").open("w", encoding="utf-8-sig", newline="") as output:
             writer = csv.writer(output)
             writer.writerow(["Video", "Đầu ra bắt đầu (s)", "Đầu ra kết thúc (s)",
@@ -291,6 +312,7 @@ def gui():
     game = tk.StringVar(value=AUTO)
     facecam = tk.BooleanVar(value=True)
     status = tk.StringVar(value="MP4, MOV, MKV hoặc WebM")
+    error_details = ""
     output_dir = tk.StringVar(value="")
     output_label = tk.StringVar(value="Cạnh video gốc")
     duration_label = tk.StringVar(value="Đang dùng số phút mặc định")
@@ -387,7 +409,7 @@ def gui():
     tk.Label(root, textvariable=status, bg="#111827", fg="#e5e7eb", wraplength=520).pack(pady=9)
 
     def start(path):
-        nonlocal busy
+        nonlocal busy, error_details
         if busy or not path:
             return
         try:
@@ -405,16 +427,15 @@ def gui():
         parent = Path(output_dir.get()) if output_dir.get() else None
         target = destination_for(source, parent)
         busy = True
+        error_details = ""
+        copy_error.pack_forget()
         status.set("Đang mở video…")
 
         def run():
             try:
                 edit(source, target, amount, lengths[0], title, with_facecam, messages.put, durations=lengths)
             except Exception as error:
-                status_detail = str(error)
-                if isinstance(error, subprocess.CalledProcessError):
-                    status_detail = f"FFmpeg xử lý thất bại (mã {error.returncode})."
-                messages.put(f"Lỗi: {status_detail}")
+                messages.put(error_message(error))
             finally:
                 messages.put(None)
 
@@ -427,13 +448,24 @@ def gui():
         elif not busy:
             status.set("Mỗi lần chỉ thả một video.")
 
+    def copy_error_text():
+        if error_details:
+            root.clipboard_clear()
+            root.clipboard_append(error_details)
+            copy_error.configure(text="Đã sao chép lỗi")
+
     def poll():
-        nonlocal busy
+        nonlocal busy, error_details
         try:
             while True:
                 message = messages.get_nowait()
                 if message is None:
                     busy = False
+                elif isinstance(message, tuple):
+                    summary, error_details = message
+                    status.set(f"Lỗi: {summary}")
+                    copy_error.configure(text="Sao chép lỗi")
+                    copy_error.pack(side="left", padx=4)
                 else:
                     status.set(message)
         except Empty:
@@ -442,7 +474,10 @@ def gui():
 
     zone.drop_target_register(DND_FILES)
     zone.dnd_bind("<<Drop>>", drop)
-    ttk.Button(root, text="Chọn video", command=lambda: start(filedialog.askopenfilename())).pack()
+    actions = ttk.Frame(root)
+    actions.pack()
+    ttk.Button(actions, text="Chọn video", command=lambda: start(filedialog.askopenfilename())).pack(side="left", padx=4)
+    copy_error = ttk.Button(actions, text="Sao chép lỗi", command=copy_error_text)
     root.after_idle(root.lift)
     poll()
     root.mainloop()
@@ -466,6 +501,7 @@ if __name__ == "__main__":
             destination = (args.output or destination_for(source)).resolve()
             edit(source, destination, args.count, args.minutes, args.game, not args.no_facecam, durations=args.durations)
         except (ValueError, OSError, RuntimeError, subprocess.CalledProcessError) as error:
-            parser.exit(1, f"{error}\n")
+            _, details = error_message(error)
+            parser.exit(1, f"{details}\n")
     else:
         gui()

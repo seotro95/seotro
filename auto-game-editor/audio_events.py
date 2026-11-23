@@ -61,7 +61,9 @@ class AudioEvents:
                    "-ar", str(RATE), "-c:a", "pcm_f32le", "-f", "f32le", "-"]
         speech = []
         stickers = []
-        with subprocess.Popen(command, stdout=subprocess.PIPE) as process:
+        with tempfile.TemporaryFile() as errors, subprocess.Popen(
+            command, stdout=subprocess.PIPE, stderr=errors
+        ) as process:
             try:
                 window = process.stdout.read(self.samples * 4)
                 for i in range(length * 2):
@@ -85,7 +87,8 @@ class AudioEvents:
                         break
                     window = window[HOP * 4:] + next_audio
                 if process.wait():
-                    raise RuntimeError("Không đọc được luồng âm thanh để nhận diện phản ứng.")
+                    errors.seek(max(0, errors.tell() - 8192))
+                    raise subprocess.CalledProcessError(process.returncode, command, stderr=errors.read())
             finally:
                 if process.poll() is None:
                     process.kill()
