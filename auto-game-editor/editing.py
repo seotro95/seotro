@@ -1,4 +1,5 @@
 """Chọn nhóm cảnh liền mạch và lên lịch các góc camera."""
+from array import array
 from collections import deque
 from dataclasses import dataclass
 from itertools import accumulate
@@ -22,31 +23,40 @@ class Effect:
 GAPS = (0, 3, 5, 8, 12, 18, 25, 35, 45, 60)
 
 
-def best_sequence(scores, light, labels, first, end, length):
-    count = min(6 if length >= 60 else 5, max(1, length // 5))
+def gameplay_lengths(length):
+    if length <= 7:
+        return [length]
+    if length <= 9:
+        return [5, length-5]
+    count = (length+3)//6
     base, extra = divmod(length, count)
-    lengths = [base+1]*extra + [base]*(count-extra)
+    return [base+1]*extra + [base]*(count-extra)
+
+
+def rank_windows(scores, size):
+    prefix = list(accumulate(scores, initial=0.0))
+    peaks = deque()
+    windows = []
+    for i, value in enumerate(scores):
+        while peaks and scores[peaks[-1]] <= value:
+            peaks.pop()
+        peaks.append(i)
+        start = i-size+1
+        if start < 0:
+            continue
+        while peaks[0] < start:
+            peaks.popleft()
+        average = (prefix[i+1]-prefix[start])/size
+        windows.append((.45*scores[peaks[0]]+.55*average, peaks[0]))
+    return windows
+
+
+def best_sequence(scores, light, labels, first, end, length):
+    lengths = gameplay_lengths(length)
     duration = end-first
-    gaps = GAPS[1:] if duration >= length + 3*(count-1) else GAPS
+    gaps = GAPS[1:] if duration >= length + 3*(len(lengths)-1) else GAPS
     local = scores[first:end]
-    prefix = list(accumulate(local, initial=0.0))
-    lookup = {}
-    for size in set(lengths):
-        # Cửa sổ xếp hạng theo điểm cao trào và mức hoạt động cả đoạn.
-        peaks = deque()
-        windows = []
-        for i, value in enumerate(local):
-            while peaks and local[peaks[-1]] <= value:
-                peaks.pop()
-            peaks.append(i)
-            start = i-size+1
-            if start < 0:
-                continue
-            while peaks[0] < start:
-                peaks.popleft()
-            average = (prefix[i+1]-prefix[start])/size
-            windows.append((.65*local[peaks[0]]+.35*average, peaks[0]))
-        lookup[size] = windows
+    lookup = {size: rank_windows(local, size) for size in set(lengths)}
 
     backtracks = []
     previous = []
@@ -54,10 +64,10 @@ def best_sequence(scores, light, labels, first, end, length):
     for stage, size in enumerate(lengths):
         remaining = length-elapsed-size
         current = [float("-inf")] * (duration-size-remaining+1)
-        back = [-1] * len(current)
+        back = array("i", [-1]) * len(current)
+        weight = 1 + .4 * stage / max(1, len(lengths)-1)
         for start in range(elapsed, len(current)):
             score = lookup[size][start][0]
-            weight = 1 + .08*stage
             if not stage:
                 current[start] = score*weight
                 continue
@@ -105,6 +115,24 @@ def select_shots(scores, light, labels, lengths):
     return outputs
 
 
+def select_short_clips(scores, labels, count, length):
+    windows = rank_windows(scores, length)
+    order = sorted(range(len(windows)), key=lambda start: windows[start][0], reverse=True)
+    occupied = bytearray(len(scores))
+    selected = []
+    for start in order:
+        if any(occupied[start:start+length]):
+            continue
+        selected.append(start)
+        occupied[start:start+length] = b"\1"*length
+        if len(selected) == count:
+            break
+    if len(selected) < count:
+        # Nếu các cửa sổ điểm cao chắn nhau, dùng một lưới có đủ chỗ để xuất.
+        selected = [start for start in order if start % length == 0][:count]
+    return [[Shot(start, length, labels[windows[start][1]])] for start in sorted(selected)]
+
+
 def events_for_shot(length, offset, total, facecam, speech, stickers):
     effects = []
     for minute in range(max(60, offset//60*60), min(total, offset+length), 60):
@@ -112,27 +140,20 @@ def events_for_shot(length, offset, total, facecam, speech, stickers):
         if start < end:
             effects.append(Effect("bottom", start, end, 1.16))
 
-    def free(start, end):
-        return all(end <= e.start or start >= e.end for e in effects)
-
     if facecam:
+        for boundary in range(offset//3*3, offset+length, 3):
+            start, end = max(0, boundary-offset), min(length, boundary+3-offset)
+            close = boundary % 6 == 0
+            effects.append(Effect("near" if close else "wide", start, end, 1.55 if close else 1))
         streak_start = last = None
         inserted = False
         for moment in speech:
-            if last is None or moment-last > 1.0:
+            if last is None or moment-last > 1:
                 streak_start, inserted = moment, False
             last = moment
-            # Lời nói kéo dài ít nhất sáu giây, có thể có khoảng ngắt ngắn.
-            if not inserted and moment-streak_start >= 5.5 and moment+2 <= length and free(moment, moment+2):
-                effects.append(Effect("speech", moment, moment+2, 3.5))
+            if not inserted and moment >= 0 and moment-streak_start >= 5.5 and moment+2 <= length:
+                effects.append(Effect("speech", moment, moment+2, 3.32))
                 inserted = True
-
-        # Ưu tiên điểm nối. Dịch sớm nếu trùng đoạn nói dài hoặc góc mép dưới.
-        for start in range(length-5, -1, -1):
-            if free(start, start+5):
-                effects.extend((Effect("near", start, start+3, 1.95),
-                                Effect("wide", start+3, start+5)))
-                break
 
     chosen = []
     for moment, name, confidence in sorted(stickers, key=lambda item: item[2], reverse=True):
@@ -148,22 +169,14 @@ def time_test(start, end, variable):
     return f"gte({variable},{start})*lt({variable},{end})"
 
 
-def framing_filter(effects):
-    zoom = "1"
-    y = "clip(ih*.31-ih/zoom*.49,0,ih-ih/zoom)"
-    for effect in reversed(effects):
-        if effect.zoom <= 1:
-            continue
-        start, end = effect.start, effect.end
-        active = time_test(start, end, "on/30")
-        factor = str(effect.zoom)
+def bottom_filter(effects):
+    factors = []
+    for effect in effects:
         if effect.name == "bottom":
+            start, end = effect.start, effect.end
             ramp = f"clip(min(on/30-{start},{end}-on/30)/.25,0,1)"
-            factor = f"1+{effect.zoom-1:.3f}*{ramp}"
-            y = f"if({active},ih-ih/zoom,{y})"
-        zoom = f"if({active},{factor},{zoom})"
-    if zoom == "1":
+            factors.append(f"{effect.zoom-1:.3f}*{ramp}")
+    if not factors:
         return ""
-    bottom = "+".join(time_test(e.start, e.end, "on/30") for e in effects if e.name == "bottom") or "0"
-    x = f"if({bottom},(iw-iw/zoom)/2,clip(iw*.10-iw/zoom*.44,0,iw-iw/zoom))"
-    return f",zoompan=z='{zoom}':x='{x}':y='{y}':d=1:s=1280x720:fps=30"
+    zoom = "1+" + "+".join(factors)
+    return f",zoompan=z='{zoom}':x='(iw-iw/zoom)/2':y='ih-ih/zoom':d=1:s=1280x720:fps=30"

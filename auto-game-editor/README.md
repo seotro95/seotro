@@ -20,21 +20,23 @@ Bản này hỗ trợ FFmpeg đã bỏ tùy chọn cũ `-filter_complex_script`.
 
    Dùng `py` trên Windows hoặc `python3` trên macOS/Linux nếu lệnh `python` không có.
 
-3. Nhập **Số video** và **Phút mặc định**. Dùng **Chỉnh phút từng video…** để đặt thời lượng riêng và **Chọn thư mục lưu…** để chọn nơi xuất. Chọn game hoặc thể loại, rồi thả một tệp MP4, MOV, MKV hoặc WebM vào cửa sổ. Bật **Zoom facecam bên trái** nếu bản ghi có webcam giống video mẫu.
-4. Mở thư mục `<tên video>-highlights` tại nơi đã chọn. Nếu chưa chọn thư mục, kết quả nằm cạnh video gốc. `timeline.csv` ghi các đoạn nguồn và `effects.csv` ghi các mốc hiệu ứng.
+3. Nhập **Số video** và **Phút mặc định**. Dùng **Chỉnh phút từng video…** để đặt thời lượng riêng và **Chọn thư mục lưu…** để chọn nơi xuất. Chọn game hoặc thể loại, rồi thả một tệp MP4, MOV, MKV hoặc WebM vào cửa sổ. Bật **Đổi góc facecam bên trái mỗi 3 giây** nếu bản ghi có ô webcam cùng vị trí với mẫu.
+4. Bật **Xuất từng clip 5–7 giây** nếu muốn mỗi đoạn là một MP4. Chọn số clip và 5, 6 hoặc 7 giây mỗi clip.
+5. Mở thư mục `<tên video>-highlights` tại nơi đã chọn. Nếu chưa chọn thư mục, kết quả nằm cạnh video gốc. `timeline.csv` ghi các đoạn nguồn và `effects.csv` ghi các mốc hiệu ứng.
 
 Có thể chạy bằng dòng lệnh mà không cần cài `tkinterdnd2`:
 
 ```bash
 python auto_edit.py "ban-ghi-5-gio.mp4" --durations 3 5 8 --game Minecraft --output "D:/Video/Highlight"
+python auto_edit.py "ban-ghi-5-gio.mp4" --count 12 --clip-seconds 6 --game Minecraft
 ```
 
 ## Cách chọn đoạn và dựng
 
 - Quét tuần tự toàn bộ bản ghi, lấy 2 mẫu chuyển động mỗi giây và phân tích âm lượng. Chấm điểm theo thể loại. Mỗi đoạn ghi tín hiệu mạnh nhất trong số phản ứng facecam, chuyển động gameplay và cao trào âm thanh. Đây là phân loại tín hiệu, chưa nhận diện được các sự kiện như hạ gục hoặc thắng trận.
 - Chế độ **Tự nhận diện** dùng OCR để tìm tên game trong danh sách hỗ trợ ở tối đa sáu khung hình. Nếu thiếu bằng chứng hoặc chưa cài OCR, công cụ báo chưa nhận diện và dùng cấu hình Tổng hợp. Bạn có thể chọn game, nhập tên hoặc chọn thể loại trước khi thả tệp.
-- Chọn 5–6 đoạn mỗi video (video dưới 25 giây có thể dùng ít hơn). Giữ thứ tự nguồn và ưu tiên nhóm có cao trào, độ sáng qua điểm nối phù hợp và khoảng bỏ 3–60 giây khi nguồn đủ dài.
-- Trước điểm cắt, công cụ ưu tiên cận facecam 3 giây, rồi về rộng 2 giây. Khi phát hiện lời nói kéo dài khoảng 6 giây, công cụ dùng cú cận riêng 2 giây. Với webcam chiếm 20% chiều ngang ảnh gốc, độ phóng khoảng 3,5× tương ứng gần 70% chiều ngang ảnh đầu ra. Tại phút 1, 2, 3… của mỗi video, khung hình dịch xuống mép dưới khoảng 3 giây rồi trở lại. Khi các hiệu ứng cùng mốc, công cụ ưu tiên góc mép dưới và đoạn nói dài rồi dời cặp cận/rộng vào phần trống.
+- Khi ghép, chọn các đoạn gameplay 5–7 giây, giữ thứ tự nguồn và ưu tiên cảnh có cao trào, độ sáng qua điểm nối phù hợp, khoảng bỏ 3–60 giây khi nguồn đủ dài. Yêu cầu đầu ra dưới 10 giây có thể cần đoạn cuối ngắn hơn để khớp tổng thời lượng. Khi xuất riêng, công cụ chọn cửa sổ điểm cao trong toàn bộ nguồn, tránh dùng lại cùng giây.
+- Facecam đổi cận và rộng mỗi 3 giây theo thời gian đầu ra. Ở góc cận, công cụ phóng riêng ô webcam bên trái khoảng 1,55× và dịch nhẹ, giữ bố cục gameplay. Vùng webcam mặc định theo mẫu, rộng khoảng 21% khung và nằm từ 13% đến 40% chiều cao. Góc nhấn lời nói dài vẫn có thể phóng vùng đó tới khoảng 70% chiều ngang trong 2 giây. Tại phút 1, 2, 3… của bản ghép, khung hình dịch xuống mép dưới khoảng 3 giây rồi trở lại.
 - YAMNet nhận diện tiếng cười hoặc tiếng khóc và hiện mặt tương ứng đúng 1 giây. Mô hình phân loại âm thanh, nên có thể nhầm tiếng trong game hoặc bỏ sót câu đùa không phát ra tiếng cười. Nếu bộ nhận diện chưa cài, công cụ vẫn dựng video với hiệu ứng theo nhịp thông thường. Cài thủ công ngoài Windows bằng `python -m pip install "ai-edge-litert>=2.1,<3"` rồi `python audio_events.py --setup` (Python 3.10 trở lên).
 - Công cụ xử lý trên máy, đọc bản ghi theo luồng và lưu các đặc trưng nhẹ để lập kế hoạch. Thời gian quét phụ thuộc vào codec, độ phân giải và CPU. Tổng thời lượng yêu cầu cần nằm trong thời lượng nguồn để các video đầu ra không dùng lại đoạn.
 
