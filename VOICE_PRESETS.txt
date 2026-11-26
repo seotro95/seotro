@@ -1,0 +1,22 @@
+Tập 007 — Hồ sơ giọng theo bảng người dùng đã chốt
+Công cụ Melo-Viet-Studio-1.3.1-Them-Giong-Windows; mã nguồn đúng tag 1.3.1 chạy backend tương ứng trên Linux.
+Nguồn https://github.com/seotro95/seotro/releases/tag/melo-viet-studio-1.3.1-txt-srt-41595029816
+Năm giọng đánh dấu sao dùng tempo 0,92×, cao độ gốc. Các giọng khác căn tốc độ từng đoạn theo master es-ES.
+Ngôn ngữ | Tên | Mã chính xác | Backend | Tốc độ | Cao độ
+es-ES | Álvaro | es-ES-AlvaroNeural | Microsoft Edge | 0,92× | Gốc
+vi | Nam Minh | vi-VN-NamMinhNeural | Microsoft Edge | Căn từng đoạn; xem báo cáo audio | Gốc
+en | Andrew | en-US-AndrewNeural | Microsoft Edge | 0,92× | Gốc
+fr | Henri | fr-FR-HenriNeural | Microsoft Edge | 0,92× | Gốc
+ja | Supertonic 3 M1 | supertonic:5 | Supertonic 3 CPU INT8, M1 | Căn từng đoạn; xem báo cáo audio | Gốc
+ko | Supertonic 3 M1 | supertonic:5 | Supertonic 3 CPU INT8, M1 | Căn từng đoạn; xem báo cáo audio | Gốc
+de | Thorsten | piper:de_DE-thorsten-medium:0 | Piper ONNX FP32 | Căn từng đoạn; xem báo cáo audio | Gốc
+it | Riccardo | piper:it_IT-riccardo-x_low:0 | Piper ONNX FP32 | Căn từng đoạn; xem báo cáo audio | Gốc
+pt | Duarte | pt-PT-DuarteNeural | Microsoft Edge | 0,92× | Gốc
+nl | Pim | piper:nl_NL-pim-medium:0 | Piper ONNX FP32 | Căn từng đoạn; xem báo cáo audio | Gốc
+pl | mc_speech | piper:pl_PL-mc_speech-medium:0 | Piper ONNX FP32 | Căn từng đoạn; xem báo cáo audio | Gốc
+sv | NST | piper:sv_SE-nst-medium:0 | Piper ONNX FP32 | Căn từng đoạn; xem báo cáo audio | Gốc
+da | Talesyntese | piper:da_DK-talesyntese-medium:0 | Piper ONNX FP32 | Căn từng đoạn; xem báo cáo audio | Gốc
+fi | Harri Neural | fi-FI-HarriNeural | Microsoft Edge | 0,92× | Gốc
+no | Talesyntese | piper:no_NO-talesyntese-medium:0 | Piper ONNX FP32 | Căn từng đoạn; xem báo cáo audio | Gốc
+cs | Jirka | piper:cs_CZ-jirka-medium:0 | Piper ONNX FP32 | Căn từng đoạn; xem báo cáo audio | Gốc
+hi-IN | Rohan | piper:hi_IN-rohan-medium:0 | Piper ONNX FP32 | Căn từng đoạn; xem báo cáo audio | Gốc

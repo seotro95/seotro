@@ -1,0 +1,18 @@
+Ngôn ngữ	Tên	Mã giọng	Thời lượng	Số cue	WAV	SRT	Tốc độ
+es-ES	Álvaro	es-ES-AlvaroNeural	21:00.000	266	CINTAS_007_es-ES.wav	CINTAS_007_es-ES.srt	0,92×
+vi	Nam Minh	vi-VN-NamMinhNeural	21:00.000	190	CINTAS_007_vi.wav	CINTAS_007_vi.srt	Theo từng đoạn
+en	Andrew	en-US-AndrewNeural	21:00.000	225	CINTAS_007_en.wav	CINTAS_007_en.srt	0,92×
+fr	Henri	fr-FR-HenriNeural	21:00.000	239	CINTAS_007_fr.wav	CINTAS_007_fr.srt	0,92×
+ja	Supertonic 3 M1	supertonic:5	21:00.000	190	CINTAS_007_ja.wav	CINTAS_007_ja.srt	Theo từng đoạn
+ko	Supertonic 3 M1	supertonic:5	21:00.000	168	CINTAS_007_ko.wav	CINTAS_007_ko.srt	Theo từng đoạn
+de	Thorsten	piper:de_DE-thorsten-medium:0	21:00.000	219	CINTAS_007_de.wav	CINTAS_007_de.srt	Theo từng đoạn
+it	Riccardo	piper:it_IT-riccardo-x_low:0	21:00.000	224	CINTAS_007_it.wav	CINTAS_007_it.srt	Theo từng đoạn
+pt	Duarte	pt-PT-DuarteNeural	21:00.000	238	CINTAS_007_pt.wav	CINTAS_007_pt.srt	0,92×
+nl	Pim	piper:nl_NL-pim-medium:0	21:00.000	218	CINTAS_007_nl.wav	CINTAS_007_nl.srt	Theo từng đoạn
+pl	mc_speech	piper:pl_PL-mc_speech-medium:0	21:00.000	199	CINTAS_007_pl.wav	CINTAS_007_pl.srt	Theo từng đoạn
+sv	NST	piper:sv_SE-nst-medium:0	21:00.000	203	CINTAS_007_sv.wav	CINTAS_007_sv.srt	Theo từng đoạn
+da	Talesyntese	piper:da_DK-talesyntese-medium:0	21:00.000	197	CINTAS_007_da.wav	CINTAS_007_da.srt	Theo từng đoạn
+fi	Harri Neural	fi-FI-HarriNeural	21:00.000	205	CINTAS_007_fi.wav	CINTAS_007_fi.srt	0,92×
+no	Talesyntese	piper:no_NO-talesyntese-medium:0	21:00.000	200	CINTAS_007_no.wav	CINTAS_007_no.srt	Theo từng đoạn
+cs	Jirka	piper:cs_CZ-jirka-medium:0	21:00.000	192	CINTAS_007_cs.wav	CINTAS_007_cs.srt	Theo từng đoạn
+hi-IN	Rohan	piper:hi_IN-rohan-medium:0	21:00.000	195	CINTAS_007_hi-IN.wav	CINTAS_007_hi-IN.srt	Theo từng đoạn
